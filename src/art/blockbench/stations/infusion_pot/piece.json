@@ -1,0 +1,21 @@
+{
+  "project": "infusion_pot.bbmodel",
+  "textures": {
+    "painted": "herbalwitch:block/stations/plum_painted",
+    "plum": "herbalwitch:block/material/plum",
+    "lid": "herbalwitch:block/stations/plum_lid",
+    "gold": "herbalwitch:block/material/gold",
+    "copper": "herbalwitch:block/material/copper",
+    "particle": "herbalwitch:block/stations/plum_painted"
+  },
+  "bounds": {
+    "min": [0, 0, 0],
+    "max": [16, 16, 16]
+  },
+  "outputs": [
+    {
+      "model": "block/stations/infusion_pot/base",
+      "item": true
+    }
+  ]
+}

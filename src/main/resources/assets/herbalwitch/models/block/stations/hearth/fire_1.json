@@ -1,12 +1,49 @@
 {
   "render_type": "minecraft:cutout",
   "textures": {
+    "particle": "herbalwitch:block/stations/stone_dark",
     "coals": "herbalwitch:block/stations/coals",
     "glow": "herbalwitch:block/stations/fire_glow",
-    "flame": "herbalwitch:block/stations/flame",
-    "particle": "herbalwitch:block/stations/stone_dark"
+    "flame": "herbalwitch:block/stations/flame"
   },
   "elements": [
+    {
+      "from": [
+        16,
+        2.5,
+        8
+      ],
+      "to": [
+        16,
+        9.5,
+        11.5
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "west": {
+          "uv": [
+            6,
+            7,
+            14,
+            16
+          ],
+          "texture": "#flame"
+        },
+        "east": {
+          "uv": [
+            6,
+            7,
+            14,
+            16
+          ],
+          "texture": "#flame",
+          "cullface": "east"
+        }
+      }
+    },
     {
       "from": [
         10,
@@ -157,43 +194,6 @@
             16
           ],
           "texture": "#flame"
-        }
-      }
-    },
-    {
-      "from": [
-        16,
-        2.5,
-        8
-      ],
-      "to": [
-        16,
-        9.5,
-        11.5
-      ],
-      "forge_data": {
-        "block_light": 15,
-        "sky_light": 15
-      },
-      "faces": {
-        "west": {
-          "uv": [
-            6,
-            7,
-            14,
-            16
-          ],
-          "texture": "#flame"
-        },
-        "east": {
-          "uv": [
-            6,
-            7,
-            14,
-            16
-          ],
-          "texture": "#flame",
-          "cullface": "east"
         }
       }
     }

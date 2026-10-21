@@ -1,0 +1,32 @@
+{
+  "project": "hearth.bbmodel",
+  "textures": {
+    "stone": "herbalwitch:block/stations/stone_dark",
+    "plaque": "herbalwitch:block/stations/plaque",
+    "wood": "herbalwitch:block/material/wood",
+    "post": "herbalwitch:block/material/wood_post",
+    "log": "herbalwitch:block/material/wood_end",
+    "gold": "herbalwitch:block/material/gold",
+    "iron": "herbalwitch:block/material/iron",
+    "ivy": "herbalwitch:block/material/ivy",
+    "particle": "herbalwitch:block/stations/stone_dark",
+    "coals": "herbalwitch:block/stations/coals",
+    "glow": "herbalwitch:block/stations/fire_glow",
+    "flame": "herbalwitch:block/stations/flame"
+  },
+  "bounds": {
+    "min": [-16, 0, 0],
+    "max": [16, 32, 16]
+  },
+  "multiblock": {
+    "dir": "block/stations/hearth",
+    "cells": [2, 2],
+    "overlays": [
+      {
+        "name": "fire",
+        "group": "fire",
+        "emissive": true
+      }
+    ]
+  }
+}

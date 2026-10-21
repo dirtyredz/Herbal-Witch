@@ -1,0 +1,40 @@
+{
+  "project": "stove.bbmodel",
+  "textures": {
+    "iron": "herbalwitch:block/material/iron",
+    "iron_top": "herbalwitch:block/material/iron",
+    "post": "herbalwitch:block/material/wood_post",
+    "gold": "herbalwitch:block/material/gold",
+    "cloth": "herbalwitch:block/stations/cloth_red",
+    "parts": "herbalwitch:block/botany/parts",
+    "bundle_lavender": "herbalwitch:item/preparations/herbs/temperate/lavender/bundle",
+    "particle": "herbalwitch:block/material/iron",
+    "coals": "herbalwitch:block/stations/coals",
+    "glow": "herbalwitch:block/stations/fire_glow"
+  },
+  "bounds": {
+    "min": [-16, 0, 0],
+    "max": [16, 32, 16]
+  },
+  "multiblock": {
+    "dir": "block/stations/stove",
+    "cells": [2, 1],
+    "overflow": true,
+    "overlays": [
+      {
+        "name": "fire",
+        "group": "fire",
+        "emissive": true
+      }
+    ]
+  },
+  "attachments": {
+    "bundle": {
+      "kind": "bundle",
+      "herb": "lavender",
+      "width": 4.5,
+      "height": 8,
+      "across": "x"
+    }
+  }
+}

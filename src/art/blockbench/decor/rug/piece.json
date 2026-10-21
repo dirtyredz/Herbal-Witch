@@ -1,0 +1,20 @@
+{
+  "project": "rug.bbmodel",
+  "textures": {
+    "rug": "herbalwitch:block/material/rug",
+    "particle": "herbalwitch:block/material/wood"
+  },
+  "owned_textures": {
+    "rug": "herbalwitch:block/material/rug"
+  },
+  "bounds": {
+    "min": [0, 0, 0],
+    "max": [16, 16, 16]
+  },
+  "outputs": [
+    {
+      "model": "block/decor/templates/rug",
+      "item": true
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 // Resource lookup for the model previewer: the mod's authored tree (src/main/resources) and the
-// datagen tree (src/generated/resources), resolved the way the game sees one merged resource pack.
-// A path present in both trees is a conflict and is reported, never silently picked.
+// datagen tree (src/generated/resources), or explicitly given asset roots (a staged dev resource
+// pack, a captured baseline), resolved the way the game sees one merged resource pack. A path
+// present in two trees is a conflict and is reported, never silently picked.
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 import { decodePng } from '../../image/png-decode.mjs';
@@ -24,10 +25,18 @@ export function splitId(id) {
   return i < 0 ? ['minecraft', id] : [id.slice(0, i), id.slice(i + 1)];
 }
 
+/** The repository's two asset trees under a mod directory: datagen output, then authored. */
+export const repositoryTrees = (root) => [join(root, 'src/generated/resources/assets'), join(root, 'src/main/resources/assets')];
+
 export class Resources {
-  /** @param root the mod directory (mods/HerbalWitch) */
-  constructor(root) {
-    this.trees = [join(root, 'src/generated/resources/assets'), join(root, 'src/main/resources/assets')];
+  /**
+   * @param root  the mod directory (mods/HerbalWitch)
+   * @param trees explicit asset roots (each holding <namespace>/...) instead of the repository's
+   *              two, e.g. a staged resource pack or a captured baseline
+   */
+  constructor(root, { trees = null } = {}) {
+    if (trees && !trees.length) throw new Error('no asset trees given');
+    this.trees = trees ?? repositoryTrees(root);
     this.textureCache = new Map();
     this.diagnostics = [];
   }

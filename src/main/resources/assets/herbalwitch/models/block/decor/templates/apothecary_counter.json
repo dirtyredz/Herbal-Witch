@@ -12,6 +12,110 @@
     "bundle_lavender": "herbalwitch:item/preparations/herbs/temperate/lavender/bundle",
     "particle": "herbalwitch:block/material/wood"
   },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        2.5,
+        0
+      ],
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        225,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    },
+    "ground": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        3,
+        0
+      ],
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    "gui": {
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.625,
+        0.625,
+        0.625
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    }
+  },
   "elements": [
     {
       "from": [
@@ -2557,106 +2661,6 @@
     },
     {
       "from": [
-        15.2,
-        3,
-        5.25
-      ],
-      "to": [
-        15.2,
-        11,
-        10.75
-      ],
-      "faces": {
-        "west": {
-          "uv": [
-            0,
-            0,
-            16,
-            16
-          ],
-          "texture": "#bundle_lavender"
-        },
-        "east": {
-          "uv": [
-            0,
-            0,
-            16,
-            16
-          ],
-          "texture": "#bundle_lavender"
-        }
-      }
-    },
-    {
-      "from": [
-        14.8,
-        7.45,
-        7.2125
-      ],
-      "to": [
-        15.6,
-        8.65,
-        8.7875
-      ],
-      "faces": {
-        "down": {
-          "uv": [
-            2.25,
-            4.25,
-            3.75,
-            5.75
-          ],
-          "texture": "#parts"
-        },
-        "up": {
-          "uv": [
-            2.25,
-            4.25,
-            3.75,
-            5.75
-          ],
-          "texture": "#parts"
-        },
-        "north": {
-          "uv": [
-            2.25,
-            4.25,
-            3.75,
-            5.75
-          ],
-          "texture": "#parts"
-        },
-        "south": {
-          "uv": [
-            2.25,
-            4.25,
-            3.75,
-            5.75
-          ],
-          "texture": "#parts"
-        },
-        "west": {
-          "uv": [
-            2.25,
-            4.25,
-            3.75,
-            5.75
-          ],
-          "texture": "#parts"
-        },
-        "east": {
-          "uv": [
-            2.25,
-            4.25,
-            3.75,
-            5.75
-          ],
-          "texture": "#parts"
-        }
-      }
-    },
-    {
-      "from": [
         0.3,
         4.5,
         3.5
@@ -2918,6 +2922,106 @@
             6
           ],
           "texture": "#ivy"
+        }
+      }
+    },
+    {
+      "from": [
+        15.2,
+        3,
+        5.25
+      ],
+      "to": [
+        15.2,
+        11,
+        10.75
+      ],
+      "faces": {
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#bundle_lavender"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#bundle_lavender"
+        }
+      }
+    },
+    {
+      "from": [
+        14.8,
+        7.45,
+        7.2125
+      ],
+      "to": [
+        15.6,
+        8.65,
+        8.7875
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            2.25,
+            4.25,
+            3.75,
+            5.75
+          ],
+          "texture": "#parts"
+        },
+        "up": {
+          "uv": [
+            2.25,
+            4.25,
+            3.75,
+            5.75
+          ],
+          "texture": "#parts"
+        },
+        "north": {
+          "uv": [
+            2.25,
+            4.25,
+            3.75,
+            5.75
+          ],
+          "texture": "#parts"
+        },
+        "south": {
+          "uv": [
+            2.25,
+            4.25,
+            3.75,
+            5.75
+          ],
+          "texture": "#parts"
+        },
+        "west": {
+          "uv": [
+            2.25,
+            4.25,
+            3.75,
+            5.75
+          ],
+          "texture": "#parts"
+        },
+        "east": {
+          "uv": [
+            2.25,
+            4.25,
+            3.75,
+            5.75
+          ],
+          "texture": "#parts"
         }
       }
     }

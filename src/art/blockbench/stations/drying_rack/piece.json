@@ -1,0 +1,60 @@
+{
+  "project": "drying_rack.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/material/wood",
+    "wood_z": "herbalwitch:block/material/wood",
+    "post": "herbalwitch:block/material/wood_post",
+    "iron": "herbalwitch:block/material/iron",
+    "gold": "herbalwitch:block/material/gold",
+    "particle": "herbalwitch:block/material/wood",
+    "bundle_mint": "herbalwitch:item/preparations/herbs/wet/mint/bundle",
+    "bundle_lavender": "herbalwitch:item/preparations/herbs/temperate/lavender/bundle",
+    "bundle_chamomile": "herbalwitch:item/preparations/herbs/temperate/chamomile/bundle",
+    "bundle_yarrow": "herbalwitch:item/preparations/herbs/temperate/yarrow/bundle",
+    "parts": "herbalwitch:block/botany/parts"
+  },
+  "bounds": {
+    "min": [-16, 0, 0],
+    "max": [16, 32, 16]
+  },
+  "multiblock": {
+    "dir": "block/stations/drying_rack",
+    "cells": [2, 2],
+    "overlays": [
+      {
+        "name": "bundles",
+        "group": "bundles"
+      }
+    ]
+  },
+  "attachments": {
+    "bundle_0": {
+      "kind": "bundle",
+      "herb": "mint",
+      "width": 5,
+      "height": 10,
+      "across": "cross"
+    },
+    "bundle_1": {
+      "kind": "bundle",
+      "herb": "lavender",
+      "width": 5,
+      "height": 10,
+      "across": "cross"
+    },
+    "bundle_2": {
+      "kind": "bundle",
+      "herb": "chamomile",
+      "width": 5,
+      "height": 10,
+      "across": "cross"
+    },
+    "bundle_3": {
+      "kind": "bundle",
+      "herb": "yarrow",
+      "width": 5,
+      "height": 10,
+      "across": "cross"
+    }
+  }
+}

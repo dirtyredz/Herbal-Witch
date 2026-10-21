@@ -1,9 +1,9 @@
 {
   "render_type": "minecraft:cutout",
   "textures": {
+    "particle": "herbalwitch:block/material/wood",
     "bundle_chamomile": "herbalwitch:item/preparations/herbs/temperate/chamomile/bundle",
-    "bundle_yarrow": "herbalwitch:item/preparations/herbs/temperate/yarrow/bundle",
-    "particle": "herbalwitch:block/material/wood"
+    "bundle_yarrow": "herbalwitch:item/preparations/herbs/temperate/yarrow/bundle"
   },
   "elements": [
     {

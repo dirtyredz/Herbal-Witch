@@ -1,0 +1,31 @@
+{
+  "project": "table_lamp.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/material/wood",
+    "wood_v": "herbalwitch:block/material/wood_post",
+    "plum": "herbalwitch:block/material/trim_purple",
+    "gold": "herbalwitch:block/material/gold",
+    "ivy": "herbalwitch:block/material/ivy",
+    "lamp_shade": "herbalwitch:block/material/lamp_shade",
+    "particle": "herbalwitch:block/material/wood"
+  },
+  "owned_textures": {
+    "lamp_shade": "herbalwitch:block/material/lamp_shade"
+  },
+  "bounds": {
+    "min": [0, 0, 0],
+    "max": [16, 16, 16]
+  },
+  "outputs": [
+    {
+      "model": "block/decor/templates/table_lamp_off",
+      "item": true
+    },
+    {
+      "model": "block/decor/templates/table_lamp_on",
+      "emissive": [
+        "shade"
+      ]
+    }
+  ]
+}

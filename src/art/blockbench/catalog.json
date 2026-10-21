@@ -1,0 +1,29 @@
+{
+  "blockbench": "5.2.2",
+  "format_version": "5.0",
+  "java_block_version": "1.9.0",
+  "model_dirs": [
+    "block/stations/kettle",
+    "block/stations/infusion_pot",
+    "block/stations/mortar",
+    "block/stations/drying_rack",
+    "block/stations/hearth",
+    "block/stations/stove",
+    "block/decor/templates",
+    "block/preparations/templates"
+  ],
+  "projects": [
+    "stations/kettle",
+    "stations/infusion_pot",
+    "stations/mortar",
+    "stations/drying_rack",
+    "stations/hearth",
+    "stations/stove",
+    "decor/armchair",
+    "decor/apothecary_counter",
+    "decor/wall_shelf",
+    "decor/table_lamp",
+    "decor/rug",
+    "preparations/oil_lantern"
+  ]
+}

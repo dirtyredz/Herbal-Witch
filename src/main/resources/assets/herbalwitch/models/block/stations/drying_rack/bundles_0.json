@@ -1,9 +1,9 @@
 {
   "render_type": "minecraft:cutout",
   "textures": {
+    "particle": "herbalwitch:block/material/wood",
     "bundle_mint": "herbalwitch:item/preparations/herbs/wet/mint/bundle",
-    "bundle_lavender": "herbalwitch:item/preparations/herbs/temperate/lavender/bundle",
-    "particle": "herbalwitch:block/material/wood"
+    "bundle_lavender": "herbalwitch:item/preparations/herbs/temperate/lavender/bundle"
   },
   "elements": [
     {

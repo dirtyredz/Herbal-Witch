@@ -1,0 +1,30 @@
+{
+  "project": "oil_lantern.bbmodel",
+  "textures": {
+    "brass": "herbalwitch:block/material/brass",
+    "glass": "herbalwitch:block/material/glass",
+    "iron": "herbalwitch:block/stations/iron",
+    "ember": "herbalwitch:block/stations/ember",
+    "flame": "herbalwitch:block/stations/flame",
+    "particle": "#brass"
+  },
+  "bounds": {
+    "min": [0, 0, 0],
+    "max": [16, 16, 16]
+  },
+  "outputs": [
+    {
+      "model": "block/preparations/templates/oil_lantern_off",
+      "item": true,
+      "exclude": [
+        "lit"
+      ]
+    },
+    {
+      "model": "block/preparations/templates/oil_lantern_on",
+      "emissive": [
+        "lit"
+      ]
+    }
+  ]
+}
