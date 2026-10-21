@@ -2,6 +2,22 @@
 
 Newest first.
 
+## 2026-10-21 - Herb bed inner corners: four inner-corner flags (supersedes "no diagonal state")
+
+Owner screenshot: where joined beds form an L, U or ring, the inside corner showed a notch above the
+soil, because the corner part (both sides joined) only had wooden sides up to the soil and the two
+neighbours' rails stopped short of each other. A multipart state cannot tell an interior corner from
+an inside corner without the diagonal, so the bed gains four booleans (`inner_north_east`,
+`inner_east_south`, `inner_south_west`, `inner_west_north`): set when both sides of the corner are
+joined and no bed stands diagonally. They are computed with the sides (`GardenBedConnections`:
+`refreshCorners`; in `updateShape` for side changes) and refreshed on the four diagonal beds when a
+bed is placed or removed (`refreshDiagonals`, no neighbour update reaches a diagonal). The flag adds
+the `wood/inner` part (the two neighbours' rails carried round the corner, same profile) and swaps the
+wood-sided soil corner for `soil/corner_inner`. `tools/preview/test/bed-corners.test.mjs` floods a
+slice of every arrangement (line, square, L, U, T, plus, ring, staircase) at five heights and fails
+when the outside reaches the planter. Old saves lack the flag and look as before until their random
+tick repairs them. Rejected: a taller corner box with no state (shows as a pillar inside a 2x2).
+
 ## 2026-10-21 - 0.2.0-dev.5: dried bundles back to 2D sprites, mortar at kettle size
 
 Owner feedback on dev.4: the first, flatter bundle look was better than the cube bundles; the mortar
@@ -82,8 +98,8 @@ actual herb would need a block entity renderer or a state per herb. Rejected for
 Beds join where the same bed stands beside them at the same height; corners follow from the two
 sides that meet. Parts are authored for one side and corner and turned by the blockstate. Beds
 connect on placement (including a plain setBlock), on neighbour changes, and old beds are repaired
-by their random tick. Tradeoff: an inner corner around an empty diagonal shows the two rails meeting
-(closed by the corner part's wooden sides) instead of a post; no chunk-load migration.
+by their random tick. (The inner-corner tradeoff here was reversed by the 2026-10-21 inner corner
+flags above.) No chunk-load migration.
 
 ## 2026-10-21 - Herbs rooted 2 px into the ground; mature herbs are 3D
 

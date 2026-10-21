@@ -76,6 +76,28 @@ public final class GardenBedConnectionGameTests {
     }
 
     @GameTest(template = TEMPLATE)
+    public static void innerCornersFollowTheDiagonalBed(GameTestHelper helper) {
+        floor(helper);
+        BlockPos elbow = new BlockPos(2, 1, 2);
+        bed(helper, elbow, false);
+        bed(helper, elbow.east(), false);
+        bed(helper, elbow.south(), false);
+        // an L: the elbow's east-south corner has both sides joined and no bed on the diagonal
+        check(helper.getBlockState(elbow).getValue(GardenBedConnections.innerCorner(1)), "the L's inside corner is not flagged");
+        check(!helper.getBlockState(elbow.east()).getValue(GardenBedConnections.innerCorner(1)), "an arm of the L is flagged");
+        // filling the diagonal closes the square: no inner corner is left (the bed was never a neighbour of the elbow)
+        bed(helper, elbow.east().south(), false);
+        check(!helper.getBlockState(elbow).getValue(GardenBedConnections.innerCorner(1)), "the corner stayed flagged beside a full square");
+        helper.setBlock(elbow.east().south(), Blocks.AIR);
+        check(helper.getBlockState(elbow).getValue(GardenBedConnections.innerCorner(1)), "removing the diagonal bed did not reopen the corner");
+        // the flags turn and mirror with the block
+        BlockState flagged = BotanyBlocks.herbBed().defaultBlockState().setValue(GardenBedConnections.innerCorner(0), true);
+        check(flagged.rotate(Rotation.CLOCKWISE_90).getValue(GardenBedConnections.innerCorner(1)), "rotation did not turn the inner corner");
+        check(flagged.mirror(Mirror.LEFT_RIGHT).getValue(GardenBedConnections.innerCorner(1)), "mirroring did not flip the inner corner");
+        helper.succeed();
+    }
+
+    @GameTest(template = TEMPLATE)
     public static void onlyTheSameBedBesideItJoinsAndStateIsKept(GameTestHelper helper) {
         floor(helper);
         BlockPos centre = new BlockPos(4, 1, 4);

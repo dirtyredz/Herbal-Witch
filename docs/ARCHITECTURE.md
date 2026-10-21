@@ -35,6 +35,8 @@ vanilla carpet. Only the server toggles the lamp. The 0.2.0 restyle changed mode
 properties, computed by `GardenBedConnections`: a side is joined when the same bed block stands beside
 it at the same height. They are set on placement, in `onPlace` for direct `setBlock`, in `updateShape`
 on neighbour change, and on rotate/mirror; beds saved before 0.2.0 are repaired by their random tick.
+Four more booleans (`inner_north_east` ... `inner_west_north`) flag an inside corner (both sides joined, no
+bed on the diagonal): set by `refreshCorners`, and refreshed on diagonal beds by `onPlace`/`onRemove`.
 Connection is visual only; moisture and enrichment are unchanged. The blockstate is multipart
 (`data/client/botany/garden/HerbBedBlockstates` + `HerbBedModels`) over part models under
 `models/block/botany/garden/parts/{wood,soil,moist}`.

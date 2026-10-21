@@ -22,6 +22,11 @@ export function beds(cells, props = {}, y = 0) {
       south: has.has(`${x},${z + 1}`),
       west: has.has(`${x - 1},${z}`),
       east: has.has(`${x + 1},${z}`),
+      // an inner corner: both sides joined but the bed on the diagonal missing (the inside of an L, U or ring)
+      inner_north_east: has.has(`${x},${z - 1}`) && has.has(`${x + 1},${z}`) && !has.has(`${x + 1},${z - 1}`),
+      inner_east_south: has.has(`${x + 1},${z}`) && has.has(`${x},${z + 1}`) && !has.has(`${x + 1},${z + 1}`),
+      inner_south_west: has.has(`${x},${z + 1}`) && has.has(`${x - 1},${z}`) && !has.has(`${x - 1},${z + 1}`),
+      inner_west_north: has.has(`${x - 1},${z}`) && has.has(`${x},${z - 1}`) && !has.has(`${x - 1},${z - 1}`),
     },
   }));
 }
@@ -83,6 +88,18 @@ export const SCENES = [
       { at: [8, 1, 3], block: plant('temperate', 'sage'), props: { age: 3 } },
       { at: [9, 0, 3], proxy: 'grass' },
       { at: [9, 1, 3], block: plant('wet', 'mint'), props: { age: 3 } },
+    ],
+  },
+  {
+    // the inside corners of joined shapes (owner feedback 0.2.0-dev.6): closed with the rails' detail, no notch
+    name: 'garden-inner-corners',
+    view: 'iso',
+    scale: 12,
+    entries: [
+      ...beds([[0, 0], [1, 0], [0, 1]]), // L (a 2 x 2 with one bed missing)
+      ...beds([[3, 0], [5, 0], [3, 1], [4, 1], [5, 1]]), // U
+      ...beds([[0, 3], [1, 3], [0, 4], [1, 4]]), // 2 x 2: no inside corner
+      ...beds([[3, 3], [4, 3], [5, 3], [4, 4], [4, 5]]), // T: two inside corners
     ],
   },
   {

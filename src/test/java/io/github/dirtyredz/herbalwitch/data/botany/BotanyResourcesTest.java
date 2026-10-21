@@ -151,10 +151,11 @@ class BotanyResourcesTest {
     }
 
     /**
-     * Every bed state (four sides joined or not, moisture 0-7, enriched or not): one soil core of the
+     * Every bed state (four sides joined or not, every reachable inner-corner flag, moisture 0-7, enriched or not): one soil core of the
      * right moisture; each exposed side its rail, each joined side soil; each corner exactly one of
      * post (both sides exposed), the rail of the one exposed side running through, or soil (both
-     * joined). Enrichment never changes the look.
+     * joined), and the corner wall (the neighbours' rails carried round it) exactly when the corner's
+     * inner-corner flag is set: both sides joined, diagonal bed missing. Enrichment never changes the look.
      */
     @Test
     void herbBedStatesJoinWithoutGapsOrOverlaps() {
@@ -162,12 +163,20 @@ class BotanyResourcesTest {
         String parts = "herbalwitch:block/botany/garden/parts/";
         String[] sides = {"north", "east", "south", "west"};
         int states = 0;
+        int pairs = 0;
+        String[] inners = {"inner_north_east", "inner_east_south", "inner_south_west", "inner_west_north"};
         for (int mask = 0; mask < 16; mask++) {
+          for (int innerMask = 0; innerMask < 16; innerMask++) {
+            if (!reachable(mask, innerMask)) {
+                continue;
+            }
+            pairs++;
             for (int moisture = 0; moisture <= 7; moisture++) {
                 for (boolean enriched : new boolean[] {false, true}) {
                     Map<String, String> props = new java.util.HashMap<>(Map.of("moisture", String.valueOf(moisture), "enriched", String.valueOf(enriched)));
                     for (int i = 0; i < 4; i++) {
                         props.put(sides[i], String.valueOf((mask & (1 << i)) != 0));
+                        props.put(inners[i], String.valueOf((innerMask & (1 << i)) != 0));
                     }
                     List<BlockstateModels.Applied> applied = BlockstateModels.select(bed, props);
                     String soil = parts + (moisture > 0 ? "moist/" : "soil/");
@@ -177,19 +186,35 @@ class BotanyResourcesTest {
                         int turn = i * 90;
                         boolean joined = (mask & (1 << i)) != 0;
                         boolean next = (mask & (1 << ((i + 1) % 4))) != 0;
+                        boolean inner = (innerMask & (1 << i)) != 0;
                         assertEquals(joined ? 0 : 1, count(applied, parts + "wood/rail", turn), what + " rail " + sides[i]);
                         assertEquals(joined ? 1 : 0, count(applied, soil + "edge", turn), what + " edge " + sides[i]);
                         long corner = count(applied, parts + "wood/post", turn) + count(applied, parts + "wood/rail_end", turn)
-                                + count(applied, parts + "wood/rail_start", (turn + 90) % 360) + count(applied, soil + "corner", turn);
+                                + count(applied, parts + "wood/rail_start", (turn + 90) % 360) + count(applied, soil + "corner", turn)
+                                + count(applied, soil + "corner_inner", turn);
                         assertEquals(1, corner, what + " corner after " + sides[i]);
                         assertEquals(!joined && !next ? 1 : 0, count(applied, parts + "wood/post", turn), what + " post");
-                        assertEquals(joined && next ? 1 : 0, count(applied, soil + "corner", turn), what + " soil corner");
+                        assertEquals(joined && next && !inner ? 1 : 0, count(applied, soil + "corner", turn), what + " soil corner");
+                        assertEquals(inner ? 1 : 0, count(applied, soil + "corner_inner", turn), what + " soil inner corner");
+                        assertEquals(inner ? 1 : 0, count(applied, parts + "wood/inner", turn), what + " inner corner wall");
                     }
                     states++;
                 }
             }
+          }
         }
-        assertEquals(256, states);
+        // every reachable (sides, inner corner) pair, at 8 moistures x enrichment
+        assertEquals(pairs * 16, states);
+    }
+
+    /** An inner corner is only reachable where both of its sides are joined. */
+    private static boolean reachable(int sides, int inner) {
+        for (int i = 0; i < 4; i++) {
+            if ((inner & (1 << i)) != 0 && ((sides & (1 << i)) == 0 || (sides & (1 << ((i + 1) % 4))) == 0)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private static long count(List<BlockstateModels.Applied> applied, String model, int y) {

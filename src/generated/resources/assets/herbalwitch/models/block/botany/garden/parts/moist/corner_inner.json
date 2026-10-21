@@ -1,0 +1,6 @@
+{
+  "parent": "herbalwitch:block/botany/garden/parts/soil/corner_inner",
+  "textures": {
+    "soil": "herbalwitch:block/botany/garden/soil_moist"
+  }
+}
