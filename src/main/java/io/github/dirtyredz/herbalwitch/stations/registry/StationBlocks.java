@@ -8,6 +8,7 @@ import io.github.dirtyredz.herbalwitch.stations.everyday.hearth.block.HearthBloc
 import io.github.dirtyredz.herbalwitch.stations.everyday.infusion_pot.block.InfusionPotBlock;
 import io.github.dirtyredz.herbalwitch.stations.everyday.kettle.block.KettleBlock;
 import io.github.dirtyredz.herbalwitch.stations.everyday.mortar.block.MortarBlock;
+import io.github.dirtyredz.herbalwitch.stations.everyday.stove.block.StoveBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -21,7 +22,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/** The five station blocks, ids {@code stations/<station>/station}. */
+/** The station blocks, ids {@code stations/<station>/station}. */
 public final class StationBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, HerbalWitch.MOD_ID);
     private static final Map<StationSpec, RegistryObject<Block>> BY_SPEC = new LinkedHashMap<>();
@@ -35,6 +36,8 @@ public final class StationBlocks {
             BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(2.0F, 6.0F).sound(SoundType.METAL).noOcclusion()));
     public static final RegistryObject<Block> HEARTH = register(StationCatalog.HEARTH, () -> new HearthBlock(
             BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED).strength(2.5F, 6.0F).sound(SoundType.STONE).noOcclusion()));
+    public static final RegistryObject<Block> STOVE = register(StationCatalog.STOVE, () -> new StoveBlock(
+            BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).strength(3.0F, 6.0F).sound(SoundType.METAL).noOcclusion()));
     public static final RegistryObject<Block> INFUSION_POT = register(StationCatalog.INFUSION_POT, () -> new InfusionPotBlock(
             BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_WHITE).strength(1.5F, 6.0F).sound(SoundType.STONE)
                     .noOcclusion()));

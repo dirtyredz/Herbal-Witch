@@ -1,0 +1,162 @@
+{
+  "textures": {
+    "coals": "herbalwitch:block/stations/coals",
+    "glow": "herbalwitch:block/stations/fire_glow",
+    "particle": "herbalwitch:block/material/iron"
+  },
+  "elements": [
+    {
+      "from": [
+        15,
+        4,
+        1.35
+      ],
+      "to": [
+        16,
+        11,
+        1.38
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            5,
+            1,
+            12
+          ],
+          "texture": "#glow"
+        }
+      }
+    },
+    {
+      "from": [
+        5,
+        16,
+        6.5
+      ],
+      "to": [
+        11,
+        16.05,
+        9.5
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "up": {
+          "uv": [
+            5,
+            6.5,
+            11,
+            9.5
+          ],
+          "texture": "#coals"
+        },
+        "north": {
+          "uv": [
+            5,
+            15.95,
+            11,
+            16
+          ],
+          "texture": "#coals"
+        },
+        "south": {
+          "uv": [
+            5,
+            15.95,
+            11,
+            16
+          ],
+          "texture": "#coals"
+        },
+        "west": {
+          "uv": [
+            6.5,
+            15.95,
+            9.5,
+            16
+          ],
+          "texture": "#coals"
+        },
+        "east": {
+          "uv": [
+            6.5,
+            15.95,
+            9.5,
+            16
+          ],
+          "texture": "#coals"
+        }
+      }
+    },
+    {
+      "from": [
+        6.5,
+        16,
+        5
+      ],
+      "to": [
+        9.5,
+        16.05,
+        11
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "up": {
+          "uv": [
+            6.5,
+            5,
+            9.5,
+            11
+          ],
+          "texture": "#coals"
+        },
+        "north": {
+          "uv": [
+            6.5,
+            15.95,
+            9.5,
+            16
+          ],
+          "texture": "#coals"
+        },
+        "south": {
+          "uv": [
+            6.5,
+            15.95,
+            9.5,
+            16
+          ],
+          "texture": "#coals"
+        },
+        "west": {
+          "uv": [
+            5,
+            15.95,
+            11,
+            16
+          ],
+          "texture": "#coals"
+        },
+        "east": {
+          "uv": [
+            5,
+            15.95,
+            11,
+            16
+          ],
+          "texture": "#coals"
+        }
+      }
+    }
+  ]
+}

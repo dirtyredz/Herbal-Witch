@@ -1,5 +1,6 @@
 package io.github.dirtyredz.herbalwitch.stations.everyday.hearth.block;
 
+import io.github.dirtyredz.herbalwitch.stations.block.StationBlock;
 import io.github.dirtyredz.herbalwitch.stations.block.StationEntity;
 import io.github.dirtyredz.herbalwitch.stations.everyday.hearth.menu.HearthMenu;
 import io.github.dirtyredz.herbalwitch.stations.process.ProcessCompletion;
@@ -28,7 +29,7 @@ import java.util.EnumMap;
 import java.util.Map;
 
 /**
- * Hearth fuel: burns any furnace fuel for its normal burn time, one item after another, while the
+ * Hearth and stove fuel (one block entity type serves both blocks): burns any furnace fuel for its normal burn time, one item after another, while the
  * chunk is loaded (a vessel above is not required); unloading pauses it. A fuel's container (a lava
  * bucket's bucket) goes to the return slot; fuel is not taken while that slot cannot hold it.
  */
@@ -89,8 +90,8 @@ public class HearthBlockEntity extends BlockEntity implements StationEntity {
         }
         boolean lit = burn > 0;
         BlockState state = getBlockState();
-        if (state.getValue(HearthBlock.LIT) != lit) {
-            level.setBlock(worldPosition, state.setValue(HearthBlock.LIT, lit), Block.UPDATE_ALL);
+        if (state.getValue(HearthBlock.LIT) != lit && state.getBlock() instanceof StationBlock block) {
+            block.setOnStation(level, worldPosition, HearthBlock.LIT, lit);
         }
         if (lit) {
             setChanged();
@@ -175,6 +176,6 @@ public class HearthBlockEntity extends BlockEntity implements StationEntity {
 
     @Override
     public AbstractContainerMenu createMenu(int id, Inventory player, Player who) {
-        return new HearthMenu(id, player, inventory, data, ContainerLevelAccess.create(level, worldPosition));
+        return new HearthMenu(id, player, inventory, data, ContainerLevelAccess.create(level, worldPosition), getBlockState().getBlock());
     }
 }

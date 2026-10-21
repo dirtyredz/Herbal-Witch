@@ -1,13 +1,17 @@
 package io.github.dirtyredz.herbalwitch.botany.garden;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -18,9 +22,10 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 /**
- * A raised herb bed: a wooden trough of tilled soil that holds one plant. Moisture works like
+ * A raised herb bed: a wooden planter of tilled soil that holds one plant. Moisture works like
  * farmland ({@link GardenSoil}); unlike farmland it is never trampled and never dries back to dirt.
- * State lives entirely in block properties: no block entity, no continuous scan.
+ * Beds side by side join into one planter ({@link GardenBedConnections}): the shared rails and
+ * posts disappear. State lives entirely in block properties: no block entity, no continuous scan.
  */
 public class HerbBedBlock extends Block {
     public static final IntegerProperty MOISTURE = BlockStateProperties.MOISTURE;
@@ -30,7 +35,9 @@ public class HerbBedBlock extends Block {
 
     public HerbBedBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(MOISTURE, 0).setValue(ENRICHED, false));
+        registerDefaultState(stateDefinition.any().setValue(MOISTURE, 0).setValue(ENRICHED, false)
+                .setValue(GardenBedConnections.NORTH, false).setValue(GardenBedConnections.EAST, false)
+                .setValue(GardenBedConnections.SOUTH, false).setValue(GardenBedConnections.WEST, false));
     }
 
     public static boolean isMoist(BlockState state) {
@@ -49,7 +56,8 @@ public class HerbBedBlock extends Block {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(MOISTURE, ENRICHED);
+        builder.add(MOISTURE, ENRICHED, GardenBedConnections.NORTH, GardenBedConnections.EAST, GardenBedConnections.SOUTH,
+                GardenBedConnections.WEST);
     }
 
     @Override
@@ -57,7 +65,38 @@ public class HerbBedBlock extends Block {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
         boolean watered = GardenSoil.isWatered(level, pos, level.isRainingAt(pos.above()));
-        return defaultBlockState().setValue(MOISTURE, watered ? GardenSoil.MAX_MOISTURE : 0);
+        return GardenBedConnections.connect(defaultBlockState().setValue(MOISTURE, watered ? GardenSoil.MAX_MOISTURE : 0), level, pos);
+    }
+
+    /** Placed by any means (including a plain setBlock, as the showcase does): join existing neighbours. */
+    @Override
+    @SuppressWarnings("deprecation") // overriding, not calling
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState old, boolean moving) {
+        super.onPlace(state, level, pos, old, moving);
+        BlockState joined = GardenBedConnections.connect(state, level, pos);
+        if (joined != state) {
+            level.setBlock(pos, joined, Block.UPDATE_CLIENTS);
+        }
+    }
+
+    @Override
+    @SuppressWarnings("deprecation") // overriding, not calling
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighbour, LevelAccessor level,
+                                  BlockPos pos, BlockPos neighbourPos) {
+        BooleanProperty side = GardenBedConnections.property(direction);
+        return side == null ? state : state.setValue(side, GardenBedConnections.joins(state, neighbour));
+    }
+
+    @Override
+    @SuppressWarnings("deprecation") // overriding, not calling
+    public BlockState rotate(BlockState state, Rotation rotation) {
+        return GardenBedConnections.rotate(state, rotation);
+    }
+
+    @Override
+    @SuppressWarnings("deprecation") // overriding, not calling
+    public BlockState mirror(BlockState state, Mirror mirror) {
+        return GardenBedConnections.mirror(state, mirror);
     }
 
     @Override
@@ -70,8 +109,10 @@ public class HerbBedBlock extends Block {
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         int moisture = state.getValue(MOISTURE);
         int next = GardenSoil.nextMoisture(moisture, GardenSoil.isWatered(level, pos, level.isRainingAt(pos.above())));
-        if (next != moisture) {
-            level.setBlock(pos, state.setValue(MOISTURE, next), Block.UPDATE_CLIENTS);
+        // Also repairs beds saved before connections existed (their sides default to unjoined).
+        BlockState updated = GardenBedConnections.connect(state.setValue(MOISTURE, next), level, pos);
+        if (updated != state) {
+            level.setBlock(pos, updated, Block.UPDATE_CLIENTS);
         }
     }
 

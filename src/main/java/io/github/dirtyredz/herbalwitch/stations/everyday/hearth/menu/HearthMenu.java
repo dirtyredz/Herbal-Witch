@@ -10,19 +10,22 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraft.world.level.block.Block;
 
-/** Fuel and the returned container, with remaining burn time. */
+/** Fuel and the returned container, with remaining burn time: the hearth's and the stove's menu. */
 public class HearthMenu extends StationMenu {
     public static final SlotSpec[] SLOTS = {
             new SlotSpec(HearthBlockEntity.FUEL, 80, 44),
             new SlotSpec(HearthBlockEntity.RETURN, 116, 44)};
 
-    public HearthMenu(int id, Inventory player, ProcessInventory inventory, ContainerData data, ContainerLevelAccess access) {
-        super(StationMenus.HEARTH.get(), id, player, inventory, data, access, StationBlocks.HEARTH.get(), SLOTS);
+    /** @param block the hearth or stove the menu belongs to (the distance and block check) */
+    public HearthMenu(int id, Inventory player, ProcessInventory inventory, ContainerData data, ContainerLevelAccess access,
+                      Block block) {
+        super(StationMenus.HEARTH.get(), id, player, inventory, data, access, block, SLOTS);
     }
 
     public HearthMenu(int id, Inventory player, FriendlyByteBuf extra) {
         this(id, player, HearthBlockEntity.newInventory(), new SimpleContainerData(HearthBlockEntity.DATA_COUNT),
-                ContainerLevelAccess.NULL);
+                ContainerLevelAccess.NULL, StationBlocks.HEARTH.get());
     }
 }

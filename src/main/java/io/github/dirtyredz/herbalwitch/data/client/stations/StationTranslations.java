@@ -20,6 +20,7 @@ public final class StationTranslations {
             "mortar", "Bundle -> powder",
             "kettle", "Powders + water -> tea",
             "hearth", "Burns fuel: heat above",
+            "stove", "Burns fuel: two burners",
             "infusion_pot", "Powders + base -> salve");
 
     private StationTranslations() {

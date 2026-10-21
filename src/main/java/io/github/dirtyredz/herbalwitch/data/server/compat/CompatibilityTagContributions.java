@@ -7,7 +7,7 @@ import net.minecraft.tags.BlockTags;
 
 /**
  * Reciprocal heat for Farmer's Delight 1.3.4: its HeatableBlockEntity treats anything in
- * {@code farmersdelight:heat_sources} as heat, honouring {@code lit}, so a lit hearth heats its
+ * {@code farmersdelight:heat_sources} as heat, honouring {@code lit}, so a lit hearth or stove heats its
  * cooking pot and skillet. The tag file is inert when Farmer's Delight is absent.
  */
 public final class CompatibilityTagContributions {
@@ -17,6 +17,6 @@ public final class CompatibilityTagContributions {
     }
 
     public static void blocks(HerbalWitchBlockTagsProvider.Sink tags) {
-        tags.tag(BlockTags.create(FD_HEAT_SOURCES)).add(StationBlocks.HEARTH.get());
+        tags.tag(BlockTags.create(FD_HEAT_SOURCES)).add(StationBlocks.HEARTH.get(), StationBlocks.STOVE.get());
     }
 }

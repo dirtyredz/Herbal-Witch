@@ -11,7 +11,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-/** One block entity type per station, under the station's id. */
+/** One block entity type per station, under the station's id; the stove shares the hearth's (same fuel behaviour). */
 public final class StationBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> TYPES =
             DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, HerbalWitch.MOD_ID);
@@ -27,7 +27,7 @@ public final class StationBlockEntities {
             "stations/kettle/station", () -> BlockEntityType.Builder.of(KettleBlockEntity::new, StationBlocks.KETTLE.get()).build(null));
     @SuppressWarnings("DataFlowIssue")
     public static final RegistryObject<BlockEntityType<HearthBlockEntity>> HEARTH = TYPES.register(
-            "stations/hearth/station", () -> BlockEntityType.Builder.of(HearthBlockEntity::new, StationBlocks.HEARTH.get()).build(null));
+            "stations/hearth/station", () -> BlockEntityType.Builder.of(HearthBlockEntity::new, StationBlocks.HEARTH.get(), StationBlocks.STOVE.get()).build(null));
     @SuppressWarnings("DataFlowIssue")
     public static final RegistryObject<BlockEntityType<InfusionPotBlockEntity>> INFUSION_POT = TYPES.register(
             "stations/infusion_pot/station", () -> BlockEntityType.Builder.of(InfusionPotBlockEntity::new, StationBlocks.INFUSION_POT.get()).build(null));

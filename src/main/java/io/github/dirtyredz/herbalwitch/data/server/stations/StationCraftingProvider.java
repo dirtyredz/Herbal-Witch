@@ -17,7 +17,8 @@ import static io.github.dirtyredz.herbalwitch.data.server.recipes.HerbalWitchRec
 /**
  * Station assembly, each yielding one, shaped as the station's silhouette, with acquisition
  * advancements: rack (4 sticks, 2 string, 2 wooden slabs), mortar (3 smooth stone, flint, stick),
- * kettle (5 iron, 1 copper), hearth (6 bricks, campfire), infusion pot (4 bricks, 2 iron, glass bottle).
+ * kettle (5 iron, 1 copper), hearth (6 bricks, campfire), stove (5 iron, 2 bricks, campfire),
+ * infusion pot (4 bricks, 2 iron, glass bottle).
  */
 public final class StationCraftingProvider {
     private StationCraftingProvider() {
@@ -39,6 +40,9 @@ public final class StationCraftingProvider {
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT)).save(writer);
         shaped(StationCatalog.HEARTH).pattern("B B").pattern("BCB").pattern("B B")
                 .define('B', Items.BRICK).define('C', Items.CAMPFIRE)
+                .unlockedBy("has_campfire", has(Items.CAMPFIRE)).save(writer);
+        shaped(StationCatalog.STOVE).pattern("III").pattern("ICI").pattern("B B")
+                .define('I', Tags.Items.INGOTS_IRON).define('C', Items.CAMPFIRE).define('B', Items.BRICK)
                 .unlockedBy("has_campfire", has(Items.CAMPFIRE)).save(writer);
         shaped(StationCatalog.INFUSION_POT).pattern("IGI").pattern("B B").pattern("B B")
                 .define('I', Tags.Items.INGOTS_IRON).define('G', Items.GLASS_BOTTLE).define('B', Items.BRICK)

@@ -23,7 +23,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 
 import java.util.Map;
 
-/** Wires the five stations: blocks, items, block entities, menus, recipe types, the tab, reload tracking and showcases. */
+/** Wires the stations: blocks, items, block entities, menus, recipe types, the tab, reload tracking and showcases. */
 public final class StationRegistration {
     /** Showcase recipe line keys, {@code showcase.herbalwitch.recipe.<station>}. */
     public static String recipeKey(String station) {
@@ -59,6 +59,8 @@ public final class StationRegistration {
                         KettleBlockEntity.WATER, water(),
                         KettleBlockEntity.OUTPUT, new ItemStack(PreparationItems.product(EverydayProductCatalog.RECOVERY_TEA)))));
         ShowcaseRegistry.register(new StationShowcaseSection(StationCatalog.HEARTH, false, recipeKey("hearth"),
+                () -> Map.of(HearthBlockEntity.FUEL, new ItemStack(Items.COAL, StationShowcaseSection.DEMO_FUEL))));
+        ShowcaseRegistry.register(new StationShowcaseSection(StationCatalog.STOVE, false, recipeKey("stove"),
                 () -> Map.of(HearthBlockEntity.FUEL, new ItemStack(Items.COAL, StationShowcaseSection.DEMO_FUEL))));
         ShowcaseRegistry.register(new StationShowcaseSection(StationCatalog.INFUSION_POT, true, recipeKey("infusion_pot"),
                 () -> Map.of(InfusionPotBlockEntity.INPUT_0, new ItemStack(PreparationItems.powder(HerbCatalog.YARROW), 2),

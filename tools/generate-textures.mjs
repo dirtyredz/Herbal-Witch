@@ -23,7 +23,12 @@ import wet from './art/botany/wet.mjs';
 import shadeHerbs from './art/botany/shade.mjs';
 import woodland from './art/botany/woodland.mjs';
 import { soilDry, soilMoist } from './art/botany/garden.mjs';
+import { plantParts } from './art/botany/parts.mjs';
+import { HERB_LIST } from './art/botany/herbs.mjs';
 import { ceramic, iron, soil, ember, flame } from './art/stations/materials.mjs';
+import * as house from './art/stations/house.mjs';
+import { mortarStone, plinthStone, pestleStone, herbPile } from './art/stations/stone.mjs';
+import { ivy, bundle } from './art/foliage.mjs';
 import * as interfaces from './art/stations/interfaces.mjs';
 import { PREPARATION_HERBS, bundleSprite, powderSprite } from './art/preparations/materials.mjs';
 import { PRODUCTS } from './art/preparations/products.mjs';
@@ -44,10 +49,36 @@ const TEXTURES = {
   trim_purple: trimPurple, // dark-purple piping, knobs, small details
   rug: rug, // the small rug
   lamp_shade: lampShade, // the table lamp's shade
+  // the shared house materials (furniture, stations, garden): docs/ART.md
+  wood: house.wood, // warm reddish-brown, grain along U (beams, rails, tops)
+  wood_post: house.woodPost, // the same wood, grain along V (posts, legs)
+  wood_end: house.woodEnd, // end grain: caps and post tops
+  iron: house.ironDark, // charcoal iron brackets, bands, plates
+  gold: house.gold, // rivets, studs, knobs, bands
+  copper: house.copper, // handles and beaded rims
+  plum: house.plum, // dark purple surfaces
+  ivy: ivy, // cutout: dense trailing ivy with small pink flowers
 };
 
 // Station block materials (block/stations/): untinted; flame is cutout.
-const STATION_TEXTURES = { ceramic, iron, soil, ember, flame };
+const STATION_TEXTURES = {
+  ceramic, iron, soil, ember, flame,
+  plum_painted: house.plumPainted, // kettle and pot bodies: moons, stars, flowers on vines
+  plum_lid: house.plumLid, // vessel lids seen from above
+  stone_dark: house.stoneDark, // hearth bricks
+  plaque: house.plaque, // the hearth's moon plaque
+  fire_glow: house.fireGlow, // lit firebox back walls
+  coals: house.coals, // burners and grates
+  cloth_red: house.clothRed, // cutout: the stove's towel
+  mortar_stone: mortarStone,
+  plinth_stone: plinthStone,
+  pestle_stone: pestleStone,
+  herb_pile: herbPile,
+  bundle_green: () => bundle('green'), // cutout: rack bundles
+  bundle_lavender: () => bundle('lavender'),
+  bundle_white: () => bundle('white'),
+  bundle_yellow: () => bundle('yellow'),
+};
 
 mkdirSync(outDir, { recursive: true });
 for (const [name, make] of Object.entries(TEXTURES)) {
@@ -57,22 +88,8 @@ for (const [name, make] of Object.entries(TEXTURES)) {
 
 // Botany: [group, herb, module] in a fixed order. Each herb writes block stage_0..3 and item seeds
 // + fresh; the two garden soil tiles follow.
-const HERBS = [
-  ['temperate', 'lavender', temperate],
-  ['temperate', 'sage', temperate],
-  ['temperate', 'chamomile', temperate],
-  ['temperate', 'yarrow', temperate],
-  ['dry', 'rosemary', dry],
-  ['dry', 'thyme', dry],
-  ['wet', 'mint', wet],
-  ['wet', 'nettle', wet],
-  ['shade', 'valerian', shadeHerbs],
-  ['shade', 'mugwort', shadeHerbs],
-  ['woodland', 'belladonna', woodland],
-  ['woodland', 'nightshade', woodland],
-  ['woodland', 'wolfsbane', woodland],
-  ['woodland', 'mandrake', woodland],
-];
+const GROUP_ART = { temperate, dry, wet, shade: shadeHerbs, woodland };
+const HERBS = HERB_LIST.map(([group, herb]) => [group, herb, GROUP_ART[group]]);
 
 const botany = []; // [path relative to textures/, image]
 const sheetRows = []; // per herb: stage_0..3, seeds, fresh
@@ -86,6 +103,7 @@ for (const [group, herb, mod] of HERBS) {
 }
 botany.push(['block/botany/garden/soil_dry.png', soilDry()]);
 botany.push(['block/botany/garden/soil_moist.png', soilMoist()]);
+botany.push(['block/botany/parts.png', plantParts()]); // swatches the 3D mature herbs are built from
 
 for (const [rel, img] of botany) {
   mkdirSync(dirname(join(texRoot, rel)), { recursive: true });

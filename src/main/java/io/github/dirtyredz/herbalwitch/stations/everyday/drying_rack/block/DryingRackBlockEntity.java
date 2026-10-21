@@ -57,8 +57,9 @@ public class DryingRackBlockEntity extends BlockEntity implements StationEntity 
         station.tick(level, false);
         boolean active = !station.inventory().getStackInSlot(INPUT).isEmpty() || !station.inventory().getStackInSlot(OUTPUT).isEmpty();
         BlockState state = getBlockState();
-        if (state.hasProperty(DryingRackBlock.ACTIVE) && state.getValue(DryingRackBlock.ACTIVE) != active) {
-            level.setBlock(worldPosition, state.setValue(DryingRackBlock.ACTIVE, active), Block.UPDATE_CLIENTS);
+        if (state.hasProperty(DryingRackBlock.ACTIVE) && state.getValue(DryingRackBlock.ACTIVE) != active
+                && state.getBlock() instanceof DryingRackBlock rack) {
+            rack.setOnStation(level, worldPosition, DryingRackBlock.ACTIVE, active);
         }
     }
 
