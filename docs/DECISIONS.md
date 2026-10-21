@@ -2,6 +2,16 @@
 
 Newest first.
 
+## 2026-10-21 - 0.2.0-dev.5: dried bundles back to 2D sprites, mortar at kettle size
+
+Owner feedback on dev.4: the first, flatter bundle look was better than the cube bundles; the mortar
+is too big beside the kettle. Bundles are the herb's own item sprite on zero-thickness cutout planes
+(crossed for free-hanging ones), a small 3D tie, and a peg or hook; planes carry only their two broad
+faces and stay 0.75 px inside every cell boundary, the fix for dev.1's bleed onto the host block.
+The mortar is drawn at full size and scaled by 0.6 (about 9 px across, like the kettle), its hit
+box shrunk to match. Supersedes the 3D bundle builder below (dev.2/dev.3). Rejected: keeping cubes
+(the owner's call), 1 px thick sprite boxes (their top and bottom faces smeared onto neighbours).
+
 ## 2026-10-21 - 0.2.0-dev.3: slim stemmed bundles, rack legs meeting at an apex
 
 Owner feedback on dev.2: the cube bundles read as stacked blobs and lost their stems, and the rack's

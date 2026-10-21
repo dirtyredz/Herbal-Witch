@@ -1,10 +1,14 @@
 // Mortar and pestle (owner reference: reference-mortar.png): a chunky mottled stone bowl, octagonal
 // with chamfered corners, tapering to a narrow foot on a stepped square plinth, a stepped rim,
 // moss and small pink flowers creeping over it, a heap of bright ground herbs inside, and a thick
-// knob-headed stone pestle leaning out of the bowl. One block.
-import { box } from '../geometry.mjs';
+// knob-headed stone pestle leaning out of the bowl. One block, drawn at full size and scaled by
+// SIZE to match the kettle (about 9 px across, ~11 tall; owner ruling 0.2.0-dev.5).
+import { box, scaleAbout } from '../geometry.mjs';
 import { octagon, octagonTrue, octagonRing } from '../shapes.mjs';
 import { STATION } from '../textures.mjs';
+
+/** Uniform scale of the drawn mortar: its 15.5 px bowl becomes the kettle's ~9 px body. */
+const SIZE = 0.6;
 
 export function mortar() {
   const C = 8;
@@ -38,6 +42,6 @@ export function mortar() {
   return [{
     path: 'block/stations/mortar/base',
     textures: { plinth: STATION.plinth_stone, stone: STATION.mortar_stone, herbs: STATION.herb_pile, pestle: STATION.pestle_stone, particle: STATION.mortar_stone },
-    elements: els,
+    elements: scaleAbout(els, SIZE),
   }];
 }

@@ -41,15 +41,19 @@ art is reviewed, and the owner checklist.
   `node --test "tools/preview/test/*.test.mjs"` and `tools/preview-models.mjs` fail on them.
 - **Watered soil must read at a glance:** moist far darker than dry, the two on either side of the
   rails' wood (`BotanyModelsTest` checks the luminance gap).
-- **Bundles are slim and airy, with visible stems:** stems gathered at a tie under the hook, then
-  thin (under a pixel) stems fanning down into a few small sparse leaf and flower cubes, about 4 px
-  across and 20 elements. Never stacked solid layers, never a stemless blob (a dried bunch, not a
-  column). `tools/models/preparations/bundles.mjs` is the one source for every bundle.
+- **Dried bundles are 2D sprites, inset so they never touch neighbour faces** (owner, after dev.4:
+  the first, flatter look was better than the cube bundles). Each herb's own 16 x 16 bundle sprite
+  is stretched over a zero-thickness cutout plane (two crossed planes where it hangs free), with a
+  small 3D pink tie and, on a block, a wooden peg. A plane has only its two broad faces (no
+  up/down/edge faces to smear) and keeps at least 0.75 px from every cell boundary, which is what
+  stopped dev.1's sprites bleeding onto the host block (`tools/preview/test/bundles.test.mjs`
+  guards it). `tools/models/preparations/bundles.mjs` is the one source for every bundle. The
+  growing herbs in beds stay cube-built 3D.
 - **Rack leg pairs meet at an apex and never cross:** each end's two legs lean in (22.5 degrees)
   until their centre lines meet, then a short post rises to a small iron cap (about 4 x 4 x 3.5 px,
   nothing larger). No X, no leg ending past the other, no big caps.
-- **Nothing flat that can leak:** dried bundles are small 3D cubes like the herbs, never a stretched
-  sprite on a thin box.
+- **Stove-top vessels share a size:** the mortar and pestle is the kettle's size (about 9 px across,
+  ~10-11 tall); `mortar.mjs` draws it full size and scales it by one constant.
 
 ## The house style (0.2.0)
 
@@ -155,7 +159,7 @@ orientation follows the transform maths (not checked against a client).
 
 ## Owner review checklist (0.2.0-dev.3)
 
-Status: **awaiting owner review.** Since dev.2: slim stemmed hung bundles, rack legs meeting at an apex under small caps. Since dev.1: 3D growth stages, one dark wood, rack legs on their
+Status: **awaiting owner review.** Since dev.4: dried bundles are 2D inset sprites again (dev.5), the mortar is the kettle's size. Since dev.2: slim stemmed hung bundles, rack legs meeting at an apex under small caps. Since dev.1: 3D growth stages, one dark wood, rack legs on their
 feet, smaller kettle and pot, stovepipe out of the stove's back, solid hearth back, no flickering
 tops, wet-looking watered beds (joined too), 3D hung bundles (no leaking onto the host block). Trial instance, creative; `/herbalwitch showcase` on a clear
 plot, then walk it.

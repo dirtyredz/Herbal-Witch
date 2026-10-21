@@ -89,7 +89,7 @@
   their lower ends off the feet; pivot a leaning part where it must touch (its foot) and let the
   free end land where it may.
 - **Stretched sprites on thin boxes leak.** A whole sprite squeezed onto a 1 px side or top face
-  shows as coloured streaks next to the host block; hung bundles are 3D cubes for this reason.
+  shows as coloured streaks next to the host block; dried bundles are flat sprite planes with only their two broad faces, inset 0.75 px from every cell boundary, for this reason (0.2.0-dev.5; bundles.test.mjs guards it).
 - **Previews are approximations.** `tools/preview-models.mjs` shades faces like Minecraft but has no
   ambient occlusion, light, shaders, animation or item extrusion; its GUI orientation follows the
   transform maths and has not been compared with a client. The owner's in-game check still decides.

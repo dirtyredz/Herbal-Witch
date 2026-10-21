@@ -29,10 +29,10 @@ export const STATION = {
   parts: `${HW}botany/parts`, // the swatch atlas the 3D bundles are built from
 };
 
-/** Variables whose textures have transparency: a model using any of them renders cutout. */
+/** Variables whose textures have transparency (and every `bundle_<herb>` sprite): a model using any of them renders cutout. */
 export const CUTOUT = new Set(['ivy', 'flame', 'cloth', 'leaf', 'glass', 'vine', 'runner', 'runner_magenta']);
 
 /** Whether elements use a cutout variable. */
 export function needsCutout(elements) {
-  return elements.some((e) => Object.values(e.faces).some((f) => CUTOUT.has(f.texture.slice(1))));
+  return elements.some((e) => Object.values(e.faces).some((f) => CUTOUT.has(f.texture.slice(1)) || f.texture.startsWith('#bundle_')));
 }

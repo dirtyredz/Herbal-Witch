@@ -117,6 +117,15 @@ export function shift(elements, [dx, dy, dz]) {
   return elements.map((e) => ({ ...e, from: m(e.from), to: m(e.to), ...(e.rotation ? { rotation: { ...e.rotation, origin: m(e.rotation.origin) } } : {}) }));
 }
 
+/**
+ * Scales elements uniformly by `k` about the point (8, 0, 8) (the block's centre on the floor),
+ * rotation origins too; rotated elements stay legal because a uniform scale keeps their shape.
+ */
+export function scaleAbout(elements, k) {
+  const m = (p) => [8 + (p[0] - 8) * k, p[1] * k, 8 + (p[2] - 8) * k];
+  return elements.map((e) => ({ ...e, from: m(e.from), to: m(e.to), ...(e.rotation ? { rotation: { ...e.rotation, origin: m(e.rotation.origin) } } : {}) }));
+}
+
 /** Mirrors elements across x = 8 (swapping east/west faces and negating rotations about y and z). */
 export function mirrorX(elements) {
   return elements.map((e) => {

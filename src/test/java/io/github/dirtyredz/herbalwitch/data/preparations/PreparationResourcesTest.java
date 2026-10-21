@@ -63,12 +63,13 @@ class PreparationResourcesTest {
     }
 
     /**
-     * Hung bundles are small 3D cube models over the parts atlas (owner feedback 0.2.0-dev.1: the
-     * flat sprite bled onto the host block), one ceiling and one wall form per herb, each herb its
-     * own; the wall form turns with the facing and the floor states reuse the ceiling form.
+     * Hung bundles are flat sprite planes with a small 3D tie and peg (the owner's preferred 2D look;
+     * the dev.1 sprites bled onto the host block, so the planes are zero-thickness and inset, which
+     * tools/preview/test/bundles.test.mjs guards), one ceiling and one wall form per herb, each
+     * binding its own sprite; the wall form turns with the facing and floor states reuse the ceiling form.
      */
     @Test
-    void bundlesHangFromCeilingsAndWallsAsCubeModels() {
+    void bundlesHangFromCeilingsAndWallsAsSpritePlanes() {
         Set<String> shapes = new HashSet<>();
         for (BotanyManifest.Herb herb : BotanyManifest.HERBS) {
             String path = PreparationManifest.herbDir(herb) + "/bundle";
@@ -76,10 +77,11 @@ class PreparationResourcesTest {
             for (String form : List.of("ceiling", "wall")) {
                 TemplateChecks.check(dir + form, Map.of());
                 Resolved model = ModelResolver.resolve(dir + form);
-                assertNull(model.renderType(), dir + form + " is solid, not a cutout sprite");
+                assertEquals("minecraft:cutout", model.renderType(), dir + form + " is a cutout sprite");
                 assertEquals("herbalwitch:block/botany/parts", model.texture("#parts"), dir + form);
                 assertEquals("herbalwitch:item/" + path, model.texture("#particle"), dir + form);
-                assertTrue(model.elements().size() >= 8, dir + form + " is not built from cubes");
+                assertEquals("herbalwitch:item/" + path, model.texture("#bundle_" + herb.id()), dir + form);
+                assertTrue(model.elements().size() >= 3, dir + form + " is a peg, a tie and a sprite plane");
                 assertTrue(shapes.add(model.elements().toString()), dir + form + " repeats another bundle");
             }
             JsonObject variants = generated("assets/herbalwitch/blockstates/" + path + ".json").getAsJsonObject("variants");

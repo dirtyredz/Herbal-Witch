@@ -10,8 +10,7 @@ import { box } from '../geometry.mjs';
 import { rivet } from '../shapes.mjs';
 import { STATION } from '../textures.mjs';
 import { multiblockModels, rectangle } from './multiblock.mjs';
-import { bundle } from '../preparations/bundles.mjs';
-import { separateCoplanar } from '../botany/separate.mjs';
+import { bundle, bundleTextures } from '../preparations/bundles.mjs';
 
 const ENDS = [13, -13]; // x of the two A-frames (assembly space: x -16..16)
 const BEAM_Y = [24, 27];
@@ -61,11 +60,11 @@ function base() {
   return els;
 }
 
-const BUNDLES = ['mint', 'lavender', 'chamomile', 'yellow'];
+const BUNDLES = ['mint', 'lavender', 'chamomile', 'yarrow'];
 
 function bundles() {
-  // neighbouring bundles' leaves can share a plane, so the four are separated together
-  return separateCoplanar(HOOKS.flatMap((x, i) => bundle(BUNDLES[i], { cx: x, cz: 8, top: BEAM_Y[0] - 1.75, length: 1.1, seed: 50 + i })));
+  // flat sprite bundles, 5 px wide so neighbours (hooks 5.5 apart) never share a plane
+  return HOOKS.flatMap((x, i) => bundle(BUNDLES[i], { at: [x, 8], top: BEAM_Y[0] - 1.75, width: 5, height: 10, across: 'cross' }));
 }
 
 export function dryingRack() {
@@ -77,7 +76,7 @@ export function dryingRack() {
     fit: 0.5,
     textures: {
       wood: STATION.wood, wood_z: STATION.wood, post: STATION.wood_post, iron: STATION.iron, gold: STATION.gold,
-      parts: STATION.parts, particle: STATION.wood,
+      parts: STATION.parts, ...bundleTextures(BUNDLES), particle: STATION.wood,
     },
   });
 }

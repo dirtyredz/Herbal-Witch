@@ -67,7 +67,7 @@ public final class TemplateChecks {
                 for (JsonElement u : uv) {
                     assertTrue(u.getAsDouble() >= 0 && u.getAsDouble() <= 16, what + ": uv outside the texture " + uv);
                 }
-                if (!STRETCHED.contains(variable)) {
+                if (!STRETCHED.contains(variable) && !variable.startsWith("bundle_")) {
                     double[] size = faceSize(entry.getKey(), from, to);
                     assertEquals(size[0], Math.abs(uv.get(2).getAsDouble() - uv.get(0).getAsDouble()), 1e-3, what + ": u density");
                     assertEquals(size[1], Math.abs(uv.get(3).getAsDouble() - uv.get(1).getAsDouble()), 1e-3, what + ": v density");
@@ -75,7 +75,7 @@ public final class TemplateChecks {
                 String texture = variables.getOrDefault(variable, model.texture("#" + variable));
                 assertNotNull(texture, what + ": unresolved texture");
                 assertTrue(Files.isRegularFile(ModelResolver.texturePng(texture)), what + ": missing " + texture);
-                alpha |= ALPHA.contains(variable);
+                alpha |= ALPHA.contains(variable) || variable.startsWith("bundle_"); // bundle_<herb>: stretched cutout sprites
                 faces++;
             }
         }

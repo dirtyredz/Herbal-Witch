@@ -9,7 +9,7 @@ import java.util.Map;
 /** Collision and selection shape, simplified from the authored model, facing north. */
 public final class MortarShapes {
     public static final Map<Direction, VoxelShape> BODY = ShapeRotation.horizontal(
-            new double[] {3, 0, 3, 13, 8, 13});
+            new double[] {3.5, 0, 3.5, 12.5, 9, 12.5});
 
     private MortarShapes() {
     }

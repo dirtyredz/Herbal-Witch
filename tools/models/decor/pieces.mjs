@@ -8,9 +8,9 @@
 import { box } from '../geometry.mjs';
 import { band, ivyDrape, octagon, octagonTrue, rivet } from '../shapes.mjs';
 import { DECOR } from './textures.mjs';
-import { bundle } from '../preparations/bundles.mjs';
+import { bundle, bundleTextures } from '../preparations/bundles.mjs';
 
-const T = { ...DECOR, particle: DECOR.wood };
+const T = { ...DECOR, ...bundleTextures(['lavender']), particle: DECOR.wood };
 
 /** A chunky black-iron corner bracket at a corner of the body, with gold rivets on its two faces. */
 function bracket(x, y, z, sx, sz) {
@@ -52,7 +52,7 @@ export function counter() {
   }
   // a dried bundle hanging on a gold ring at the east side, and ivy over the west corner
   els.push(box([15, 11, 7.5], [15.75, 12, 8.5], '#gold'));
-  els.push(...bundle('lavender', { cx: 8, cz: 15.45, top: 11, depth: 0.9, length: 0.65, seed: 3, across: 'x' }));
+  els.push(...bundle('lavender', { at: [15.2, 8], top: 11, width: 5.5, height: 8, across: 'x' }));
   els.push(...ivyDrape({ face: 'west', at: 0, along: [3.5, 8], top: 13.5, lengths: [9, 12], inside: true }));
   els.push(...ivyDrape({ face: 'north', at: 0, along: [13, 16], top: 13.5, lengths: [6, 10], inside: true }));
   return [{ path: 'block/decor/templates/apothecary_counter', textures: T, elements: els }];

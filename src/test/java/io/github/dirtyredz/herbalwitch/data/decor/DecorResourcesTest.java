@@ -95,7 +95,7 @@ class DecorResourcesTest {
             TemplateChecks.check(id, Map.of());
             Resolved model = ModelResolver.resolve(id);
             for (Map.Entry<String, String> texture : model.textures().entrySet()) {
-                if (!texture.getKey().equals("particle")) {
+                if (!texture.getKey().equals("particle") && !texture.getKey().startsWith("bundle_")) { // bundle sprites are item art
                     String name = texture.getValue().substring(texture.getValue().lastIndexOf('/') + 1);
                     assertTrue(PALETTE.contains(name), id + " uses " + texture.getValue());
                     assertTrue(!name.contains("floral"), id + ": no floral fabric");
