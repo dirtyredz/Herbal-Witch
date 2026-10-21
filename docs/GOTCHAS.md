@@ -46,6 +46,15 @@
   need code, datagen and a jar; after datagen or a shared-texture change restart the watcher (it
   caches). The pack is client-side: each client needs its own copy. The trial instance is
   packwiz-managed; its installer does not track this folder, but re-publish if a launch removed it.
+- **One texture density: 32 x 32, UVs in 16 units.** Every block and item texture is 32 x 32 and
+  every GUI atlas 512 x 512 (0.2.0-dev.9); model coordinates and UVs never change with it, so a UV of
+  4 units covers 8 texels. Blockbench creates new textures at the project resolution (16) by default:
+  the compiler refuses them, so create them at 32. The item sprites and GUI atlases are drawn on a
+  16 (256) grid and enlarged in `tools/art/catalogue.mjs`; a sprite drawn natively at 32 must leave
+  that enlargement, or it is doubled to 64 and refused. GUI blits keep vanilla's 256 logical size
+  (`GuiGraphics.blit` without a texture size): u/v and widths stay in GUI pixels, only the file is
+  finer. Parity across a resolution change compares at the game's sampling (`--compare` accepts an
+  exact integer nearest-neighbour enlargement, nothing else).
 - **Faces may not span more than one texture.** A face longer than 16 pixels cannot have position
   UVs; multiblock pieces are split per cell (and the item assembly is the split pieces put back).
 - **Rotations are one axis, 0 / +-22.5 / +-45 degrees.** A rotated element's `from`/`to` is checked

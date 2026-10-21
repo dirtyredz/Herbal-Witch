@@ -19,7 +19,7 @@ docs/ARCHITECTURE.md and docs/catalogue/).
   5. `git diff --check`, and from the workspace root `.\tools\sync-mod-files.ps1 -Check`
   6. Optional-mod runtime profiles: `.\gradlew.bat runGameTestServer -PcompatProfile=<base|emi|jei|viewers|farmersdelight|thirst|all> -PcompatModsDir=<mods folder>`
      (the folder supplies the Farmer's Delight and Thirst jars; see docs/COMPATIBILITY.md)
-  Art changes also: `node --test "tools/blockbench/test/*.test.mjs" "tools/blockbench/dev-art/test/*.test.mjs" "tools/preview/test/*.test.mjs"` and
+  Art changes also: `node --test "tools/art/test/*.test.mjs" "tools/blockbench/test/*.test.mjs" "tools/blockbench/dev-art/test/*.test.mjs" "tools/preview/test/*.test.mjs"` and
   `node tools/preview-models.mjs --output <job folder>/previews/<name> --references <job folder>`,
   then review the sheets before any jar goes to a trial instance (docs/ART.md "Review").
   The owner checks visuals, transforms, shaders and two-client behaviour in the trial instance.

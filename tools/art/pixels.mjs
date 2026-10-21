@@ -34,3 +34,17 @@ export function image(size, fill) {
   }
   return { size, px };
 }
+
+/**
+ * Nearest-neighbour enlargement by an integer factor: each pixel becomes a factor x factor block, so
+ * the result samples exactly like the original wherever UVs are measured in units (the game's case).
+ */
+export function upscale(img, factor) {
+  if (!Number.isInteger(factor) || factor < 1) throw new Error(`bad upscale factor ${factor}`);
+  const size = img.size * factor;
+  const px = new Array(size * size);
+  for (let y = 0; y < size; y++) {
+    for (let x = 0; x < size; x++) px[y * size + x] = img.px[Math.floor(y / factor) * img.size + Math.floor(x / factor)];
+  }
+  return { size, px };
+}

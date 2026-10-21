@@ -5,12 +5,13 @@ import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { png } from '../../image/png-encode.mjs';
 import { writeProject } from '../project.mjs';
+import { TEXTURE_SIZE } from '../../art/density.mjs';
 
 /** A size x size PNG filled by fn(x, y) -> [r, g, b, a]. */
 export const pngOf = (size, fn) => png({ size, px: Array.from({ length: size * size }, (_, i) => fn(i % size, Math.floor(i / size))) });
-export const SOLID = pngOf(16, () => [120, 60, 30, 255]);
-export const STRIPES = pngOf(16, (x) => (x % 2 ? [200, 180, 40, 255] : [90, 80, 20, 255]));
-export const HOLES = pngOf(16, (x, y) => ((x + y) % 2 ? [40, 160, 40, 255] : [0, 0, 0, 0]));
+export const SOLID = pngOf(TEXTURE_SIZE, () => [120, 60, 30, 255]);
+export const STRIPES = pngOf(TEXTURE_SIZE, (x) => (x % 2 ? [200, 180, 40, 255] : [90, 80, 20, 255]));
+export const HOLES = pngOf(TEXTURE_SIZE, (x, y) => ((x + y) % 2 ? [40, 160, 40, 255] : [0, 0, 0, 0]));
 
 /** A cube element for writeProject: every face textured `tex` (index) with its default-sized UV. */
 export function cube(from, to, tex = 0, extra = {}) {

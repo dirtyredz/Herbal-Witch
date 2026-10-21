@@ -2,6 +2,34 @@
 
 Newest first.
 
+## 2026-10-21 - 0.2.0-dev.9: the whole set paints at 32 x 32 (two texels per model unit)
+
+Owner ruling: every Herbal Witch texture is 32 x 32, twice vanilla's pixel density, so finer detail can
+be painted in Blockbench. This supersedes the mixed rule in docs/ART.md ("32 x 32 for materials, 16 x 16
+for young herb, seed, fresh-herb and product sprites"). The rule is "two texels per model unit": model
+geometry and UVs stay in Minecraft's 16-unit space; block and item textures are 32 x 32 and the GUI
+atlases 512 x 512 (vanilla's 256-unit sheet; the screens' `blit` calls already measure in that logical
+256, so no code changed). It lives once in `tools/art/density.mjs` (mirrored by the Java
+`TextureDensity`) and is enforced by the texture producer (every manifest entry), the Blockbench
+compiler (every embedded texture, owned or shared preview), `TemplateChecks` (every texture a model
+uses) and `TextureDensityTest` plus `tools/art/test/density.test.mjs` (every PNG shipped), so a 16 x 16
+texture cannot return beside 32 x 32 ones.
+
+The Blockbench pieces' textures, the house wood and gold, the soil and the herb atlas were already
+32 x 32 (since 0.2.0-dev.1) and did not change; the Blockbench projects keep their 16 x 16 project
+resolution with 32 x 32 textures, which is what makes the editor paint at two texels per pixel. What
+moved: the 74 item sprites (seeds, fresh herbs, bundles, powders, products) and the five GUI atlases,
+plus the five embedded bundle previews in the drying rack, stove and apothecary chest. They are exact
+2x nearest-neighbour enlargements: the generators still draw on the old grid and `catalogue.mjs`
+enlarges (`drawnAt1x`), so the generators remain the source and the game shows the same pixels.
+Evidence: `compile-blockbench.mjs --compare` against dev.8 (textures compared at the game's sampling,
+which now accepts an exact integer enlargement and nothing else) reports appearance identical, and the
+preview sheets render byte-identical before and after. Rejected: doubling everything again to 64 (the
+block textures were already at the target density; 64 would be four times vanilla's); per-texture
+densities (a sprite at 16 beside a 32 block reads as a mismatched, coarser piece, and the checks could
+not tell a slip from intent); redrawing sprites natively at 32 now (that is art, left to the owner or a
+later art pass).
+
 ## 2026-10-21 - 0.2.0-dev.8: every texture of a Blockbench piece belongs to that piece
 
 In dev.6 only the rug and lamp shade were piece-owned; wood, gold, iron, glaze and the rest were shared

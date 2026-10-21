@@ -92,7 +92,7 @@ def artCheck = { String name, List<String> script ->
 artCheck('checkTextures', ['tools/generate-textures.mjs', '--check'])
 artCheck('checkModels', ['tools/generate-models.mjs', '--check'])
 artCheck('checkBlockbench', ['tools/compile-blockbench.mjs', '--check'])
-artCheck('testArtTools', ['--test', 'tools/blockbench/test/*.test.mjs', 'tools/blockbench/dev-art/test/*.test.mjs', 'tools/preview/test/*.test.mjs'])
+artCheck('testArtTools', ['--test', 'tools/art/test/*.test.mjs', 'tools/blockbench/test/*.test.mjs', 'tools/blockbench/dev-art/test/*.test.mjs', 'tools/preview/test/*.test.mjs'])
 
 tasks.register('checkArt') {
     group = 'verification'

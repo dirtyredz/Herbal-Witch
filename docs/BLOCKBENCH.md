@@ -72,8 +72,8 @@ the kettle is committed as `tools/blockbench/test/fixtures/editor-save/kettle.bb
   ivy, stone, the rug, the lamp shade...) belongs to that piece alone and is paintable: paint it in
   Blockbench and save, and only that piece changes. Each is its own texture in the Textures panel, so
   a piece that has `wood` and `wood_v` (or `iron` and `iron_top`) has two to paint. They are exported
-  to `textures/block/pieces/<group>/<piece>/<name>.png`. Keep each texture's size (32 x 32, or the
-  rug's own) and pure transparent or opaque pixels. The one exception: the herb atlas (`parts`) and
+  to `textures/block/pieces/<group>/<piece>/<name>.png`. Keep each texture at 32 x 32 (see
+  "Painting at 32 x 32") and its pixels purely transparent or opaque. The one exception: the herb atlas (`parts`) and
   the `bundle_*` sprites are the procedural herbs' art, drawn into the dried bundles; painting those
   is refused. Shared textures cannot be added to a piece.
 - **Groups** are named for what they are (body, lid, handle, shade, frames/legs...). Some groups mean
@@ -91,6 +91,27 @@ the kettle is committed as `tools/blockbench/test/fixtures/editor-save/kettle.bb
   y 32 above the stove). The compiler cuts the assembly into the game's cells; a cube may cross a
   seam.
 
+### Painting at 32 x 32
+
+The set paints at **two texels per model pixel**, twice vanilla's density (docs/DECISIONS.md,
+0.2.0-dev.9). What you see in Blockbench:
+
+- **Every texture is 32 x 32** (right-click a texture > Properties shows 32 x 32). The brush paints
+  one texel, which is half a model pixel, so a 1 px rivet is 2 x 2 texels and a line can be half a
+  pixel wide. Blockbench's painting grid (View menu) and the UV editor's grid show the
+  texels.
+- **Geometry and UVs stay in 16 units.** The UV editor still measures faces in the 16-unit space: a
+  face 4 px wide spans 4 UV units and 8 texels. File > **Project...** keeps its texture size (UV
+  resolution) at **16 x 16**; do not change it to 32.
+- **New textures:** create them at **32 x 32** (Textures panel > Create Texture, Resolution 32). A
+  texture at any other size is refused (`every texture is 32 x 32`), so a 16 x 16 one cannot slip
+  in beside the others. If Blockbench offers to change the project's resolution or rescale UVs to
+  match a texture, decline. Do not resize existing textures.
+- **The procedural art is not painted in Blockbench.** The item sprites (seeds, fresh herbs, bundles,
+  powders, products), the GUI atlases, the herb atlas, the herb bed soil and the shared wood and gold
+  come from `tools/art/` and are 32 x 32 too. The sprites and GUI atlases are still drawn on their
+  old 16-pixel grid and enlarged, so they look blocky at 32 until someone draws them finer.
+
 ## When a save is refused
 
 | Message | Meaning |
@@ -98,6 +119,7 @@ the kettle is committed as `tools/blockbench/test/fixtures/editor-save/kettle.bb
 | `the embedded preview differs from the shared ...` | The herb atlas or a bundle sprite was painted. Undo it; every other texture is yours to paint. |
 | `... is not supported` (mesh, group rotation, tint, inflate, light_emission, a second rotation axis) | That Blockbench feature does not exist in Minecraft 1.20.1 block models; use cubes and element rotations. |
 | `project format 5.x` / `Minecraft target ...` | Blockbench was updated, or the project's Format Version changed; see "Once" step 1 and the Project dialog. |
+| `N x N; every texture is 32 x 32` | A texture is not 32 x 32 (a new texture made at Blockbench's default 16, or a resized one). Recreate it at 32 x 32. |
 | `coplanar faces overlap` | Two faces lie in the same plane and would flicker (z-fight). Move one by 0.1 px or more. |
 | `leaves the permitted bounds` | A cube left the piece's space; bring it back, or ask for the bounds to change. |
 | `not valid JSON` | The file was read mid-save; the watcher retries by itself. |
@@ -114,7 +136,7 @@ shared-texture change, restart the watcher.
 
    ```
    node tools/compile-blockbench.mjs
-   node --test "tools/blockbench/test/*.test.mjs" "tools/preview/test/*.test.mjs"
+   node --test "tools/art/test/*.test.mjs" "tools/blockbench/test/*.test.mjs" "tools/preview/test/*.test.mjs"
    node tools/preview-models.mjs --output <job folder>/previews/<name> --references <job folder>
    .\gradlew.bat test build
    ```

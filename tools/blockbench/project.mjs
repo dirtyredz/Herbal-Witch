@@ -219,7 +219,7 @@ export function writeProject(spec) {
   const outliner = walk(spec.tree);
   const textures = spec.textures.map((t, i) => ({
     path: '', name: t.name, folder: t.folder ?? '', namespace: t.namespace ?? '', id: t.id, group: '',
-    width: t.width ?? 16, height: t.height ?? 16, uv_width: 16, uv_height: 16, particle: !!t.particle,
+    width: t.width ?? t.png.readUInt32BE(16), height: t.height ?? t.png.readUInt32BE(20), uv_width: 16, uv_height: 16, particle: !!t.particle,
     use_as_default: false, layers_enabled: false, sync_to_project: '', render_mode: 'default', render_sides: 'auto',
     pbr_channel: 'color', frame_time: 1, frame_order_type: 'loop', frame_order: '', frame_interpolate: false,
     visible: true, internal: true, saved: true, uuid: stableUuid(spec.name, 'texture', i),

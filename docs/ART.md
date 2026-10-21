@@ -26,6 +26,10 @@ art is reviewed, and the owner checklist.
   texture was already the dark wood (`wood_post`, same palette as `wood`); the orange in the
   screenshot is sunlit wood under the owner's shader, so judge colour against the neighbouring
   wood block, not against an unlit preview. 0.2.0-dev.3 answers it.
+- **2026-10-21 (0.2.0-dev.9):** the whole set paints at 32 x 32, twice vanilla's pixel density, so the
+  owner can paint finer detail in Blockbench. The piece and material textures were already 32 x 32;
+  the item sprites (seeds, fresh herbs, bundles, powders, products) and the GUI atlases moved to 2x as
+  exact nearest-neighbour enlargements, so nothing looks different until something is repainted.
 
 ## Standing rules (owner, from the 0.2.0-dev.1 feedback)
 
@@ -42,7 +46,7 @@ art is reviewed, and the owner checklist.
 - **Watered soil must read at a glance:** moist far darker than dry, the two on either side of the
   rails' wood (`BotanyModelsTest` checks the luminance gap).
 - **Dried bundles are 2D sprites, inset so they never touch neighbour faces** (owner, after dev.4:
-  the first, flatter look was better than the cube bundles). Each herb's own 16 x 16 bundle sprite
+  the first, flatter look was better than the cube bundles). Each herb's own bundle sprite
   is stretched over a zero-thickness cutout plane (two crossed planes where it hangs free), with a
   small 3D pink tie and, on a block, a wooden peg. A plane has only its two broad faces (no
   up/down/edge faces to smear) and keeps at least 0.75 px from every cell boundary, which is what
@@ -59,6 +63,13 @@ art is reviewed, and the owner checklist.
 ## The house style (0.2.0)
 
 One set: stations and furniture share a hardware language so they read together.
+
+**Density: 32 x 32.** Every block and item texture is 32 x 32, two texels per model pixel (twice
+vanilla's); GUI atlases are 512 x 512 (vanilla's 256 sheet at two texels per GUI pixel). Geometry and
+UVs stay in Minecraft's 16-unit space. One density for the whole set: a 16 x 16 texture next to 32 x 32
+ones reads as a coarser, mismatched piece, so the producers, the compiler and the tests refuse it
+(`tools/art/density.mjs`, `TextureDensity`). Detail finer than one model pixel is the point: a rivet,
+a stitch or a grain line can be half a pixel wide.
 
 Since 0.2.0-dev.8 every Blockbench piece owns its textures (`block/pieces/<piece>/<name>.png`, starting as
 copies of the house materials below); the `Texture` column names the original material and the shared
@@ -137,9 +148,12 @@ stone, plum glaze, gold and fire.
   procedural families: herbs, soil, the herb atlas, sprites, GUI atlases, and the house wood and gold
   the herb bed and hung bundles use. Every texture of every Blockbench piece is that piece's own,
   painted in its project and exported by the compiler to `textures/block/pieces/<group>/<piece>/<name>.png`
-  (nothing else uses it, so painting never reaches another piece). 32 x 32 for materials
-  (two texels per model pixel), 16 x 16 for young herb, seed, fresh-herb and product sprites; alpha
-  is 0 or 255. Untinted: no tint index, no colour handler.
+  (nothing else uses it, so painting never reaches another piece). Every texture is 32 x 32 (two
+  texels per model pixel; GUI atlases 512 x 512). The materials, soil and herb atlas are drawn at
+  32; the item sprites and GUI atlases are still drawn on their old 16 x 16 (256 x 256) grid and enlarged
+  2x nearest-neighbour by `tools/art/catalogue.mjs` (`drawnAt1x`); to give one finer detail, draw it
+  natively at 32 and drop the enlargement for it. Alpha is 0 or 255. Untinted: no tint index, no
+  colour handler.
 - **One-off pieces are hand-editable** (owner direction: subtle adjustments in Blockbench). The six
   stations, five furniture pieces and the oil lantern are Blockbench projects
   (`src/art/blockbench/`, workflow in docs/BLOCKBENCH.md) compiled by

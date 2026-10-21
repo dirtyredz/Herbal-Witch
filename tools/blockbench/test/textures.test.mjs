@@ -9,6 +9,7 @@ import { compileAll } from '../compile.mjs';
 import { decodeDataUrl, refreshPreviews, samePixels } from '../textures.mjs';
 import { decodePng } from '../../image/png-decode.mjs';
 import { cube, group, projectText, simplePiece, tempRoot, pngOf, SOLID, STRIPES, HOLES } from './helpers.mjs';
+import { TEXTURE_SIZE } from '../../art/density.mjs';
 
 const canonical = { 'block/test/clay.png': SOLID, 'block/test/gold.png': STRIPES, 'block/test/leaf.png': HOLES };
 
@@ -43,7 +44,7 @@ test('UVs convert from the project resolution to the 0..16 model space', () => {
 });
 
 test('an owned texture is exported deterministically through the repository encoder', () => {
-  const painted = pngOf(16, (x, y) => [x * 16, y * 16, 128, 255]);
+  const painted = pngOf(TEXTURE_SIZE, (x, y) => [x * 8, y * 8, 128, 255]);
   const piece = { owned_textures: { clay: 'herbalwitch:block/test/clay' } };
   const first = compile([cube([0, 0, 0], [16, 16, 16])], [{ id: 'clay', png: painted }], piece);
   const again = compileAll(first.root);
@@ -53,7 +54,7 @@ test('an owned texture is exported deterministically through the repository enco
 });
 
 test('a shared preview must show the canonical pixels; refresh re-embeds them', () => {
-  const stale = pngOf(16, () => [121, 60, 30, 255]);
+  const stale = pngOf(TEXTURE_SIZE, () => [121, 60, 30, 255]);
   assert.throws(() => compile([cube([0, 0, 0], [16, 16, 16])], [{ id: 'clay', png: stale }]), /test\/p texture clay: the embedded preview differs from the shared herbalwitch:block\/test\/clay.*--refresh-previews/);
   const json = JSON.parse(projectText('p', [cube([0, 0, 0], [16, 16, 16])], [{ id: 'clay', png: stale }]));
   const { changed } = refreshPreviews(json, simplePiece('p.bbmodel', ['clay']), (id) => canonical[`${id.split(':')[1]}.png`]);
@@ -62,15 +63,26 @@ test('a shared preview must show the canonical pixels; refresh re-embeds them', 
 });
 
 test('colour under a fully transparent pixel is not compared (an editor canvas drops it)', () => {
-  const zeroed = pngOf(16, (x, y) => ((x + y) % 2 ? [40, 160, 40, 255] : [255, 0, 255, 0]));
+  const zeroed = pngOf(TEXTURE_SIZE, (x, y) => ((x + y) % 2 ? [40, 160, 40, 255] : [255, 0, 255, 0]));
   assert.doesNotThrow(() => compile([cube([0, 0, 0], [16, 16, 16])], [{ id: 'leaf', png: zeroed }]));
 });
 
-test('owned textures keep binary alpha and their resolution', () => {
-  const soft = pngOf(16, () => [10, 10, 10, 128]);
+test('owned textures keep binary alpha', () => {
+  const soft = pngOf(TEXTURE_SIZE, () => [10, 10, 10, 128]);
   const piece = { owned_textures: { clay: 'herbalwitch:block/test/clay' } };
   assert.throws(() => compile([cube([0, 0, 0], [16, 16, 16])], [{ id: 'clay', png: soft }], piece), /alpha must be fully opaque or fully transparent/);
-  assert.throws(() => compile([cube([0, 0, 0], [16, 16, 16])], [{ id: 'clay', png: pngOf(32, () => [1, 2, 3, 255]) }], piece), /keep their resolution \(16 x 16, found 32 x 32\)/);
+});
+
+test('every texture, owned or shared, is 32 x 32: two texels per model unit, no mixed densities', () => {
+  const owned = { owned_textures: { clay: 'herbalwitch:block/test/clay' } };
+  const at16 = pngOf(16, () => [1, 2, 3, 255]);
+  const at64 = pngOf(64, () => [1, 2, 3, 255]);
+  const rule = /test\/p texture clay: 16 x 16; every texture is 32 x 32 \(2 texels per model unit\)/;
+  assert.throws(() => compile([cube([0, 0, 0], [16, 16, 16])], [{ id: 'clay', png: at16 }], owned), rule);
+  assert.throws(() => compile([cube([0, 0, 0], [16, 16, 16])], [{ id: 'clay', png: at64 }], owned), /64 x 64; every texture is 32 x 32/);
+  assert.throws(() => compile([cube([0, 0, 0], [16, 16, 16])], [{ id: 'clay', png: at16 }]), rule); // a shared preview too
+  const mixed = [cube([0, 0, 0], [8, 8, 8], 0), cube([8, 0, 0], [16, 8, 8], 1)];
+  assert.throws(() => compile(mixed, [{ id: 'gold', png: STRIPES }, { id: 'clay', png: at16 }], owned), rule);
 });
 
 test('cutout follows the resolved pixels, not the variable names', () => {

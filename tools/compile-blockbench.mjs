@@ -13,7 +13,9 @@
 //                                                         appearance parity of the current trees against a
 //                                                         captured baseline (<dir>/main-assets and
 //                                                         <dir>/generated-assets); the map names the baseline
-//                                                         texture each renamed texture was copied from; writes nothing
+//                                                         texture each renamed texture was copied from; textures
+//                                                         compare at the game's sampling (an exact integer
+//                                                         nearest-neighbour enlargement passes); writes nothing
 //
 // Writes only into the model directories src/art/blockbench/catalog.json declares and the owned
 // texture files the projects declare, and removes stale JSON only in those directories. Run
@@ -91,7 +93,8 @@ if (args.includes('--dev-pack')) {
   const dir = arg('--compare');
   const base = new Resources(root, { trees: [join(dir, 'generated-assets'), join(dir, 'main-assets')] });
   const { checked, differences } = compareAppearance(base, new Resources(root), arg('--texture-map') ? JSON.parse(readFileSync(arg('--texture-map'), 'utf8')) : {});
-  console.log(`compared ${checked.models} models (${checked.items} items), ${checked.states} block states, ${checked.textures} textures`);
+  console.log(`compared ${checked.models} models (${checked.items} items), ${checked.states} block states, ${checked.textures} textures`
+    + ` (${checked.resampled} at a new resolution, identical at the game's sampling)`);
   if (differences.length) fail(differences);
   console.log('appearance identical');
 } else {

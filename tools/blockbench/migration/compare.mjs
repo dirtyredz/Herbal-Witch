@@ -2,10 +2,14 @@
 // block model's baked faces (positions, UVs, textures after resolution, shading, glow, cullfaces),
 // render type and ambient occlusion; every item model's effective display transforms (parent
 // chain merged, vanilla's left-hand fallbacks applied) and geometry; every blockstate combination
-// as the game assembles it; and the decoded pixels of every texture any of them uses. Element
-// order, JSON formatting and where a display field is inherited from may differ; appearance may
-// not. Pure comparison: it never writes.
+// as the game assembles it; and the decoded pixels of every texture any of them uses (block faces
+// and item/generated layers). Element order, JSON formatting and where a display field is inherited
+// from may differ; appearance may not. Textures compare at the game's sampling: UVs are measured in
+// units, not texels, so a texture enlarged by an integer factor nearest-neighbour (the 0.2.0-dev.9
+// move to 32 x 32) shows exactly the same pixels and passes; any other change fails. Pure comparison:
+// it never writes.
 import { Baker } from '../../preview/geometry/bake.mjs';
+import { resolveTexture } from '../../preview/assets/models.mjs';
 import { variantRotation } from '../../preview/geometry/transforms.mjs';
 import { enumerate, select, stateLabel } from '../../preview/scenes/blockstates.mjs';
 
@@ -45,9 +49,24 @@ export function effectiveDisplay(display) {
 const displayKey = (display) => JSON.stringify(Object.fromEntries(Object.entries(effectiveDisplay(display))
   .map(([s, d]) => [s, d && Object.fromEntries(Object.entries(d).map(([k, v]) => [k, v.map(k4)]))])));
 
-function samePixels(a, b) {
+/**
+ * Whether two decoded textures show the same pixels wherever a unit-space UV samples them: equal
+ * sizes compare texel for texel; otherwise the larger must be an exact integer nearest-neighbour
+ * enlargement of the smaller (same aspect, every texel equal to the one it covers).
+ */
+export function sameAtSampling(a, b) {
   if (!a || !b) return a === b;
-  return a.width === b.width && a.height === b.height && a.rgba.every((v, i) => v === b.rgba[i]);
+  const [small, large] = a.width <= b.width ? [a, b] : [b, a];
+  const f = large.width / small.width;
+  if (!Number.isInteger(f) || large.height !== small.height * f) return false;
+  for (let y = 0; y < large.height; y++) {
+    for (let x = 0; x < large.width; x++) {
+      const li = (y * large.width + x) * 4;
+      const si = (Math.floor(y / f) * small.width + Math.floor(x / f)) * 4;
+      for (let c = 0; c < 4; c++) if (large.rgba[li + c] !== small.rgba[si + c]) return false;
+    }
+  }
+  return true;
 }
 
 /**
@@ -62,7 +81,7 @@ export function compareAppearance(base, cand, rename = {}) {
   const cb = new Baker(cand);
   const differences = [];
   const textures = new Set();
-  const checked = { models: 0, items: 0, states: 0, textures: 0 };
+  const checked = { models: 0, items: 0, states: 0, textures: 0, resampled: 0 };
   const quadsOf = (baker, id, map) => {
     const { model, quads } = baker.bake(id);
     if (baker === cb) for (const q of quads) if (q.texture) textures.add(q.texture); // candidate ids; faces already compare by baseline name
@@ -89,7 +108,12 @@ export function compareAppearance(base, cand, rename = {}) {
     const item = id.startsWith('herbalwitch:item/');
     if (a.model.builtin !== b.model.builtin) differences.push(`${id}: builtin ${a.model.builtin} -> ${b.model.builtin}`);
     if (a.model.builtin === 'generated') {
-      if (a.model.textures.layer0 !== was(b.model.textures.layer0)) differences.push(`${id}: layer0 differs`);
+      for (let n = 0; a.model.textures[`layer${n}`] || b.model.textures[`layer${n}`]; n++) {
+        const la = resolveTexture(a.model, `#layer${n}`);
+        const lb = resolveTexture(b.model, `#layer${n}`);
+        if (la !== (lb && was(lb))) differences.push(`${id}: layer${n} differs`);
+        if (lb) textures.add(lb);
+      }
     }
     compareQuads(id, a.keys, b.keys);
     if ((a.model.renderType ?? null) !== (b.model.renderType ?? null)) differences.push(`${id}: render type ${a.model.renderType} -> ${b.model.renderType}`);
@@ -119,7 +143,10 @@ export function compareAppearance(base, cand, rename = {}) {
     }
   }
   for (const t of [...textures].sort()) {
-    if (!samePixels(base.texture(was(t)), cand.texture(t))) differences.push(`texture ${t}: pixels differ from ${was(t)}`);
+    const a = base.texture(was(t));
+    const b = cand.texture(t);
+    if (!sameAtSampling(a, b)) differences.push(`texture ${t}: pixels differ from ${was(t)}${a && b && a.width !== b.width ? ` (${a.width} x ${a.height} -> ${b.width} x ${b.height})` : ''}`);
+    else if (a && b && a.width !== b.width) checked.resampled++;
     checked.textures++;
   }
   for (const d of [...base.diagnostics, ...cand.diagnostics]) differences.push(`${d.kind}: ${d.message}`);

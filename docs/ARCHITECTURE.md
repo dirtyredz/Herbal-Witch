@@ -51,6 +51,9 @@ wrappers that only name their parent model, everything into `src/generated`; the
 Item display lives in the compiled parent model, not Java; `ModelResolver` and the test fixtures merge
 inherited display. Gradle (`gradle/art.gradle`) runs the producers before resources and datagen
 (`generateArt`) and the checks in `check` (`checkArt`). The owner workflow is docs/BLOCKBENCH.md.
+Every texture is at one density, two texels per model unit (`tools/art/density.mjs`: 32 x 32 block and
+item textures, 512 x 512 GUI atlases, UVs still in 16 units); the texture producer, the Blockbench
+compiler and `TextureDensityTest`/`TemplateChecks` refuse any other size.
 `tools/preview-models.mjs` (with `tools/preview/**`) renders headless previews (family contact sheets,
 herbs on beds, item GUI sheet, review scenes, owner-reference comparisons, a manifest); tests:
 `node --test "tools/preview/test/*.test.mjs"`. Previews approximate directional shading only (no

@@ -8,8 +8,10 @@ import io.github.dirtyredz.herbalwitch.data.fixture.ModelResolver.Resolved;
 import io.github.dirtyredz.herbalwitch.data.fixture.ResourceFiles;
 import io.github.dirtyredz.herbalwitch.data.fixture.ResourceFiles.Png;
 import io.github.dirtyredz.herbalwitch.data.fixture.TemplateChecks;
+import io.github.dirtyredz.herbalwitch.data.fixture.TextureDensity;
 import org.junit.jupiter.api.Test;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -25,9 +27,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /** Preparation art and data: sprites, bundle and lantern models, loot, tags and the resin modifier. */
 class PreparationResourcesTest {
     private static Png sprite(String path) {
-        Png png = ResourceFiles.readPng(ResourceFiles.MAIN_ASSETS.resolve("textures/item/" + path + ".png"));
-        assertEquals(16, png.width(), path);
-        assertEquals(16, png.height(), path);
+        Path file = ResourceFiles.MAIN_ASSETS.resolve("textures/item/" + path + ".png");
+        TextureDensity.assertTextureSize(file, path);
+        Png png = ResourceFiles.readPng(file);
         for (int pixel : png.rgba()) {
             int alpha = pixel & 0xFF;
             assertTrue(alpha == 0 || alpha == 255, path + ": partial alpha");

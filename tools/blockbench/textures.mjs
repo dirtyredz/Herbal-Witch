@@ -7,8 +7,11 @@
 //   owned slots (piece.json `owned_textures`) are painted in Blockbench: the compiler exports the
 //     embedded bitmap through the repository's deterministic PNG encoder.
 // Transparency (and so `render_type: cutout`) is read from the resolved pixels, never from names.
+// Every texture, owned or shared, is 32 x 32: the set's density of two texels per model unit
+// (tools/art/density.mjs), while the project's UVs stay in the 16-unit space.
 import { decodePng } from '../image/png-decode.mjs';
 import { png } from '../image/png-encode.mjs';
+import { TEXTURE_SIZE, TEXELS_PER_UNIT } from '../art/density.mjs';
 
 const PREFIX = 'data:image/png;base64,';
 
@@ -65,12 +68,10 @@ export function resolveTextures(where, project, piece, canonical) {
     if (!id) throw new Error(`${at}: not bound in piece.json textures`);
     if (id.startsWith('#')) throw new Error(`${at}: a project texture must bind a texture id, not ${id}`);
     const img = decodeDataUrl(t.source, at);
+    if (img.width !== TEXTURE_SIZE || img.height !== TEXTURE_SIZE) {
+      throw new Error(`${at}: ${img.width} x ${img.height}; every texture is ${TEXTURE_SIZE} x ${TEXTURE_SIZE} (${TEXELS_PER_UNIT} texels per model unit). Create new textures at ${TEXTURE_SIZE} x ${TEXTURE_SIZE} and keep the size of existing ones (docs/BLOCKBENCH.md)`);
+    }
     if (piece.owned_textures[t.id]) {
-      const was = canonical(id);
-      if (was && (img.width !== was.width || img.height !== was.height)) {
-        throw new Error(`${at}: owned textures keep their resolution (${was.width} x ${was.height}, found ${img.width} x ${img.height})`);
-      }
-      if (img.width !== img.height || img.width < 16 || (img.width & (img.width - 1))) throw new Error(`${at}: textures are square powers of two (found ${img.width} x ${img.height})`);
       if (!binaryAlpha(img)) throw new Error(`${at}: alpha must be fully opaque or fully transparent (cutout)`);
       const bytes = png({ width: img.width, height: img.height, px: img.rgba });
       const path = texturePath(id);

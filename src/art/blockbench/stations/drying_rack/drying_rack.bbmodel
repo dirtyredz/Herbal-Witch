@@ -2789,8 +2789,8 @@
 			"namespace": "herbalwitch",
 			"id": "bundle_mint",
 			"group": "",
-			"width": 16,
-			"height": 16,
+			"width": 32,
+			"height": 32,
 			"uv_width": 16,
 			"uv_height": 16,
 			"particle": false,
@@ -2808,7 +2808,7 @@
 			"internal": true,
 			"saved": true,
 			"uuid": "d0e50eaf-92d5-4087-8842-78037ddbf85e",
-			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAp0lEQVR42mNgwAOSVrj+n34h9T8DOcC+yug/CIMMYSAXwFwAMohsV1DFBWRpfle15D8yJknzCq2Y/zccqlAwSIwkA5BjAlkML4iutf0PwiC/I2uG0dapmv9hGKtmUICBNKt5yqFohLFBGkHyIIxhCEwSm83orsBqALLT0TWhpwucXkCXwKYQaxjA/A/zOy4xZJeiiGMThBkAcja6OM5AxOYldBegqwUAltG9/P985fYAAAAASUVORK5CYII="
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA2ElEQVR42mNgIBMkrXD9D8LTL6SCMQO9wYA5wL7K6D8yhjlk5DgAVxTAHDRyHDDgUTDo0sDIccC7qiX/8eHh64AVWjH/QfiGQxVeDFM3fB2Aq0jGpW7oOiC61vY/MoZlO1wWo/OtUzX/Y8OD3wEwC2EFDMxiNU85MMZlIbo4zEKYfhgm6JABdwC6RmKDnFBUDB0H4Ep0hCwiVF2TnAgH3AGENBBrINnZkO4OQM9+6NmOVHW4ohSn+kHjAEIK0R0AS2yE1BNMjAPuAGITF3oiJRQFpCZaujsAAF5J+AtYhZh0AAAAAElFTkSuQmCC"
 		},
 		{
 			"path": "",
@@ -2845,8 +2845,8 @@
 			"namespace": "herbalwitch",
 			"id": "bundle_lavender",
 			"group": "",
-			"width": 16,
-			"height": 16,
+			"width": 32,
+			"height": 32,
 			"uv_width": 16,
 			"uv_height": 16,
 			"particle": false,
@@ -2864,7 +2864,7 @@
 			"internal": true,
 			"saved": true,
 			"uuid": "e8dffdac-afb6-4f30-b77d-43ba7ff467c5",
-			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAjUlEQVR42mNgwAPKJlX9n79j/n8GcoB/Vuh/EAYZwkAugLkAZBDZrqCKC8jS/K5qyX9kTJLmFVox/284VKFgkBhJBsC8AAsDkgwAgaqwtf9hBoDYJGkOM2/+v7L7BlgjCIPYIDGSbIcZAtNMlCtgmmCGIBsIoolyCbLtMDGiXIGuCZsLiHYFLhcw0AIAAEzaocnaZ+43AAAAAElFTkSuQmCC"
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAuklEQVR42mNgIBOUTar6D8Lzd8wHYwZ6gwFzgH9W6H9kDHPIyHEAriiAOWjkOGDAo2DQpYGR44B3VUv+48PD1wErtGL+g/ANhyq8GKZu+DoAPRGiZ8Ph6wAYqApb+x+E0R0AE6d5LhgwB4SZN/8H4ZXdN8AYZiEMw8Rh6oafA2AWoTsE3WKaRQXdHYBuEbpDcDkQxqc4SgbcAYSCHl0dzaKC7g4gZBGxUUB2VAy4A8h1GN1LQro7YNgCADnGhz+boKJ9AAAAAElFTkSuQmCC"
 		},
 		{
 			"path": "",
@@ -2873,8 +2873,8 @@
 			"namespace": "herbalwitch",
 			"id": "bundle_chamomile",
 			"group": "",
-			"width": 16,
-			"height": 16,
+			"width": 32,
+			"height": 32,
 			"uv_width": 16,
 			"uv_height": 16,
 			"particle": false,
@@ -2892,7 +2892,7 @@
 			"internal": true,
 			"saved": true,
 			"uuid": "5d432821-72d2-403a-b8fb-da35b2370df6",
-			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAhklEQVR42mNgwAPiu7z+926N/89ADrCPNf8PwiBDGMgFMBeADCLbFVRxAVma31Ut+Y+MSdK8Qivm/w2HKhQMEiPJAJgXYGFAkgHImpENIUkzOk2SIdgMQKZJ0oyPjQJ+f33yH4axKYTx0dWhGPBir91/ZAUwRehiMHU4XYCuCJ/hRHkHnyYAwtfrF7PiZ6IAAAAASUVORK5CYII="
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAqUlEQVR42mNgIBPEd3n9B+HerfFgzEBvMGAOsI81/4+MYQ4ZOQ7AFQUwB40cBwx4FAy6NDByHPCuasl/fHj4OmCFVsx/EL7hUIUXw9QNXwegJ0L0bDh8HYDLYlwOGX4OQLcAF59mDhkyDsDFH7oOINZgUsUHrwN+f33yHxsm1kB0eULmDV4HvNhrB8a4DEA3iJA6dPMGvwNINYhchw8+B5CbOKlmEb0dAAATPqyGbz2jDgAAAABJRU5ErkJggg=="
 		},
 		{
 			"path": "",
@@ -2901,8 +2901,8 @@
 			"namespace": "herbalwitch",
 			"id": "bundle_yarrow",
 			"group": "",
-			"width": 16,
-			"height": 16,
+			"width": 32,
+			"height": 32,
 			"uv_width": 16,
 			"uv_height": 16,
 			"particle": false,
@@ -2920,7 +2920,7 @@
 			"internal": true,
 			"saved": true,
 			"uuid": "2e73ad0e-18b3-4690-abfc-bb0913b09311",
-			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAg0lEQVR42mNgwANKZmT9X7Cv5z8DOcCvwOM/CIMMYSAXwFwAMohsV1DFBWRpfle15D8yJknzCq2Y/zccqlAwSIwkA5BjAlmM5GhENoQsA9ANI1ozNhqdjVczsWwU8P7Jsf8wjEsTuhoUcPPMqv+/vz75D6KRFSJjZDV4vYKskGhN5AAAZEC7gpm1lLAAAAAASUVORK5CYII="
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAp0lEQVR42mNgIBOUzMj6D8IL9vWAMQO9wYA5wK/A4z8yhjlk5DgAVxTAHDRyHDDgUTDo0sDIccC7qiX/8eHh64AVWjH/QfiGQxVeDFM3fB2Aq0jGpW74OACXxbgcMnIcQMhhw8cBuCzExSckPnQcQKrBVHfIgDng/ZNj/7FhUi0iZM7gdcDNM6v+g/Dvr0/AGMbHZSAujMucwe8AUh1GdYsGrQOGHQAAqhXuI0N0zWoAAAAASUVORK5CYII="
 		}
 	],
 	"display": {

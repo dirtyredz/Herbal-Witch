@@ -4025,8 +4025,8 @@
 			"namespace": "herbalwitch",
 			"id": "bundle_lavender",
 			"group": "",
-			"width": 16,
-			"height": 16,
+			"width": 32,
+			"height": 32,
 			"uv_width": 16,
 			"uv_height": 16,
 			"particle": false,
@@ -4044,7 +4044,7 @@
 			"internal": true,
 			"saved": true,
 			"uuid": "29bdcbd1-fa51-4fe5-bb70-3a85426a2b3a",
-			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAjUlEQVR42mNgwAPKJlX9n79j/n8GcoB/Vuh/EAYZwkAugLkAZBDZrqCKC8jS/K5qyX9kTJLmFVox/284VKFgkBhJBsC8AAsDkgwAgaqwtf9hBoDYJGkOM2/+v7L7BlgjCIPYIDGSbIcZAtNMlCtgmmCGIBsIoolyCbLtMDGiXIGuCZsLiHYFLhcw0AIAAEzaocnaZ+43AAAAAElFTkSuQmCC"
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAuklEQVR42mNgIBOUTar6D8Lzd8wHYwZ6gwFzgH9W6H9kDHPIyHEAriiAOWjkOGDAo2DQpYGR44B3VUv+48PD1wErtGL+g/ANhyq8GKZu+DoAPRGiZ8Ph6wAYqApb+x+E0R0AE6d5LhgwB4SZN/8H4ZXdN8AYZiEMw8Rh6oafA2AWoTsE3WKaRQXdHYBuEbpDcDkQxqc4SgbcAYSCHl0dzaKC7g4gZBGxUUB2VAy4A8h1GN1LQro7YNgCADnGhz+boKJ9AAAAAElFTkSuQmCC"
 		},
 		{
 			"path": "",

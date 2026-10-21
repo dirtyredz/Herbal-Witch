@@ -9,6 +9,7 @@ import io.github.dirtyredz.herbalwitch.data.fixture.ModelResolver.Resolved;
 import io.github.dirtyredz.herbalwitch.data.fixture.ResourceFiles;
 import io.github.dirtyredz.herbalwitch.data.fixture.ResourceFiles.Png;
 import io.github.dirtyredz.herbalwitch.data.fixture.TemplateChecks;
+import io.github.dirtyredz.herbalwitch.data.fixture.TextureDensity;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Files;
@@ -37,8 +38,7 @@ class BotanyModelsTest {
         Path file = ModelResolver.texturePng(textureId);
         assertTrue(Files.isRegularFile(file), "missing " + file);
         Png png = ResourceFiles.readPng(file);
-        assertEquals(16, png.width(), file + " width");
-        assertEquals(16, png.height(), file + " height");
+        TextureDensity.assertTextureSize(file, textureId);
         for (int i = 0; i < png.rgba().length; i++) {
             int alpha = png.rgba()[i] & 0xFF;
             assertTrue(alpha == 0 || alpha == 255, file + " has partial alpha " + alpha);

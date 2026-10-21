@@ -20,7 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Contracts for untinted cuboid models: elements inside their bounds (one block unless the caller
  * allows more), legal one-axis rotations (0, +-22.5, +-45 degrees), explicit finite UVs inside the
- * 0..16 texture space, every texture resolving to an existing square PNG of at least 16 px, no tint
+ * 0..16 texture space, every texture resolving to an existing 32 x 32 PNG (two texels per model unit,
+ * {@link TextureDensity}), no tint
  * indices, a particle texture, and cutout exactly when a used texture has transparent pixels (read
  * from the PNG, not from variable names).
  * <p>
@@ -115,8 +116,7 @@ public final class TemplateChecks {
                 assertNotNull(texture, what + ": unresolved texture");
                 Path png = ModelResolver.texturePng(texture);
                 assertTrue(Files.isRegularFile(png), what + ": missing " + texture);
-                int[] size = ResourceFiles.pngSize(png);
-                assertTrue(size[0] == size[1] && size[0] >= 16 && Integer.bitCount(size[0]) == 1, what + ": " + texture + " is " + size[0] + " x " + size[1]);
+                TextureDensity.assertTextureSize(png, what + " " + texture);
                 alpha |= transparent(png);
                 faces++;
             }
