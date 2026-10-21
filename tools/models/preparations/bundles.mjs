@@ -1,9 +1,10 @@
 // Dried herb bundles built from small cubes, like the growing herbs (owner feedback 0.2.0-dev.1:
-// the flat bundle sprite bled onto the host block's faces). A bundle hangs upside down: a short
-// tied stem bunch, a hot-pink twine band, then a tapering head of leaves with a few florets in the
-// herb's own colours, every face one swatch of the parts atlas (#parts). Shared by the hung bundle
-// block (ceiling and wall forms, one model pair per herb), the drying rack, the stove and the
-// apothecary counter. About a dozen elements each.
+// the flat bundle sprite bled onto the host block's faces; dev.2: solid stacked blobs with no
+// stems). A bundle hangs upside down: a short gathered stem bunch under the hook, a hot-pink twine
+// tie, then thin visible stems fanning down into a few small sparse leaf and flower clusters in
+// the herb's own colours, every face one swatch of the parts atlas (#parts). Slim and airy: about
+// 4 px across, nothing solid. Shared by the hung bundle block (ceiling and wall forms, one model
+// pair per herb), the drying rack, the stove and the apothecary counter. About 20 elements each.
 import { box } from '../geometry.mjs';
 import { swatchUv } from '../../art/botany/parts.mjs';
 import { rng } from '../../art/pixels.mjs';
@@ -32,8 +33,8 @@ export const BUNDLE_PALETTES = {
 const sw = (from, to, swatch) => box(from, to, '#parts', { decal: { all: swatchUv(swatch) } });
 
 /**
- * One bundle hanging from (cx, top, cz): stems tied at the top, the head below, about 12 px long
- * (scaled by `length`). `depth` limits its z extent (a bundle against a wall is flatter). Florets
+ * One bundle hanging from (cx, top, cz): stems tied at the top, fanning below, about 12 px long
+ * (scaled by `length`). `depth` limits its z extent (a bundle against a wall is flatter). Leaves
  * are placed by `seed` so neighbouring bundles differ. With `across: 'x'` the bundle is turned a
  * quarter so its flat side lies along z (against a west or east face): cx/cz and depth still name
  * the bundle's own width and depth axes, which are then swapped.
@@ -48,27 +49,39 @@ export function bundle(palette, { cx, cz, top, depth = 5, length = 1, seed = 1, 
   }
   const [stems, head, light, floret] = BUNDLE_PALETTES[palette] ?? (() => { throw new Error(`no bundle palette ${palette}`); })();
   const y = (d) => top - d * length;
-  const dz = (w) => Math.min(w, depth) / 2;
-  const stemHalf = Math.min(0.9, depth / 2 - 0.1);
+  const half = depth / 2;
+  const T = Math.min(0.8, depth); // one stem is under a pixel thick: slim, airy, never a solid column
+  const box1 = (x0, x1, d0, d1, z0, z1, swatch) => sw([cx + x0, y(d1), cz + z0], [cx + x1, y(d0), cz + z1], swatch);
+  const g = Math.min(0.7, half - 0.1); // the gathered stems and the twine are a little wider than one stem
+  const w = Math.min(1, half);
   const out = [
-    sw([cx - 1, y(3), cz - stemHalf], [cx + 1, top, cz + stemHalf], stems),
-    sw([cx - 1.2, y(2.4), cz - stemHalf - 0.2], [cx + 1.2, y(1.6), cz + stemHalf + 0.2], 'pink'), // the twine
+    box1(-0.7, 0.7, 0, 2.4, -g, g, stems), // the stems gathered under the hook
+    box1(-1, 1, 1.4, 2.2, -w, w, 'pink'), // the twine tie
+    box1(-T / 2, T / 2, 2.2, 9.6, -T / 2, T / 2, stems), // centre stem
   ];
-  // the head: tapering layers, each a little off the one above so no faces share a plane
-  const layers = [[3, 5.5, 4, head], [5.5, 8.5, 5, light], [8.5, 10.5, 3.6, head], [10.5, 12, 1.6, light]];
-  for (const [d0, d1, w, s] of layers) out.push(sw([cx - w / 2, y(d1), cz - dz(w)], [cx + w / 2, y(d0), cz + dz(w)], s));
-  // florets and leaf tips standing out of the head
   const rand = rng(4200 + seed);
-  for (let i = 0; i < 5; i++) {
-    const d = 4.2 + i * 1.45 + rand() * 0.3;
-    const side = i % 2 ? 1 : -1;
-    const s = 1.1 + rand() * 0.3;
-    // the widest layer the floret reaches into decides how far out it sits
-    const half = Math.max(...layers.filter(([d0, d1]) => d - s / 2 < d1 && d + s / 2 > d0).map(([, , w]) => w / 2));
-    const x = cx + side * (half + 0.5 + rand() * 0.3 - s / 2); // half sunk, its outer face clear of the layer
-    const t = Math.min(s, depth); // a floret never sticks out past the bundle's depth
-    const z = cz + (rand() - 0.5) * Math.max(0, Math.min(3, depth) - t);
-    out.push(sw([x - s / 2, y(d) - s / 2, z - t / 2], [x + s / 2, y(d) + s / 2, z + t / 2], i === 2 ? light : floret));
+  const leaf = (xc, d, s, swatch) => {
+    const t = Math.min(s, depth);
+    const zc = (rand() - 0.5) * Math.max(0, Math.min(2, depth) - t);
+    out.push(box1(xc - s / 2, xc + s / 2, d - s / 2, d + s / 2, zc - t / 2, zc + t / 2, swatch));
+  };
+  // two side stems fan out below the tie in two kinked steps, each carrying a few small leaves
+  for (const s of [-1, 1]) {
+    out.push(box1(s * 0.6 - T / 2, s * 0.6 + T / 2, 2.2, 5, -T / 2, T / 2, stems));
+    out.push(box1(s * 1.55 - T / 2, s * 1.55 + T / 2, 4.8, 8.6, -T / 2, T / 2, stems));
+    leaf(s * (1.2 + 0.7 + rand() * 0.2), 3.5, 1.2, head);
+    leaf(s * (1.95 + 0.5 + rand() * 0.15), 5.6 + rand() * 0.3, 1.3, light);
+    leaf(s * (1.95 + 0.5 + rand() * 0.15), 7.4 + rand() * 0.3, 1.2, head);
+    leaf(s * 1.55, 9.2 + rand() * 0.3, 1.2, floret); // the floret at its stem tip
+  }
+  leaf(0, 10.2, 1.2, floret);
+  if (depth >= 3) {
+    // a front and a back stem with a leaf each, so the bunch has some depth
+    for (const s of [-1, 1]) {
+      const zc = s * Math.min(0.95, half - 0.5);
+      out.push(box1(-T / 2, T / 2, 3, 7, zc - T / 2, zc + T / 2, stems));
+      out.push(box1(-0.55, 0.55, 6.6, 7.7, zc + s * 0.4 - 0.55, zc + s * 0.4 + 0.55, s > 0 ? head : light));
+    }
   }
   return separateCoplanar(out);
 }

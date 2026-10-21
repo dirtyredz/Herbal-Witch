@@ -3,7 +3,7 @@
 How the mod is put together. Code map: [STRUCTURE.md](../STRUCTURE.md).
 Plan of record: milestones 1-12 (docs/FEATURES.md); traceability: docs/catalogue/.
 
-## Current system (0.2.0-dev.2: Milestones 1-3 plus the art pass and its first review fixes)
+## Current system (0.2.0-dev.3: Milestones 1-3 plus the art pass and its first review fixes)
 
 Everything below is server-authoritative; clients get vanilla block updates, menu slots and menu data.
 No custom network channel exists. Paths are under `src/main/java/io/github/dirtyredz/herbalwitch/`.

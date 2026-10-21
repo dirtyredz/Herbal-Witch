@@ -55,7 +55,7 @@ function base() {
   els.push(box([-15.5, 4.5, 4.75], [-14.75, 8.5, 8.25], '#iron'), box([-15.5, 5.25, 4], [-14.75, 7.75, 9], '#iron', { skip: ['west', 'east'] }));
   els.push(box([-15.35, 8.5, 6.1], [-14.9, 11.5, 6.9], '#iron'));
   els.push(box([-15.4, 5, 9.75], [-14.8, 11.25, 10.5], '#post'), box([-15.5, 4, 9.5], [-14.7, 5, 10.75], '#post'));
-  els.push(...bundle('lavender', { cx: 11.7, cz: -15.05, top: 11.5, depth: 1.6, length: 0.7, seed: 7, across: 'x' }));
+  els.push(...bundle('lavender', { cx: 11.85, cz: -15.05, top: 11.5, depth: 1.6, length: 0.7, seed: 7, across: 'x' }));
   els.push(rivet('west', -14, 3, 8), rivet('east', 14, 3, 8));
   // the stovepipe rises out of the body: a riveted flue box on the back wall, a gold collar on
   // the top plate, then the black pipe with gold bands and a gold rim, above the stove

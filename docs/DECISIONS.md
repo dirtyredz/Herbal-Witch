@@ -2,6 +2,15 @@
 
 Newest first.
 
+## 2026-10-21 - 0.2.0-dev.3: slim stemmed bundles, rack legs meeting at an apex
+
+Owner feedback on dev.2: the cube bundles read as stacked blobs and lost their stems, and the rack's
+legs crossed under oversized caps. Bundles are now gathered stems, a twine tie, then thin kinked
+stems with a few sparse leaf and floret cubes (about 20 elements, 4 px wide). Rack legs keep the
+22.5-degree rotation rule, so they meet where their centre lines cross (17.5 px up) and a short
+post carries on to a small cap; rejected: a shallower lean (not an allowed angle) and moving the
+feet inward (cell layout). The leg texture was already the dark wood.
+
 ## 2026-10-21 - 0.2.0-dev.2: 3D herbs at every age, one dark wood, a z-fighting guard
 
 From the owner's dev.1 feedback (docs/ART.md "Standing rules"). Young herb ages are derived from

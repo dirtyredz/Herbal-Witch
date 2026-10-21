@@ -21,6 +21,11 @@ art is reviewed, and the owner checklist.
   the hearth's back had holes; furniture tops flickered (z-fighting); watered beds no longer looked
   wet; hung bundles bled onto their host block. 0.2.0-dev.2 answers all ten and the standing rules
   below come from it.
+- **2026-10-21 (0.2.0-dev.2 feedback, bundles and rack):** hung bundles were thick stacked blobs with
+  no stems; the rack's iron corner caps were huge and its A-frame legs crossed in an X. The legs'
+  texture was already the dark wood (`wood_post`, same palette as `wood`); the orange in the
+  screenshot is sunlit wood under the owner's shader, so judge colour against the neighbouring
+  wood block, not against an unlit preview. 0.2.0-dev.3 answers it.
 
 ## Standing rules (owner, from the 0.2.0-dev.1 feedback)
 
@@ -36,6 +41,13 @@ art is reviewed, and the owner checklist.
   `node --test "tools/preview/test/*.test.mjs"` and `tools/preview-models.mjs` fail on them.
 - **Watered soil must read at a glance:** moist far darker than dry, the two on either side of the
   rails' wood (`BotanyModelsTest` checks the luminance gap).
+- **Bundles are slim and airy, with visible stems:** stems gathered at a tie under the hook, then
+  thin (under a pixel) stems fanning down into a few small sparse leaf and flower cubes, about 4 px
+  across and 20 elements. Never stacked solid layers, never a stemless blob (a dried bunch, not a
+  column). `tools/models/preparations/bundles.mjs` is the one source for every bundle.
+- **Rack leg pairs meet at an apex and never cross:** each end's two legs lean in (22.5 degrees)
+  until their centre lines meet, then a short post rises to a small iron cap (about 4 x 4 x 3.5 px,
+  nothing larger). No X, no leg ending past the other, no big caps.
 - **Nothing flat that can leak:** dried bundles are small 3D cubes like the herbs, never a stretched
   sprite on a thin box.
 
@@ -141,9 +153,9 @@ The previewer shows directional face shading only: no ambient occlusion, world l
 animation, mipmaps or held-item extrusion; emissive faces are drawn full bright, and the GUI
 orientation follows the transform maths (not checked against a client).
 
-## Owner review checklist (0.2.0-dev.2)
+## Owner review checklist (0.2.0-dev.3)
 
-Status: **awaiting owner review.** Since dev.1: 3D growth stages, one dark wood, rack legs on their
+Status: **awaiting owner review.** Since dev.2: slim stemmed hung bundles, rack legs meeting at an apex under small caps. Since dev.1: 3D growth stages, one dark wood, rack legs on their
 feet, smaller kettle and pot, stovepipe out of the stove's back, solid hearth back, no flickering
 tops, wet-looking watered beds (joined too), 3D hung bundles (no leaking onto the host block). Trial instance, creative; `/herbalwitch showcase` on a clear
 plot, then walk it.
