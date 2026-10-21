@@ -161,16 +161,19 @@ public final class StationProcessingGameTests {
         check(helper.getBlockState(hearth).getValue(HearthBlock.LIT), "lava did not light it");
         check(inv.getStackInSlot(HearthBlockEntity.RETURN).is(Items.BUCKET), "bucket not returned");
         check(helper.getBlockState(hearth).getLightEmission() == HearthBlock.LIGHT, "no light");
-        place(helper, StationBlocks.KETTLE.get(), hearth.above());
-        KettleBlockEntity kettle = (KettleBlockEntity) helper.getBlockEntity(hearth.above());
-        check(io.github.dirtyredz.herbalwitch.stations.heat.HeatSources.isHeated(helper.getLevel(), helper.absolutePos(hearth.above())),
+        check(helper.getBlockState(hearth.above().west()).getValue(HearthBlock.LIT), "the chimney cells do not show the fire");
+        // the hearth is two blocks tall: a vessel stands on its chimney top
+        BlockPos top = hearth.above(2);
+        place(helper, StationBlocks.KETTLE.get(), top);
+        KettleBlockEntity kettle = (KettleBlockEntity) helper.getBlockEntity(top);
+        check(io.github.dirtyredz.herbalwitch.stations.heat.HeatSources.isHeated(helper.getLevel(), helper.absolutePos(top)),
                 "a lit hearth does not heat the kettle");
         check(kettle != null, "kettle on hearth");
         HearthBlockEntity entity = (HearthBlockEntity) helper.getBlockEntity(hearth);
         int left = entity.burn();
         tick(helper, hearth, left);
         check(!helper.getBlockState(hearth).getValue(HearthBlock.LIT), "still lit after the fuel ran out");
-        check(!io.github.dirtyredz.herbalwitch.stations.heat.HeatSources.isHeated(helper.getLevel(), helper.absolutePos(hearth.above())),
+        check(!io.github.dirtyredz.herbalwitch.stations.heat.HeatSources.isHeated(helper.getLevel(), helper.absolutePos(top)),
                 "a cold hearth still heats");
         helper.succeed();
     }

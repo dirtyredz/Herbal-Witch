@@ -1,6 +1,7 @@
 // Material synthesis: the surfaces furniture is built from. One art direction, nothing is tinted:
-// dark wood frames, deep green and hot pink fabric, tiny touches of dark purple, brass hardware,
-// trailing ivy. Every tile is 32 x 32 pixels, i.e. two texels per model pixel.
+// dark wood frames, hot pink fabric, tiny touches of dark purple, brass (the lantern), glass and
+// tinctures (the shelf's bottles). The house materials (warm wood, iron, gold, ivy) are in
+// stations/house.mjs and foliage.mjs. Every tile is 32 x 32 pixels, i.e. two texels per model pixel.
 import { rng, clamp, shade, image } from './pixels.mjs';
 
 export const SIZE = 32;
@@ -67,53 +68,6 @@ export function darkWood() {
   });
 }
 
-/**
- * Trailing ivy for cutout rendering: leafy stems that wander down from the top edge, deep green
- * leaves with darker veins on a transparent background. Alpha is only 0 or 255.
- */
-export function vine() {
-  const rand = rng(7703);
-  const stem = [47, 90, 44];
-  const leafMid = [62, 122, 58];
-  const leafLight = [78, 140, 70];
-  const vein = [35, 69, 32];
-  const grid = Array.from({ length: SIZE * SIZE }, () => null);
-  const put = (x, y, c) => {
-    x = Math.round(x);
-    y = Math.round(y);
-    if (x >= 0 && y >= 0 && x < SIZE && y < SIZE) grid[y * SIZE + x] = c;
-  };
-  const stems = [[3, 0.2], [9, 1.7], [15, 3.1], [21, 4.4], [27, 5.6]];
-  for (const [x0, phase] of stems) {
-    const len = 22 + Math.floor(rand() * 10);
-    let side = rand() < 0.5 ? -1 : 1;
-    for (let y = 0; y < len; y++) {
-      const sx = x0 + Math.sin(y * 0.33 + phase) * 2.2;
-      put(sx, y, stem);
-      if (y % 4 === 2 && y > 2) {
-        // a leaf: a small ellipse hanging off the stem with a vein along its axis
-        const rx = 2.6 + rand() * 0.9;
-        const ry = 1.5;
-        const cx = sx + side * (rx - 0.2);
-        const cy = y + 1;
-        for (let yy = -2; yy <= 2; yy++) {
-          for (let xx = -4; xx <= 4; xx++) {
-            if ((xx / rx) ** 2 + (yy / ry) ** 2 > 1) continue;
-            const px = Math.round(cx) + xx;
-            const py = Math.round(cy) + yy;
-            put(px, py, yy === 0 ? vein : yy < 0 ? leafLight : leafMid);
-          }
-        }
-        side = -side;
-      }
-    }
-  }
-  return image(SIZE, (x, y) => {
-    const c = grid[y * SIZE + x];
-    return c ? [c[0], c[1], c[2], 255] : [0, 0, 0, 0];
-  });
-}
-
 /** Plain upholstery: only a fine two-tone weave in a / b, no motif. */
 function weave(seed, a, b) {
   const rand = rng(seed);
@@ -121,11 +75,6 @@ function weave(seed, a, b) {
     const f = 1 + (rand() - 0.5) * 0.05;
     return shade((x + y) % 2 === 0 ? a : b, f);
   });
-}
-
-/** Deep green upholstery. */
-export function fabricGreen() {
-  return weave(8101, [47, 90, 44], [54, 100, 58]);
 }
 
 /** Hot pink upholstery. */

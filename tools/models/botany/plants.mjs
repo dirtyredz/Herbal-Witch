@@ -75,7 +75,7 @@ function mass(cx, cz, r, top, count, swatches, seed, s = 2) {
     const z = Math.min(14 - s / 2, Math.max(2 + s / 2, cz + Math.sin(a) * d));
     const h = Math.max(1, (top - ROOT) * (1 - (d / r) ** 2 * 0.6));
     const size = s * (0.75 + rand() * 0.6);
-    out.push(cube(x, ROOT + h - size - rand() * 1.5, z, size, swatches[i % swatches.length], size));
+    out.push(cube(x, Math.max(ROOT, ROOT + h - size - rand() * 1.5), z, size, swatches[i % swatches.length], size));
   }
   return out;
 }
@@ -145,6 +145,7 @@ const HERBS = {
     }
     rand();
     for (const [x, z] of [[6, 7], [9, 6], [10, 10], [7, 10.5], [8, 8.5]]) out.push(cube(x, 5, z, 1, 'thyme_flower'));
+    for (const [x, z] of [[7, 7], [9.5, 8.5], [6.5, 9.5]]) out.push(stem(x, z, 3, 'bark', 1)); // woody stems
     return out;
   },
   mint() {

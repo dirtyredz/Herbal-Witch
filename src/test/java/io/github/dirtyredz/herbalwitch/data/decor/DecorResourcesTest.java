@@ -23,14 +23,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * The single-design furniture (owner direction 2026-10-21): five pieces, one block each, crafted
- * directly, never restyled; untinted templates in dark wood, deep green, hot pink and dark purple
- * with trailing vines.
+ * directly, never restyled; untinted templates in dark wood, forest-green velvet, magenta, plum
+ * and gold, with trailing ivy (art pass 0.2.0).
  */
 class DecorResourcesTest {
     private static final Set<String> CONTEXTS = Set.of("gui", "ground", "fixed", "thirdperson_righthand",
             "firstperson_righthand", "firstperson_lefthand");
-    private static final Set<String> PALETTE = Set.of("dark_wood", "vine", "brass", "glass", "tincture", "fabric_green",
-            "fabric_pink", "trim_purple", "rug", "lamp_shade");
+    private static final Set<String> PALETTE = Set.of("dark_wood", "wood", "wood_post", "glass", "tincture", "velvet",
+            "fabric_pink", "trim_purple", "gold", "iron", "paint_green", "runner", "ivy", "rug", "lamp_shade", "bundle_lavender");
 
     @Test
     void oneDesignAndFivePiecesWithStablePaths() {
@@ -101,9 +101,9 @@ class DecorResourcesTest {
                     assertTrue(!name.contains("floral"), id + ": no floral fabric");
                 }
             }
-            vines |= model.textures().containsKey("vine");
+            vines |= model.textures().containsKey("ivy");
         }
-        assertTrue(vines, "no template trails vines");
+        assertTrue(vines, "no template trails ivy");
     }
 
     @Test
@@ -120,9 +120,11 @@ class DecorResourcesTest {
             if (element.has("forge_data")) {
                 assertTrue(element.toString().contains("\"#lamp_shade\""), "only the shade glows");
                 glowing++;
+            } else {
+                assertTrue(!element.toString().contains("\"#lamp_shade\""), "the whole shade glows");
             }
         }
-        assertEquals(2, glowing);
+        assertTrue(glowing >= 2, "the lit shade glows");
     }
 
     @Test

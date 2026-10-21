@@ -1,6 +1,5 @@
 {
-  "parent": "minecraft:block/cross",
-  "render_type": "minecraft:cutout",
+  "parent": "herbalwitch:block/botany/templates/planted_cross",
   "textures": {
     "cross": "herbalwitch:block/botany/dry/rosemary/stage_2"
   }

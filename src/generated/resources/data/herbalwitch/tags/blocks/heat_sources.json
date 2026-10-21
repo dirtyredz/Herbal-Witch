@@ -1,6 +1,7 @@
 {
   "values": [
     "herbalwitch:stations/hearth/station",
+    "herbalwitch:stations/stove/station",
     "minecraft:campfire",
     "minecraft:soul_campfire",
     "minecraft:magma_block",

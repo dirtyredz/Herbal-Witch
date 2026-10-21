@@ -2,12 +2,14 @@ package io.github.dirtyredz.herbalwitch.showcase;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.botany.registry.BotanyBlocks;
+import io.github.dirtyredz.herbalwitch.botany.garden.GardenBedConnections;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.gametest.GameTestHolder;
 import net.minecraftforge.gametest.PrefixGameTestTemplate;
 
@@ -39,6 +41,11 @@ public final class ShowcaseCommandGameTests {
         check(placed > 0, "operator command placed nothing");
         check(helper.getBlockState(DRY_BED).is(BotanyBlocks.herbBed()), "garden bed missing: " + helper.getBlockState(DRY_BED));
         check(helper.getBlockState(ORIGIN.offset(0, 1, 0)).is(Blocks.OAK_SIGN), "section heading sign missing");
+        // the planted square's north-west bed (section 0, 1, 3) joined its neighbours as it was built
+        BlockState square = helper.getBlockState(ORIGIN.offset(0, 1, 4));
+        check(square.getValue(GardenBedConnections.EAST) && square.getValue(GardenBedConnections.SOUTH)
+                && !square.getValue(GardenBedConnections.NORTH) && !square.getValue(GardenBedConnections.WEST), "showcase beds did not join: " + square);
+        check(!helper.getBlockState(DRY_BED).getValue(GardenBedConnections.EAST), "the lone dry bed joined something");
         helper.succeed();
     }
 

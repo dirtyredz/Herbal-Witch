@@ -15,8 +15,8 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { png } from './image/png-encode.mjs';
-import { brass, glass, tincture, darkWood, vine, fabricGreen, fabricPink, trimPurple } from './art/materials.mjs';
-import { rug, lampShade } from './art/patterns.mjs';
+import { brass, glass, tincture, darkWood, fabricPink, trimPurple } from './art/materials.mjs';
+import { rug, lampShade, velvet, paintGreen, runner } from './art/patterns.mjs';
 import temperate from './art/botany/temperate.mjs';
 import dry from './art/botany/dry.mjs';
 import wet from './art/botany/wet.mjs';
@@ -25,7 +25,7 @@ import woodland from './art/botany/woodland.mjs';
 import { soilDry, soilMoist } from './art/botany/garden.mjs';
 import { plantParts } from './art/botany/parts.mjs';
 import { HERB_LIST } from './art/botany/herbs.mjs';
-import { ceramic, iron, soil, ember, flame } from './art/stations/materials.mjs';
+import { iron, ember, flame } from './art/stations/materials.mjs';
 import * as house from './art/stations/house.mjs';
 import { mortarStone, plinthStone, pestleStone, herbPile } from './art/stations/stone.mjs';
 import { ivy, bundle } from './art/foliage.mjs';
@@ -40,11 +40,9 @@ const outDir = join(texRoot, 'block/material');
 // The complete texture manifest. GeneratedModelsTest checks every model reference against the files.
 const TEXTURES = {
   dark_wood: darkWood, // frames, legs, boards
-  vine: vine, // cutout: trailing ivy on edges, legs and backs
   brass: brass, // hardware
   glass: glass, // cutout bottle glass
   tincture: tincture, // bottle contents
-  fabric_green: fabricGreen, // plain deep-green upholstery
   fabric_pink: fabricPink, // plain hot-pink upholstery
   trim_purple: trimPurple, // dark-purple piping, knobs, small details
   rug: rug, // the small rug
@@ -58,11 +56,14 @@ const TEXTURES = {
   copper: house.copper, // handles and beaded rims
   plum: house.plum, // dark purple surfaces
   ivy: ivy, // cutout: dense trailing ivy with small pink flowers
+  velvet: velvet, // forest-green tufted upholstery
+  paint_green: paintGreen, // deep green painted drawer fronts
+  runner: runner, // cutout decal: draped runners with a pointed hem
 };
 
 // Station block materials (block/stations/): untinted; flame is cutout.
 const STATION_TEXTURES = {
-  ceramic, iron, soil, ember, flame,
+  iron, ember, flame, // the oil lantern's iron and flame, the bundles' coals
   plum_painted: house.plumPainted, // kettle and pot bodies: moons, stars, flowers on vines
   plum_lid: house.plumLid, // vessel lids seen from above
   stone_dark: house.stoneDark, // hearth bricks
@@ -86,19 +87,19 @@ for (const [name, make] of Object.entries(TEXTURES)) {
   console.log(`wrote material/${name}.png`);
 }
 
-// Botany: [group, herb, module] in a fixed order. Each herb writes block stage_0..3 and item seeds
+// Botany: [group, herb, module] in a fixed order. Each herb writes block stage_0..2 and item seeds
 // + fresh; the two garden soil tiles follow.
 const GROUP_ART = { temperate, dry, wet, shade: shadeHerbs, woodland };
 const HERBS = HERB_LIST.map(([group, herb]) => [group, herb, GROUP_ART[group]]);
 
 const botany = []; // [path relative to textures/, image]
-const sheetRows = []; // per herb: stage_0..3, seeds, fresh
+const sheetRows = []; // per herb: stage_0..2, seeds, fresh
 for (const [group, herb, mod] of HERBS) {
   const { stages, seeds, fresh } = mod[herb];
   const imgs = [...stages.map((make) => make()), seeds(), fresh()];
   stages.forEach((_, i) => botany.push([`block/botany/${group}/${herb}/stage_${i}.png`, imgs[i]]));
-  botany.push([`item/botany/${group}/${herb}/seeds.png`, imgs[4]]);
-  botany.push([`item/botany/${group}/${herb}/fresh.png`, imgs[5]]);
+  botany.push([`item/botany/${group}/${herb}/seeds.png`, imgs[3]]);
+  botany.push([`item/botany/${group}/${herb}/fresh.png`, imgs[4]]);
   sheetRows.push(imgs);
 }
 botany.push(['block/botany/garden/soil_dry.png', soilDry()]);

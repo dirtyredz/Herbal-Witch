@@ -17,13 +17,12 @@ const valerian = grow(
       leaf(cv, 7, 11, 125, 2.5, 0.7, R.moss);
       return;
     }
-    const tops = s === 2 ? [[7, 5], [4, 8]] : [[7, 3], [3, 6], [11, 5]];
+    const tops = [[7, 5], [4, 8]];
     for (const [x, y] of tops) line(cv, 7, 15, x, y + 1, R.moss[0]);
     leaf(cv, 7, 14, 155, 4, 0.9, R.moss, 0.3);
     leaf(cv, 8, 14, 25, 4, 0.9, R.moss, 0.3);
     leaf(cv, 7, 11, 130, 3, 0.8, R.moss, 0.3);
     leaf(cv, 8, 10, 45, 3, 0.8, R.moss, 0.3);
-    if (s === 3) for (const [x, y] of tops) head(cv, x, y);
   },
   (cv) => sprout(cv, 7, R.moss, 2, 0, 3),
 );
@@ -36,18 +35,11 @@ const fork = (cv, x, y, deg, len, w) => {
 
 const mugwort = grow(
   (cv, s) => {
-    const top = s === 1 ? 9 : s === 2 ? 6 : 3;
+    const top = s === 1 ? 9 : 6;
     line(cv, 7, 15, 7, top, R.moss[0]);
     fork(cv, 7, 13, 150, 4, 0.9);
     if (s >= 2) fork(cv, 7, 12, 30, 4, 0.9);
     if (s >= 2) fork(cv, 7, 9, 145, 3.5, 0.8);
-    if (s === 3) {
-      fork(cv, 7, 8, 35, 3.5, 0.8);
-      fork(cv, 7, 5, 140, 3, 0.7);
-      fork(cv, 7, 4, 40, 3, 0.7);
-      for (const [x, y] of [[4, 11], [10, 10], [4, 8], [10, 6], [5, 5], [9, 3]]) set(cv, x, y, R.silver[1]);
-      for (const [x, y] of [[3, 13], [11, 13], [3, 10], [11, 8]]) set(cv, x, y, R.silver[0]);
-    }
   },
   (cv) => sprout(cv, 7, R.moss, 2, 0, 2.5),
 );

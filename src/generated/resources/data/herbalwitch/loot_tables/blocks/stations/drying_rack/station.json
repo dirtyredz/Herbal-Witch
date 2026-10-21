@@ -11,6 +11,15 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "herbalwitch:stations/drying_rack/station",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "part": "0"
+              }
+            }
+          ],
           "name": "herbalwitch:stations/drying_rack/station"
         }
       ],

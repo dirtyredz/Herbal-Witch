@@ -40,7 +40,7 @@ class ShowcasePlanTest {
     void sectionsStandSideBySideInRegistrationOrder() throws Exception {
         ShowcasePlan plan = ShowcasePlan.of(sections());
         List<ShowcasePlan.SectionArea> areas = plan.areas();
-        assertEquals(List.of("decor", "herbs", "garden", "drying_rack", "mortar", "kettle", "hearth", "infusion_pot", "preparations"), areas.stream().map(ShowcasePlan.SectionArea::id).toList());
+        assertEquals(List.of("decor", "herbs", "garden", "drying_rack", "mortar", "kettle", "hearth", "stove", "infusion_pot", "preparations"), areas.stream().map(ShowcasePlan.SectionArea::id).toList());
         for (int i = 1; i < areas.size(); i++) {
             ShowcasePlan.SectionArea previous = areas.get(i - 1);
             assertEquals(previous.x() + previous.width() + ShowcasePlan.GAP, areas.get(i).x());

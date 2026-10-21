@@ -38,7 +38,9 @@ function post() {
 const soil = {
   core: () => [box([2, 0, 2], [14, SOIL_Y, 14], '#soil', SOIL_ONLY_TOP)],
   edge: () => [box([2, 0, 0], [14, SOIL_Y, 2], '#soil', SOIL_ONLY_TOP)],
-  corner: () => [box([14, 0, 0], [16, SOIL_Y, 2], '#soil', SOIL_ONLY_TOP)],
+  // A corner joined on both sides: soil on top, and wooden sides that close the small gap where
+  // two rails meet around an empty diagonal neighbour (the inner corner of an L or a ring).
+  corner: () => [box([14, 0, 0], [16, SOIL_Y, 2], { top: '#soil', side: '#wood' }, { skip: ['down'] })],
 };
 
 const WOOD = { wood: MATERIAL.wood, wood_end: MATERIAL.wood_end, post: MATERIAL.wood_post, cap: MATERIAL.wood_end, gold: MATERIAL.gold };
@@ -52,7 +54,7 @@ export function bed() {
     wood('rail_end', rail(14, 16)),
     wood('rail_start', rail(0, 2)),
     wood('post', post()),
-    ...Object.entries(soil).map(([name, make]) => ({ path: `${parts}/soil/${name}`, textures: { ...SOIL, particle: SOIL.soil }, elements: make() })),
+    ...Object.entries(soil).map(([name, make]) => ({ path: `${parts}/soil/${name}`, textures: { ...SOIL, wood: MATERIAL.wood, particle: SOIL.soil }, elements: make() })),
   ];
   // the unjoined bed (its item, and the shape a lone bed shows): core soil, four rails, four posts
   const assembly = [...soil.core()];

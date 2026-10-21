@@ -1,101 +1,1559 @@
 {
   "render_type": "minecraft:cutout",
   "textures": {
-    "dark_wood": "herbalwitch:block/material/dark_wood",
-    "brass": "herbalwitch:block/material/brass",
+    "wood": "herbalwitch:block/material/dark_wood",
+    "wood_v": "herbalwitch:block/material/dark_wood",
+    "plum": "herbalwitch:block/material/trim_purple",
+    "gold": "herbalwitch:block/material/gold",
+    "ivy": "herbalwitch:block/material/ivy",
     "lamp_shade": "herbalwitch:block/material/lamp_shade",
-    "trim_purple": "herbalwitch:block/material/trim_purple",
-    "vine": "herbalwitch:block/material/vine",
-    "particle": "#dark_wood"
+    "particle": "herbalwitch:block/material/wood"
   },
   "elements": [
     {
-      "name": "base",
-      "from": [5, 0, 5],
-      "to": [11, 1, 11],
+      "from": [
+        4.5,
+        0,
+        6.5
+      ],
+      "to": [
+        11.5,
+        1.5,
+        9.5
+      ],
       "faces": {
-        "north": {"uv": [5,15,11,16], "texture": "#dark_wood"},
-        "east": {"uv": [5,15,11,16], "texture": "#dark_wood"},
-        "south": {"uv": [5,15,11,16], "texture": "#dark_wood"},
-        "west": {"uv": [5,15,11,16], "texture": "#dark_wood"},
-        "up": {"uv": [5,5,11,11], "texture": "#dark_wood"},
-        "down": {"uv": [5,5,11,11], "texture": "#dark_wood"}
+        "down": {
+          "uv": [
+            4.5,
+            6.5,
+            11.5,
+            9.5
+          ],
+          "texture": "#wood",
+          "cullface": "down"
+        },
+        "up": {
+          "uv": [
+            4.5,
+            6.5,
+            11.5,
+            9.5
+          ],
+          "texture": "#wood"
+        },
+        "north": {
+          "uv": [
+            4.5,
+            14.5,
+            11.5,
+            16
+          ],
+          "texture": "#wood"
+        },
+        "south": {
+          "uv": [
+            4.5,
+            14.5,
+            11.5,
+            16
+          ],
+          "texture": "#wood"
+        },
+        "west": {
+          "uv": [
+            6.5,
+            14.5,
+            9.5,
+            16
+          ],
+          "texture": "#wood"
+        },
+        "east": {
+          "uv": [
+            6.5,
+            14.5,
+            9.5,
+            16
+          ],
+          "texture": "#wood"
+        }
       }
     },
     {
-      "name": "ring",
-      "from": [6, 1, 6],
-      "to": [10, 2, 10],
+      "from": [
+        6.5,
+        0,
+        4.5
+      ],
+      "to": [
+        9.5,
+        1.5,
+        11.5
+      ],
       "faces": {
-        "north": {"uv": [6,14,10,15], "texture": "#brass"},
-        "east": {"uv": [6,14,10,15], "texture": "#brass"},
-        "south": {"uv": [6,14,10,15], "texture": "#brass"},
-        "west": {"uv": [6,14,10,15], "texture": "#brass"},
-        "up": {"uv": [6,6,10,10], "texture": "#brass"},
-        "down": {"uv": [6,6,10,10], "texture": "#brass"}
+        "down": {
+          "uv": [
+            6.5,
+            4.5,
+            9.5,
+            11.5
+          ],
+          "texture": "#wood",
+          "cullface": "down"
+        },
+        "up": {
+          "uv": [
+            6.5,
+            4.5,
+            9.5,
+            11.5
+          ],
+          "texture": "#wood"
+        },
+        "north": {
+          "uv": [
+            6.5,
+            14.5,
+            9.5,
+            16
+          ],
+          "texture": "#wood"
+        },
+        "south": {
+          "uv": [
+            6.5,
+            14.5,
+            9.5,
+            16
+          ],
+          "texture": "#wood"
+        },
+        "west": {
+          "uv": [
+            4.5,
+            14.5,
+            11.5,
+            16
+          ],
+          "texture": "#wood"
+        },
+        "east": {
+          "uv": [
+            4.5,
+            14.5,
+            11.5,
+            16
+          ],
+          "texture": "#wood"
+        }
       }
     },
     {
-      "name": "stem",
-      "from": [7, 2, 7],
-      "to": [9, 8, 9],
+      "from": [
+        5.5,
+        1.5,
+        7
+      ],
+      "to": [
+        10.5,
+        2.25,
+        9
+      ],
       "faces": {
-        "north": {"uv": [7,8,9,14], "texture": "#dark_wood"},
-        "east": {"uv": [7,8,9,14], "texture": "#dark_wood"},
-        "south": {"uv": [7,8,9,14], "texture": "#dark_wood"},
-        "west": {"uv": [7,8,9,14], "texture": "#dark_wood"},
-        "up": {"uv": [7,7,9,9], "texture": "#dark_wood"},
-        "down": {"uv": [7,7,9,9], "texture": "#dark_wood"}
+        "down": {
+          "uv": [
+            5.5,
+            7,
+            10.5,
+            9
+          ],
+          "texture": "#gold"
+        },
+        "up": {
+          "uv": [
+            5.5,
+            7,
+            10.5,
+            9
+          ],
+          "texture": "#gold"
+        },
+        "north": {
+          "uv": [
+            5.5,
+            13.75,
+            10.5,
+            14.5
+          ],
+          "texture": "#gold"
+        },
+        "south": {
+          "uv": [
+            5.5,
+            13.75,
+            10.5,
+            14.5
+          ],
+          "texture": "#gold"
+        },
+        "west": {
+          "uv": [
+            7,
+            13.75,
+            9,
+            14.5
+          ],
+          "texture": "#gold"
+        },
+        "east": {
+          "uv": [
+            7,
+            13.75,
+            9,
+            14.5
+          ],
+          "texture": "#gold"
+        }
       }
     },
     {
-      "name": "shade",
-      "from": [4, 8, 4],
-      "to": [12, 14, 12],
-      "forge_data": {"block_light": 15, "sky_light": 15},
+      "from": [
+        7,
+        1.5,
+        5.5
+      ],
+      "to": [
+        9,
+        2.25,
+        10.5
+      ],
       "faces": {
-        "north": {"uv": [4,10,12,16], "texture": "#lamp_shade"},
-        "east": {"uv": [4,10,12,16], "texture": "#lamp_shade"},
-        "south": {"uv": [4,10,12,16], "texture": "#lamp_shade"},
-        "west": {"uv": [4,10,12,16], "texture": "#lamp_shade"},
-        "up": {"uv": [4,4,12,12], "texture": "#lamp_shade"},
-        "down": {"uv": [4,4,12,12], "texture": "#lamp_shade"}
+        "down": {
+          "uv": [
+            7,
+            5.5,
+            9,
+            10.5
+          ],
+          "texture": "#gold"
+        },
+        "up": {
+          "uv": [
+            7,
+            5.5,
+            9,
+            10.5
+          ],
+          "texture": "#gold"
+        },
+        "north": {
+          "uv": [
+            7,
+            13.75,
+            9,
+            14.5
+          ],
+          "texture": "#gold"
+        },
+        "south": {
+          "uv": [
+            7,
+            13.75,
+            9,
+            14.5
+          ],
+          "texture": "#gold"
+        },
+        "west": {
+          "uv": [
+            5.5,
+            13.75,
+            10.5,
+            14.5
+          ],
+          "texture": "#gold"
+        },
+        "east": {
+          "uv": [
+            5.5,
+            13.75,
+            10.5,
+            14.5
+          ],
+          "texture": "#gold"
+        }
       }
     },
     {
-      "name": "shade_top",
-      "from": [5, 14, 5],
-      "to": [11, 15, 11],
-      "forge_data": {"block_light": 15, "sky_light": 15},
+      "from": [
+        7.25,
+        2.25,
+        7.25
+      ],
+      "to": [
+        8.75,
+        8.5,
+        8.75
+      ],
       "faces": {
-        "north": {"uv": [5,0,11,1], "texture": "#lamp_shade"},
-        "east": {"uv": [5,0,11,1], "texture": "#lamp_shade"},
-        "south": {"uv": [5,0,11,1], "texture": "#lamp_shade"},
-        "west": {"uv": [5,0,11,1], "texture": "#lamp_shade"},
-        "up": {"uv": [5,5,11,11], "texture": "#lamp_shade"},
-        "down": {"uv": [5,5,11,11], "texture": "#lamp_shade"}
+        "down": {
+          "uv": [
+            7.25,
+            7.25,
+            8.75,
+            8.75
+          ],
+          "texture": "#wood_v"
+        },
+        "up": {
+          "uv": [
+            7.25,
+            7.25,
+            8.75,
+            8.75
+          ],
+          "texture": "#wood_v"
+        },
+        "north": {
+          "uv": [
+            7.25,
+            7.5,
+            8.75,
+            13.75
+          ],
+          "texture": "#wood_v"
+        },
+        "south": {
+          "uv": [
+            7.25,
+            7.5,
+            8.75,
+            13.75
+          ],
+          "texture": "#wood_v"
+        },
+        "west": {
+          "uv": [
+            7.25,
+            7.5,
+            8.75,
+            13.75
+          ],
+          "texture": "#wood_v"
+        },
+        "east": {
+          "uv": [
+            7.25,
+            7.5,
+            8.75,
+            13.75
+          ],
+          "texture": "#wood_v"
+        }
       }
     },
     {
-      "name": "finial",
-      "from": [7.5, 15, 7.5],
-      "to": [8.5, 16, 8.5],
+      "from": [
+        7,
+        4.5,
+        7
+      ],
+      "to": [
+        9,
+        5.25,
+        9
+      ],
       "faces": {
-        "north": {"uv": [7.5,0,8.5,1], "texture": "#trim_purple"},
-        "east": {"uv": [7.5,0,8.5,1], "texture": "#trim_purple"},
-        "south": {"uv": [7.5,0,8.5,1], "texture": "#trim_purple"},
-        "west": {"uv": [7.5,0,8.5,1], "texture": "#trim_purple"},
-        "up": {"uv": [7.5,7.5,8.5,8.5], "texture": "#trim_purple"},
-        "down": {"uv": [7.5,7.5,8.5,8.5], "texture": "#trim_purple"}
+        "north": {
+          "uv": [
+            7,
+            10.75,
+            9,
+            11.5
+          ],
+          "texture": "#gold"
+        },
+        "south": {
+          "uv": [
+            7,
+            10.75,
+            9,
+            11.5
+          ],
+          "texture": "#gold"
+        },
+        "west": {
+          "uv": [
+            7,
+            10.75,
+            9,
+            11.5
+          ],
+          "texture": "#gold"
+        },
+        "east": {
+          "uv": [
+            7,
+            10.75,
+            9,
+            11.5
+          ],
+          "texture": "#gold"
+        }
       }
     },
     {
-      "name": "vine_stem",
-      "from": [7, 3, 6],
-      "to": [9, 7, 7],
+      "from": [
+        7,
+        7,
+        7
+      ],
+      "to": [
+        9,
+        7.5,
+        9
+      ],
       "faces": {
-        "north": {"uv": [6,0,8,4], "texture": "#vine"},
-        "south": {"uv": [6,0,8,4], "texture": "#vine"}
+        "north": {
+          "uv": [
+            7,
+            8.5,
+            9,
+            9
+          ],
+          "texture": "#plum"
+        },
+        "south": {
+          "uv": [
+            7,
+            8.5,
+            9,
+            9
+          ],
+          "texture": "#plum"
+        },
+        "west": {
+          "uv": [
+            7,
+            8.5,
+            9,
+            9
+          ],
+          "texture": "#plum"
+        },
+        "east": {
+          "uv": [
+            7,
+            8.5,
+            9,
+            9
+          ],
+          "texture": "#plum"
+        }
+      }
+    },
+    {
+      "from": [
+        3.25,
+        8.5,
+        6
+      ],
+      "to": [
+        12.75,
+        13,
+        10
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "down": {
+          "uv": [
+            3.25,
+            6,
+            12.75,
+            10
+          ],
+          "texture": "#lamp_shade"
+        },
+        "up": {
+          "uv": [
+            3.25,
+            6,
+            12.75,
+            10
+          ],
+          "texture": "#lamp_shade"
+        },
+        "north": {
+          "uv": [
+            3.25,
+            3,
+            12.75,
+            7.5
+          ],
+          "texture": "#lamp_shade"
+        },
+        "south": {
+          "uv": [
+            3.25,
+            3,
+            12.75,
+            7.5
+          ],
+          "texture": "#lamp_shade"
+        },
+        "west": {
+          "uv": [
+            6,
+            3,
+            10,
+            7.5
+          ],
+          "texture": "#lamp_shade"
+        },
+        "east": {
+          "uv": [
+            6,
+            3,
+            10,
+            7.5
+          ],
+          "texture": "#lamp_shade"
+        }
+      }
+    },
+    {
+      "from": [
+        6,
+        8.5,
+        3.25
+      ],
+      "to": [
+        10,
+        13,
+        12.75
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "down": {
+          "uv": [
+            6,
+            3.25,
+            10,
+            12.75
+          ],
+          "texture": "#lamp_shade"
+        },
+        "up": {
+          "uv": [
+            6,
+            3.25,
+            10,
+            12.75
+          ],
+          "texture": "#lamp_shade"
+        },
+        "north": {
+          "uv": [
+            6,
+            3,
+            10,
+            7.5
+          ],
+          "texture": "#lamp_shade"
+        },
+        "south": {
+          "uv": [
+            6,
+            3,
+            10,
+            7.5
+          ],
+          "texture": "#lamp_shade"
+        },
+        "west": {
+          "uv": [
+            3.25,
+            3,
+            12.75,
+            7.5
+          ],
+          "texture": "#lamp_shade"
+        },
+        "east": {
+          "uv": [
+            3.25,
+            3,
+            12.75,
+            7.5
+          ],
+          "texture": "#lamp_shade"
+        }
+      }
+    },
+    {
+      "from": [
+        8.743,
+        8.5,
+        4.3402
+      ],
+      "to": [
+        12.632,
+        13,
+        6.2848
+      ],
+      "rotation": {
+        "angle": -45,
+        "axis": "y",
+        "origin": [
+          10.6875,
+          10.75,
+          5.3125
+        ]
+      },
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "down": {
+          "uv": [
+            8.743,
+            9.7152,
+            12.632,
+            11.6598
+          ],
+          "texture": "#lamp_shade"
+        },
+        "up": {
+          "uv": [
+            8.743,
+            4.3402,
+            12.632,
+            6.2848
+          ],
+          "texture": "#lamp_shade"
+        },
+        "north": {
+          "uv": [
+            3.368,
+            3,
+            7.257,
+            7.5
+          ],
+          "texture": "#lamp_shade"
+        },
+        "south": {
+          "uv": [
+            8.743,
+            3,
+            12.632,
+            7.5
+          ],
+          "texture": "#lamp_shade"
+        },
+        "west": {
+          "uv": [
+            4.3402,
+            3,
+            6.2848,
+            7.5
+          ],
+          "texture": "#lamp_shade"
+        },
+        "east": {
+          "uv": [
+            9.7152,
+            3,
+            11.6598,
+            7.5
+          ],
+          "texture": "#lamp_shade"
+        }
+      }
+    },
+    {
+      "from": [
+        3.368,
+        8.5,
+        4.3402
+      ],
+      "to": [
+        7.257,
+        13,
+        6.2848
+      ],
+      "rotation": {
+        "angle": 45,
+        "axis": "y",
+        "origin": [
+          5.3125,
+          10.75,
+          5.3125
+        ]
+      },
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "down": {
+          "uv": [
+            3.368,
+            9.7152,
+            7.257,
+            11.6598
+          ],
+          "texture": "#lamp_shade"
+        },
+        "up": {
+          "uv": [
+            3.368,
+            4.3402,
+            7.257,
+            6.2848
+          ],
+          "texture": "#lamp_shade"
+        },
+        "north": {
+          "uv": [
+            8.743,
+            3,
+            12.632,
+            7.5
+          ],
+          "texture": "#lamp_shade"
+        },
+        "south": {
+          "uv": [
+            3.368,
+            3,
+            7.257,
+            7.5
+          ],
+          "texture": "#lamp_shade"
+        },
+        "west": {
+          "uv": [
+            4.3402,
+            3,
+            6.2848,
+            7.5
+          ],
+          "texture": "#lamp_shade"
+        },
+        "east": {
+          "uv": [
+            9.7152,
+            3,
+            11.6598,
+            7.5
+          ],
+          "texture": "#lamp_shade"
+        }
+      }
+    },
+    {
+      "from": [
+        8.743,
+        8.5,
+        9.7152
+      ],
+      "to": [
+        12.632,
+        13,
+        11.6598
+      ],
+      "rotation": {
+        "angle": 45,
+        "axis": "y",
+        "origin": [
+          10.6875,
+          10.75,
+          10.6875
+        ]
+      },
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "down": {
+          "uv": [
+            8.743,
+            4.3402,
+            12.632,
+            6.2848
+          ],
+          "texture": "#lamp_shade"
+        },
+        "up": {
+          "uv": [
+            8.743,
+            9.7152,
+            12.632,
+            11.6598
+          ],
+          "texture": "#lamp_shade"
+        },
+        "north": {
+          "uv": [
+            3.368,
+            3,
+            7.257,
+            7.5
+          ],
+          "texture": "#lamp_shade"
+        },
+        "south": {
+          "uv": [
+            8.743,
+            3,
+            12.632,
+            7.5
+          ],
+          "texture": "#lamp_shade"
+        },
+        "west": {
+          "uv": [
+            9.7152,
+            3,
+            11.6598,
+            7.5
+          ],
+          "texture": "#lamp_shade"
+        },
+        "east": {
+          "uv": [
+            4.3402,
+            3,
+            6.2848,
+            7.5
+          ],
+          "texture": "#lamp_shade"
+        }
+      }
+    },
+    {
+      "from": [
+        3.368,
+        8.5,
+        9.7152
+      ],
+      "to": [
+        7.257,
+        13,
+        11.6598
+      ],
+      "rotation": {
+        "angle": -45,
+        "axis": "y",
+        "origin": [
+          5.3125,
+          10.75,
+          10.6875
+        ]
+      },
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "down": {
+          "uv": [
+            3.368,
+            4.3402,
+            7.257,
+            6.2848
+          ],
+          "texture": "#lamp_shade"
+        },
+        "up": {
+          "uv": [
+            3.368,
+            9.7152,
+            7.257,
+            11.6598
+          ],
+          "texture": "#lamp_shade"
+        },
+        "north": {
+          "uv": [
+            8.743,
+            3,
+            12.632,
+            7.5
+          ],
+          "texture": "#lamp_shade"
+        },
+        "south": {
+          "uv": [
+            3.368,
+            3,
+            7.257,
+            7.5
+          ],
+          "texture": "#lamp_shade"
+        },
+        "west": {
+          "uv": [
+            9.7152,
+            3,
+            11.6598,
+            7.5
+          ],
+          "texture": "#lamp_shade"
+        },
+        "east": {
+          "uv": [
+            4.3402,
+            3,
+            6.2848,
+            7.5
+          ],
+          "texture": "#lamp_shade"
+        }
+      }
+    },
+    {
+      "from": [
+        4.5,
+        13,
+        6.5
+      ],
+      "to": [
+        11.5,
+        15,
+        9.5
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "down": {
+          "uv": [
+            4.5,
+            6.5,
+            11.5,
+            9.5
+          ],
+          "texture": "#lamp_shade"
+        },
+        "up": {
+          "uv": [
+            4.5,
+            6.5,
+            11.5,
+            9.5
+          ],
+          "texture": "#lamp_shade"
+        },
+        "north": {
+          "uv": [
+            4.5,
+            1,
+            11.5,
+            3
+          ],
+          "texture": "#lamp_shade"
+        },
+        "south": {
+          "uv": [
+            4.5,
+            1,
+            11.5,
+            3
+          ],
+          "texture": "#lamp_shade"
+        },
+        "west": {
+          "uv": [
+            6.5,
+            1,
+            9.5,
+            3
+          ],
+          "texture": "#lamp_shade"
+        },
+        "east": {
+          "uv": [
+            6.5,
+            1,
+            9.5,
+            3
+          ],
+          "texture": "#lamp_shade"
+        }
+      }
+    },
+    {
+      "from": [
+        6.5,
+        13,
+        4.5
+      ],
+      "to": [
+        9.5,
+        15,
+        11.5
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "down": {
+          "uv": [
+            6.5,
+            4.5,
+            9.5,
+            11.5
+          ],
+          "texture": "#lamp_shade"
+        },
+        "up": {
+          "uv": [
+            6.5,
+            4.5,
+            9.5,
+            11.5
+          ],
+          "texture": "#lamp_shade"
+        },
+        "north": {
+          "uv": [
+            6.5,
+            1,
+            9.5,
+            3
+          ],
+          "texture": "#lamp_shade"
+        },
+        "south": {
+          "uv": [
+            6.5,
+            1,
+            9.5,
+            3
+          ],
+          "texture": "#lamp_shade"
+        },
+        "west": {
+          "uv": [
+            4.5,
+            1,
+            11.5,
+            3
+          ],
+          "texture": "#lamp_shade"
+        },
+        "east": {
+          "uv": [
+            4.5,
+            1,
+            11.5,
+            3
+          ],
+          "texture": "#lamp_shade"
+        }
+      }
+    },
+    {
+      "from": [
+        8.5858,
+        13,
+        5.2929
+      ],
+      "to": [
+        11.4142,
+        15,
+        6.7071
+      ],
+      "rotation": {
+        "angle": -45,
+        "axis": "y",
+        "origin": [
+          10,
+          14,
+          6
+        ]
+      },
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "down": {
+          "uv": [
+            8.5858,
+            9.2929,
+            11.4142,
+            10.7071
+          ],
+          "texture": "#lamp_shade"
+        },
+        "up": {
+          "uv": [
+            8.5858,
+            5.2929,
+            11.4142,
+            6.7071
+          ],
+          "texture": "#lamp_shade"
+        },
+        "north": {
+          "uv": [
+            4.5858,
+            1,
+            7.4142,
+            3
+          ],
+          "texture": "#lamp_shade"
+        },
+        "south": {
+          "uv": [
+            8.5858,
+            1,
+            11.4142,
+            3
+          ],
+          "texture": "#lamp_shade"
+        },
+        "west": {
+          "uv": [
+            5.2929,
+            1,
+            6.7071,
+            3
+          ],
+          "texture": "#lamp_shade"
+        },
+        "east": {
+          "uv": [
+            9.2929,
+            1,
+            10.7071,
+            3
+          ],
+          "texture": "#lamp_shade"
+        }
+      }
+    },
+    {
+      "from": [
+        4.5858,
+        13,
+        5.2929
+      ],
+      "to": [
+        7.4142,
+        15,
+        6.7071
+      ],
+      "rotation": {
+        "angle": 45,
+        "axis": "y",
+        "origin": [
+          6,
+          14,
+          6
+        ]
+      },
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "down": {
+          "uv": [
+            4.5858,
+            9.2929,
+            7.4142,
+            10.7071
+          ],
+          "texture": "#lamp_shade"
+        },
+        "up": {
+          "uv": [
+            4.5858,
+            5.2929,
+            7.4142,
+            6.7071
+          ],
+          "texture": "#lamp_shade"
+        },
+        "north": {
+          "uv": [
+            8.5858,
+            1,
+            11.4142,
+            3
+          ],
+          "texture": "#lamp_shade"
+        },
+        "south": {
+          "uv": [
+            4.5858,
+            1,
+            7.4142,
+            3
+          ],
+          "texture": "#lamp_shade"
+        },
+        "west": {
+          "uv": [
+            5.2929,
+            1,
+            6.7071,
+            3
+          ],
+          "texture": "#lamp_shade"
+        },
+        "east": {
+          "uv": [
+            9.2929,
+            1,
+            10.7071,
+            3
+          ],
+          "texture": "#lamp_shade"
+        }
+      }
+    },
+    {
+      "from": [
+        8.5858,
+        13,
+        9.2929
+      ],
+      "to": [
+        11.4142,
+        15,
+        10.7071
+      ],
+      "rotation": {
+        "angle": 45,
+        "axis": "y",
+        "origin": [
+          10,
+          14,
+          10
+        ]
+      },
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "down": {
+          "uv": [
+            8.5858,
+            5.2929,
+            11.4142,
+            6.7071
+          ],
+          "texture": "#lamp_shade"
+        },
+        "up": {
+          "uv": [
+            8.5858,
+            9.2929,
+            11.4142,
+            10.7071
+          ],
+          "texture": "#lamp_shade"
+        },
+        "north": {
+          "uv": [
+            4.5858,
+            1,
+            7.4142,
+            3
+          ],
+          "texture": "#lamp_shade"
+        },
+        "south": {
+          "uv": [
+            8.5858,
+            1,
+            11.4142,
+            3
+          ],
+          "texture": "#lamp_shade"
+        },
+        "west": {
+          "uv": [
+            9.2929,
+            1,
+            10.7071,
+            3
+          ],
+          "texture": "#lamp_shade"
+        },
+        "east": {
+          "uv": [
+            5.2929,
+            1,
+            6.7071,
+            3
+          ],
+          "texture": "#lamp_shade"
+        }
+      }
+    },
+    {
+      "from": [
+        4.5858,
+        13,
+        9.2929
+      ],
+      "to": [
+        7.4142,
+        15,
+        10.7071
+      ],
+      "rotation": {
+        "angle": -45,
+        "axis": "y",
+        "origin": [
+          6,
+          14,
+          10
+        ]
+      },
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "down": {
+          "uv": [
+            4.5858,
+            5.2929,
+            7.4142,
+            6.7071
+          ],
+          "texture": "#lamp_shade"
+        },
+        "up": {
+          "uv": [
+            4.5858,
+            9.2929,
+            7.4142,
+            10.7071
+          ],
+          "texture": "#lamp_shade"
+        },
+        "north": {
+          "uv": [
+            8.5858,
+            1,
+            11.4142,
+            3
+          ],
+          "texture": "#lamp_shade"
+        },
+        "south": {
+          "uv": [
+            4.5858,
+            1,
+            7.4142,
+            3
+          ],
+          "texture": "#lamp_shade"
+        },
+        "west": {
+          "uv": [
+            9.2929,
+            1,
+            10.7071,
+            3
+          ],
+          "texture": "#lamp_shade"
+        },
+        "east": {
+          "uv": [
+            5.2929,
+            1,
+            6.7071,
+            3
+          ],
+          "texture": "#lamp_shade"
+        }
+      }
+    },
+    {
+      "from": [
+        6.5,
+        15,
+        7.25
+      ],
+      "to": [
+        9.5,
+        15.75,
+        8.75
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            6.5,
+            7.25,
+            9.5,
+            8.75
+          ],
+          "texture": "#gold"
+        },
+        "up": {
+          "uv": [
+            6.5,
+            7.25,
+            9.5,
+            8.75
+          ],
+          "texture": "#gold"
+        },
+        "north": {
+          "uv": [
+            6.5,
+            0.25,
+            9.5,
+            1
+          ],
+          "texture": "#gold"
+        },
+        "south": {
+          "uv": [
+            6.5,
+            0.25,
+            9.5,
+            1
+          ],
+          "texture": "#gold"
+        },
+        "west": {
+          "uv": [
+            7.25,
+            0.25,
+            8.75,
+            1
+          ],
+          "texture": "#gold"
+        },
+        "east": {
+          "uv": [
+            7.25,
+            0.25,
+            8.75,
+            1
+          ],
+          "texture": "#gold"
+        }
+      }
+    },
+    {
+      "from": [
+        7.25,
+        15,
+        6.5
+      ],
+      "to": [
+        8.75,
+        15.75,
+        9.5
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            7.25,
+            6.5,
+            8.75,
+            9.5
+          ],
+          "texture": "#gold"
+        },
+        "up": {
+          "uv": [
+            7.25,
+            6.5,
+            8.75,
+            9.5
+          ],
+          "texture": "#gold"
+        },
+        "north": {
+          "uv": [
+            7.25,
+            0.25,
+            8.75,
+            1
+          ],
+          "texture": "#gold"
+        },
+        "south": {
+          "uv": [
+            7.25,
+            0.25,
+            8.75,
+            1
+          ],
+          "texture": "#gold"
+        },
+        "west": {
+          "uv": [
+            6.5,
+            0.25,
+            9.5,
+            1
+          ],
+          "texture": "#gold"
+        },
+        "east": {
+          "uv": [
+            6.5,
+            0.25,
+            9.5,
+            1
+          ],
+          "texture": "#gold"
+        }
+      }
+    },
+    {
+      "from": [
+        7,
+        3,
+        6.95
+      ],
+      "to": [
+        9,
+        8,
+        6.95
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            4,
+            5
+          ],
+          "texture": "#ivy"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            4,
+            5
+          ],
+          "texture": "#ivy"
+        }
       }
     }
   ]

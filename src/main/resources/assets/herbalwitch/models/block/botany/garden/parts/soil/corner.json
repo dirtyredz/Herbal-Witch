@@ -1,6 +1,7 @@
 {
   "textures": {
     "soil": "herbalwitch:block/botany/garden/soil_dry",
+    "wood": "herbalwitch:block/material/wood",
     "particle": "herbalwitch:block/botany/garden/soil_dry"
   },
   "elements": [
@@ -24,6 +25,44 @@
             2
           ],
           "texture": "#soil"
+        },
+        "north": {
+          "uv": [
+            0,
+            2,
+            2,
+            16
+          ],
+          "texture": "#wood",
+          "cullface": "north"
+        },
+        "south": {
+          "uv": [
+            14,
+            2,
+            16,
+            16
+          ],
+          "texture": "#wood"
+        },
+        "west": {
+          "uv": [
+            0,
+            2,
+            2,
+            16
+          ],
+          "texture": "#wood"
+        },
+        "east": {
+          "uv": [
+            14,
+            2,
+            16,
+            16
+          ],
+          "texture": "#wood",
+          "cullface": "east"
         }
       }
     }

@@ -1,0 +1,168 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/stove/part_0"
+      },
+      "when": {
+        "facing": "north",
+        "part": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/stove/fire_0"
+      },
+      "when": {
+        "facing": "north",
+        "lit": "true",
+        "part": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/stove/part_0",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "part": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/stove/fire_0",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "lit": "true",
+        "part": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/stove/part_0",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "part": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/stove/fire_0",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "lit": "true",
+        "part": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/stove/part_0",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "part": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/stove/fire_0",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "lit": "true",
+        "part": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/stove/part_1"
+      },
+      "when": {
+        "facing": "north",
+        "part": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/stove/fire_1"
+      },
+      "when": {
+        "facing": "north",
+        "lit": "true",
+        "part": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/stove/part_1",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "part": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/stove/fire_1",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "lit": "true",
+        "part": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/stove/part_1",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "part": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/stove/fire_1",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "lit": "true",
+        "part": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/stove/part_1",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "part": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/stove/fire_1",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "lit": "true",
+        "part": "1"
+      }
+    }
+  ]
+}

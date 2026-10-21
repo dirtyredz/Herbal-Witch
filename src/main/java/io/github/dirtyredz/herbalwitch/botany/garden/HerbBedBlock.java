@@ -68,11 +68,17 @@ public class HerbBedBlock extends Block {
         return GardenBedConnections.connect(defaultBlockState().setValue(MOISTURE, watered ? GardenSoil.MAX_MOISTURE : 0), level, pos);
     }
 
-    /** Placed by any means (including a plain setBlock, as the showcase does): join existing neighbours. */
+    /**
+     * Newly placed by any means (including a plain setBlock, as the showcase does): join existing
+     * neighbours. A bed changing its own state (moisture, enrichment) keeps its connections.
+     */
     @Override
     @SuppressWarnings("deprecation") // overriding, not calling
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState old, boolean moving) {
         super.onPlace(state, level, pos, old, moving);
+        if (old.is(this)) {
+            return;
+        }
         BlockState joined = GardenBedConnections.connect(state, level, pos);
         if (joined != state) {
             level.setBlock(pos, joined, Block.UPDATE_CLIENTS);

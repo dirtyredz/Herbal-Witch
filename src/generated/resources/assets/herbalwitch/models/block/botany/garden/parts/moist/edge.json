@@ -1,5 +1,5 @@
 {
-  "parent": "herbalwitch:block/botany/garden/herb_bed",
+  "parent": "herbalwitch:block/botany/garden/parts/soil/edge",
   "textures": {
     "soil": "herbalwitch:block/botany/garden/soil_moist"
   }

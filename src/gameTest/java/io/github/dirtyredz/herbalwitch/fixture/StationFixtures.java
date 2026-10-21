@@ -13,15 +13,24 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CampfireBlock;
+import net.minecraft.world.level.block.state.BlockState;
 
 /** Station setup for GameTests: placing a station, stocking its inventory and running its server ticks. */
 public final class StationFixtures {
     private StationFixtures() {
     }
 
-    /** Places {@code station} facing north at {@code pos} (relative) and returns its block entity. */
+    /**
+     * Places {@code station} facing north at {@code pos} (relative) and returns its block entity. A
+     * multiblock station is placed whole, its other cells to the west (the viewer's right) and above.
+     */
     public static StationEntity place(GameTestHelper helper, Block station, BlockPos pos) {
-        helper.setBlock(pos, station.defaultBlockState().setValue(StationBlock.FACING, Direction.NORTH));
+        BlockState state = station.defaultBlockState().setValue(StationBlock.FACING, Direction.NORTH);
+        if (station instanceof StationBlock block && block.layout() != null) {
+            block.placeStation(helper.getLevel(), helper.absolutePos(pos), state, Block.UPDATE_ALL);
+        } else {
+            helper.setBlock(pos, state);
+        }
         return (StationEntity) helper.getBlockEntity(pos);
     }
 

@@ -68,7 +68,9 @@ public final class BotanyManifest {
             files.add("data/herbalwitch/tags/worldgen/biome/botany/habitat/" + group + ".json");
         }
         files.add("assets/herbalwitch/blockstates/" + BED + ".json");
-        files.add("assets/herbalwitch/models/block/" + BED + "_moist.json");
+        for (String part : List.of("core", "edge", "corner")) {
+            files.add("assets/herbalwitch/models/block/botany/garden/parts/moist/" + part + ".json");
+        }
         files.add("assets/herbalwitch/models/item/" + BED + ".json");
         files.add("data/herbalwitch/loot_tables/blocks/" + BED + ".json");
         files.add("data/herbalwitch/recipes/" + BED + ".json");

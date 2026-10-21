@@ -1,47 +1,9 @@
-// Station materials: the glazed ceramic, blackened iron, soil, glowing coals and flame tongues the
-// workstation models are built from. 32 x 32, untinted; flame has alpha 0 or 255 (cutout).
-// Palette: cream glaze with hot pink and deep green bands and tiny dark purple pinstripes.
+// The oil lantern's materials (blackened iron, glowing coals, flame tongues), also the flames of the
+// hearth. 32 x 32, untinted; flame has alpha 0 or 255 (cutout). The house-style station materials
+// are in house.mjs and stone.mjs.
 import { rng, clamp, shade, image } from '../pixels.mjs';
 
 const SIZE = 32;
-const CREAM = [232, 220, 192];
-const PINK = [216, 64, 122];
-const GREEN = [47, 90, 44];
-const PURPLE = [74, 42, 85];
-
-/**
- * Cream glaze with faint crackle; across the middle rows a hot pink band (rows 12-15) and a deep
- * green band (rows 17-20), each edged by a one-pixel dark purple pinstripe (rows 11 and 21).
- */
-export function ceramic() {
-  const rand = rng(8801);
-  // Crackle: short hairline cracks scattered over the glaze, fixed up front so rows stay deterministic.
-  const crack = new Set();
-  for (let i = 0; i < 14; i++) {
-    let x = Math.floor(rand() * SIZE);
-    let y = Math.floor(rand() * SIZE);
-    for (let n = 0; n < 5 + Math.floor(rand() * 5); n++) {
-      crack.add(y * SIZE + x);
-      if (rand() < 0.5) x = (x + (rand() < 0.5 ? 1 : -1) + SIZE) % SIZE;
-      else y = (y + (rand() < 0.5 ? 1 : -1) + SIZE) % SIZE;
-    }
-  }
-  return image(SIZE, (x, y) => {
-    let base = CREAM;
-    let f = 1 + (rand() - 0.5) * 0.05 + Math.sin(x * 0.4 + y * 0.2) * 0.012;
-    if (y === 11 || y === 21) {
-      base = PURPLE;
-    } else if (y >= 12 && y <= 15) {
-      base = PINK;
-      f *= y === 12 ? 1.1 : y === 15 ? 0.88 : 1;
-    } else if (y >= 17 && y <= 20) {
-      base = GREEN;
-      f *= y === 17 ? 1.15 : y === 20 ? 0.85 : 1;
-    }
-    if (crack.has(y * SIZE + x)) f *= base === CREAM ? 0.86 : 0.9;
-    return shade(base, f);
-  });
-}
 
 /** Blackened iron with a soft diagonal sheen, a few rivet-bright specks and pitting. */
 export function iron() {
@@ -52,20 +14,6 @@ export function iron() {
     if (rand() < 0.02) f *= 1.7; // bright speck
     if (rand() < 0.04) f *= 0.65; // pit
     return shade(base, f);
-  });
-}
-
-/** Dark rich soil (also cold ash and powder fill): fine crumbs of two browns, a few pale grains. */
-export function soil() {
-  const rand = rng(8803);
-  return image(SIZE, (x, y) => {
-    const n = rand();
-    let c = [58, 42, 32];
-    if (n < 0.25) c = [44, 31, 24];
-    else if (n > 0.85) c = [80, 60, 44];
-    if (rand() < 0.02) c = [122, 104, 86];
-    const wob = 1 + Math.sin(x * 0.7 + y * 0.45) * 0.04;
-    return shade(c, wob);
   });
 }
 

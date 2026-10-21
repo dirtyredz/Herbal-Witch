@@ -141,8 +141,8 @@ export const sprite = (draw) => () => {
   return finish(cv);
 };
 
-/** The four growth stages of a herb: s0 draws the seedling, draw(cv, stage) the stages 1-3. */
-export const grow = (draw, s0) => [sprite(s0), ...[1, 2, 3].map((s) => sprite((cv) => draw(cv, s)))];
+/** The three young growth stages of a herb: s0 draws the seedling, draw(cv, stage) stages 1-2; the mature stage is a 3D model, tools/models/botany/plants.mjs. */
+export const grow = (draw, s0) => [sprite(s0), ...[1, 2].map((s) => sprite((cv) => draw(cv, s)))];
 
 const LAYOUTS = [
   [[6, 7], [9, 6], [8, 10], [5, 10], [11, 9]],

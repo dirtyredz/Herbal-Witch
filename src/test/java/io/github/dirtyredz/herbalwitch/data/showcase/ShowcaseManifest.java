@@ -18,7 +18,7 @@ public final class ShowcaseManifest {
             lang.put("commands.herbalwitch.showcase." + reason, null);
         }
         SECTIONS.forEach(section -> lang.put("showcase.herbalwitch.section." + section, null));
-        for (String label : List.of("ages", "samples", "bed_dry", "bed_moist", "farmland")) {
+        for (String label : List.of("ages", "samples", "bed_dry", "bed_moist", "farmland", "beds_joined")) {
             lang.put("showcase.herbalwitch.label." + label, null);
         }
         return lang;

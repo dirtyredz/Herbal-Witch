@@ -15,7 +15,9 @@ import java.util.TreeSet;
 public final class StationManifest {
     /** station directory -> English name, in catalogue order. */
     public static final Map<String, String> STATIONS = linked("drying_rack", "Herb Drying Rack", "mortar", "Mortar and Pestle",
-            "kettle", "Tea Kettle", "hearth", "Hearth", "infusion_pot", "Infusion Pot");
+            "kettle", "Tea Kettle", "hearth", "Hearth", "stove", "Witch's Stove", "infusion_pot", "Infusion Pot");
+    /** Multiblock stations: directory -> number of cells. */
+    public static final Map<String, Integer> MULTIBLOCKS = Map.of("drying_rack", 4, "hearth", 4, "stove", 2);
     public static final List<String> TYPES = List.of("drying", "grinding", "steeping", "infusion");
     public static final List<String> GRINDING_EXTRAS = List.of("plant_oil", "fertilizer", "flower_dust", "mushroom_dust",
             "purple_dye", "green_dye", "yellow_dye", "black_dye", "bone_meal");

@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import io.github.dirtyredz.herbalwitch.data.botany.BotanyManifest.Herb;
+import io.github.dirtyredz.herbalwitch.data.fixture.BlockstateModels;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -138,7 +139,7 @@ class BotanyResourcesTest {
     }
 
     @Test
-    void blockstatesSelectAStageModelPerAgeAndTheBedByMoisture() {
+    void blockstatesSelectAStageModelPerAge() {
         for (Herb herb : BotanyManifest.HERBS) {
             JsonObject variants = generated("assets/herbalwitch/blockstates/" + herb.dir() + "/plant.json").getAsJsonObject("variants");
             assertEquals(Set.of("age=0", "age=1", "age=2", "age=3"), variants.keySet(), herb.id());
@@ -147,10 +148,52 @@ class BotanyResourcesTest {
                         variants.getAsJsonObject("age=" + age).get("model").getAsString());
             }
         }
-        JsonObject bed = generated("assets/herbalwitch/blockstates/" + BotanyManifest.BED + ".json").getAsJsonObject("variants");
-        assertEquals(16, bed.size()); // moisture 0..7 x enriched
-        assertEquals("herbalwitch:block/" + BotanyManifest.BED, bed.getAsJsonObject("enriched=false,moisture=0").get("model").getAsString());
-        assertEquals("herbalwitch:block/" + BotanyManifest.BED + "_moist", bed.getAsJsonObject("enriched=true,moisture=7").get("model").getAsString());
+    }
+
+    /**
+     * Every bed state (four sides joined or not, moisture 0-7, enriched or not): one soil core of the
+     * right moisture; each exposed side its rail, each joined side soil; each corner exactly one of
+     * post (both sides exposed), the rail of the one exposed side running through, or soil (both
+     * joined). Enrichment never changes the look.
+     */
+    @Test
+    void herbBedStatesJoinWithoutGapsOrOverlaps() {
+        JsonObject bed = generated("assets/herbalwitch/blockstates/" + BotanyManifest.BED + ".json");
+        String parts = "herbalwitch:block/botany/garden/parts/";
+        String[] sides = {"north", "east", "south", "west"};
+        int states = 0;
+        for (int mask = 0; mask < 16; mask++) {
+            for (int moisture = 0; moisture <= 7; moisture++) {
+                for (boolean enriched : new boolean[] {false, true}) {
+                    Map<String, String> props = new java.util.HashMap<>(Map.of("moisture", String.valueOf(moisture), "enriched", String.valueOf(enriched)));
+                    for (int i = 0; i < 4; i++) {
+                        props.put(sides[i], String.valueOf((mask & (1 << i)) != 0));
+                    }
+                    List<BlockstateModels.Applied> applied = BlockstateModels.select(bed, props);
+                    String soil = parts + (moisture > 0 ? "moist/" : "soil/");
+                    String what = props.toString();
+                    assertEquals(1, applied.stream().filter(p -> p.model().equals(soil + "core")).count(), what);
+                    for (int i = 0; i < 4; i++) {
+                        int turn = i * 90;
+                        boolean joined = (mask & (1 << i)) != 0;
+                        boolean next = (mask & (1 << ((i + 1) % 4))) != 0;
+                        assertEquals(joined ? 0 : 1, count(applied, parts + "wood/rail", turn), what + " rail " + sides[i]);
+                        assertEquals(joined ? 1 : 0, count(applied, soil + "edge", turn), what + " edge " + sides[i]);
+                        long corner = count(applied, parts + "wood/post", turn) + count(applied, parts + "wood/rail_end", turn)
+                                + count(applied, parts + "wood/rail_start", (turn + 90) % 360) + count(applied, soil + "corner", turn);
+                        assertEquals(1, corner, what + " corner after " + sides[i]);
+                        assertEquals(!joined && !next ? 1 : 0, count(applied, parts + "wood/post", turn), what + " post");
+                        assertEquals(joined && next ? 1 : 0, count(applied, soil + "corner", turn), what + " soil corner");
+                    }
+                    states++;
+                }
+            }
+        }
+        assertEquals(256, states);
+    }
+
+    private static long count(List<BlockstateModels.Applied> applied, String model, int y) {
+        return applied.stream().filter(p -> p.model().equals(model) && p.y() == y).count();
     }
 
     private static Set<String> strings(JsonArray array) {

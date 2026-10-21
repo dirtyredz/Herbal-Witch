@@ -1,7 +1,3 @@
 {
-  "parent": "minecraft:block/cross",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "cross": "herbalwitch:block/botany/wet/nettle/stage_3"
-  }
+  "parent": "herbalwitch:block/botany/wet/nettle/mature"
 }

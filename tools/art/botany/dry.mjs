@@ -16,7 +16,7 @@ const rosemary = grow(
       }
       return;
     }
-    const stems = s === 2 ? [[5, 7], [8, 4]] : [[4, 5], [8, 2], [11, 5]];
+    const stems = [[5, 7], [8, 4]];
     line(cv, 7, 15, 7, 12, R.wood[1]);
     for (const [x, y] of stems) {
       line(cv, 7, 12, x, y, R.wood[1]);
@@ -27,17 +27,13 @@ const rosemary = grow(
       }
       set(cv, x, y - 1, R.needle[2]);
     }
-    if (s === 3) {
-      for (const [x, y] of [[3, 6], [7, 3], [10, 6], [5, 9], [9, 8]]) set(cv, x, y, R.blue[2]);
-      set(cv, 12, 4, R.blue[2]);
-    }
   },
   (cv) => sprout(cv, 7, R.needle, 3, 0, 2),
 );
 
 const thymeMat = (cv, s) => {
-  const spread = s === 1 ? 3 : s === 2 ? 5 : 7;
-  const top = s === 1 ? 13 : s === 2 ? 11 : 9;
+  const spread = s === 1 ? 3 : 5;
+  const top = s === 1 ? 13 : 11;
   for (let x = 8 - spread; x <= 7 + spread; x++) {
     const d = Math.abs(x - 7.5);
     const h = Math.round(top + (d / spread) * (15 - top));
@@ -47,11 +43,6 @@ const thymeMat = (cv, s) => {
   }
   if (s >= 2) line(cv, 7, 15, 3, 10, R.wood[0]);
   if (s >= 2) line(cv, 8, 15, 12, 11, R.wood[0]);
-  if (s === 3) {
-    for (const [x, y] of [[3, 9], [5, 8], [7, 8], [9, 8], [11, 9], [12, 10], [4, 11], [10, 11], [8, 10], [6, 10]]) {
-      set(cv, x, y, (x + y) % 2 ? R.rose[1] : R.rose[2]);
-    }
-  }
 };
 
 export default {

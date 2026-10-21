@@ -103,11 +103,13 @@ export function band(x0, z0, x1, z1, y0, y1, tex, t = 0.25) {
 /**
  * Ivy draped down a vertical face: a few cutout planes of varied length hanging from `top`,
  * slightly off the surface, plus a small clump of leaf cubes where it is anchored.
- * spec: {face: 'north'|'south'|'east'|'west', at (the face plane), along: [a0, a1], top, lengths}
+ * spec: {face: 'north'|'south'|'east'|'west', at (the face plane), along: [a0, a1], top, lengths,
+ * clump (a leaf cube at the anchor), inside (hang on the inner side, for faces on the block edge)}
  */
-export function ivyDrape({ face, at, along, top, lengths, clump = true }, tex = '#ivy', leaf = '#ivy') {
+export function ivyDrape({ face, at, along, top, lengths, clump = true, inside = false }, tex = '#ivy', leaf = '#ivy') {
   const out = [];
-  const off = face === 'north' || face === 'west' ? -0.3 : 0.3;
+  // strands hang just outside the face, or just inside it when the face is the block's own edge
+  const off = (face === 'north' || face === 'west' ? -0.3 : 0.3) * (inside ? -1 : 1);
   const axis = face === 'north' || face === 'south' ? 'z' : 'x';
   const span = (along[1] - along[0]) / lengths.length;
   lengths.forEach((len, i) => {
@@ -120,7 +122,7 @@ export function ivyDrape({ face, at, along, top, lengths, clump = true }, tex = 
     const mid = (along[0] + along[1]) / 2;
     const p = at + off * 2;
     const [x0, x1, z0, z1] = axis === 'z' ? [mid - 1.5, mid + 1.5, Math.min(at, p), Math.max(at, p)] : [Math.min(at, p), Math.max(at, p), mid - 1.5, mid + 1.5];
-    out.push(box([x0, top - 1.5, z0], [x1, top + 0.5, z1], leaf, { decal: { all: [2, 2, 6, 6] } }));
+    out.push(box([x0, top - 2, z0], [x1, top, z1], leaf, { decal: { all: [2, 2, 6, 6] } }));
   }
   return out;
 }

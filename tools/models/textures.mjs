@@ -35,7 +35,7 @@ export const STATION = {
 
 /** Variables whose textures have transparency: a model using any of them renders cutout. */
 export const CUTOUT = new Set(['ivy', 'flame', 'cloth', 'bundle_green', 'bundle_lavender', 'bundle_white', 'bundle_yellow',
-  'cross', 'leaf', 'glass', 'vine']);
+  'cross', 'leaf', 'glass', 'vine', 'runner', 'bundle']);
 
 /** Whether elements use a cutout variable. */
 export function needsCutout(elements) {

@@ -31,5 +31,6 @@ public final class ShowcaseTranslations {
         lang.add(GardenShowcaseSection.BED_DRY, "Herb bed (dry)");
         lang.add(GardenShowcaseSection.BED_MOIST, "Herb bed (moist)");
         lang.add(GardenShowcaseSection.FARMLAND, "Farmland");
+        lang.add(GardenShowcaseSection.JOINED, "Beds join");
     }
 }

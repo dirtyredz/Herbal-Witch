@@ -25,5 +25,5 @@ function soil(seed, base, lump, shadowC, speck) {
   });
 }
 
-export const soilDry = () => soil(7101, hex('#4e3220'), hex('#6c4a2e'), hex('#321e12'), hex('#80603f'));
+export const soilDry = () => soil(7101, hex('#4a301e'), hex('#62432a'), hex('#301c10'), hex('#74563a'));
 export const soilMoist = () => soil(7101, hex('#3e281a'), hex('#553925'), hex('#26170e'), hex('#62452e'));

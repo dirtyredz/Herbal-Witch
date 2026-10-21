@@ -2,6 +2,7 @@ package io.github.dirtyredz.herbalwitch.data.stations;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import io.github.dirtyredz.herbalwitch.data.fixture.BlockstateModels;
 import io.github.dirtyredz.herbalwitch.data.fixture.ModelResolver;
 import io.github.dirtyredz.herbalwitch.data.fixture.ResourceFiles;
 import io.github.dirtyredz.herbalwitch.data.fixture.TemplateChecks;
@@ -31,6 +32,7 @@ class StationResourcesTest {
                 "mortar", Map.of("minecraft:smooth_stone", 3, "minecraft:flint", 1, "#forge:rods/wooden", 1),
                 "kettle", Map.of("#forge:ingots/iron", 5, "#forge:ingots/copper", 1),
                 "hearth", Map.of("minecraft:brick", 6, "minecraft:campfire", 1),
+                "stove", Map.of("#forge:ingots/iron", 5, "minecraft:campfire", 1, "minecraft:brick", 2),
                 "infusion_pot", Map.of("minecraft:brick", 4, "#forge:ingots/iron", 2, "minecraft:glass_bottle", 1));
         expected.forEach((station, counts) -> {
             JsonObject recipe = generated("data/herbalwitch/recipes/" + StationManifest.station(station) + ".json");
@@ -89,26 +91,75 @@ class StationResourcesTest {
     }
 
     @Test
-    void stationModelsFollowTheTemplateContracts() {
+    void oneBlockStationsTurnTheirBaseModelToEachFacing() {
         for (String station : StationManifest.STATIONS.keySet()) {
+            if (StationManifest.MULTIBLOCKS.containsKey(station)) {
+                continue;
+            }
             JsonObject variants = generated("assets/herbalwitch/blockstates/" + StationManifest.station(station) + ".json")
                     .getAsJsonObject("variants");
             Set<String> models = new TreeSet<>();
             variants.entrySet().forEach(v -> models.add(v.getValue().getAsJsonObject().get("model").getAsString()));
-            Set<String> expected = new TreeSet<>(Set.of("herbalwitch:block/stations/" + station + "/base"));
-            if (station.equals("drying_rack") || station.equals("hearth")) {
-                expected.add("herbalwitch:block/stations/" + station + "/active");
-            }
-            assertEquals(expected, models, station);
+            assertEquals(Set.of("herbalwitch:block/stations/" + station + "/base"), models, station);
             models.forEach(m -> assertTrue(TemplateChecks.check(m, Map.of()) >= 6, m));
             assertEquals("herbalwitch:block/stations/" + station + "/base",
                     ModelResolver.resolve("herbalwitch:item/" + StationManifest.station(station)).chain().get(1));
         }
     }
 
+    /**
+     * A multiblock station shows, for every facing and cell, exactly its permanent part turned to the
+     * facing, plus its overlay (fire or bundles) only while lit or active; every model keeps the
+     * template contracts; the item shows the whole assembly.
+     */
+    @Test
+    void multiblockStationsComposeCellsWithOverlaysInEveryFacing() {
+        Map<String, Integer> turns = Map.of("north", 0, "east", 90, "south", 180, "west", 270);
+        StationManifest.MULTIBLOCKS.forEach((station, cells) -> {
+            String dir = "herbalwitch:block/stations/" + station + "/";
+            String shown = station.equals("drying_rack") ? "active" : "lit";
+            String overlay = station.equals("drying_rack") ? "bundles_" : "fire_";
+            JsonObject states = generated("assets/herbalwitch/blockstates/" + StationManifest.station(station) + ".json");
+            assertTrue(states.has("multipart"), station);
+            for (int part = 0; part < cells; part++) {
+                for (Map.Entry<String, Integer> facing : turns.entrySet()) {
+                    for (boolean on : new boolean[] {false, true}) {
+                        List<BlockstateModels.Applied> applied = BlockstateModels.select(states,
+                                Map.of("facing", facing.getKey(), "part", String.valueOf(part), shown, String.valueOf(on)));
+                        String what = station + " part " + part + " " + facing.getKey() + " " + shown + "=" + on;
+                        assertEquals(dir + "part_" + part, applied.get(0).model(), what);
+                        applied.forEach(a -> assertEquals(facing.getValue(), a.y(), what));
+                        assertTrue(applied.size() <= 2, what);
+                        if (!on) {
+                            assertEquals(1, applied.size(), what + " shows its overlay");
+                        } else if (applied.size() == 2) {
+                            assertEquals(dir + overlay + part, applied.get(1).model(), what);
+                        }
+                    }
+                }
+                // the stove's pipe rises above its cell; every other cell stays inside its block
+                double top = station.equals("stove") ? 32 : 16;
+                TemplateChecks.check(dir + "part_" + part, Map.of(), new double[] {0, 0, 0}, new double[] {16, top, 16});
+            }
+            int overlays = 0;
+            for (int part = 0; part < cells; part++) {
+                if (java.nio.file.Files.isRegularFile(ModelResolver.modelFile(dir + overlay + part))) {
+                    TemplateChecks.check(dir + overlay + part, Map.of(), new double[] {0, 0, 0}, new double[] {16, 17, 16});
+                    overlays++;
+                }
+            }
+            assertTrue(overlays > 0, station + " has no overlay");
+            assertEquals(dir + "assembly", ModelResolver.resolve("herbalwitch:item/" + StationManifest.station(station)).chain().get(1));
+            TemplateChecks.check(dir + "assembly", Map.of(), new double[] {-16, 0, 0}, new double[] {16, 32, 16});
+        });
+    }
+
     @Test
     void everyStationHasA256PixelGuiAtlas() {
         for (String station : StationManifest.STATIONS.keySet()) {
+            if (station.equals("stove")) {
+                continue; // the stove opens the hearth's menu and screen
+            }
             int[] size = ResourceFiles.pngSize(ResourceFiles.MAIN_ASSETS.resolve("textures/gui/stations/" + station + ".png"));
             assertEquals(256, size[0], station);
             assertEquals(256, size[1], station);
@@ -117,12 +168,12 @@ class StationResourcesTest {
 
     @Test
     void heatComesFromLitSourcesAndOneConductor() {
-        assertEquals("[\"herbalwitch:stations/hearth/station\",\"minecraft:campfire\",\"minecraft:soul_campfire\","
+        assertEquals("[\"herbalwitch:stations/hearth/station\",\"herbalwitch:stations/stove/station\",\"minecraft:campfire\",\"minecraft:soul_campfire\","
                         + "\"minecraft:magma_block\",{\"id\":\"farmersdelight:stove\",\"required\":false}]",
                 generated("data/herbalwitch/tags/blocks/heat_sources.json").getAsJsonArray("values").toString());
         assertEquals("[\"minecraft:hopper\",{\"id\":\"#farmersdelight:heat_conductors\",\"required\":false}]",
                 generated("data/herbalwitch/tags/blocks/heat_conductors.json").getAsJsonArray("values").toString());
-        assertEquals("[\"herbalwitch:stations/hearth/station\"]",
+        assertEquals("[\"herbalwitch:stations/hearth/station\",\"herbalwitch:stations/stove/station\"]",
                 generated("data/farmersdelight/tags/blocks/heat_sources.json").getAsJsonArray("values").toString());
     }
 }

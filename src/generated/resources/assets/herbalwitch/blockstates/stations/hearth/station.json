@@ -1,34 +1,246 @@
 {
-  "variants": {
-    "facing=east,lit=false": {
-      "model": "herbalwitch:block/stations/hearth/base",
-      "y": 90
+  "multipart": [
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/hearth/part_0"
+      },
+      "when": {
+        "facing": "north",
+        "part": "0"
+      }
     },
-    "facing=east,lit=true": {
-      "model": "herbalwitch:block/stations/hearth/active",
-      "y": 90
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/hearth/fire_0"
+      },
+      "when": {
+        "facing": "north",
+        "lit": "true",
+        "part": "0"
+      }
     },
-    "facing=north,lit=false": {
-      "model": "herbalwitch:block/stations/hearth/base"
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/hearth/part_0",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "part": "0"
+      }
     },
-    "facing=north,lit=true": {
-      "model": "herbalwitch:block/stations/hearth/active"
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/hearth/fire_0",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "lit": "true",
+        "part": "0"
+      }
     },
-    "facing=south,lit=false": {
-      "model": "herbalwitch:block/stations/hearth/base",
-      "y": 180
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/hearth/part_0",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "part": "0"
+      }
     },
-    "facing=south,lit=true": {
-      "model": "herbalwitch:block/stations/hearth/active",
-      "y": 180
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/hearth/fire_0",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "lit": "true",
+        "part": "0"
+      }
     },
-    "facing=west,lit=false": {
-      "model": "herbalwitch:block/stations/hearth/base",
-      "y": 270
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/hearth/part_0",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "part": "0"
+      }
     },
-    "facing=west,lit=true": {
-      "model": "herbalwitch:block/stations/hearth/active",
-      "y": 270
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/hearth/fire_0",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "lit": "true",
+        "part": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/hearth/part_1"
+      },
+      "when": {
+        "facing": "north",
+        "part": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/hearth/fire_1"
+      },
+      "when": {
+        "facing": "north",
+        "lit": "true",
+        "part": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/hearth/part_1",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "part": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/hearth/fire_1",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "lit": "true",
+        "part": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/hearth/part_1",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "part": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/hearth/fire_1",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "lit": "true",
+        "part": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/hearth/part_1",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "part": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/hearth/fire_1",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "lit": "true",
+        "part": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/hearth/part_2"
+      },
+      "when": {
+        "facing": "north",
+        "part": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/hearth/part_2",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "part": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/hearth/part_2",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "part": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/hearth/part_2",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "part": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/hearth/part_3"
+      },
+      "when": {
+        "facing": "north",
+        "part": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/hearth/part_3",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "part": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/hearth/part_3",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "part": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/stations/hearth/part_3",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "part": "3"
+      }
     }
-  }
+  ]
 }

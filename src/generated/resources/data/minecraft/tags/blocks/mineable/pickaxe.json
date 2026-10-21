@@ -3,6 +3,7 @@
     "herbalwitch:stations/mortar/station",
     "herbalwitch:stations/kettle/station",
     "herbalwitch:stations/hearth/station",
+    "herbalwitch:stations/stove/station",
     "herbalwitch:stations/infusion_pot/station",
     "herbalwitch:preparations/household/oil_lantern"
   ]
