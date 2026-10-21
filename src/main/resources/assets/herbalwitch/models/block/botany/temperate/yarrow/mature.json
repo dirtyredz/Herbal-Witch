@@ -2,7 +2,7 @@
   "ambientocclusion": false,
   "textures": {
     "parts": "herbalwitch:block/botany/parts",
-    "particle": "herbalwitch:block/botany/temperate/yarrow/stage_2"
+    "particle": "herbalwitch:item/botany/temperate/yarrow/fresh"
   },
   "elements": [
     {
@@ -17,24 +17,6 @@
         7.375
       ],
       "faces": {
-        "down": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "up": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
         "north": {
           "uv": [
             2.25,
@@ -144,12 +126,12 @@
     {
       "from": [
         5,
-        12,
+        12.12,
         4.5
       ],
       "to": [
         9,
-        13,
+        12.88,
         9.5
       ],
       "faces": {
@@ -221,24 +203,6 @@
         9.875
       ],
       "faces": {
-        "down": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "up": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
         "north": {
           "uv": [
             2.25,
@@ -348,12 +312,12 @@
     {
       "from": [
         9,
-        10,
+        10.12,
         7.5
       ],
       "to": [
         12,
-        11,
+        10.88,
         11.5
       ],
       "faces": {
@@ -425,24 +389,6 @@
         10.875
       ],
       "faces": {
-        "down": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "up": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
         "north": {
           "uv": [
             2.25,
@@ -552,12 +498,12 @@
     {
       "from": [
         3.75,
-        9,
+        9.12,
         8.75
       ],
       "to": [
         6.25,
-        10,
+        9.88,
         12.25
       ],
       "faces": {
@@ -1350,7 +1296,7 @@
       ],
       "to": [
         8.6552,
-        4.6852,
+        4.5652,
         8.4848
       ],
       "faces": {

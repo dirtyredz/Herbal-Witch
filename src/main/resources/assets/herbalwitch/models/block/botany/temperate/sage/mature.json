@@ -2,7 +2,7 @@
   "ambientocclusion": false,
   "textures": {
     "parts": "herbalwitch:block/botany/parts",
-    "particle": "herbalwitch:block/botany/temperate/sage/stage_2"
+    "particle": "herbalwitch:item/botany/temperate/sage/fresh"
   },
   "elements": [
     {
@@ -17,24 +17,6 @@
         8.5
       ],
       "faces": {
-        "down": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "up": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
         "north": {
           "uv": [
             2.25,
@@ -85,24 +67,6 @@
         9.375
       ],
       "faces": {
-        "down": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "up": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
         "north": {
           "uv": [
             2.25,
@@ -153,15 +117,6 @@
         7.375
       ],
       "faces": {
-        "down": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
         "up": {
           "uv": [
             2.25,
@@ -290,12 +245,12 @@
       "from": [
         3.5,
         2.5,
-        6.75
+        6.87
       ],
       "to": [
         8,
         3,
-        9.25
+        9.13
       ],
       "rotation": {
         "angle": -22.5,
@@ -598,12 +553,12 @@
       "from": [
         7,
         5,
-        5.75
+        5.87
       ],
       "to": [
         10.5,
         5.5,
-        8.25
+        8.13
       ],
       "rotation": {
         "angle": -22.5,
@@ -1458,15 +1413,6 @@
           ],
           "texture": "#parts"
         },
-        "up": {
-          "uv": [
-            0.25,
-            2.25,
-            1.75,
-            3.75
-          ],
-          "texture": "#parts"
-        },
         "north": {
           "uv": [
             0.25,
@@ -1704,74 +1650,6 @@
             2.25,
             1.75,
             3.75
-          ],
-          "texture": "#parts"
-        }
-      }
-    },
-    {
-      "from": [
-        11.1528,
-        -0.4111,
-        4.6262
-      ],
-      "to": [
-        13.2111,
-        1.6472,
-        6.6846
-      ],
-      "faces": {
-        "down": {
-          "uv": [
-            12.25,
-            0.25,
-            13.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "up": {
-          "uv": [
-            12.25,
-            0.25,
-            13.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "north": {
-          "uv": [
-            12.25,
-            0.25,
-            13.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "south": {
-          "uv": [
-            12.25,
-            0.25,
-            13.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "west": {
-          "uv": [
-            12.25,
-            0.25,
-            13.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "east": {
-          "uv": [
-            12.25,
-            0.25,
-            13.75,
-            1.75
           ],
           "texture": "#parts"
         }
@@ -2323,7 +2201,7 @@
     },
     {
       "from": [
-        8.6083,
+        8.7283,
         1.1939,
         3.3529
       ],

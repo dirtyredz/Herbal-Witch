@@ -2,7 +2,7 @@
   "ambientocclusion": false,
   "textures": {
     "parts": "herbalwitch:block/botany/parts",
-    "particle": "herbalwitch:block/botany/temperate/lavender/stage_2"
+    "particle": "herbalwitch:item/botany/temperate/lavender/fresh"
   },
   "elements": [
     {
@@ -17,24 +17,6 @@
         8.375
       ],
       "faces": {
-        "down": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "up": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
         "north": {
           "uv": [
             2.25,
@@ -425,24 +407,6 @@
         7.375
       ],
       "faces": {
-        "down": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "up": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
         "north": {
           "uv": [
             2.25,
@@ -833,24 +797,6 @@
         9.875
       ],
       "faces": {
-        "down": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "up": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
         "north": {
           "uv": [
             2.25,
@@ -1241,24 +1187,6 @@
         11.375
       ],
       "faces": {
-        "down": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "up": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
         "north": {
           "uv": [
             2.25,
@@ -1649,24 +1577,6 @@
         5.875
       ],
       "faces": {
-        "down": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "up": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
         "north": {
           "uv": [
             2.25,
@@ -2183,7 +2093,7 @@
     },
     {
       "from": [
-        7.2428,
+        7.3628,
         3.4266,
         8.6756
       ],
@@ -2416,15 +2326,6 @@
           "texture": "#parts"
         },
         "north": {
-          "uv": [
-            8.25,
-            0.25,
-            9.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "south": {
           "uv": [
             8.25,
             0.25,
@@ -3019,15 +2920,6 @@
           "texture": "#parts"
         },
         "up": {
-          "uv": [
-            10.25,
-            0.25,
-            11.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "north": {
           "uv": [
             10.25,
             0.25,

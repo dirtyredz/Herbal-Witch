@@ -2,38 +2,55 @@
 // from overlapping boxes, stacked vessel profiles, rivets and studs, bands, and ivy drapes.
 import { box, plane } from './geometry.mjs';
 
+/** How far a chamfer wall's exposed top or bottom sits inside its layer, off the crossing parts' plane. */
+export const CHAMFER_INSET = 0.1;
+
 /**
- * An octagonal slab centred on (cx, cz): a w x d footprint with corners cut by c, built from two
- * crossing boxes (plus a third for a softer, stepped chamfer when c >= 2). `tex` as in box().
- * Inner faces hidden by the union are skipped where they are fully covered.
+ * An octagonal slab centred on (cx, cz): a w x d footprint with corners cut by c. Built from
+ * rows along z that tile the footprint without overlapping (so no two top faces share a plane over
+ * the same area and nothing z-fights): the full-width middle and a narrower row at each end, plus a
+ * half step between them for a softer, stepped chamfer when c >= 2 (unless opts.third is false).
+ * A row's face toward a wider neighbour is hidden and skipped. `tex` as in box().
  */
 export function octagon(cx, cz, y0, y1, w, d, c, tex, opts = {}) {
   const hw = w / 2;
   const hd = d / 2;
-  const out = [
-    box([cx - hw, y0, cz - hd + c], [cx + hw, y1, cz + hd - c], tex, opts),
-    box([cx - hw + c, y0, cz - hd], [cx + hw - c, y1, cz + hd], tex, opts),
-  ];
-  if (c >= 2 && opts.third !== false) out.push(box([cx - hw + c / 2, y0, cz - hd + c / 2], [cx + hw - c / 2, y1, cz + hd - c / 2], tex, opts));
-  return out;
+  const stepped = c >= 2 && opts.third !== false;
+  // [z0, z1, inset] rows from north to south
+  const rows = stepped
+    ? [[-hd, -hd + c / 2, c], [-hd + c / 2, -hd + c, c / 2], [-hd + c, hd - c, 0], [hd - c, hd - c / 2, c / 2], [hd - c / 2, hd, c]]
+    : [[-hd, -hd + c, c], [-hd + c, hd - c, 0], [hd - c, hd, c]];
+  const { third, ...rest } = opts;
+  return rows.filter(([z0, z1]) => z1 > z0).map(([z0, z1, inset]) => {
+    const skip = [...(rest.skip ?? [])];
+    // the face toward the middle is covered by the wider neighbour
+    if (inset > 0) skip.push(z0 < 0 ? 'south' : 'north');
+    return box([cx - hw + inset, y0, cz + z0], [cx + hw - inset, y1, cz + z1], tex, { ...rest, skip });
+  });
 }
 
 /**
- * A true octagonal slab: the crossing boxes plus four 45-degree corner boxes whose outer faces lie
- * on the chamfers, so every one of the eight sides is flat (6 elements).
+ * A true octagonal slab: the tiled rows plus four 45-degree corner walls whose outer faces lie on
+ * the chamfers, so every one of the eight sides is flat (7 elements).
  */
 export function octagonTrue(cx, cz, y0, y1, w, d, c, tex, opts = {}) {
-  const out = octagon(cx, cz, y0, y1, w, d, c, tex, { ...opts, third: false });
-  out.length = 2;
-  out.push(...chamfers(cx, cz, y0, y1, w, d, c, c / Math.SQRT2, tex, opts));
-  return out;
+  return [
+    ...octagon(cx, cz, y0, y1, w, d, c, tex, { ...opts, third: false }),
+    ...chamfers(cx, cz, y0, y1, w, d, c, c / Math.SQRT2, tex, opts),
+  ];
 }
 
-/** The four 45-degree corner walls of an octagon, each `t` thick inward from its chamfer. */
+/**
+ * The four 45-degree corner walls of an octagon, each `t` thick inward from its chamfer. A wall
+ * overlaps the straight parts it joins, so its exposed top and bottom sit CHAMFER_INSET inside the
+ * layer instead of sharing their plane (an invisible step that keeps the surface from flickering).
+ */
 export function chamfers(cx, cz, y0, y1, w, d, c, t, tex, opts = {}) {
   const hw = w / 2;
   const hd = d / 2;
   const L = c * Math.SQRT2;
+  const top = opts.skip?.includes('up') ? y1 : y1 - CHAMFER_INSET;
+  const bottom = opts.skip?.includes('down') ? y0 : y0 + CHAMFER_INSET;
   const out = [];
   for (const [sx, sz] of [[1, -1], [-1, -1], [1, 1], [-1, 1]]) {
     // chamfer midpoint, then step inward along the corner's inward normal
@@ -42,7 +59,7 @@ export function chamfers(cx, cz, y0, y1, w, d, c, t, tex, opts = {}) {
     const bx = mx - (sx * t) / 2 / Math.SQRT2;
     const bz = mz - (sz * t) / 2 / Math.SQRT2;
     const angle = sx === sz ? 45 : -45;
-    out.push(box([bx - L / 2, y0, bz - t / 2], [bx + L / 2, y1, bz + t / 2], tex,
+    out.push(box([bx - L / 2, bottom, bz - t / 2], [bx + L / 2, top, bz + t / 2], tex,
       { ...opts, rot: { origin: [bx, (y0 + y1) / 2, bz], axis: 'y', angle } }));
   }
   return out;
@@ -119,10 +136,12 @@ export function ivyDrape({ face, at, along, top, lengths, clump = true, inside =
     out.push(plane(axis, at + off * (1 + (i % 2)), a0, a0 + span, top - len, top, tex, { uv: [u0, 0, u0 + 4, (len / 16) * 16] }));
   });
   if (clump) {
+    // a leaf cube a little in from every plane it could share: past the strands, inside the edges
+    // of the post or rail it sits on, just under the top
     const mid = (along[0] + along[1]) / 2;
-    const p = at + off * 2;
-    const [x0, x1, z0, z1] = axis === 'z' ? [mid - 1.5, mid + 1.5, Math.min(at, p), Math.max(at, p)] : [Math.min(at, p), Math.max(at, p), mid - 1.5, mid + 1.5];
-    out.push(box([x0, top - 2, z0], [x1, top, z1], leaf, { decal: { all: [2, 2, 6, 6] } }));
+    const p = at + off * 2.6;
+    const [x0, x1, z0, z1] = axis === 'z' ? [mid - 1.4, mid + 1.4, Math.min(at, p), Math.max(at, p)] : [Math.min(at, p), Math.max(at, p), mid - 1.4, mid + 1.4];
+    out.push(box([x0, top - 2.1, z0], [x1, top - 0.1, z1], leaf, { decal: { all: [2, 2, 6, 6] } }));
   }
   return out;
 }

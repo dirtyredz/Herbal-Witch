@@ -2,7 +2,7 @@
   "ambientocclusion": false,
   "textures": {
     "parts": "herbalwitch:block/botany/parts",
-    "particle": "herbalwitch:block/botany/woodland/wolfsbane/stage_2"
+    "particle": "herbalwitch:item/botany/woodland/wolfsbane/fresh"
   },
   "elements": [
     {
@@ -17,24 +17,6 @@
         9.375
       ],
       "faces": {
-        "down": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "up": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
         "north": {
           "uv": [
             2.25,
@@ -357,24 +339,6 @@
         6.375
       ],
       "faces": {
-        "down": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "up": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
         "north": {
           "uv": [
             2.25,
@@ -697,24 +661,6 @@
         5.875
       ],
       "faces": {
-        "down": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "up": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
         "north": {
           "uv": [
             2.25,
@@ -1037,24 +983,6 @@
         12.375
       ],
       "faces": {
-        "down": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "up": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
         "north": {
           "uv": [
             2.25,
@@ -1753,15 +1681,6 @@
         12.4691
       ],
       "faces": {
-        "down": {
-          "uv": [
-            6.25,
-            0.25,
-            7.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
         "up": {
           "uv": [
             6.25,
@@ -1957,15 +1876,6 @@
         10.1864
       ],
       "faces": {
-        "down": {
-          "uv": [
-            4.25,
-            0.25,
-            5.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
         "up": {
           "uv": [
             4.25,

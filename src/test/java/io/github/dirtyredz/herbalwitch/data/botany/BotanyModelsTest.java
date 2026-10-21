@@ -21,16 +21,15 @@ import java.util.Set;
 import static io.github.dirtyredz.herbalwitch.data.fixture.ModelResolver.vec;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Herb art and models. Young ages are the planted cross over a 16 px sprite with binary alpha; the
- * mature age is a 3D model of small cubes from the parts atlas; seeds and fresh herbs are flat
- * items. Every age is rooted in the soil: its lowest geometry meets the herb bed's soil surface
+ * Herb art and models. Every age is a 3D model of small cubes from the parts atlas (the young ages
+ * derived from the mature form); seeds and fresh herbs are flat items. Every age is rooted in the soil: its lowest geometry meets the herb bed's soil surface
  * (the dev.5 bug was a cross standing on the bed's rim, three pixels above its soil).
  */
 class BotanyModelsTest {
-    private static final String CROSS = "herbalwitch:block/botany/templates/planted_cross";
     private static final String SOIL_CORE = "herbalwitch:block/botany/garden/parts/soil/core";
     private static final double FARMLAND_TOP = 15;
 
@@ -53,6 +52,21 @@ class BotanyModelsTest {
         Set<Integer> both = new HashSet<>(a);
         both.retainAll(b);
         return union.size() - both.size();
+    }
+
+    /** Mean relative luminance (0..255) of a texture's opaque pixels. */
+    private static double luminance(String textureId) {
+        Png png = ResourceFiles.readPng(ModelResolver.texturePng(textureId));
+        double sum = 0;
+        int n = 0;
+        for (int pixel : png.rgba()) {
+            if ((pixel & 0xFF) == 0) {
+                continue;
+            }
+            sum += 0.2126 * (pixel >>> 24) + 0.7152 * ((pixel >>> 16) & 0xFF) + 0.0722 * ((pixel >>> 8) & 0xFF);
+            n++;
+        }
+        return sum / n;
     }
 
     /** Lowest and highest y of a model's elements (model pixels, before rotation). */
@@ -80,27 +94,51 @@ class BotanyModelsTest {
         }
     }
 
+    /**
+     * Every age is a 3D cube model over the parts atlas (owner ruling 0.2.0-dev.1 feedback: no flat
+     * crossed sprites): solid, within a garden-friendly budget, its own shape, and growing - each
+     * age taller and wider than the one before, the last young age still short of the mature plant.
+     */
     @Test
-    void youngAgesAreCutoutCrossesWhoseSilhouetteGrows() {
+    void everyAgeIsACubeModelThatGrowsTowardTheMatureForm() {
         for (Herb herb : BotanyManifest.HERBS) {
-            int previous = 0;
-            Set<Set<Integer>> masks = new HashSet<>();
-            for (int age = 0; age < 3; age++) {
+            double[] previous = {0, 0};
+            Set<String> shapes = new HashSet<>();
+            for (int age = 0; age <= 3; age++) {
                 Resolved model = ModelResolver.resolve("herbalwitch:block/" + herb.dir() + "/stage_" + age);
-                assertEquals(CROSS, model.chain().get(1), herb.id());
-                assertEquals("minecraft:cutout", model.renderType(), herb.id());
-                Png png = sprite(model.texture("#cross"));
-                Set<Integer> mask = png.mask();
-                assertTrue(mask.size() > previous, herb.id() + " stage " + age + " does not grow");
-                assertTrue(masks.add(mask), herb.id() + " stage " + age + " repeats a silhouette");
-                boolean grounded = false;
-                for (int x = 0; x < 16; x++) {
-                    grounded |= png.alpha(x, 15) != 0 || png.alpha(x, 14) != 0;
+                String what = herb.id() + " stage " + age;
+                String form = age == 3 ? "mature" : "young_" + age;
+                assertEquals("herbalwitch:block/" + herb.dir() + "/" + form, model.chain().get(1), what);
+                assertNull(model.renderType(), what + " is a cutout sprite");
+                JsonArray elements = model.elements();
+                assertTrue(elements.size() >= 4 && elements.size() <= 64, what + " has " + elements.size() + " elements");
+                for (JsonElement e : elements) {
+                    for (Map.Entry<String, JsonElement> face : e.getAsJsonObject().getAsJsonObject("faces").entrySet()) {
+                        assertEquals("herbalwitch:block/botany/parts", model.texture(face.getValue().getAsJsonObject().get("texture").getAsString()),
+                                what + " face " + face.getKey());
+                    }
                 }
-                assertTrue(grounded, herb.id() + " stage " + age + " sprite does not reach its roots");
-                previous = mask.size();
+                double[] size = {heights(elements)[1] - heights(elements)[0], width(elements)};
+                assertTrue(size[0] > previous[0] && size[1] > previous[1], what + " does not grow: " + java.util.Arrays.toString(size));
+                assertTrue(shapes.add(elements.toString()), what + " repeats an earlier age");
+                previous = size;
+            }
+            assertEquals("herbalwitch:item/" + herb.dir() + "/fresh",
+                    ModelResolver.resolve("herbalwitch:block/" + herb.dir() + "/stage_0").texture("#particle"), herb.id() + " particle");
+        }
+    }
+
+    /** Horizontal extent of a model's elements (model pixels, before rotation). */
+    private static double width(JsonArray elements) {
+        double low = Double.MAX_VALUE;
+        double high = -Double.MAX_VALUE;
+        for (JsonElement e : elements) {
+            for (int axis : new int[] {0, 2}) {
+                low = Math.min(low, vec(e.getAsJsonObject(), "from")[axis]);
+                high = Math.max(high, vec(e.getAsJsonObject(), "to")[axis]);
             }
         }
+        return high - low;
     }
 
     @Test
@@ -172,6 +210,13 @@ class BotanyModelsTest {
             }
         }
         assertEquals(32, ResourceFiles.pngSize(ModelResolver.texturePng("herbalwitch:block/botany/garden/soil_dry"))[0]);
+        // the watered state must read at a glance (0.2.0-dev.1 made both soils dark and lost it):
+        // moist soil far darker than dry, and the two on opposite sides of the dark wood rails
+        double dry = luminance("herbalwitch:block/botany/garden/soil_dry");
+        double moist = luminance("herbalwitch:block/botany/garden/soil_moist");
+        double rail = luminance("herbalwitch:block/material/wood");
+        assertTrue(moist < dry * 0.5, "moist soil " + moist + " is not clearly darker than dry " + dry);
+        assertTrue(moist < rail && rail < dry, "soils " + moist + "/" + dry + " do not stand apart from the rails " + rail);
         String bed = "herbalwitch:block/" + BotanyManifest.BED;
         TemplateChecks.check(bed, Map.of());
         Resolved item = ModelResolver.resolve("herbalwitch:item/" + BotanyManifest.BED);

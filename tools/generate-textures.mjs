@@ -15,7 +15,7 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { png } from './image/png-encode.mjs';
-import { brass, glass, tincture, darkWood, fabricPink, trimPurple } from './art/materials.mjs';
+import { brass, glass, tincture, fabricPink, trimPurple } from './art/materials.mjs';
 import { rug, lampShade, velvet, paintGreen, runner } from './art/patterns.mjs';
 import temperate from './art/botany/temperate.mjs';
 import dry from './art/botany/dry.mjs';
@@ -28,7 +28,7 @@ import { HERB_LIST } from './art/botany/herbs.mjs';
 import { iron, ember, flame } from './art/stations/materials.mjs';
 import * as house from './art/stations/house.mjs';
 import { mortarStone, plinthStone, pestleStone, herbPile } from './art/stations/stone.mjs';
-import { ivy, bundle } from './art/foliage.mjs';
+import { ivy } from './art/foliage.mjs';
 import * as interfaces from './art/stations/interfaces.mjs';
 import { PREPARATION_HERBS, bundleSprite, powderSprite } from './art/preparations/materials.mjs';
 import { PRODUCTS } from './art/preparations/products.mjs';
@@ -39,7 +39,6 @@ const outDir = join(texRoot, 'block/material');
 
 // The complete texture manifest. GeneratedModelsTest checks every model reference against the files.
 const TEXTURES = {
-  dark_wood: darkWood, // frames, legs, boards
   brass: brass, // hardware
   glass: glass, // cutout bottle glass
   tincture: tincture, // bottle contents
@@ -48,7 +47,7 @@ const TEXTURES = {
   rug: rug, // the small rug
   lamp_shade: lampShade, // the table lamp's shade
   // the shared house materials (furniture, stations, garden): docs/ART.md
-  wood: house.wood, // warm reddish-brown, grain along U (beams, rails, tops)
+  wood: house.wood, // the dark brown house wood, grain along U (beams, rails, tops, frames)
   wood_post: house.woodPost, // the same wood, grain along V (posts, legs)
   wood_end: house.woodEnd, // end grain: caps and post tops
   iron: house.ironDark, // charcoal iron brackets, bands, plates
@@ -76,10 +75,6 @@ const STATION_TEXTURES = {
   plinth_stone: plinthStone,
   pestle_stone: pestleStone,
   herb_pile: herbPile,
-  bundle_green: () => bundle('green'), // cutout: rack bundles
-  bundle_lavender: () => bundle('lavender'),
-  bundle_white: () => bundle('white'),
-  bundle_yellow: () => bundle('yellow'),
 };
 
 mkdirSync(outDir, { recursive: true });
@@ -88,19 +83,18 @@ for (const [name, make] of Object.entries(TEXTURES)) {
   console.log(`wrote material/${name}.png`);
 }
 
-// Botany: [group, herb, module] in a fixed order. Each herb writes block stage_0..2 and item seeds
-// + fresh; the two garden soil tiles follow.
+// Botany: [group, herb, module] in a fixed order. Each herb writes its item seeds and
+// fresh sprites (the growth stages are 3D models); the garden soil tiles and parts atlas follow.
 const GROUP_ART = { temperate, dry, wet, shade: shadeHerbs, woodland };
 const HERBS = HERB_LIST.map(([group, herb]) => [group, herb, GROUP_ART[group]]);
 
 const botany = []; // [path relative to textures/, image]
-const sheetRows = []; // per herb: stage_0..2, seeds, fresh
+const sheetRows = []; // per herb: seeds, fresh
 for (const [group, herb, mod] of HERBS) {
-  const { stages, seeds, fresh } = mod[herb];
-  const imgs = [...stages.map((make) => make()), seeds(), fresh()];
-  stages.forEach((_, i) => botany.push([`block/botany/${group}/${herb}/stage_${i}.png`, imgs[i]]));
-  botany.push([`item/botany/${group}/${herb}/seeds.png`, imgs[3]]);
-  botany.push([`item/botany/${group}/${herb}/fresh.png`, imgs[4]]);
+  const { seeds, fresh } = mod[herb];
+  const imgs = [seeds(), fresh()];
+  botany.push([`item/botany/${group}/${herb}/seeds.png`, imgs[0]]);
+  botany.push([`item/botany/${group}/${herb}/fresh.png`, imgs[1]]);
   sheetRows.push(imgs);
 }
 botany.push(['block/botany/garden/soil_dry.png', soilDry()]);

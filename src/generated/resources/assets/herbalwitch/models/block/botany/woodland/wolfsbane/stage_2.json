@@ -1,6 +1,3 @@
 {
-  "parent": "herbalwitch:block/botany/templates/planted_cross",
-  "textures": {
-    "cross": "herbalwitch:block/botany/woodland/wolfsbane/stage_2"
-  }
+  "parent": "herbalwitch:block/botany/woodland/wolfsbane/young_2"
 }

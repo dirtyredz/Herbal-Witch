@@ -1,7 +1,8 @@
 // The herb bed (owner references: reference-herb-bed-lavender.png, reference-joined-bed-2x2.png):
-// a warm reddish-brown planter, two horizontal plank rails per side with a groove between them,
-// chunky square corner posts rising just above the rails with dark end-grain caps and small gold
-// rivets, and dark lumpy soil just below the rim. Parts are authored for the north side and the
+// a dark wooden planter (the armchair's wood, owner ruling), two horizontal plank rails per side
+// with a groove between them, chunky square corner posts rising just above the rails with end-grain
+// caps and small gold rivets, and lumpy soil just below the rim (dry or wet: tools/art/botany/garden).
+// The rails stop at the posts' faces so nothing overlaps (or z-fights) at a corner. Parts are authored for the north side and the
 // north-east corner; the multipart blockstate turns them (data/client/botany/garden/). Joined sides
 // show soil instead of a rail, so beds side by side read as one planter.
 import { box, turnY } from '../geometry.mjs';
@@ -10,6 +11,8 @@ import { MATERIAL } from '../textures.mjs';
 /** Soil height: herb models root two pixels below their block, i.e. exactly at this surface. */
 export const SOIL_Y = 14;
 const RAIL_Z = [0.75, 2.5];
+/** The rails stop at the corner posts' faces (posts span 13.25..15.75), so nothing overlaps there. */
+const POST_IN = [2.75, 13.25];
 const SOIL_ONLY_TOP = { skip: ['down', 'north', 'south', 'east', 'west'] };
 
 /** The two-rail wall section along the north side, between x0 and x1. */
@@ -50,15 +53,15 @@ export function bed() {
   const parts = 'block/botany/garden/parts';
   const wood = (name, elements) => ({ path: `${parts}/wood/${name}`, textures: { ...WOOD, particle: MATERIAL.wood }, elements });
   const out = [
-    wood('rail', rail(2, 14)),
-    wood('rail_end', rail(14, 16)),
-    wood('rail_start', rail(0, 2)),
+    wood('rail', rail(...POST_IN)),
+    wood('rail_end', rail(POST_IN[1], 16)),
+    wood('rail_start', rail(0, POST_IN[0])),
     wood('post', post()),
     ...Object.entries(soil).map(([name, make]) => ({ path: `${parts}/soil/${name}`, textures: { ...SOIL, wood: MATERIAL.wood, particle: SOIL.soil }, elements: make() })),
   ];
   // the unjoined bed (its item, and the shape a lone bed shows): core soil, four rails, four posts
   const assembly = [...soil.core()];
-  for (let q = 0; q < 4; q++) assembly.push(...turnY([...rail(2, 14), ...post()], q));
+  for (let q = 0; q < 4; q++) assembly.push(...turnY([...rail(...POST_IN), ...post()], q));
   out.push({ path: 'block/botany/garden/herb_bed', textures: { ...WOOD, ...SOIL, particle: MATERIAL.wood }, elements: assembly });
   return out;
 }

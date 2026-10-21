@@ -1,6 +1,8 @@
-// Garden soil tiles: 32 x 32 opaque, dark rich lumpy earth (owner reference: the herb bed's soil
-// sits just below the rim, dark and textured with lumps). Moist soil is the same layout, darker.
-// Seamless, so joined beds read as one continuous bed of soil.
+// Garden soil tiles: 32 x 32 opaque lumpy earth (owner reference: the herb bed's soil sits just
+// below the rim, textured with lumps). Dry soil is a dusty grey-brown, lighter than the dark wood
+// rails; watered soil is the same layout, near black and wet with cool glints, darker than the
+// rails. The two must stay far apart (BotanyModelsTest checks the luminance gap): the 0.2.0 art
+// pass made both dark and the watered state vanished. Seamless, so joined beds read as one.
 import { image, rng, clamp } from '../pixels.mjs';
 import { smoothNoise } from '../motifs.mjs';
 import { hex } from './sprites.mjs';
@@ -25,5 +27,5 @@ function soil(seed, base, lump, shadowC, speck) {
   });
 }
 
-export const soilDry = () => soil(7101, hex('#4a301e'), hex('#62432a'), hex('#301c10'), hex('#74563a'));
-export const soilMoist = () => soil(7101, hex('#3e281a'), hex('#553925'), hex('#26170e'), hex('#62452e'));
+export const soilDry = () => soil(7101, hex('#6e5a46'), hex('#8a755c'), hex('#4a3a2c'), hex('#a08a6c'));
+export const soilMoist = () => soil(7101, hex('#26180f'), hex('#3a2617'), hex('#120a06'), hex('#6c6460'));

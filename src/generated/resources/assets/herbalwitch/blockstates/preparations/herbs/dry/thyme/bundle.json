@@ -1,42 +1,42 @@
 {
   "variants": {
     "face=ceiling,facing=east": {
-      "model": "herbalwitch:block/preparations/herbs/dry/thyme/bundle"
+      "model": "herbalwitch:block/preparations/bundles/dry/thyme/ceiling"
     },
     "face=ceiling,facing=north": {
-      "model": "herbalwitch:block/preparations/herbs/dry/thyme/bundle"
+      "model": "herbalwitch:block/preparations/bundles/dry/thyme/ceiling"
     },
     "face=ceiling,facing=south": {
-      "model": "herbalwitch:block/preparations/herbs/dry/thyme/bundle"
+      "model": "herbalwitch:block/preparations/bundles/dry/thyme/ceiling"
     },
     "face=ceiling,facing=west": {
-      "model": "herbalwitch:block/preparations/herbs/dry/thyme/bundle"
+      "model": "herbalwitch:block/preparations/bundles/dry/thyme/ceiling"
     },
     "face=floor,facing=east": {
-      "model": "herbalwitch:block/preparations/herbs/dry/thyme/bundle"
+      "model": "herbalwitch:block/preparations/bundles/dry/thyme/ceiling"
     },
     "face=floor,facing=north": {
-      "model": "herbalwitch:block/preparations/herbs/dry/thyme/bundle"
+      "model": "herbalwitch:block/preparations/bundles/dry/thyme/ceiling"
     },
     "face=floor,facing=south": {
-      "model": "herbalwitch:block/preparations/herbs/dry/thyme/bundle"
+      "model": "herbalwitch:block/preparations/bundles/dry/thyme/ceiling"
     },
     "face=floor,facing=west": {
-      "model": "herbalwitch:block/preparations/herbs/dry/thyme/bundle"
+      "model": "herbalwitch:block/preparations/bundles/dry/thyme/ceiling"
     },
     "face=wall,facing=east": {
-      "model": "herbalwitch:block/preparations/herbs/dry/thyme/bundle_wall",
+      "model": "herbalwitch:block/preparations/bundles/dry/thyme/wall",
       "y": 90
     },
     "face=wall,facing=north": {
-      "model": "herbalwitch:block/preparations/herbs/dry/thyme/bundle_wall"
+      "model": "herbalwitch:block/preparations/bundles/dry/thyme/wall"
     },
     "face=wall,facing=south": {
-      "model": "herbalwitch:block/preparations/herbs/dry/thyme/bundle_wall",
+      "model": "herbalwitch:block/preparations/bundles/dry/thyme/wall",
       "y": 180
     },
     "face=wall,facing=west": {
-      "model": "herbalwitch:block/preparations/herbs/dry/thyme/bundle_wall",
+      "model": "herbalwitch:block/preparations/bundles/dry/thyme/wall",
       "y": 270
     }
   }

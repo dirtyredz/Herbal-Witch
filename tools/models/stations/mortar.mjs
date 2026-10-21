@@ -21,7 +21,7 @@ export function mortar() {
     // the stepped rim
     ...octagonRing(C, C, 11.25, 12.75, 15.5, 15.5, 4.5, 2.75, STONE),
     // ground herbs heaped inside
-    ...octagon(C, C, 6.5, 8.75, 10.5, 10.5, 2, '#herbs', { skip: ['down'], third: false }),
+    ...octagon(C, C, 6.5, 8.75, 10.5, 10.5, 2.25, '#herbs', { skip: ['down'], third: false }),
     box([5, 8.75, 5.5], [9.5, 9.75, 9.5], '#herbs', { skip: ['down'] }),
     box([5.75, 8.75, 9], [8.25, 10.5, 11.25], '#herbs', { skip: ['down'] }),
     box([9.5, 8.75, 6], [11.5, 9.5, 8], '#herbs', { skip: ['down'] }),
@@ -32,8 +32,8 @@ export function mortar() {
     box([8.25, 7, 5.75], [10.75, 14, 8.25], '#pestle', { rot: lean }),
     box([7.75, 7, 6.25], [11.25, 14, 7.75], '#pestle', { rot: lean, skip: ['up', 'down'] }),
     box([8.75, 7, 5.25], [10.25, 14, 8.75], '#pestle', { rot: lean, skip: ['up', 'down'] }),
-    box([7.5, 13.25, 4.75], [11.5, 16, 8.75], '#pestle', { rot: lean }),
-    box([8, 12.75, 5.25], [11, 13.25, 8.25], '#pestle', { rot: lean, skip: ['up'] }),
+    box([7.4, 13.25, 4.65], [11.6, 16, 8.85], '#pestle', { rot: lean }),
+    box([7.9, 12.75, 5.15], [11.1, 13.25, 8.35], '#pestle', { rot: lean, skip: ['up'] }),
   );
   return [{
     path: 'block/stations/mortar/base',

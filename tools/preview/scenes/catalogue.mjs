@@ -3,6 +3,8 @@
 // use real blockstates; vanilla blocks are labelled proxies. Each scene may name an owner
 // reference image (in the job folder) for a side-by-side comparison.
 
+import { HERB_LIST } from '../../art/botany/herbs.mjs';
+
 const HW = 'herbalwitch:';
 const BED = `${HW}botany/garden/herb_bed`;
 const plant = (group, herb) => `${HW}botany/${group}/${herb}/plant`;
@@ -33,6 +35,18 @@ export function multiblock(block, cells, at, props = {}) {
 const RACK = [[0, 0], [1, 0], [0, 1], [1, 1]];
 const HEARTH = [[0, 0], [1, 0], [0, 1], [1, 1]];
 const STOVE = [[0, 0], [1, 0]];
+const bundleBlock = (group, herb) => `${HW}preparations/herbs/${group}/${herb}/bundle`;
+
+/** Every herb's four ages, youngest on the left, on one joined row of beds. */
+const growthRows = HERB_LIST.map(([group, herb]) => ({
+  name: `growth-${herb}`,
+  view: 'iso',
+  scale: 10,
+  entries: [
+    ...beds([[0, 0], [1, 0], [2, 0], [3, 0]], { moisture: 7 }),
+    ...[0, 1, 2, 3].map((age) => ({ at: [3 - age, 1, 0], block: plant(group, herb), props: { age } })),
+  ],
+}));
 
 export const SCENES = [
   {
@@ -146,5 +160,27 @@ export const SCENES = [
     ],
   },
 ];
+
+/** Hung bundles under a ceiling and on a wall, against proxy stone, to show nothing leaks onto the host. */
+const hungBundles = ['iso', 'isoWest'].map((view) => ({
+  name: `bundles-hung-${view}`,
+  view,
+  scale: 12,
+  entries: [
+    { at: [0, 1, 0], proxy: 'stone' }, { at: [0, 0, 0], block: bundleBlock('temperate', 'lavender'), props: { face: 'ceiling', facing: 'north' } },
+    { at: [2, 1, 0], proxy: 'stone' }, { at: [2, 0, 0], block: bundleBlock('temperate', 'chamomile'), props: { face: 'ceiling', facing: 'north' } },
+    { at: [4, 0, 1], proxy: 'stone' }, { at: [4, 0, 0], block: bundleBlock('dry', 'rosemary'), props: { face: 'wall', facing: 'north' } },
+    { at: [6, 0, 0], proxy: 'stone' }, { at: [5, 0, 0], block: bundleBlock('woodland', 'nightshade'), props: { face: 'wall', facing: 'west' } },
+  ],
+}));
+
+SCENES.push(
+  // the watered state on a joined bed (it vanished in 0.2.0-dev.1): dry beside wet
+  { name: 'garden-joined-2x2-watered', view: 'iso', scale: 9, entries: [...beds([[0, 0], [1, 0], [0, 1], [1, 1]], { moisture: 7 }), ...beds([[3, 0], [4, 0], [3, 1], [4, 1]], { moisture: 0 })] },
+  ...growthRows,
+  ...hungBundles,
+  { name: 'hearth-back', view: 'back', entries: multiblock(station('hearth'), HEARTH, [1, 0, 0], { facing: 'north', lit: false }) },
+  { name: 'stove-back', view: 'back', entries: multiblock(station('stove'), STOVE, [1, 0, 0], { facing: 'north', lit: false }) },
+);
 
 export const MULTIBLOCKS = { RACK, HEARTH, STOVE };

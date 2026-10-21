@@ -41,8 +41,6 @@ public final class PreparationManifest {
         for (BotanyManifest.Herb herb : BotanyManifest.HERBS) {
             String dir = herbDir(herb);
             files.add("assets/herbalwitch/blockstates/" + dir + "/bundle.json");
-            files.add("assets/herbalwitch/models/block/" + dir + "/bundle.json");
-            files.add("assets/herbalwitch/models/block/" + dir + "/bundle_wall.json");
             files.add("assets/herbalwitch/models/item/" + dir + "/bundle.json");
             files.add("assets/herbalwitch/models/item/" + dir + "/powder.json");
             files.add("data/herbalwitch/loot_tables/blocks/" + dir + "/bundle.json");

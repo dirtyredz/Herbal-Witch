@@ -1,6 +1,3 @@
 {
-  "parent": "herbalwitch:block/botany/templates/planted_cross",
-  "textures": {
-    "cross": "herbalwitch:block/botany/temperate/chamomile/stage_1"
-  }
+  "parent": "herbalwitch:block/botany/temperate/chamomile/young_1"
 }

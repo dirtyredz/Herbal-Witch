@@ -1,8 +1,8 @@
 // The armchair (owner reference: reference-armchair.png, also the vine standard for furniture):
-// a dark brown frame with chunky square corner posts capped above the arms and back, magenta
-// inlays and thin gold and plum bands on the posts; a forest-green velvet seat and tall back with
-// small magenta tufting studs and magenta piping; draped arm runners and a head runner with pointed
-// hems; dense trailing ivy with small pink flowers climbing the back posts, spilling over the top
+// a dark brown frame (the house wood; its posts keep the grain across, as approved) with chunky
+// square corner posts capped above the arms and back, magenta inlays and thin gold and plum bands
+// on the posts; a forest-green velvet seat and tall back with small magenta tufting studs and
+// magenta piping; draped arm runners and a head runner with pointed hems; dense trailing ivy with small pink flowers climbing the back posts, spilling over the top
 // rail and winding down the front posts and arms at varied lengths.
 import { box } from '../geometry.mjs';
 import { band, ivyDrape, rivet } from '../shapes.mjs';
@@ -62,5 +62,5 @@ export function armchair() {
     ...ivyDrape({ face: 'west', at: 0.75, along: [9.5, 12.5], top: 10.5, lengths: [10], clump: false }),
     ...ivyDrape({ face: 'east', at: 15.25, along: [1, 3.5], top: 11.5, lengths: [11], clump: false }),
   );
-  return [{ path: 'block/decor/templates/armchair', textures: { ...DECOR, particle: DECOR.wood }, elements: els }];
+  return [{ path: 'block/decor/templates/armchair', textures: { ...DECOR, wood_v: DECOR.wood, particle: DECOR.wood }, elements: els }];
 }

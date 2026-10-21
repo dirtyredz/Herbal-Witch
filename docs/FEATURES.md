@@ -5,7 +5,7 @@ Detail per entry: docs/catalogue/{decor,stations,products}.md.
 
 ## Implemented
 
-Version 0.2.0-dev.1 (local candidate; builds on the 0.1.0 content). Owner review of art, station UIs and viewers is pending.
+Version 0.2.0-dev.2 (local candidate; builds on the 0.1.0 content; dev.2 answers the owner's ten dev.1 art findings). Owner review of art, station UIs and viewers is pending.
 
 | Feature | Milestone | Status | Evidence |
 |---|---|---|---|

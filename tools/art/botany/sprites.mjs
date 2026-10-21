@@ -109,16 +109,6 @@ export function bell(cv, x, y, r) {
   set(cv, x, y + 2, r[1]);
 }
 
-/** Tiny seedling: stem of height h and a leaf pair. Stage 0 of most herbs. */
-export function sprout(cv, x, r, h = 2, lean = 0, len = 2.5) {
-  line(cv, x, 15, x + lean, 15 - h, r[1]);
-  leaf(cv, x + lean, 15 - h, 160, len, 0.8, r);
-  leaf(cv, x + lean, 15 - h, 20, len, 0.8, r);
-}
-
-/** Opaque pixel count helper for tests and tuning. */
-export const count = (img) => img.px.filter((p) => p[3] === 255).length;
-
 /** Converts a canvas to an image, darkening the edge of shaded shapes. */
 export function finish(cv) {
   const at = (x, y) => (x < 0 || y < 0 || x >= N || y >= N ? undefined : cv.px[y * N + x]);
@@ -140,9 +130,6 @@ export const sprite = (draw) => () => {
   draw(cv);
   return finish(cv);
 };
-
-/** The three young growth stages of a herb: s0 draws the seedling, draw(cv, stage) stages 1-2; the mature stage is a 3D model, tools/models/botany/plants.mjs. */
-export const grow = (draw, s0) => [sprite(s0), ...[1, 2].map((s) => sprite((cv) => draw(cv, s)))];
 
 const LAYOUTS = [
   [[6, 7], [9, 6], [8, 10], [5, 10], [11, 9]],

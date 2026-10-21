@@ -11,7 +11,8 @@
 //   scenes/<name>.png                 joined beds, multiblocks, vessels on heat, furniture
 //   compare/<name>.png                owner reference beside the render (with --references)
 //   manifest.json                     coverage, diagnostics, settings and input SHA-256s
-// Exits 1 when anything is missing, unbound, unsupported or unrendered.
+// Exits 1 when anything is missing, unbound, unsupported or unrendered, or when any model or
+// blockstate combination has overlapping coplanar faces facing the same way (z-fighting).
 //
 // Approximations: Minecraft's directional face shading only. No ambient occlusion, world light,
 // shaders, animation, mipmapping, or item extrusion; emissive faces are drawn at full brightness.
@@ -22,6 +23,7 @@ import { png } from './image/png-encode.mjs';
 import { Resources } from './preview/assets/resources.mjs';
 import { Baker } from './preview/geometry/bake.mjs';
 import { coverage } from './preview/report/coverage.mjs';
+import { zFighting } from './preview/report/zfighting.mjs';
 import { reviewSet } from './preview/report/review.mjs';
 import { inputHashes, combinedHash } from './preview/report/manifest.mjs';
 
@@ -41,7 +43,7 @@ const res = new Resources(root);
 const baker = new Baker(res);
 const cov = coverage(res, baker);
 const { images, errors } = reviewSet(res, baker, cov, { referenceDir: arg('--references'), scale });
-const allErrors = [...cov.errors, ...errors];
+const allErrors = [...cov.errors, ...zFighting(res, baker), ...errors];
 
 for (const [name, img] of images) {
   const file = join(out, name);

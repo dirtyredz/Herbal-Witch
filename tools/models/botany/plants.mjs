@@ -1,17 +1,22 @@
-// Mature herbs built from small cubes (owner references: reference-herb-bed-lavender.png and
-// reference-joined-bed-2x2.png): chunky stems, leaves and flower heads in each herb's own
-// silhouette and colours, rooted two pixels below the block so the plant stands in the soil. Every
-// face samples one colour swatch of the parts atlas (tools/art/botany/parts.mjs); directional
-// shading does the modelling. Budgets: about 40 elements a plant, so a full garden stays cheap.
+// Herbs built from small cubes at every age (owner references: reference-herb-bed-lavender.png and
+// reference-joined-bed-2x2.png; owner ruling 0.2.0-dev.1 feedback: no flat young stages). The
+// mature form is authored per herb: chunky stems, leaves and flower heads in its own silhouette and
+// colours. The three young ages are derived from it: the same plant scaled down toward its root,
+// thinned, with flowers first absent, then green buds, then partly open. Everything is rooted two
+// pixels below the block so the plant stands in the soil. Every face samples one colour swatch of
+// the parts atlas (tools/art/botany/parts.mjs); directional shading does the modelling. Budgets:
+// at most about 60 elements for a mature plant and far fewer young, so a full garden stays cheap.
 import { box } from '../geometry.mjs';
 import { swatchUv } from '../../art/botany/parts.mjs';
 import { rng } from '../../art/pixels.mjs';
+import { separateCoplanar } from './separate.mjs';
 
 const ROOT = -2;
 
-/** A cube or bar of one swatch (all faces), optionally rotated. */
+/** A cube or bar of one swatch (all faces), optionally rotated; a face down in the soil is left out. */
 function part(from, to, swatch, rot) {
-  return box(from, to, '#parts', { decal: { all: swatchUv(swatch) }, ...(rot ? { rot } : {}) });
+  const skip = !rot && from[1] <= ROOT ? ['down'] : [];
+  return { ...box(from, to, '#parts', { decal: { all: swatchUv(swatch) }, skip, ...(rot ? { rot } : {}) }), swatch };
 }
 
 const stem = (x, z, y1, swatch = 'stem', w = 1, y0 = ROOT) => part([x - w / 2, y0, z - w / 2], [x + w / 2, y1, z + w / 2], swatch);
@@ -244,17 +249,67 @@ const HERBS = {
   },
 };
 
-/** [{path, textures, elements, ao, cutout}] for every herb's mature model. */
-export function matureHerbs(herbs) {
-  return herbs.map(([group, herb]) => {
+/** Swatches that are flowers, berries or seed heads: absent while young, then buds, then open. */
+const BLOOMS = new Set(['lavender', 'lavender_light', 'lavender_deep', 'white', 'yellow', 'yellow_deep', 'pink', 'cream', 'hood',
+  'hood_light', 'berry_black', 'berry_shine', 'berry_red', 'berry_red_light', 'blush', 'umbel', 'thyme_flower', 'bell']);
+const BUD = 'leaf_bright';
+
+/** Ages 0-2: horizontal and vertical scale about the root, share of side parts kept, share of blooms open. */
+const GROWTH = [
+  { h: 0.55, v: 0.38, keep: 0.4, open: 0 },
+  { h: 0.72, v: 0.6, keep: 0.62, open: 0 },
+  { h: 0.88, v: 0.82, keep: 0.85, open: 0.45 },
+];
+
+/** A stable pseudo-random fraction for element i of a herb (the same parts thin out at every age). */
+const share = (i, salt) => (((i + 1) * 2654435761 + salt * 40503) >>> 0) % 1000 / 1000;
+
+/**
+ * A young age of a mature plant: rooted parts (stems, the base of the plant) always stay, side
+ * parts thin out, blooms are dropped at age 0 and turn into green buds until age 2 opens some.
+ * Sizes shrink with the plant but never below half a pixel, so nothing turns into a sliver.
+ */
+function young(mature, age) {
+  const g = GROWTH[age];
+  const sx = (x) => 8 + (x - 8) * g.h;
+  const sy = (y) => ROOT + (y - ROOT) * g.v;
+  // side parts (not rooted, not blooms) kept by a stable ranking, never fewer than four
+  const side = mature.map((e, i) => i).filter((i) => !BLOOMS.has(mature[i].swatch) && mature[i].from[1] > ROOT);
+  const ranked = [...side].sort((a, b) => share(a, 1) - share(b, 1));
+  const kept = new Set(ranked.slice(0, Math.max(Math.round(side.length * g.keep), Math.min(side.length, 4))));
+  const out = [];
+  mature.forEach((e, i) => {
+    const bloom = BLOOMS.has(e.swatch);
+    if (bloom && age === 0) return;
+    if (!bloom && e.from[1] > ROOT && !kept.has(i)) return;
+    const swatch = bloom && share(i, 2) >= g.open ? BUD : e.swatch;
+    const scale = [sx, sy, sx];
+    const from = [];
+    const to = [];
+    for (let k = 0; k < 3; k++) {
+      const [a, b] = [scale[k](e.from[k]), scale[k](e.to[k])];
+      const size = Math.max(b - a, Math.min(e.to[k] - e.from[k], 0.5));
+      const mid = (a + b) / 2;
+      from.push(k === 1 && e.from[k] <= ROOT ? ROOT : mid - size / 2);
+      to.push(k === 1 && e.from[k] <= ROOT ? ROOT + size : mid + size / 2);
+    }
+    const rot = e.rotation ? { ...e.rotation, origin: e.rotation.origin.map((v, k) => scale[k](v)) } : null;
+    out.push(part(from, to, swatch, rot));
+  });
+  return out;
+}
+
+/** [{path, textures, elements, ao, cutout}] for every herb's three young ages and its mature model. */
+export function herbModels(herbs) {
+  return herbs.flatMap(([group, herb]) => {
     const make = HERBS[herb];
     if (!make) throw new Error(`no mature form for ${herb}`);
-    return {
-      path: `block/botany/${group}/${herb}/mature`,
-      textures: { parts: 'herbalwitch:block/botany/parts', particle: `herbalwitch:block/botany/${group}/${herb}/stage_2` },
-      elements: make(),
-      ao: false,
-      cutout: false,
-    };
+    const mature = make();
+    const textures = { parts: 'herbalwitch:block/botany/parts', particle: `herbalwitch:item/botany/${group}/${herb}/fresh` };
+    const dir = `block/botany/${group}/${herb}`;
+    return [
+      ...[0, 1, 2].map((age) => ({ path: `${dir}/young_${age}`, textures, elements: separateCoplanar(young(mature, age)), ao: false, cutout: false })),
+      { path: `${dir}/mature`, textures, elements: separateCoplanar(mature), ao: false, cutout: false },
+    ];
   });
 }

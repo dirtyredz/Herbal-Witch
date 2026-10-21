@@ -1,4 +1,4 @@
-// The other cottage pieces, in the owner's dresser language (warm wood, black iron corner brackets
+// The other cottage pieces, in the owner's dresser language (the house dark wood, black iron corner brackets
 // with gold rivets, deep green drawer fronts with chunky gold knobs, a magenta runner with a gold
 // moon, hanging herb bundles on gold rings) and the armchair's ivy standard:
 //   apothecary counter: a one-block apothecary chest, its top full and sturdy for a lamp
@@ -8,15 +8,16 @@
 import { box } from '../geometry.mjs';
 import { band, ivyDrape, octagon, octagonTrue, rivet } from '../shapes.mjs';
 import { DECOR } from './textures.mjs';
+import { bundle } from '../preparations/bundles.mjs';
 
-const T = { ...DECOR, particle: DECOR.warm };
+const T = { ...DECOR, particle: DECOR.wood };
 
 /** A chunky black-iron corner bracket at a corner of the body, with gold rivets on its two faces. */
 function bracket(x, y, z, sx, sz) {
-  // a quarter pixel proud of the body so the iron reads as a separate bracket
+  // proud of the body (and of the drawer frames) so the iron reads as a separate bracket
   const s = 2.75;
-  const x0 = sx < 0 ? x - 0.25 : x - s + 0.25;
-  const z0 = sz < 0 ? z - 0.25 : z - s + 0.25;
+  const x0 = sx < 0 ? x - 0.35 : x - s + 0.35;
+  const z0 = sz < 0 ? z - 0.35 : z - s + 0.35;
   return [
     box([x0, y, z0], [x0 + s, y + s, z0 + s], '#iron'),
     rivet(sz < 0 ? 'north' : 'south', x0 + s / 2, y + s / 2, sz < 0 ? z0 : z0 + s, '#gold', 0.75, 0.25),
@@ -26,9 +27,9 @@ function bracket(x, y, z, sx, sz) {
 
 export function counter() {
   const els = [
-    box([1.5, 0, 1.5], [14.5, 1.5, 14.5], '#warm'), // recessed plinth
-    box([1, 1.5, 1], [15, 13.5, 15], '#warm_v'),
-    box([0, 13.5, 0], [16, 15.75, 16], '#warm'), // thick overhanging top
+    box([1.5, 0, 1.5], [14.5, 1.5, 14.5], '#wood'), // recessed plinth
+    box([1, 1.5, 1], [15, 13.5, 15], '#wood_v', { skip: ['down'] }),
+    box([0, 13.5, 0.1], [16, 15.75, 16], '#wood'), // thick overhanging top, just behind the runner's fall
     // two deep green drawer fronts, inset in raised gold frames, with chunky gold knobs
     ...[[2.5, 6.5], [7.5, 12]].flatMap(([y0, y1]) => [
       box([2.5, y0, 0.75], [13.5, y1, 1], '#gold', { skip: ['south'] }),
@@ -37,7 +38,7 @@ export function counter() {
       box([11, (y0 + y1) / 2 - 1, 0], [12.5, (y0 + y1) / 2 + 1, 0.5], '#gold'),
     ]),
     // gold studs along the top rail
-    ...[3, 6, 10, 13].map((x) => rivet('north', x, 12.75, 1, '#gold', 0.75, 0.25)),
+    ...[4.5, 6.5, 9.5, 11.5].map((x) => rivet('north', x, 12.75, 1, '#gold', 0.75, 0.25)),
     // the magenta runner draped over the top and down the front
     box([6, 16, 0], [10, 16, 16], '#runner_magenta', { decal: { up: [0, 0, 16, 10] }, skip: ['down', 'north', 'south', 'east', 'west'] }),
   ];
@@ -51,7 +52,7 @@ export function counter() {
   }
   // a dried bundle hanging on a gold ring at the east side, and ivy over the west corner
   els.push(box([15, 11, 7.5], [15.75, 12, 8.5], '#gold'));
-  els.push(box([15.4, 3.5, 5.5], [15.4, 11, 10.5], '#bundle', { decal: { west: [0, 0, 16, 16], east: [0, 0, 16, 16] }, skip: ['up', 'down', 'north', 'south'] }));
+  els.push(...bundle('lavender', { cx: 8, cz: 15.45, top: 11, depth: 0.9, length: 0.65, seed: 3, across: 'x' }));
   els.push(...ivyDrape({ face: 'west', at: 0, along: [3.5, 8], top: 13.5, lengths: [9, 12], inside: true }));
   els.push(...ivyDrape({ face: 'north', at: 0, along: [13, 16], top: 13.5, lengths: [6, 10], inside: true }));
   return [{ path: 'block/decor/templates/apothecary_counter', textures: T, elements: els }];
@@ -76,7 +77,7 @@ export function lamp(lit) {
 
 export function rug() {
   const els = [box([0, 0, 0], [16, 1, 16], '#rug', { decal: { all: [0, 0, 16, 16] } })];
-  for (const z of [0.25, 15.25]) for (const x of [3, 6, 10, 13]) els.push(box([x - 0.5, 0, z], [x + 0.5, 0.75, z + 0.5], '#gold'));
+  for (const z of [0.25, 15.25]) for (const x of [3, 6, 10, 13]) els.push(box([x - 0.5, 0, z], [x + 0.5, 0.75, z + 0.5], '#gold', { skip: ['down'] }));
   return [{ path: 'block/decor/templates/rug', textures: T, elements: els }];
 }
 

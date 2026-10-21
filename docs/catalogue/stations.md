@@ -57,20 +57,20 @@ Recipe types are `herbalwitch:processing/{drying,grinding,steeping,infusion}`. B
 - **Reloads and saves:** a changed or removed recipe cancels the job and resets progress (items stay);
   saved jobs use schema 1; unloaded stations do not progress.
 
-## Look and size (0.2.0-dev.1 art pass)
+## Look and size (0.2.0-dev.2)
 
-House style: warm reddish-brown wood, charcoal iron, gold rivets, bands and studs, gold crescent moons
+House style: the armchair's dark brown wood, charcoal iron, gold rivets, bands and studs, gold crescent moons
 and four-point stars, pink flowers on olive vines, dark plum surfaces, rounded octagonal silhouettes
 from stacked layers. Previews and recipes are unchanged by the art pass; owner review is pending.
 
 | Station | Size | Look |
 |---|---|---|
 | Mortar and pestle | 1 block | Mottled grey-taupe stone bowl, octagonal with chamfered corners, tapering to a narrow foot on a stepped square plinth; stepped rim, moss and small pink flowers, bright ground herbs inside, a knob-headed stone pestle leaning out |
-| Tea kettle | 1 block | Bulbous plum body painted with gold moons, stars and pink flowers on olive vines; beaded copper-and-gold rim, stepped lid with gold studs and knob, arched copper handle with gold bands, angled spout with a gold nozzle. Stands on heat |
-| Infusion pot | 1 block | The kettle's sister: squat round plum pot, banded copper-and-gold rims, gold clasps, domed lid painted with a moon, gold knob on a post, copper loop handles with gold caps, short gold feet, small gold plaque. Stands on heat |
-| Drying rack | 2 wide x 2 tall | Wooden A-frames with splayed legs at each end, iron feet, bands and caps with gold rivets; a top beam with gold strap clips and hooks. While it holds anything (input or output) four dried bundles hang from the beam (green leafy, lavender, white-flowered, yellow-flowered); they show occupancy, not which herb |
-| Hearth | 2 wide x 2 tall | Gothic fireplace: charcoal stone-brick firebox under a stepped arch, iron grate, wooden mantel posts and shelf with gold bands and caps, ivy over the mantel corners, dark chimney breast with a gold moon-and-stars plaque, floor slabs, fire tools, a log crate. Lit on every cell (light 13) |
-| Witch's Stove | 2 wide x 1 | Charcoal iron cooking range with wooden corner posts and gold caps; two burners on top, gold-framed firebox door, two drawers with gold stars, a towel rail with a red cloth bearing a gold crescent, a rail with a hanging pan, spoon and herb bundle, a stovepipe at the back |
+| Tea kettle | 1 block (a modest 9 px vessel, about 11 tall) | Bulbous plum body painted with gold moons, stars and pink flowers on olive vines; beaded copper-and-gold rim, stepped lid with gold studs and knob, arched copper handle with gold bands, angled spout with a gold nozzle. Stands on heat |
+| Infusion pot | 1 block (a modest 10.5 px pot, 11 tall) | The kettle's sister: squat round plum pot, banded copper-and-gold rims, gold clasps, domed lid painted with a moon, gold knob on a post, copper loop handles with gold caps, short gold feet, small gold plaque. Stands on heat |
+| Drying rack | 2 wide x 2 tall | Wooden A-frames at each end whose legs stand on iron feet and lean in to cross under an iron cap, iron bands and gold rivets; a top beam with gold strap clips and hooks. While it holds anything (input or output) four 3D dried bundles hang from the beam (green leafy, lavender, white-flowered, yellow-flowered); they show occupancy, not which herb |
+| Hearth | 2 wide x 2 tall | Gothic fireplace: charcoal stone-brick firebox under a stepped arch, iron grate, wooden mantel posts and shelf with gold bands and caps, ivy over the mantel corners, solid brick behind, dark chimney breast with a gold moon-and-stars plaque, floor slabs, fire tools, a log crate. Lit on every cell (light 13) |
+| Witch's Stove | 2 wide x 1 | Charcoal iron cooking range with wooden corner posts and gold caps; two burners on top, gold-framed firebox door, two drawers with gold stars, a towel rail with a red cloth bearing a gold crescent, a rail with a hanging pan, spoon and herb bundle, a stovepipe rising out of the back of the body between the burners |
 
 **Multiblocks.** The drying rack and hearth have the same block entity, menu and recipes as before.
 Layouts are named in `StationCatalog` (`StationSpec.layout`). Placing needs every cell replaceable

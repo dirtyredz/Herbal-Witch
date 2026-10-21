@@ -1,42 +1,42 @@
 {
   "variants": {
     "face=ceiling,facing=east": {
-      "model": "herbalwitch:block/preparations/herbs/shade/mugwort/bundle"
+      "model": "herbalwitch:block/preparations/bundles/shade/mugwort/ceiling"
     },
     "face=ceiling,facing=north": {
-      "model": "herbalwitch:block/preparations/herbs/shade/mugwort/bundle"
+      "model": "herbalwitch:block/preparations/bundles/shade/mugwort/ceiling"
     },
     "face=ceiling,facing=south": {
-      "model": "herbalwitch:block/preparations/herbs/shade/mugwort/bundle"
+      "model": "herbalwitch:block/preparations/bundles/shade/mugwort/ceiling"
     },
     "face=ceiling,facing=west": {
-      "model": "herbalwitch:block/preparations/herbs/shade/mugwort/bundle"
+      "model": "herbalwitch:block/preparations/bundles/shade/mugwort/ceiling"
     },
     "face=floor,facing=east": {
-      "model": "herbalwitch:block/preparations/herbs/shade/mugwort/bundle"
+      "model": "herbalwitch:block/preparations/bundles/shade/mugwort/ceiling"
     },
     "face=floor,facing=north": {
-      "model": "herbalwitch:block/preparations/herbs/shade/mugwort/bundle"
+      "model": "herbalwitch:block/preparations/bundles/shade/mugwort/ceiling"
     },
     "face=floor,facing=south": {
-      "model": "herbalwitch:block/preparations/herbs/shade/mugwort/bundle"
+      "model": "herbalwitch:block/preparations/bundles/shade/mugwort/ceiling"
     },
     "face=floor,facing=west": {
-      "model": "herbalwitch:block/preparations/herbs/shade/mugwort/bundle"
+      "model": "herbalwitch:block/preparations/bundles/shade/mugwort/ceiling"
     },
     "face=wall,facing=east": {
-      "model": "herbalwitch:block/preparations/herbs/shade/mugwort/bundle_wall",
+      "model": "herbalwitch:block/preparations/bundles/shade/mugwort/wall",
       "y": 90
     },
     "face=wall,facing=north": {
-      "model": "herbalwitch:block/preparations/herbs/shade/mugwort/bundle_wall"
+      "model": "herbalwitch:block/preparations/bundles/shade/mugwort/wall"
     },
     "face=wall,facing=south": {
-      "model": "herbalwitch:block/preparations/herbs/shade/mugwort/bundle_wall",
+      "model": "herbalwitch:block/preparations/bundles/shade/mugwort/wall",
       "y": 180
     },
     "face=wall,facing=west": {
-      "model": "herbalwitch:block/preparations/herbs/shade/mugwort/bundle_wall",
+      "model": "herbalwitch:block/preparations/bundles/shade/mugwort/wall",
       "y": 270
     }
   }

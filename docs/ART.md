@@ -15,6 +15,29 @@ art is reviewed, and the owner checklist.
   bigger and more detailed; the mortar round and smooth stone, not striped; the hearth and infusion
   pot "missed the mark - why pink and green stripes"; machines need their own dark, gothy,
   witchy-forest look, and roundness (like the kettle). This pass (0.2.0-dev.1) answers all of it.
+- **2026-10-21 (0.2.0-dev.1 feedback, ten items):** young herbs were flat pale crossed sprites; the
+  chest lid, planters and rack were bright orange next to the dark armchair; the rack legs floated
+  above their feet; the kettle and pot were too big on the stove; the stovepipe sat on a corner post;
+  the hearth's back had holes; furniture tops flickered (z-fighting); watered beds no longer looked
+  wet; hung bundles bled onto their host block. 0.2.0-dev.2 answers all ten and the standing rules
+  below come from it.
+
+## Standing rules (owner, from the 0.2.0-dev.1 feedback)
+
+- **Every growth stage is cube-built 3D** at the mature model's level of detail: scaled down toward
+  the root, fewer or no flowers, growing toward the mature form. No flat crossed sprites for plants.
+  Keep the cube budget garden-friendly (young ages lighter than mature, mature about 60 at most).
+- **One wood: the armchair's dark wood** for the whole set (furniture, planters, the drying rack,
+  station posts and mantels). There is no light or orange wood.
+- **Stove-top pieces are modest** (kettle and pot about 9-10 px across, 11 tall), so they read as
+  vessels sitting on a stove, not blocks stacked on it. Chimneys and pipes rise out of the body,
+  never perched on a post or bracket.
+- **No overlapping coplanar faces facing the same way**, in any model or blockstate combination.
+  `node --test "tools/preview/test/*.test.mjs"` and `tools/preview-models.mjs` fail on them.
+- **Watered soil must read at a glance:** moist far darker than dry, the two on either side of the
+  rails' wood (`BotanyModelsTest` checks the luminance gap).
+- **Nothing flat that can leak:** dried bundles are small 3D cubes like the herbs, never a stretched
+  sprite on a thin box.
 
 ## The house style (0.2.0)
 
@@ -22,8 +45,7 @@ One set: stations and furniture share a hardware language so they read together.
 
 | Role | Colours | Texture |
 |---|---|---|
-| Warm reddish-brown wood (stations, beds, chest) | #542A16 .. #AA5E32 | `material/wood` (grain along U), `wood_post` (along V), `wood_end` |
-| Dark brown wood (armchair, shelf, lamp) | #3B2416, #5A3A22 | `material/dark_wood` |
+| Dark brown wood, the armchair's (everything wooden) | #3B2416 .. #5A3A22 | `material/wood` (grain along U), `wood_post` (along V), `wood_end` |
 | Charcoal iron (faint plum cast) | #2E2934 | `material/iron` |
 | Gold (rivets, studs, bands, knobs) | #9A681E, #D4A03A, #F2C95A | `material/gold` |
 | Copper (handles, beaded rims) | #6E2E16 .. #C86834 | `material/copper` |
@@ -75,7 +97,7 @@ stone, plum glaze, gold and fire.
   caps, bands and feet with gold rivets, a top beam with gold strap clips, four twine-tied bundles
   on gold hooks (green leafy, lavender, white-flowered, yellow-flowered).
 - **Hearth:** about 2 wide: charcoal stone-brick firebox with a glowing fire and an iron grate,
-  reddish-brown mantel posts and shelf with gold bands and caps, vines with purple flowers over the
+  reddish-brown mantel posts (built in the house dark wood) and shelf with gold bands and caps, vines with purple flowers over the
   mantel corners, a dark stone chimney breast with a gold moon-and-stars plaque and gold trim, floor
   slabs in front, fire tools on one side and a log crate on the other.
 - **Witch's stove:** 2-wide charcoal iron range with wooden corner posts and gold caps; two burners
@@ -98,8 +120,12 @@ stone, plum glaze, gold and fire.
   sprites (ivy, runners, plaques, bundles, glass, flames, the rug), multiblocks authored as one
   assembly and split into cells. The bundle and lantern templates under `preparations/templates/`
   are still hand-authored JSON.
-- **Herbs:** ages 0-2 are 16 px sprites on the planted cross; age 3 is a 3D model of small cubes over
-  the `botany/parts.png` swatch atlas.
+- **Herbs:** every age is a 3D model of small cubes over the `botany/parts.png` swatch atlas; ages
+  0-2 are derived from the authored mature form (tools/models/botany/plants.mjs). Dried bundles use
+  the same atlas (tools/models/preparations/bundles.mjs).
+- **Faces:** the generator drops faces buried inside a solid box; organic models (herbs, bundles)
+  pull the smaller of two coplanar faces in by 0.12 px; built pieces are fixed by hand. The octagon
+  helpers tile their rows instead of crossing two boxes.
 
 ## Review (required before any jar swap)
 
@@ -107,7 +133,7 @@ stone, plum glaze, gold and fire.
 2. `node tools/preview-models.mjs --output <job folder>/previews/<name> --references <job folder>`:
    family sheets (iso and front at one scale), herbs on beds, item GUI sheet, scenes (joined beds,
    growth, multiblocks lit and cold, vessels on the stove, furniture) and reference comparisons.
-   It fails on any missing texture, unbound variable or unrendered model.
+   It fails on any missing texture, unbound variable, unrendered model or z-fighting face pair.
 3. Look at every changed family against the references and this guide; record findings in the job's
    notes. Any later art change needs new previews.
 
@@ -115,14 +141,17 @@ The previewer shows directional face shading only: no ambient occlusion, world l
 animation, mipmaps or held-item extrusion; emissive faces are drawn full bright, and the GUI
 orientation follows the transform maths (not checked against a client).
 
-## Owner review checklist (0.2.0-dev.1)
+## Owner review checklist (0.2.0-dev.2)
 
-Status: **awaiting owner review.** Trial instance, creative; `/herbalwitch showcase` on a clear
+Status: **awaiting owner review.** Since dev.1: 3D growth stages, one dark wood, rack legs on their
+feet, smaller kettle and pot, stovepipe out of the stove's back, solid hearth back, no flickering
+tops, wet-looking watered beds (joined too), 3D hung bundles (no leaking onto the host block). Trial instance, creative; `/herbalwitch showcase` on a clear
 plot, then walk it.
 
 1. **Garden:** every herb age stands in the soil (bed and farmland); mature herbs bushy, vibrant,
    each recognisable; beds read as wood outside; the 2 x 2, line, L and ring join with posts only on
-   the outside; break a bed in the middle of a row and the rails come back.
+   the outside; break a bed in the middle of a row and the rails come back; every young age is 3D
+   and grows; put water within four blocks of a joined 2 x 2 and every soil goes dark and wet.
 2. **Stations:** mortar (round smooth stone, moss, pestle), kettle and pot (plum, moons, gold) on
    the stove, the 2 x 2 rack with and without bundles, the 2 x 2 hearth lit and cold, the stove lit
    and cold. Place and break each multiblock (one item back, contents dropped once).

@@ -1,5 +1,5 @@
 // The fourteen herbs in catalogue order, [habitat group, herb] (matches HerbCatalog). Shared by the
-// texture generator (stage sprites, seeds, fresh herbs) and the model generator (mature forms).
+// texture generator (seeds, fresh herbs) and the model generator (every age's 3D form).
 export const HERB_LIST = [
   ['temperate', 'lavender'], ['temperate', 'sage'], ['temperate', 'chamomile'], ['temperate', 'yarrow'],
   ['dry', 'rosemary'], ['dry', 'thyme'],

@@ -1,5 +1,5 @@
 // Shade herbs: valerian, mugwort.
-import { R, set, line, leaf, blob, sprite, seeds, grow, sprout } from './sprites.mjs';
+import { R, set, line, leaf, blob, sprite, seeds } from './sprites.mjs';
 
 const head = (cv, x, y) => {
   blob(cv, x, y, 2.2, 1.7, R.pink);
@@ -8,45 +8,14 @@ const head = (cv, x, y) => {
   set(cv, x - 1, y + 1, R.rose[0]);
 };
 
-const valerian = grow(
-  (cv, s) => {
-    if (s === 1) {
-      line(cv, 7, 15, 7, 9, R.moss[1]);
-      leaf(cv, 7, 14, 155, 3.5, 0.8, R.moss, 0.3);
-      leaf(cv, 7, 14, 25, 3.5, 0.8, R.moss, 0.3);
-      leaf(cv, 7, 11, 125, 2.5, 0.7, R.moss);
-      return;
-    }
-    const tops = [[7, 5], [4, 8]];
-    for (const [x, y] of tops) line(cv, 7, 15, x, y + 1, R.moss[0]);
-    leaf(cv, 7, 14, 155, 4, 0.9, R.moss, 0.3);
-    leaf(cv, 8, 14, 25, 4, 0.9, R.moss, 0.3);
-    leaf(cv, 7, 11, 130, 3, 0.8, R.moss, 0.3);
-    leaf(cv, 8, 10, 45, 3, 0.8, R.moss, 0.3);
-  },
-  (cv) => sprout(cv, 7, R.moss, 2, 0, 3),
-);
-
 const fork = (cv, x, y, deg, len, w) => {
   leaf(cv, x, y, deg, len, w, R.moss, 0.3);
   leaf(cv, x, y, deg + 28, len * 0.8, w * 0.8, R.moss, 0.3);
   leaf(cv, x, y, deg - 28, len * 0.8, w * 0.8, R.moss, 0.3);
 };
 
-const mugwort = grow(
-  (cv, s) => {
-    const top = s === 1 ? 9 : 6;
-    line(cv, 7, 15, 7, top, R.moss[0]);
-    fork(cv, 7, 13, 150, 4, 0.9);
-    if (s >= 2) fork(cv, 7, 12, 30, 4, 0.9);
-    if (s >= 2) fork(cv, 7, 9, 145, 3.5, 0.8);
-  },
-  (cv) => sprout(cv, 7, R.moss, 2, 0, 2.5),
-);
-
 export default {
   valerian: {
-    stages: valerian,
     seeds: seeds(1, R.root, 'oval'),
     fresh: sprite((cv) => {
       line(cv, 6, 15, 8, 5, R.moss[0]);
@@ -60,7 +29,6 @@ export default {
     }),
   },
   mugwort: {
-    stages: mugwort,
     seeds: seeds(2, R.fern, 'long'),
     fresh: sprite((cv) => {
       line(cv, 3, 15, 9, 6, R.moss[0]);

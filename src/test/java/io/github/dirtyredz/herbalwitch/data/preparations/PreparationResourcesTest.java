@@ -3,6 +3,7 @@ package io.github.dirtyredz.herbalwitch.data.preparations;
 import com.google.gson.JsonObject;
 import io.github.dirtyredz.herbalwitch.data.botany.BotanyManifest;
 import io.github.dirtyredz.herbalwitch.data.fixture.ModelResolver;
+import io.github.dirtyredz.herbalwitch.data.fixture.ModelResolver.Resolved;
 import io.github.dirtyredz.herbalwitch.data.fixture.ResourceFiles;
 import io.github.dirtyredz.herbalwitch.data.fixture.ResourceFiles.Png;
 import io.github.dirtyredz.herbalwitch.data.fixture.TemplateChecks;
@@ -17,6 +18,7 @@ import java.util.Set;
 
 import static io.github.dirtyredz.herbalwitch.data.fixture.ResourceFiles.generated;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /** Preparation art and data: sprites, bundle and lantern models, loot, tags and the resin modifier. */
@@ -60,17 +62,31 @@ class PreparationResourcesTest {
         }
     }
 
+    /**
+     * Hung bundles are small 3D cube models over the parts atlas (owner feedback 0.2.0-dev.1: the
+     * flat sprite bled onto the host block), one ceiling and one wall form per herb, each herb its
+     * own; the wall form turns with the facing and the floor states reuse the ceiling form.
+     */
     @Test
-    void bundlesHangFromCeilingsAndWallsWithTheirHerbSprite() {
+    void bundlesHangFromCeilingsAndWallsAsCubeModels() {
+        Set<String> shapes = new HashSet<>();
         for (BotanyManifest.Herb herb : BotanyManifest.HERBS) {
             String path = PreparationManifest.herbDir(herb) + "/bundle";
-            for (String model : List.of(path, path + "_wall")) {
-                TemplateChecks.check("herbalwitch:block/" + model, Map.of());
-                assertEquals("herbalwitch:item/" + path, ModelResolver.resolve("herbalwitch:block/" + model).texture("#bundle"));
+            String dir = "herbalwitch:block/preparations/bundles/" + herb.group() + "/" + herb.id() + "/";
+            for (String form : List.of("ceiling", "wall")) {
+                TemplateChecks.check(dir + form, Map.of());
+                Resolved model = ModelResolver.resolve(dir + form);
+                assertNull(model.renderType(), dir + form + " is solid, not a cutout sprite");
+                assertEquals("herbalwitch:block/botany/parts", model.texture("#parts"), dir + form);
+                assertEquals("herbalwitch:item/" + path, model.texture("#particle"), dir + form);
+                assertTrue(model.elements().size() >= 8, dir + form + " is not built from cubes");
+                assertTrue(shapes.add(model.elements().toString()), dir + form + " repeats another bundle");
             }
             JsonObject variants = generated("assets/herbalwitch/blockstates/" + path + ".json").getAsJsonObject("variants");
-            assertTrue(variants.keySet().stream().noneMatch(k -> k.contains("face=floor") && !variants.getAsJsonObject(k)
-                    .get("model").getAsString().endsWith("/bundle")), path);
+            for (String key : variants.keySet()) {
+                String expected = dir + (key.contains("face=wall") ? "wall" : "ceiling");
+                assertEquals(expected, variants.getAsJsonObject(key).get("model").getAsString(), path + " " + key);
+            }
             assertTrue(generated("data/herbalwitch/loot_tables/blocks/" + path + ".json").toString()
                     .contains("\"name\":\"herbalwitch:" + path + "\""), path + " drops itself");
         }

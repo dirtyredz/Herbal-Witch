@@ -3,7 +3,8 @@
 // assembly for the item with display transforms that fit it in a slot. Cells match the Java
 // layout (platform/multiblock/MultiblockLayout): row by row from the bottom, cell 0 the origin,
 // "right" toward -x for a north-facing model.
-import { splitCells, shift, assemblyDisplay } from '../geometry.mjs';
+import { splitCells, shift, assemblyDisplay, dropBuriedFaces } from '../geometry.mjs';
+import { needsCutout } from '../textures.mjs';
 
 /** Cells of a width x height rectangle, in the Java layout's order. */
 export function rectangle(width, height) {
@@ -22,7 +23,8 @@ export function rectangle(width, height) {
  */
 export function multiblockModels({ dir, cells, base, overlay, textures, fit, overflow = false }) {
   const out = [];
-  const parts = splitCells(base, cells, { overflow });
+  // buried faces go before the split, while every box is still whole (a cut face is not a hole)
+  const parts = splitCells(dropBuriedFaces(base, (e) => !needsCutout([e])), cells, { overflow });
   parts.forEach((elements, i) => {
     if (!elements.length) throw new Error(`${dir}: cell ${i} has no permanent geometry`);
     out.push({ path: `${dir}/part_${i}`, textures, elements });

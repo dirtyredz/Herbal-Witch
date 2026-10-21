@@ -209,9 +209,7 @@
       },
       "faces": {
         "east": {"uv": [6,10,10,14], "texture": "#flame"},
-        "west": {"uv": [6,10,10,14], "texture": "#flame"},
-        "up": {"uv": [7.5,6,8.5,10], "texture": "#flame"},
-        "down": {"uv": [7.5,6,8.5,10], "texture": "#flame"}
+        "west": {"uv": [6,10,10,14], "texture": "#flame"}
       }
     }
   ]

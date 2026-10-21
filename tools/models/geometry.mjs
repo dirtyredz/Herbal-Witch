@@ -249,3 +249,32 @@ export function assemblyDisplay(min, max, fit) {
   }
   return out;
 }
+
+const AXIS = { west: 0, east: 0, down: 1, up: 1, north: 2, south: 2 };
+const POSITIVE = new Set(['east', 'up', 'south']);
+
+/**
+ * Drops faces that can never be seen: an unrotated face with an opaque, unrotated box directly in
+ * front of its whole area, closed on every side a line of sight could leave it by (all faces but
+ * the one facing back at the buried face). Such a face costs a quad and, when it shares a plane
+ * with a visible face, z-fights. `opaque(element)` says whether an element blocks the view.
+ */
+export function dropBuriedFaces(elements, opaque) {
+  const OPPOSITE = { up: 'down', down: 'up', north: 'south', south: 'north', west: 'east', east: 'west' };
+  const solids = elements.filter((e) => !e.rotation && opaque(e));
+  const closed = (s, f) => FACES.every((g) => g === OPPOSITE[f] || s.faces[g]);
+  const eps = 1e-3;
+  return elements.map((e) => {
+    if (e.rotation) return e;
+    const faces = {};
+    for (const [f, face] of Object.entries(e.faces)) {
+      const a = AXIS[f];
+      const at = POSITIVE.has(f) ? e.to[a] : e.from[a];
+      const front = at + (POSITIVE.has(f) ? eps : -eps);
+      const buried = solids.some((s) => s !== e && closed(s, f) && s.from[a] < front && front < s.to[a]
+        && [0, 1, 2].every((k) => k === a || (s.from[k] <= e.from[k] && e.to[k] <= s.to[k])));
+      if (!buried) faces[f] = face;
+    }
+    return { ...e, faces };
+  }).filter((e) => Object.keys(e.faces).length);
+}

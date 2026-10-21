@@ -24,11 +24,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public final class TemplateChecks {
     /** Textures with transparency: the model must render as cutout. */
-    public static final Set<String> ALPHA = Set.of("vine", "glass", "flame", "bundle", "ivy", "runner", "runner_magenta", "cloth",
-            "bundle_green", "bundle_lavender", "bundle_white", "bundle_yellow");
-    /** Decal textures stretched over a whole face rather than sampled at model density. */
-    public static final Set<String> STRETCHED = Set.of("glass", "bundle", "ivy", "runner", "runner_magenta", "cloth", "plaque", "rug", "flame",
-            "bundle_green", "bundle_lavender", "bundle_white", "bundle_yellow");
+    public static final Set<String> ALPHA = Set.of("vine", "glass", "flame", "ivy", "runner", "runner_magenta", "cloth");
+    /** Decal textures stretched over a whole face, or (parts) one colour swatch sampled per face. */
+    public static final Set<String> STRETCHED = Set.of("glass", "ivy", "runner", "runner_magenta", "cloth", "plaque", "rug", "flame", "parts");
     private static final Set<Double> ANGLES = Set.of(-45.0, -22.5, 0.0, 22.5, 45.0);
 
     private TemplateChecks() {

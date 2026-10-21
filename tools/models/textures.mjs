@@ -5,7 +5,6 @@ export const MATERIAL = {
   wood: `${HW}material/wood`,
   wood_post: `${HW}material/wood_post`,
   wood_end: `${HW}material/wood_end`,
-  dark_wood: `${HW}material/dark_wood`,
   iron: `${HW}material/iron`,
   gold: `${HW}material/gold`,
   copper: `${HW}material/copper`,
@@ -27,15 +26,11 @@ export const STATION = {
   plinth_stone: `${HW}stations/plinth_stone`,
   pestle_stone: `${HW}stations/pestle_stone`,
   herb_pile: `${HW}stations/herb_pile`,
-  bundle_green: `${HW}stations/bundle_green`,
-  bundle_lavender: `${HW}stations/bundle_lavender`,
-  bundle_white: `${HW}stations/bundle_white`,
-  bundle_yellow: `${HW}stations/bundle_yellow`,
+  parts: `${HW}botany/parts`, // the swatch atlas the 3D bundles are built from
 };
 
 /** Variables whose textures have transparency: a model using any of them renders cutout. */
-export const CUTOUT = new Set(['ivy', 'flame', 'cloth', 'bundle_green', 'bundle_lavender', 'bundle_white', 'bundle_yellow',
-  'cross', 'leaf', 'glass', 'vine', 'runner', 'runner_magenta', 'bundle']);
+export const CUTOUT = new Set(['ivy', 'flame', 'cloth', 'leaf', 'glass', 'vine', 'runner', 'runner_magenta']);
 
 /** Whether elements use a cutout variable. */
 export function needsCutout(elements) {

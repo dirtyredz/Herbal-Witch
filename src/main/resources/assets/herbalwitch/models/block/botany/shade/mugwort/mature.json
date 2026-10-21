@@ -2,7 +2,7 @@
   "ambientocclusion": false,
   "textures": {
     "parts": "herbalwitch:block/botany/parts",
-    "particle": "herbalwitch:block/botany/shade/mugwort/stage_2"
+    "particle": "herbalwitch:item/botany/shade/mugwort/fresh"
   },
   "elements": [
     {
@@ -17,24 +17,6 @@
         8.5
       ],
       "faces": {
-        "down": {
-          "uv": [
-            0.25,
-            0.25,
-            1.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "up": {
-          "uv": [
-            0.25,
-            0.25,
-            1.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
         "north": {
           "uv": [
             0.25,
@@ -538,24 +520,6 @@
         10
       ],
       "faces": {
-        "down": {
-          "uv": [
-            0.25,
-            0.25,
-            1.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "up": {
-          "uv": [
-            0.25,
-            0.25,
-            1.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
         "north": {
           "uv": [
             0.25,
@@ -982,24 +946,6 @@
         6.5
       ],
       "faces": {
-        "down": {
-          "uv": [
-            0.25,
-            0.25,
-            1.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "up": {
-          "uv": [
-            0.25,
-            0.25,
-            1.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
         "north": {
           "uv": [
             0.25,
@@ -1426,24 +1372,6 @@
         11.5
       ],
       "faces": {
-        "down": {
-          "uv": [
-            0.25,
-            0.25,
-            1.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "up": {
-          "uv": [
-            0.25,
-            0.25,
-            1.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
         "north": {
           "uv": [
             0.25,

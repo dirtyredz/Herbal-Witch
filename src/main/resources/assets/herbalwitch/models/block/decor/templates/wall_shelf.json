@@ -1,7 +1,7 @@
 {
   "render_type": "minecraft:cutout",
   "textures": {
-    "wood": "herbalwitch:block/material/dark_wood",
+    "wood": "herbalwitch:block/material/wood",
     "pink": "herbalwitch:block/material/fabric_pink",
     "plum": "herbalwitch:block/material/trim_purple",
     "gold": "herbalwitch:block/material/gold",
@@ -104,15 +104,6 @@
           ],
           "texture": "#plum"
         },
-        "up": {
-          "uv": [
-            1,
-            9,
-            15,
-            10
-          ],
-          "texture": "#plum"
-        },
         "north": {
           "uv": [
             1,
@@ -163,15 +154,6 @@
         15
       ],
       "faces": {
-        "down": {
-          "uv": [
-            1,
-            1,
-            15,
-            6
-          ],
-          "texture": "#pink"
-        },
         "up": {
           "uv": [
             1,
@@ -299,15 +281,6 @@
           ],
           "texture": "#iron"
         },
-        "up": {
-          "uv": [
-            2,
-            15,
-            3,
-            16
-          ],
-          "texture": "#iron"
-        },
         "north": {
           "uv": [
             13,
@@ -365,15 +338,6 @@
             0,
             14,
             1
-          ],
-          "texture": "#iron"
-        },
-        "up": {
-          "uv": [
-            13,
-            15,
-            14,
-            16
           ],
           "texture": "#iron"
         },
@@ -437,29 +401,11 @@
           ],
           "texture": "#iron"
         },
-        "up": {
-          "uv": [
-            2,
-            11,
-            3,
-            15
-          ],
-          "texture": "#iron"
-        },
         "north": {
           "uv": [
             13,
             9,
             14,
-            10
-          ],
-          "texture": "#iron"
-        },
-        "south": {
-          "uv": [
-            2,
-            9,
-            3,
             10
           ],
           "texture": "#iron"
@@ -505,29 +451,11 @@
           ],
           "texture": "#iron"
         },
-        "up": {
-          "uv": [
-            13,
-            11,
-            14,
-            15
-          ],
-          "texture": "#iron"
-        },
         "north": {
           "uv": [
             2,
             9,
             3,
-            10
-          ],
-          "texture": "#iron"
-        },
-        "south": {
-          "uv": [
-            13,
-            9,
-            14,
             10
           ],
           "texture": "#iron"
@@ -591,15 +519,6 @@
           ],
           "texture": "#gold"
         },
-        "south": {
-          "uv": [
-            2.125,
-            11.625,
-            2.875,
-            12.375
-          ],
-          "texture": "#gold"
-        },
         "west": {
           "uv": [
             14.75,
@@ -659,15 +578,6 @@
           ],
           "texture": "#gold"
         },
-        "south": {
-          "uv": [
-            13.125,
-            11.625,
-            13.875,
-            12.375
-          ],
-          "texture": "#gold"
-        },
         "west": {
           "uv": [
             14.75,
@@ -700,15 +610,6 @@
         14
       ],
       "faces": {
-        "down": {
-          "uv": [
-            0,
-            0,
-            16,
-            16
-          ],
-          "texture": "#glass"
-        },
         "up": {
           "uv": [
             0,
@@ -768,15 +669,6 @@
         13.5
       ],
       "faces": {
-        "down": {
-          "uv": [
-            3.5,
-            2.5,
-            5.5,
-            4.5
-          ],
-          "texture": "#tincture"
-        },
         "up": {
           "uv": [
             3.5,
@@ -837,15 +729,6 @@
       ],
       "faces": {
         "down": {
-          "uv": [
-            0,
-            0,
-            16,
-            16
-          ],
-          "texture": "#glass"
-        },
-        "up": {
           "uv": [
             0,
             0,
@@ -973,15 +856,6 @@
         14
       ],
       "faces": {
-        "down": {
-          "uv": [
-            0,
-            0,
-            16,
-            16
-          ],
-          "texture": "#glass"
-        },
         "up": {
           "uv": [
             0,
@@ -1041,15 +915,6 @@
         13.5
       ],
       "faces": {
-        "down": {
-          "uv": [
-            3,
-            2.5,
-            4,
-            3.5
-          ],
-          "texture": "#tincture"
-        },
         "up": {
           "uv": [
             3,
@@ -1177,15 +1042,6 @@
         14
       ],
       "faces": {
-        "down": {
-          "uv": [
-            0,
-            0,
-            16,
-            16
-          ],
-          "texture": "#glass"
-        },
         "up": {
           "uv": [
             0,
@@ -1245,15 +1101,6 @@
         13.5
       ],
       "faces": {
-        "down": {
-          "uv": [
-            10.5,
-            2.5,
-            12.5,
-            4.5
-          ],
-          "texture": "#tincture"
-        },
         "up": {
           "uv": [
             10.5,
@@ -1314,15 +1161,6 @@
       ],
       "faces": {
         "down": {
-          "uv": [
-            0,
-            0,
-            16,
-            16
-          ],
-          "texture": "#glass"
-        },
-        "up": {
           "uv": [
             0,
             0,
@@ -1535,13 +1373,13 @@
     },
     {
       "from": [
-        1.25,
-        7,
-        8.4
+        1.35,
+        6.9,
+        8.22
       ],
       "to": [
-        4.25,
-        9,
+        4.15,
+        8.9,
         9
       ],
       "faces": {
@@ -1667,13 +1505,13 @@
     },
     {
       "from": [
-        11.25,
-        7,
-        8.4
+        11.35,
+        6.9,
+        8.22
       ],
       "to": [
-        14.25,
-        9,
+        14.15,
+        8.9,
         9
       ],
       "faces": {

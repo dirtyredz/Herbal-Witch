@@ -1,7 +1,8 @@
 // The two heated vessels, sister pieces in the house style: dark plum bodies built from stacked
 // octagonal layers and painted with gold moons, stars and pink flowers on olive vines, beaded
 // copper-and-gold rims, gold knobs and studs. Both stand on heat (a stove burner, a hearth, a
-// campfire) with their feet at y = 0. One block each.
+// campfire) with their feet at y = 0. One block each, sized modestly (about 9 px across and 11
+// tall, the owner's ruling for stove-top pieces) so a vessel reads as a pot on a stove, not a block.
 //   Kettle (reference-kettle-front/angle.png): bulbous body, stepped domed lid, gold octagonal
 //   knob, an arched copper handle with gold bands, an angled spout with a gold square nozzle.
 //   Infusion pot (reference-infusion-pot.png): a round squat pot, domed lid with a gold knob on a
@@ -38,42 +39,39 @@ function studs(w, y, size = 1, per = 1) {
 
 export function kettle() {
   const els = [
-    // body: a narrow foot ring, swelling to a wide painted belly, drawing in at the shoulder
-    ...octagon(C, C, 0, 1, 8, 8, 2, '#plum', { third: false }),
-    ...octagonTrue(C, C, 1, 2.5, 10.5, 10.5, 3, BODY, { skip: ['down'] }),
-    ...octagonTrue(C, C, 2.5, 8, 12.5, 12.5, 3.5, BODY, { skip: ['down'] }),
-    ...octagonTrue(C, C, 8, 9.5, 11, 11, 3, BODY, { skip: ['down'] }),
+    // body: a narrow foot ring, swelling to a painted belly, drawing in at the shoulder
+    ...octagon(C, C, 0, 0.5, 5.5, 5.5, 1.5, '#plum', { third: false }),
+    ...octagonTrue(C, C, 0.5, 1.5, 7.5, 7.5, 2.25, BODY, { skip: ['down'] }),
+    ...octagonTrue(C, C, 1.5, 5.5, 9, 9, 2.5, BODY, { skip: ['down'] }),
+    ...octagonTrue(C, C, 5.5, 6.5, 8, 8, 2.25, BODY, { skip: ['down'] }),
     // the beaded copper rim at the lid seam, studded with gold
-    ...octagon(C, C, 9.5, 10.5, 10, 10, 2.5, '#copper', { skip: ['down'] }),
-    ...studs(10, 9.5, 1.25, 2),
-    // stepped domed lid with gold studs and an octagonal gold knob
-    ...octagon(C, C, 10.5, 11.75, 8, 8, 2, PLAIN_LID, { skip: ['down'] }),
-    ...octagon(C, C, 11.75, 12.5, 5.5, 5.5, 1.5, PLAIN_LID, { skip: ['down'], third: false }),
-    ...studs(8, 10.75, 0.75),
-    box([7.25, 12.5, 7.25], [8.75, 13, 8.75], '#plum'),
-    ...octagon(C, C, 13, 14.25, 3, 3, 0.75, '#gold', { third: false }),
+    ...octagon(C, C, 6.5, 7.25, 7.25, 7.25, 1.75, '#copper', { skip: ['down'], third: false }),
+    ...studs(7.25, 6.55, 0.6),
+    // stepped domed lid and an octagonal gold knob
+    ...octagon(C, C, 7.25, 8.25, 5.75, 5.75, 1.5, PLAIN_LID, { skip: ['down'], third: false }),
+    ...octagon(C, C, 8.25, 8.75, 4, 4, 1, PLAIN_LID, { skip: ['down'], third: false }),
+    box([7.4, 8.75, 7.4], [8.6, 9.1, 8.6], '#plum'),
+    ...octagon(C, C, 9.1, 10, 2.25, 2.25, 0.5, '#gold', { third: false }),
   ];
   // the spout: a plum tube rising from the front of the belly, a gold collar and square nozzle
-  const tilt = { origin: [8, 5, 2], axis: 'x', angle: -45 };
+  const tilt = { origin: [8, 3.5, 3.75], axis: 'x', angle: -45 };
   els.push(
-    box([7, 4, 0.75], [9, 10.5, 2.75], '#plum', { rot: tilt }),
-    box([6.75, 6, 0.5], [9.25, 7, 3], '#gold', { rot: tilt, skip: ['up', 'down'] }),
-    box([6.5, 10.5, 0.25], [9.5, 11.75, 3.25], '#gold', { rot: tilt }),
-    box([7.25, 11.75, 1], [8.75, 11.8, 2.5], '#iron', { rot: tilt, skip: ['down', 'north', 'south', 'east', 'west'] }),
+    box([7.25, 2.5, 2.75], [8.75, 7, 4.25], '#plum', { rot: tilt }),
+    box([7.05, 4, 2.55], [8.95, 4.75, 4.45], '#gold', { rot: tilt, skip: ['up', 'down'] }),
+    box([7.1, 7, 2.6], [8.9, 7.75, 4.4], '#gold', { rot: tilt }),
   );
-  // the arched copper handle over the top, gold bands on its uprights and gold elbow caps
-  for (const [x0, x1] of [[1.25, 2.75], [13.25, 14.75]]) {
+  // the arched copper handle over the top, gold bands on its uprights and gold caps at the elbows
+  for (const [x0, x1] of [[2.6, 3.6], [12.4, 13.4]]) {
     els.push(
-      box([x0, 7, 7.25], [x1, 14.5, 8.75], '#copper'),
-      box([x0 - 0.25, 8.5, 7], [x1 + 0.25, 9.5, 9], '#gold', { skip: ['up', 'down'] }),
-      box([x0 - 0.25, 11, 7], [x1 + 0.25, 12, 9], '#gold', { skip: ['up', 'down'] }),
-      box([x0 - 0.25, 14, 7], [x1 + 0.25, 16, 9], '#gold'),
+      box([x0, 4.5, 7.5], [x1, 10.25, 8.5], '#copper'),
+      box([x0 - 0.2, 6.5, 7.3], [x1 + 0.2, 7.25, 8.7], '#gold', { skip: ['up', 'down'] }),
+      box([x0 - 0.2, 10, 7.3], [x1 + 0.2, 11.4, 8.7], '#gold'),
     );
   }
   els.push(
-    box([2.75, 14.5, 7.25], [13.25, 16, 8.75], '#copper'),
-    box([2.75, 7.5, 7.5], [3.75, 8.5, 8.5], '#copper'),
-    box([12.25, 7.5, 7.5], [13.25, 8.5, 8.5], '#copper'),
+    box([3.8, 10.25, 7.5], [12.2, 11.25, 8.5], '#copper'),
+    box([3.6, 4.6, 7.6], [4.1, 5.35, 8.4], '#copper'),
+    box([11.9, 4.6, 7.6], [12.4, 5.35, 8.4], '#copper'),
   );
   return [{ path: 'block/stations/kettle/base', textures: TEXTURES, elements: els }];
 }
@@ -81,32 +79,32 @@ export function kettle() {
 export function infusionPot() {
   const els = [
     // short gold feet
-    ...[[4.5, 4.5], [11.5, 4.5], [4.5, 11.5], [11.5, 11.5]].map(([x, z]) => box([x - 1, 0, z - 1], [x + 1, 1.25, z + 1], '#gold')),
+    ...[[5.25, 5.25], [10.75, 5.25], [5.25, 10.75], [10.75, 10.75]].map(([x, z]) => box([x - 0.75, 0, z - 0.75], [x + 0.75, 1, z + 0.75], '#gold')),
     // squat round body: a banded base, the painted belly, a heavy banded rim at the lid seam
-    ...octagonTrue(C, C, 1.25, 2.5, 11.5, 11.5, 3.25, { side: '#copper', top: '#plum', bottom: '#plum' }),
-    ...octagonTrue(C, C, 2.5, 3.25, 12.25, 12.25, 3.5, { side: '#gold', top: '#plum', bottom: '#plum' }, { skip: ['down'] }),
-    ...octagonTrue(C, C, 3.25, 8.75, 12.5, 12.5, 3.5, BODY, { skip: ['down'] }),
-    ...octagonTrue(C, C, 8.75, 9.5, 13, 13, 3.75, { side: '#gold', top: '#plum', bottom: '#plum' }, { skip: ['down'] }),
-    ...octagonTrue(C, C, 9.5, 10.75, 13.5, 13.5, 3.75, { side: '#copper', top: '#plum', bottom: '#plum' }, { skip: ['down'] }),
-    // gold clasps on the rim's diagonal faces
-    ...[[3.6, 3.6], [12.4, 3.6], [3.6, 12.4], [12.4, 12.4]].map(([x, z]) => box([x - 1, 8.5, z - 1], [x + 1, 11.25, z + 1], '#gold')),
+    ...octagonTrue(C, C, 1, 1.75, 8.5, 8.5, 2.5, { side: '#copper', top: '#plum', bottom: '#plum' }),
+    ...octagonTrue(C, C, 1.75, 2.25, 9.25, 9.25, 2.75, { side: '#gold', top: '#plum', bottom: '#plum' }, { skip: ['down'] }),
+    ...octagonTrue(C, C, 2.25, 6.25, 9.5, 9.5, 2.75, BODY, { skip: ['down'] }),
+    ...octagonTrue(C, C, 6.25, 6.75, 10, 10, 3, { side: '#gold', top: '#plum', bottom: '#plum' }, { skip: ['down'] }),
+    ...octagonTrue(C, C, 6.75, 7.75, 10.5, 10.5, 3, { side: '#copper', top: '#plum', bottom: '#plum' }, { skip: ['down'] }),
     // domed lid painted with the house motifs, a gold knob on a short post
-    ...octagonTrue(C, C, 10.75, 12, 12, 12, 3.5, LID, { skip: ['down'] }),
-    ...octagon(C, C, 12, 12.75, 6, 6, 1.75, PLAIN_LID, { skip: ['down'], third: false }),
-    box([7.25, 12.75, 7.25], [8.75, 13.75, 8.75], '#copper'),
-    box([6.5, 13.75, 6.5], [9.5, 15.25, 9.5], '#gold'),
+    ...octagonTrue(C, C, 7.75, 8.75, 9, 9, 2.5, LID, { skip: ['down'] }),
+    ...octagon(C, C, 8.75, 9.25, 4.5, 4.5, 1.25, PLAIN_LID, { skip: ['down'], third: false }),
+    box([7.4, 9.25, 7.4], [8.6, 10, 8.6], '#copper'),
+    box([6.85, 10, 6.85], [9.15, 11, 9.15], '#gold'),
   ];
-  // copper loop handles with gold caps, left and right
-  for (const [x0, x1, cx] of [[0, 1.5, 1.75], [14.5, 16, 14.25]]) {
+  // gold clasps on the rim's four straight faces, standing proud of it
+  for (const [x0, z0, x1, z1] of [[7.25, 2.6, 8.75, 2.85], [7.25, 13.15, 8.75, 13.4], [2.6, 7.25, 2.85, 8.75], [13.15, 7.25, 13.4, 8.75]]) {
+    els.push(box([x0, 6.4, z0], [x1, 8.1, z1], '#gold'));
+  }
+  // copper loop handles with gold caps, left and right, clear of the body's faces
+  for (const [x0, x1] of [[1.6, 2.6], [13.4, 14.4]]) {
     els.push(
-      box([x0, 9.5, 6], [x1, 10.75, 10], '#copper'),
-      box([x0, 7.25, 6], [x1, 9.5, 7], '#copper'),
-      box([x0, 7.25, 9], [x1, 9.5, 10], '#copper'),
-      box([cx - 0.75, 6.75, 5.25], [cx + 0.75, 8.25, 6.75], '#gold'),
-      box([cx - 0.75, 6.75, 9.25], [cx + 0.75, 8.25, 10.75], '#gold'),
+      box([x0, 7.75, 6.25], [x1, 8.75, 9.75], '#copper'),
+      box([x0, 6, 6.25], [x1, 7.75, 7.1], '#copper'),
+      box([x0, 6, 8.9], [x1, 7.75, 9.75], '#copper'),
     );
   }
-  // the small gold oval plaque on the east side
-  els.push(box([14.25, 4.5, 6.75], [14.5, 6.75, 9.25], '#gold'));
+  // the small gold plaque on the east side
+  els.push(box([12.75, 3.25, 7], [12.95, 5.25, 9], '#gold'));
   return [{ path: 'block/stations/infusion_pot/base', textures: TEXTURES, elements: els }];
 }

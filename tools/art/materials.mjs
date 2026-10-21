@@ -1,6 +1,6 @@
 // Material synthesis: the surfaces furniture is built from. One art direction, nothing is tinted:
-// dark wood frames, hot pink fabric, tiny touches of dark purple, brass (the lantern), glass and
-// tinctures (the shelf's bottles). The house materials (warm wood, iron, gold, ivy) are in
+// hot pink fabric, tiny touches of dark purple, brass (the lantern), glass and tinctures (the
+// shelf's bottles). The house materials (the dark wood, iron, gold, ivy) are in
 // stations/house.mjs and foliage.mjs. Every tile is 32 x 32 pixels, i.e. two texels per model pixel.
 import { rng, clamp, shade, image } from './pixels.mjs';
 
@@ -45,26 +45,6 @@ export function tincture() {
     let f = 0.9 - (y / SIZE) * 0.25 + (rand() - 0.5) * 0.06;
     if (y < 2) f = 1.35; // meniscus
     return shade(band, f);
-  });
-}
-
-/** Dark wood for the stations and the lantern: rich brown grain along U with pores. */
-export function darkWood() {
-  const rand = rng(6607);
-  const lineOffset = Array.from({ length: SIZE }, () => rand() * 0.7);
-  const dark = [59, 36, 22];
-  const light = [90, 58, 34];
-  return image(SIZE, (x, y) => {
-    const wave = Math.sin(x * 0.19 + y * 0.06) * 1.7 + Math.sin(x * 0.06 + 0.7) * 2.4;
-    const ring = (((y + wave + lineOffset[y]) % 6) + 6) % 6;
-    let t = 0.35 + Math.sin((y + wave) * 1.1) * 0.18;
-    if (ring < 0.9) t = 0; // latewood line stays dark
-    else if (ring < 1.8) t = 0.2;
-    t += (rand() - 0.5) * 0.18;
-    t = Math.max(0, Math.min(1, t));
-    let c = [0, 1, 2].map((i) => dark[i] + (light[i] - dark[i]) * t);
-    if (rand() < 0.03) c = c.map((v) => v * 0.72); // pore
-    return [clamp(c[0]), clamp(c[1]), clamp(c[2]), 255];
   });
 }
 

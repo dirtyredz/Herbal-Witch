@@ -1,4 +1,4 @@
-// The house style for stations (docs/ART.md "Station style guide"): warm reddish-brown wood,
+// The house style for stations (docs/ART.md "The house style"): dark brown wood,
 // charcoal iron, gold and copper hardware, dark plum vessels painted with gold moons, stars and
 // pink flowers on olive vines, charcoal stone, firelight. 32 x 32, untinted, opaque unless noted.
 import { rng, clamp, shade, mix, image } from '../pixels.mjs';
@@ -6,33 +6,41 @@ import { grid, moon, star, flower, sprig, overlay, smoothNoise, put, GOLD, PINK,
 
 const SIZE = 32;
 
-/** Wood grain running along U (beams, rails, mantels) or along V (posts, legs) when vertical. */
-function grain(seed, dark, light, vertical) {
+/**
+ * The house's dark brown wood (the armchair's, the owner's standard for the whole set): rich grain
+ * with dark latewood lines and pores, along U (beams, rails, tops) or along V (posts, legs). The
+ * horizontal grain is the armchair's original texture, pixel for pixel.
+ */
+function grain(seed, vertical) {
   const rand = rng(seed);
-  const offs = Array.from({ length: SIZE }, () => rand() * 0.8);
+  const lineOffset = Array.from({ length: SIZE }, () => rand() * 0.7);
+  const dark = [59, 36, 22];
+  const light = [90, 58, 34];
   return image(SIZE, (px, py) => {
     const [x, y] = vertical ? [py, px] : [px, py];
-    const wave = Math.sin(x * 0.11 + y * 0.05) * 0.7 + Math.sin(x * 0.04 + 1.3) * 0.9;
-    const ring = (((y + wave + offs[y]) % 6) + 6) % 6;
-    let t = 0.55 + Math.sin((y + wave) * 0.7) * 0.12;
-    if (ring < 0.7) t = 0.12;
-    else if (ring < 1.4) t = 0.34;
-    t += (rand() - 0.5) * 0.12;
-    if (rand() < 0.025) t *= 0.5; // pore
-    return shade(mix(dark, light, Math.max(0, Math.min(1, t))), 1);
+    const wave = Math.sin(x * 0.19 + y * 0.06) * 1.7 + Math.sin(x * 0.06 + 0.7) * 2.4;
+    const ring = (((y + wave + lineOffset[y]) % 6) + 6) % 6;
+    let t = 0.35 + Math.sin((y + wave) * 1.1) * 0.18;
+    if (ring < 0.9) t = 0; // latewood line stays dark
+    else if (ring < 1.8) t = 0.2;
+    t += (rand() - 0.5) * 0.18;
+    t = Math.max(0, Math.min(1, t));
+    let c = [0, 1, 2].map((i) => dark[i] + (light[i] - dark[i]) * t);
+    if (rand() < 0.03) c = c.map((v) => v * 0.72); // pore
+    return [clamp(c[0]), clamp(c[1]), clamp(c[2]), 255];
   });
 }
 
-export const wood = () => grain(9101, [84, 42, 22], [170, 94, 50], false);
-export const woodPost = () => grain(9102, [78, 39, 21], [160, 88, 47], true);
+export const wood = () => grain(6607, false);
+export const woodPost = () => grain(6608, true);
 
-/** End grain for caps and post tops: dark rings around a centre. */
+/** End grain for caps and post tops: dark rings around a centre, a shade under the plank faces. */
 export function woodEnd() {
   const rand = rng(9103);
   return image(SIZE, (x, y) => {
     const d = Math.hypot((x % 16) - 7.5, (y % 16) - 7.5);
-    const ring = d % 3 < 1 ? 0.75 : 1;
-    return shade([92, 46, 26], ring * (0.92 + rand() * 0.14));
+    const ring = d % 3 < 1 ? 0.72 : 1;
+    return shade([66, 40, 25], ring * (0.92 + rand() * 0.14));
   });
 }
 
@@ -75,26 +83,24 @@ export function plum() {
 
 /**
  * The painted vessel body (kettle and pot side faces, sampled by position: v = 16 - model y): a
- * band of gold moons and stars across the shoulder and pink/magenta flowers on olive sprigs
- * around the lower half, on plum. Repeats every 16 texels so each face shows one full motif.
+ * gold moon with stars across the belly and pink/magenta flowers on olive sprigs below it, on plum.
+ * Repeats every 16 texels so each face shows one full motif.
  */
 export function plumPainted() {
-  // Vessel bellies span model y 1..9.5 (texture rows 13..30): the moon band sits on rows 15..24,
-  // the flowers and vine sprigs on rows 23..30.
+  // The modest stove-top vessels' bellies span model y 1.5..6.25 (texture rows 19.5..29): the
+  // moon band sits on rows 20.5..26.5, the flowers on rows 26..29 and the vine sprigs below.
   const base = plum();
   const g = grid();
   for (const ox of [0, 16]) {
-    moon(g, ox + 8, 19, 4.3);
-    star(g, ox + 2, 16, 1);
-    star(g, ox + 14, 15, 1);
-    star(g, ox + 14, 21, 1);
-    sprig(g, ox + 2, 31, 7, 0.2);
-    sprig(g, ox + 12, 31, 7, -0.15);
-    flower(g, ox + 3, 25, PINK);
-    flower(g, ox + 6, 28, MAGENTA);
-    flower(g, ox + 12, 25, PINK);
+    moon(g, ox + 8, 23.5, 2.8);
+    star(g, ox + 3, 22, 1);
+    star(g, ox + 13, 24, 1);
+    sprig(g, ox + 2, 31, 5, 0.2);
+    sprig(g, ox + 12, 31, 5, -0.15);
+    flower(g, ox + 3, 27, PINK);
+    flower(g, ox + 8, 28, MAGENTA);
+    flower(g, ox + 12.5, 27, PINK);
     flower(g, ox + 15, 28, MAGENTA);
-    flower(g, ox + 9, 29, PINK);
   }
   return overlay(base, g);
 }

@@ -1,6 +1,3 @@
 {
-  "parent": "herbalwitch:block/botany/templates/planted_cross",
-  "textures": {
-    "cross": "herbalwitch:block/botany/wet/mint/stage_0"
-  }
+  "parent": "herbalwitch:block/botany/wet/mint/young_0"
 }

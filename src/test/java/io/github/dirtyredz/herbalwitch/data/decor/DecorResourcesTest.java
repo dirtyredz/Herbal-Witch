@@ -29,8 +29,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class DecorResourcesTest {
     private static final Set<String> CONTEXTS = Set.of("gui", "ground", "fixed", "thirdperson_righthand",
             "firstperson_righthand", "firstperson_lefthand");
-    private static final Set<String> PALETTE = Set.of("dark_wood", "wood", "wood_post", "glass", "tincture", "velvet",
-            "fabric_pink", "trim_purple", "gold", "iron", "paint_green", "runner", "runner_magenta", "ivy", "rug", "lamp_shade", "bundle_lavender");
+    private static final Set<String> PALETTE = Set.of("wood", "wood_post", "glass", "tincture", "velvet",
+            "fabric_pink", "trim_purple", "gold", "iron", "paint_green", "runner", "runner_magenta", "ivy", "rug", "lamp_shade", "parts");
 
     @Test
     void oneDesignAndFivePiecesWithStablePaths() {

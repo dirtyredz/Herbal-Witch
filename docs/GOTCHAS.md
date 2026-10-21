@@ -73,8 +73,23 @@
 - **Multiblock stations: place all cells or none.** Tests and the showcase place them through
   `StationBlock.placeStation` (or cell by cell, origin first); a lone origin with a missing cell is
   removed by the next shape update from that side. Only cell 0 has a block entity.
-- **The stove's pipe reaches past its cell.** The stove's west cell carries its stovepipe up to
-  y 32 (the block above that burner); a full block placed there clips it.
+- **The stove's pipe reaches past its cells.** The stovepipe rises at the back, straddling the two
+  cells, up to y 32 (the blocks above the stove, at their shared back edge); a full block placed
+  there clips it. Vessels on the burners stay clear of it.
+- **Coplanar faces z-fight, and the octagon trick made many.** Two boxes crossing to fake a rounded
+  slab share their top and bottom planes over the centre; rotated chamfer walls share them too, with
+  different UVs, so the tops flickered in game (0.2.0-dev.1). Octagons now tile rows, chamfer walls
+  sit 0.1 px inside an exposed top, and the z-fighting sweep (`tools/preview/report/zfighting.mjs`,
+  run by the node tests and the previewer) fails on any same-facing overlap closer than 0.02 px,
+  per model and per blockstate combination. Flush decorations need a real offset (0.1 px or more).
+- **A colour change can erase a state.** The 0.2.0 soil restyle made dry soil dark too, so moist
+  soil (only a shade darker) became indistinguishable and "watered" vanished although the blockstate
+  still switched. Keep state-carrying textures far apart; `BotanyModelsTest` checks the soil gap.
+- **A rotated leg pivots about its origin, not its foot.** Rack legs rotated about the cap swung
+  their lower ends off the feet; pivot a leaning part where it must touch (its foot) and let the
+  free end land where it may.
+- **Stretched sprites on thin boxes leak.** A whole sprite squeezed onto a 1 px side or top face
+  shows as coloured streaks next to the host block; hung bundles are 3D cubes for this reason.
 - **Previews are approximations.** `tools/preview-models.mjs` shades faces like Minecraft but has no
   ambient occlusion, light, shaders, animation or item extrusion; its GUI orientation follows the
   transform maths and has not been compared with a client. The owner's in-game check still decides.

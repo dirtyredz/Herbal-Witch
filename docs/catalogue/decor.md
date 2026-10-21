@@ -178,7 +178,7 @@ An unlabelled drawer unit sits beside Ladder Shelf on the sheet; it is not a lab
 ## Design
 
 There is one cottage design (2026-10-21), restyled in 0.2.0-dev.1 (the art pass; owner review
-pending; docs/ART.md): dark brown and warm wood, forest green, magenta and plum, gold bands, rivets
+pending; docs/ART.md): the armchair's dark brown wood throughout (since 0.2.0-dev.2), forest green, magenta and plum, gold bands, rivets
 and studs, ivy with small pink flowers. It replaces the former 18 finishes; `FinishCatalog`
 keeps a single entry so a design can return later. The pieces are crafted directly from dark oak inputs:
 
@@ -197,7 +197,7 @@ Same five ids; no new furniture ids in this release.
 - **Armchair:** dark brown frame with chunky capped posts and magenta inlays, gold and plum bands;
   forest-green velvet seat and tall back with magenta tufting studs and piping; draped arm and head
   runners with pointed hems; dense trailing ivy with small pink flowers.
-- **Apothecary Counter:** apothecary chest in warm wood with black iron corner brackets and gold
+- **Apothecary Counter:** apothecary chest in the dark house wood with black iron corner brackets and gold
   rivets; two deep-green drawer fronts in gold frames with chunky gold knobs; gold studs along the top
   rail; a magenta runner draped over the top and down the front; a dried bundle on a gold ring; ivy.
 - **Small Wall Shelf:** the approved bottle composition kept; iron brackets with gold rivets, a gold

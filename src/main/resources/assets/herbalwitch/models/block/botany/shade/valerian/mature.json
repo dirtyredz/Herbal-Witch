@@ -2,7 +2,7 @@
   "ambientocclusion": false,
   "textures": {
     "parts": "herbalwitch:block/botany/parts",
-    "particle": "herbalwitch:block/botany/shade/valerian/stage_2"
+    "particle": "herbalwitch:item/botany/shade/valerian/fresh"
   },
   "elements": [
     {
@@ -17,24 +17,6 @@
         8.375
       ],
       "faces": {
-        "down": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "up": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
         "north": {
           "uv": [
             2.25,
@@ -153,15 +135,6 @@
         9
       ],
       "faces": {
-        "down": {
-          "uv": [
-            12.25,
-            2.25,
-            13.75,
-            3.75
-          ],
-          "texture": "#parts"
-        },
         "up": {
           "uv": [
             12.25,
@@ -221,24 +194,6 @@
         6.875
       ],
       "faces": {
-        "down": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "up": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
         "north": {
           "uv": [
             2.25,
@@ -357,15 +312,6 @@
         7.5
       ],
       "faces": {
-        "down": {
-          "uv": [
-            12.25,
-            2.25,
-            13.75,
-            3.75
-          ],
-          "texture": "#parts"
-        },
         "up": {
           "uv": [
             12.25,
@@ -425,24 +371,6 @@
         10.375
       ],
       "faces": {
-        "down": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
-        "up": {
-          "uv": [
-            2.25,
-            0.25,
-            3.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
         "north": {
           "uv": [
             2.25,
@@ -561,15 +489,6 @@
         11
       ],
       "faces": {
-        "down": {
-          "uv": [
-            12.25,
-            2.25,
-            13.75,
-            3.75
-          ],
-          "texture": "#parts"
-        },
         "up": {
           "uv": [
             12.25,
@@ -698,12 +617,12 @@
       "from": [
         3,
         0.5,
-        7
+        7.12
       ],
       "to": [
         8,
         1,
-        9
+        8.88
       ],
       "rotation": {
         "angle": -22.5,
@@ -1363,15 +1282,6 @@
         6.6146
       ],
       "faces": {
-        "down": {
-          "uv": [
-            6.25,
-            0.25,
-            7.75,
-            1.75
-          ],
-          "texture": "#parts"
-        },
         "up": {
           "uv": [
             6.25,

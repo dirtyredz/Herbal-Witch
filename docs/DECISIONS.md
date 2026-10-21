@@ -2,6 +2,20 @@
 
 Newest first.
 
+## 2026-10-21 - 0.2.0-dev.2: 3D herbs at every age, one dark wood, a z-fighting guard
+
+From the owner's dev.1 feedback (docs/ART.md "Standing rules"). Young herb ages are derived from
+each mature model (scaled toward the root, thinned, flowers absent, then buds, then partly open)
+rather than authored three more times per herb, so a mature redesign carries through; the stage
+sprites and the planted-cross template are gone. The armchair's dark wood replaced the warm wood as
+`material/wood` (the texture name kept, `dark_wood` removed), so every wooden piece changed at
+once. Z-fighting is guarded by a geometric sweep in the previewer (node tests and preview runs)
+over every model and multipart combination, not by convention; organic models resolve their own
+coincidences automatically, built pieces by hand. Dried bundles are one 3D builder shared by the
+hung bundle block, rack, stove and counter (the four station bundle sprites are gone). Rejected:
+authored young models per herb (42 more shapes to keep in step); a per-element size jitter to
+dodge the check (hides the fault instead of removing it); keeping a separate warm wood.
+
 ## 2026-10-21 - Art pass 0.2.0: an independent house style for stations (supersedes "fixed station appearances")
 
 Stations no longer borrow the furniture's fabric colours (the pink and green ceramic stripes): they
@@ -17,7 +31,7 @@ Node generator: one place per piece, position UVs that keep textures continuous 
 and cells, decal UVs for stretched sprites, and automatic cell splitting. The JSON stays checked
 in under `src/main/resources` (like the generated textures) and passes the same template tests.
 Rejected: hand-editing 80-element JSON; Java datagen for geometry (verbose, and models would split
-between two pipelines). The bundle and lantern templates stay hand-authored.
+between two pipelines). The lantern templates stay hand-authored (bundles are generated since dev.2).
 
 ## 2026-10-21 - Headless model previews gate art changes
 
@@ -54,7 +68,7 @@ by their random tick. Tradeoff: an inner corner around an empty diagonal shows t
 
 ## 2026-10-21 - Herbs rooted 2 px into the ground; mature herbs are 3D
 
-Young ages use a planted cross whose roots are two pixels below the block, matching the bed's soil
+(Superseded 2026-10-21 by 3D young ages, see above.) Young ages use a planted cross whose roots are two pixels below the block, matching the bed's soil
 surface (14) and sitting one pixel into farmland and two into full ground; the plant needs no
 state for what it stands on. Mature herbs are cube models over a swatch atlas (the owner's
 reference), so their stage sprites were removed. Rejected: per-support plant states; a taller bed
