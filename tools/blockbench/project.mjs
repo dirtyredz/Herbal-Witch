@@ -35,6 +35,9 @@ function readDisplaySlot(where, slot) {
     scale: slot.scale ?? [1, 1, 1],
   };
   for (const [k, v] of Object.entries(out)) if (!isVec(v)) fail(where, `${k} must be three numbers`);
+  // The editor wraps angles into -180..180 (225 is saved as -135); both turn the item the same
+  // way, so one canonical range keeps an unchanged save compiling to the committed model.
+  out.rotation = out.rotation.map((a) => ((a % 360) + 360) % 360);
   return out;
 }
 
