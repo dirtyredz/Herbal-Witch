@@ -7,8 +7,11 @@ import { resolveModel, resolveTexture, isAbstract } from '../assets/models.mjs';
 
 /**
  * Returns {states: [{block, props, models}], items: [id], errors: [string], models: {total, covered}}.
+ * `scope` ({blocks, items, models}: sets of ids) limits the sweep to part of the mod (the dev-art
+ * pack checks what a save can change); without it everything is covered.
  */
-export function coverage(res, baker) {
+export function coverage(res, baker, scope = null) {
+  const inScope = (kind, id) => !scope || scope[kind].has(id);
   const errors = [];
   const states = [];
   const textures = new Set();
@@ -18,7 +21,7 @@ export function coverage(res, baker) {
       if (!res.texture(id)) errors.push(`${where}: missing texture ${id}`);
     }
   };
-  for (const block of res.ids('blockstates')) {
+  for (const block of res.ids('blockstates').filter((b) => inScope('blocks', b))) {
     const bs = res.json('blockstates', block);
     let combos;
     try {
@@ -43,7 +46,7 @@ export function coverage(res, baker) {
       }
     }
   }
-  const items = res.ids('models').filter((id) => id.startsWith('herbalwitch:item/'));
+  const items = res.ids('models').filter((id) => id.startsWith('herbalwitch:item/') && inScope('items', id));
   for (const id of items) {
     try {
       const { model, quads } = baker.bake(id);
@@ -58,7 +61,7 @@ export function coverage(res, baker) {
       errors.push(`${id}: ${e.message}`);
     }
   }
-  const all = res.ids('models');
+  const all = res.ids('models').filter((id) => inScope('models', id));
   let covered = 0;
   for (const id of all) {
     if (baker.used.has(id)) {

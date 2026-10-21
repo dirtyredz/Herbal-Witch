@@ -3,6 +3,10 @@
 //
 //   node tools/compile-blockbench.mjs                     compile and write (only changed files)
 //   node tools/compile-blockbench.mjs --check             compile in memory; fail if committed output is stale
+//   node tools/compile-blockbench.mjs --dev-pack "<trial .minecraft>" [--watch]
+//                                                         publish the live dev-art resource pack into that
+//                                                         instance (once, or on every save); writes nothing
+//                                                         in the repository (docs/BLOCKBENCH.md)
 //   node tools/compile-blockbench.mjs --refresh-previews  re-embed shared textures in the .bbmodel files
 //                                                         after an intentional palette change
 //   node tools/compile-blockbench.mjs --compare <dir>     appearance parity of the current trees against a
@@ -16,10 +20,12 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { compileAll, canonicalTextures, TEXTURE_ROOT } from './blockbench/compile.mjs';
-import { loadPieces } from './blockbench/catalogue.mjs';
+import { loadPieces, SOURCE_DIR } from './blockbench/catalogue.mjs';
 import { refreshPreviews } from './blockbench/textures.mjs';
 import { compileJson } from './blockbench/project.mjs';
 import { compareAppearance } from './blockbench/migration/compare.mjs';
+import { devPackSession } from './blockbench/dev-art/pack.mjs';
+import { watchSources } from './blockbench/dev-art/watch.mjs';
 import { writeOutputs } from './art/output.mjs';
 import { Resources } from './preview/assets/resources.mjs';
 
@@ -36,7 +42,41 @@ function fail(lines) {
   process.exit(1);
 }
 
-if (args.includes('--refresh-previews')) {
+/** One dev-pack publication (never throws). */
+function devPack(session) {
+  const started = Date.now();
+  try {
+    return { ...session.run(), ms: Date.now() - started };
+  } catch (e) {
+    return { ok: false, errors: [e.message] };
+  }
+}
+
+/** Reports a publication for the owner. */
+function report(result) {
+  const time = new Date().toLocaleTimeString();
+  if (result.ok) {
+    console.log(`[${time}] published ${result.dest} (${result.written.length} changed, ${result.removed.length} removed, ${result.ms} ms): ready for F3+T`);
+  } else {
+    console.error(`[${time}] NOT published; the pack in game is unchanged:`);
+    for (const e of result.errors.slice(0, 20)) console.error(`  ${e}`);
+    if (result.errors.length > 20) console.error(`  ... ${result.errors.length - 20} more`);
+  }
+  return result;
+}
+
+if (args.includes('--dev-pack')) {
+  const instance = arg('--dev-pack');
+  if (!instance || instance.startsWith('--')) fail(['--dev-pack needs the trial instance\'s .minecraft folder']);
+  const session = devPackSession({ root, instance });
+  const first = report(devPack(session));
+  if (args.includes('--watch')) {
+    watchSources(join(root, SOURCE_DIR), () => devPack(session), report);
+    console.log(`watching ${SOURCE_DIR} for saves (Ctrl+C to stop)`);
+  } else if (!first.ok) {
+    process.exit(1);
+  }
+} else if (args.includes('--refresh-previews')) {
   const canonical = canonicalTextures(join(root, TEXTURE_ROOT));
   for (const { dir, piece, projectFile } of loadPieces(root)) {
     const { json, changed } = refreshPreviews(JSON.parse(readFileSync(projectFile, 'utf8')), piece, canonical.bytes);

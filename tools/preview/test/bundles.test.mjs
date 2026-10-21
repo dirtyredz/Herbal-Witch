@@ -4,7 +4,11 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { hungBundles, INSET } from '../../models/preparations/bundles.mjs';
 import { HERB_LIST } from '../../art/botany/herbs.mjs';
-import { MODELS } from '../../models/catalogue.mjs';
+import { readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const models = join(dirname(fileURLToPath(import.meta.url)), '../../../src/main/resources/assets/herbalwitch/models');
 
 const spritePlanes = (elements) => elements.filter((e) => Object.values(e.faces).some((f) => f.texture.startsWith('#bundle_')));
 
@@ -23,8 +27,12 @@ test('a bundle sprite is a zero-thickness plane with only its two broad faces, i
   }
 });
 
-test('every sprite plane of the stations and furniture obeys the same rule within its cell', () => {
-  for (const m of MODELS().filter((x) => /drying_rack\/bundles|stove\/assembly|apothecary_counter/.test(x.path))) {
+test('every sprite plane of the compiled stations and furniture obeys the same rule within its cell', () => {
+  const paths = ['drying_rack/bundles_0', 'drying_rack/bundles_1', 'drying_rack/bundles_2', 'drying_rack/bundles_3', 'stove/assembly']
+    .map((p) => `block/stations/${p}`).concat(['block/decor/templates/apothecary_counter']);
+  for (const path of paths) {
+    const m = { path, elements: JSON.parse(readFileSync(join(models, `${path}.json`), 'utf8')).elements };
+    assert.ok(spritePlanes(m.elements).length, `${path} has a bundle`);
     for (const e of spritePlanes(m.elements)) {
       assert.deepEqual(Object.keys(e.faces).filter((f) => f === 'up' || f === 'down'), [], `${m.path}: no horizontal faces`);
       const lo = e.from.map((v, i) => v === e.to[i] ? v : null).findIndex((v) => v !== null);

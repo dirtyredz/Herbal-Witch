@@ -1,0 +1,106 @@
+// The art pipeline (docs/ARCHITECTURE.md, "Art pipeline"): three deterministic Node producers write
+// committed resources, each into paths only it owns:
+//   generateTextures  tools/generate-textures.mjs    procedural textures (textures/)
+//   generateModels    tools/generate-models.mjs      herbs, herb beds, hung bundles (models/block/botany, .../preparations/bundles)
+//   compileBlockbench tools/compile-blockbench.mjs   the Blockbench pieces (src/art/blockbench -> stations,
+//                                                    decor and lantern templates, plus their owned textures)
+// generateArt runs all three (textures first: Blockbench previews are checked against them);
+// datagen and resource processing run after it, and `check` runs checkArt (the non-writing
+// --check modes and the Node tests). Java datagen stays the only writer of src/generated.
+// Override the Node binary with -PnodeExecutable=<path>.
+
+def nodeExecutable = (project.findProperty('nodeExecutable') ?: 'node').toString()
+def artAssets = 'src/main/resources/assets/herbalwitch'
+
+def requireNode = { Task task ->
+    task.doFirst {
+        String version
+        try {
+            def proc = new ProcessBuilder(nodeExecutable, '--version').redirectErrorStream(true).start()
+            version = proc.inputStream.text.trim()
+            if (proc.waitFor() != 0) version = null
+        } catch (IOException ignored) {
+            version = null
+        }
+        if (!version) {
+            throw new GradleException("${task.name} needs Node.js 22 or newer on PATH (or -PnodeExecutable=<path>) for the art pipeline in tools/.")
+        }
+        if ((version.replaceFirst(/^v(\d+).*/, '$1') as int) < 22) {
+            throw new GradleException("${task.name} needs Node.js 22 or newer (found ${version}).")
+        }
+    }
+}
+
+def artTask = { String name, String text, List<String> script, Closure io ->
+    tasks.register(name, Exec) { Exec task ->
+        group = 'art'
+        description = text
+        workingDir = projectDir
+        commandLine([nodeExecutable] + script)
+        io.resolveStrategy = Closure.DELEGATE_FIRST
+        io.delegate = task
+        io(task)
+        requireNode(task)
+    }
+}
+
+artTask('generateTextures', 'Writes the procedural textures (tools/generate-textures.mjs).', ['tools/generate-textures.mjs']) {
+    inputs.dir('tools/art')
+    inputs.dir('tools/image')
+    inputs.file('tools/generate-textures.mjs')
+    outputs.dir("${artAssets}/textures")
+}
+
+artTask('generateModels', 'Writes the procedural herb, herb-bed and hung-bundle models (tools/generate-models.mjs).', ['tools/generate-models.mjs']) {
+    inputs.dir('tools/models')
+    inputs.dir('tools/art')
+    inputs.dir('tools/preview/geometry')
+    inputs.file('tools/generate-models.mjs')
+    outputs.dir("${artAssets}/models/block/botany")
+    outputs.dir("${artAssets}/models/block/preparations/bundles")
+}
+
+artTask('compileBlockbench', 'Compiles src/art/blockbench projects into models and owned textures (tools/compile-blockbench.mjs).', ['tools/compile-blockbench.mjs']) {
+    dependsOn 'generateTextures'
+    inputs.dir('src/art/blockbench')
+    inputs.dir('tools/blockbench')
+    inputs.dir('tools/models')
+    inputs.dir('tools/image')
+    inputs.file('tools/compile-blockbench.mjs')
+    outputs.dir("${artAssets}/models/block/stations")
+    outputs.dir("${artAssets}/models/block/decor/templates")
+    outputs.dir("${artAssets}/models/block/preparations/templates")
+    outputs.file("${artAssets}/textures/block/material/rug.png")
+    outputs.file("${artAssets}/textures/block/material/lamp_shade.png")
+}
+
+tasks.register('generateArt') {
+    group = 'art'
+    description = 'Runs every art producer: textures, procedural models, Blockbench pieces.'
+    dependsOn 'generateTextures', 'generateModels', 'compileBlockbench'
+}
+
+def artCheck = { String name, List<String> script ->
+    tasks.register(name, Exec) { Exec task ->
+        group = 'verification'
+        workingDir = projectDir
+        commandLine([nodeExecutable] + script)
+        mustRunAfter 'generateArt'
+        requireNode(task)
+    }
+}
+artCheck('checkTextures', ['tools/generate-textures.mjs', '--check'])
+artCheck('checkModels', ['tools/generate-models.mjs', '--check'])
+artCheck('checkBlockbench', ['tools/compile-blockbench.mjs', '--check'])
+artCheck('testArtTools', ['--test', 'tools/blockbench/test/*.test.mjs', 'tools/blockbench/dev-art/test/*.test.mjs', 'tools/preview/test/*.test.mjs'])
+
+tasks.register('checkArt') {
+    group = 'verification'
+    description = 'Fails when committed art is stale, plus the Node pipeline, dev-pack and preview tests (z-fighting, coverage).'
+    dependsOn 'checkTextures', 'checkModels', 'checkBlockbench', 'testArtTools'
+}
+
+tasks.named('processResources') { dependsOn 'generateArt' }
+tasks.named('check') { dependsOn 'checkArt' }
+// ForgeGradle creates its run tasks late; datagen reads the generated art through --existing.
+tasks.matching { it.name == 'runData' }.configureEach { dependsOn 'generateArt' }

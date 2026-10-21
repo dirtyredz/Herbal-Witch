@@ -3,6 +3,7 @@
 // (explicit UVs in Minecraft's 0..16 space, group paths, generated attachments expanded in place),
 // check bounds, then produce the piece's state or cell outputs. Writing is the caller's job
 // (tools/compile-blockbench.mjs through tools/art/output.mjs, or the dev-art staging pack).
+import { createHash } from 'node:crypto';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { decodePng } from '../image/png-decode.mjs';
@@ -114,25 +115,36 @@ export function compileProject({ dir, piece }, text, canonical) {
 
 /**
  * Compiles the whole catalogue. `readText(projectFile)` supplies project contents (default: the
- * file). Owned textures are written before shared ones are read, so a piece may use another's.
- * Returns {models, textures, catalogue, pieces}.
+ * file). With a `cache` (a Map kept between calls, as the dev-art watcher does) a project whose
+ * text and descriptor are unchanged is not recompiled. Returns {models, textures, catalogue,
+ * pieces, changed (project dirs compiled afresh), owners (model path -> project dir)}.
  */
-export function compileAll(root, { readText = (f) => readFileSync(f, 'utf8'), textureRoot = join(root, TEXTURE_ROOT) } = {}) {
+export function compileAll(root, { readText = (f) => readFileSync(f, 'utf8'), textureRoot = join(root, TEXTURE_ROOT), cache = null } = {}) {
   const catalogue = loadCatalogue(root);
   const pieces = loadPieces(root, catalogue);
   const models = new Map();
   const textures = new Map();
   const canonical = canonicalTextures(textureRoot, textures);
+  const changed = [];
+  const owners = new Map();
   for (const p of pieces) {
-    const out = compileProject(p, readText(p.projectFile), canonical);
+    const text = readText(p.projectFile);
+    const key = createHash('sha1').update(text).update(JSON.stringify(p.piece)).digest('hex');
+    let out = cache?.get(p.dir)?.key === key ? cache.get(p.dir).out : null;
+    if (!out) {
+      out = compileProject(p, text, canonical);
+      cache?.set(p.dir, { key, out });
+      changed.push(p.dir);
+    }
     for (const [k, v] of out.models) {
       if (models.has(k)) throw new Error(`${p.dir}: ${k} is also written by another project`);
       models.set(k, v);
+      owners.set(k, p.dir);
     }
     for (const [k, v] of out.textures) {
       if (textures.has(k)) throw new Error(`${p.dir}: texture ${k} is also owned by another project`);
       textures.set(k, v);
     }
   }
-  return { models, textures, catalogue, pieces };
+  return { models, textures, catalogue, pieces, changed, owners };
 }

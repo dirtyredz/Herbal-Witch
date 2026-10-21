@@ -31,27 +31,35 @@ export const repositoryTrees = (root) => [join(root, 'src/generated/resources/as
 export class Resources {
   /**
    * @param root  the mod directory (mods/HerbalWitch)
-   * @param trees explicit asset roots (each holding <namespace>/...) instead of the repository's
-   *              two, e.g. a staged resource pack or a captured baseline
+   * @param trees   explicit asset roots (each holding <namespace>/...) instead of the repository's
+   *                two, e.g. a staged resource pack or a captured baseline
+   * @param overlay Map of '<ns>/<kind>/<path><ext>' -> bytes laid over the trees (an in-memory
+   *                resource pack: the dev-art staging)
    */
-  constructor(root, { trees = null } = {}) {
+  constructor(root, { trees = null, overlay = new Map() } = {}) {
+    this.overlay = overlay;
     if (trees && !trees.length) throw new Error('no asset trees given');
     this.trees = trees ?? repositoryTrees(root);
     this.textureCache = new Map();
     this.diagnostics = [];
   }
 
-  /** The single file for assets/<ns>/<kind>/<path><ext>, or null; conflicts are diagnosed. */
-  file(ns, kind, path, ext) {
+  /**
+   * The bytes of assets/<ns>/<kind>/<path><ext>, or null. An overlay entry wins over the trees (a
+   * resource pack over the mod); a path in two trees is a diagnosed conflict.
+   */
+  read(ns, kind, path, ext) {
+    const key = `${ns}/${kind}/${path}${ext}`;
+    if (this.overlay.has(key)) return this.overlay.get(key);
     const hits = this.trees.map((t) => join(t, ns, kind, path + ext)).filter((f) => existsSync(f));
-    if (hits.length > 1) this.diagnose('conflict', `${ns}:${kind}/${path}${ext} exists in both resource trees`);
-    return hits[0] ?? null;
+    if (hits.length > 1) this.diagnose('conflict', `${ns}:${kind}/${path}${ext} exists in more than one resource tree`);
+    return hits.length ? readFileSync(hits[0]) : null;
   }
 
   json(kind, id) {
     const [ns, path] = splitId(id);
-    const f = this.file(ns, kind, path, '.json');
-    return f ? JSON.parse(readFileSync(f, 'utf8')) : null;
+    const b = this.read(ns, kind, path, '.json');
+    return b ? JSON.parse(b.toString('utf8')) : null;
   }
 
   /** Every id of a kind ('blockstates', 'models') in this mod's namespace, sorted. */
@@ -63,6 +71,10 @@ export class Resources {
         if (f.endsWith('.json')) out.add(`${NAMESPACE}:${relative(base, f).split(sep).join('/').slice(0, -5)}`);
       }
     }
+    const prefix = `${NAMESPACE}/${kind}/`;
+    for (const key of this.overlay.keys()) {
+      if (key.startsWith(prefix) && key.endsWith('.json')) out.add(`${NAMESPACE}:${key.slice(prefix.length, -5)}`);
+    }
     return [...out].sort();
   }
 
@@ -70,16 +82,10 @@ export class Resources {
   texture(id) {
     if (this.textureCache.has(id)) return this.textureCache.get(id);
     const [ns, path] = splitId(id);
-    const f = this.file(ns, 'textures', path, '.png');
-    const tex = f ? decodePng(readFileSync(f), id) : null;
+    const b = this.read(ns, 'textures', path, '.png');
+    const tex = b ? decodePng(b, id) : null;
     this.textureCache.set(id, tex);
     return tex;
-  }
-
-  /** Raw bytes of every file a render depended on, for the manifest's input hashes. */
-  bytes(ns, kind, path, ext) {
-    const f = this.file(ns, kind, path, ext);
-    return f ? readFileSync(f) : null;
   }
 
   diagnose(kind, message) {

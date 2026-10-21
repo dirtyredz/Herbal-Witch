@@ -2,6 +2,7 @@ package io.github.dirtyredz.herbalwitch.data.preparations;
 
 import com.google.gson.JsonObject;
 import io.github.dirtyredz.herbalwitch.data.botany.BotanyManifest;
+import io.github.dirtyredz.herbalwitch.data.fixture.ItemDisplays;
 import io.github.dirtyredz.herbalwitch.data.fixture.ModelResolver;
 import io.github.dirtyredz.herbalwitch.data.fixture.ModelResolver.Resolved;
 import io.github.dirtyredz.herbalwitch.data.fixture.ResourceFiles;
@@ -101,10 +102,11 @@ class PreparationResourcesTest {
         assertEquals("herbalwitch:block/preparations/templates/oil_lantern_off", variants.getAsJsonObject("lit=false").get("model").getAsString());
         for (String state : List.of("on", "off")) {
             String model = "herbalwitch:block/preparations/templates/oil_lantern_" + state;
-            TemplateChecks.check(model, Map.of());
+            TemplateChecks.checkAuthored(model);
             boolean glows = ModelResolver.resolve(model).elements().toString().contains("forge_data");
             assertEquals(state.equals("on"), glows, model);
         }
+        ItemDisplays.assertInherited("herbalwitch:item/" + PreparationManifest.LANTERN);
         JsonObject recipe = generated("data/herbalwitch/recipes/" + PreparationManifest.LANTERN + ".json");
         assertEquals("[\"N N\",\"NTN\",\" G \"]", recipe.getAsJsonArray("pattern").toString());
     }

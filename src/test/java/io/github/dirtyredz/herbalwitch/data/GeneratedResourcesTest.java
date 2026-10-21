@@ -102,7 +102,7 @@ class GeneratedResourcesTest {
             if (rel.startsWith("data/herbalwitch/") && text.contains("farmersdelight:")) {
                 assertTrue(text.contains("\"required\": false"), rel + ": Farmer's Delight references must be optional");
             }
-            assertFalse(rel.endsWith(".png"), "textures are authored by tools/generate-textures.mjs, not datagen: " + rel);
+            assertFalse(rel.endsWith(".png"), "textures come from the art pipeline (tools/generate-textures.mjs, tools/compile-blockbench.mjs), never datagen: " + rel);
         }
     }
 }

@@ -11,10 +11,13 @@ function report(where, quads, errors) {
   }
 }
 
-/** Diagnostics for every block model and every blockstate combination of the mod. */
-export function zFighting(res, baker) {
+/**
+ * Diagnostics for every block model and every blockstate combination of the mod, or only those in
+ * `scope` ({models, blocks}: sets of ids).
+ */
+export function zFighting(res, baker, scope = null) {
   const errors = [];
-  for (const id of res.ids('models').filter((m) => m.startsWith('herbalwitch:block/'))) {
+  for (const id of res.ids('models').filter((m) => m.startsWith('herbalwitch:block/') && (!scope || scope.models.has(m)))) {
     let quads;
     try {
       quads = baker.bake(id).quads;
@@ -23,7 +26,7 @@ export function zFighting(res, baker) {
     }
     report(id, quads, errors);
   }
-  for (const block of res.ids('blockstates')) {
+  for (const block of res.ids('blockstates').filter((b) => !scope || scope.blocks.has(b))) {
     const bs = res.json('blockstates', block);
     if (!bs.multipart) continue; // a variant is one model, already checked above
     for (const props of enumerate(bs)) {

@@ -166,6 +166,8 @@ tasks.named('jar', Jar).configure {
     finalizedBy 'reobfJar'
 }
 
+apply from: 'gradle/art.gradle'
+
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }

@@ -10,7 +10,8 @@
 //   sheets/items-gui.png              every item as the GUI shows it
 //   scenes/<name>.png                 joined beds, multiblocks, vessels on heat, furniture
 //   compare/<name>.png                owner reference beside the render (with --references)
-//   manifest.json                     coverage, diagnostics, settings and input SHA-256s
+//   manifest.json                     coverage, diagnostics, settings, input SHA-256s and the
+//                                     Blockbench source and compiled-model SHA-256s
 // Exits 1 when anything is missing, unbound, unsupported or unrendered, or when any model or
 // blockstate combination has overlapping coplanar faces facing the same way (z-fighting).
 //
@@ -25,7 +26,7 @@ import { Baker } from './preview/geometry/bake.mjs';
 import { coverage } from './preview/report/coverage.mjs';
 import { zFighting } from './preview/report/zfighting.mjs';
 import { reviewSet } from './preview/report/review.mjs';
-import { inputHashes, combinedHash } from './preview/report/manifest.mjs';
+import { inputHashes, combinedHash, blockbenchHashes } from './preview/report/manifest.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const arg = (name, fallback = null) => {
@@ -57,6 +58,7 @@ const manifest = {
   images: [...images.keys()].sort(),
   errors: allErrors,
   inputs: { combined: combinedHash(hashes), files: hashes },
+  blockbench: blockbenchHashes(root),
   approximations: 'directional shading only; no AO, world light, shaders, animation, mipmaps or item extrusion; emissive drawn full-bright',
 };
 mkdirSync(out, { recursive: true });

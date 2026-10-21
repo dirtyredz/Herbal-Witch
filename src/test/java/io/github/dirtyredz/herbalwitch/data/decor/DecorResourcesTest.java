@@ -1,8 +1,8 @@
 package io.github.dirtyredz.herbalwitch.data.decor;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import io.github.dirtyredz.herbalwitch.data.fixture.ItemDisplays;
 import io.github.dirtyredz.herbalwitch.data.fixture.ModelResolver;
 import io.github.dirtyredz.herbalwitch.data.fixture.ModelResolver.Resolved;
 import io.github.dirtyredz.herbalwitch.data.fixture.TemplateChecks;
@@ -27,8 +27,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * and gold, with trailing ivy (art pass 0.2.0).
  */
 class DecorResourcesTest {
-    private static final Set<String> CONTEXTS = Set.of("gui", "ground", "fixed", "thirdperson_righthand",
-            "firstperson_righthand", "firstperson_lefthand");
     private static final Set<String> PALETTE = Set.of("wood", "wood_post", "glass", "tincture", "velvet",
             "fabric_pink", "trim_purple", "gold", "iron", "paint_green", "runner", "runner_magenta", "ivy", "rug", "lamp_shade", "parts");
 
@@ -92,7 +90,7 @@ class DecorResourcesTest {
         boolean vines = false;
         for (String template : List.of("armchair", "apothecary_counter", "wall_shelf", "table_lamp_off", "table_lamp_on", "rug")) {
             String id = "herbalwitch:block/decor/templates/" + template;
-            TemplateChecks.check(id, Map.of());
+            TemplateChecks.checkAuthored(id);
             Resolved model = ModelResolver.resolve(id);
             for (Map.Entry<String, String> texture : model.textures().entrySet()) {
                 if (!texture.getKey().equals("particle") && !texture.getKey().startsWith("bundle_")) { // bundle sprites are item art
@@ -127,16 +125,14 @@ class DecorResourcesTest {
         assertTrue(glowing >= 2, "the lit shade glows");
     }
 
+    /** The item is its template; its display transforms are compiled into the template from the Blockbench project. */
     @Test
-    void everyItemIsItsTemplateWithDeliberateTransforms() {
+    void everyItemIsItsTemplateWithInheritedTransforms() {
         for (String id : ids()) {
             Resolved item = ModelResolver.resolve("herbalwitch:item/" + id);
             String template = DecorManifest.TEMPLATES.get(pieceOf(id)) + (pieceOf(id).equals("table_lamp") ? "_off" : "");
             assertEquals("herbalwitch:block/decor/templates/" + template, item.chain().get(1), id);
-            assertEquals(CONTEXTS, item.display().keySet(), id);
-            JsonElement scale = item.display().getAsJsonObject("gui").getAsJsonArray("scale").get(0);
-            double expected = Set.of("small_rug", "small_wall_shelf").contains(pieceOf(id)) ? 0.75 : 0.625;
-            assertEquals(expected, scale.getAsDouble(), 1e-6, id);
+            ItemDisplays.assertInherited("herbalwitch:item/" + id);
         }
     }
 }

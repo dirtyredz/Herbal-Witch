@@ -3,6 +3,7 @@ package io.github.dirtyredz.herbalwitch.data.stations;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import io.github.dirtyredz.herbalwitch.data.fixture.BlockstateModels;
+import io.github.dirtyredz.herbalwitch.data.fixture.ItemDisplays;
 import io.github.dirtyredz.herbalwitch.data.fixture.ModelResolver;
 import io.github.dirtyredz.herbalwitch.data.fixture.ResourceFiles;
 import io.github.dirtyredz.herbalwitch.data.fixture.TemplateChecks;
@@ -101,9 +102,10 @@ class StationResourcesTest {
             Set<String> models = new TreeSet<>();
             variants.entrySet().forEach(v -> models.add(v.getValue().getAsJsonObject().get("model").getAsString()));
             assertEquals(Set.of("herbalwitch:block/stations/" + station + "/base"), models, station);
-            models.forEach(m -> assertTrue(TemplateChecks.check(m, Map.of()) >= 6, m));
+            models.forEach(m -> assertTrue(TemplateChecks.checkAuthored(m) >= 6, m));
             assertEquals("herbalwitch:block/stations/" + station + "/base",
                     ModelResolver.resolve("herbalwitch:item/" + StationManifest.station(station)).chain().get(1));
+            ItemDisplays.assertInherited("herbalwitch:item/" + StationManifest.station(station));
         }
     }
 
@@ -139,18 +141,19 @@ class StationResourcesTest {
                 }
                 // the stove's pipe rises above its cell; every other cell stays inside its block
                 double top = station.equals("stove") ? 32 : 16;
-                TemplateChecks.check(dir + "part_" + part, Map.of(), new double[] {0, 0, 0}, new double[] {16, top, 16});
+                TemplateChecks.checkAuthored(dir + "part_" + part, new double[] {0, 0, 0}, new double[] {16, top, 16});
             }
             int overlays = 0;
             for (int part = 0; part < cells; part++) {
                 if (java.nio.file.Files.isRegularFile(ModelResolver.modelFile(dir + overlay + part))) {
-                    TemplateChecks.check(dir + overlay + part, Map.of(), new double[] {0, 0, 0}, new double[] {16, 17, 16});
+                    TemplateChecks.checkAuthored(dir + overlay + part, new double[] {0, 0, 0}, new double[] {16, 17, 16});
                     overlays++;
                 }
             }
             assertTrue(overlays > 0, station + " has no overlay");
             assertEquals(dir + "assembly", ModelResolver.resolve("herbalwitch:item/" + StationManifest.station(station)).chain().get(1));
-            TemplateChecks.check(dir + "assembly", Map.of(), new double[] {-16, 0, 0}, new double[] {16, 32, 16});
+            ItemDisplays.assertInherited("herbalwitch:item/" + StationManifest.station(station));
+            TemplateChecks.checkAuthored(dir + "assembly", new double[] {-16, 0, 0}, new double[] {16, 32, 16});
         });
     }
 
