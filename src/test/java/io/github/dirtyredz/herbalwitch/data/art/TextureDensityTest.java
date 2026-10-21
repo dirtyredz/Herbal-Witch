@@ -28,7 +28,7 @@ class TextureDensityTest {
         }
         assertTrue(pngs.size() > 150, "expected the whole texture set, found " + pngs.size());
         for (Path png : pngs) {
-            String relative = TEXTURES.relativize(png).toString().replace('\', '/');
+            String relative = TEXTURES.relativize(png).toString().replace('\\', '/');
             int want = TextureDensity.expectedSize(relative);
             int[] size = ResourceFiles.pngSize(png);
             assertEquals(want + " x " + want, size[0] + " x " + size[1], relative + " (" + TextureDensity.TEXELS_PER_UNIT + " texels per model unit)");

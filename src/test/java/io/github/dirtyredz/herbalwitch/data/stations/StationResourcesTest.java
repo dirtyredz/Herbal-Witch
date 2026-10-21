@@ -6,6 +6,7 @@ import io.github.dirtyredz.herbalwitch.data.fixture.BlockstateModels;
 import io.github.dirtyredz.herbalwitch.data.fixture.ItemDisplays;
 import io.github.dirtyredz.herbalwitch.data.fixture.ModelResolver;
 import io.github.dirtyredz.herbalwitch.data.fixture.ResourceFiles;
+import io.github.dirtyredz.herbalwitch.data.fixture.TextureDensity;
 import io.github.dirtyredz.herbalwitch.data.fixture.TemplateChecks;
 import org.junit.jupiter.api.Test;
 
@@ -158,14 +159,15 @@ class StationResourcesTest {
     }
 
     @Test
-    void everyStationHasA256PixelGuiAtlas() {
+    void everyStationHasAGuiAtlasAtTheSetDensity() {
+        // vanilla 256-unit container sheet (the screens blit in those units) at two texels per GUI pixel
         for (String station : StationManifest.STATIONS.keySet()) {
             if (station.equals("stove")) {
                 continue; // the stove opens the hearth's menu and screen
             }
             int[] size = ResourceFiles.pngSize(ResourceFiles.MAIN_ASSETS.resolve("textures/gui/stations/" + station + ".png"));
-            assertEquals(256, size[0], station);
-            assertEquals(256, size[1], station);
+            assertEquals(TextureDensity.GUI_SIZE, size[0], station);
+            assertEquals(TextureDensity.GUI_SIZE, size[1], station);
         }
     }
 
