@@ -16,6 +16,9 @@ Detail per entry: docs/catalogue/{decor,stations,products}.md.
 | Generated original textures (32 px), tinted baked models | 1 | done; owner art review pending | DecorModelsTest |
 | Fourteen herbs (4 ages, crop or bush), seeds, fresh herbs, herb bed, starter recipes, grass foraging, habitat worldgen, reloadable conditions | 2 | done (0.1.0-dev.2); owner art review pending | botany GameTests, BotanyResourcesTest, BotanyModelsTest |
 | `/herbalwitch showcase [section]` (operators): every registered block, labelled, on a flat plot | 2 | done | Showcase*GameTests, ShowcasePlanTest |
+| Five stations (drying rack, mortar, tea kettle, hearth, infusion pot) with menus, in-slot reservations, heat, automation sides, no catch-up | 3 | done (0.1.0-dev.3); owner UI/art review pending | StationProcessingGameTests, ProcessBehaviourGameTests, StationResourcesTest |
+| Bundles, powders, 7 teas, salve, oils, garden products, oil lantern, warmth and pest-repellent effects, resin | 3 | done (0.1.0-dev.3) | PreparationUseGameTests, PreparationBlockGameTests, PreparationResourcesTest |
+| EMI and JEI categories; Farmer's Delight heat both ways; Thirst Was Taken hydration and purity | 3 | done; viewers are owner checks | CompatibilityGameTests (-PcompatProfile=all) |
 
 ## Planned
 

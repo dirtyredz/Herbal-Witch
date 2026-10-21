@@ -148,9 +148,9 @@ class BotanyResourcesTest {
             }
         }
         JsonObject bed = generated("assets/herbalwitch/blockstates/" + BotanyManifest.BED + ".json").getAsJsonObject("variants");
-        assertEquals(8, bed.size());
-        assertEquals("herbalwitch:block/" + BotanyManifest.BED, bed.getAsJsonObject("moisture=0").get("model").getAsString());
-        assertEquals("herbalwitch:block/" + BotanyManifest.BED + "_moist", bed.getAsJsonObject("moisture=7").get("model").getAsString());
+        assertEquals(16, bed.size()); // moisture 0..7 x enriched
+        assertEquals("herbalwitch:block/" + BotanyManifest.BED, bed.getAsJsonObject("enriched=false,moisture=0").get("model").getAsString());
+        assertEquals("herbalwitch:block/" + BotanyManifest.BED + "_moist", bed.getAsJsonObject("enriched=true,moisture=7").get("model").getAsString());
     }
 
     private static Set<String> strings(JsonArray array) {

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:brick"
+    },
+    "C": {
+      "item": "minecraft:campfire"
+    }
+  },
+  "pattern": [
+    "B B",
+    "BCB",
+    "B B"
+  ],
+  "result": {
+    "item": "herbalwitch:stations/hearth/station"
+  },
+  "show_notification": true
+}

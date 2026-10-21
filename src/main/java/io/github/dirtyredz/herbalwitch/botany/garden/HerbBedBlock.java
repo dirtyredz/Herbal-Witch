@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -23,20 +24,32 @@ import net.minecraft.world.phys.shapes.VoxelShape;
  */
 public class HerbBedBlock extends Block {
     public static final IntegerProperty MOISTURE = BlockStateProperties.MOISTURE;
+    /** Soil tonic: the next mature harvest above gives one extra fresh herb, then clears. */
+    public static final BooleanProperty ENRICHED = BooleanProperty.create("enriched");
     private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 15, 16);
 
     public HerbBedBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(MOISTURE, 0));
+        registerDefaultState(stateDefinition.any().setValue(MOISTURE, 0).setValue(ENRICHED, false));
     }
 
     public static boolean isMoist(BlockState state) {
         return state.getValue(MOISTURE) > 0;
     }
 
+    /** If the bed at {@code pos} is enriched, clears it and returns 1 extra herb; otherwise 0. */
+    public static int consumeEnrichment(Level level, BlockPos pos) {
+        BlockState state = level.getBlockState(pos);
+        if (state.getBlock() instanceof HerbBedBlock && state.getValue(ENRICHED)) {
+            level.setBlock(pos, state.setValue(ENRICHED, false), Block.UPDATE_CLIENTS);
+            return 1;
+        }
+        return 0;
+    }
+
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(MOISTURE);
+        builder.add(MOISTURE, ENRICHED);
     }
 
     @Override

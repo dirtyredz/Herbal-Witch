@@ -3,7 +3,9 @@ package io.github.dirtyredz.herbalwitch.data.client.language;
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.data.client.botany.BotanyTranslations;
 import io.github.dirtyredz.herbalwitch.data.client.decor.DecorTranslations;
+import io.github.dirtyredz.herbalwitch.data.client.preparations.PreparationTranslations;
 import io.github.dirtyredz.herbalwitch.data.client.showcase.ShowcaseTranslations;
+import io.github.dirtyredz.herbalwitch.data.client.stations.StationTranslations;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
 
@@ -20,6 +22,8 @@ public class HerbalWitchLanguageProvider extends LanguageProvider {
     protected void addTranslations() {
         DecorTranslations.addTo(this);
         BotanyTranslations.addTo(this);
+        StationTranslations.addTo(this);
+        PreparationTranslations.addTo(this);
         ShowcaseTranslations.addTo(this);
     }
 }

@@ -1,0 +1,38 @@
+{
+  "type": "herbalwitch:processing/infusion",
+  "base": {
+    "count": 1,
+    "ingredient": {
+      "item": "herbalwitch:preparations/ingredients/plant_oil"
+    }
+  },
+  "duration": 600,
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "herbalwitch:preparations/herbs/wet/nettle/powder"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:wheat_seeds"
+      }
+    }
+  ],
+  "packaging": {
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "result": {
+    "item": "herbalwitch:preparations/oils/fishing_blend"
+  },
+  "returns": [
+    {
+      "item": "minecraft:glass_bottle"
+    }
+  ]
+}

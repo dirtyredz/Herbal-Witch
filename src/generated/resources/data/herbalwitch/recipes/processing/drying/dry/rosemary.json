@@ -1,0 +1,15 @@
+{
+  "type": "herbalwitch:processing/drying",
+  "duration": 1200,
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "herbalwitch:botany/dry/rosemary/fresh"
+      }
+    }
+  ],
+  "result": {
+    "item": "herbalwitch:preparations/herbs/dry/rosemary/bundle"
+  }
+}

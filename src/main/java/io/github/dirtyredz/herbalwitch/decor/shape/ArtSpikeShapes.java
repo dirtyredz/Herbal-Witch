@@ -1,5 +1,6 @@
 package io.github.dirtyredz.herbalwitch.decor.shape;
 
+import io.github.dirtyredz.herbalwitch.platform.geometry.ShapeRotation;
 import net.minecraft.core.Direction;
 import net.minecraft.world.phys.shapes.VoxelShape;
 

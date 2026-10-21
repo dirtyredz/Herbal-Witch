@@ -3,7 +3,9 @@ package io.github.dirtyredz.herbalwitch.data;
 import com.google.gson.JsonObject;
 import io.github.dirtyredz.herbalwitch.data.botany.BotanyManifest;
 import io.github.dirtyredz.herbalwitch.data.decor.DecorManifest;
+import io.github.dirtyredz.herbalwitch.data.preparations.PreparationManifest;
 import io.github.dirtyredz.herbalwitch.data.showcase.ShowcaseManifest;
+import io.github.dirtyredz.herbalwitch.data.stations.StationManifest;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -34,11 +36,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 class GeneratedResourcesTest {
     private static final Set<String> ALLOWED_NAMESPACES = Set.of("minecraft", "herbalwitch", "forge");
+    /** Files allowed to name an optional mod: the heat tags (as optional entries) and Farmer's Delight's own tag. */
+    private static final Map<String, Set<String>> OPTIONAL_REFERENCES = Map.of(
+            "data/herbalwitch/tags/blocks/heat_sources.json", Set.of("farmersdelight"),
+            "data/herbalwitch/tags/blocks/heat_conductors.json", Set.of("farmersdelight"),
+            "data/farmersdelight/tags/blocks/heat_sources.json", Set.of("farmersdelight"));
     private static final Pattern NAMESPACED = Pattern.compile("\"#?([a-z0-9_.-]+):[a-z0-9_./-]+\"");
 
     static Map<String, String> expectedLang() {
         Map<String, String> lang = new LinkedHashMap<>();
-        for (Map<String, String> part : List.of(DecorManifest.lang(), BotanyManifest.lang(), ShowcaseManifest.lang())) {
+        for (Map<String, String> part : List.of(DecorManifest.lang(), BotanyManifest.lang(), StationManifest.lang(),
+                PreparationManifest.lang(), ShowcaseManifest.lang())) {
             part.forEach((key, value) -> {
                 assertFalse(lang.containsKey(key), "two features claim " + key);
                 lang.put(key, value);
@@ -52,6 +60,8 @@ class GeneratedResourcesTest {
         Set<String> expected = new TreeSet<>();
         expected.addAll(DecorManifest.files());
         expected.addAll(BotanyManifest.files());
+        expected.addAll(StationManifest.files());
+        expected.addAll(PreparationManifest.files());
         assertEquals(expected, generatedFiles());
     }
 
@@ -80,11 +90,17 @@ class GeneratedResourcesTest {
     }
 
     @Test
-    void noOptionalModReferences() throws IOException {
+    void optionalModReferencesOnlyWhereDeclared() throws IOException {
         for (String rel : generatedFiles()) {
-            Matcher m = NAMESPACED.matcher(Files.readString(GENERATED.resolve(rel)));
+            String text = Files.readString(GENERATED.resolve(rel));
+            Matcher m = NAMESPACED.matcher(text);
             while (m.find()) {
-                assertTrue(ALLOWED_NAMESPACES.contains(m.group(1)), rel + " references " + m.group());
+                String namespace = m.group(1);
+                assertTrue(ALLOWED_NAMESPACES.contains(namespace) || OPTIONAL_REFERENCES.getOrDefault(rel, Set.of()).contains(namespace),
+                        rel + " references " + m.group());
+            }
+            if (rel.startsWith("data/herbalwitch/") && text.contains("farmersdelight:")) {
+                assertTrue(text.contains("\"required\": false"), rel + ": Farmer's Delight references must be optional");
             }
             assertFalse(rel.endsWith(".png"), "textures are authored by tools/generate-textures.mjs, not datagen: " + rel);
         }

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": {
+      "item": "minecraft:flint"
+    },
+    "S": {
+      "item": "minecraft:smooth_stone"
+    },
+    "T": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "pattern": [
+    " T ",
+    "SFS",
+    " S "
+  ],
+  "result": {
+    "item": "herbalwitch:stations/mortar/station"
+  },
+  "show_notification": true
+}

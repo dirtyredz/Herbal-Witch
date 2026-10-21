@@ -1,0 +1,33 @@
+{
+  "type": "herbalwitch:processing/grinding",
+  "duration": 100,
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "herbalwitch:preparations/herbs/shade/mugwort/powder"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": [
+        {
+          "item": "minecraft:brown_mushroom"
+        },
+        {
+          "item": "minecraft:red_mushroom"
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:bone_meal"
+      }
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "herbalwitch:preparations/garden/mushroom_dust"
+  }
+}

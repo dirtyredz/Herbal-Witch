@@ -2,13 +2,19 @@ package io.github.dirtyredz.herbalwitch.showcase;
 
 import io.github.dirtyredz.herbalwitch.botany.showcase.GardenShowcaseSection;
 import io.github.dirtyredz.herbalwitch.botany.showcase.HerbShowcaseSection;
+import io.github.dirtyredz.herbalwitch.brewing.product.showcase.PreparationShowcaseSection;
 import io.github.dirtyredz.herbalwitch.decor.showcase.DecorShowcaseSection;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcasePlacement;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcasePlan;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseSection;
+import io.github.dirtyredz.herbalwitch.stations.catalog.StationCatalog;
+import io.github.dirtyredz.herbalwitch.stations.catalog.StationSpec;
+import io.github.dirtyredz.herbalwitch.stations.showcase.StationShowcaseSection;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,14 +27,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 class ShowcasePlanTest {
     static List<ShowcaseSection> sections() {
-        return List.of(new DecorShowcaseSection(), new HerbShowcaseSection(), new GardenShowcaseSection());
+        List<ShowcaseSection> all = new ArrayList<>(List.of(new DecorShowcaseSection(), new HerbShowcaseSection(), new GardenShowcaseSection()));
+        for (StationSpec station : StationCatalog.ALL) {
+            boolean heated = station == StationCatalog.KETTLE || station == StationCatalog.INFUSION_POT;
+            all.add(new StationShowcaseSection(station, heated, "recipe", Map::of));
+        }
+        all.add(new PreparationShowcaseSection());
+        return all;
     }
 
     @Test
     void sectionsStandSideBySideInRegistrationOrder() throws Exception {
         ShowcasePlan plan = ShowcasePlan.of(sections());
         List<ShowcasePlan.SectionArea> areas = plan.areas();
-        assertEquals(List.of("decor", "herbs", "garden"), areas.stream().map(ShowcasePlan.SectionArea::id).toList());
+        assertEquals(List.of("decor", "herbs", "garden", "drying_rack", "mortar", "kettle", "hearth", "infusion_pot", "preparations"), areas.stream().map(ShowcasePlan.SectionArea::id).toList());
         for (int i = 1; i < areas.size(); i++) {
             ShowcasePlan.SectionArea previous = areas.get(i - 1);
             assertEquals(previous.x() + previous.width() + ShowcasePlan.GAP, areas.get(i).x());

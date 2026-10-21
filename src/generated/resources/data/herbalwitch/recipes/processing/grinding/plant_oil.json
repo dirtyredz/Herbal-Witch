@@ -1,0 +1,21 @@
+{
+  "type": "herbalwitch:processing/grinding",
+  "duration": 100,
+  "ingredients": [
+    {
+      "count": 4,
+      "ingredient": {
+        "item": "minecraft:wheat_seeds"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:glass_bottle"
+      }
+    }
+  ],
+  "result": {
+    "item": "herbalwitch:preparations/ingredients/plant_oil"
+  }
+}

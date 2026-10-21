@@ -3,6 +3,7 @@ package io.github.dirtyredz.herbalwitch.data.server.tags;
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.data.server.botany.BotanyTagContributions;
 import io.github.dirtyredz.herbalwitch.data.server.decor.DecorItemTags;
+import io.github.dirtyredz.herbalwitch.data.server.preparations.PreparationTagContributions;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
@@ -48,5 +49,6 @@ public class HerbalWitchItemTagsProvider extends ItemTagsProvider {
         };
         DecorItemTags.addTo(sink);
         BotanyTagContributions.items(sink);
+        PreparationTagContributions.items(sink);
     }
 }

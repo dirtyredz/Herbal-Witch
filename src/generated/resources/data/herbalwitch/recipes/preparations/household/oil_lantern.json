@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:glass_bottle"
+    },
+    "N": {
+      "tag": "forge:nuggets/iron"
+    },
+    "T": {
+      "item": "minecraft:torch"
+    }
+  },
+  "pattern": [
+    "N N",
+    "NTN",
+    " G "
+  ],
+  "result": {
+    "item": "herbalwitch:preparations/household/oil_lantern"
+  },
+  "show_notification": true
+}

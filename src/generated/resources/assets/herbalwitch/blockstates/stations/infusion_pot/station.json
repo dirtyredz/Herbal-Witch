@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "herbalwitch:block/stations/infusion_pot/base",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "herbalwitch:block/stations/infusion_pot/base"
+    },
+    "facing=south": {
+      "model": "herbalwitch:block/stations/infusion_pot/base",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "herbalwitch:block/stations/infusion_pot/base",
+      "y": 270
+    }
+  }
+}

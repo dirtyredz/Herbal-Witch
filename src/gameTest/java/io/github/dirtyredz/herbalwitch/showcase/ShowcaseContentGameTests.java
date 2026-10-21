@@ -6,11 +6,13 @@ import io.github.dirtyredz.herbalwitch.botany.catalog.HerbSpec;
 import io.github.dirtyredz.herbalwitch.botany.crop.HerbCropBlock;
 import io.github.dirtyredz.herbalwitch.botany.registry.BotanyBlocks;
 import io.github.dirtyredz.herbalwitch.botany.registry.BotanyItems;
+import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationBlocks;
 import io.github.dirtyredz.herbalwitch.decor.block.TableLampBlock;
 import io.github.dirtyredz.herbalwitch.decor.block.WallShelfBlock;
 import io.github.dirtyredz.herbalwitch.decor.registry.DecorBlocks;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcasePlan;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseRegistry;
+import io.github.dirtyredz.herbalwitch.stations.registry.StationBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -94,7 +96,14 @@ public final class ShowcaseContentGameTests {
             }
         }
         check(blocks.getOrDefault(BotanyBlocks.herbBed(), 0) >= 56, "herb beds " + blocks.get(BotanyBlocks.herbBed()));
-        check(barrels == HerbCatalog.ALL.size(), "sample barrels " + barrels);
+        check(barrels == HerbCatalog.ALL.size() + 2, "sample barrels " + barrels); // one per herb, powders, products
+        for (Block station : StationBlocks.all()) {
+            check(blocks.getOrDefault(station, 0) >= 1, station + " missing from the showcase");
+        }
+        for (HerbSpec herb : HerbCatalog.ALL) {
+            check(blocks.getOrDefault(PreparationBlocks.bundle(herb), 0) == 1, herb.id() + " bundle not hung once");
+        }
+        check(blocks.getOrDefault(PreparationBlocks.OIL_LANTERN.get(), 0) == 1, "no oil lantern");
         check(signs >= DecorBlocks.entries().size() + HerbCatalog.ALL.size() + ShowcaseRegistry.sections().size(), "signs " + signs);
         check(BotanyItems.all().size() > 0, "botany items");
         helper.succeed();

@@ -1,0 +1,40 @@
+{
+  "type": "herbalwitch:processing/infusion",
+  "base": {
+    "count": 1,
+    "ingredient": {
+      "type": "forge:partial_nbt",
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"minecraft:water\"}"
+    }
+  },
+  "duration": 600,
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "herbalwitch:preparations/herbs/wet/nettle/powder"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:bone_meal"
+      }
+    }
+  ],
+  "packaging": {
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "result": {
+    "item": "herbalwitch:preparations/garden/growth_infusion"
+  },
+  "returns": [
+    {
+      "item": "minecraft:glass_bottle"
+    }
+  ]
+}

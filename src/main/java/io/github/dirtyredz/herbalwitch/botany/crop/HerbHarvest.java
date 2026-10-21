@@ -1,6 +1,7 @@
 package io.github.dirtyredz.herbalwitch.botany.crop;
 
 import io.github.dirtyredz.herbalwitch.botany.conditions.HerbConditionEvaluator;
+import io.github.dirtyredz.herbalwitch.botany.garden.HerbBedBlock;
 import io.github.dirtyredz.herbalwitch.botany.registry.BotanyItems;
 import io.github.dirtyredz.herbalwitch.platform.permission.ActionContext;
 import io.github.dirtyredz.herbalwitch.platform.permission.ActionPermissionService;
@@ -43,7 +44,8 @@ public final class HerbHarvest {
         }
         ServerLevel server = (ServerLevel) level;
         level.setBlock(pos, block.getStateForAge(block.harvestResetAge()), Block.UPDATE_CLIENTS);
-        int fresh = BASE_FRESH + HerbConditionEvaluator.harvestBonus(server, pos, block.herb(), level.random);
+        int fresh = BASE_FRESH + HerbConditionEvaluator.harvestBonus(server, pos, block.herb(), level.random)
+                + HerbBedBlock.consumeEnrichment(level, pos.below());
         Block.popResource(level, pos, new ItemStack(BotanyItems.fresh(block.herb()), fresh));
         Block.popResource(level, pos, new ItemStack(BotanyItems.seeds(block.herb()), BASE_SEEDS));
         level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F,

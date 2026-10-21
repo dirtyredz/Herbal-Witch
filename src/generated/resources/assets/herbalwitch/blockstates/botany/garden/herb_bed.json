@@ -1,27 +1,51 @@
 {
   "variants": {
-    "moisture=0": {
+    "enriched=false,moisture=0": {
       "model": "herbalwitch:block/botany/garden/herb_bed"
     },
-    "moisture=1": {
+    "enriched=false,moisture=1": {
       "model": "herbalwitch:block/botany/garden/herb_bed_moist"
     },
-    "moisture=2": {
+    "enriched=false,moisture=2": {
       "model": "herbalwitch:block/botany/garden/herb_bed_moist"
     },
-    "moisture=3": {
+    "enriched=false,moisture=3": {
       "model": "herbalwitch:block/botany/garden/herb_bed_moist"
     },
-    "moisture=4": {
+    "enriched=false,moisture=4": {
       "model": "herbalwitch:block/botany/garden/herb_bed_moist"
     },
-    "moisture=5": {
+    "enriched=false,moisture=5": {
       "model": "herbalwitch:block/botany/garden/herb_bed_moist"
     },
-    "moisture=6": {
+    "enriched=false,moisture=6": {
       "model": "herbalwitch:block/botany/garden/herb_bed_moist"
     },
-    "moisture=7": {
+    "enriched=false,moisture=7": {
+      "model": "herbalwitch:block/botany/garden/herb_bed_moist"
+    },
+    "enriched=true,moisture=0": {
+      "model": "herbalwitch:block/botany/garden/herb_bed"
+    },
+    "enriched=true,moisture=1": {
+      "model": "herbalwitch:block/botany/garden/herb_bed_moist"
+    },
+    "enriched=true,moisture=2": {
+      "model": "herbalwitch:block/botany/garden/herb_bed_moist"
+    },
+    "enriched=true,moisture=3": {
+      "model": "herbalwitch:block/botany/garden/herb_bed_moist"
+    },
+    "enriched=true,moisture=4": {
+      "model": "herbalwitch:block/botany/garden/herb_bed_moist"
+    },
+    "enriched=true,moisture=5": {
+      "model": "herbalwitch:block/botany/garden/herb_bed_moist"
+    },
+    "enriched=true,moisture=6": {
+      "model": "herbalwitch:block/botany/garden/herb_bed_moist"
+    },
+    "enriched=true,moisture=7": {
       "model": "herbalwitch:block/botany/garden/herb_bed_moist"
     }
   }

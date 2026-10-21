@@ -1,0 +1,128 @@
+package io.github.dirtyredz.herbalwitch.data.stations;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import io.github.dirtyredz.herbalwitch.data.fixture.ModelResolver;
+import io.github.dirtyredz.herbalwitch.data.fixture.ResourceFiles;
+import io.github.dirtyredz.herbalwitch.data.fixture.TemplateChecks;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+
+import static io.github.dirtyredz.herbalwitch.data.fixture.ResourceFiles.generated;
+import static io.github.dirtyredz.herbalwitch.data.fixture.ResourceFiles.generatedFiles;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+/** The stations' generated data and authored art: assembly recipes, the processing matrix, models, GUIs, heat tags. */
+class StationResourcesTest {
+    private static final Map<String, Integer> DURATIONS = Map.of("drying", 1200, "grinding", 100, "steeping", 200, "infusion", 600);
+
+    @Test
+    void stationsAssembleFromThePlannedIngredients() {
+        Map<String, Map<String, Integer>> expected = Map.of(
+                "drying_rack", Map.of("#forge:rods/wooden", 4, "#forge:string", 2, "#minecraft:wooden_slabs", 2),
+                "mortar", Map.of("minecraft:smooth_stone", 3, "minecraft:flint", 1, "#forge:rods/wooden", 1),
+                "kettle", Map.of("#forge:ingots/iron", 5, "#forge:ingots/copper", 1),
+                "hearth", Map.of("minecraft:brick", 6, "minecraft:campfire", 1),
+                "infusion_pot", Map.of("minecraft:brick", 4, "#forge:ingots/iron", 2, "minecraft:glass_bottle", 1));
+        expected.forEach((station, counts) -> {
+            JsonObject recipe = generated("data/herbalwitch/recipes/" + StationManifest.station(station) + ".json");
+            assertEquals("minecraft:crafting_shaped", recipe.get("type").getAsString(), station);
+            Map<String, Integer> actual = new HashMap<>();
+            JsonObject key = recipe.getAsJsonObject("key");
+            for (JsonElement row : recipe.getAsJsonArray("pattern")) {
+                for (char c : row.getAsString().toCharArray()) {
+                    if (c != ' ') {
+                        JsonObject k = key.getAsJsonObject(String.valueOf(c));
+                        actual.merge(k.has("tag") ? "#" + k.get("tag").getAsString() : k.get("item").getAsString(), 1, Integer::sum);
+                    }
+                }
+            }
+            assertEquals(counts, actual, station);
+            assertEquals("herbalwitch:" + StationManifest.station(station), recipe.getAsJsonObject("result").get("item").getAsString());
+        });
+    }
+
+    @Test
+    void processingRecipesAreTheFullMatrixWithTheirDurationsAndContainers() {
+        Set<String> actual = new TreeSet<>();
+        generatedFiles().stream().filter(f -> f.startsWith("data/herbalwitch/recipes/processing/"))
+                .forEach(f -> actual.add(f.substring("data/herbalwitch/recipes/".length(), f.length() - 5)));
+        assertEquals(StationManifest.processingRecipes(), actual);
+        for (String path : actual) {
+            String type = path.split("/")[1];
+            JsonObject recipe = generated("data/herbalwitch/recipes/" + path + ".json");
+            assertEquals("herbalwitch:processing/" + type, recipe.get("type").getAsString(), path);
+            assertEquals(DURATIONS.get(type), recipe.get("duration").getAsInt(), path);
+            switch (type) {
+                case "steeping" -> {
+                    assertTrue(recipe.getAsJsonObject("base").toString().contains("Potion:\\\"minecraft:water\\\""), path);
+                    assertTrue(!recipe.has("returns") && !recipe.has("packaging"), path + ": the water bottle becomes the drink");
+                }
+                case "infusion" -> {
+                    assertTrue(recipe.has("base") && recipe.has("packaging"), path);
+                    assertEquals("[{\"item\":\"minecraft:glass_bottle\"}]", recipe.getAsJsonArray("returns").toString(), path);
+                }
+                default -> assertTrue(!recipe.has("base") && !recipe.has("packaging"), path);
+            }
+        }
+    }
+
+    @Test
+    void noTwoRecipesOfATypeShareTheirInputs() {
+        Map<String, String> seen = new HashMap<>();
+        for (String path : StationManifest.processingRecipes()) {
+            JsonObject recipe = generated("data/herbalwitch/recipes/" + path + ".json");
+            List<String> inputs = new ArrayList<>();
+            recipe.getAsJsonArray("ingredients").forEach(e -> inputs.add(e.getAsJsonObject().get("ingredient").toString()));
+            inputs.sort(null);
+            String key = path.split("/")[1] + inputs + recipe.get("base") + recipe.get("packaging");
+            assertNull(seen.put(key, path), "ambiguous recipes: " + path + " and " + seen.get(key));
+        }
+    }
+
+    @Test
+    void stationModelsFollowTheTemplateContracts() {
+        for (String station : StationManifest.STATIONS.keySet()) {
+            JsonObject variants = generated("assets/herbalwitch/blockstates/" + StationManifest.station(station) + ".json")
+                    .getAsJsonObject("variants");
+            Set<String> models = new TreeSet<>();
+            variants.entrySet().forEach(v -> models.add(v.getValue().getAsJsonObject().get("model").getAsString()));
+            Set<String> expected = new TreeSet<>(Set.of("herbalwitch:block/stations/" + station + "/base"));
+            if (station.equals("drying_rack") || station.equals("hearth")) {
+                expected.add("herbalwitch:block/stations/" + station + "/active");
+            }
+            assertEquals(expected, models, station);
+            models.forEach(m -> assertTrue(TemplateChecks.check(m, Map.of()) >= 6, m));
+            assertEquals("herbalwitch:block/stations/" + station + "/base",
+                    ModelResolver.resolve("herbalwitch:item/" + StationManifest.station(station)).chain().get(1));
+        }
+    }
+
+    @Test
+    void everyStationHasA256PixelGuiAtlas() {
+        for (String station : StationManifest.STATIONS.keySet()) {
+            int[] size = ResourceFiles.pngSize(ResourceFiles.MAIN_ASSETS.resolve("textures/gui/stations/" + station + ".png"));
+            assertEquals(256, size[0], station);
+            assertEquals(256, size[1], station);
+        }
+    }
+
+    @Test
+    void heatComesFromLitSourcesAndOneConductor() {
+        assertEquals("[\"herbalwitch:stations/hearth/station\",\"minecraft:campfire\",\"minecraft:soul_campfire\","
+                        + "\"minecraft:magma_block\",{\"id\":\"farmersdelight:stove\",\"required\":false}]",
+                generated("data/herbalwitch/tags/blocks/heat_sources.json").getAsJsonArray("values").toString());
+        assertEquals("[\"minecraft:hopper\",{\"id\":\"#farmersdelight:heat_conductors\",\"required\":false}]",
+                generated("data/herbalwitch/tags/blocks/heat_conductors.json").getAsJsonArray("values").toString());
+        assertEquals("[\"herbalwitch:stations/hearth/station\"]",
+                generated("data/farmersdelight/tags/blocks/heat_sources.json").getAsJsonArray("values").toString());
+    }
+}

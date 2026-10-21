@@ -1,0 +1,28 @@
+{
+  "type": "herbalwitch:processing/grinding",
+  "duration": 100,
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "herbalwitch:preparations/herbs/temperate/chamomile/powder"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:dandelion"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:bone_meal"
+      }
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "herbalwitch:preparations/garden/flower_dust"
+  }
+}

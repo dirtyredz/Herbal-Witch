@@ -1,0 +1,29 @@
+{
+  "type": "herbalwitch:processing/steeping",
+  "base": {
+    "count": 1,
+    "ingredient": {
+      "type": "forge:partial_nbt",
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"minecraft:water\"}"
+    }
+  },
+  "duration": 200,
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "herbalwitch:preparations/herbs/temperate/lavender/powder"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "herbalwitch:preparations/herbs/shade/valerian/powder"
+      }
+    }
+  ],
+  "result": {
+    "item": "herbalwitch:preparations/drinks/restful_infusion"
+  }
+}

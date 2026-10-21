@@ -2,8 +2,8 @@
 //
 //   node tools/generate-textures.mjs
 //
-// Writes exactly the files listed in TEXTURES (block/material/) and the botany set (HERBS and the
-// garden soil tiles) under src/main/resources/assets/herbalwitch/textures/ and nothing else;
+// Writes exactly the files listed in TEXTURES (block/material/), the botany set (HERBS and the
+// garden soil tiles) and the station/preparation set (block/stations, gui/stations, item/preparations) under src/main/resources/assets/herbalwitch/textures/ and nothing else;
 // re-running gives identical bytes. Materials: tools/art/materials.mjs; decorative motifs:
 // tools/art/patterns.mjs; herbs, seeds, fresh items and soil: tools/art/botany/.
 //
@@ -15,7 +15,7 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { png } from './art/png.mjs';
-import { woodGrain, paintedWood, cutStone, brass, glass, tincture } from './art/materials.mjs';
+import { woodGrain, paintedWood, cutStone, brass, glass, tincture, darkWood, vine } from './art/materials.mjs';
 import { fabricFloral, rug, lampShade } from './art/patterns.mjs';
 import temperate from './art/botany/temperate.mjs';
 import dry from './art/botany/dry.mjs';
@@ -23,6 +23,10 @@ import wet from './art/botany/wet.mjs';
 import shadeHerbs from './art/botany/shade.mjs';
 import woodland from './art/botany/woodland.mjs';
 import { soilDry, soilMoist } from './art/botany/garden.mjs';
+import { ceramic, iron, soil, ember, flame } from './art/stations/materials.mjs';
+import * as interfaces from './art/stations/interfaces.mjs';
+import { PREPARATION_HERBS, bundleSprite, powderSprite } from './art/preparations/materials.mjs';
+import { PRODUCTS } from './art/preparations/products.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const texRoot = join(root, 'src/main/resources/assets/herbalwitch/textures');
@@ -39,7 +43,12 @@ const TEXTURES = {
   brass: brass, // untinted hardware
   glass: glass, // untinted cutout bottle glass
   tincture: tincture, // untinted bottle contents
+  dark_wood: darkWood, // untinted: stations and the oil lantern
+  vine: vine, // untinted cutout: trailing ivy on edges, legs and backs
 };
+
+// Station block materials (block/stations/): untinted; flame is cutout.
+const STATION_TEXTURES = { ceramic, iron, soil, ember, flame };
 
 mkdirSync(outDir, { recursive: true });
 for (const [name, make] of Object.entries(TEXTURES)) {
@@ -80,6 +89,22 @@ botany.push(['block/botany/garden/soil_dry.png', soilDry()]);
 botany.push(['block/botany/garden/soil_moist.png', soilMoist()]);
 
 for (const [rel, img] of botany) {
+  mkdirSync(dirname(join(texRoot, rel)), { recursive: true });
+  writeFileSync(join(texRoot, rel), png(img));
+  console.log(`wrote ${rel}`);
+}
+
+// Stations: block materials, the five GUI atlases, then the preparation item sprites.
+const stations = [];
+for (const [name, make] of Object.entries(STATION_TEXTURES)) stations.push([`block/stations/${name}.png`, make()]);
+for (const [name, make] of Object.entries(interfaces)) stations.push([`gui/stations/${name}.png`, make()]);
+for (const [group, herb] of PREPARATION_HERBS) {
+  stations.push([`item/preparations/herbs/${group}/${herb}/bundle.png`, bundleSprite(herb)()]);
+  stations.push([`item/preparations/herbs/${group}/${herb}/powder.png`, powderSprite(group, herb)()]);
+}
+for (const [rel, make] of PRODUCTS) stations.push([`item/preparations/${rel}`, make()]);
+
+for (const [rel, img] of stations) {
   mkdirSync(dirname(join(texRoot, rel)), { recursive: true });
   writeFileSync(join(texRoot, rel), png(img));
   console.log(`wrote ${rel}`);

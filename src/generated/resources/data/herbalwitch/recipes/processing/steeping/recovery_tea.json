@@ -1,0 +1,29 @@
+{
+  "type": "herbalwitch:processing/steeping",
+  "base": {
+    "count": 1,
+    "ingredient": {
+      "type": "forge:partial_nbt",
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"minecraft:water\"}"
+    }
+  },
+  "duration": 200,
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "herbalwitch:preparations/herbs/temperate/chamomile/powder"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "herbalwitch:preparations/herbs/temperate/yarrow/powder"
+      }
+    }
+  ],
+  "result": {
+    "item": "herbalwitch:preparations/drinks/recovery_tea"
+  }
+}

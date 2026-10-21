@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:brick"
+    },
+    "G": {
+      "item": "minecraft:glass_bottle"
+    },
+    "I": {
+      "tag": "forge:ingots/iron"
+    }
+  },
+  "pattern": [
+    "IGI",
+    "B B",
+    "B B"
+  ],
+  "result": {
+    "item": "herbalwitch:stations/infusion_pot/station"
+  },
+  "show_notification": true
+}

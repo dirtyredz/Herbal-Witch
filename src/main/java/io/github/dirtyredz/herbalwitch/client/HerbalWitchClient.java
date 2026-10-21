@@ -3,10 +3,12 @@ package io.github.dirtyredz.herbalwitch.client;
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.client.botany.BotanyColorHandlers;
 import io.github.dirtyredz.herbalwitch.client.decor.DecorColorHandlers;
+import io.github.dirtyredz.herbalwitch.client.stations.StationScreens;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 /**
  * Client-only wiring on the mod bus; each feature's client code lives in its own package. Never
@@ -15,6 +17,11 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = HerbalWitch.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public final class HerbalWitchClient {
     private HerbalWitchClient() {
+    }
+
+    @SubscribeEvent
+    public static void clientSetup(FMLClientSetupEvent event) {
+        event.enqueueWork(StationScreens::register);
     }
 
     @SubscribeEvent

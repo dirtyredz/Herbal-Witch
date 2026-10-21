@@ -1,0 +1,43 @@
+{
+  "variants": {
+    "face=ceiling,facing=east": {
+      "model": "herbalwitch:block/preparations/herbs/woodland/wolfsbane/bundle"
+    },
+    "face=ceiling,facing=north": {
+      "model": "herbalwitch:block/preparations/herbs/woodland/wolfsbane/bundle"
+    },
+    "face=ceiling,facing=south": {
+      "model": "herbalwitch:block/preparations/herbs/woodland/wolfsbane/bundle"
+    },
+    "face=ceiling,facing=west": {
+      "model": "herbalwitch:block/preparations/herbs/woodland/wolfsbane/bundle"
+    },
+    "face=floor,facing=east": {
+      "model": "herbalwitch:block/preparations/herbs/woodland/wolfsbane/bundle"
+    },
+    "face=floor,facing=north": {
+      "model": "herbalwitch:block/preparations/herbs/woodland/wolfsbane/bundle"
+    },
+    "face=floor,facing=south": {
+      "model": "herbalwitch:block/preparations/herbs/woodland/wolfsbane/bundle"
+    },
+    "face=floor,facing=west": {
+      "model": "herbalwitch:block/preparations/herbs/woodland/wolfsbane/bundle"
+    },
+    "face=wall,facing=east": {
+      "model": "herbalwitch:block/preparations/herbs/woodland/wolfsbane/bundle_wall",
+      "y": 90
+    },
+    "face=wall,facing=north": {
+      "model": "herbalwitch:block/preparations/herbs/woodland/wolfsbane/bundle_wall"
+    },
+    "face=wall,facing=south": {
+      "model": "herbalwitch:block/preparations/herbs/woodland/wolfsbane/bundle_wall",
+      "y": 180
+    },
+    "face=wall,facing=west": {
+      "model": "herbalwitch:block/preparations/herbs/woodland/wolfsbane/bundle_wall",
+      "y": 270
+    }
+  }
+}

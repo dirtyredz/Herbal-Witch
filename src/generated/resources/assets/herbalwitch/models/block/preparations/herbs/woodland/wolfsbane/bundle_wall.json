@@ -1,0 +1,6 @@
+{
+  "parent": "herbalwitch:block/preparations/templates/dried_bundle_wall",
+  "textures": {
+    "bundle": "herbalwitch:item/preparations/herbs/woodland/wolfsbane/bundle"
+  }
+}

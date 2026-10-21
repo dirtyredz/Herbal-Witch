@@ -1,0 +1,165 @@
+{
+  "textures": {
+    "dark_wood": "herbalwitch:block/material/dark_wood",
+    "ceramic": "herbalwitch:block/stations/ceramic",
+    "particle": "#ceramic"
+  },
+  "elements": [
+    {
+      "name": "base",
+      "from": [3, 0, 3],
+      "to": [13, 1, 13],
+      "faces": {
+        "north": {"uv": [3,15,13,16], "texture": "#dark_wood"},
+        "south": {"uv": [3,15,13,16], "texture": "#dark_wood"},
+        "east": {"uv": [3,15,13,16], "texture": "#dark_wood"},
+        "west": {"uv": [3,15,13,16], "texture": "#dark_wood"},
+        "up": {"uv": [3,3,13,13], "texture": "#dark_wood"},
+        "down": {"uv": [3,3,13,13], "texture": "#dark_wood"}
+      }
+    },
+    {
+      "name": "foot",
+      "from": [5, 1, 5],
+      "to": [11, 2, 11],
+      "faces": {
+        "north": {"uv": [5,7.5,11,8.5], "texture": "#ceramic"},
+        "south": {"uv": [5,7.5,11,8.5], "texture": "#ceramic"},
+        "east": {"uv": [5,7.5,11,8.5], "texture": "#ceramic"},
+        "west": {"uv": [5,7.5,11,8.5], "texture": "#ceramic"},
+        "up": {"uv": [5,5,11,11], "texture": "#ceramic"},
+        "down": {"uv": [5,5,11,11], "texture": "#ceramic"}
+      }
+    },
+    {
+      "name": "body",
+      "from": [4, 2, 4],
+      "to": [12, 4, 12],
+      "faces": {
+        "north": {"uv": [4,7,12,9], "texture": "#ceramic"},
+        "south": {"uv": [4,7,12,9], "texture": "#ceramic"},
+        "east": {"uv": [4,7,12,9], "texture": "#ceramic"},
+        "west": {"uv": [4,7,12,9], "texture": "#ceramic"},
+        "up": {"uv": [4,4,12,12], "texture": "#ceramic"},
+        "down": {"uv": [4,4,12,12], "texture": "#ceramic"}
+      }
+    },
+    {
+      "name": "wall_front",
+      "from": [3, 4, 3],
+      "to": [13, 9, 5],
+      "faces": {
+        "north": {"uv": [3,5.5,13,10.5], "texture": "#ceramic"},
+        "south": {"uv": [3,5.5,13,10.5], "texture": "#ceramic"},
+        "east": {"uv": [3,5.5,5,10.5], "texture": "#ceramic"},
+        "west": {"uv": [3,5.5,5,10.5], "texture": "#ceramic"},
+        "up": {"uv": [3,3,13,5], "texture": "#ceramic"},
+        "down": {"uv": [3,3,13,5], "texture": "#ceramic"}
+      }
+    },
+    {
+      "name": "wall_back",
+      "from": [3, 4, 11],
+      "to": [13, 9, 13],
+      "faces": {
+        "north": {"uv": [3,5.5,13,10.5], "texture": "#ceramic"},
+        "south": {"uv": [3,5.5,13,10.5], "texture": "#ceramic"},
+        "east": {"uv": [11,5.5,13,10.5], "texture": "#ceramic"},
+        "west": {"uv": [11,5.5,13,10.5], "texture": "#ceramic"},
+        "up": {"uv": [3,11,13,13], "texture": "#ceramic"},
+        "down": {"uv": [3,11,13,13], "texture": "#ceramic"}
+      }
+    },
+    {
+      "name": "wall_left",
+      "from": [3, 4, 5],
+      "to": [5, 9, 11],
+      "faces": {
+        "north": {"uv": [3,5.5,5,10.5], "texture": "#ceramic"},
+        "south": {"uv": [3,5.5,5,10.5], "texture": "#ceramic"},
+        "east": {"uv": [5,5.5,11,10.5], "texture": "#ceramic"},
+        "west": {"uv": [5,5.5,11,10.5], "texture": "#ceramic"},
+        "up": {"uv": [3,5,5,11], "texture": "#ceramic"},
+        "down": {"uv": [3,5,5,11], "texture": "#ceramic"}
+      }
+    },
+    {
+      "name": "wall_right",
+      "from": [11, 4, 5],
+      "to": [13, 9, 11],
+      "faces": {
+        "north": {"uv": [11,5.5,13,10.5], "texture": "#ceramic"},
+        "south": {"uv": [11,5.5,13,10.5], "texture": "#ceramic"},
+        "east": {"uv": [5,5.5,11,10.5], "texture": "#ceramic"},
+        "west": {"uv": [5,5.5,11,10.5], "texture": "#ceramic"},
+        "up": {"uv": [11,5,13,11], "texture": "#ceramic"},
+        "down": {"uv": [11,5,13,11], "texture": "#ceramic"}
+      }
+    },
+    {
+      "name": "floor",
+      "from": [5, 4, 5],
+      "to": [11, 5, 11],
+      "faces": {
+        "north": {"uv": [5,7.5,11,8.5], "texture": "#ceramic"},
+        "south": {"uv": [5,7.5,11,8.5], "texture": "#ceramic"},
+        "east": {"uv": [5,7.5,11,8.5], "texture": "#ceramic"},
+        "west": {"uv": [5,7.5,11,8.5], "texture": "#ceramic"},
+        "up": {"uv": [5,5,11,11], "texture": "#ceramic"},
+        "down": {"uv": [5,5,11,11], "texture": "#ceramic"}
+      }
+    },
+    {
+      "name": "pestle_low",
+      "from": [6, 5, 6],
+      "to": [8, 8, 8],
+      "faces": {
+        "north": {"uv": [6,8,8,11], "texture": "#dark_wood"},
+        "south": {"uv": [6,8,8,11], "texture": "#dark_wood"},
+        "east": {"uv": [6,8,8,11], "texture": "#dark_wood"},
+        "west": {"uv": [6,8,8,11], "texture": "#dark_wood"},
+        "up": {"uv": [6,6,8,8], "texture": "#dark_wood"},
+        "down": {"uv": [6,6,8,8], "texture": "#dark_wood"}
+      }
+    },
+    {
+      "name": "pestle_mid",
+      "from": [7, 8, 6],
+      "to": [9, 11, 8],
+      "faces": {
+        "north": {"uv": [7,5,9,8], "texture": "#dark_wood"},
+        "south": {"uv": [7,5,9,8], "texture": "#dark_wood"},
+        "east": {"uv": [6,5,8,8], "texture": "#dark_wood"},
+        "west": {"uv": [6,5,8,8], "texture": "#dark_wood"},
+        "up": {"uv": [7,6,9,8], "texture": "#dark_wood"},
+        "down": {"uv": [7,6,9,8], "texture": "#dark_wood"}
+      }
+    },
+    {
+      "name": "pestle_high",
+      "from": [8, 11, 6],
+      "to": [10, 14, 8],
+      "faces": {
+        "north": {"uv": [8,2,10,5], "texture": "#dark_wood"},
+        "south": {"uv": [8,2,10,5], "texture": "#dark_wood"},
+        "east": {"uv": [6,2,8,5], "texture": "#dark_wood"},
+        "west": {"uv": [6,2,8,5], "texture": "#dark_wood"},
+        "up": {"uv": [8,6,10,8], "texture": "#dark_wood"},
+        "down": {"uv": [8,6,10,8], "texture": "#dark_wood"}
+      }
+    },
+    {
+      "name": "pestle_knob",
+      "from": [8, 14, 5.5],
+      "to": [10.5, 16, 8.5],
+      "faces": {
+        "north": {"uv": [8,0,10.5,2], "texture": "#dark_wood"},
+        "south": {"uv": [8,0,10.5,2], "texture": "#dark_wood"},
+        "east": {"uv": [5.5,0,8.5,2], "texture": "#dark_wood"},
+        "west": {"uv": [5.5,0,8.5,2], "texture": "#dark_wood"},
+        "up": {"uv": [8,5.5,10.5,8.5], "texture": "#dark_wood"},
+        "down": {"uv": [8,5.5,10.5,8.5], "texture": "#dark_wood"}
+      }
+    }
+  ]
+}

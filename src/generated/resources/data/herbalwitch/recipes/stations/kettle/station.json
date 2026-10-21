@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "forge:ingots/copper"
+    },
+    "I": {
+      "tag": "forge:ingots/iron"
+    }
+  },
+  "pattern": [
+    "I C",
+    "III",
+    " I "
+  ],
+  "result": {
+    "item": "herbalwitch:stations/kettle/station"
+  },
+  "show_notification": true
+}

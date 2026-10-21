@@ -22,12 +22,27 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `src/main/java/io/github/dirtyredz/herbalwitch/botany/worldgen/` — herb patch feature keys and bootstraps, biome modifiers
 - `src/main/java/io/github/dirtyredz/herbalwitch/botany/showcase/` — the herb and garden showcase sections
 - `src/main/java/io/github/dirtyredz/herbalwitch/platform/permission/` — the shared authorization boundary for custom world changes
+- `src/main/java/io/github/dirtyredz/herbalwitch/platform/geometry/` — shape rotation shared by furniture and stations
+- `src/main/java/io/github/dirtyredz/herbalwitch/platform/compat/` — optional server adapters, loaded only when their mod is present (`thirst/`)
+- `src/main/java/io/github/dirtyredz/herbalwitch/stations/catalog/` — the five station identities
+- `src/main/java/io/github/dirtyredz/herbalwitch/stations/registry/` — station blocks, items, block entities, menus, recipe types, the apothecary tab, bootstrap and showcase registration
+- `src/main/java/io/github/dirtyredz/herbalwitch/stations/process/` — shared processing by composition: inventory with in-slot reservations, job, completion arithmetic, recipe format, reload-aware lookup
+- `src/main/java/io/github/dirtyredz/herbalwitch/stations/block/` — block behaviour shared by stations (facing, support, menu, ticker, drops)
+- `src/main/java/io/github/dirtyredz/herbalwitch/stations/menu/` — menu behaviour shared by stations (slots, quick-move that respects reservations)
+- `src/main/java/io/github/dirtyredz/herbalwitch/stations/heat/` — heat sources and conductors
+- `src/main/java/io/github/dirtyredz/herbalwitch/stations/showcase/` — the parameterised station showcase section
+- `src/main/java/io/github/dirtyredz/herbalwitch/stations/everyday/` — the Milestone 3 stations, one package each (`drying_rack`, `mortar`, `kettle`, `hearth`, `infusion_pot`; `block/`, `menu/`, `recipe/`)
+- `src/main/java/io/github/dirtyredz/herbalwitch/brewing/product/` — preparations: `catalog/`, `registry/`, `item/`, `block/` (hung bundles), `lighting/` (oil lantern), `metadata/` (water-to-drink data), `foraging/` (resin), `showcase/`
+- `src/main/java/io/github/dirtyredz/herbalwitch/brewing/application/` — what products do when used, once, server side
+- `src/main/java/io/github/dirtyredz/herbalwitch/brewing/effect/` — the warmth and pest-repellent effects
 - `src/main/java/io/github/dirtyredz/herbalwitch/showcase/command/` — `/herbalwitch showcase` registration and execution
 - `src/main/java/io/github/dirtyredz/herbalwitch/showcase/layout/` — section contract, registry, placements and the bounded plan (no world writes)
 - `src/main/java/io/github/dirtyredz/herbalwitch/showcase/build/` — preflight checks, the builder and sign labels (the only world writes)
 - `src/main/java/io/github/dirtyredz/herbalwitch/client/` — client-only mod-bus wiring (`HerbalWitchClient`) only
 - `src/main/java/io/github/dirtyredz/herbalwitch/client/decor/` — furniture tint (colour) handlers
 - `src/main/java/io/github/dirtyredz/herbalwitch/client/botany/` — herb bed frame tint
+- `src/main/java/io/github/dirtyredz/herbalwitch/client/stations/` — station screens and shared widgets
+- `src/main/java/io/github/dirtyredz/herbalwitch/client/compat/` — EMI (`emi/`) and JEI (`jei/`) plugins over one shared card layout
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/` — datagen provider registration only
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/client/language/` — the sole `en_us.json` writer
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/client/decor/` — furniture blockstates, finish models, item models, names
@@ -38,6 +53,11 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/server/loot/` — the sole global loot modifier provider
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/server/decor/` — furniture recipes, loot, block and item tag contributions
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/server/botany/` — herb recipes, loot, tags, biome tags, worldgen, conditions
+- `src/main/java/io/github/dirtyredz/herbalwitch/data/server/stations/` — station crafting, loot and tags; `recipes/` the processing recipe providers
+- `src/main/java/io/github/dirtyredz/herbalwitch/data/server/preparations/` — lantern crafting, loot, tags, entity tags
+- `src/main/java/io/github/dirtyredz/herbalwitch/data/server/compat/` — tags offered to optional mods (Farmer's Delight heat)
+- `src/main/java/io/github/dirtyredz/herbalwitch/data/client/stations/` — station blockstates, item models, names
+- `src/main/java/io/github/dirtyredz/herbalwitch/data/client/preparations/` — bundle and lantern models, item models, names
 - `src/main/resources/` — mods.toml, pack.mcmeta, authored models (`models/block/decor/templates/`, `models/block/botany/garden/`), generated textures (`textures/block/material/`, `textures/{block,item}/botany/`)
 - `src/generated/resources/` — datagen output, checked in and packaged (its `.cache/` is ignored and excluded); never hand-edited
 - `src/test/java/io/github/dirtyredz/herbalwitch/` — pure JUnit tests (`decor/`, `botany/`, `showcase/`, `data/` with per-feature manifests and `data/fixture/`), no Minecraft bootstrap

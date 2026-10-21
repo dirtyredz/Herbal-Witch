@@ -42,3 +42,15 @@
   eagerly) so the plan is unit-testable without a Minecraft bootstrap.
 - **The showcase refuses an occupied plot.** Signs and barrels are block entities, so a second run
   over a built showcase is refused by the preflight; use a fresh flat plot.
+- **Station recipes are exact.** Every filled input slot must be used by the recipe, so a stray item
+  blocks processing; that keeps three-slot and one-slot grinding recipes unambiguous.
+- **Recipe reloads cancel jobs whose recipe changed** (id or content fingerprint). Ingredients stay
+  in their slots; progress restarts. A saved job is revalidated on its first tick after loading.
+- **Vanilla `moveItemStackTo` merges into slots without asking `mayPlace`.** Station menus insert
+  through each slot's own rules instead, or shift-click would fill output slots.
+- **Containers come from recipes, not craft remainders.** Processing recipes list returned
+  containers explicitly (`returns`); a consumed item's crafting remainder is not added.
+- **Water purity rides only through an installed carrier.** Without Thirst Was Taken the tea has no
+  purity tag; with it, the water's `Purity` int is copied unchanged (never upgraded by heating).
+- **Compat runtime profiles need SRG refmap remapping** for the local FD/Thirst jars; build.gradle
+  sets it only when `-PcompatProfile` uses them. Their mixin warnings about absent mods are harmless.

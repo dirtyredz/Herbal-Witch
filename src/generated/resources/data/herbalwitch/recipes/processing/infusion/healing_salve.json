@@ -1,0 +1,38 @@
+{
+  "type": "herbalwitch:processing/infusion",
+  "base": {
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:honey_bottle"
+    }
+  },
+  "duration": 600,
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "herbalwitch:preparations/herbs/temperate/yarrow/powder"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "herbalwitch:preparations/herbs/temperate/chamomile/powder"
+      }
+    }
+  ],
+  "packaging": {
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:bowl"
+    }
+  },
+  "result": {
+    "item": "herbalwitch:preparations/salves/healing_salve"
+  },
+  "returns": [
+    {
+      "item": "minecraft:glass_bottle"
+    }
+  ]
+}

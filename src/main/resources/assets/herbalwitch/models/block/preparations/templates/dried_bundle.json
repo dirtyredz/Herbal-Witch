@@ -1,0 +1,48 @@
+{
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "dark_wood": "herbalwitch:block/material/dark_wood",
+    "particle": "#bundle"
+  },
+  "elements": [
+    {
+      "name": "plane_x",
+      "from": [4, 4, 7.5],
+      "to": [12, 16, 8.5],
+      "faces": {
+        "north": {"uv": [0,0,16,16], "texture": "#bundle"},
+        "south": {"uv": [0,0,16,16], "texture": "#bundle"},
+        "east": {"uv": [0,0,16,16], "texture": "#bundle"},
+        "west": {"uv": [0,0,16,16], "texture": "#bundle"},
+        "up": {"uv": [0,0,16,16], "texture": "#bundle"},
+        "down": {"uv": [0,0,16,16], "texture": "#bundle"}
+      }
+    },
+    {
+      "name": "plane_z",
+      "from": [7.5, 4, 4],
+      "to": [8.5, 16, 12],
+      "faces": {
+        "north": {"uv": [0,0,16,16], "texture": "#bundle"},
+        "south": {"uv": [0,0,16,16], "texture": "#bundle"},
+        "east": {"uv": [0,0,16,16], "texture": "#bundle"},
+        "west": {"uv": [0,0,16,16], "texture": "#bundle"},
+        "up": {"uv": [0,0,16,16], "texture": "#bundle"},
+        "down": {"uv": [0,0,16,16], "texture": "#bundle"}
+      }
+    },
+    {
+      "name": "peg",
+      "from": [7, 14, 7],
+      "to": [9, 16, 9],
+      "faces": {
+        "north": {"uv": [7,0,9,2], "texture": "#dark_wood"},
+        "south": {"uv": [7,0,9,2], "texture": "#dark_wood"},
+        "east": {"uv": [7,0,9,2], "texture": "#dark_wood"},
+        "west": {"uv": [7,0,9,2], "texture": "#dark_wood"},
+        "up": {"uv": [7,7,9,9], "texture": "#dark_wood"},
+        "down": {"uv": [7,7,9,9], "texture": "#dark_wood"}
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "type": "herbalwitch:processing/drying",
+  "duration": 1200,
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "herbalwitch:botany/temperate/sage/fresh"
+      }
+    }
+  ],
+  "result": {
+    "item": "herbalwitch:preparations/herbs/temperate/sage/bundle"
+  }
+}

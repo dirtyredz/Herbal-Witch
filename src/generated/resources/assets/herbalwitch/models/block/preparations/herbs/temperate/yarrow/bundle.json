@@ -1,0 +1,6 @@
+{
+  "parent": "herbalwitch:block/preparations/templates/dried_bundle",
+  "textures": {
+    "bundle": "herbalwitch:item/preparations/herbs/temperate/yarrow/bundle"
+  }
+}

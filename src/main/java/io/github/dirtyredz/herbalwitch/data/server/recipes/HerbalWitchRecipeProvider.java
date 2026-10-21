@@ -2,6 +2,12 @@ package io.github.dirtyredz.herbalwitch.data.server.recipes;
 
 import io.github.dirtyredz.herbalwitch.data.server.botany.BotanyRecipes;
 import io.github.dirtyredz.herbalwitch.data.server.decor.DecorRecipes;
+import io.github.dirtyredz.herbalwitch.data.server.preparations.PreparationCraftingProvider;
+import io.github.dirtyredz.herbalwitch.data.server.stations.StationCraftingProvider;
+import io.github.dirtyredz.herbalwitch.data.server.stations.recipes.DryingRecipeProvider;
+import io.github.dirtyredz.herbalwitch.data.server.stations.recipes.GrindingRecipeProvider;
+import io.github.dirtyredz.herbalwitch.data.server.stations.recipes.InfusionRecipeProvider;
+import io.github.dirtyredz.herbalwitch.data.server.stations.recipes.SteepingRecipeProvider;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -34,5 +40,11 @@ public class HerbalWitchRecipeProvider extends RecipeProvider {
     protected void buildRecipes(Consumer<FinishedRecipe> writer) {
         DecorRecipes.addTo(writer);
         BotanyRecipes.addTo(writer);
+        StationCraftingProvider.addTo(writer);
+        PreparationCraftingProvider.addTo(writer);
+        DryingRecipeProvider.addTo(writer);
+        GrindingRecipeProvider.addTo(writer);
+        SteepingRecipeProvider.addTo(writer);
+        InfusionRecipeProvider.addTo(writer);
     }
 }

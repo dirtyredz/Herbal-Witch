@@ -1,0 +1,12 @@
+{
+  "values": [
+    "herbalwitch:stations/hearth/station",
+    "minecraft:campfire",
+    "minecraft:soul_campfire",
+    "minecraft:magma_block",
+    {
+      "id": "farmersdelight:stove",
+      "required": false
+    }
+  ]
+}

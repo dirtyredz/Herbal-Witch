@@ -1,0 +1,18 @@
+{
+  "values": [
+    "herbalwitch:preparations/herbs/temperate/lavender/bundle",
+    "herbalwitch:preparations/herbs/temperate/sage/bundle",
+    "herbalwitch:preparations/herbs/temperate/chamomile/bundle",
+    "herbalwitch:preparations/herbs/temperate/yarrow/bundle",
+    "herbalwitch:preparations/herbs/dry/rosemary/bundle",
+    "herbalwitch:preparations/herbs/dry/thyme/bundle",
+    "herbalwitch:preparations/herbs/wet/mint/bundle",
+    "herbalwitch:preparations/herbs/wet/nettle/bundle",
+    "herbalwitch:preparations/herbs/shade/valerian/bundle",
+    "herbalwitch:preparations/herbs/shade/mugwort/bundle",
+    "herbalwitch:preparations/herbs/woodland/belladonna/bundle",
+    "herbalwitch:preparations/herbs/woodland/nightshade/bundle",
+    "herbalwitch:preparations/herbs/woodland/wolfsbane/bundle",
+    "herbalwitch:preparations/herbs/woodland/mandrake/bundle"
+  ]
+}
