@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "herbalwitch:block/decor/seating/armchair/painted/moss",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "herbalwitch:block/decor/seating/armchair/painted/moss"
+    },
+    "facing=south": {
+      "model": "herbalwitch:block/decor/seating/armchair/painted/moss",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "herbalwitch:block/decor/seating/armchair/painted/moss",
+      "y": 270
+    }
+  }
+}

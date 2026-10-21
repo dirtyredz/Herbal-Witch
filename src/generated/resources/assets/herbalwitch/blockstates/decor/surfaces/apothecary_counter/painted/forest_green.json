@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "herbalwitch:block/decor/surfaces/apothecary_counter/painted/forest_green",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "herbalwitch:block/decor/surfaces/apothecary_counter/painted/forest_green"
+    },
+    "facing=south": {
+      "model": "herbalwitch:block/decor/surfaces/apothecary_counter/painted/forest_green",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "herbalwitch:block/decor/surfaces/apothecary_counter/painted/forest_green",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "herbalwitch:small_rug",
+  "key": {
+    "C": {
+      "tag": "minecraft:wool_carpets"
+    },
+    "S": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    "CSC"
+  ],
+  "result": {
+    "count": 2,
+    "item": "herbalwitch:decor/textiles/small_rug/natural/dark_oak"
+  },
+  "show_notification": true
+}

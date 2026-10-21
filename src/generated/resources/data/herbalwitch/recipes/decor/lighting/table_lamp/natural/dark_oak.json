@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "herbalwitch:table_lamp",
+  "key": {
+    "S": {
+      "item": "minecraft:dark_oak_slab"
+    },
+    "T": {
+      "item": "minecraft:torch"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    "W",
+    "T",
+    "S"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/lighting/table_lamp/natural/dark_oak"
+  },
+  "show_notification": true
+}

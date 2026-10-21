@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "herbalwitch:block/decor/surfaces/apothecary_counter/natural/dark_oak",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "herbalwitch:block/decor/surfaces/apothecary_counter/natural/dark_oak"
+    },
+    "facing=south": {
+      "model": "herbalwitch:block/decor/surfaces/apothecary_counter/natural/dark_oak",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "herbalwitch:block/decor/surfaces/apothecary_counter/natural/dark_oak",
+      "y": 270
+    }
+  }
+}

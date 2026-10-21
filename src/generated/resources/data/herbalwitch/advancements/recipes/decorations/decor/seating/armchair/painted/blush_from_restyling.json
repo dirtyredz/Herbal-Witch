@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_armchair": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "herbalwitch:decor/armchair"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "herbalwitch:decor/seating/armchair/painted/blush_from_restyling"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_armchair",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "herbalwitch:decor/seating/armchair/painted/blush_from_restyling"
+    ]
+  },
+  "sends_telemetry_event": false
+}

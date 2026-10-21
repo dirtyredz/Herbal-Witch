@@ -1,0 +1,6 @@
+{
+  "parent": "herbalwitch:block/decor/templates/apothecary_counter",
+  "textures": {
+    "frame": "herbalwitch:block/material/wood_grain"
+  }
+}

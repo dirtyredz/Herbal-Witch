@@ -1,0 +1,58 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": [
+    {
+      "item": "herbalwitch:decor/textiles/small_rug/natural/dark_oak"
+    },
+    {
+      "item": "herbalwitch:decor/textiles/small_rug/natural/cherry"
+    },
+    {
+      "item": "herbalwitch:decor/textiles/small_rug/natural/rosewood"
+    },
+    {
+      "item": "herbalwitch:decor/textiles/small_rug/natural/pale_oak"
+    },
+    {
+      "item": "herbalwitch:decor/textiles/small_rug/natural/spruce"
+    },
+    {
+      "item": "herbalwitch:decor/textiles/small_rug/natural/birch"
+    },
+    {
+      "item": "herbalwitch:decor/textiles/small_rug/painted/black"
+    },
+    {
+      "item": "herbalwitch:decor/textiles/small_rug/painted/stone"
+    },
+    {
+      "item": "herbalwitch:decor/textiles/small_rug/painted/moss"
+    },
+    {
+      "item": "herbalwitch:decor/textiles/small_rug/painted/sage_green"
+    },
+    {
+      "item": "herbalwitch:decor/textiles/small_rug/painted/forest_green"
+    },
+    {
+      "item": "herbalwitch:decor/textiles/small_rug/painted/plum"
+    },
+    {
+      "item": "herbalwitch:decor/textiles/small_rug/painted/burgundy"
+    },
+    {
+      "item": "herbalwitch:decor/textiles/small_rug/painted/dusty_pink"
+    },
+    {
+      "item": "herbalwitch:decor/textiles/small_rug/painted/blush"
+    },
+    {
+      "item": "herbalwitch:decor/textiles/small_rug/painted/cream"
+    },
+    {
+      "item": "herbalwitch:decor/textiles/small_rug/painted/lilac"
+    }
+  ],
+  "result": "herbalwitch:decor/textiles/small_rug/natural/walnut"
+}

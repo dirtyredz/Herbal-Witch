@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "herbalwitch:block/decor/storage/small_wall_shelf/painted/burgundy",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "herbalwitch:block/decor/storage/small_wall_shelf/painted/burgundy"
+    },
+    "facing=south": {
+      "model": "herbalwitch:block/decor/storage/small_wall_shelf/painted/burgundy",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "herbalwitch:block/decor/storage/small_wall_shelf/painted/burgundy",
+      "y": 270
+    }
+  }
+}

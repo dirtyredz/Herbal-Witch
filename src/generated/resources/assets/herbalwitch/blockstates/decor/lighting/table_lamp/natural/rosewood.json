@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "herbalwitch:block/decor/lighting/table_lamp/natural/rosewood"
+    },
+    "lit=true": {
+      "model": "herbalwitch:block/decor/lighting/table_lamp/lit/natural/rosewood"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "herbalwitch:block/decor/lighting/table_lamp/natural/dark_oak"
+    },
+    "lit=true": {
+      "model": "herbalwitch:block/decor/lighting/table_lamp/lit/natural/dark_oak"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "herbalwitch:block/decor/lighting/table_lamp/painted/moss"
+    },
+    "lit=true": {
+      "model": "herbalwitch:block/decor/lighting/table_lamp/lit/painted/moss"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "herbalwitch:block/decor/seating/armchair/natural/pale_oak",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "herbalwitch:block/decor/seating/armchair/natural/pale_oak"
+    },
+    "facing=south": {
+      "model": "herbalwitch:block/decor/seating/armchair/natural/pale_oak",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "herbalwitch:block/decor/seating/armchair/natural/pale_oak",
+      "y": 270
+    }
+  }
+}

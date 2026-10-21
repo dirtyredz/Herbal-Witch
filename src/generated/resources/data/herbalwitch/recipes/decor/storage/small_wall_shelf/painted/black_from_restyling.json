@@ -1,0 +1,58 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": [
+    {
+      "item": "herbalwitch:decor/storage/small_wall_shelf/natural/dark_oak"
+    },
+    {
+      "item": "herbalwitch:decor/storage/small_wall_shelf/natural/walnut"
+    },
+    {
+      "item": "herbalwitch:decor/storage/small_wall_shelf/natural/cherry"
+    },
+    {
+      "item": "herbalwitch:decor/storage/small_wall_shelf/natural/rosewood"
+    },
+    {
+      "item": "herbalwitch:decor/storage/small_wall_shelf/natural/pale_oak"
+    },
+    {
+      "item": "herbalwitch:decor/storage/small_wall_shelf/natural/spruce"
+    },
+    {
+      "item": "herbalwitch:decor/storage/small_wall_shelf/natural/birch"
+    },
+    {
+      "item": "herbalwitch:decor/storage/small_wall_shelf/painted/stone"
+    },
+    {
+      "item": "herbalwitch:decor/storage/small_wall_shelf/painted/moss"
+    },
+    {
+      "item": "herbalwitch:decor/storage/small_wall_shelf/painted/sage_green"
+    },
+    {
+      "item": "herbalwitch:decor/storage/small_wall_shelf/painted/forest_green"
+    },
+    {
+      "item": "herbalwitch:decor/storage/small_wall_shelf/painted/plum"
+    },
+    {
+      "item": "herbalwitch:decor/storage/small_wall_shelf/painted/burgundy"
+    },
+    {
+      "item": "herbalwitch:decor/storage/small_wall_shelf/painted/dusty_pink"
+    },
+    {
+      "item": "herbalwitch:decor/storage/small_wall_shelf/painted/blush"
+    },
+    {
+      "item": "herbalwitch:decor/storage/small_wall_shelf/painted/cream"
+    },
+    {
+      "item": "herbalwitch:decor/storage/small_wall_shelf/painted/lilac"
+    }
+  ],
+  "result": "herbalwitch:decor/storage/small_wall_shelf/painted/black"
+}
