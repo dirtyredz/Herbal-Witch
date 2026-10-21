@@ -25,7 +25,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
  * A raised herb bed: a wooden planter of tilled soil that holds one plant. Moisture works like
  * farmland ({@link GardenSoil}); unlike farmland it is never trampled and never dries back to dirt.
  * Beds side by side join into one planter ({@link GardenBedConnections}): the shared rails and
- * posts disappear. State lives entirely in block properties: no block entity, no continuous scan.
+ * posts disappear, and an inner corner of the joined shape gets its own flag. State lives entirely in block properties: no block entity, no continuous scan.
  */
 public class HerbBedBlock extends Block {
     public static final IntegerProperty MOISTURE = BlockStateProperties.MOISTURE;
@@ -37,7 +37,9 @@ public class HerbBedBlock extends Block {
         super(properties);
         registerDefaultState(stateDefinition.any().setValue(MOISTURE, 0).setValue(ENRICHED, false)
                 .setValue(GardenBedConnections.NORTH, false).setValue(GardenBedConnections.EAST, false)
-                .setValue(GardenBedConnections.SOUTH, false).setValue(GardenBedConnections.WEST, false));
+                .setValue(GardenBedConnections.SOUTH, false).setValue(GardenBedConnections.WEST, false)
+                .setValue(GardenBedConnections.innerCorner(0), false).setValue(GardenBedConnections.innerCorner(1), false)
+                .setValue(GardenBedConnections.innerCorner(2), false).setValue(GardenBedConnections.innerCorner(3), false));
     }
 
     public static boolean isMoist(BlockState state) {
@@ -57,7 +59,8 @@ public class HerbBedBlock extends Block {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(MOISTURE, ENRICHED, GardenBedConnections.NORTH, GardenBedConnections.EAST, GardenBedConnections.SOUTH,
-                GardenBedConnections.WEST);
+                GardenBedConnections.WEST, GardenBedConnections.innerCorner(0), GardenBedConnections.innerCorner(1),
+                GardenBedConnections.innerCorner(2), GardenBedConnections.innerCorner(3));
     }
 
     @Override
@@ -83,6 +86,17 @@ public class HerbBedBlock extends Block {
         if (joined != state) {
             level.setBlock(pos, joined, Block.UPDATE_CLIENTS);
         }
+        GardenBedConnections.refreshDiagonals(level, pos);
+    }
+
+    /** A removed bed may open an inner corner on the beds diagonal to it. */
+    @Override
+    @SuppressWarnings("deprecation") // overriding, not calling
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean moving) {
+        super.onRemove(state, level, pos, newState, moving);
+        if (!newState.is(this)) {
+            GardenBedConnections.refreshDiagonals(level, pos);
+        }
     }
 
     @Override
@@ -90,7 +104,10 @@ public class HerbBedBlock extends Block {
     public BlockState updateShape(BlockState state, Direction direction, BlockState neighbour, LevelAccessor level,
                                   BlockPos pos, BlockPos neighbourPos) {
         BooleanProperty side = GardenBedConnections.property(direction);
-        return side == null ? state : state.setValue(side, GardenBedConnections.joins(state, neighbour));
+        if (side == null) {
+            return state;
+        }
+        return GardenBedConnections.refreshCorners(state.setValue(side, GardenBedConnections.joins(state, neighbour)), level, pos);
     }
 
     @Override

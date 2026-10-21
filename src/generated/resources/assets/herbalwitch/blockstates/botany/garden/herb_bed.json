@@ -72,10 +72,43 @@
     },
     {
       "apply": {
+        "model": "herbalwitch:block/botany/garden/parts/wood/inner"
+      },
+      "when": {
+        "east": "true",
+        "inner_north_east": "true",
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/botany/garden/parts/soil/corner_inner"
+      },
+      "when": {
+        "east": "true",
+        "inner_north_east": "true",
+        "moisture": "0",
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/botany/garden/parts/moist/corner_inner"
+      },
+      "when": {
+        "east": "true",
+        "inner_north_east": "true",
+        "moisture": "1|2|3|4|5|6|7",
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
         "model": "herbalwitch:block/botany/garden/parts/soil/corner"
       },
       "when": {
         "east": "true",
+        "inner_north_east": "false",
         "moisture": "0",
         "north": "true"
       }
@@ -86,6 +119,7 @@
       },
       "when": {
         "east": "true",
+        "inner_north_east": "false",
         "moisture": "1|2|3|4|5|6|7",
         "north": "true"
       }
@@ -151,11 +185,47 @@
     },
     {
       "apply": {
+        "model": "herbalwitch:block/botany/garden/parts/wood/inner",
+        "y": 90
+      },
+      "when": {
+        "east": "true",
+        "inner_east_south": "true",
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/botany/garden/parts/soil/corner_inner",
+        "y": 90
+      },
+      "when": {
+        "east": "true",
+        "inner_east_south": "true",
+        "moisture": "0",
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/botany/garden/parts/moist/corner_inner",
+        "y": 90
+      },
+      "when": {
+        "east": "true",
+        "inner_east_south": "true",
+        "moisture": "1|2|3|4|5|6|7",
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
         "model": "herbalwitch:block/botany/garden/parts/soil/corner",
         "y": 90
       },
       "when": {
         "east": "true",
+        "inner_east_south": "false",
         "moisture": "0",
         "south": "true"
       }
@@ -167,6 +237,7 @@
       },
       "when": {
         "east": "true",
+        "inner_east_south": "false",
         "moisture": "1|2|3|4|5|6|7",
         "south": "true"
       }
@@ -232,10 +303,46 @@
     },
     {
       "apply": {
+        "model": "herbalwitch:block/botany/garden/parts/wood/inner",
+        "y": 180
+      },
+      "when": {
+        "inner_south_west": "true",
+        "south": "true",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/botany/garden/parts/soil/corner_inner",
+        "y": 180
+      },
+      "when": {
+        "inner_south_west": "true",
+        "moisture": "0",
+        "south": "true",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/botany/garden/parts/moist/corner_inner",
+        "y": 180
+      },
+      "when": {
+        "inner_south_west": "true",
+        "moisture": "1|2|3|4|5|6|7",
+        "south": "true",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
         "model": "herbalwitch:block/botany/garden/parts/soil/corner",
         "y": 180
       },
       "when": {
+        "inner_south_west": "false",
         "moisture": "0",
         "south": "true",
         "west": "true"
@@ -247,6 +354,7 @@
         "y": 180
       },
       "when": {
+        "inner_south_west": "false",
         "moisture": "1|2|3|4|5|6|7",
         "south": "true",
         "west": "true"
@@ -312,10 +420,46 @@
     },
     {
       "apply": {
+        "model": "herbalwitch:block/botany/garden/parts/wood/inner",
+        "y": 270
+      },
+      "when": {
+        "inner_west_north": "true",
+        "north": "true",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/botany/garden/parts/soil/corner_inner",
+        "y": 270
+      },
+      "when": {
+        "inner_west_north": "true",
+        "moisture": "0",
+        "north": "true",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/botany/garden/parts/moist/corner_inner",
+        "y": 270
+      },
+      "when": {
+        "inner_west_north": "true",
+        "moisture": "1|2|3|4|5|6|7",
+        "north": "true",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
         "model": "herbalwitch:block/botany/garden/parts/soil/corner",
         "y": 270
       },
       "when": {
+        "inner_west_north": "false",
         "moisture": "0",
         "north": "true",
         "west": "true"
@@ -327,6 +471,7 @@
         "y": 270
       },
       "when": {
+        "inner_west_north": "false",
         "moisture": "1|2|3|4|5|6|7",
         "north": "true",
         "west": "true"

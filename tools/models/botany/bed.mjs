@@ -4,7 +4,9 @@
 // caps and small gold rivets, and lumpy soil just below the rim (dry or wet: tools/art/botany/garden).
 // The rails stop at the posts' faces so nothing overlaps (or z-fights) at a corner. Parts are authored for the north side and the
 // north-east corner; the multipart blockstate turns them (data/client/botany/garden/). Joined sides
-// show soil instead of a rail, so beds side by side read as one planter.
+// show soil instead of a rail, so beds side by side read as one planter. Where two joined sides
+// meet around an empty diagonal (the inside of an L, U or ring) the blockstate's inner-corner flag
+// adds the 'inner' part, which carries both neighbours' rails round the corner.
 import { box, turnY } from '../geometry.mjs';
 import { MATERIAL } from '../textures.mjs';
 
@@ -15,14 +17,35 @@ const RAIL_Z = [0.75, 2.5];
 const POST_IN = [2.75, 13.25];
 const SOIL_ONLY_TOP = { skip: ['down', 'north', 'south', 'east', 'west'] };
 
+/**
+ * A rail box over the footprint [x0, x1] x [z0, z1], with the recessed skirt and the groove cut into
+ * the face named by 'outer' ('north': the z0 side, 'east': the x1 side), any footprint.
+ */
+function railBox(x0, x1, z0, z1, outer) {
+  const east = outer === 'east';
+  const grow = (y0, y1, inset, opts) => box([x0, y0, east ? z0 : z0 + inset], [east ? x1 - inset : x1, y1, z1], '#wood', opts);
+  return [
+    grow(0, 1, 0.25, { skip: ['up'] }),
+    grow(1, 7.25, 0),
+    box([x0, 7.25, east ? z0 : z0 + 0.75], [east ? x1 - 0.75 : x1, 8.25, z1], '#wood_end', { skip: ['down', 'up'] }),
+    grow(8.25, 15, 0),
+  ];
+}
+
 /** The two-rail wall section along the north side, between x0 and x1. */
 function rail(x0, x1) {
+  return railBox(x0, x1, RAIL_Z[0], RAIL_Z[1], 'north');
+}
+
+/**
+ * The inner corner at the north-east: the north neighbour's east rail and the east neighbour's north
+ * rail run on into this block and meet, so the two walls close round the empty diagonal.
+ */
+function inner() {
   const [z0, z1] = RAIL_Z;
   return [
-    box([x0, 0, z0 + 0.25], [x1, 1, z1], '#wood', { skip: ['up'] }), // recessed skirt
-    box([x0, 1, z0], [x1, 7.25, z1], '#wood'),
-    box([x0, 7.25, z0 + 0.75], [x1, 8.25, z1], '#wood_end', { skip: ['down', 'up'] }), // the groove
-    box([x0, 8.25, z0], [x1, 15, z1], '#wood'),
+    ...railBox(16 - z1, 16 - z0, 0, z1, 'east'), // the north neighbour's east rail, carried to this block's north edge
+    ...railBox(16 - z0, 16, z0, z1, 'north'), // the east neighbour's north rail, carried to this block's east edge
   ];
 }
 
@@ -43,6 +66,8 @@ const soil = {
   edge: () => [box([2, 0, 0], [14, SOIL_Y, 2], '#soil', SOIL_ONLY_TOP)],
   // A corner joined on both sides: soil on top, and wooden sides that close the small gap where
   // two rails meet around an empty diagonal neighbour (the inner corner of an L or a ring).
+  // The same joined corner when the diagonal bed is missing: soil only, the wall comes from the inner part.
+  corner_inner: () => [box([14, 0, 0], [16, SOIL_Y, 2], '#soil', SOIL_ONLY_TOP)],
   corner: () => [box([14, 0, 0], [16, SOIL_Y, 2], { top: '#soil', side: '#wood' }, { skip: ['down'] })],
 };
 
@@ -57,6 +82,7 @@ export function bed() {
     wood('rail_end', rail(POST_IN[1], 16)),
     wood('rail_start', rail(0, POST_IN[0])),
     wood('post', post()),
+    wood('inner', inner()),
     ...Object.entries(soil).map(([name, make]) => ({ path: `${parts}/soil/${name}`, textures: { ...SOIL, wood: MATERIAL.wood, particle: SOIL.soil }, elements: make() })),
   ];
   // the unjoined bed (its item, and the shape a lone bed shows): core soil, four rails, four posts

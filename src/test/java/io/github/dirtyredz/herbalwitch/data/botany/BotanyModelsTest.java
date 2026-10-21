@@ -195,13 +195,13 @@ class BotanyModelsTest {
     @Test
     void herbBedPartsAreUntintedWoodAndSoilTemplates() {
         String parts = "herbalwitch:block/botany/garden/parts/";
-        for (String wood : List.of("rail", "rail_end", "rail_start", "post")) {
+        for (String wood : List.of("rail", "rail_end", "rail_start", "post", "inner")) {
             TemplateChecks.check(parts + "wood/" + wood, Map.of());
             Resolved part = ModelResolver.resolve(parts + "wood/" + wood);
             String grain = part.texture(wood.equals("post") ? "#post" : "#wood");
             assertEquals(wood.equals("post") ? "herbalwitch:block/material/wood_post" : "herbalwitch:block/material/wood", grain, wood);
         }
-        for (String soil : List.of("core", "edge", "corner")) {
+        for (String soil : List.of("core", "edge", "corner", "corner_inner")) {
             for (String kind : List.of("soil", "moist")) {
                 String id = parts + kind + "/" + soil;
                 TemplateChecks.check(id, Map.of());
