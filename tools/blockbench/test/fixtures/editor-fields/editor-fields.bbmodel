@@ -1,0 +1,189 @@
+{
+	"meta": {
+		"format_version": "5.0",
+		"model_format": "java_block",
+		"box_uv": false
+	},
+	"name": "editor-fields",
+	"parent": "",
+	"ambientocclusion": true,
+	"front_gui_light": false,
+	"visible_box": [1, 1, 0],
+	"variable_placeholders": "",
+	"variable_placeholder_buttons": [],
+	"unhandled_root_fields": {},
+	"java_block_version": "1.9.0",
+	"resolution": {
+		"width": 16,
+		"height": 16
+	},
+	"elements": [
+		{
+			"name": "body",
+			"box_uv": false,
+			"render_order": "default",
+			"rescale": false,
+			"locked": true,
+			"from": [4, 0, 4],
+			"to": [12, 6, 12],
+			"autouv": 0,
+			"color": 3,
+			"visibility": false,
+			"origin": [8, 3, 8],
+			"faces": {
+				"north": {"uv": [4, 10, 12, 16], "texture": 0},
+				"east": {"uv": [4, 10, 12, 16], "texture": 0},
+				"south": {"uv": [4, 10, 12, 16], "texture": 0},
+				"west": {"uv": [4, 10, 12, 16], "texture": 0},
+				"up": {"uv": [12, 12, 4, 4], "rotation": 90, "texture": 0},
+				"down": {"uv": [0, 0, 0, 0], "texture": null}
+			},
+			"type": "cube",
+			"uuid": "0f6b1f4e-3c35-4a5e-9d8e-1b2a3c4d5e6f"
+		},
+		{
+			"name": "lean",
+			"box_uv": false,
+			"render_order": "default",
+			"rescale": false,
+			"locked": false,
+			"from": [7, 6, 7],
+			"to": [9, 12, 9],
+			"autouv": 0,
+			"color": 1,
+			"rotation": [0, 0, -22.5],
+			"origin": [8, 6, 8],
+			"faces": {
+				"north": {"uv": [7, 4, 9, 10], "texture": 0, "cullface": "north"},
+				"east": {"uv": [7, 4, 9, 10], "texture": 0},
+				"south": {"uv": [7, 4, 9, 10], "texture": 0},
+				"west": {"uv": [7, 4, 9, 10], "texture": 0},
+				"up": {"uv": [7, 7, 9, 9], "texture": 0},
+				"down": {"uv": [7, 7, 9, 9], "texture": 0}
+			},
+			"type": "cube",
+			"uuid": "1a2b3c4d-5e6f-4a1b-8c2d-3e4f5a6b7c8d"
+		},
+		{
+			"name": "hidden from export",
+			"box_uv": false,
+			"from": [0, 0, 0],
+			"to": [1, 1, 1],
+			"autouv": 0,
+			"color": 0,
+			"export": false,
+			"origin": [0, 0, 0],
+			"faces": {
+				"north": {"uv": [0, 0, 1, 1], "texture": 0},
+				"east": {"uv": [0, 0, 1, 1], "texture": 0},
+				"south": {"uv": [0, 0, 1, 1], "texture": 0},
+				"west": {"uv": [0, 0, 1, 1], "texture": 0},
+				"up": {"uv": [0, 0, 1, 1], "texture": 0},
+				"down": {"uv": [0, 0, 1, 1], "texture": 0}
+			},
+			"type": "cube",
+			"uuid": "2b3c4d5e-6f7a-4b2c-9d3e-4f5a6b7c8d9e"
+		}
+	],
+	"groups": [
+		{
+			"name": "pot",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"uuid": "aa000000-0000-4000-8000-000000000001",
+			"export": true,
+			"mirror_uv": false,
+			"isOpen": true,
+			"locked": false,
+			"visibility": true,
+			"autouv": 0,
+			"selected": true,
+			"primary_selected": true
+		},
+		{
+			"name": "handle",
+			"origin": [8, 6, 8],
+			"color": 2,
+			"uuid": "aa000000-0000-4000-8000-000000000002",
+			"export": true,
+			"mirror_uv": false,
+			"isOpen": false,
+			"locked": false,
+			"visibility": false,
+			"autouv": 0
+		}
+	],
+	"outliner": [
+		{
+			"uuid": "aa000000-0000-4000-8000-000000000001",
+			"isOpen": true,
+			"children": [
+				"0f6b1f4e-3c35-4a5e-9d8e-1b2a3c4d5e6f",
+				{
+					"uuid": "aa000000-0000-4000-8000-000000000002",
+					"isOpen": false,
+					"children": ["1a2b3c4d-5e6f-4a1b-8c2d-3e4f5a6b7c8d"]
+				}
+			]
+		},
+		"2b3c4d5e-6f7a-4b2c-9d3e-4f5a6b7c8d9e"
+	],
+	"textures": [
+		{
+			"path": "C:\\Users\\someone\\Desktop\\clay.png",
+			"name": "clay.png",
+			"folder": "block/test",
+			"namespace": "herbalwitch",
+			"id": "clay",
+			"group": "",
+			"width": 16,
+			"height": 16,
+			"uv_width": 16,
+			"uv_height": 16,
+			"particle": true,
+			"use_as_default": false,
+			"layers_enabled": false,
+			"sync_to_project": "",
+			"render_mode": "default",
+			"render_sides": "auto",
+			"pbr_channel": "color",
+			"frame_time": 1,
+			"frame_order_type": "loop",
+			"frame_order": "",
+			"frame_interpolate": false,
+			"visible": true,
+			"internal": true,
+			"saved": false,
+			"uuid": "bb000000-0000-4000-8000-000000000001",
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGUlEQVR42mOosJH7TwlmGDVg1IBRA4aLAQAH4NEQu9/+owAAAABJRU5ErkJggg=="
+		}
+	],
+	"collections": [
+		{
+			"name": "export set",
+			"export_codec": "java_block",
+			"children": ["aa000000-0000-4000-8000-000000000001"],
+			"uuid": "cc000000-0000-4000-8000-000000000001"
+		}
+	],
+	"reference_images": [
+		{
+			"name": "reference.png",
+			"layer": "background",
+			"position": [0, 0],
+			"size": [400, 300],
+			"uuid": "dd000000-0000-4000-8000-000000000001"
+		}
+	],
+	"display": {
+		"gui": {
+			"rotation": [30, 225, 0],
+			"scale": [0.625, 0.625, 0.625]
+		},
+		"ground": {
+			"translation": [0, 3, 0],
+			"scale": [0.25, 0.25, 0.25]
+		},
+		"head": {}
+	}
+}

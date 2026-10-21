@@ -36,3 +36,26 @@ test('rendering is deterministic', () => {
   const id = 'herbalwitch:item/stations/kettle/station';
   assert.deepEqual(renderItem(a, new Baker(a), id, 48).image.px, renderItem(b, new Baker(b), id, 48).image.px);
 });
+
+test('explicit staged roots: a pack laid over the mod resolves, and a path in two trees is a conflict', async () => {
+  const { mkdtempSync, mkdirSync, writeFileSync, readFileSync } = await import('node:fs');
+  const { tmpdir } = await import('node:os');
+  const stage = mkdtempSync(join(tmpdir(), 'hw-stage-'));
+  const rel = 'herbalwitch/models/block/stations/kettle/base.json';
+  mkdirSync(join(stage, dirname(rel)), { recursive: true });
+  writeFileSync(join(stage, rel), readFileSync(join(root, 'src/main/resources/assets', rel)));
+  const trees = [stage, join(root, 'src/generated/resources/assets')];
+  const staged = new Resources(root, { trees });
+  const scope = { blocks: new Set(['herbalwitch:stations/kettle/station']), items: new Set(['herbalwitch:item/stations/kettle/station']), models: new Set(['herbalwitch:block/stations/kettle/base']) };
+  const ok = coverage(staged, new Baker(staged), scope);
+  assert.deepEqual(ok.errors.filter((e) => !/missing texture/.test(e)), []); // textures live in the third tree, left out here
+  const both = new Resources(root, { trees: [stage, ...trees.slice(1), join(root, 'src/main/resources/assets')] });
+  const dup = coverage(both, new Baker(both), scope);
+  assert.ok(dup.errors.some((e) => /conflict: herbalwitch:models\/block\/stations\/kettle\/base.json exists in more than one resource tree/.test(e)), dup.errors.join('\n'));
+});
+
+test('an in-memory overlay wins over the trees, as a resource pack wins over the mod', () => {
+  const res = new Resources(root, { overlay: new Map([['herbalwitch/models/block/stations/kettle/base.json', Buffer.from('{"elements":[]}')]]) });
+  assert.deepEqual(res.json('models', 'herbalwitch:block/stations/kettle/base'), { elements: [] });
+  assert.equal(res.diagnostics.length, 0);
+});

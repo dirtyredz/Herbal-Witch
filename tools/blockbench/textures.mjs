@@ -99,7 +99,7 @@ export function resolveTextures(where, project, piece, canonical) {
 export function refreshPreviews(json, piece, canonicalBytes) {
   const changed = [];
   for (const t of json.textures ?? []) {
-    if (piece.owned_textures[t.id] || !piece.textures[t.id]) continue;
+    if (piece.owned_textures?.[t.id] || !piece.textures[t.id]) continue;
     const bytes = canonicalBytes(piece.textures[t.id]);
     if (!bytes) throw new Error(`no canonical PNG for ${piece.textures[t.id]}`);
     const url = dataUrl(bytes);
