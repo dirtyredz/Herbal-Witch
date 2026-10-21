@@ -4,9 +4,9 @@ Forge 1.20.1 mod: woodland herbal witchcraft (herbs, stations, brewing, familiar
 an apothecary trade) together with a cottage furniture catalogue. Install on **both** the server and
 every client.
 
-**Status: private development, `0.1.0-dev.4` local candidate.** Contains Milestone 1 (cottage decor
+**Status: private development, `0.2.0-dev.1` local candidate (the art pass).** Contains Milestone 1 (cottage decor
 in a single design), Milestone 2 (herbs and garden) and Milestone 3 (everyday preparation stations and
-products). Owner review of the art and station UIs is pending. Later systems are listed in
+products), all redrawn in 0.2.0-dev.1. Owner review of the art and station UIs is pending. Later systems are listed in
 docs/FEATURES.md. Not published; not in any pack.
 
 ## Supported versions
@@ -20,12 +20,14 @@ docs/FEATURES.md. Not published; not in any pack.
 
 ## Content
 
-- **Cottage decor** (tab "Cottage Decor"): five pieces in one dark-wood design, with deep green and hot
-  pink accents and a little dark purple. Armchair, Apothecary Counter, Small Wall Shelf, Table Lamp
+- **Cottage decor** (tab "Cottage Decor"): five pieces in one dark-wood design, with forest green,
+  magenta and plum accents, gold trim and ivy. Armchair, Apothecary Counter, Small Wall Shelf, Table Lamp
   (use to switch on, light 14), Small Rug. Craft them from dark oak (docs/catalogue/decor.md).
 - **Herbs and garden** (tab "Gardening"): 14 herbs in five habitat groups, seeds, fresh herbs and the
-  herb bed (docs/catalogue/herbs.md).
-- **Apothecary** (tab "Apothecary"): five stations, dried bundles, powders, seven drinks, a salve,
+  herb bed (docs/catalogue/herbs.md). Herbs stand rooted in the soil with a 3D mature form, and
+  adjacent herb beds join into one planter.
+- **Apothecary** (tab "Apothecary"): six stations (the drying rack and hearth are 2x2 multiblocks; the new Witch's Stove is a two-wide
+  range), dried bundles, powders, seven drinks, a salve,
   oils, garden products and a finite oil lantern (docs/catalogue/stations.md, products.md).
 
 ## Getting started in survival
@@ -37,7 +39,7 @@ docs/FEATURES.md. Not published; not in any pack.
 3. **Harvest** a mature plant with use (right click): 2 fresh herbs and 1 seed, and the plant resets.
 4. **Drying rack.** Fresh herb in, bundle out after 1,200 ticks (60 s). No heat.
 5. **Mortar and pestle.** Bundle in, powder out (100 ticks).
-6. **Hearth and kettle.** Fuel the hearth with any furnace fuel; set the kettle on top. Powder or
+6. **Hearth and kettle.** Fuel the hearth with any furnace fuel; set the kettle on the hearth's chimney top (or on a Witch's Stove burner). Powder or
    bundle plus a water bottle makes a drink.
 7. **Infusion pot** on a hearth for salves, oils and garden infusions; **salve**: yarrow and chamomile
    in the pot with a honey bottle and a bowl.
@@ -55,10 +57,11 @@ slabs) is farmland that never dries to dirt and is never trampled; it needs wate
 | Mortar and pestle | ` T ` / `SFS` / ` S ` | stick, 3 smooth stone, flint |
 | Tea kettle | `I C` / `III` / ` I ` | 5 iron ingots, 1 copper ingot |
 | Hearth | `B B` / `BCB` / `B B` | 6 bricks, a campfire |
+| Witch's Stove | `III` / `ICI` / `B B` | 5 iron ingots, a campfire, 2 bricks |
 | Infusion pot | `IGI` / `B B` / `B B` | 2 iron ingots, glass bottle, 4 bricks |
 | Oil lantern | `N N` / `NTN` / ` G ` | iron nuggets, torch, glass bottle |
 
-The kettle and infusion pot need heat from a lit hearth, campfire, soul campfire or magma block directly
+The kettle and infusion pot need heat from a lit hearth, Witch's Stove, campfire, soul campfire or magma block directly
 below (one hopper may sit between).
 
 ### Kettle (steeping): two herbs or powders plus a water bottle, 200 heated ticks
@@ -92,10 +95,10 @@ leaves (about 1 in 8, not shears, not silk touch). Details and effects: docs/cat
 `/herbalwitch showcase [section]` builds a labelled sample of every registered block, for owner review
 and testing. It needs permission level 2 (operators; a non-op, in survival or creative, and the console
 are refused). Sections: `decor`, `herbs`, `garden`, `drying_rack`, `mortar`, `kettle`, `hearth`,
-`infusion_pot`, `preparations`; with no section it builds all of them.
+`stove`, `infusion_pot`, `preparations`; with no section it builds all of them.
 
 - **Where:** the box starts 2 blocks east of you on your row and extends east and south. The floor is
-  the block you stand on. Height 8 (floor layer plus 7 cleared). The full layout is about 67 x 8 x 28;
+  the block you stand on. Height 8 (floor layer plus 7 cleared). The full layout is about 78 x 8 x 28;
   hard caps are 128 x 8 x 128 and 65,536 writes.
 - **Destructive:** the whole box is replaced: terrain (grass, dirt, stone, plants, leaves, logs, water) is cleared (no drops) and the floor laid (grass blocks under the garden and herbs, smooth stone elsewhere), then the floor,
   supports, samples and signs are placed. There is no undo.
@@ -120,6 +123,7 @@ Details: docs/COMPATIBILITY.md.
 ```
 cd mods/HerbalWitch
 node tools/generate-textures.mjs
+node tools/generate-models.mjs
 node tools/generate-test-structures.mjs
 .\gradlew.bat runData
 .\gradlew.bat test build
@@ -130,6 +134,14 @@ node tools/generate-test-structures.mjs
 `-PcompatProfile` is one of `base`, `emi`, `jei`, `viewers`, `farmersdelight`, `thirst`, `all`. The owner
 trial mods folder is `C:/Users/dirty/MultiMC/instances/Evil Eye Trial Cozy/.minecraft/mods`. The jar is
 `build/libs/herbalwitch-1.20.1-<version>.jar` (reobfuscated). CLAUDE.md has the full headless list.
+
+### Model tools
+
+- `node tools/generate-models.mjs` writes every station, furniture, herb and herb-bed model.
+- `node tools/preview-models.mjs --output <dir outside the repo> [--references <dir>]` renders headless
+  previews (contact sheets, herbs on beds, item sheet, review scenes, reference comparisons, manifest).
+  Check it with `node --test "tools/preview/test/*.test.mjs"`. Shading is approximate (no ambient
+  occlusion, world light, shaders, animation or mipmaps).
 
 ## Owner trial
 

@@ -3,7 +3,7 @@
 How the mod is put together. Code map: [STRUCTURE.md](../STRUCTURE.md).
 Plan of record: milestones 1-12 (docs/FEATURES.md); traceability: docs/catalogue/.
 
-## Current system (0.1.0-dev.4: Milestones 1-3)
+## Current system (0.2.0-dev.1: Milestones 1-3 plus the art pass)
 
 Everything below is server-authoritative; clients get vanilla block updates, menu slots and menu data.
 No custom network channel exists. Paths are under `src/main/java/io/github/dirtyredz/herbalwitch/`.
@@ -13,7 +13,7 @@ No custom network channel exists. Paths are under `src/main/java/io/github/dirty
 no block entities, no tints: materials are untinted textures bound directly by authored templates, and
 blockstates use the templates directly. State lives in block properties (`facing`, `lit`). The shelf
 (wall face) and lamp (sturdy centre below) check support on placement and in `updateShape`; the rug is
-vanilla carpet. Only the server toggles the lamp.
+vanilla carpet. Only the server toggles the lamp. The 0.2.0 restyle changed models and textures only.
 
 **Botany (`botany/`).**
 - *State and growth:* a herb is a plant block with age 0..3 (crop or bush form). It grows by vanilla
@@ -30,6 +30,21 @@ vanilla carpet. Only the server toggles the lamp.
   habitat herb at its discovery chance.
 - *Worldgen:* per herb a configured and placed feature, added by per-group biome modifiers onto habitat
   biome tags. Existing chunks are not retrofitted.
+
+**Herb bed joining (`botany/garden/`).** `HerbBedBlock` carries boolean `north/east/south/west`
+properties, computed by `GardenBedConnections`: a side is joined when the same bed block stands beside
+it at the same height. They are set on placement, in `onPlace` for direct `setBlock`, in `updateShape`
+on neighbour change, and on rotate/mirror; beds saved before 0.2.0 are repaired by their random tick.
+Connection is visual only; moisture and enrichment are unchanged. The blockstate is multipart
+(`data/client/botany/garden/HerbBedBlockstates` + `HerbBedModels`) over part models under
+`models/block/botany/garden/parts/{wood,soil,moist}`.
+
+**Model and preview tooling.** `tools/generate-models.mjs` (with `tools/models/**`) writes every
+station, furniture, herb (template and mature) and herb-bed model, and the part models above.
+`tools/preview-models.mjs` (with `tools/preview/**`) renders headless previews (family contact sheets,
+herbs on beds, item GUI sheet, review scenes, owner-reference comparisons, a manifest); tests:
+`node --test "tools/preview/test/*.test.mjs"`. Previews approximate directional shading only (no
+ambient occlusion, world light, shaders, animation, mipmaps or item extrusion).
 
 **Showcase (`showcase/`).** Three separated steps. `layout/` builds a bounded plan from registered
 sections with no world access (lazy state suppliers keep it unit-testable). `construction/` runs the
@@ -52,7 +67,15 @@ Each feature registers its own section; coverage tests require every block to ap
   station running.
 - *Heat:* `heat/` reads tags: `herbalwitch:heat_sources` (must be LIT where the block has that
   property) directly below, or one `herbalwitch:heat_conductors` block then a source. Waterlogged gives
-  none. Heated stations show Needs heat until then.
+  none. Heated stations show Needs heat until then. The Witch's Stove (`stations/stove/`) is a heat source
+  that reuses the hearth's block entity type, menu and screen.
+- *Multiblocks:* `platform/multiblock/` (`MultiblockLayout`, `MultiblockStructure`) describes a
+  station's cells; layouts are named in `StationCatalog` (`StationSpec.layout`). The drying rack and
+  hearth are 2x2. `StationBlock` places the other cells (all must be replaceable, grounded cells
+  supported), breaking any cell removes all, and only the origin cell (part 0) holds the block entity
+  and drops the item once (never in creative). Any cell opens the origin's menu; lit/active is shared
+  by every cell. Blockstates are multipart: `part_<n>` per cell plus `fire_<n>`/`bundles_<n>` overlays
+  while lit/active. The item uses `models/block/stations/<station>/assembly`.
 - *Reload and persistence:* the recipe index bumps a generation on server data reload; a job re-matches
   only on inventory revision or reload generation, and a changed or removed recipe cancels it (items
   stay, progress resets). Jobs save with schema version 1. There is no catch-up simulation: unloaded

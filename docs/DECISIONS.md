@@ -2,6 +2,64 @@
 
 Newest first.
 
+## 2026-10-21 - Art pass 0.2.0: an independent house style for stations (supersedes "fixed station appearances")
+
+Stations no longer borrow the furniture's fabric colours (the pink and green ceramic stripes): they
+are warm wood, charcoal iron, stone and plum glaze with gold hardware and moon/star/flower motifs,
+matching the owner's reference pieces (docs/ART.md). Furniture keeps the single COTTAGE design,
+restyled in the same hardware language. Rejected: retinting the old stations.
+
+## 2026-10-21 - Cuboid models are generated from code (tools/generate-models.mjs)
+
+Station, furniture, herb and herb-bed models went from about 20 hand-placed elements to 40-80 with
+rounded octagonal layers, rotations and multiblock cells. They are now written by a deterministic
+Node generator: one place per piece, position UVs that keep textures continuous across elements
+and cells, decal UVs for stretched sprites, and automatic cell splitting. The JSON stays checked
+in under `src/main/resources` (like the generated textures) and passes the same template tests.
+Rejected: hand-editing 80-element JSON; Java datagen for geometry (verbose, and models would split
+between two pipelines). The bundle and lantern templates stay hand-authored.
+
+## 2026-10-21 - Headless model previews gate art changes
+
+`tools/preview-models.mjs` renders every state, item and review scene (CPU rasterizer, directional
+shading, no client) and compares owner references side by side; it fails on missing textures or
+unrendered models. Art changes are reviewed on its sheets before a jar goes to the trial instance.
+It does not model ambient occlusion, lighting, shaders or animation; the owner still checks those.
+
+## 2026-10-21 - Multiblock rack, hearth and witch's stove; one origin cell
+
+The owner asked for a bigger rack and gave 2-wide references for the rack, hearth and a cooking
+stove. The rack and hearth are 2 x 2, the stove 2 x 1 (`platform/multiblock`). Only cell 0 holds
+the block entity, ticks and drops the item; any cell opens it; breaking any cell removes all (one
+item, contents once, nothing in creative); lit/active is copied to every cell so overlays and heat
+work everywhere. Block entities, menus and recipes are unchanged; the stove reuses the hearth's
+block entity type, menu and screen (same fuel rules). A vessel heats on the hearth's chimney top;
+the stove's burners are the intended cooking surface. Tradeoff: a dev.5 world's single-block rack or
+hearth stays a lone origin cell until replaced. Rejected: a deeper single-block rack (cannot read
+as bigger in one block), a 1-block hearth with a decorative surround (no room for the chimney
+breast).
+
+## 2026-10-21 - Rack bundles show occupancy, not the herb
+
+Four fixed bundles (green, lavender, white, yellow) hang while the rack holds anything. Showing the
+actual herb would need a block entity renderer or a state per herb. Rejected for this pass.
+
+## 2026-10-21 - Joined herb beds: four side properties, multipart, no diagonal state
+
+Beds join where the same bed stands beside them at the same height; corners follow from the two
+sides that meet. Parts are authored for one side and corner and turned by the blockstate. Beds
+connect on placement (including a plain setBlock), on neighbour changes, and old beds are repaired
+by their random tick. Tradeoff: an inner corner around an empty diagonal shows the two rails meeting
+(closed by the corner part's wooden sides) instead of a post; no chunk-load migration.
+
+## 2026-10-21 - Herbs rooted 2 px into the ground; mature herbs are 3D
+
+Young ages use a planted cross whose roots are two pixels below the block, matching the bed's soil
+surface (14) and sitting one pixel into farmland and two into full ground; the plant needs no
+state for what it stands on. Mature herbs are cube models over a swatch atlas (the owner's
+reference), so their stage sprites were removed. Rejected: per-support plant states; a taller bed
+soil (the frame would hide less of the plant).
+
 ## 2026-10-21 - Showcase command: plan, preflight, build; refuses occupied plots
 
 `/herbalwitch showcase` needs op level 2, builds a pure bounded plan, runs a preflight, and only then
@@ -26,7 +84,7 @@ effects wait for the energy system in Milestone 6.
 
 ## 2026-10-21 - Fixed station appearances; a finite oil lantern consumes lantern oil
 
-Each station has one authored look (dark wood, ceramic, iron, with accents). The oil lantern (one dose,
+Each station has one authored look (superseded for appearance by the 0.2.0 house style above). The oil lantern (one dose,
 6,000 loaded ticks) gives lantern oil a consumer.
 
 ## 2026-10-21 - Stations grouped under `stations/everyday/`

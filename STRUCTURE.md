@@ -16,13 +16,14 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `src/main/java/io/github/dirtyredz/herbalwitch/botany/catalog/` — plain herb descriptors: the 14 herbs, habitats (groups), traits
 - `src/main/java/io/github/dirtyredz/herbalwitch/botany/registry/` — herb plants, seeds, fresh herbs, herb bed, tags, gardening tab, bootstrap
 - `src/main/java/io/github/dirtyredz/herbalwitch/botany/crop/` — herb plant blocks, seed/fresh items, growth rules, harvest by hand, tooltips
-- `src/main/java/io/github/dirtyredz/herbalwitch/botany/garden/` — the herb bed and its farmland-style moisture
+- `src/main/java/io/github/dirtyredz/herbalwitch/botany/garden/` — the herb bed, its farmland-style moisture and its joining to neighbouring beds
 - `src/main/java/io/github/dirtyredz/herbalwitch/botany/conditions/` — reloadable discovery/yield conditions: model, reload listener, live evaluator
 - `src/main/java/io/github/dirtyredz/herbalwitch/botany/foraging/` — additive grass foraging (global loot modifier) and its eligibility
 - `src/main/java/io/github/dirtyredz/herbalwitch/botany/worldgen/` — herb patch feature keys and bootstraps, biome modifiers
 - `src/main/java/io/github/dirtyredz/herbalwitch/botany/showcase/` — the herb and garden showcase sections
 - `src/main/java/io/github/dirtyredz/herbalwitch/platform/permission/` — the shared authorization boundary for custom world changes
 - `src/main/java/io/github/dirtyredz/herbalwitch/platform/geometry/` — shape rotation shared by furniture and stations
+- `src/main/java/io/github/dirtyredz/herbalwitch/platform/multiblock/` — multiblock cell layout and lifecycle (placement, removal, shared state) used by the rack, hearth and stove
 - `src/main/java/io/github/dirtyredz/herbalwitch/platform/compat/` — optional server adapters, loaded only when their mod is present (`thirst/`)
 - `src/main/java/io/github/dirtyredz/herbalwitch/stations/catalog/` — the five station identities
 - `src/main/java/io/github/dirtyredz/herbalwitch/stations/registry/` — station blocks, items, block entities, menus, recipe types, the apothecary tab, bootstrap and showcase registration
@@ -31,7 +32,7 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `src/main/java/io/github/dirtyredz/herbalwitch/stations/menu/` — `StationMenu`: menu behaviour shared by stations (slots, quick-move that respects reservations)
 - `src/main/java/io/github/dirtyredz/herbalwitch/stations/heat/` — heat sources and conductors
 - `src/main/java/io/github/dirtyredz/herbalwitch/stations/showcase/` — the parameterised station showcase section
-- `src/main/java/io/github/dirtyredz/herbalwitch/stations/everyday/` — the Milestone 3 stations, one package each (`drying_rack`, `mortar`, `kettle`, `hearth`, `infusion_pot`; `block/`, `menu/`, `recipe/`)
+- `src/main/java/io/github/dirtyredz/herbalwitch/stations/everyday/` — the everyday stations, one package each (`drying_rack`, `mortar`, `kettle`, `hearth`, `stove`, `infusion_pot`; `block/`, `menu/`, `recipe/`)
 - `src/main/java/io/github/dirtyredz/herbalwitch/brewing/product/` — preparations: `catalog/`, `registry/`, `item/`, `block/` (hung bundles), `lighting/` (oil lantern), `metadata/` (water-to-drink data), `foraging/` (resin), `showcase/`
 - `src/main/java/io/github/dirtyredz/herbalwitch/brewing/application/` — what products do when used, once, server side
 - `src/main/java/io/github/dirtyredz/herbalwitch/brewing/effect/` — the warmth and pest-repellent effects
@@ -44,7 +45,8 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/` — datagen provider registration only
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/client/language/` — the sole `en_us.json` writer
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/client/decor/` — furniture blockstates, item models, names
-- `src/main/java/io/github/dirtyredz/herbalwitch/data/client/botany/` — herb stage/bed models and states, item models, names and tooltips
+- `src/main/java/io/github/dirtyredz/herbalwitch/data/client/botany/` — herb stage models and states, item models, names and tooltips
+- `src/main/java/io/github/dirtyredz/herbalwitch/data/client/botany/garden/` — the herb bed's multipart state and moist soil parts
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/client/stations/` — station blockstates, item models, names
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/client/preparations/` — bundle and lantern models, item models, names
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/client/showcase/` — showcase messages, headings and labels
@@ -57,12 +59,14 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/server/preparations/` — lantern crafting, loot, tags, entity tags
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/server/compat/` — tags offered to optional mods (Farmer's Delight heat)
 - `src/main/resources/META-INF/` — `mods.toml` and mod metadata
-- `src/main/resources/assets/herbalwitch/models/block/decor/templates/` — authored furniture templates with explicit UVs
-- `src/main/resources/assets/herbalwitch/models/block/botany/garden/` — authored herb bed model
+- `src/main/resources/assets/herbalwitch/models/block/decor/templates/` — furniture templates (written by tools/generate-models.mjs)
+- `src/main/resources/assets/herbalwitch/models/block/botany/garden/` — the herb bed assembly and its parts (`parts/wood/`, `parts/soil/`; generated by tools/generate-models.mjs)
+- `src/main/resources/assets/herbalwitch/models/block/botany/templates/` — the planted cross for young herbs
+- `src/main/resources/assets/herbalwitch/models/block/botany/` — mature herb models `<group>/<herb>/mature.json` (generated by tools/generate-models.mjs)
 - `src/main/resources/assets/herbalwitch/models/block/preparations/templates/` — authored bundle and oil lantern templates
-- `src/main/resources/assets/herbalwitch/models/block/stations/` — authored station models, one directory per station (`drying_rack/`, `mortar/`, `kettle/`, `hearth/`, `infusion_pot/`)
-- `src/main/resources/assets/herbalwitch/textures/block/material/` — the ten untinted decor materials (generated)
-- `src/main/resources/assets/herbalwitch/textures/block/botany/` — herb growth stages `<group>/<herb>/stage_0..3.png` and the herb bed (generated)
+- `src/main/resources/assets/herbalwitch/models/block/stations/` — station models, one directory per station (`base`, or `part_<n>`, overlays and `assembly` for multiblocks; generated by tools/generate-models.mjs)
+- `src/main/resources/assets/herbalwitch/textures/block/material/` — the shared untinted materials: furniture fabrics and the house materials (generated)
+- `src/main/resources/assets/herbalwitch/textures/block/botany/` — young herb stages `<group>/<herb>/stage_0..2.png`, the mature-herb swatch atlas `parts.png` and the bed soil (generated)
 - `src/main/resources/assets/herbalwitch/textures/block/stations/` — shared station materials (generated)
 - `src/main/resources/assets/herbalwitch/textures/gui/stations/` — station interface atlases (generated)
 - `src/main/resources/assets/herbalwitch/textures/item/botany/` — seed and fresh-herb sprites `<group>/<herb>/` (generated)
@@ -84,9 +88,10 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `tools/` — deterministic Node tools: `generate-textures.mjs`, `generate-models.mjs`, `generate-test-structures.mjs`, `preview-models.mjs`; not packaged
 - `tools/image/` — PNG encode/decode, the bitmap font and contact-sheet composition shared by generators and the previewer
 - `tools/preview/` — the headless model previewer: `assets/` (resource lookup, model inheritance, vanilla parents), `geometry/` (element baking, transforms, item sprites), `render/` (cameras, rasterizer), `scenes/` (blockstate evaluation, review scenes), `report/` (coverage, sheets, manifest), `test/` (node --test)
-- `tools/art/` — shared pixel code (`pixels`, `materials`, `patterns`)
-- `tools/art/botany/` — herb sprites per habitat group, garden art
-- `tools/art/stations/` — station materials and interface atlases (`interfaces.mjs` holds the layout)
+- `tools/art/` — shared pixel code (`pixels`, `motifs`), furniture materials and textiles (`materials`, `patterns`), ivy and bundles (`foliage`)
+- `tools/art/botany/` — herb sprites per habitat group, the herb list, the parts atlas, garden soil
+- `tools/art/stations/` — the house-style station materials (`house`, `stone`), lantern materials and interface atlases (`interfaces.mjs` holds the layout)
+- `tools/models/` — the model generator's code: `geometry`, `shapes`, `textures`, `catalogue`; `stations/`, `decor/`, `botany/` per family
 - `tools/art/preparations/` — preparation materials and product sprites
 - `docs/` — architecture, decisions, gotchas, features, art, compatibility; `docs/catalogue/` traces the design to implementation
 
@@ -107,7 +112,9 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 | Compat | `platform/compat/**`, `client/compat/**`, `data/server/compat/` | Thirst adapter; EMI/JEI plugins; Farmer's Delight tags |
 | Client | `client/HerbalWitchClient`, `client/stations/*` | Station screens and widgets; no colour handlers |
 | Datagen | `data/**` | Models, states, names, recipes, loot, tags, worldgen, conditions |
-| Art pipeline | `tools/generate-textures.mjs`, `tools/art/**`, authored model JSON | Seeded generation of materials, sprites and GUI atlases |
+| Art pipeline | `tools/generate-textures.mjs`, `tools/art/**`, `tools/generate-models.mjs`, `tools/models/**` | Seeded generation of materials, sprites, GUI atlases and cuboid models |
+| Art review | `tools/preview-models.mjs`, `tools/preview/**` | Headless previews, coverage and reference comparisons |
+| Multiblocks | `platform/multiblock/*`, `stations/block/StationBlock` | Cell layout, placement and removal, the origin cell, shared lit/active state |
 
 ## Dependency direction
 

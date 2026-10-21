@@ -7,20 +7,53 @@ and permanent. Groups are the habitat: temperate, dry, wet, shade, woodland. Mod
 
 | Herb | Id path | Group | Form | Traits | Starter | Discovery chance | Liked conditions | Worldgen rarity | Art reference |
 |---|---|---|---|---|---|---|---|---|---|
-| Lavender | `botany/temperate/lavender/` | temperate | bush | calming, attraction | yes | 1/32 | none | 1 per 8 chunks | `textures/block/botany/temperate/lavender/stage_0..3.png` |
-| Sage | `botany/temperate/sage/` | temperate | bush | protective, restorative | yes | 1/32 | none | 1 per 8 chunks | `textures/block/botany/temperate/sage/stage_0..3.png` |
-| Chamomile | `botany/temperate/chamomile/` | temperate | crop | calming, restorative | yes | 1/32 | none | 1 per 8 chunks | `textures/block/botany/temperate/chamomile/stage_0..3.png` |
-| Yarrow | `botany/temperate/yarrow/` | temperate | crop | restorative, protective | no | 1/32 | none | 1 per 8 chunks | `textures/block/botany/temperate/yarrow/stage_0..3.png` |
-| Rosemary | `botany/dry/rosemary/` | dry | bush | protective, sight | no | 1/32 | none | 1 per 8 chunks | `textures/block/botany/dry/rosemary/stage_0..3.png` |
-| Thyme | `botany/dry/thyme/` | dry | bush | protective, growth | no | 1/32 | none | 1 per 8 chunks | `textures/block/botany/dry/thyme/stage_0..3.png` |
-| Mint | `botany/wet/mint/` | wet | bush | restorative, speed | yes | 1/32 | rain | 1 per 8 chunks | `textures/block/botany/wet/mint/stage_0..3.png` |
-| Nettle | `botany/wet/nettle/` | wet | crop | growth, restorative | no | 1/32 | rain | 1 per 8 chunks | `textures/block/botany/wet/nettle/stage_0..3.png` |
-| Valerian | `botany/shade/valerian/` | shade | crop | calming, attraction | no | 1/32 | low sky (covered) | 1 per 16 chunks | `textures/block/botany/shade/valerian/stage_0..3.png` |
-| Mugwort | `botany/shade/mugwort/` | shade | crop | sight, binding | no | 1/32 | low sky (covered) | 1 per 16 chunks | `textures/block/botany/shade/mugwort/stage_0..3.png` |
-| Belladonna | `botany/woodland/belladonna/` | woodland | bush | toxic, sight | no | 1/64 | night, full moon | 1 per 32 chunks | `textures/block/botany/woodland/belladonna/stage_0..3.png` |
-| Nightshade | `botany/woodland/nightshade/` | woodland | bush | concealment, binding | no | 1/64 | night, full moon | 1 per 32 chunks | `textures/block/botany/woodland/nightshade/stage_0..3.png` |
-| Wolfsbane | `botany/woodland/wolfsbane/` | woodland | crop | toxic, protective | no | 1/64 | night, full moon | 1 per 32 chunks | `textures/block/botany/woodland/wolfsbane/stage_0..3.png` |
-| Mandrake | `botany/woodland/mandrake/` | woodland | crop | binding, growth | no | 1/64 | night, full moon | 1 per 32 chunks | `textures/block/botany/woodland/mandrake/stage_0..3.png` |
+| Lavender | `botany/temperate/lavender/` | temperate | bush | calming, attraction | yes | 1/32 | none | 1 per 8 chunks | `textures/block/botany/temperate/lavender/stage_0..2.png` |
+| Sage | `botany/temperate/sage/` | temperate | bush | protective, restorative | yes | 1/32 | none | 1 per 8 chunks | `textures/block/botany/temperate/sage/stage_0..2.png` |
+| Chamomile | `botany/temperate/chamomile/` | temperate | crop | calming, restorative | yes | 1/32 | none | 1 per 8 chunks | `textures/block/botany/temperate/chamomile/stage_0..2.png` |
+| Yarrow | `botany/temperate/yarrow/` | temperate | crop | restorative, protective | no | 1/32 | none | 1 per 8 chunks | `textures/block/botany/temperate/yarrow/stage_0..2.png` |
+| Rosemary | `botany/dry/rosemary/` | dry | bush | protective, sight | no | 1/32 | none | 1 per 8 chunks | `textures/block/botany/dry/rosemary/stage_0..2.png` |
+| Thyme | `botany/dry/thyme/` | dry | bush | protective, growth | no | 1/32 | none | 1 per 8 chunks | `textures/block/botany/dry/thyme/stage_0..2.png` |
+| Mint | `botany/wet/mint/` | wet | bush | restorative, speed | yes | 1/32 | rain | 1 per 8 chunks | `textures/block/botany/wet/mint/stage_0..2.png` |
+| Nettle | `botany/wet/nettle/` | wet | crop | growth, restorative | no | 1/32 | rain | 1 per 8 chunks | `textures/block/botany/wet/nettle/stage_0..2.png` |
+| Valerian | `botany/shade/valerian/` | shade | crop | calming, attraction | no | 1/32 | low sky (covered) | 1 per 16 chunks | `textures/block/botany/shade/valerian/stage_0..2.png` |
+| Mugwort | `botany/shade/mugwort/` | shade | crop | sight, binding | no | 1/32 | low sky (covered) | 1 per 16 chunks | `textures/block/botany/shade/mugwort/stage_0..2.png` |
+| Belladonna | `botany/woodland/belladonna/` | woodland | bush | toxic, sight | no | 1/64 | night, full moon | 1 per 32 chunks | `textures/block/botany/woodland/belladonna/stage_0..2.png` |
+| Nightshade | `botany/woodland/nightshade/` | woodland | bush | concealment, binding | no | 1/64 | night, full moon | 1 per 32 chunks | `textures/block/botany/woodland/nightshade/stage_0..2.png` |
+| Wolfsbane | `botany/woodland/wolfsbane/` | woodland | crop | toxic, protective | no | 1/64 | night, full moon | 1 per 32 chunks | `textures/block/botany/woodland/wolfsbane/stage_0..2.png` |
+| Mandrake | `botany/woodland/mandrake/` | woodland | crop | binding, growth | no | 1/64 | night, full moon | 1 per 32 chunks | `textures/block/botany/woodland/mandrake/stage_0..2.png` |
+
+## Look (0.2.0-dev.1 art pass)
+
+Herbs are rooted in the soil. Ages 0-2 use the shared template `block/botany/templates/planted_cross`
+(vanilla cross planes moved down 2 px) over 16 px stage sprites (the stage_3 PNGs are gone). The mature
+age (3) is a 3D model per herb, `block/botany/<group>/<herb>/mature`, built from small cubes sampling
+the 32x32 swatch atlas `textures/block/botany/parts.png`. Every age's lowest geometry meets the bed's
+soil surface (soil top 14 = plant block y -2) and sits 1 px into farmland and 2 px into full ground.
+
+| Herb | Mature form |
+|---|---|
+| Lavender | Purple flower spikes over a leafy mound |
+| Sage | Broad grey-green leaves with purple spikes |
+| Chamomile | Low bushy mound with white daisies, yellow centres |
+| Yarrow | Flat white umbels |
+| Rosemary | Upright needled stems with pale flowers |
+| Thyme | Dense low cubic-leaf bush with pink flowers |
+| Mint | Paired leaves on upright stems, lilac tips |
+| Nettle | Upright stems with drooping dark leaves |
+| Valerian | Pale pink-white flower heads |
+| Mugwort | Silver-green divided foliage with brown tips |
+| Belladonna | Bushy dark leaves, shiny black berries, purple bells |
+| Nightshade | Dark leaves with red berry clusters |
+| Wolfsbane | Spikes of blue-purple hooded flowers |
+| Mandrake | Basal rosette of long leaves, root crown, small purple flowers |
+
+## Herb bed
+
+Warm reddish-brown planter: two horizontal plank rails per side with a groove, chunky corner posts
+with dark end-grain caps and small gold rivets, dark lumpy soil at height 14 of 16. **Beds join:** a
+side touching the same herb bed block at the same height shows soil instead of a rail; outer corners
+keep a capped post, one-sided corners continue the rail, both-joined corners are soil. Moisture and
+enrichment are unchanged. Old beds saved before 0.2.0 repair on their normal random tick.
 
 ## Habitat biomes (default)
 

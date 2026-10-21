@@ -5,12 +5,12 @@ Detail per entry: docs/catalogue/{decor,stations,products}.md.
 
 ## Implemented
 
-Version 0.1.0-dev.4 (local candidate). Owner review of art, station UIs and viewers is pending.
+Version 0.2.0-dev.1 (local candidate; builds on the 0.1.0 content). Owner review of art, station UIs and viewers is pending.
 
 | Feature | Milestone | Status | Evidence |
 |---|---|---|---|
 | Standalone Forge 1.20.1 build, datagen, isolated GameTests | 1 | done | `test build`, `runGameTestServer` green |
-| One cottage design (dark wood, green and pink accents, vine leaves, untinted materials) | 1 | done; owner art review pending | DecorResourcesTest, GeneratedResourcesTest |
+| One cottage design (dark wood, green and magenta accents, gold trim, ivy, untinted materials) | 1 | done; restyled in 0.2.0-dev.1; owner art review pending | DecorResourcesTest, GeneratedResourcesTest |
 | Armchair, Apothecary Counter, Small Wall Shelf, Table Lamp, Small Rug: five blocks, `decor/<family>/<piece>` | 1 | done; owner art review pending | DecorContentGameTests |
 | Facing, wall/surface/floor support, support-loss drops | 1 | done | DecorPlacementGameTests |
 | Lamp on/off with light 14, saved in the block state | 1 | done; two-client sync is an owner check | DecorInteractionGameTests |
@@ -20,6 +20,20 @@ Version 0.1.0-dev.4 (local candidate). Owner review of art, station UIs and view
 | Five stations (drying rack, mortar, tea kettle, hearth, infusion pot) with menus, in-slot reservations, heat, automation sides, no catch-up | 3 | done; owner UI/art review pending | StationProcessingGameTests, ProcessBehaviourGameTests, ProcessReservationTest, ProcessCompletionTest, StationResourcesTest |
 | Bundles, powders, 7 drinks, salve, oils, garden products, oil lantern, warmth and pest-repellent effects, resin | 3 | done | PreparationUseGameTests, PreparationBlockGameTests, PreparationResourcesTest |
 | EMI and JEI categories; Farmer's Delight heat both ways; Thirst Was Taken hydration and purity | 3 | done; viewers are owner checks | CompatibilityGameTests (`-PcompatProfile=all`) |
+
+### 0.2.0-dev.1: art pass
+
+Status: implemented, unit tests and GameTests passing; owner review in the trial instance is pending.
+
+| Feature | Status |
+|---|---|
+| Herb beds join: four side properties, soil instead of rails where the same bed is adjacent; connects on placement, setBlock, neighbour change, rotate/mirror; old beds repair on random tick | implemented |
+| Herbs rooted in the soil: planted-cross template for ages 0-2, a 3D mature model per herb (14), shared swatch atlas | implemented |
+| Stations redrawn in one house style; drying rack and hearth become 2x2 multiblocks (same block entity, menu, recipes) | implemented |
+| New Witch's Stove: two-wide range, two burners, hearth fuel rules and block entity; heat-source tags; craftable | implemented |
+| Furniture restyled (same five ids) | implemented |
+| `tools/generate-models.mjs` writes all models; `tools/preview-models.mjs` renders headless previews | implemented |
+| Showcase: joined-bed garden section, stove section, multiblocks placed cell by cell | implemented |
 
 ## Planned
 

@@ -9,21 +9,25 @@ docs/ARCHITECTURE.md and docs/catalogue/).
 - **Standalone.** No RedzCore dependency and no code shared with other mods at runtime. Patterns from
   Roundwood/DankRecipeTransfer are adapted locally, with attribution where source was copied.
 - **Headless only.** Never run `runClient`. Verification, in `mods/HerbalWitch/`:
-  1. `node tools/generate-textures.mjs` and `node tools/generate-test-structures.mjs`
+  1. `node tools/generate-textures.mjs`, `node tools/generate-models.mjs` and `node tools/generate-test-structures.mjs`
   2. `.\gradlew.bat runData` (run it twice when generation changed: output must be byte-identical)
   3. `.\gradlew.bat test build`
   4. `.\gradlew.bat runGameTestServer` (one GameTest server at a time across the workspace)
   5. `git diff --check`, and from the workspace root `.\tools\sync-mod-files.ps1 -Check`
   6. Optional-mod runtime profiles: `.\gradlew.bat runGameTestServer -PcompatProfile=<base|emi|jei|viewers|farmersdelight|thirst|all> -PcompatModsDir=<mods folder>`
      (the folder supplies the Farmer's Delight and Thirst jars; see docs/COMPATIBILITY.md)
+  Art changes also: `node --test "tools/preview/test/*.test.mjs"` and
+  `node tools/preview-models.mjs --output <job folder>/previews/<name> --references <job folder>`,
+  then review the sheets before any jar goes to a trial instance (docs/ART.md "Review").
   The owner checks visuals, transforms, shaders and two-client behaviour in the trial instance.
 - **Generated resources are source.** Change a provider, run `runData`, commit the regenerated
   `src/generated/resources/` with the code. Never hand-edit generated JSON. `GeneratedResourcesTest`
   holds the exact manifest; when a file is renamed or removed, delete `src/generated` and regenerate.
-- **Textures** come only from `tools/generate-textures.mjs` (explicit manifest). Template models in
-  `src/main/resources/assets/herbalwitch/models/block/decor/templates/` are authored JSON with explicit
-  UVs at one UV unit per model pixel. Materials are untinted: there is no tint index, no colour
-  handler and no runtime recolouring; a new look is a new texture. See docs/ART.md.
+- **Textures** come only from `tools/generate-textures.mjs` (explicit manifest). Station, furniture,
+  herb and herb-bed models come only from `tools/generate-models.mjs` (it deletes stray JSON in the
+  directories it owns); edit `tools/models/`, never the JSON. Materials are untinted: there is no
+  tint index, no colour handler and no runtime recolouring; a new look is a new texture. The house
+  style and the owner's reference pieces are in docs/ART.md.
 - **One catalogue.** There is a single cottage design: `decor/catalog/FinishCatalog` has one entry
   (`COTTAGE`; the `Finish` type stays so a design can return later) and pieces live only in their
   catalogue. IDs are `decor/<family>/<piece>` and permanent once a world uses them. Update the

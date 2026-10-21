@@ -12,11 +12,18 @@
   Generation is deterministic: run it twice and compare bytes after changing a provider.
 - **Every generated directory must stay under 12 entries** (`GeneratedResourcesTest`). Deeper variants
   get their own directory level.
-- **Sprites only span UV 0..16.** Templates are single-block and carry explicit UVs at one UV unit per
-  model pixel (two texels at 32 px). Glass faces are the one exception: they stretch the whole rim
-  over each face. The model test enforces both.
-- **Cutout only where needed.** The shelf template is `minecraft:cutout` for its bottle glass; the
-  glass texture's alpha is strictly 0 or 255.
+- **Models are generated: edit tools/models/, not the JSON.** `tools/generate-models.mjs` owns the
+  station, decor-template, herb and herb-bed model directories and deletes any JSON there it did not
+  write. UVs are position-based (one unit per model pixel, v = 16 - y on sides), so a motif painted
+  at texture row r shows at model height 16 - r/2: move the motif, not the UV. Decal textures
+  (ivy, runner, cloth, plaque, rug, flame, glass, bundles) stretch instead; `TemplateChecks`
+  knows the list.
+- **Faces may not span more than one texture.** A face longer than 16 pixels cannot have position
+  UVs; multiblock pieces are split per cell (and the item assembly is the split pieces put back).
+- **Rotations are one axis, 0 / +-22.5 / +-45 degrees.** A rotated element's `from`/`to` is checked
+  unrotated; after rotation it may lean slightly out of its cell (the rack legs, the pestle).
+- **Cutout only where needed.** A model is `minecraft:cutout` exactly when it uses an alpha texture
+  (glass, ivy, runner, cloth, flame, bundles); those textures' alpha is strictly 0 or 255.
 - **`GameTestHelper.destroyBlock` drops nothing** in 1.20.1; use `level.destroyBlock(pos, true)`.
 - **GameTest pass/fail beacons leak light** into neighbouring tests (block light 3 was observed).
   Light assertions run inside a sealed stone room.
@@ -57,3 +64,17 @@
   caught `showcase/build/`, now `showcase/construction/`).
 - **Decor has no tints.** Materials are plain textures; there is no colour handler to register, so a
   face's look is exactly its texture. A new look needs a new texture, not a tint index.
+- **Herb roots are at model y = -2.** The bed's soil top is 14, so a plant one block up meets it at
+  -2; farmland (15) buries one pixel, full ground two. `BotanyModelsTest` composes these heights:
+  change the bed and the plant templates together.
+- **Bed connections change only on placement, neighbour updates and random ticks.** A bed set with
+  flags that skip neighbour updates (or saved before 0.2.0) keeps stale sides until its next random
+  tick; `onPlace` only joins a newly placed bed, not a bed changing its own moisture.
+- **Multiblock stations: place all cells or none.** Tests and the showcase place them through
+  `StationBlock.placeStation` (or cell by cell, origin first); a lone origin with a missing cell is
+  removed by the next shape update from that side. Only cell 0 has a block entity.
+- **The stove's pipe reaches past its cell.** The stove's west cell carries its stovepipe up to
+  y 32 (the block above that burner); a full block placed there clips it.
+- **Previews are approximations.** `tools/preview-models.mjs` shades faces like Minecraft but has no
+  ambient occlusion, light, shaders, animation or item extrusion; its GUI orientation follows the
+  transform maths and has not been compared with a client. The owner's in-game check still decides.
