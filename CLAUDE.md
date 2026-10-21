@@ -14,16 +14,20 @@ docs/ARCHITECTURE.md and docs/catalogue/).
   3. `.\gradlew.bat test build`
   4. `.\gradlew.bat runGameTestServer` (one GameTest server at a time across the workspace)
   5. `git diff --check`, and from the workspace root `.\tools\sync-mod-files.ps1 -Check`
+  6. Optional-mod runtime profiles: `.\gradlew.bat runGameTestServer -PcompatProfile=<base|emi|jei|viewers|farmersdelight|thirst|all> -PcompatModsDir=<mods folder>`
+     (the folder supplies the Farmer's Delight and Thirst jars; see docs/COMPATIBILITY.md)
   The owner checks visuals, transforms, shaders and two-client behaviour in the trial instance.
 - **Generated resources are source.** Change a provider, run `runData`, commit the regenerated
   `src/generated/resources/` with the code. Never hand-edit generated JSON. `GeneratedResourcesTest`
   holds the exact manifest; when a file is renamed or removed, delete `src/generated` and regenerate.
 - **Textures** come only from `tools/generate-textures.mjs` (explicit manifest). Template models in
   `src/main/resources/assets/herbalwitch/models/block/decor/templates/` are authored JSON with explicit
-  UVs at one UV unit per model pixel; tint index 0 = frame, 1 = fabric; see docs/ART.md.
-- **One catalogue.** Finishes only in `decor/catalog/FinishCatalog`, pieces only in their catalogue;
-  update the independent lists in the tests to match. IDs (`decor/<family>/<piece>/<palette>/<finish>`)
-  are permanent once a world uses them.
+  UVs at one UV unit per model pixel. Materials are untinted: there is no tint index, no colour
+  handler and no runtime recolouring; a new look is a new texture. See docs/ART.md.
+- **One catalogue.** There is a single cottage design: `decor/catalog/FinishCatalog` has one entry
+  (`COTTAGE`; the `Finish` type stays so a design can return later) and pieces live only in their
+  catalogue. IDs are `decor/<family>/<piece>` and permanent once a world uses them. Update the
+  independent lists in the tests to match.
 - **Showcase:** every new block or feature must contribute to the showcase registry and its coverage
   tests; update labels, supports, sample states/inventories, and documented bounds in the same change.
   Sections register from their feature's registration (`showcase/layout/ShowcaseRegistry`).

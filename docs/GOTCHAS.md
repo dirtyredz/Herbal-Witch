@@ -10,13 +10,11 @@
 - **runData does not delete outputs nobody generates any more** reliably. When a generated path
   changes, delete `src/generated` and regenerate; `GeneratedResourcesTest` fails on any stale file.
   Generation is deterministic: run it twice and compare bytes after changing a provider.
-- **Every generated directory must stay under 12 entries** (`GeneratedResourcesTest`). Adding a
-  per-finish file variant (like the lit lamp) needs its own directory level.
+- **Every generated directory must stay under 12 entries** (`GeneratedResourcesTest`). Deeper variants
+  get their own directory level.
 - **Sprites only span UV 0..16.** Templates are single-block and carry explicit UVs at one UV unit per
   model pixel (two texels at 32 px). Glass faces are the one exception: they stretch the whole rim
   over each face. The model test enforces both.
-- **Tint index is the contract between models and `DecorColorHandlers`:** 0 frame, 1 fabric. A face
-  with no tint index keeps its texture colours. Register block and item handlers together.
 - **Cutout only where needed.** The shelf template is `minecraft:cutout` for its bottle glass; the
   glass texture's alpha is strictly 0 or 255.
 - **`GameTestHelper.destroyBlock` drops nothing** in 1.20.1; use `level.destroyBlock(pos, true)`.
@@ -54,3 +52,8 @@
   purity tag; with it, the water's `Purity` int is copied unchanged (never upgraded by heating).
 - **Compat runtime profiles need SRG refmap remapping** for the local FD/Thirst jars; build.gradle
   sets it only when `-PcompatProfile` uses them. Their mixin warnings about absent mods are harmless.
+- **Never name a source directory `build/`, `run/`, `out/` or `bin/`.** The shared `.gitignore` ignores
+  them anywhere in the tree, so the files are silently left out of commits (a standalone clone build
+  caught `showcase/build/`, now `showcase/construction/`).
+- **Decor has no tints.** Materials are plain textures; there is no colour handler to register, so a
+  face's look is exactly its texture. A new look needs a new texture, not a tint index.

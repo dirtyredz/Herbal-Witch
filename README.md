@@ -1,12 +1,13 @@
 # The Herbal Witch
 
 Forge 1.20.1 mod: woodland herbal witchcraft (herbs, stations, brewing, familiars, rituals, brooms,
-an apothecary trade) together with a coordinated cottage furniture catalogue. Install on **both** the
-server and every client.
+an apothecary trade) together with a cottage furniture catalogue. Install on **both** the server and
+every client.
 
-**Status: private development, Milestone 1 (`0.1.0-dev.1`).** This build contains only the furniture
-art spike: five pieces in 18 finishes, to approve the visual system before mass production. The
-witchcraft systems arrive in later milestones (docs/FEATURES.md). Not published; not in any pack.
+**Status: private development, `0.1.0-dev.4` local candidate.** Contains Milestone 1 (cottage decor
+in a single design), Milestone 2 (herbs and garden) and Milestone 3 (everyday preparation stations and
+products). Owner review of the art and station UIs is pending. Later systems are listed in
+docs/FEATURES.md. Not published; not in any pack.
 
 ## Supported versions
 
@@ -15,34 +16,104 @@ witchcraft systems arrive in later milestones (docs/FEATURES.md). Not published;
 | Minecraft | 1.20.1 |
 | Forge | 47.x (built and tested on 47.4.10) |
 | Java | 17 |
-| Dependencies | none |
+| Required dependencies | none |
 
-## Milestone 1 content
+## Content
 
-Five pieces, each in all 18 finishes (90 blocks), in the **The Herbal Witch: Cottage Decor** creative tab:
+- **Cottage decor** (tab "Cottage Decor"): five pieces in one dark-wood design, with deep green and hot
+  pink accents and a little dark purple. Armchair, Apothecary Counter, Small Wall Shelf, Table Lamp
+  (use to switch on, light 14), Small Rug. Craft them from dark oak (docs/catalogue/decor.md).
+- **Herbs and garden** (tab "Gardening"): 14 herbs in five habitat groups, seeds, fresh herbs and the
+  herb bed (docs/catalogue/herbs.md).
+- **Apothecary** (tab "Apothecary"): five stations, dried bundles, powders, seven drinks, a salve,
+  oils, garden products and a finite oil lantern (docs/catalogue/stations.md, products.md).
 
-| Piece | Behaviour |
+## Getting started in survival
+
+1. **Seeds.** Craft starter seeds (wheat seeds plus a companion plant, below), or break grass, tall
+   grass, ferns and large ferns by hand or tool (not shears, not silk touch): about 1 in 16 drops a
+   starter seed, and a herb that grows in that biome sometimes turns up too.
+2. **Plant** them on a herb bed or farmland. Herbs grow in four ages and need crop light; bone meal helps.
+3. **Harvest** a mature plant with use (right click): 2 fresh herbs and 1 seed, and the plant resets.
+4. **Drying rack.** Fresh herb in, bundle out after 1,200 ticks (60 s). No heat.
+5. **Mortar and pestle.** Bundle in, powder out (100 ticks).
+6. **Hearth and kettle.** Fuel the hearth with any furnace fuel; set the kettle on top. Powder or
+   bundle plus a water bottle makes a drink.
+7. **Infusion pot** on a hearth for salves, oils and garden infusions; **salve**: yarrow and chamomile
+   in the pot with a honey bottle and a bowl.
+
+Starter seed recipes (shapeless): wheat seeds + lilac = lavender seeds; + fern = sage seeds;
++ sugar cane = mint seeds; + dandelion = chamomile seeds. The herb bed (`D D` / `SSS`: dirt, wooden
+slabs) is farmland that never dries to dirt and is never trampled; it needs water within 4 blocks
+(or rain) for the crop to count it as moist.
+
+### Station recipes
+
+| Station | Recipe (rows top to bottom) | Ingredients |
+|---|---|---|
+| Herb drying rack | `TST` / `s s` / `TST` | sticks (T), string (S), wooden slabs (s) |
+| Mortar and pestle | ` T ` / `SFS` / ` S ` | stick, 3 smooth stone, flint |
+| Tea kettle | `I C` / `III` / ` I ` | 5 iron ingots, 1 copper ingot |
+| Hearth | `B B` / `BCB` / `B B` | 6 bricks, a campfire |
+| Infusion pot | `IGI` / `B B` / `B B` | 2 iron ingots, glass bottle, 4 bricks |
+| Oil lantern | `N N` / `NTN` / ` G ` | iron nuggets, torch, glass bottle |
+
+The kettle and infusion pot need heat from a lit hearth, campfire, soul campfire or magma block directly
+below (one hopper may sit between).
+
+### Kettle (steeping): two herbs or powders plus a water bottle, 200 heated ticks
+
+| Result | Ingredients |
 |---|---|
-| Armchair | Faces you when placed. Decorative for now (sitting comes with the seating family). |
-| Apothecary Counter | Faces you when placed; its top holds a lamp. Decorative for now (shop counters come later). |
-| Small Wall Shelf | Hangs on the wall you aim at (needs a solid wall face); drops if the wall goes. Decorative bottles. |
-| Table Lamp | Needs a solid surface below (floor, counter). Use it to switch it on (light 14) or off. |
-| Small Rug | Carpet behaviour: needs a block below, breaks instantly. |
+| Recovery tea | chamomile + yarrow |
+| Energy tea | mint + sugar |
+| Restful infusion | lavender + valerian |
+| Warmth remedy | rosemary + blaze powder |
+| Cooling remedy | mint + snowball |
+| Mining tonic | thyme + iron nugget |
+| Travel tonic | mint + sugar cane |
 
-**Finishes:** natural Dark Oak, Walnut, Cherry, Rosewood, Pale Oak, Spruce, Birch; painted/material
-Black, Stone, Moss, Sage Green, Forest Green, Plum, Burgundy, Dusty Pink, Blush, Cream, Lilac. Each
-finish pairs a frame with its own upholstery colour. Finishes are appearance only.
+### Infusion pot: two ingredients, a base liquid and a glass bottle or bowl, 600 heated ticks
 
-## Recipes
-
-| Result | Recipe |
+| Result | Ingredients, base, package |
 |---|---|
-| Dark Oak Armchair | `PWP / PPP / S S`: dark oak planks, any wool, sticks |
-| Dark Oak Apothecary Counter | `SSS / PNP / PPP`: dark oak slabs, planks, a gold nugget |
-| 2 Dark Oak Small Wall Shelves | `SSS / T T`: dark oak slabs, sticks |
-| Dark Oak Table Lamp | wool over a torch over a dark oak slab |
-| 2 Dark Oak Small Rugs | `C S C`: two carpets (any colour) and string |
-| Any other finish | Stonecutter: any finish of a piece becomes any other finish of that piece, 1 for 1 |
+| Healing salve | yarrow + chamomile, honey bottle, bowl |
+| Lantern oil | rosemary + resin, plant oil, glass bottle |
+| Fishing blend | nettle + wheat seeds, plant oil, glass bottle |
+| Growth infusion | nettle + bone meal, water bottle, glass bottle |
+| Pest repellent | lavender + sage, plant oil, glass bottle |
+| Soil tonic | moss block + hanging roots, water bottle, glass bottle |
+
+Plant oil comes from the mortar (4 wheat seeds + glass bottle). Resin drops from player-broken spruce
+leaves (about 1 in 8, not shears, not silk touch). Details and effects: docs/catalogue/products.md.
+
+## Showcase command
+
+`/herbalwitch showcase [section]` builds a labelled sample of every registered block, for owner review
+and testing. It needs permission level 2 (operators; a non-op, in survival or creative, and the console
+are refused). Sections: `decor`, `herbs`, `garden`, `drying_rack`, `mortar`, `kettle`, `hearth`,
+`infusion_pot`, `preparations`; with no section it builds all of them.
+
+- **Where:** the box starts 2 blocks east of you on your row and extends east and south. The floor is
+  the block you stand on. Height 8 (floor layer plus 7 cleared). The full layout is about 67 x 8 x 28;
+  hard caps are 128 x 8 x 128 and 65,536 writes.
+- **Destructive:** everything in the box above the floor is cleared (no drops), then the floor,
+  supports, samples and signs are placed. There is no undo.
+- **Refuses** before any write if a chunk is unloaded, the box leaves the world border or build
+  height, you may not build there, a floor cell is air, fluid or not a full solid block, the box holds
+  a block entity, an unbreakable block or an entity. A second run over a built showcase is refused;
+  use a fresh flat plot.
+
+## Optional integrations
+
+None are required, and no foreign mod classes are in the jar.
+
+- **Farmer's Delight** (tested 1.3.4): the hearth heats FD cooking blocks; a lit FD stove heats our
+  kettle and infusion pot.
+- **Thirst Was Taken** (1.4.0): the seven drinks hydrate; water purity carries into the tea.
+- **EMI** (1.1.24+1.20.1) and **JEI** (15.62.0.219): four recipe categories each.
+
+Details: docs/COMPATIBILITY.md.
 
 ## Build, datagen, test
 
@@ -53,15 +124,17 @@ node tools/generate-test-structures.mjs
 .\gradlew.bat runData
 .\gradlew.bat test build
 .\gradlew.bat runGameTestServer
+.\gradlew.bat runGameTestServer -PcompatProfile=all -PcompatModsDir=<mods folder with FD and Thirst jars>
 ```
 
-The jar is `build/libs/herbalwitch-1.20.1-<version>.jar` (reobfuscated). See CLAUDE.md for the full
-headless verification list.
+`-PcompatProfile` is one of `base`, `emi`, `jei`, `viewers`, `farmersdelight`, `thirst`, `all`. The owner
+trial mods folder is `C:/Users/dirty/MultiMC/instances/Evil Eye Trial Cozy/.minecraft/mods`. The jar is
+`build/libs/herbalwitch-1.20.1-<version>.jar` (reobfuscated). CLAUDE.md has the full headless list.
 
 ## Owner trial
 
 Copy the jar into the trial instance's `mods/` folder (MultiMC: Evil Eye Trial Cozy) with the game
-closed, then follow the art-review checklist in [docs/ART.md](docs/ART.md).
+closed, then follow the review checklist in [docs/ART.md](docs/ART.md).
 
 ## License
 

@@ -8,10 +8,10 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 ## Layout
 
 - `src/main/java/io/github/dirtyredz/herbalwitch/` — mod bootstrap (`HerbalWitch.java`) only
-- `src/main/java/io/github/dirtyredz/herbalwitch/decor/catalog/` — plain finish and furniture descriptors: the 18 finishes, the art-spike pieces
+- `src/main/java/io/github/dirtyredz/herbalwitch/decor/catalog/` — plain descriptors: the single cottage finish, the five furniture pieces
 - `src/main/java/io/github/dirtyredz/herbalwitch/decor/registry/` — deferred registers, catalogue-to-block construction, creative tab, furniture tags
 - `src/main/java/io/github/dirtyredz/herbalwitch/decor/block/` — furniture block adapters: facing/shape, wall-mounted shelf, table lamp
-- `src/main/java/io/github/dirtyredz/herbalwitch/decor/shape/` — collision/selection geometry and its rotation
+- `src/main/java/io/github/dirtyredz/herbalwitch/decor/shape/` — collision/selection geometry
 - `src/main/java/io/github/dirtyredz/herbalwitch/decor/showcase/` — the decor showcase section
 - `src/main/java/io/github/dirtyredz/herbalwitch/botany/catalog/` — plain herb descriptors: the 14 herbs, habitats (groups), traits
 - `src/main/java/io/github/dirtyredz/herbalwitch/botany/registry/` — herb plants, seeds, fresh herbs, herb bed, tags, gardening tab, bootstrap
@@ -27,8 +27,8 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `src/main/java/io/github/dirtyredz/herbalwitch/stations/catalog/` — the five station identities
 - `src/main/java/io/github/dirtyredz/herbalwitch/stations/registry/` — station blocks, items, block entities, menus, recipe types, the apothecary tab, bootstrap and showcase registration
 - `src/main/java/io/github/dirtyredz/herbalwitch/stations/process/` — shared processing by composition: inventory with in-slot reservations, job, completion arithmetic, recipe format, reload-aware lookup
-- `src/main/java/io/github/dirtyredz/herbalwitch/stations/block/` — block behaviour shared by stations (facing, support, menu, ticker, drops)
-- `src/main/java/io/github/dirtyredz/herbalwitch/stations/menu/` — menu behaviour shared by stations (slots, quick-move that respects reservations)
+- `src/main/java/io/github/dirtyredz/herbalwitch/stations/block/` — `StationBlock` and `StationEntity`: block behaviour shared by stations (facing, support, menu, ticker, drops)
+- `src/main/java/io/github/dirtyredz/herbalwitch/stations/menu/` — `StationMenu`: menu behaviour shared by stations (slots, quick-move that respects reservations)
 - `src/main/java/io/github/dirtyredz/herbalwitch/stations/heat/` — heat sources and conductors
 - `src/main/java/io/github/dirtyredz/herbalwitch/stations/showcase/` — the parameterised station showcase section
 - `src/main/java/io/github/dirtyredz/herbalwitch/stations/everyday/` — the Milestone 3 stations, one package each (`drying_rack`, `mortar`, `kettle`, `hearth`, `infusion_pot`; `block/`, `menu/`, `recipe/`)
@@ -37,16 +37,16 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `src/main/java/io/github/dirtyredz/herbalwitch/brewing/effect/` — the warmth and pest-repellent effects
 - `src/main/java/io/github/dirtyredz/herbalwitch/showcase/command/` — `/herbalwitch showcase` registration and execution
 - `src/main/java/io/github/dirtyredz/herbalwitch/showcase/layout/` — section contract, registry, placements and the bounded plan (no world writes)
-- `src/main/java/io/github/dirtyredz/herbalwitch/showcase/build/` — preflight checks, the builder and sign labels (the only world writes)
+- `src/main/java/io/github/dirtyredz/herbalwitch/showcase/construction/` — preflight checks, the builder and sign labels (the only world writes)
 - `src/main/java/io/github/dirtyredz/herbalwitch/client/` — client-only mod-bus wiring (`HerbalWitchClient`) only
-- `src/main/java/io/github/dirtyredz/herbalwitch/client/decor/` — furniture tint (colour) handlers
-- `src/main/java/io/github/dirtyredz/herbalwitch/client/botany/` — herb bed frame tint
 - `src/main/java/io/github/dirtyredz/herbalwitch/client/stations/` — station screens and shared widgets
 - `src/main/java/io/github/dirtyredz/herbalwitch/client/compat/` — EMI (`emi/`) and JEI (`jei/`) plugins over one shared card layout
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/` — datagen provider registration only
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/client/language/` — the sole `en_us.json` writer
-- `src/main/java/io/github/dirtyredz/herbalwitch/data/client/decor/` — furniture blockstates, finish models, item models, names
+- `src/main/java/io/github/dirtyredz/herbalwitch/data/client/decor/` — furniture blockstates, item models, names
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/client/botany/` — herb stage/bed models and states, item models, names and tooltips
+- `src/main/java/io/github/dirtyredz/herbalwitch/data/client/stations/` — station blockstates, item models, names
+- `src/main/java/io/github/dirtyredz/herbalwitch/data/client/preparations/` — bundle and lantern models, item models, names
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/client/showcase/` — showcase messages, headings and labels
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/server/tags/` — the sole block and item tag writers
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/server/recipes/` — the sole recipe provider
@@ -56,47 +56,75 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/server/stations/` — station crafting, loot and tags; `recipes/` the processing recipe providers
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/server/preparations/` — lantern crafting, loot, tags, entity tags
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/server/compat/` — tags offered to optional mods (Farmer's Delight heat)
-- `src/main/java/io/github/dirtyredz/herbalwitch/data/client/stations/` — station blockstates, item models, names
-- `src/main/java/io/github/dirtyredz/herbalwitch/data/client/preparations/` — bundle and lantern models, item models, names
-- `src/main/resources/` — mods.toml, pack.mcmeta, authored models (`models/block/decor/templates/`, `models/block/botany/garden/`), generated textures (`textures/block/material/`, `textures/{block,item}/botany/`)
+- `src/main/resources/META-INF/` — `mods.toml` and mod metadata
+- `src/main/resources/assets/herbalwitch/models/block/decor/templates/` — authored furniture templates with explicit UVs
+- `src/main/resources/assets/herbalwitch/models/block/botany/garden/` — authored herb bed model
+- `src/main/resources/assets/herbalwitch/models/block/preparations/templates/` — authored bundle and oil lantern templates
+- `src/main/resources/assets/herbalwitch/models/block/stations/` — authored station models, one directory per station (`drying_rack/`, `mortar/`, `kettle/`, `hearth/`, `infusion_pot/`)
+- `src/main/resources/assets/herbalwitch/textures/block/material/` — the ten untinted decor materials (generated)
+- `src/main/resources/assets/herbalwitch/textures/block/botany/` — herb growth stages `<group>/<herb>/stage_0..3.png` and the herb bed (generated)
+- `src/main/resources/assets/herbalwitch/textures/block/stations/` — shared station materials (generated)
+- `src/main/resources/assets/herbalwitch/textures/gui/stations/` — station interface atlases (generated)
+- `src/main/resources/assets/herbalwitch/textures/item/botany/` — seed and fresh-herb sprites `<group>/<herb>/` (generated)
+- `src/main/resources/assets/herbalwitch/textures/item/preparations/` — bundle, powder and product sprites (generated)
 - `src/generated/resources/` — datagen output, checked in and packaged (its `.cache/` is ignored and excluded); never hand-edited
-- `src/test/java/io/github/dirtyredz/herbalwitch/` — pure JUnit tests (`decor/`, `botany/`, `showcase/`, `data/` with per-feature manifests and `data/fixture/`), no Minecraft bootstrap
-- `src/gameTest/java/io/github/dirtyredz/herbalwitch/` — Forge GameTests (`fixture/`, `decor/`, `botany/`, `showcase/`); never in the release jar
-- `src/gameTest/resources/` — GameTest structure templates (`empty`, `showcase`, `showcase_section`)
-- `tools/` — deterministic Node generators: textures (`generate-textures.mjs`, `art/`, `art/botany/`) and the GameTest structures; not packaged
+- `src/test/java/io/github/dirtyredz/herbalwitch/botany/` — pure JUnit tests for catalogues and conditions
+- `src/test/java/io/github/dirtyredz/herbalwitch/data/` — generated-resource tests: `GeneratedResourcesTest`, per-feature manifests and tests in `botany/`, `decor/`, `preparations/`, `showcase/`, `stations/`, and `fixture/` helpers
+- `src/test/java/io/github/dirtyredz/herbalwitch/platform/geometry/` — shape rotation tests
+- `src/test/java/io/github/dirtyredz/herbalwitch/showcase/` — showcase plan and coverage tests
+- `src/test/java/io/github/dirtyredz/herbalwitch/stations/process/` — reservation and completion arithmetic tests
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/fixture/` — shared GameTest world, player, botany, station and showcase fixtures
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/decor/` — furniture GameTests
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/botany/` — herb, garden, foraging and worldgen GameTests
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/showcase/` — showcase command, boundary and content GameTests
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/stations/` — station GameTests; `process/` the shared process behaviour tests
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/preparations/` — product use and block GameTests
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/compat/` — optional-integration GameTests (profile dependent)
+- `src/gameTest/resources/data/herbalwitch/structures/` — GameTest structure templates (`empty`, `showcase`, `showcase_section`); never in the release jar
+- `tools/` — deterministic Node generators: `generate-textures.mjs`, `generate-test-structures.mjs`; not packaged
+- `tools/art/` — shared pixel code (`png`, `materials`, `patterns`)
+- `tools/art/botany/` — herb sprites per habitat group, garden art
+- `tools/art/stations/` — station materials and interface atlases (`interfaces.mjs` holds the layout)
+- `tools/art/preparations/` — preparation materials and product sprites
 - `docs/` — architecture, decisions, gotchas, features, art, compatibility; `docs/catalogue/` traces the design to implementation
 
 ## Components
 
 | Component | Files | Responsibility |
 |---|---|---|
-| Finish catalogue | `decor/catalog/Finish`, `FinishCatalog` | The 18 coordinated finishes (7 natural, 11 painted/material); everything else iterates this list |
-| Piece catalogue | `decor/catalog/FurnitureSpec`, `ArtSpikeCatalog` | Piece id, family, template, behaviour; the id/path scheme `decor/<family>/<piece>/<palette>/<finish>` |
-| Registration | `decor/registry/ArtSpikeRegistration` | Catalogue x finishes -> blocks + items; finish-independent strength |
-| Registers | `decor/registry/DecorBlocks`, `DecorItems`, `DecorCreativeTab`, `DecorTags` | Deferred registers, lookups by piece and finish, tab, tag keys |
-| Block adapters | `decor/block/HorizontalFurnitureBlock`, `WallShelfBlock`, `TableLampBlock` | Facing + shape; wall support; surface support + server-side toggle. Rug is vanilla `CarpetBlock` |
-| Shapes | `decor/shape/ArtSpikeShapes`, `ShapeRotation` | North-authored pixel boxes, turned like a blockstate y rotation |
-| Client | `client/HerbalWitchClient`, `client/decor/DecorColorHandlers` | Block and item tints: index 0 frame, 1 fabric |
-| Datagen | `data/**` | Finish wrapper models, states, item models, names, crafting + stonecutter restyling, loot, tags |
-| Art pipeline | `tools/generate-textures.mjs`, `tools/art/{png,materials,patterns}.mjs`, `models/block/decor/templates/*.json` | 32 px neutral materials and motifs; Blockbench-style cuboid templates with explicit UVs |
+| Design catalogue | `decor/catalog/Finish`, `FinishCatalog` (one entry, `COTTAGE`), `FurnitureSpec`, `ArtSpikeCatalog` | The single cottage design and the five pieces; ids `decor/<family>/<piece>` |
+| Decor registration | `decor/registry/*`, `decor/block/*`, `decor/shape/ArtSpikeShapes` | Catalogue -> blocks + items, creative tab, tags; facing/shape, wall shelf, table lamp; rug is vanilla `CarpetBlock` |
+| Botany | `botany/**` | Herb catalogue, plants, bed, growth, harvest, conditions reload, foraging, worldgen |
+| Station base | `stations/block/StationBlock`, `StationEntity`, `stations/menu/StationMenu` | Shared block and menu boilerplate (facing, support, ticker, drops, slot rules) |
+| Processing | `stations/process/*` | Composition, not a superclass: inventory with reservations, job, completion, recipe format and index |
+| Stations | `stations/everyday/<station>/{block,menu,recipe}`, `stations/registry/*`, `stations/heat/*` | The five stations, their registration and heat rules |
+| Products | `brewing/product/**`, `brewing/application/*`, `brewing/effect/*` | Bundles, powders, drinks, salve, oils, garden products, oil lantern, effects |
+| Metadata carrier | `brewing/product/metadata/DrinkMetadata` | Water-to-drink data hand-off; the Thirst adapter installs it |
+| Showcase | `showcase/{layout,construction,command}`, `*/showcase/` sections | Plan (pure), preflight and builder (world writes), command |
+| Permission | `platform/permission/*` | `ActionContext` + `ActionPermissionService` |
+| Compat | `platform/compat/**`, `client/compat/**`, `data/server/compat/` | Thirst adapter; EMI/JEI plugins; Farmer's Delight tags |
+| Client | `client/HerbalWitchClient`, `client/stations/*` | Station screens and widgets; no colour handlers |
+| Datagen | `data/**` | Models, states, names, recipes, loot, tags, worldgen, conditions |
+| Art pipeline | `tools/generate-textures.mjs`, `tools/art/**`, authored model JSON | Seeded generation of materials, sprites and GUI atlases |
 
 ## Dependency direction
 
-`registry` -> `block`, `shape`, `catalog`; `block` -> nothing of ours (shapes arrive as constructor
-arguments); `client` -> `registry`, `catalog`; `data` -> everything above. `catalog` imports only
-`MapColor` from Minecraft, so the pure tests load it without a bootstrap. Nothing in `decor` imports
-`client` or `data`. Future features follow the same rule: feature packages never import `client/` or
-`data/`; client and datagen import features.
+- Features (`decor`, `botany`, `stations`, `brewing`, `platform`) never import `client/` or `data/`;
+  client and datagen import features.
+- `stations` -> `brewing` (preparations, metadata) and `botany`; `brewing` -> `botany`. Nothing imports
+  `stations` except `data/`, `client/` and the showcase wiring. `platform/compat` -> `brewing`.
+- `decor` registry -> block, shape, catalog; blocks take their shapes as constructor arguments.
+- `catalog` packages import only plain Minecraft value types (e.g. `MapColor`), so the pure unit tests
+  load them without a Minecraft bootstrap.
+- Future features follow the same rule.
 
 ## Structural rules
 
 - Java root holds bootstrap only; `client/` and `data/` roots hold wiring/registration only.
 - About 800 lines per code file at most; review for extraction around 600.
 - At most 12 direct source files per responsibility directory. Split a growing directory by
-  responsibility, never into numbered batches.
-- Generated resources stay bounded through family, piece and palette directories: every generated
-  directory has fewer than 12 entries (`GeneratedResourcesTest` enforces it). Lit lamp models live in
-  `.../<piece>/lit/<palette>/` for that reason.
+  responsibility, never into numbered batches. Stations sit under `stations/everyday/` for this reason.
+- Every generated directory has fewer than 12 entries (`GeneratedResourcesTest` enforces it).
 - GameTests stay in `src/gameTest/`, outside the release source set.
 - No RedzCore dependency and no shared runtime library (docs/DECISIONS.md).
 
@@ -104,6 +132,8 @@ arguments); `client` -> `registry`, `catalog`; `data` -> everything above. `cata
 
 - `ArtSpikeRegistration` is the only place that knows which block class a piece uses; Milestone 5
   replaces it with a full-catalogue registration rather than growing it.
-- Templates bind their fixed textures (fabric, brass, glass); finish wrappers bind only `frame`.
-- `GeneratedResourcesTest` / `GeneratedModelsTest` keep their own independent lists of pieces and
-  finishes on purpose, so a catalogue slip shows up as a diff.
+- Stations share `StationBlock`/`StationMenu` for block and menu boilerplate only. Processing rules
+  live in `stations/process/` and are used by composition: a station owns a `ProcessStation`, and no
+  station extends a processing base class.
+- `GeneratedResourcesTest` and the per-feature manifests keep their own independent lists on purpose,
+  so a catalogue slip shows up as a diff.
