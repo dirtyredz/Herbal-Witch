@@ -13,9 +13,10 @@ const T = { ...DECOR, particle: DECOR.warm };
 
 /** A chunky black-iron corner bracket at a corner of the body, with gold rivets on its two faces. */
 function bracket(x, y, z, sx, sz) {
-  const s = 2.5;
-  const x0 = sx < 0 ? x : x - s;
-  const z0 = sz < 0 ? z : z - s;
+  // a quarter pixel proud of the body so the iron reads as a separate bracket
+  const s = 2.75;
+  const x0 = sx < 0 ? x - 0.25 : x - s + 0.25;
+  const z0 = sz < 0 ? z - 0.25 : z - s + 0.25;
   return [
     box([x0, y, z0], [x0 + s, y + s, z0 + s], '#iron'),
     rivet(sz < 0 ? 'north' : 'south', x0 + s / 2, y + s / 2, sz < 0 ? z0 : z0 + s, '#gold', 0.75, 0.25),
@@ -38,10 +39,10 @@ export function counter() {
     // gold studs along the top rail
     ...[3, 6, 10, 13].map((x) => rivet('north', x, 12.75, 1, '#gold', 0.75, 0.25)),
     // the magenta runner draped over the top and down the front
-    box([6, 16, 0], [10, 16, 16], '#runner', { decal: { up: [0, 0, 16, 10] }, skip: ['down', 'north', 'south', 'east', 'west'] }),
+    box([6, 16, 0], [10, 16, 16], '#runner_magenta', { decal: { up: [0, 0, 16, 10] }, skip: ['down', 'north', 'south', 'east', 'west'] }),
   ];
   // the runner's front fall (a face just off the drawers)
-  els.push(box([6, 6, 0], [10, 16, 0.01], '#runner', { decal: { north: [0, 0, 16, 16], south: [0, 0, 16, 16] }, skip: ['up', 'down', 'east', 'west'] }));
+  els.push(box([6, 6, 0], [10, 16, 0.01], '#runner_magenta', { decal: { north: [0, 0, 16, 16], south: [0, 0, 16, 16] }, skip: ['up', 'down', 'east', 'west'] }));
   // black iron corner brackets top and bottom, front and back
   for (const [x, sx] of [[1, -1], [15, 1]]) {
     for (const [z, sz] of [[1, -1], [15, 1]]) {

@@ -58,7 +58,8 @@ const TEXTURES = {
   ivy: ivy, // cutout: dense trailing ivy with small pink flowers
   velvet: velvet, // forest-green tufted upholstery
   paint_green: paintGreen, // deep green painted drawer fronts
-  runner: runner, // cutout decal: draped runners with a pointed hem
+  runner: () => runner(false), // cutout decal: the armchair's green runners with a pointed hem
+  runner_magenta: () => runner(true), // cutout decal: the apothecary chest's magenta runner with a gold moon
 };
 
 // Station block materials (block/stations/): untinted; flame is cutout.

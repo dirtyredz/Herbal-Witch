@@ -15,6 +15,7 @@ export const DECOR = {
   iron: `${M}iron`,
   paint: `${M}paint_green`,
   runner: `${M}runner`,
+  runner_magenta: `${M}runner_magenta`,
   ivy: `${M}ivy`,
   glass: `${M}glass`,
   tincture: `${M}tincture`,

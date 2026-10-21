@@ -34,21 +34,26 @@ export function paintGreen() {
 }
 
 /**
- * A draped runner, stretched over one face: green field, magenta-and-plum borders, a pointed hem
- * at the bottom with an embroidered pink flower and gold tassel tips. Transparent outside the hem.
+ * A draped runner, stretched over one face: a green field (the armchair's) or a magenta field with
+ * a gold crescent (the apothecary chest's), magenta-and-plum or gold borders, a pointed hem with an
+ * embroidered flower and a gold tassel tip. Transparent outside the hem.
  */
-export function runner() {
+export function runner(magenta = false) {
   const rand = rng(8904);
   const g = grid();
-  flower(g, 16, 22, PINK, 5);
-  star(g, 16, 13, 1);
+  flower(g, 16, 22, magenta ? [[150, 34, 98], [238, 150, 196], [255, 200, 226]] : PINK, 5);
+  if (magenta) moon(g, 16, 11, 4.5);
+  else star(g, 16, 13, 1);
+  const FIELD = magenta ? [176, 40, 110] : FOREST;
+  const FIELD_LIGHT = magenta ? [196, 48, 128] : FOREST_LIGHT;
+  const BORDER = magenta ? GOLD[1] : MAGENTA_C;
   return overlay(image(SIZE, (x, y) => {
     const tip = 24 + (16 - Math.abs(x - 15.5)) * 0.45; // the pointed hem
     if (y > tip) return Math.abs(x - 15.5) < 1 && y < tip + 3 ? [GOLD[1][0], GOLD[1][1], GOLD[1][2], 255] : [0, 0, 0, 0];
     const edge = Math.min(x, SIZE - 1 - x);
-    if (edge < 2 || y > tip - 2) return shade(MAGENTA_C, 0.95 + rand() * 0.08);
+    if (edge < 2 || y > tip - 2) return shade(BORDER, 0.95 + rand() * 0.08);
     if (edge < 3 || y > tip - 3) return shade(PLUM, 1);
-    return shade((x + y) % 2 ? FOREST : FOREST_LIGHT, 0.95 + rand() * 0.06);
+    return shade((x + y) % 2 ? FIELD : FIELD_LIGHT, 0.95 + rand() * 0.06);
   }), g);
 }
 
