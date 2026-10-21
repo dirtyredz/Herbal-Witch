@@ -9,9 +9,11 @@
 //                                                         in the repository (docs/BLOCKBENCH.md)
 //   node tools/compile-blockbench.mjs --refresh-previews  re-embed shared textures in the .bbmodel files
 //                                                         after an intentional palette change
-//   node tools/compile-blockbench.mjs --compare <dir>     appearance parity of the current trees against a
+//   node tools/compile-blockbench.mjs --compare <dir> [--texture-map <json>]
+//                                                         appearance parity of the current trees against a
 //                                                         captured baseline (<dir>/main-assets and
-//                                                         <dir>/generated-assets); writes nothing
+//                                                         <dir>/generated-assets); the map names the baseline
+//                                                         texture each renamed texture was copied from; writes nothing
 //
 // Writes only into the model directories src/art/blockbench/catalog.json declares and the owned
 // texture files the projects declare, and removes stale JSON only in those directories. Run
@@ -88,7 +90,7 @@ if (args.includes('--dev-pack')) {
 } else if (arg('--compare')) {
   const dir = arg('--compare');
   const base = new Resources(root, { trees: [join(dir, 'generated-assets'), join(dir, 'main-assets')] });
-  const { checked, differences } = compareAppearance(base, new Resources(root));
+  const { checked, differences } = compareAppearance(base, new Resources(root), arg('--texture-map') ? JSON.parse(readFileSync(arg('--texture-map'), 'utf8')) : {});
   console.log(`compared ${checked.models} models (${checked.items} items), ${checked.states} block states, ${checked.textures} textures`);
   if (differences.length) fail(differences);
   console.log('appearance identical');
@@ -101,9 +103,8 @@ if (args.includes('--dev-pack')) {
     fail([e.message]);
   }
   const { models, textures, catalogue, pieces } = compiled;
-  const ownedTextures = pieces.flatMap((p) => Object.values(p.piece.owned_textures).map((id) => `${id.split(':')[1]}.png`));
   const m = writeOutputs(join(assets, 'models'), models, { name: 'compile-blockbench', dirs: catalogue.modelDirs }, { check });
-  const t = writeOutputs(join(assets, 'textures'), textures, { name: 'compile-blockbench', dirs: [], files: ownedTextures, ext: '.png' }, { check });
+  const t = writeOutputs(join(assets, 'textures'), textures, { name: 'compile-blockbench', dirs: catalogue.ownedTextureDir ? [catalogue.ownedTextureDir] : [], files: pieces.flatMap((p) => Object.values(p.piece.owned_textures).map((id) => `${id.split(':')[1]}.png`)), ext: '.png' }, { check });
   if (check && (m.problems.length || t.problems.length)) fail([...m.problems, ...t.problems, 'run node tools/compile-blockbench.mjs']);
   console.log(`${pieces.length} projects -> ${models.size} models, ${textures.size} textures: `
     + `${m.written.length + t.written.length} written, ${m.removed.length} removed, ${m.unchanged.length + t.unchanged.length} unchanged`);

@@ -4392,8 +4392,8 @@
 	"textures": [
 		{
 			"path": "",
-			"name": "stone_dark.png",
-			"folder": "block/stations",
+			"name": "stone.png",
+			"folder": "block/pieces/stations/hearth",
 			"namespace": "herbalwitch",
 			"id": "stone",
 			"group": "",
@@ -4421,7 +4421,7 @@
 		{
 			"path": "",
 			"name": "gold.png",
-			"folder": "block/material",
+			"folder": "block/pieces/stations/hearth",
 			"namespace": "herbalwitch",
 			"id": "gold",
 			"group": "",
@@ -4449,7 +4449,7 @@
 		{
 			"path": "",
 			"name": "iron.png",
-			"folder": "block/material",
+			"folder": "block/pieces/stations/hearth",
 			"namespace": "herbalwitch",
 			"id": "iron",
 			"group": "",
@@ -4476,8 +4476,8 @@
 		},
 		{
 			"path": "",
-			"name": "wood_post.png",
-			"folder": "block/material",
+			"name": "post.png",
+			"folder": "block/pieces/stations/hearth",
 			"namespace": "herbalwitch",
 			"id": "post",
 			"group": "",
@@ -4505,7 +4505,7 @@
 		{
 			"path": "",
 			"name": "wood.png",
-			"folder": "block/material",
+			"folder": "block/pieces/stations/hearth",
 			"namespace": "herbalwitch",
 			"id": "wood",
 			"group": "",
@@ -4533,7 +4533,7 @@
 		{
 			"path": "",
 			"name": "ivy.png",
-			"folder": "block/material",
+			"folder": "block/pieces/stations/hearth",
 			"namespace": "herbalwitch",
 			"id": "ivy",
 			"group": "",
@@ -4560,8 +4560,8 @@
 		},
 		{
 			"path": "",
-			"name": "wood_end.png",
-			"folder": "block/material",
+			"name": "log.png",
+			"folder": "block/pieces/stations/hearth",
 			"namespace": "herbalwitch",
 			"id": "log",
 			"group": "",
@@ -4589,7 +4589,7 @@
 		{
 			"path": "",
 			"name": "plaque.png",
-			"folder": "block/stations",
+			"folder": "block/pieces/stations/hearth",
 			"namespace": "herbalwitch",
 			"id": "plaque",
 			"group": "",
@@ -4617,7 +4617,7 @@
 		{
 			"path": "",
 			"name": "coals.png",
-			"folder": "block/stations",
+			"folder": "block/pieces/stations/hearth",
 			"namespace": "herbalwitch",
 			"id": "coals",
 			"group": "",
@@ -4644,8 +4644,8 @@
 		},
 		{
 			"path": "",
-			"name": "fire_glow.png",
-			"folder": "block/stations",
+			"name": "glow.png",
+			"folder": "block/pieces/stations/hearth",
 			"namespace": "herbalwitch",
 			"id": "glow",
 			"group": "",
@@ -4673,7 +4673,7 @@
 		{
 			"path": "",
 			"name": "flame.png",
-			"folder": "block/stations",
+			"folder": "block/pieces/stations/hearth",
 			"namespace": "herbalwitch",
 			"id": "flame",
 			"group": "",

@@ -1,7 +1,7 @@
 {
   "textures": {
-    "rug": "herbalwitch:block/material/rug",
-    "particle": "herbalwitch:block/material/wood"
+    "rug": "herbalwitch:block/pieces/decor/rug/rug",
+    "particle": "herbalwitch:block/pieces/decor/rug/rug"
   },
   "display": {
     "thirdperson_righthand": {

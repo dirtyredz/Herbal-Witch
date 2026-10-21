@@ -12,9 +12,9 @@ import { enumerate, select, stateLabel } from '../../preview/scenes/blockstates.
 const k4 = (v) => (Math.round(v * 1e4) / 1e4 + 0).toFixed(4);
 
 /** A face as an order-free key: its corners as (position, uv) pairs, sorted, plus its render state. */
-function quadKey(q) {
+function quadKey(q, rename = (t) => t) {
   const corners = q.pos.map((p, i) => `${p.map(k4)}|${q.uv[i].map(k4)}`).sort().join(' ');
-  return `${q.texture}|${q.shade ? 's' : 'f'}|${q.emissive ? 'g' : '-'}|${q.cullface ?? '-'}|${corners}`;
+  return `${rename(q.texture)}|${q.shade ? 's' : 'f'}|${q.emissive ? 'g' : '-'}|${q.cullface ?? '-'}|${corners}`;
 }
 
 function multisetDiff(a, b) {
@@ -51,19 +51,22 @@ function samePixels(a, b) {
 }
 
 /**
- * Compares `base` and `cand` (preview Resources). Returns {checked: {models, items, states,
+ * Compares `base` and `cand` (preview Resources). `rename` maps a candidate texture id to the
+ * baseline texture it was copied from (a texture moved to a new owner keeps its pixels, not its
+ * name). Returns {checked: {models, items, states,
  * textures}, differences: [string]}.
  */
-export function compareAppearance(base, cand) {
+export function compareAppearance(base, cand, rename = {}) {
+  const was = (t) => rename[t] ?? t;
   const bb = new Baker(base);
   const cb = new Baker(cand);
   const differences = [];
   const textures = new Set();
   const checked = { models: 0, items: 0, states: 0, textures: 0 };
-  const quadsOf = (baker, id) => {
+  const quadsOf = (baker, id, map) => {
     const { model, quads } = baker.bake(id);
-    for (const q of quads) if (q.texture) textures.add(q.texture);
-    return { model, keys: quads.map(quadKey) };
+    if (baker === cb) for (const q of quads) if (q.texture) textures.add(q.texture); // candidate ids; faces already compare by baseline name
+    return { model, keys: quads.map((q) => quadKey(q, map)) };
   };
   const compareQuads = (what, a, b) => {
     const { onlyA, onlyB } = multisetDiff(a, b);
@@ -78,7 +81,7 @@ export function compareAppearance(base, cand) {
     let b;
     try {
       a = quadsOf(bb, id);
-      b = quadsOf(cb, id);
+      b = quadsOf(cb, id, was);
     } catch (e) {
       differences.push(`${id}: ${e.message}`);
       continue;
@@ -86,7 +89,7 @@ export function compareAppearance(base, cand) {
     const item = id.startsWith('herbalwitch:item/');
     if (a.model.builtin !== b.model.builtin) differences.push(`${id}: builtin ${a.model.builtin} -> ${b.model.builtin}`);
     if (a.model.builtin === 'generated') {
-      if (a.model.textures.layer0 !== b.model.textures.layer0) differences.push(`${id}: layer0 differs`);
+      if (a.model.textures.layer0 !== was(b.model.textures.layer0)) differences.push(`${id}: layer0 differs`);
     }
     compareQuads(id, a.keys, b.keys);
     if ((a.model.renderType ?? null) !== (b.model.renderType ?? null)) differences.push(`${id}: render type ${a.model.renderType} -> ${b.model.renderType}`);
@@ -106,9 +109,9 @@ export function compareAppearance(base, cand) {
       continue;
     }
     for (const props of enumerate(sa)) {
-      const bake = (baker, bs) => select(bs, props).flatMap((p) => variantRotation(baker.bake(p.model).quads, p)).map(quadKey);
+      const bake = (baker, bs, map) => select(bs, props).flatMap((p) => variantRotation(baker.bake(p.model).quads, p)).map((q) => quadKey(q, map));
       try {
-        compareQuads(`${block} [${stateLabel(props)}]`, bake(bb, sa), bake(cb, sb));
+        compareQuads(`${block} [${stateLabel(props)}]`, bake(bb, sa), bake(cb, sb, was));
       } catch (e) {
         differences.push(`${block} [${stateLabel(props)}]: ${e.message}`);
       }
@@ -116,7 +119,7 @@ export function compareAppearance(base, cand) {
     }
   }
   for (const t of [...textures].sort()) {
-    if (!samePixels(base.texture(t), cand.texture(t))) differences.push(`texture ${t}: pixels differ`);
+    if (!samePixels(base.texture(was(t)), cand.texture(t))) differences.push(`texture ${t}: pixels differ from ${was(t)}`);
     checked.textures++;
   }
   for (const d of [...base.diagnostics, ...cand.diagnostics]) differences.push(`${d.kind}: ${d.message}`);

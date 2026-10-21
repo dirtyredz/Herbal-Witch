@@ -1,11 +1,11 @@
 {
   "render_type": "minecraft:cutout",
   "textures": {
-    "brass": "herbalwitch:block/material/brass",
-    "glass": "herbalwitch:block/material/glass",
-    "iron": "herbalwitch:block/stations/iron",
-    "ember": "herbalwitch:block/stations/ember",
-    "flame": "herbalwitch:block/stations/flame",
+    "brass": "herbalwitch:block/pieces/preparations/oil_lantern/brass",
+    "glass": "herbalwitch:block/pieces/preparations/oil_lantern/glass",
+    "iron": "herbalwitch:block/pieces/preparations/oil_lantern/iron",
+    "ember": "herbalwitch:block/pieces/preparations/oil_lantern/ember",
+    "flame": "herbalwitch:block/pieces/preparations/oil_lantern/flame",
     "particle": "#brass"
   },
   "elements": [

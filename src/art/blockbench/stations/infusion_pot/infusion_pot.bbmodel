@@ -2711,7 +2711,7 @@
 		{
 			"path": "",
 			"name": "gold.png",
-			"folder": "block/material",
+			"folder": "block/pieces/stations/infusion_pot",
 			"namespace": "herbalwitch",
 			"id": "gold",
 			"group": "",
@@ -2739,7 +2739,7 @@
 		{
 			"path": "",
 			"name": "plum.png",
-			"folder": "block/material",
+			"folder": "block/pieces/stations/infusion_pot",
 			"namespace": "herbalwitch",
 			"id": "plum",
 			"group": "",
@@ -2767,7 +2767,7 @@
 		{
 			"path": "",
 			"name": "copper.png",
-			"folder": "block/material",
+			"folder": "block/pieces/stations/infusion_pot",
 			"namespace": "herbalwitch",
 			"id": "copper",
 			"group": "",
@@ -2794,8 +2794,8 @@
 		},
 		{
 			"path": "",
-			"name": "plum_painted.png",
-			"folder": "block/stations",
+			"name": "painted.png",
+			"folder": "block/pieces/stations/infusion_pot",
 			"namespace": "herbalwitch",
 			"id": "painted",
 			"group": "",
@@ -2822,8 +2822,8 @@
 		},
 		{
 			"path": "",
-			"name": "plum_lid.png",
-			"folder": "block/stations",
+			"name": "lid.png",
+			"folder": "block/pieces/stations/infusion_pot",
 			"namespace": "herbalwitch",
 			"id": "lid",
 			"group": "",

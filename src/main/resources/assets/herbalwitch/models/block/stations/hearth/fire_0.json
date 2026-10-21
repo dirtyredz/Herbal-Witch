@@ -1,10 +1,10 @@
 {
   "render_type": "minecraft:cutout",
   "textures": {
-    "particle": "herbalwitch:block/stations/stone_dark",
-    "coals": "herbalwitch:block/stations/coals",
-    "glow": "herbalwitch:block/stations/fire_glow",
-    "flame": "herbalwitch:block/stations/flame"
+    "particle": "herbalwitch:block/pieces/stations/hearth/stone",
+    "coals": "herbalwitch:block/pieces/stations/hearth/coals",
+    "glow": "herbalwitch:block/pieces/stations/hearth/glow",
+    "flame": "herbalwitch:block/pieces/stations/hearth/flame"
   },
   "elements": [
     {

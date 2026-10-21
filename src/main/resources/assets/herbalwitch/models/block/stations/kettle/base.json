@@ -1,10 +1,10 @@
 {
   "textures": {
-    "painted": "herbalwitch:block/stations/plum_painted",
-    "plum": "herbalwitch:block/material/plum",
-    "gold": "herbalwitch:block/material/gold",
-    "copper": "herbalwitch:block/material/copper",
-    "particle": "herbalwitch:block/stations/plum_painted"
+    "painted": "herbalwitch:block/pieces/stations/kettle/painted",
+    "plum": "herbalwitch:block/pieces/stations/kettle/plum",
+    "gold": "herbalwitch:block/pieces/stations/kettle/gold",
+    "copper": "herbalwitch:block/pieces/stations/kettle/copper",
+    "particle": "herbalwitch:block/pieces/stations/kettle/painted"
   },
   "display": {
     "thirdperson_righthand": {

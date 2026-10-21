@@ -1,10 +1,10 @@
 {
   "textures": {
-    "plinth": "herbalwitch:block/stations/plinth_stone",
-    "stone": "herbalwitch:block/stations/mortar_stone",
-    "herbs": "herbalwitch:block/stations/herb_pile",
-    "pestle": "herbalwitch:block/stations/pestle_stone",
-    "particle": "herbalwitch:block/stations/mortar_stone"
+    "plinth": "herbalwitch:block/pieces/stations/mortar/plinth",
+    "stone": "herbalwitch:block/pieces/stations/mortar/stone",
+    "herbs": "herbalwitch:block/pieces/stations/mortar/herbs",
+    "pestle": "herbalwitch:block/pieces/stations/mortar/pestle",
+    "particle": "herbalwitch:block/pieces/stations/mortar/stone"
   },
   "display": {
     "thirdperson_righthand": {

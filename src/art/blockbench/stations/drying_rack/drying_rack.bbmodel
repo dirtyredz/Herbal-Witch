@@ -2644,8 +2644,8 @@
 	"textures": [
 		{
 			"path": "",
-			"name": "wood_post.png",
-			"folder": "block/material",
+			"name": "post.png",
+			"folder": "block/pieces/stations/drying_rack",
 			"namespace": "herbalwitch",
 			"id": "post",
 			"group": "",
@@ -2673,7 +2673,7 @@
 		{
 			"path": "",
 			"name": "iron.png",
-			"folder": "block/material",
+			"folder": "block/pieces/stations/drying_rack",
 			"namespace": "herbalwitch",
 			"id": "iron",
 			"group": "",
@@ -2701,7 +2701,7 @@
 		{
 			"path": "",
 			"name": "gold.png",
-			"folder": "block/material",
+			"folder": "block/pieces/stations/drying_rack",
 			"namespace": "herbalwitch",
 			"id": "gold",
 			"group": "",
@@ -2728,8 +2728,8 @@
 		},
 		{
 			"path": "",
-			"name": "wood.png",
-			"folder": "block/material",
+			"name": "wood_z.png",
+			"folder": "block/pieces/stations/drying_rack",
 			"namespace": "herbalwitch",
 			"id": "wood_z",
 			"group": "",
@@ -2757,7 +2757,7 @@
 		{
 			"path": "",
 			"name": "wood.png",
-			"folder": "block/material",
+			"folder": "block/pieces/stations/drying_rack",
 			"namespace": "herbalwitch",
 			"id": "wood",
 			"group": "",

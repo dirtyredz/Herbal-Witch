@@ -92,7 +92,7 @@
 		{
 			"path": "",
 			"name": "rug.png",
-			"folder": "block/material",
+			"folder": "block/pieces/decor/rug",
 			"namespace": "herbalwitch",
 			"id": "rug",
 			"group": "",

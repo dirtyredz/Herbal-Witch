@@ -1,8 +1,8 @@
 {
   "textures": {
-    "particle": "herbalwitch:block/material/iron",
-    "coals": "herbalwitch:block/stations/coals",
-    "glow": "herbalwitch:block/stations/fire_glow"
+    "particle": "herbalwitch:block/pieces/stations/stove/iron",
+    "coals": "herbalwitch:block/pieces/stations/stove/coals",
+    "glow": "herbalwitch:block/pieces/stations/stove/glow"
   },
   "elements": [
     {

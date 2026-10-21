@@ -1,9 +1,9 @@
 {
   "render_type": "minecraft:cutout",
   "textures": {
-    "brass": "herbalwitch:block/material/brass",
-    "glass": "herbalwitch:block/material/glass",
-    "iron": "herbalwitch:block/stations/iron",
+    "brass": "herbalwitch:block/pieces/preparations/oil_lantern/brass",
+    "glass": "herbalwitch:block/pieces/preparations/oil_lantern/glass",
+    "iron": "herbalwitch:block/pieces/preparations/oil_lantern/iron",
     "particle": "#brass"
   },
   "display": {

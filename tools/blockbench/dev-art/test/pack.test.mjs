@@ -32,8 +32,9 @@ test('the pack carries the compiled models, owned textures, and the item models 
   assert.equal(keys.filter((k) => k.startsWith('assets/herbalwitch/models/block/')).length, 32);
   assert.equal(keys.filter((k) => k.startsWith('assets/herbalwitch/models/item/')).length, 12);
   assert.equal(keys.filter((k) => k.startsWith('assets/herbalwitch/blockstates/')).length, 12);
-  assert.deepEqual(keys.filter((k) => k.startsWith('assets/herbalwitch/textures/')).sort(),
-    ['assets/herbalwitch/textures/block/material/lamp_shade.png', 'assets/herbalwitch/textures/block/material/rug.png']);
+  const textures = keys.filter((k) => k.startsWith('assets/herbalwitch/textures/'));
+  assert.equal(textures.length, compiled.textures.size);
+  for (const k of textures) assert.ok(k.startsWith("assets/herbalwitch/textures/block/pieces/"), k);
   assert.deepEqual(validateStage(root, files, ids, shown), []);
 });
 
@@ -41,9 +42,9 @@ test('the staged pack is validated before publication: a missing texture or copl
   const files = stageFiles(root, compiled, shown);
   const kettle = 'assets/herbalwitch/models/block/stations/kettle/base.json';
   const json = JSON.parse(files.get(kettle));
-  json.textures.painted = 'herbalwitch:block/stations/no_such_texture';
+  json.textures.painted = 'herbalwitch:block/pieces/stations/kettle/no_such_texture';
   const broken = new Map(files).set(kettle, Buffer.from(JSON.stringify(json)));
-  assert.ok(validateStage(root, broken, ids, shown).some((e) => /missing texture herbalwitch:block\/stations\/no_such_texture/.test(e)));
+  assert.ok(validateStage(root, broken, ids, shown).some((e) => /missing texture herbalwitch:block.pieces.stations.kettle.no_such_texture/.test(e)));
   const twin = JSON.parse(files.get(kettle));
   twin.elements.push(JSON.parse(JSON.stringify(twin.elements.find((e) => !e.rotation && e.faces.up))));
   twin.elements[twin.elements.length - 1].faces.up.uv = [0, 0, 1, 1];
@@ -59,7 +60,7 @@ test('a failed compile or validation keeps the last good pack', () => {
     if (mode === 'bad') {
       const models = new Map(compiled.models);
       const p = 'block/stations/kettle/base.json';
-      models.set(p, models.get(p).replace('"herbalwitch:block/stations/plum_painted"', '"herbalwitch:block/stations/gone"'));
+      models.set(p, models.get(p).replace('"herbalwitch:block/pieces/stations/kettle/painted"', '"herbalwitch:block/pieces/stations/kettle/gone"'));
       return { ...compiled, models };
     }
     return compiled;

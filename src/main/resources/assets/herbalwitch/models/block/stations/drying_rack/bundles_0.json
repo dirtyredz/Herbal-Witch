@@ -1,7 +1,7 @@
 {
   "render_type": "minecraft:cutout",
   "textures": {
-    "particle": "herbalwitch:block/material/wood",
+    "particle": "herbalwitch:block/pieces/stations/drying_rack/wood",
     "bundle_mint": "herbalwitch:item/preparations/herbs/wet/mint/bundle",
     "bundle_lavender": "herbalwitch:item/preparations/herbs/temperate/lavender/bundle"
   },

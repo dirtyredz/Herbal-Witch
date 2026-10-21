@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * What the Blockbench pipeline must produce, written out independently of
  * src/art/blockbench/catalog.json and the compiler: twelve projects, the 32 model files they compile
- * to, and the two textures they own.
+ * to, and the textures they own.
  */
 public final class BlockbenchManifest {
     /** Project directories under src/art/blockbench, in catalogue order. */
@@ -18,8 +18,79 @@ public final class BlockbenchManifest {
     public static final List<String> MODEL_DIRS = List.of("block/stations/kettle", "block/stations/infusion_pot",
             "block/stations/mortar", "block/stations/drying_rack", "block/stations/hearth", "block/stations/stove",
             "block/decor/templates", "block/preparations/templates");
-    /** Textures (under textures/) painted in a project rather than generated. */
-    public static final List<String> TEXTURES = List.of("block/material/rug.png", "block/material/lamp_shade.png");
+    /** Textures (under textures/) every piece owns, painted in its project: block/pieces/<project>/<texture>.png. */
+    public static final List<String> TEXTURES = List.of(
+            "block/pieces/decor/apothecary_counter/gold.png",
+            "block/pieces/decor/apothecary_counter/iron.png",
+            "block/pieces/decor/apothecary_counter/ivy.png",
+            "block/pieces/decor/apothecary_counter/paint.png",
+            "block/pieces/decor/apothecary_counter/runner_magenta.png",
+            "block/pieces/decor/apothecary_counter/wood.png",
+            "block/pieces/decor/apothecary_counter/wood_v.png",
+            "block/pieces/decor/armchair/gold.png",
+            "block/pieces/decor/armchair/ivy.png",
+            "block/pieces/decor/armchair/pink.png",
+            "block/pieces/decor/armchair/plum.png",
+            "block/pieces/decor/armchair/runner.png",
+            "block/pieces/decor/armchair/velvet.png",
+            "block/pieces/decor/armchair/wood.png",
+            "block/pieces/decor/armchair/wood_v.png",
+            "block/pieces/decor/rug/rug.png",
+            "block/pieces/decor/table_lamp/gold.png",
+            "block/pieces/decor/table_lamp/ivy.png",
+            "block/pieces/decor/table_lamp/lamp_shade.png",
+            "block/pieces/decor/table_lamp/plum.png",
+            "block/pieces/decor/table_lamp/wood.png",
+            "block/pieces/decor/table_lamp/wood_v.png",
+            "block/pieces/decor/wall_shelf/glass.png",
+            "block/pieces/decor/wall_shelf/gold.png",
+            "block/pieces/decor/wall_shelf/iron.png",
+            "block/pieces/decor/wall_shelf/ivy.png",
+            "block/pieces/decor/wall_shelf/pink.png",
+            "block/pieces/decor/wall_shelf/plum.png",
+            "block/pieces/decor/wall_shelf/tincture.png",
+            "block/pieces/decor/wall_shelf/wood.png",
+            "block/pieces/preparations/oil_lantern/brass.png",
+            "block/pieces/preparations/oil_lantern/ember.png",
+            "block/pieces/preparations/oil_lantern/flame.png",
+            "block/pieces/preparations/oil_lantern/glass.png",
+            "block/pieces/preparations/oil_lantern/iron.png",
+            "block/pieces/stations/drying_rack/gold.png",
+            "block/pieces/stations/drying_rack/iron.png",
+            "block/pieces/stations/drying_rack/post.png",
+            "block/pieces/stations/drying_rack/wood.png",
+            "block/pieces/stations/drying_rack/wood_z.png",
+            "block/pieces/stations/hearth/coals.png",
+            "block/pieces/stations/hearth/flame.png",
+            "block/pieces/stations/hearth/glow.png",
+            "block/pieces/stations/hearth/gold.png",
+            "block/pieces/stations/hearth/iron.png",
+            "block/pieces/stations/hearth/ivy.png",
+            "block/pieces/stations/hearth/log.png",
+            "block/pieces/stations/hearth/plaque.png",
+            "block/pieces/stations/hearth/post.png",
+            "block/pieces/stations/hearth/stone.png",
+            "block/pieces/stations/hearth/wood.png",
+            "block/pieces/stations/infusion_pot/copper.png",
+            "block/pieces/stations/infusion_pot/gold.png",
+            "block/pieces/stations/infusion_pot/lid.png",
+            "block/pieces/stations/infusion_pot/painted.png",
+            "block/pieces/stations/infusion_pot/plum.png",
+            "block/pieces/stations/kettle/copper.png",
+            "block/pieces/stations/kettle/gold.png",
+            "block/pieces/stations/kettle/painted.png",
+            "block/pieces/stations/kettle/plum.png",
+            "block/pieces/stations/mortar/herbs.png",
+            "block/pieces/stations/mortar/pestle.png",
+            "block/pieces/stations/mortar/plinth.png",
+            "block/pieces/stations/mortar/stone.png",
+            "block/pieces/stations/stove/cloth.png",
+            "block/pieces/stations/stove/coals.png",
+            "block/pieces/stations/stove/glow.png",
+            "block/pieces/stations/stove/gold.png",
+            "block/pieces/stations/stove/iron.png",
+            "block/pieces/stations/stove/iron_top.png",
+            "block/pieces/stations/stove/post.png");
 
     private BlockbenchManifest() {
     }

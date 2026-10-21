@@ -1,18 +1,31 @@
 {
   "project": "hearth.bbmodel",
   "textures": {
-    "stone": "herbalwitch:block/stations/stone_dark",
-    "plaque": "herbalwitch:block/stations/plaque",
-    "wood": "herbalwitch:block/material/wood",
-    "post": "herbalwitch:block/material/wood_post",
-    "log": "herbalwitch:block/material/wood_end",
-    "gold": "herbalwitch:block/material/gold",
-    "iron": "herbalwitch:block/material/iron",
-    "ivy": "herbalwitch:block/material/ivy",
-    "particle": "herbalwitch:block/stations/stone_dark",
-    "coals": "herbalwitch:block/stations/coals",
-    "glow": "herbalwitch:block/stations/fire_glow",
-    "flame": "herbalwitch:block/stations/flame"
+    "stone": "herbalwitch:block/pieces/stations/hearth/stone",
+    "plaque": "herbalwitch:block/pieces/stations/hearth/plaque",
+    "wood": "herbalwitch:block/pieces/stations/hearth/wood",
+    "post": "herbalwitch:block/pieces/stations/hearth/post",
+    "log": "herbalwitch:block/pieces/stations/hearth/log",
+    "gold": "herbalwitch:block/pieces/stations/hearth/gold",
+    "iron": "herbalwitch:block/pieces/stations/hearth/iron",
+    "ivy": "herbalwitch:block/pieces/stations/hearth/ivy",
+    "particle": "herbalwitch:block/pieces/stations/hearth/stone",
+    "coals": "herbalwitch:block/pieces/stations/hearth/coals",
+    "glow": "herbalwitch:block/pieces/stations/hearth/glow",
+    "flame": "herbalwitch:block/pieces/stations/hearth/flame"
+  },
+  "owned_textures": {
+    "stone": "herbalwitch:block/pieces/stations/hearth/stone",
+    "plaque": "herbalwitch:block/pieces/stations/hearth/plaque",
+    "wood": "herbalwitch:block/pieces/stations/hearth/wood",
+    "post": "herbalwitch:block/pieces/stations/hearth/post",
+    "log": "herbalwitch:block/pieces/stations/hearth/log",
+    "gold": "herbalwitch:block/pieces/stations/hearth/gold",
+    "iron": "herbalwitch:block/pieces/stations/hearth/iron",
+    "ivy": "herbalwitch:block/pieces/stations/hearth/ivy",
+    "coals": "herbalwitch:block/pieces/stations/hearth/coals",
+    "glow": "herbalwitch:block/pieces/stations/hearth/glow",
+    "flame": "herbalwitch:block/pieces/stations/hearth/flame"
   },
   "bounds": {
     "min": [-16, 0, 0],

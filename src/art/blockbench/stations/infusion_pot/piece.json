@@ -1,12 +1,19 @@
 {
   "project": "infusion_pot.bbmodel",
   "textures": {
-    "painted": "herbalwitch:block/stations/plum_painted",
-    "plum": "herbalwitch:block/material/plum",
-    "lid": "herbalwitch:block/stations/plum_lid",
-    "gold": "herbalwitch:block/material/gold",
-    "copper": "herbalwitch:block/material/copper",
-    "particle": "herbalwitch:block/stations/plum_painted"
+    "painted": "herbalwitch:block/pieces/stations/infusion_pot/painted",
+    "plum": "herbalwitch:block/pieces/stations/infusion_pot/plum",
+    "lid": "herbalwitch:block/pieces/stations/infusion_pot/lid",
+    "gold": "herbalwitch:block/pieces/stations/infusion_pot/gold",
+    "copper": "herbalwitch:block/pieces/stations/infusion_pot/copper",
+    "particle": "herbalwitch:block/pieces/stations/infusion_pot/painted"
+  },
+  "owned_textures": {
+    "painted": "herbalwitch:block/pieces/stations/infusion_pot/painted",
+    "plum": "herbalwitch:block/pieces/stations/infusion_pot/plum",
+    "lid": "herbalwitch:block/pieces/stations/infusion_pot/lid",
+    "gold": "herbalwitch:block/pieces/stations/infusion_pot/gold",
+    "copper": "herbalwitch:block/pieces/stations/infusion_pot/copper"
   },
   "bounds": {
     "min": [0, 0, 0],

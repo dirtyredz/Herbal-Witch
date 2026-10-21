@@ -680,7 +680,7 @@
 		{
 			"path": "",
 			"name": "brass.png",
-			"folder": "block/material",
+			"folder": "block/pieces/preparations/oil_lantern",
 			"namespace": "herbalwitch",
 			"id": "brass",
 			"group": "",
@@ -708,7 +708,7 @@
 		{
 			"path": "",
 			"name": "iron.png",
-			"folder": "block/stations",
+			"folder": "block/pieces/preparations/oil_lantern",
 			"namespace": "herbalwitch",
 			"id": "iron",
 			"group": "",
@@ -736,7 +736,7 @@
 		{
 			"path": "",
 			"name": "glass.png",
-			"folder": "block/material",
+			"folder": "block/pieces/preparations/oil_lantern",
 			"namespace": "herbalwitch",
 			"id": "glass",
 			"group": "",
@@ -764,7 +764,7 @@
 		{
 			"path": "",
 			"name": "ember.png",
-			"folder": "block/stations",
+			"folder": "block/pieces/preparations/oil_lantern",
 			"namespace": "herbalwitch",
 			"id": "ember",
 			"group": "",
@@ -792,7 +792,7 @@
 		{
 			"path": "",
 			"name": "flame.png",
-			"folder": "block/stations",
+			"folder": "block/pieces/preparations/oil_lantern",
 			"namespace": "herbalwitch",
 			"id": "flame",
 			"group": "",

@@ -13,6 +13,11 @@ const KEYS = new Set(['project', 'textures', 'owned_textures', 'bounds', 'output
 const OUTPUT_KEYS = new Set(['model', 'item', 'exclude', 'emissive']);
 const ATTACHMENT_KINDS = { bundle: ['herb', 'width', 'height', 'across'] };
 
+/** Textures a piece may bind without owning: the procedural herbs' art that generated bundle attachments draw from. */
+export const isSharedTexture = (id) => id === 'herbalwitch:block/botany/parts' || id.startsWith('herbalwitch:item/preparations/herbs/');
+/** Where a piece's own textures live: textures/<owned_texture_dir>/<project dir>/<texture variable>.png. */
+export const ownedTextureId = (ownedDir, dir, variable) => `herbalwitch:${ownedDir}/${dir}/${variable}`;
+
 const fail = (where, message) => {
   throw new Error(`${where}: ${message}`);
 };
@@ -37,7 +42,8 @@ export function loadCatalogue(root) {
   if (!Array.isArray(json.projects) || !json.projects.length) fail(where, 'lists no projects');
   if (new Set(json.projects).size !== json.projects.length) fail(where, 'lists a project twice');
   if (!Array.isArray(json.model_dirs) || !json.model_dirs.length) fail(where, 'declares no model_dirs');
-  return { blockbench: json.blockbench, projects: json.projects, modelDirs: json.model_dirs };
+  if (json.owned_texture_dir !== undefined && !/^[a-z0-9_/-]+$/.test(json.owned_texture_dir)) fail(where, 'owned_texture_dir must be a directory under textures/');
+  return { blockbench: json.blockbench, projects: json.projects, modelDirs: json.model_dirs, ownedTextureDir: json.owned_texture_dir ?? null };
 }
 
 /** Validates one piece.json; `dir` is the project's directory relative to SOURCE_DIR. */
@@ -52,6 +58,17 @@ export function validatePiece(json, dir, catalogue) {
   }
   const owned = json.owned_textures ?? {};
   for (const [k, v] of Object.entries(owned)) if (textures[k] !== v) fail(where, `owned texture ${k} must equal its binding`);
+  // With an owned_texture_dir, every texture belongs to exactly one piece: it is painted in that
+  // piece's project, at the piece's own path (the herb atlas and bundle sprites stay shared).
+  if (catalogue.ownedTextureDir) {
+    if (!textures.particle.startsWith('#') && !Object.values(owned).includes(textures.particle)) fail(where, 'particle must be a #reference or one of the piece own textures');
+    for (const [k, v] of Object.entries(textures)) {
+      if (k === 'particle' || v.startsWith('#') || isSharedTexture(v)) continue;
+      const at = ownedTextureId(catalogue.ownedTextureDir, dir, k);
+      if (!owned[k]) fail(where, `texture ${k} (${v}) must be owned by the piece (owned_textures); only the herb atlas and bundle sprites are shared`);
+      if (v !== at) fail(where, `owned texture ${k} must live at ${at}, not ${v}`);
+    }
+  }
   const bounds = json.bounds ?? fail(where, 'no bounds');
   if (!vec3(bounds.min) || !vec3(bounds.max)) fail(where, 'bounds needs min and max');
   const attachments = json.attachments ?? {};

@@ -1,15 +1,15 @@
 {
   "render_type": "minecraft:cutout",
   "textures": {
-    "wood": "herbalwitch:block/material/wood",
-    "wood_v": "herbalwitch:block/material/wood",
-    "velvet": "herbalwitch:block/material/velvet",
-    "pink": "herbalwitch:block/material/fabric_pink",
-    "plum": "herbalwitch:block/material/trim_purple",
-    "gold": "herbalwitch:block/material/gold",
-    "runner": "herbalwitch:block/material/runner",
-    "ivy": "herbalwitch:block/material/ivy",
-    "particle": "herbalwitch:block/material/wood"
+    "wood": "herbalwitch:block/pieces/decor/armchair/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/armchair/wood_v",
+    "velvet": "herbalwitch:block/pieces/decor/armchair/velvet",
+    "pink": "herbalwitch:block/pieces/decor/armchair/pink",
+    "plum": "herbalwitch:block/pieces/decor/armchair/plum",
+    "gold": "herbalwitch:block/pieces/decor/armchair/gold",
+    "runner": "herbalwitch:block/pieces/decor/armchair/runner",
+    "ivy": "herbalwitch:block/pieces/decor/armchair/ivy",
+    "particle": "herbalwitch:block/pieces/decor/armchair/wood"
   },
   "display": {
     "thirdperson_righthand": {

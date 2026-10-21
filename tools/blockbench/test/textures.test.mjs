@@ -87,10 +87,11 @@ test('a texture has one owner and every bound slot exists', () => {
   assert.throws(() => compile([cube([0, 0, 0], [16, 16, 16])], [{ id: 'clay', png: SOLID }], { textures: { particle: 'herbalwitch:block/test/clay' } }), /texture clay: not bound in piece.json/);
 });
 
-test('the committed rug and lamp shade are exactly what their projects export', () => {
+test('every committed piece texture is exactly what its project exports', () => {
   const root = join(import.meta.dirname, '../../..');
   const { textures } = compileAll(root);
-  for (const rel of ['block/material/rug.png', 'block/material/lamp_shade.png']) {
+  assert.ok(textures.size > 0);
+  for (const rel of textures.keys()) {
     assert.ok(textures.get(rel).equals(readFileSync(join(root, 'src/main/resources/assets/herbalwitch/textures', rel))), rel);
   }
 });

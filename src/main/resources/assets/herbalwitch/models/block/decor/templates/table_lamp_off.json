@@ -1,13 +1,13 @@
 {
   "render_type": "minecraft:cutout",
   "textures": {
-    "wood": "herbalwitch:block/material/wood",
-    "wood_v": "herbalwitch:block/material/wood_post",
-    "plum": "herbalwitch:block/material/trim_purple",
-    "gold": "herbalwitch:block/material/gold",
-    "ivy": "herbalwitch:block/material/ivy",
-    "lamp_shade": "herbalwitch:block/material/lamp_shade",
-    "particle": "herbalwitch:block/material/wood"
+    "wood": "herbalwitch:block/pieces/decor/table_lamp/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/table_lamp/wood_v",
+    "plum": "herbalwitch:block/pieces/decor/table_lamp/plum",
+    "gold": "herbalwitch:block/pieces/decor/table_lamp/gold",
+    "ivy": "herbalwitch:block/pieces/decor/table_lamp/ivy",
+    "lamp_shade": "herbalwitch:block/pieces/decor/table_lamp/lamp_shade",
+    "particle": "herbalwitch:block/pieces/decor/table_lamp/wood"
   },
   "display": {
     "thirdperson_righthand": {

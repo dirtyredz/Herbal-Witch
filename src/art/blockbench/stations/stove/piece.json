@@ -1,16 +1,25 @@
 {
   "project": "stove.bbmodel",
   "textures": {
-    "iron": "herbalwitch:block/material/iron",
-    "iron_top": "herbalwitch:block/material/iron",
-    "post": "herbalwitch:block/material/wood_post",
-    "gold": "herbalwitch:block/material/gold",
-    "cloth": "herbalwitch:block/stations/cloth_red",
+    "iron": "herbalwitch:block/pieces/stations/stove/iron",
+    "iron_top": "herbalwitch:block/pieces/stations/stove/iron_top",
+    "post": "herbalwitch:block/pieces/stations/stove/post",
+    "gold": "herbalwitch:block/pieces/stations/stove/gold",
+    "cloth": "herbalwitch:block/pieces/stations/stove/cloth",
     "parts": "herbalwitch:block/botany/parts",
     "bundle_lavender": "herbalwitch:item/preparations/herbs/temperate/lavender/bundle",
-    "particle": "herbalwitch:block/material/iron",
-    "coals": "herbalwitch:block/stations/coals",
-    "glow": "herbalwitch:block/stations/fire_glow"
+    "particle": "herbalwitch:block/pieces/stations/stove/iron",
+    "coals": "herbalwitch:block/pieces/stations/stove/coals",
+    "glow": "herbalwitch:block/pieces/stations/stove/glow"
+  },
+  "owned_textures": {
+    "iron": "herbalwitch:block/pieces/stations/stove/iron",
+    "iron_top": "herbalwitch:block/pieces/stations/stove/iron_top",
+    "post": "herbalwitch:block/pieces/stations/stove/post",
+    "gold": "herbalwitch:block/pieces/stations/stove/gold",
+    "cloth": "herbalwitch:block/pieces/stations/stove/cloth",
+    "coals": "herbalwitch:block/pieces/stations/stove/coals",
+    "glow": "herbalwitch:block/pieces/stations/stove/glow"
   },
   "bounds": {
     "min": [-16, 0, 0],

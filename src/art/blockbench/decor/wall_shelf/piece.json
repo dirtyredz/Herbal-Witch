@@ -1,15 +1,25 @@
 {
   "project": "wall_shelf.bbmodel",
   "textures": {
-    "wood": "herbalwitch:block/material/wood",
-    "pink": "herbalwitch:block/material/fabric_pink",
-    "plum": "herbalwitch:block/material/trim_purple",
-    "gold": "herbalwitch:block/material/gold",
-    "iron": "herbalwitch:block/material/iron",
-    "ivy": "herbalwitch:block/material/ivy",
-    "glass": "herbalwitch:block/material/glass",
-    "tincture": "herbalwitch:block/material/tincture",
-    "particle": "herbalwitch:block/material/wood"
+    "wood": "herbalwitch:block/pieces/decor/wall_shelf/wood",
+    "pink": "herbalwitch:block/pieces/decor/wall_shelf/pink",
+    "plum": "herbalwitch:block/pieces/decor/wall_shelf/plum",
+    "gold": "herbalwitch:block/pieces/decor/wall_shelf/gold",
+    "iron": "herbalwitch:block/pieces/decor/wall_shelf/iron",
+    "ivy": "herbalwitch:block/pieces/decor/wall_shelf/ivy",
+    "glass": "herbalwitch:block/pieces/decor/wall_shelf/glass",
+    "tincture": "herbalwitch:block/pieces/decor/wall_shelf/tincture",
+    "particle": "herbalwitch:block/pieces/decor/wall_shelf/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/wall_shelf/wood",
+    "pink": "herbalwitch:block/pieces/decor/wall_shelf/pink",
+    "plum": "herbalwitch:block/pieces/decor/wall_shelf/plum",
+    "gold": "herbalwitch:block/pieces/decor/wall_shelf/gold",
+    "iron": "herbalwitch:block/pieces/decor/wall_shelf/iron",
+    "ivy": "herbalwitch:block/pieces/decor/wall_shelf/ivy",
+    "glass": "herbalwitch:block/pieces/decor/wall_shelf/glass",
+    "tincture": "herbalwitch:block/pieces/decor/wall_shelf/tincture"
   },
   "bounds": {
     "min": [0, 0, 0],

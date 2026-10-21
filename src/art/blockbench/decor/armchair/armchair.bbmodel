@@ -2604,8 +2604,8 @@
 	"textures": [
 		{
 			"path": "",
-			"name": "wood.png",
-			"folder": "block/material",
+			"name": "wood_v.png",
+			"folder": "block/pieces/decor/armchair",
 			"namespace": "herbalwitch",
 			"id": "wood_v",
 			"group": "",
@@ -2633,7 +2633,7 @@
 		{
 			"path": "",
 			"name": "wood.png",
-			"folder": "block/material",
+			"folder": "block/pieces/decor/armchair",
 			"namespace": "herbalwitch",
 			"id": "wood",
 			"group": "",
@@ -2661,7 +2661,7 @@
 		{
 			"path": "",
 			"name": "gold.png",
-			"folder": "block/material",
+			"folder": "block/pieces/decor/armchair",
 			"namespace": "herbalwitch",
 			"id": "gold",
 			"group": "",
@@ -2688,8 +2688,8 @@
 		},
 		{
 			"path": "",
-			"name": "trim_purple.png",
-			"folder": "block/material",
+			"name": "plum.png",
+			"folder": "block/pieces/decor/armchair",
 			"namespace": "herbalwitch",
 			"id": "plum",
 			"group": "",
@@ -2716,8 +2716,8 @@
 		},
 		{
 			"path": "",
-			"name": "fabric_pink.png",
-			"folder": "block/material",
+			"name": "pink.png",
+			"folder": "block/pieces/decor/armchair",
 			"namespace": "herbalwitch",
 			"id": "pink",
 			"group": "",
@@ -2745,7 +2745,7 @@
 		{
 			"path": "",
 			"name": "velvet.png",
-			"folder": "block/material",
+			"folder": "block/pieces/decor/armchair",
 			"namespace": "herbalwitch",
 			"id": "velvet",
 			"group": "",
@@ -2773,7 +2773,7 @@
 		{
 			"path": "",
 			"name": "runner.png",
-			"folder": "block/material",
+			"folder": "block/pieces/decor/armchair",
 			"namespace": "herbalwitch",
 			"id": "runner",
 			"group": "",
@@ -2801,7 +2801,7 @@
 		{
 			"path": "",
 			"name": "ivy.png",
-			"folder": "block/material",
+			"folder": "block/pieces/decor/armchair",
 			"namespace": "herbalwitch",
 			"id": "ivy",
 			"group": "",

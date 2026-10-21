@@ -1221,7 +1221,7 @@
 		{
 			"path": "",
 			"name": "wood.png",
-			"folder": "block/material",
+			"folder": "block/pieces/decor/table_lamp",
 			"namespace": "herbalwitch",
 			"id": "wood",
 			"group": "",
@@ -1249,7 +1249,7 @@
 		{
 			"path": "",
 			"name": "gold.png",
-			"folder": "block/material",
+			"folder": "block/pieces/decor/table_lamp",
 			"namespace": "herbalwitch",
 			"id": "gold",
 			"group": "",
@@ -1276,8 +1276,8 @@
 		},
 		{
 			"path": "",
-			"name": "wood_post.png",
-			"folder": "block/material",
+			"name": "wood_v.png",
+			"folder": "block/pieces/decor/table_lamp",
 			"namespace": "herbalwitch",
 			"id": "wood_v",
 			"group": "",
@@ -1304,8 +1304,8 @@
 		},
 		{
 			"path": "",
-			"name": "trim_purple.png",
-			"folder": "block/material",
+			"name": "plum.png",
+			"folder": "block/pieces/decor/table_lamp",
 			"namespace": "herbalwitch",
 			"id": "plum",
 			"group": "",
@@ -1333,7 +1333,7 @@
 		{
 			"path": "",
 			"name": "lamp_shade.png",
-			"folder": "block/material",
+			"folder": "block/pieces/decor/table_lamp",
 			"namespace": "herbalwitch",
 			"id": "lamp_shade",
 			"group": "",
@@ -1361,7 +1361,7 @@
 		{
 			"path": "",
 			"name": "ivy.png",
-			"folder": "block/material",
+			"folder": "block/pieces/decor/table_lamp",
 			"namespace": "herbalwitch",
 			"id": "ivy",
 			"group": "",

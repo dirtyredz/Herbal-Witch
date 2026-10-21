@@ -2313,7 +2313,7 @@
 		{
 			"path": "",
 			"name": "plum.png",
-			"folder": "block/material",
+			"folder": "block/pieces/stations/kettle",
 			"namespace": "herbalwitch",
 			"id": "plum",
 			"group": "",
@@ -2340,8 +2340,8 @@
 		},
 		{
 			"path": "",
-			"name": "plum_painted.png",
-			"folder": "block/stations",
+			"name": "painted.png",
+			"folder": "block/pieces/stations/kettle",
 			"namespace": "herbalwitch",
 			"id": "painted",
 			"group": "",
@@ -2369,7 +2369,7 @@
 		{
 			"path": "",
 			"name": "copper.png",
-			"folder": "block/material",
+			"folder": "block/pieces/stations/kettle",
 			"namespace": "herbalwitch",
 			"id": "copper",
 			"group": "",
@@ -2397,7 +2397,7 @@
 		{
 			"path": "",
 			"name": "gold.png",
-			"folder": "block/material",
+			"folder": "block/pieces/stations/kettle",
 			"namespace": "herbalwitch",
 			"id": "gold",
 			"group": "",

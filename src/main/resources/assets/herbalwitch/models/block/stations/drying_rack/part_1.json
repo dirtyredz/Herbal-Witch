@@ -1,10 +1,10 @@
 {
   "textures": {
-    "wood_z": "herbalwitch:block/material/wood",
-    "post": "herbalwitch:block/material/wood_post",
-    "iron": "herbalwitch:block/material/iron",
-    "gold": "herbalwitch:block/material/gold",
-    "particle": "herbalwitch:block/material/wood"
+    "wood_z": "herbalwitch:block/pieces/stations/drying_rack/wood_z",
+    "post": "herbalwitch:block/pieces/stations/drying_rack/post",
+    "iron": "herbalwitch:block/pieces/stations/drying_rack/iron",
+    "gold": "herbalwitch:block/pieces/stations/drying_rack/gold",
+    "particle": "herbalwitch:block/pieces/stations/drying_rack/wood"
   },
   "elements": [
     {

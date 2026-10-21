@@ -1,16 +1,16 @@
 {
   "render_type": "minecraft:cutout",
   "textures": {
-    "wood": "herbalwitch:block/material/wood",
-    "wood_v": "herbalwitch:block/material/wood_post",
-    "gold": "herbalwitch:block/material/gold",
-    "iron": "herbalwitch:block/material/iron",
-    "paint": "herbalwitch:block/material/paint_green",
-    "runner_magenta": "herbalwitch:block/material/runner_magenta",
-    "ivy": "herbalwitch:block/material/ivy",
+    "wood": "herbalwitch:block/pieces/decor/apothecary_counter/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/apothecary_counter/wood_v",
+    "gold": "herbalwitch:block/pieces/decor/apothecary_counter/gold",
+    "iron": "herbalwitch:block/pieces/decor/apothecary_counter/iron",
+    "paint": "herbalwitch:block/pieces/decor/apothecary_counter/paint",
+    "runner_magenta": "herbalwitch:block/pieces/decor/apothecary_counter/runner_magenta",
+    "ivy": "herbalwitch:block/pieces/decor/apothecary_counter/ivy",
     "parts": "herbalwitch:block/botany/parts",
     "bundle_lavender": "herbalwitch:item/preparations/herbs/temperate/lavender/bundle",
-    "particle": "herbalwitch:block/material/wood"
+    "particle": "herbalwitch:block/pieces/decor/apothecary_counter/wood"
   },
   "display": {
     "thirdperson_righthand": {

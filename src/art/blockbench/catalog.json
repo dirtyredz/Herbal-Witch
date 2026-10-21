@@ -2,6 +2,7 @@
   "blockbench": "5.2.2",
   "format_version": "5.0",
   "java_block_version": "1.9.0",
+  "owned_texture_dir": "block/pieces",
   "model_dirs": [
     "block/stations/kettle",
     "block/stations/infusion_pot",

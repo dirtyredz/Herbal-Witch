@@ -86,9 +86,9 @@ test('an edited project round-trips: exactly the edited cube, face, display and 
   assert.deepEqual(now.display.gui.scale, [0.7, 0.7, 0.7]);
   const differing = now.elements.filter((e, i) => JSON.stringify(e) !== JSON.stringify(was.elements[i]));
   assert.equal(differing.length, 2, 'the moved lid cube and the re-mapped face');
-  const rug = decodePng(after.textures.get('block/material/rug.png'));
+  const rug = decodePng(after.textures.get('block/pieces/decor/rug/rug.png'));
   assert.deepEqual([...rug.rgba.subarray(0, 4)], [255, 255, 255, 255]);
-  assert.ok(!after.textures.get('block/material/lamp_shade.png').equals(after.textures.get('block/material/rug.png')));
+  assert.ok(!after.textures.get('block/pieces/decor/table_lamp/lamp_shade.png').equals(after.textures.get('block/pieces/decor/rug/rug.png')));
 });
 
 test('the migrated item displays keep their 0.2.0-dev.5 values (later Display edits change only these fixtures)', () => {

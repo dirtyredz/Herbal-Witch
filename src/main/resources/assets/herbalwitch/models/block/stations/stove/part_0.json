@@ -1,12 +1,12 @@
 {
   "render_type": "minecraft:cutout",
   "textures": {
-    "iron": "herbalwitch:block/material/iron",
-    "iron_top": "herbalwitch:block/material/iron",
-    "post": "herbalwitch:block/material/wood_post",
-    "gold": "herbalwitch:block/material/gold",
-    "cloth": "herbalwitch:block/stations/cloth_red",
-    "particle": "herbalwitch:block/material/iron"
+    "iron": "herbalwitch:block/pieces/stations/stove/iron",
+    "iron_top": "herbalwitch:block/pieces/stations/stove/iron_top",
+    "post": "herbalwitch:block/pieces/stations/stove/post",
+    "gold": "herbalwitch:block/pieces/stations/stove/gold",
+    "cloth": "herbalwitch:block/pieces/stations/stove/cloth",
+    "particle": "herbalwitch:block/pieces/stations/stove/iron"
   },
   "elements": [
     {

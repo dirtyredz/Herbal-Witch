@@ -2241,7 +2241,7 @@
 		{
 			"path": "",
 			"name": "wood.png",
-			"folder": "block/material",
+			"folder": "block/pieces/decor/apothecary_counter",
 			"namespace": "herbalwitch",
 			"id": "wood",
 			"group": "",
@@ -2268,8 +2268,8 @@
 		},
 		{
 			"path": "",
-			"name": "wood_post.png",
-			"folder": "block/material",
+			"name": "wood_v.png",
+			"folder": "block/pieces/decor/apothecary_counter",
 			"namespace": "herbalwitch",
 			"id": "wood_v",
 			"group": "",
@@ -2297,7 +2297,7 @@
 		{
 			"path": "",
 			"name": "gold.png",
-			"folder": "block/material",
+			"folder": "block/pieces/decor/apothecary_counter",
 			"namespace": "herbalwitch",
 			"id": "gold",
 			"group": "",
@@ -2324,8 +2324,8 @@
 		},
 		{
 			"path": "",
-			"name": "paint_green.png",
-			"folder": "block/material",
+			"name": "paint.png",
+			"folder": "block/pieces/decor/apothecary_counter",
 			"namespace": "herbalwitch",
 			"id": "paint",
 			"group": "",
@@ -2353,7 +2353,7 @@
 		{
 			"path": "",
 			"name": "runner_magenta.png",
-			"folder": "block/material",
+			"folder": "block/pieces/decor/apothecary_counter",
 			"namespace": "herbalwitch",
 			"id": "runner_magenta",
 			"group": "",
@@ -2381,7 +2381,7 @@
 		{
 			"path": "",
 			"name": "iron.png",
-			"folder": "block/material",
+			"folder": "block/pieces/decor/apothecary_counter",
 			"namespace": "herbalwitch",
 			"id": "iron",
 			"group": "",
@@ -2409,7 +2409,7 @@
 		{
 			"path": "",
 			"name": "ivy.png",
-			"folder": "block/material",
+			"folder": "block/pieces/decor/apothecary_counter",
 			"namespace": "herbalwitch",
 			"id": "ivy",
 			"group": "",

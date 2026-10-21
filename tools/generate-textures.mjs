@@ -2,11 +2,11 @@
 //
 //   node tools/generate-textures.mjs [--check] [--contact-sheet <path.png>]
 //
-// Writes exactly the files tools/art/catalogue.mjs lists (furniture and house materials, the botany
-// set, station materials, GUI atlases, preparation sprites) under
+// Writes exactly the files tools/art/catalogue.mjs lists (the shared house wood and gold, the botany
+// set, GUI atlases, preparation sprites) under
 // src/main/resources/assets/herbalwitch/textures/ and nothing else; re-running gives identical bytes
-// and only changed files are rewritten. Textures painted in a Blockbench project (the rug, the lamp
-// shade) belong to tools/compile-blockbench.mjs. With --check nothing is written and the command
+// and only changed files are rewritten. Textures painted in a Blockbench project (every texture of every
+// piece, under block/pieces/) belong to tools/compile-blockbench.mjs. With --check nothing is written and the command
 // fails when a committed texture is missing or stale.
 //
 // --contact-sheet additionally writes one review sheet (every botany sprite at x6, a row per herb)

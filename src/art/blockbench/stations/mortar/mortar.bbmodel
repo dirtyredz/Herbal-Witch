@@ -2029,8 +2029,8 @@
 	"textures": [
 		{
 			"path": "",
-			"name": "plinth_stone.png",
-			"folder": "block/stations",
+			"name": "plinth.png",
+			"folder": "block/pieces/stations/mortar",
 			"namespace": "herbalwitch",
 			"id": "plinth",
 			"group": "",
@@ -2057,8 +2057,8 @@
 		},
 		{
 			"path": "",
-			"name": "mortar_stone.png",
-			"folder": "block/stations",
+			"name": "stone.png",
+			"folder": "block/pieces/stations/mortar",
 			"namespace": "herbalwitch",
 			"id": "stone",
 			"group": "",
@@ -2085,8 +2085,8 @@
 		},
 		{
 			"path": "",
-			"name": "herb_pile.png",
-			"folder": "block/stations",
+			"name": "herbs.png",
+			"folder": "block/pieces/stations/mortar",
 			"namespace": "herbalwitch",
 			"id": "herbs",
 			"group": "",
@@ -2113,8 +2113,8 @@
 		},
 		{
 			"path": "",
-			"name": "pestle_stone.png",
-			"folder": "block/stations",
+			"name": "pestle.png",
+			"folder": "block/pieces/stations/mortar",
 			"namespace": "herbalwitch",
 			"id": "pestle",
 			"group": "",

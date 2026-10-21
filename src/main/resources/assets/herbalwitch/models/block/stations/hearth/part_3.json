@@ -1,12 +1,12 @@
 {
   "render_type": "minecraft:cutout",
   "textures": {
-    "stone": "herbalwitch:block/stations/stone_dark",
-    "plaque": "herbalwitch:block/stations/plaque",
-    "wood": "herbalwitch:block/material/wood",
-    "gold": "herbalwitch:block/material/gold",
-    "ivy": "herbalwitch:block/material/ivy",
-    "particle": "herbalwitch:block/stations/stone_dark"
+    "stone": "herbalwitch:block/pieces/stations/hearth/stone",
+    "plaque": "herbalwitch:block/pieces/stations/hearth/plaque",
+    "wood": "herbalwitch:block/pieces/stations/hearth/wood",
+    "gold": "herbalwitch:block/pieces/stations/hearth/gold",
+    "ivy": "herbalwitch:block/pieces/stations/hearth/ivy",
+    "particle": "herbalwitch:block/pieces/stations/hearth/stone"
   },
   "elements": [
     {

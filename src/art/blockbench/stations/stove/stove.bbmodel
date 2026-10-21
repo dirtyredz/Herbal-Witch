@@ -3825,7 +3825,7 @@
 		{
 			"path": "",
 			"name": "iron.png",
-			"folder": "block/material",
+			"folder": "block/pieces/stations/stove",
 			"namespace": "herbalwitch",
 			"id": "iron",
 			"group": "",
@@ -3852,8 +3852,8 @@
 		},
 		{
 			"path": "",
-			"name": "iron.png",
-			"folder": "block/material",
+			"name": "iron_top.png",
+			"folder": "block/pieces/stations/stove",
 			"namespace": "herbalwitch",
 			"id": "iron_top",
 			"group": "",
@@ -3880,8 +3880,8 @@
 		},
 		{
 			"path": "",
-			"name": "wood_post.png",
-			"folder": "block/material",
+			"name": "post.png",
+			"folder": "block/pieces/stations/stove",
 			"namespace": "herbalwitch",
 			"id": "post",
 			"group": "",
@@ -3909,7 +3909,7 @@
 		{
 			"path": "",
 			"name": "gold.png",
-			"folder": "block/material",
+			"folder": "block/pieces/stations/stove",
 			"namespace": "herbalwitch",
 			"id": "gold",
 			"group": "",
@@ -3936,8 +3936,8 @@
 		},
 		{
 			"path": "",
-			"name": "cloth_red.png",
-			"folder": "block/stations",
+			"name": "cloth.png",
+			"folder": "block/pieces/stations/stove",
 			"namespace": "herbalwitch",
 			"id": "cloth",
 			"group": "",
@@ -3964,8 +3964,8 @@
 		},
 		{
 			"path": "",
-			"name": "fire_glow.png",
-			"folder": "block/stations",
+			"name": "glow.png",
+			"folder": "block/pieces/stations/stove",
 			"namespace": "herbalwitch",
 			"id": "glow",
 			"group": "",
@@ -3993,7 +3993,7 @@
 		{
 			"path": "",
 			"name": "coals.png",
-			"folder": "block/stations",
+			"folder": "block/pieces/stations/stove",
 			"namespace": "herbalwitch",
 			"id": "coals",
 			"group": "",
