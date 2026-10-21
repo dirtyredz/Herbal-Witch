@@ -97,12 +97,12 @@ are refused). Sections: `decor`, `herbs`, `garden`, `drying_rack`, `mortar`, `ke
 - **Where:** the box starts 2 blocks east of you on your row and extends east and south. The floor is
   the block you stand on. Height 8 (floor layer plus 7 cleared). The full layout is about 67 x 8 x 28;
   hard caps are 128 x 8 x 128 and 65,536 writes.
-- **Destructive:** everything in the box above the floor is cleared (no drops), then the floor,
+- **Destructive:** the whole box is replaced: terrain (grass, dirt, stone, plants, leaves, logs, water) is cleared (no drops) and the floor laid (grass blocks under the garden and herbs, smooth stone elsewhere), then the floor,
   supports, samples and signs are placed. There is no undo.
 - **Refuses** before any write if a chunk is unloaded, the box leaves the world border or build
-  height, you may not build there, a floor cell is air, fluid or not a full solid block, the box holds
+  height, you may not build there, the box holds
   a block entity, an unbreakable block or an entity. A second run over a built showcase is refused;
-  use a fresh flat plot.
+  use a fresh plot.
 
 ## Optional integrations
 

@@ -3,6 +3,7 @@ package io.github.dirtyredz.herbalwitch.showcase.layout;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -52,6 +53,17 @@ public record ShowcasePlacement(Kind kind, int x, int y, int z, Supplier<BlockSt
 
     public static ShowcasePlacement floor(int x, int z, Supplier<BlockState> state) {
         return new ShowcasePlacement(Kind.FLOOR, x, 0, z, state, null, List.of());
+    }
+
+    /** A rectangle of floor cells: {@code width} along x and {@code depth} along z from (x, z). */
+    public static List<ShowcasePlacement> floorArea(int x, int z, int width, int depth, Supplier<BlockState> state) {
+        List<ShowcasePlacement> cells = new ArrayList<>();
+        for (int dx = 0; dx < width; dx++) {
+            for (int dz = 0; dz < depth; dz++) {
+                cells.add(floor(x + dx, z + dz, state));
+            }
+        }
+        return cells;
     }
 
     public static ShowcasePlacement support(int x, int y, int z, Supplier<BlockState> state) {

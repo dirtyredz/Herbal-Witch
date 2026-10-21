@@ -39,7 +39,7 @@
   `Supplier<BlockState>`s (lambdas, not `Blocks.X::defaultBlockState`, which evaluates `Blocks`
   eagerly) so the plan is unit-testable without a Minecraft bootstrap.
 - **The showcase refuses an occupied plot.** Signs and barrels are block entities, so a second run
-  over a built showcase is refused by the preflight; use a fresh flat plot.
+  over a built showcase is refused by the preflight; use a fresh plot.
 - **Station recipes are exact.** Every filled input slot must be used by the recipe, so a stray item
   blocks processing; that keeps three-slot and one-slot grinding recipes unambiguous.
 - **Recipe reloads cancel jobs whose recipe changed** (id or content fingerprint). Ingredients stay

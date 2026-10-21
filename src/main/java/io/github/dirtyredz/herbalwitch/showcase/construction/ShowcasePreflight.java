@@ -8,7 +8,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
 import java.util.List;
@@ -16,8 +15,9 @@ import java.util.Optional;
 
 /**
  * Checks the whole showcase box before a single write: loaded, inside the world border and build
- * height, buildable by the player, a full solid floor, and nothing that must not be destroyed
- * (block entities, unbreakable blocks, entities). The first problem is reported with its position.
+ * height, buildable by the player, and nothing that must not be destroyed
+ * (block entities, unbreakable blocks, entities). Terrain is not checked: the builder replaces it.
+ * The first problem is reported with its position.
  * Never loads chunks or adds tickets.
  */
 public final class ShowcasePreflight {
@@ -43,10 +43,6 @@ public final class ShowcasePreflight {
                 }
                 if (!ActionPermissionService.mayModify(ActionContext.of(player, level, floor))) {
                     return fail("denied", pos(floor));
-                }
-                BlockState ground = level.getBlockState(floor);
-                if (ground.isAir() || !ground.getFluidState().isEmpty() || !ground.isCollisionShapeFullBlock(level, floor)) {
-                    return fail("not_flat", pos(floor));
                 }
                 for (int dy = 0; dy < ShowcasePlan.HEIGHT; dy++) {
                     BlockPos cell = floor.above(dy);

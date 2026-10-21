@@ -48,7 +48,6 @@
   "commands.herbalwitch.showcase.block_entity": "A block with contents is in the way at %s; use an empty plot",
   "commands.herbalwitch.showcase.denied": "You may not build at %s",
   "commands.herbalwitch.showcase.entity": "%s is in the way at %s",
-  "commands.herbalwitch.showcase.not_flat": "The showcase needs flat solid ground; none at %s",
   "commands.herbalwitch.showcase.outside_world": "The showcase would leave the world at %s",
   "commands.herbalwitch.showcase.success": "Built %s showcase section(s): %s blocks placed, %s cleared, from %s to %s",
   "commands.herbalwitch.showcase.too_large": "The showcase layout is too large: %s",

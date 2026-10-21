@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * {@code /herbalwitch showcase [section]}: builds every registered section (or one) on the flat
- * ground in front of the executing player. The box starts two blocks east of the player, on the
+ * {@code /herbalwitch showcase [section]}: builds every registered section (or one) in front of the
+ * executing player, replacing the terrain there with its own floor. The box starts two blocks east of the player, on the
  * player's row, with its floor at the block the player stands on; the player stays outside it.
  */
 public final class ShowcaseCommand {

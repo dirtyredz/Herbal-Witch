@@ -45,7 +45,7 @@ Brass, glass and tincture colours keep their own tones.
 ## Owner review checklist (0.1.0-dev.4)
 
 Status: **awaiting owner review.** In the trial instance, creative mode. The quickest way to see
-everything: on a flat plot run `/herbalwitch showcase` (operator), then walk it.
+everything: on any open plot run `/herbalwitch showcase` (operator), then walk it.
 
 1. **Single furniture design.** Open "Cottage Decor". Do the five pieces read as one set in dark wood?
    Check the green and pink accents, the vine leaves, the plain fabric, the brass, the lamp shade lit

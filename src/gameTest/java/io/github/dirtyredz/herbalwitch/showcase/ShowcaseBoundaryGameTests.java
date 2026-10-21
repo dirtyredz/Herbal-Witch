@@ -28,7 +28,8 @@ import static io.github.dirtyredz.herbalwitch.fixture.ShowcaseFixtures.stoneFloo
 import static io.github.dirtyredz.herbalwitch.fixture.WorldFixtures.check;
 
 /**
- * Refusals before any write (occupied plot, no floor, outside the world, unloaded) and writes
+ * Refusals before any write (occupied plot, block entity, outside the world, unloaded), natural terrain
+ * replaced by the showcase floor, and writes
  * confined to the planned box.
  */
 @GameTestHolder(HerbalWitch.MOD_ID)
@@ -71,17 +72,37 @@ public final class ShowcaseBoundaryGameTests {
     }
 
     @GameTest(template = SECTION)
-    public static void aChestOrMissingFloorRefusesBeforeAnyWrite(GameTestHelper helper) {
+    public static void aChestRefusesBeforeAnyWrite(GameTestHelper helper) {
         stoneFloor(helper, SECTION_X, SECTION_Z);
         ServerPlayer op = standing(helper, "op_chest", GameType.SURVIVAL);
         helper.setBlock(ORIGIN.offset(3, 1, 3), Blocks.CHEST);
         helper.setBlock(ORIGIN.offset(1, 2, 1), Blocks.DIRT);
         check(run(helper, as(op, 2), "herbalwitch showcase garden") == 0, "built over a chest");
         check(helper.getBlockState(ORIGIN.offset(1, 2, 1)).is(Blocks.DIRT), "refusal cleared blocks");
-        helper.setBlock(ORIGIN.offset(3, 1, 3), Blocks.AIR);
-        helper.setBlock(ORIGIN.offset(4, 0, 2), Blocks.AIR); // a hole in the floor
-        check(run(helper, as(op, 2), "herbalwitch showcase garden") == 0, "built over a hole");
-        check(helper.getBlockState(ORIGIN.offset(1, 2, 1)).is(Blocks.DIRT), "refusal cleared blocks");
+        check(helper.getBlockState(ORIGIN.offset(3, 1, 3)).is(Blocks.CHEST), "refusal removed the chest");
+        helper.succeed();
+    }
+
+    /** Natural terrain: no flat floor, holes, water, plants, leaves and logs in the box. */
+    @GameTest(template = SECTION)
+    public static void unevenNaturalTerrainIsReplacedByTheShowcaseFloor(GameTestHelper helper) {
+        stoneFloor(helper, SECTION_X, SECTION_Z);
+        ServerPlayer op = standing(helper, "op_rough", GameType.SURVIVAL);
+        helper.setBlock(ORIGIN.offset(4, 0, 2), Blocks.AIR); // a hole in the floor layer
+        helper.setBlock(ORIGIN.offset(2, 0, 2), Blocks.WATER); // water at floor level
+        helper.setBlock(ORIGIN.offset(1, 0, 1), Blocks.GRASS_BLOCK);
+        helper.setBlock(ORIGIN.offset(1, 1, 1), Blocks.GRASS);
+        helper.setBlock(ORIGIN.offset(3, 1, 2), Blocks.OAK_LOG);
+        helper.setBlock(ORIGIN.offset(3, 2, 2), Blocks.OAK_LEAVES);
+        helper.setBlock(ORIGIN.offset(5, 1, 3), Blocks.WATER);
+        helper.setBlock(ORIGIN.offset(0, 1, 0), Blocks.STONE);
+        check(run(helper, as(op, 2), "herbalwitch showcase garden") > 0, "rough terrain was refused");
+        for (int x : new int[] {0, 1, 2, 4, 5}) {
+            check(helper.getBlockState(ORIGIN.offset(x, 0, 2)).is(Blocks.GRASS_BLOCK), "no grass floor at x " + x);
+        }
+        check(helper.getBlockState(ORIGIN.offset(3, 2, 2)).isAir(), "leaves left in the box");
+        check(helper.getBlockState(ORIGIN.offset(5, 1, 3)).isAir(), "stray water left in the box");
+        check(helper.getBlockState(ORIGIN.offset(1, 1, 1)).isAir(), "stray plant left in the box");
         helper.succeed();
     }
 

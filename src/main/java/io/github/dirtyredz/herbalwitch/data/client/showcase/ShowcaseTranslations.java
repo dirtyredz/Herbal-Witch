@@ -19,7 +19,6 @@ public final class ShowcaseTranslations {
         lang.add(k + "outside_world", "The showcase would leave the world at %s");
         lang.add(k + "unloaded", "The showcase area is not loaded at %s");
         lang.add(k + "denied", "You may not build at %s");
-        lang.add(k + "not_flat", "The showcase needs flat solid ground; none at %s");
         lang.add(k + "block_entity", "A block with contents is in the way at %s; use an empty plot");
         lang.add(k + "unbreakable", "An unbreakable block is in the way at %s");
         lang.add(k + "entity", "%s is in the way at %s");

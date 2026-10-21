@@ -42,7 +42,8 @@ public final class HerbShowcaseSection implements ShowcaseSection {
 
     @Override
     public List<ShowcasePlacement> placements() {
-        List<ShowcasePlacement> out = new ArrayList<>();
+        List<ShowcasePlacement> out = new ArrayList<>(ShowcasePlacement.floorArea(0, 0, 6,
+                HerbCatalog.ALL.size() * 2 - 1, () -> Blocks.GRASS_BLOCK.defaultBlockState()));
         for (int row = 0; row < HerbCatalog.ALL.size(); row++) {
             HerbSpec herb = HerbCatalog.ALL.get(row);
             int z = row * 2;

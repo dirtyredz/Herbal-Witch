@@ -14,7 +14,7 @@ public final class ShowcaseManifest {
     public static Map<String, String> lang() {
         Map<String, String> lang = new LinkedHashMap<>();
         for (String reason : List.of("success", "unknown_section", "too_large", "outside_world", "unloaded", "denied",
-                "not_flat", "block_entity", "unbreakable", "entity")) {
+                "block_entity", "unbreakable", "entity")) {
             lang.put("commands.herbalwitch.showcase." + reason, null);
         }
         SECTIONS.forEach(section -> lang.put("showcase.herbalwitch.section." + section, null));

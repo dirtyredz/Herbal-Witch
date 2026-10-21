@@ -10,6 +10,7 @@ import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseSection;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FarmBlock;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,7 +35,9 @@ public final class GardenShowcaseSection implements ShowcaseSection {
 
     @Override
     public List<ShowcasePlacement> placements() {
-        return List.of(
+        List<ShowcasePlacement> out = new ArrayList<>(
+                ShowcasePlacement.floorArea(0, 0, 6, 3, () -> Blocks.GRASS_BLOCK.defaultBlockState()));
+        out.addAll(List.of(
                 ShowcasePlacement.label(0, 0, Line.translated(BED_DRY)),
                 ShowcasePlacement.content(0, 1, 1, () -> BotanyBlocks.herbBed().defaultBlockState()),
                 ShowcasePlacement.label(2, 0, Line.translated(BED_MOIST)),
@@ -47,6 +50,7 @@ public final class GardenShowcaseSection implements ShowcaseSection {
                 ShowcasePlacement.label(5, 0, Line.translated(FARMLAND)),
                 ShowcasePlacement.content(5, 1, 1, () -> Blocks.FARMLAND.defaultBlockState().setValue(FarmBlock.MOISTURE, 7)),
                 ShowcasePlacement.content(5, 2, 1,
-                        () -> BotanyBlocks.plant(HerbCatalog.CHAMOMILE).getStateForAge(HerbSpec.MAX_AGE)));
+                        () -> BotanyBlocks.plant(HerbCatalog.CHAMOMILE).getStateForAge(HerbSpec.MAX_AGE))));
+        return out;
     }
 }
