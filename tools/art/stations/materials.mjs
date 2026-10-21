@@ -1,7 +1,7 @@
 // Station materials: the glazed ceramic, blackened iron, soil, glowing coals and flame tongues the
 // workstation models are built from. 32 x 32, untinted; flame has alpha 0 or 255 (cutout).
 // Palette: cream glaze with hot pink and deep green bands and tiny dark purple pinstripes.
-import { rng, clamp, shade, image } from '../png.mjs';
+import { rng, clamp, shade, image } from '../pixels.mjs';
 
 const SIZE = 32;
 const CREAM = [232, 220, 192];

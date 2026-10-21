@@ -1,7 +1,7 @@
 // Material synthesis: the surfaces furniture is built from. One art direction, nothing is tinted:
 // dark wood frames, deep green and hot pink fabric, tiny touches of dark purple, brass hardware,
 // trailing ivy. Every tile is 32 x 32 pixels, i.e. two texels per model pixel.
-import { rng, clamp, shade, image } from './png.mjs';
+import { rng, clamp, shade, image } from './pixels.mjs';
 
 export const SIZE = 32;
 

@@ -1,7 +1,7 @@
 // Decorative motifs: the small rug and the lamp shade. Both carry their own colour (deep green,
 // hot pink, a thread of dark purple, cream); nothing is tinted in game. 32 x 32 pixels, tiling
 // seamlessly.
-import { rng, shade, image } from './png.mjs';
+import { rng, shade, image } from './pixels.mjs';
 import { SIZE } from './materials.mjs';
 
 const GREEN = [47, 90, 44];

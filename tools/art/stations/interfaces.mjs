@@ -3,7 +3,7 @@
 // edge and a dark purple corner ornament), the player inventory, the station's slot frames and EMPTY
 // progress arrow / flame outlines, plus the FILLED flame at (176, 0) and FILLED arrow at (176, 14)
 // that the screens clip to show progress. Deterministic, no dependencies.
-import { rng } from '../png.mjs';
+import { rng } from '../pixels.mjs';
 
 const W = 256;
 const hex = (s) => [1, 3, 5].map((i) => parseInt(s.slice(i, i + 2), 16));

@@ -81,8 +81,10 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/preparations/` — product use and block GameTests
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/compat/` — optional-integration GameTests (profile dependent)
 - `src/gameTest/resources/data/herbalwitch/structures/` — GameTest structure templates (`empty`, `showcase`, `showcase_section`); never in the release jar
-- `tools/` — deterministic Node generators: `generate-textures.mjs`, `generate-test-structures.mjs`; not packaged
-- `tools/art/` — shared pixel code (`png`, `materials`, `patterns`)
+- `tools/` — deterministic Node tools: `generate-textures.mjs`, `generate-models.mjs`, `generate-test-structures.mjs`, `preview-models.mjs`; not packaged
+- `tools/image/` — PNG encode/decode, the bitmap font and contact-sheet composition shared by generators and the previewer
+- `tools/preview/` — the headless model previewer: `assets/` (resource lookup, model inheritance, vanilla parents), `geometry/` (element baking, transforms, item sprites), `render/` (cameras, rasterizer), `scenes/` (blockstate evaluation, review scenes), `report/` (coverage, sheets, manifest), `test/` (node --test)
+- `tools/art/` — shared pixel code (`pixels`, `materials`, `patterns`)
 - `tools/art/botany/` — herb sprites per habitat group, garden art
 - `tools/art/stations/` — station materials and interface atlases (`interfaces.mjs` holds the layout)
 - `tools/art/preparations/` — preparation materials and product sprites

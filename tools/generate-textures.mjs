@@ -14,7 +14,7 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { png } from './art/png.mjs';
+import { png } from './image/png-encode.mjs';
 import { brass, glass, tincture, darkWood, vine, fabricGreen, fabricPink, trimPurple } from './art/materials.mjs';
 import { rug, lampShade } from './art/patterns.mjs';
 import temperate from './art/botany/temperate.mjs';

@@ -1,7 +1,7 @@
 // Shared 16 x 16 drawing primitives for the herb sprites. A Canvas holds colour-or-null pixels;
 // finish() turns it into an image() with strictly 0/255 alpha (cutout rendering) and darkens the
 // outer edge of shaded shapes so small plants read against any background.
-import { image, rng } from '../png.mjs';
+import { image, rng } from '../pixels.mjs';
 
 export { rng };
 export const N = 16;

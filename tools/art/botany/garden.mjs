@@ -1,5 +1,5 @@
 // Garden soil tiles: 32 x 32 opaque tilled earth, dry and moist, with the same furrow layout.
-import { image, rng, clamp } from '../png.mjs';
+import { image, rng, clamp } from '../pixels.mjs';
 import { hex } from './sprites.mjs';
 
 const SIZE = 32;
