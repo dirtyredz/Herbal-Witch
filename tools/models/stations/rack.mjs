@@ -56,11 +56,11 @@ function bundles() {
   HOOKS.forEach((x, i) => {
     const top = BEAM_Y[0] - 1.5;
     const tex = BUNDLES[i];
-    const h = 14;
+    const h = 16;
     const turn = (angle) => ({ rot: { origin: [x, top, 8], axis: 'y', angle } });
     els.push(
-      plane('z', 8, x - 4, x + 4, top - h, top, tex), plane('x', x, 4, 12, top - h, top, tex),
-      plane('z', 8, x - 3.5, x + 3.5, top - h + 1, top, tex, turn(45)), plane('z', 8, x - 3.5, x + 3.5, top - h + 1, top, tex, turn(-45)),
+      plane('z', 8, x - 4.5, x + 4.5, top - h, top, tex), plane('x', x, 3.5, 12.5, top - h, top, tex),
+      plane('z', 8, x - 4, x + 4, top - h + 1, top, tex, turn(45)), plane('z', 8, x - 4, x + 4, top - h + 1, top, tex, turn(-45)),
     );
   });
   return els;

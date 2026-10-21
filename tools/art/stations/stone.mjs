@@ -27,7 +27,7 @@ function moss(g, seed, count, rows) {
     for (let y = Math.floor(cy - r); y <= cy + r; y++) {
       for (let x = Math.floor(cx - r); x <= cx + r; x++) {
         const d = Math.hypot(x - cx, (y - cy) * 1.3);
-        if (d > r || rand() < d / r * 0.5) continue;
+        if (d > r || (d > r * 0.7 && rand() < 0.4)) continue;
         const shadeIdx = d < r * 0.4 ? 2 : d < r * 0.75 ? 1 : 0;
         put(g, ((x % SIZE) + SIZE) % SIZE, y, MOSS[shadeIdx]);
       }
@@ -38,12 +38,12 @@ function moss(g, seed, count, rows) {
 
 /** The bowl: grey-taupe mottled stone, moss creeping from the rim and the foot, a few pink flowers. */
 export function mortarStone() {
-  // The bowl's sides span model y 3.5..11, i.e. texture rows 10..25: moss spills from the rim
+  // The bowl's sides span model y 3.25..12.75, i.e. texture rows 6..26: moss spills from the rim
   // (rows 9..15) and gathers low on the bowl (rows 20..26), with a few flowers on it.
   const g = grid();
-  const rand = moss(g, 9201, 18, [8, 15]);
-  moss(g, 9202, 10, [19, 26]);
-  for (let i = 0; i < 7; i++) flower(g, 2 + Math.floor(rand() * 28), 10 + Math.floor(rand() * 15), PINK);
+  const rand = moss(g, 9201, 11, [8, 14]);
+  moss(g, 9202, 7, [18, 26]);
+  for (let i = 0; i < 6; i++) flower(g, 2 + Math.floor(rand() * 28), 10 + Math.floor(rand() * 15), PINK);
   return overlay(mottled(9203, [104, 96, 88], [170, 160, 146]), g);
 }
 

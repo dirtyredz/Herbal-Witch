@@ -79,7 +79,7 @@ export function reviewSet(res, baker, cov, { referenceDir = null, scale = 8 } = 
 
   for (const scene of SCENES) {
     try {
-      const shot = renderScene(res, baker, scene.entries, scene.view, 8);
+      const shot = renderScene(res, baker, scene.entries, scene.view, scene.scale ?? 8);
       if (shot.missing.size) errors.push(`scene ${scene.name}: missing ${[...shot.missing].join(' ')}`);
       images.set(`scenes/${scene.name}.png`, shot.image);
       const ref = scene.reference && referenceDir && join(referenceDir, scene.reference);

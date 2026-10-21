@@ -1,4 +1,4 @@
-// Review scenes: small arrangements that show what single-model renders cannot — beds joining,
+// Review scenes (each rendered at its own scale, default 8 px per model pixel): small arrangements that show what single-model renders cannot — beds joining,
 // herbs touching soil, vessels resting on heat, multiblocks assembled, furniture together. Entries
 // use real blockstates; vanilla blocks are labelled proxies. Each scene may name an owner
 // reference image (in the job folder) for a side-by-side comparison.
@@ -39,6 +39,7 @@ export const SCENES = [
     name: 'garden-joined-2x2',
     reference: 'reference-joined-bed-2x2.png',
     view: 'iso',
+    scale: 11,
     entries: [
       ...beds([[0, 0], [1, 0], [0, 1], [1, 1]]),
       { at: [1, 1, 0], block: plant('temperate', 'chamomile'), props: { age: 3 } },
@@ -51,6 +52,7 @@ export const SCENES = [
     name: 'garden-single-lavender',
     reference: 'reference-herb-bed-lavender.png',
     view: 'iso',
+    scale: 16,
     entries: [...beds([[0, 0]], { moisture: 7 }), { at: [0, 1, 0], block: plant('temperate', 'lavender'), props: { age: 3 } }],
   },
   {
@@ -77,35 +79,37 @@ export const SCENES = [
       ...[0, 1, 2, 3].map((age) => ({ at: [3 - age, 1, 0], block: plant('woodland', 'belladonna'), props: { age } })),
     ],
   },
-  { name: 'mortar', reference: 'reference-mortar.png', view: 'iso', entries: [{ at: [0, 0, 0], block: station('mortar'), props: { facing: 'north' } }] },
+  { name: 'mortar', reference: 'reference-mortar.png', view: 'iso', scale: 18, entries: [{ at: [0, 0, 0], block: station('mortar'), props: { facing: 'north' } }] },
   {
     name: 'kettle',
     reference: 'reference-kettle-angle.png',
     view: 'isoWest',
+    scale: 18,
     entries: [{ at: [0, 0, 0], block: station('kettle'), props: { facing: 'north' } }],
   },
   {
     name: 'infusion-pot',
     reference: 'reference-infusion-pot.png',
     view: 'iso',
+    scale: 18,
     entries: [{ at: [0, 0, 0], block: station('infusion_pot'), props: { facing: 'north' } }],
   },
   {
     name: 'drying-rack',
     reference: 'reference-drying-rack.png',
-    view: 'iso',
+    view: 'isoWest',
     entries: multiblock(station('drying_rack'), RACK, [1, 0, 0], { facing: 'north', active: true }),
   },
   {
     name: 'hearth',
     reference: 'reference-hearth.png',
-    view: 'iso',
+    view: 'isoWest',
     entries: multiblock(station('hearth'), HEARTH, [1, 0, 0], { facing: 'north', lit: true }),
   },
   {
     name: 'stove',
     reference: 'reference-stove-pot.png',
-    view: 'iso',
+    view: 'isoWest',
     entries: [
       ...multiblock(station('stove'), STOVE, [1, 0, 0], { facing: 'north', lit: true }),
       { at: [1, 1, 0], block: station('infusion_pot'), props: { facing: 'north' } },
@@ -121,6 +125,13 @@ export const SCENES = [
       ...multiblock(station('stove'), STOVE, [7, 0, 0], { facing: 'north', lit: false }),
       { at: [9, 0, 0], block: station('mortar'), props: { facing: 'north' } },
     ],
+  },
+  {
+    name: 'armchair',
+    reference: 'reference-armchair.png',
+    view: 'iso',
+    scale: 18,
+    entries: [{ at: [0, 0, 0], block: `${HW}decor/seating/armchair`, props: { facing: 'north' } }],
   },
   {
     name: 'cottage-furniture',

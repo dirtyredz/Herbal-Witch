@@ -6,8 +6,8 @@ import { rng, shade, mix, image } from './pixels.mjs';
 import { SIZE } from './materials.mjs';
 import { grid, moon, star, flower, overlay, put, smoothNoise, GOLD, PINK, MAGENTA } from './motifs.mjs';
 
-const FOREST = [36, 70, 44];
-const FOREST_LIGHT = [50, 90, 58];
+const FOREST = [28, 56, 38];
+const FOREST_LIGHT = [40, 74, 50];
 const MAGENTA_C = [196, 48, 128];
 const PLUM = [74, 36, 82];
 const CREAM = [238, 226, 196];

@@ -103,11 +103,12 @@ export function plumPainted() {
 export function plumLid() {
   const base = plum();
   const g = grid();
-  moon(g, 16, 16, 6);
-  for (const [x, y] of [[8, 9], [24, 8], [7, 23], [25, 24], [16, 5]]) star(g, x, y, 1);
-  for (const [x, y, r] of [[10, 15, PINK], [22, 18, MAGENTA], [14, 25, PINK], [20, 7, MAGENTA]]) flower(g, x, y, r);
-  sprig(g, 9, 21, 5, 0.3);
-  sprig(g, 23, 25, 6, -0.3);
+  // the knob covers the centre: the moon sits beside it, flowers and sprigs around the rim
+  moon(g, 16, 9.5, 4.5);
+  for (const [x, y] of [[8, 12], [24, 12], [9, 23], [23, 24], [16, 26]]) star(g, x, y, 1);
+  for (const [x, y, r] of [[7, 17], [25, 18], [12, 25], [21, 21]].map(([x, y], i) => [x, y, i % 2 ? MAGENTA : PINK])) flower(g, x, y, r);
+  sprig(g, 6, 22, 5, 0.3);
+  sprig(g, 26, 23, 5, -0.3);
   return overlay(base, g);
 }
 

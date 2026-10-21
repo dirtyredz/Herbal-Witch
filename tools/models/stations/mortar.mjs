@@ -11,29 +11,29 @@ export function mortar() {
   const STONE = { side: '#stone', top: '#plinth', bottom: '#plinth' };
   const els = [
     // stepped square plinth and narrow foot
-    box([1.5, 0, 1.5], [14.5, 1.5, 14.5], '#plinth'),
-    box([2.75, 1.5, 2.75], [13.25, 2.25, 13.25], '#plinth', { skip: ['down'] }),
-    ...octagon(C, C, 2.25, 3.5, 6.5, 6.5, 1.5, '#plinth', { skip: ['down', 'up'], third: false }),
-    // the bowl, tapering inward toward the bottom, then straight chamfered walls
-    ...octagonTrue(C, C, 3.5, 5, 9.5, 9.5, 2.5, STONE, { skip: ['down'] }),
-    ...octagonTrue(C, C, 5, 6.75, 12, 12, 3.25, STONE, { skip: ['down'] }),
-    ...octagonRing(C, C, 6.75, 10, 13.5, 13.5, 3.75, 2, STONE, { skip: ['down'] }),
+    box([3, 0, 3], [13, 1.5, 13], '#plinth'),
+    box([4, 1.5, 4], [12, 2.25, 12], '#plinth', { skip: ['down'] }),
+    ...octagon(C, C, 2.25, 3.25, 6.5, 6.5, 1.5, '#plinth', { skip: ['down', 'up'], third: false }),
+    // the chunky bowl, tapering inward toward the bottom, then straight chamfered walls
+    ...octagonTrue(C, C, 3.25, 4.75, 10, 10, 2.75, STONE, { skip: ['down'] }),
+    ...octagonTrue(C, C, 4.75, 6.5, 12.75, 12.75, 3.5, STONE, { skip: ['down'] }),
+    ...octagonRing(C, C, 6.5, 11.25, 14.5, 14.5, 4, 2.25, STONE, { skip: ['down'] }),
     // the stepped rim
-    ...octagonRing(C, C, 10, 11.25, 14.5, 14.5, 4.25, 2.5, STONE),
+    ...octagonRing(C, C, 11.25, 12.75, 15.5, 15.5, 4.5, 2.75, STONE),
     // ground herbs heaped inside
-    ...octagon(C, C, 6.75, 8.5, 10, 10, 2, '#herbs', { skip: ['down'], third: false }),
-    box([5.25, 8.5, 5.5], [9.5, 9.5, 9.5], '#herbs', { skip: ['down'] }),
-    box([6, 8.5, 9], [8.25, 10, 11], '#herbs', { skip: ['down'] }),
-    box([9.5, 8.5, 6.25], [11.25, 9.25, 8], '#herbs', { skip: ['down'] }),
+    ...octagon(C, C, 6.5, 8.75, 10.5, 10.5, 2, '#herbs', { skip: ['down'], third: false }),
+    box([5, 8.75, 5.5], [9.5, 9.75, 9.5], '#herbs', { skip: ['down'] }),
+    box([5.75, 8.75, 9], [8.25, 10.5, 11.25], '#herbs', { skip: ['down'] }),
+    box([9.5, 8.75, 6], [11.5, 9.5, 8], '#herbs', { skip: ['down'] }),
   ];
   // the pestle: an octagonal stone shaft with a knobbed head, leaning back out of the bowl
-  const lean = { origin: [9.5, 6, 6.5], axis: 'x', angle: 22.5 };
+  const lean = { origin: [9.5, 7, 7], axis: 'x', angle: 22.5 };
   els.push(
-    box([8.5, 6, 5.5], [10.5, 14, 7.5], '#pestle', { rot: lean }),
-    box([8, 6, 6], [11, 14, 7], '#pestle', { rot: lean, skip: ['up', 'down'] }),
-    box([9, 6, 5], [10, 14, 8], '#pestle', { rot: lean, skip: ['up', 'down'] }),
-    box([7.5, 13.5, 4.5], [11.5, 16, 8.5], '#pestle', { rot: lean }),
-    box([8, 13, 5], [11, 13.5, 8], '#pestle', { rot: lean, skip: ['up'] }),
+    box([8.25, 7, 5.75], [10.75, 14, 8.25], '#pestle', { rot: lean }),
+    box([7.75, 7, 6.25], [11.25, 14, 7.75], '#pestle', { rot: lean, skip: ['up', 'down'] }),
+    box([8.75, 7, 5.25], [10.25, 14, 8.75], '#pestle', { rot: lean, skip: ['up', 'down'] }),
+    box([7.5, 13.25, 4.75], [11.5, 16, 8.75], '#pestle', { rot: lean }),
+    box([8, 12.75, 5.25], [11, 13.25, 8.25], '#pestle', { rot: lean, skip: ['up'] }),
   );
   return [{
     path: 'block/stations/mortar/base',

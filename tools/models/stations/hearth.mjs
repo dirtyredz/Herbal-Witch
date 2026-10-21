@@ -25,7 +25,7 @@ function base() {
   els.push(box([4, OPEN_TOP, 5], [OPEN[1], OPEN_TOP + 1.5, 15], '#stone', { skip: ['up'] }));
   els.push(box([-4, OPEN_TOP + 0.75, 5], [-2, OPEN_TOP + 1.5, 15], '#stone', { skip: ['up'] }));
   els.push(box([2, OPEN_TOP + 0.75, 5], [4, OPEN_TOP + 1.5, 15], '#stone', { skip: ['up'] }));
-  els.push(box([OPEN[0], 1.5, 14.5], [OPEN[1], OPEN_TOP, 16], '#stone', { skip: ['up', 'down'] }));
+  els.push(box([OPEN[0], 1.5, 12], [OPEN[1], OPEN_TOP, 16], '#stone', { skip: ['up', 'down'] }));
   els.push(box([-1.25, 11.75, 4.5], [1.25, 14, 5], '#gold')); // keystone
   els.push(rivet('north', -9, 12.5, 5), rivet('north', 9, 12.5, 5)); // gold star studs
   // iron grate before the fire
@@ -56,17 +56,19 @@ function base() {
   els.push(box([-15.25, 2, 1], [-12.75, 3.5, 3], '#log'), box([-15.25, 3.5, 1.25], [-12.75, 5, 2.75], '#log'));
   for (const [x, z] of [[-15.75, 0.5], [-12.75, 0.5]]) els.push(box([x, 5.5, z], [x + 0.5, 6, z + 0.5], '#gold'));
   // ivy draped over the mantel corners
-  els.push(...ivyDrape({ face: 'north', at: 3, along: [9.5, 15.5], top: 18, lengths: [7, 11, 5] }));
-  els.push(...ivyDrape({ face: 'north', at: 3, along: [-15.5, -9.5], top: 18, lengths: [5, 10, 8] }));
+  els.push(...ivyDrape({ face: 'north', at: 3, along: [8.5, 15.5], top: 18, lengths: [7, 12, 9, 5] }));
+  els.push(...ivyDrape({ face: 'north', at: 3, along: [-15.5, -8.5], top: 18, lengths: [5, 10, 13, 6] }));
+  for (const x of [-12, 12]) els.push(box([x - 2.5, 18, 3.5], [x + 2.5, 19, 7.5], '#ivy', { decal: { all: [0, 0, 8, 6] } }));
   return els;
 }
 
 function fire() {
   return [
-    box([-6, 1.5, 9.5], [6, 2.5, 14], '#coals', { glow: true, skip: ['down'] }),
-    box([OPEN[0], 1.75, 14.4], [OPEN[1], OPEN_TOP, 14.45], '#glow', { glow: true, skip: ['up', 'down', 'south', 'east', 'west'] }),
-    plane('z', 11.5, -5, 5, 2, 10, '#flame', { glow: true, uv: [0, 7, 16, 16] }),
-    plane('z', 12.5, -4, 4, 2, 8.5, '#flame', { glow: true, uv: [4, 8, 14, 16] }),
+    box([-6, 1.5, 8], [6, 2.75, 11.75], '#coals', { glow: true, skip: ['down'] }),
+    box([OPEN[0], 1.75, 11.9], [OPEN[1], OPEN_TOP, 11.95], '#glow', { glow: true, skip: ['up', 'down', 'south', 'east', 'west'] }),
+    plane('z', 9.5, -6, 6, 2.5, 10.25, '#flame', { glow: true, uv: [0, 7, 16, 16] }),
+    plane('z', 10.75, -5, 5, 2.5, 9, '#flame', { glow: true, uv: [4, 8, 14, 16] }),
+    plane('x', 0, 8, 11.5, 2.5, 9.5, '#flame', { glow: true, uv: [6, 7, 14, 16] }),
   ];
 }
 

@@ -39,7 +39,7 @@ export function ivy() {
     for (let y = 0; y < len; y++) {
       const sx = x0 + Math.sin(y * 0.35 + phase) * 1.8;
       put(g, ((Math.round(sx) % SIZE) + SIZE) % SIZE, y, STEM);
-      if (y % 3 === 1) {
+      if (y % 2 === 1) {
         ivyLeaf(g, (((Math.round(sx + side * 2.5)) % SIZE) + SIZE) % SIZE, y, side, rand);
         side = -side;
       }
@@ -48,9 +48,9 @@ export function ivy() {
     ivyLeaf(g, (x0 + 2) % SIZE, 1, 1, rand);
     ivyLeaf(g, (x0 + SIZE - 2) % SIZE, 2, -1, rand);
   }
-  for (let i = 0; i < 9; i++) {
-    const x = 1 + Math.floor(rand() * 30);
-    const y = 2 + Math.floor(rand() * 24);
+  for (let i = 0; i < 5; i++) {
+    const x = 2 + Math.floor(rand() * 28);
+    const y = 3 + Math.floor(rand() * 22);
     flower(g, x, y, i % 3 === 0 ? MAGENTA : PINK, 5);
   }
   return toImage(g);

@@ -54,9 +54,9 @@ function base() {
   els.push(plane('x', -15.25, 11, 14, 4, 11.5, '#bundle'));
   els.push(rivet('west', -14, 3, 8), rivet('east', 14, 3, 8));
   // the stovepipe at the back of the west cell, behind its burner, rising above the top
-  els.push(box([-15.5, TOP, 14.25], [-12, 29, 16], '#iron', { skip: ['down'] }));
-  for (const y of [18.5, 24.5]) els.push(box([-15.75, y, 14], [-11.75, y + 1, 16], '#gold', { skip: ['up', 'down', 'south'] }));
-  els.push(box([-16, 29, 13.75], [-11.5, 30, 16], '#gold'));
+  els.push(box([-15.5, TOP, 14.25], [-12, 31, 16], '#iron', { skip: ['down'] }));
+  for (const y of [19, 26]) els.push(box([-15.75, y, 14], [-11.75, y + 1, 16], '#gold', { skip: ['up', 'down', 'south'] }));
+  els.push(box([-16, 31, 13.75], [-11.5, 32, 16], '#gold'));
   return els;
 }
 

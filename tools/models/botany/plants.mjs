@@ -87,7 +87,8 @@ const HERBS = {
     for (const [x, z, h] of [[8, 8, 13], [5.5, 7, 11], [10.5, 9.5, 11.5], [7, 11, 10], [10, 5.5, 10]]) {
       out.push(stem(x, z, h - 4, 'stem', 0.75), ...spike(x, z, h - 4.5, 5, 'lavender', 'lavender_light'));
     }
-    out.push(...mass(8, 8, 5.5, 6.5, 18, ['grey_green', 'leaf', 'sage', 'leaf_light'], 101, 1.75));
+    out.push(...mass(8, 8, 6, 7, 20, ['leaf', 'leaf_light', 'leaf_bright', 'grey_green'], 101, 2));
+    for (const [dir, x, z] of [['e', 9.5, 6.5], ['w', 6.5, 9.5], ['n', 6, 6], ['s', 10, 10]]) out.push(leaf(x, 4, z, dir, 3.5, 1.5, 'leaf_bright', 45 / 2));
     return out;
   },
   sage() {
