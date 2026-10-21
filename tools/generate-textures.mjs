@@ -15,8 +15,8 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { png } from './art/png.mjs';
-import { woodGrain, paintedWood, cutStone, brass, glass, tincture, darkWood, vine } from './art/materials.mjs';
-import { fabricFloral, rug, lampShade } from './art/patterns.mjs';
+import { brass, glass, tincture, darkWood, vine, fabricGreen, fabricPink, trimPurple } from './art/materials.mjs';
+import { rug, lampShade } from './art/patterns.mjs';
 import temperate from './art/botany/temperate.mjs';
 import dry from './art/botany/dry.mjs';
 import wet from './art/botany/wet.mjs';
@@ -34,17 +34,16 @@ const outDir = join(texRoot, 'block/material');
 
 // The complete texture manifest. GeneratedModelsTest checks every model reference against the files.
 const TEXTURES = {
-  wood_grain: woodGrain, // tinted: natural frames
-  painted_wood: paintedWood, // tinted: painted frames
-  cut_stone: cutStone, // tinted: the stone finish's frame
-  fabric_floral: fabricFloral, // tinted: upholstery and counter panels
-  rug: rug, // tinted: the small rug
-  lamp_shade: lampShade, // tinted: the table lamp's shade
-  brass: brass, // untinted hardware
-  glass: glass, // untinted cutout bottle glass
-  tincture: tincture, // untinted bottle contents
-  dark_wood: darkWood, // untinted: stations and the oil lantern
-  vine: vine, // untinted cutout: trailing ivy on edges, legs and backs
+  dark_wood: darkWood, // frames, legs, boards
+  vine: vine, // cutout: trailing ivy on edges, legs and backs
+  brass: brass, // hardware
+  glass: glass, // cutout bottle glass
+  tincture: tincture, // bottle contents
+  fabric_green: fabricGreen, // plain deep-green upholstery
+  fabric_pink: fabricPink, // plain hot-pink upholstery
+  trim_purple: trimPurple, // dark-purple piping, knobs, small details
+  rug: rug, // the small rug
+  lamp_shade: lampShade, // the table lamp's shade
 };
 
 // Station block materials (block/stations/): untinted; flame is cutout.

@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Coverage against the independent manifests: one labelled decor cell per piece and finish, one
+ * Coverage against the independent manifests: one labelled decor cell per piece, one
  * labelled herb row with every age. The live block identities are checked by the GameTests.
  */
 class ShowcaseCoverageTest {
@@ -21,16 +21,14 @@ class ShowcaseCoverageTest {
     }
 
     @Test
-    void decorShowsEveryPieceInEveryFinishWithItsSign() {
+    void decorShowsEveryPieceOnceWithItsSign() {
         List<ShowcasePlacement> placements = new DecorShowcaseSection().placements();
         int cells = DecorManifest.ids().size();
         assertEquals(cells, count(placements, ShowcasePlacement.Kind.LABEL, 1));
-        long content = placements.stream().filter(p -> p.kind() == ShowcasePlacement.Kind.CONTENT).count();
-        assertEquals(cells, content);
+        assertEquals(cells, placements.stream().filter(p -> p.kind() == ShowcasePlacement.Kind.CONTENT).count());
         List<String> labels = placements.stream().filter(p -> p.kind() == ShowcasePlacement.Kind.LABEL)
-                .map(p -> p.lines().get(0).text() + " " + p.lines().get(1).text()).toList();
-        assertEquals("Dark Oak Armchair", labels.get(0));
-        assertEquals("Lilac Small Rug", labels.get(labels.size() - 1));
+                .map(p -> p.lines().get(0).text()).toList();
+        assertEquals(DecorManifest.PIECES.keySet().stream().map(DecorManifest.NAMES::get).toList(), labels);
     }
 
     @Test

@@ -11,9 +11,9 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 /**
- * Inventory models: every item is its placed block's finish model (the unlit lamp, the north-facing
- * piece), so item, placed block and dropped item look alike. Display transforms follow vanilla's
- * block item defaults, with the flat rug and the wall shelf shown a little larger.
+ * Inventory models: every item is its piece's template (the unlit lamp, the north-facing piece), so
+ * item, placed block and dropped item look alike. Display transforms follow vanilla's block item
+ * defaults, with the flat rug and the wall shelf shown a little larger.
  */
 public class DecorItemModelProvider extends ItemModelProvider {
     public DecorItemModelProvider(PackOutput output, ExistingFileHelper existingFiles) {
@@ -28,9 +28,10 @@ public class DecorItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         for (DecorBlocks.Entry entry : DecorBlocks.entries()) {
-            String path = entry.spec().path(entry.finish());
-            ItemModelBuilder item = getBuilder("item/" + path).parent(new ModelFile.UncheckedModelFile(modLoc("block/" + path)));
-            float gui = guiScale(entry.spec());
+            FurnitureSpec spec = entry.spec();
+            ItemModelBuilder item = getBuilder("item/" + spec.path())
+                    .parent(new ModelFile.UncheckedModelFile(modLoc(DecorModelProvider.itemTemplate(spec))));
+            float gui = guiScale(spec);
             display(item, ItemDisplayContext.GUI, 30, 225, 0, 0, 0, 0, gui);
             display(item, ItemDisplayContext.GROUND, 0, 0, 0, 0, 3, 0, 0.25F);
             display(item, ItemDisplayContext.FIXED, 0, 0, 0, 0, 0, 0, 0.5F);

@@ -3,118 +3,138 @@ package io.github.dirtyredz.herbalwitch.data.decor;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import io.github.dirtyredz.herbalwitch.data.fixture.ModelResolver;
+import io.github.dirtyredz.herbalwitch.data.fixture.ModelResolver.Resolved;
+import io.github.dirtyredz.herbalwitch.data.fixture.TemplateChecks;
+import io.github.dirtyredz.herbalwitch.decor.catalog.ArtSpikeCatalog;
+import io.github.dirtyredz.herbalwitch.decor.catalog.FinishCatalog;
+import io.github.dirtyredz.herbalwitch.decor.catalog.FurnitureSpec;
 import org.junit.jupiter.api.Test;
 
-import java.nio.file.Path;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 
-import static io.github.dirtyredz.herbalwitch.data.decor.DecorManifest.PIECES;
 import static io.github.dirtyredz.herbalwitch.data.decor.DecorManifest.ids;
 import static io.github.dirtyredz.herbalwitch.data.decor.DecorManifest.pieceOf;
-import static io.github.dirtyredz.herbalwitch.data.fixture.ResourceFiles.GENERATED;
-import static io.github.dirtyredz.herbalwitch.data.fixture.ResourceFiles.json;
+import static io.github.dirtyredz.herbalwitch.data.fixture.ResourceFiles.generated;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * The decor feature's generated data: names, loot, crafting and restyling, tags and blockstates,
- * against {@link DecorManifest}. The whole-tree manifest lives in GeneratedResourcesTest.
+ * The single-design furniture (owner direction 2026-10-21): five pieces, one block each, crafted
+ * directly, never restyled; untinted templates in dark wood, deep green, hot pink and dark purple
+ * with trailing vines.
  */
 class DecorResourcesTest {
+    private static final Set<String> CONTEXTS = Set.of("gui", "ground", "fixed", "thirdperson_righthand",
+            "firstperson_righthand", "firstperson_lefthand");
+    private static final Set<String> PALETTE = Set.of("dark_wood", "vine", "brass", "glass", "tincture", "fabric_green",
+            "fabric_pink", "trim_purple", "rug", "lamp_shade");
+
     @Test
-    void ninetyDistinctIds() {
-        assertEquals(90, ids().size());
-        assertEquals(90, new TreeSet<>(ids()).size());
+    void oneDesignAndFivePiecesWithStablePaths() {
+        assertEquals(List.of(FinishCatalog.COTTAGE), FinishCatalog.ALL);
+        assertEquals(DecorManifest.PIECES.keySet().stream().toList(), ArtSpikeCatalog.ALL.stream().map(FurnitureSpec::id).toList());
+        assertEquals(ids(), ArtSpikeCatalog.ALL.stream().map(FurnitureSpec::path).toList());
     }
 
     @Test
-    void everyDecorKeyHasItsEnglishName() {
-        JsonObject lang = json(GENERATED.resolve("assets/herbalwitch/lang/en_us.json"));
-        DecorManifest.lang().forEach((key, value) ->
-                assertEquals(value, lang.has(key) ? lang.get(key).getAsString() : null, key));
-    }
-
-    @Test
-    void everyBlockDropsItself() {
-        for (String id : ids()) {
-            String loot = json(GENERATED.resolve("data/herbalwitch/loot_tables/blocks/" + id + ".json")).toString();
-            assertTrue(loot.contains("\"name\":\"herbalwitch:" + id + "\""), id + " drops " + loot);
-            assertTrue(loot.contains("minecraft:survives_explosion"), id);
-        }
-    }
-
-    @Test
-    void restylingListsEveryOtherFinishOfTheSamePieceOnly() {
-        for (String id : ids()) {
-            JsonObject recipe = json(GENERATED.resolve("data/herbalwitch/recipes/" + id + "_from_restyling.json"));
-            assertEquals("minecraft:stonecutting", recipe.get("type").getAsString(), id);
-            assertEquals("herbalwitch:" + id, recipe.get("result").getAsString(), id);
-            assertEquals(1, recipe.get("count").getAsInt(), id);
-            Set<String> sources = new TreeSet<>();
-            for (JsonElement e : recipe.getAsJsonArray("ingredient")) {
-                sources.add(e.getAsJsonObject().get("item").getAsString());
-            }
-            Set<String> expected = new TreeSet<>();
-            ids().stream().filter(o -> pieceOf(o).equals(pieceOf(id)) && !o.equals(id)).forEach(o -> expected.add("herbalwitch:" + o));
-            assertEquals(expected, sources, id);
-        }
-    }
-
-    @Test
-    void baseRecipesCraftTheDarkOakAppearance() {
+    void everyPieceCraftsDirectlyAndDropsItself() {
         Map<String, Integer> counts = Map.of("armchair", 1, "apothecary_counter", 1, "small_wall_shelf", 2,
                 "table_lamp", 1, "small_rug", 2);
-        PIECES.forEach((piece, family) -> {
-            String id = "decor/" + family + "/" + piece + "/natural/dark_oak";
-            JsonObject recipe = json(GENERATED.resolve("data/herbalwitch/recipes/" + id + ".json"));
-            assertEquals("minecraft:crafting_shaped", recipe.get("type").getAsString(), piece);
+        for (String id : ids()) {
+            JsonObject recipe = generated("data/herbalwitch/recipes/" + id + ".json");
+            assertEquals("minecraft:crafting_shaped", recipe.get("type").getAsString(), id);
             JsonObject result = recipe.getAsJsonObject("result");
-            assertEquals("herbalwitch:" + id, result.get("item").getAsString(), piece);
-            assertEquals(counts.get(piece), result.has("count") ? result.get("count").getAsInt() : 1, piece);
-        });
+            assertEquals("herbalwitch:" + id, result.get("item").getAsString(), id);
+            assertEquals(counts.get(pieceOf(id)), result.has("count") ? result.get("count").getAsInt() : 1, id);
+            String loot = generated("data/herbalwitch/loot_tables/blocks/" + id + ".json").toString();
+            assertTrue(loot.contains("\"name\":\"herbalwitch:" + id + "\"") && loot.contains("minecraft:survives_explosion"), id);
+        }
     }
 
     @Test
     void tagsCoverEveryPieceAndRugsAreNotAxeMineable() {
-        Path tags = GENERATED.resolve("data");
-        JsonArray furniture = json(tags.resolve("herbalwitch/tags/blocks/furniture.json")).getAsJsonArray("values");
-        assertEquals(90, furniture.size());
-        String axe = json(tags.resolve("minecraft/tags/blocks/mineable/axe.json")).getAsJsonArray("values").toString();
+        JsonArray furniture = generated("data/herbalwitch/tags/blocks/furniture.json").getAsJsonArray("values");
+        assertEquals(5, furniture.size());
+        String axe = generated("data/minecraft/tags/blocks/mineable/axe.json").getAsJsonArray("values").toString();
         for (String id : ids()) {
             assertEquals(!pieceOf(id).equals("small_rug"), axe.contains("\"herbalwitch:" + id + "\""), "axe " + id);
-        }
-        for (String piece : PIECES.keySet()) {
-            String values = json(tags.resolve("herbalwitch/tags/items/decor/" + piece + ".json")).getAsJsonArray("values").toString();
-            for (String id : ids()) {
-                assertEquals(pieceOf(id).equals(piece), values.contains("\"herbalwitch:" + id + "\""), piece + " tag " + id);
-            }
         }
     }
 
     @Test
-    void blockstatesSelectTheFinishModel() {
+    void blockstatesUseTheTemplatesDirectly() {
         for (String id : ids()) {
-            JsonObject variants = json(GENERATED.resolve("assets/herbalwitch/blockstates/" + id + ".json")).getAsJsonObject("variants");
+            JsonObject variants = generated("assets/herbalwitch/blockstates/" + id + ".json").getAsJsonObject("variants");
+            String template = "herbalwitch:block/decor/templates/" + DecorManifest.TEMPLATES.get(pieceOf(id));
             switch (pieceOf(id)) {
                 case "table_lamp" -> {
-                    assertEquals(Set.of("lit=false", "lit=true"), variants.keySet(), id);
-                    assertEquals("herbalwitch:block/" + id, variants.getAsJsonObject("lit=false").get("model").getAsString());
-                    assertTrue(variants.getAsJsonObject("lit=true").get("model").getAsString().contains("/lit/"), id);
+                    assertEquals(template + "_off", variants.getAsJsonObject("lit=false").get("model").getAsString());
+                    assertEquals(template + "_on", variants.getAsJsonObject("lit=true").get("model").getAsString());
                 }
-                case "small_rug" -> assertEquals(Set.of(""), variants.keySet(), id);
+                case "small_rug" -> assertEquals(template, variants.getAsJsonObject("").get("model").getAsString());
                 default -> {
-                    assertEquals(Set.of("facing=north", "facing=east", "facing=south", "facing=west"), variants.keySet(), id);
                     Map<String, Integer> turns = Map.of("facing=north", 0, "facing=east", 90, "facing=south", 180, "facing=west", 270);
                     turns.forEach((key, y) -> {
                         JsonObject v = variants.getAsJsonObject(key);
                         assertEquals(y, v.has("y") ? v.get("y").getAsInt() : 0, id + " " + key);
-                        assertEquals("herbalwitch:block/" + id, v.get("model").getAsString(), id);
+                        assertEquals(template, v.get("model").getAsString(), id);
                     });
                 }
             }
         }
     }
 
+    @Test
+    void templatesAreUntintedInTheCottagePaletteWithVines() {
+        boolean vines = false;
+        for (String template : List.of("armchair", "apothecary_counter", "wall_shelf", "table_lamp_off", "table_lamp_on", "rug")) {
+            String id = "herbalwitch:block/decor/templates/" + template;
+            TemplateChecks.check(id, Map.of());
+            Resolved model = ModelResolver.resolve(id);
+            for (Map.Entry<String, String> texture : model.textures().entrySet()) {
+                if (!texture.getKey().equals("particle")) {
+                    String name = texture.getValue().substring(texture.getValue().lastIndexOf('/') + 1);
+                    assertTrue(PALETTE.contains(name), id + " uses " + texture.getValue());
+                    assertTrue(!name.contains("floral"), id + ": no floral fabric");
+                }
+            }
+            vines |= model.textures().containsKey("vine");
+        }
+        assertTrue(vines, "no template trails vines");
+    }
+
+    @Test
+    void onlyTheLitLampGlowsAndBothLampsShareTheirShape() {
+        JsonArray off = ModelResolver.resolve("herbalwitch:block/decor/templates/table_lamp_off").elements();
+        JsonArray on = ModelResolver.resolve("herbalwitch:block/decor/templates/table_lamp_on").elements();
+        assertEquals(off.size(), on.size());
+        int glowing = 0;
+        for (int i = 0; i < off.size(); i++) {
+            assertEquals(off.get(i).getAsJsonObject().get("from"), on.get(i).getAsJsonObject().get("from"));
+            assertEquals(off.get(i).getAsJsonObject().get("to"), on.get(i).getAsJsonObject().get("to"));
+            assertTrue(!off.get(i).getAsJsonObject().has("forge_data"), "the unlit lamp glows");
+            JsonObject element = on.get(i).getAsJsonObject();
+            if (element.has("forge_data")) {
+                assertTrue(element.toString().contains("\"#lamp_shade\""), "only the shade glows");
+                glowing++;
+            }
+        }
+        assertEquals(2, glowing);
+    }
+
+    @Test
+    void everyItemIsItsTemplateWithDeliberateTransforms() {
+        for (String id : ids()) {
+            Resolved item = ModelResolver.resolve("herbalwitch:item/" + id);
+            String template = DecorManifest.TEMPLATES.get(pieceOf(id)) + (pieceOf(id).equals("table_lamp") ? "_off" : "");
+            assertEquals("herbalwitch:block/decor/templates/" + template, item.chain().get(1), id);
+            assertEquals(CONTEXTS, item.display().keySet(), id);
+            JsonElement scale = item.display().getAsJsonObject("gui").getAsJsonArray("scale").get(0);
+            double expected = Set.of("small_rug", "small_wall_shelf").contains(pieceOf(id)) ? 0.75 : 0.625;
+            assertEquals(expected, scale.getAsDouble(), 1e-6, id);
+        }
+    }
 }

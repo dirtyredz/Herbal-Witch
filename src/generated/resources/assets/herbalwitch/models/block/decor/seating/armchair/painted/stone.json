@@ -1,6 +1,0 @@
-{
-  "parent": "herbalwitch:block/decor/templates/armchair",
-  "textures": {
-    "frame": "herbalwitch:block/material/cut_stone"
-  }
-}

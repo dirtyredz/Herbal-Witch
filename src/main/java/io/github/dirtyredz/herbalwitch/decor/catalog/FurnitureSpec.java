@@ -1,11 +1,11 @@
 package io.github.dirtyredz.herbalwitch.decor.catalog;
 
 /**
- * One furniture piece, independent of finish: its stable id, name, behaviour family, the authored
+ * One furniture piece: its stable id, name, behaviour family, the authored
  * template model it uses and how it behaves when placed. Plain data; registration and datagen read it.
  *
  * @param id          stable piece segment, e.g. {@code armchair}; never renamed once released
- * @param displayName English name suffix, e.g. {@code Armchair}
+ * @param displayName English name, e.g. {@code Armchair}
  * @param family      behaviour family; also the first path segment under {@code decor/}
  * @param template    template model name under {@code models/block/decor/templates/} (lamps add
  *                    {@code _off} / {@code _on})
@@ -43,18 +43,8 @@ public record FurnitureSpec(String id, String displayName, Family family, String
         RUG
     }
 
-    /** {@code decor/<family>/<piece>/<palette>/<finish>}: the registry path and every generated path. */
-    public String path(Finish finish) {
-        return pieceDirectory() + "/" + finish.palette().directory() + "/" + finish.id();
-    }
-
-    /** {@code decor/<family>/<piece>}. */
-    public String pieceDirectory() {
+    /** {@code decor/<family>/<piece>}: the registry path and every generated path. */
+    public String path() {
         return "decor/" + family.directory() + "/" + id;
-    }
-
-    /** English name of this piece in a finish, e.g. {@code Dark Oak Armchair}. */
-    public String displayName(Finish finish) {
-        return finish.displayName() + " " + displayName;
     }
 }

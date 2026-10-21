@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "herbalwitch:block/decor/templates/table_lamp_off"
+    },
+    "lit=true": {
+      "model": "herbalwitch:block/decor/templates/table_lamp_on"
+    }
+  }
+}

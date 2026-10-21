@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "N": {
+      "item": "minecraft:gold_nugget"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "S": {
+      "item": "minecraft:dark_oak_slab"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "PNP",
+    "PPP"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/surfaces/apothecary_counter"
+  },
+  "show_notification": true
+}

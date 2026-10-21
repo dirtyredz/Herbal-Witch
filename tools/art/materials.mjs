@@ -1,59 +1,11 @@
-// Material synthesis: the surfaces furniture is built from. Tinted materials (wood grain, painted
-// wood, cut stone) are neutral greys so the finish's frame colour sets their hue in game; brass,
-// glass and tinctures carry their own colour and are never tinted. Every tile is 32 x 32 pixels,
-// i.e. two texels per model pixel.
-import { rng, clamp, grey, shade, image } from './png.mjs';
+// Material synthesis: the surfaces furniture is built from. One art direction, nothing is tinted:
+// dark wood frames, deep green and hot pink fabric, tiny touches of dark purple, brass hardware,
+// trailing ivy. Every tile is 32 x 32 pixels, i.e. two texels per model pixel.
+import { rng, clamp, shade, image } from './png.mjs';
 
 export const SIZE = 32;
 
-/** Natural wood frame: long wavy grain along U with a few darker latewood lines and pores. */
-export function woodGrain() {
-  const rand = rng(1101);
-  const lineOffset = Array.from({ length: SIZE }, () => rand() * 0.6);
-  return image(SIZE, (x, y) => {
-    const wave = Math.sin(x * 0.21 + y * 0.05) * 1.6 + Math.sin(x * 0.07 + 1.3) * 2.2;
-    const ring = (((y + wave + lineOffset[y]) % 5) + 5) % 5;
-    let v = 226 + Math.sin((y + wave) * 1.25) * 9;
-    if (ring < 0.9) v -= 34; // latewood line
-    else if (ring < 1.6) v -= 12;
-    v += (rand() - 0.5) * 10;
-    if (rand() < 0.025) v -= 28; // pore
-    return grey(v);
-  });
-}
-
-/** Painted wood: an even coat with faint grain showing through, brush streaks and pale wear. */
-export function paintedWood() {
-  const rand = rng(2203);
-  return image(SIZE, (x, y) => {
-    let v = 236 + Math.sin(y * 1.1 + Math.sin(x * 0.18) * 1.4) * 4;
-    v += Math.sin(x * 0.9 + y * 0.15) * 2; // brush streaks
-    v += (rand() - 0.5) * 6;
-    if (y % 16 === 15) v -= 22; // board seam
-    if (rand() < 0.012) v += 16; // worn speck
-    return grey(v);
-  });
-}
-
-/** Cut stone: two courses of ashlar per tile with recessed mortar and chisel noise. */
-export function cutStone() {
-  const rand = rng(3307);
-  const blockTone = [0.98, 1.03, 0.95, 1.01, 0.97, 1.04];
-  return image(SIZE, (x, y) => {
-    const course = Math.floor(y / 16);
-    const offset = course % 2 === 0 ? 0 : 12;
-    const col = Math.floor(((x + offset) % SIZE) / 20);
-    const mortarY = y % 16 === 15;
-    const mortarX = (x + offset) % SIZE === 0 || (x + offset) % SIZE === 20;
-    if (mortarY || mortarX) return grey(150 + (rand() - 0.5) * 10);
-    let v = 206 * blockTone[(course * 2 + col) % blockTone.length];
-    if (y % 16 === 0) v += 10; // lit top edge of a course
-    v += (rand() - 0.5) * 22;
-    return grey(v);
-  });
-}
-
-/** Warm brass: diagonal sheen with tarnish speckle. Untinted. */
+/** Warm brass: diagonal sheen with tarnish speckle. */
 export function brass() {
   const rand = rng(4409);
   const base = [196, 152, 64];
@@ -82,7 +34,7 @@ export function glass() {
 
 /**
  * Tinctures seen through bottle glass: three colour bands along U (sage green, amber, plum), each
- * with a lighter meniscus at the top. Models pick a band through their UVs. Untinted.
+ * with a lighter meniscus at the top. Models pick a band through their UVs.
  */
 export function tincture() {
   const rand = rng(5501);
@@ -95,7 +47,7 @@ export function tincture() {
   });
 }
 
-/** Dark wood for the stations and the lantern: rich brown grain along U with pores. Untinted. */
+/** Dark wood for the stations and the lantern: rich brown grain along U with pores. */
 export function darkWood() {
   const rand = rng(6607);
   const lineOffset = Array.from({ length: SIZE }, () => rand() * 0.7);
@@ -159,5 +111,34 @@ export function vine() {
   return image(SIZE, (x, y) => {
     const c = grid[y * SIZE + x];
     return c ? [c[0], c[1], c[2], 255] : [0, 0, 0, 0];
+  });
+}
+
+/** Plain upholstery: only a fine two-tone weave in a / b, no motif. */
+function weave(seed, a, b) {
+  const rand = rng(seed);
+  return image(SIZE, (x, y) => {
+    const f = 1 + (rand() - 0.5) * 0.05;
+    return shade((x + y) % 2 === 0 ? a : b, f);
+  });
+}
+
+/** Deep green upholstery. */
+export function fabricGreen() {
+  return weave(8101, [47, 90, 44], [54, 100, 58]);
+}
+
+/** Hot pink upholstery. */
+export function fabricPink() {
+  return weave(8202, [216, 64, 122], [201, 58, 112]);
+}
+
+/** Dark purple trim for piping, knobs and small details: plain, with a soft diagonal sheen. */
+export function trimPurple() {
+  const rand = rng(8303);
+  return image(SIZE, (x, y) => {
+    const base = (x + y) % 2 === 0 ? [62, 31, 71] : [74, 38, 86];
+    const sheen = 1 + 0.12 * Math.cos(((x - y) / SIZE) * Math.PI * 2);
+    return shade(base, sheen + (rand() - 0.5) * 0.04);
   });
 }

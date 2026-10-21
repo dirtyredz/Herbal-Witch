@@ -1,6 +1,0 @@
-{
-  "parent": "herbalwitch:block/decor/templates/table_lamp_on",
-  "textures": {
-    "frame": "herbalwitch:block/material/cut_stone"
-  }
-}

@@ -1,6 +1,0 @@
-{
-  "parent": "herbalwitch:block/decor/templates/wall_shelf",
-  "textures": {
-    "frame": "herbalwitch:block/material/painted_wood"
-  }
-}

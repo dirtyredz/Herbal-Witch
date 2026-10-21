@@ -1,8 +1,10 @@
 {
+  "render_type": "minecraft:cutout",
   "textures": {
-    "frame": "herbalwitch:block/material/wood_grain",
+    "dark_wood": "herbalwitch:block/material/dark_wood",
+    "vine": "herbalwitch:block/material/vine",
     "soil": "herbalwitch:block/botany/garden/soil_dry",
-    "particle": "#soil"
+    "particle": "#dark_wood"
   },
   "elements": [
     {
@@ -10,8 +12,8 @@
       "from": [2, 0, 2],
       "to": [14, 13, 14],
       "faces": {
-        "up": {"uv": [2, 2, 14, 14], "texture": "#soil"},
-        "down": {"uv": [2, 2, 14, 14], "texture": "#soil", "cullface": "down"}
+        "up": {"uv": [2,2,14,14], "texture": "#soil"},
+        "down": {"uv": [2,2,14,14], "texture": "#soil", "cullface": "down"}
       }
     },
     {
@@ -19,12 +21,12 @@
       "from": [0, 0, 0],
       "to": [16, 15, 2],
       "faces": {
-        "north": {"uv": [0, 1, 16, 16], "texture": "#frame", "tintindex": 0, "cullface": "north"},
-        "south": {"uv": [0, 1, 16, 16], "texture": "#frame", "tintindex": 0},
-        "east": {"uv": [14, 1, 16, 16], "texture": "#frame", "tintindex": 0, "cullface": "east"},
-        "west": {"uv": [0, 1, 2, 16], "texture": "#frame", "tintindex": 0, "cullface": "west"},
-        "up": {"uv": [0, 0, 16, 2], "texture": "#frame", "tintindex": 0},
-        "down": {"uv": [0, 14, 16, 16], "texture": "#frame", "tintindex": 0, "cullface": "down"}
+        "north": {"uv": [0,1,16,16], "texture": "#dark_wood", "cullface": "north"},
+        "east": {"uv": [14,1,16,16], "texture": "#dark_wood", "cullface": "east"},
+        "south": {"uv": [0,1,16,16], "texture": "#dark_wood"},
+        "west": {"uv": [0,1,2,16], "texture": "#dark_wood", "cullface": "west"},
+        "up": {"uv": [0,0,16,2], "texture": "#dark_wood"},
+        "down": {"uv": [0,14,16,16], "texture": "#dark_wood", "cullface": "down"}
       }
     },
     {
@@ -32,12 +34,12 @@
       "from": [0, 0, 14],
       "to": [16, 15, 16],
       "faces": {
-        "north": {"uv": [0, 1, 16, 16], "texture": "#frame", "tintindex": 0},
-        "south": {"uv": [0, 1, 16, 16], "texture": "#frame", "tintindex": 0, "cullface": "south"},
-        "east": {"uv": [0, 1, 2, 16], "texture": "#frame", "tintindex": 0, "cullface": "east"},
-        "west": {"uv": [14, 1, 16, 16], "texture": "#frame", "tintindex": 0, "cullface": "west"},
-        "up": {"uv": [0, 14, 16, 16], "texture": "#frame", "tintindex": 0},
-        "down": {"uv": [0, 0, 16, 2], "texture": "#frame", "tintindex": 0, "cullface": "down"}
+        "north": {"uv": [0,1,16,16], "texture": "#dark_wood"},
+        "east": {"uv": [0,1,2,16], "texture": "#dark_wood", "cullface": "east"},
+        "south": {"uv": [0,1,16,16], "texture": "#dark_wood", "cullface": "south"},
+        "west": {"uv": [14,1,16,16], "texture": "#dark_wood", "cullface": "west"},
+        "up": {"uv": [0,14,16,16], "texture": "#dark_wood"},
+        "down": {"uv": [0,0,16,2], "texture": "#dark_wood", "cullface": "down"}
       }
     },
     {
@@ -45,10 +47,10 @@
       "from": [0, 0, 2],
       "to": [2, 15, 14],
       "faces": {
-        "east": {"uv": [2, 1, 14, 16], "texture": "#frame", "tintindex": 0},
-        "west": {"uv": [2, 1, 14, 16], "texture": "#frame", "tintindex": 0, "cullface": "west"},
-        "up": {"uv": [0, 2, 2, 14], "texture": "#frame", "tintindex": 0},
-        "down": {"uv": [0, 2, 2, 14], "texture": "#frame", "tintindex": 0, "cullface": "down"}
+        "east": {"uv": [2,1,14,16], "texture": "#dark_wood"},
+        "west": {"uv": [2,1,14,16], "texture": "#dark_wood", "cullface": "west"},
+        "up": {"uv": [0,2,2,14], "texture": "#dark_wood"},
+        "down": {"uv": [0,2,2,14], "texture": "#dark_wood", "cullface": "down"}
       }
     },
     {
@@ -56,10 +58,19 @@
       "from": [14, 0, 2],
       "to": [16, 15, 14],
       "faces": {
-        "east": {"uv": [2, 1, 14, 16], "texture": "#frame", "tintindex": 0, "cullface": "east"},
-        "west": {"uv": [2, 1, 14, 16], "texture": "#frame", "tintindex": 0},
-        "up": {"uv": [14, 2, 16, 14], "texture": "#frame", "tintindex": 0},
-        "down": {"uv": [14, 2, 16, 14], "texture": "#frame", "tintindex": 0, "cullface": "down"}
+        "east": {"uv": [2,1,14,16], "texture": "#dark_wood", "cullface": "east"},
+        "west": {"uv": [2,1,14,16], "texture": "#dark_wood"},
+        "up": {"uv": [14,2,16,14], "texture": "#dark_wood"},
+        "down": {"uv": [14,2,16,14], "texture": "#dark_wood", "cullface": "down"}
+      }
+    },
+    {
+      "name": "vine_inner",
+      "from": [3, 9, 2],
+      "to": [6, 15, 3],
+      "faces": {
+        "north": {"uv": [0,0,3,6], "texture": "#vine"},
+        "south": {"uv": [0,0,3,6], "texture": "#vine"}
       }
     }
   ]

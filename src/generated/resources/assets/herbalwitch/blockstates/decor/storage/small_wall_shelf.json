@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "herbalwitch:block/decor/templates/wall_shelf",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "herbalwitch:block/decor/templates/wall_shelf"
+    },
+    "facing=south": {
+      "model": "herbalwitch:block/decor/templates/wall_shelf",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "herbalwitch:block/decor/templates/wall_shelf",
+      "y": 270
+    }
+  }
+}

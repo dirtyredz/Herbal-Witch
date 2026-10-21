@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "herbalwitch:block/decor/templates/armchair",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "herbalwitch:block/decor/templates/armchair"
+    },
+    "facing=south": {
+      "model": "herbalwitch:block/decor/templates/armchair",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "herbalwitch:block/decor/templates/armchair",
+      "y": 270
+    }
+  }
+}

@@ -6,7 +6,7 @@ import io.github.dirtyredz.herbalwitch.decor.catalog.FurnitureSpec.Family;
 import java.util.List;
 
 /**
- * The five representative pieces of the Milestone 1 art spike, each registered in all 18 finishes.
+ * The five representative pieces of the Milestone 1 art spike, each registered once in the cottage design.
  * Mass furniture production waits for the owner's approval of these (docs/ART.md).
  */
 public final class ArtSpikeCatalog {

@@ -1,12 +1,11 @@
 package io.github.dirtyredz.herbalwitch.data.botany;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import io.github.dirtyredz.herbalwitch.data.botany.BotanyManifest.Herb;
 import io.github.dirtyredz.herbalwitch.data.fixture.ModelResolver;
 import io.github.dirtyredz.herbalwitch.data.fixture.ModelResolver.Resolved;
 import io.github.dirtyredz.herbalwitch.data.fixture.ResourceFiles;
 import io.github.dirtyredz.herbalwitch.data.fixture.ResourceFiles.Png;
+import io.github.dirtyredz.herbalwitch.data.fixture.TemplateChecks;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Files;
@@ -16,8 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static io.github.dirtyredz.herbalwitch.data.fixture.ModelResolver.faceSize;
-import static io.github.dirtyredz.herbalwitch.data.fixture.ModelResolver.vec;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -103,28 +100,15 @@ class BotanyModelsTest {
     }
 
     @Test
-    void herbBedKeepsOneUvUnitPerPixelAndTintsOnlyItsFrame() {
+    void herbBedIsAnUntintedDarkWoodTemplateWithDryAndMoistSoil() {
         Map<String, String> soils = Map.of("herbalwitch:block/" + BotanyManifest.BED, "soil_dry",
                 "herbalwitch:block/" + BotanyManifest.BED + "_moist", "soil_moist");
         soils.forEach((id, soil) -> {
+            TemplateChecks.check(id, Map.of());
             Resolved model = ModelResolver.resolve(id);
             assertEquals("herbalwitch:block/botany/garden/" + soil, model.texture("#soil"), id);
+            assertEquals("herbalwitch:block/material/dark_wood", model.texture("#dark_wood"), id);
             assertEquals(32, ResourceFiles.pngSize(ModelResolver.texturePng(model.texture("#soil")))[0]);
-            for (JsonElement e : model.elements()) {
-                JsonObject element = e.getAsJsonObject();
-                double[] from = vec(element, "from");
-                double[] to = vec(element, "to");
-                element.getAsJsonObject("faces").entrySet().forEach(face -> {
-                    JsonObject f = face.getValue().getAsJsonObject();
-                    double[] size = faceSize(face.getKey(), from, to);
-                    double du = Math.abs(f.getAsJsonArray("uv").get(2).getAsDouble() - f.getAsJsonArray("uv").get(0).getAsDouble());
-                    double dv = Math.abs(f.getAsJsonArray("uv").get(3).getAsDouble() - f.getAsJsonArray("uv").get(1).getAsDouble());
-                    assertEquals(size[0], du, 1e-6, id + " " + face.getKey());
-                    assertEquals(size[1], dv, 1e-6, id + " " + face.getKey());
-                    boolean frame = f.get("texture").getAsString().equals("#frame");
-                    assertEquals(frame, f.has("tintindex"), id + " tint on " + f.get("texture"));
-                });
-            }
         });
         assertEquals("herbalwitch:block/" + BotanyManifest.BED,
                 ModelResolver.resolve("herbalwitch:item/" + BotanyManifest.BED).chain().get(1));

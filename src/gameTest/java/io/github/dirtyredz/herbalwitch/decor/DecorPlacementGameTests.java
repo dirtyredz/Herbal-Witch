@@ -3,8 +3,6 @@ package io.github.dirtyredz.herbalwitch.decor;
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.decor.block.TableLampBlock;
 import io.github.dirtyredz.herbalwitch.decor.catalog.ArtSpikeCatalog;
-import io.github.dirtyredz.herbalwitch.decor.catalog.Finish;
-import io.github.dirtyredz.herbalwitch.decor.catalog.FinishCatalog;
 import io.github.dirtyredz.herbalwitch.decor.catalog.FurnitureSpec;
 import io.github.dirtyredz.herbalwitch.decor.registry.DecorBlocks;
 import io.github.dirtyredz.herbalwitch.decor.registry.DecorItems;
@@ -44,7 +42,6 @@ import static io.github.dirtyredz.herbalwitch.fixture.PlayerFixtures.useItemOn;
 @PrefixGameTestTemplate(false)
 public final class DecorPlacementGameTests {
     private static final List<Direction> HORIZONTAL = List.of(Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST);
-    private static final Finish PLUM = FinishCatalog.PAINTED.get(5);
 
     private DecorPlacementGameTests() {
     }
@@ -54,7 +51,7 @@ public final class DecorPlacementGameTests {
         floor(helper);
         int x = 1;
         for (FurnitureSpec spec : List.of(ArtSpikeCatalog.ARMCHAIR, ArtSpikeCatalog.APOTHECARY_COUNTER)) {
-            Block block = DecorBlocks.block(spec, PLUM);
+            Block block = DecorBlocks.block(spec);
             int z = 1;
             for (Direction looking : HORIZONTAL) {
                 ServerPlayer player = player(helper, spec.id() + "_" + looking, GameType.SURVIVAL, looking);
@@ -81,7 +78,7 @@ public final class DecorPlacementGameTests {
                 Direction.SOUTH, new double[] {8, 14, 2.5}, Direction.WEST, new double[] {13.5, 14, 8});
         Map<Direction, double[]> front = Map.of(Direction.NORTH, new double[] {8, 14, 2.5}, Direction.EAST, new double[] {13.5, 14, 8},
                 Direction.SOUTH, new double[] {8, 14, 13.5}, Direction.WEST, new double[] {2.5, 14, 8});
-        Block chair = DecorBlocks.block(ArtSpikeCatalog.ARMCHAIR, FinishCatalog.BASE);
+        Block chair = DecorBlocks.block(ArtSpikeCatalog.ARMCHAIR);
         BlockPos pos = new BlockPos(4, 1, 4);
         for (Direction facing : HORIZONTAL) {
             BlockState state = chair.defaultBlockState().setValue(HorizontalDirectionalBlock.FACING, facing);
@@ -99,7 +96,7 @@ public final class DecorPlacementGameTests {
     @GameTest(template = TEMPLATE)
     public static void wallShelfNeedsASturdyWallAndDropsWhenItGoes(GameTestHelper helper) {
         floor(helper);
-        Item shelf = DecorItems.item(ArtSpikeCatalog.SMALL_WALL_SHELF, PLUM);
+        Item shelf = DecorItems.item(ArtSpikeCatalog.SMALL_WALL_SHELF);
         ServerPlayer player = player(helper, "shelf", GameType.SURVIVAL, Direction.SOUTH);
         // Clicking the floor in open space finds no wall: nothing placed, item kept.
         ItemStack stack = new ItemStack(shelf);
@@ -112,7 +109,7 @@ public final class DecorPlacementGameTests {
         InteractionResult hung = useItemOn(helper, player, new ItemStack(shelf), wall, Direction.NORTH);
         BlockPos at = wall.north();
         check(hung.consumesAction(), "not hung on the wall: " + hung);
-        check(helper.getBlockState(at).is(DecorBlocks.block(ArtSpikeCatalog.SMALL_WALL_SHELF, PLUM)), "shelf missing");
+        check(helper.getBlockState(at).is(DecorBlocks.block(ArtSpikeCatalog.SMALL_WALL_SHELF)), "shelf missing");
         check(helper.getBlockState(at).getValue(HorizontalDirectionalBlock.FACING) == Direction.NORTH, "shelf faces the wall");
         // A wall without a sturdy face (a thin glass pane) does not hold it.
         helper.setBlock(new BlockPos(7, 2, 5), Blocks.GLASS_PANE);
@@ -129,12 +126,12 @@ public final class DecorPlacementGameTests {
     @GameTest(template = TEMPLATE)
     public static void lampNeedsASurfaceAndStandsOnTheCounter(GameTestHelper helper) {
         floor(helper);
-        Item lamp = DecorItems.item(ArtSpikeCatalog.TABLE_LAMP, PLUM);
+        Item lamp = DecorItems.item(ArtSpikeCatalog.TABLE_LAMP);
         ServerPlayer player = player(helper, "lamp", GameType.SURVIVAL, Direction.NORTH);
         check(placeOnFloor(helper, player, lamp, new BlockPos(1, 1, 1)).consumesAction(), "lamp not placed on the floor");
         check(!helper.getBlockState(new BlockPos(1, 1, 1)).getValue(TableLampBlock.LIT), "a new lamp is off");
         // On top of an apothecary counter.
-        helper.setBlock(new BlockPos(4, 1, 4), DecorBlocks.block(ArtSpikeCatalog.APOTHECARY_COUNTER, FinishCatalog.BASE));
+        helper.setBlock(new BlockPos(4, 1, 4), DecorBlocks.block(ArtSpikeCatalog.APOTHECARY_COUNTER));
         check(placeOnFloor(helper, player, lamp, new BlockPos(4, 2, 4)).consumesAction(), "lamp not placed on the counter");
         check(helper.getBlockState(new BlockPos(4, 2, 4)).getBlock() instanceof TableLampBlock, "lamp missing on the counter");
         // Against the side of a floating block, with air below: refused, item kept.
@@ -154,10 +151,10 @@ public final class DecorPlacementGameTests {
     @GameTest(template = TEMPLATE)
     public static void rugNeedsAFloorAndDropsWhenItGoes(GameTestHelper helper) {
         floor(helper);
-        Item rug = DecorItems.item(ArtSpikeCatalog.SMALL_RUG, PLUM);
+        Item rug = DecorItems.item(ArtSpikeCatalog.SMALL_RUG);
         ServerPlayer player = player(helper, "rug", GameType.SURVIVAL, Direction.NORTH);
         check(placeOnFloor(helper, player, rug, new BlockPos(2, 1, 2)).consumesAction(), "rug not placed");
-        check(helper.getBlockState(new BlockPos(2, 1, 2)).is(DecorBlocks.block(ArtSpikeCatalog.SMALL_RUG, PLUM)), "rug missing");
+        check(helper.getBlockState(new BlockPos(2, 1, 2)).is(DecorBlocks.block(ArtSpikeCatalog.SMALL_RUG)), "rug missing");
         clearDrops(helper);
         helper.setBlock(new BlockPos(2, 0, 2), Blocks.AIR);
         check(helper.getBlockState(new BlockPos(2, 1, 2)).isAir(), "rug floats");
@@ -170,18 +167,18 @@ public final class DecorPlacementGameTests {
         floor(helper);
         ServerPlayer player = player(helper, "neighbours", GameType.SURVIVAL, Direction.NORTH);
         List<BlockPos> row = List.of(new BlockPos(2, 1, 4), new BlockPos(3, 1, 4), new BlockPos(4, 1, 4), new BlockPos(5, 1, 4));
-        List<Item> items = List.of(DecorItems.item(ArtSpikeCatalog.ARMCHAIR, FinishCatalog.BASE),
-                DecorItems.item(ArtSpikeCatalog.ARMCHAIR, PLUM),
-                DecorItems.item(ArtSpikeCatalog.APOTHECARY_COUNTER, PLUM),
-                DecorItems.item(ArtSpikeCatalog.SMALL_RUG, PLUM));
+        List<Item> items = List.of(DecorItems.item(ArtSpikeCatalog.ARMCHAIR),
+                DecorItems.item(ArtSpikeCatalog.ARMCHAIR),
+                DecorItems.item(ArtSpikeCatalog.APOTHECARY_COUNTER),
+                DecorItems.item(ArtSpikeCatalog.SMALL_RUG));
         for (int i = 0; i < row.size(); i++) {
             check(placeOnFloor(helper, player, items.get(i), row.get(i)).consumesAction(), "placement " + i + " failed");
         }
         // A shelf on a wall behind the rug, beside the lamp on the counter.
         helper.setBlock(new BlockPos(5, 2, 5), Blocks.STONE);
-        check(useItemOn(helper, player, new ItemStack(DecorItems.item(ArtSpikeCatalog.SMALL_WALL_SHELF, PLUM)),
+        check(useItemOn(helper, player, new ItemStack(DecorItems.item(ArtSpikeCatalog.SMALL_WALL_SHELF)),
                 new BlockPos(5, 2, 5), Direction.NORTH).consumesAction(), "shelf not hung");
-        check(placeOnFloor(helper, player, DecorItems.item(ArtSpikeCatalog.TABLE_LAMP, PLUM), new BlockPos(4, 2, 4)).consumesAction(),
+        check(placeOnFloor(helper, player, DecorItems.item(ArtSpikeCatalog.TABLE_LAMP), new BlockPos(4, 2, 4)).consumesAction(),
                 "lamp not placed on the counter");
         for (int i = 0; i < row.size(); i++) {
             check(helper.getBlockState(row.get(i)).is(Block.byItem(items.get(i))), "piece " + i + " disturbed");
@@ -191,21 +188,19 @@ public final class DecorPlacementGameTests {
     }
 
     @GameTest(template = TEMPLATE)
-    public static void breakingEveryPieceDropsItsOwnFinish(GameTestHelper helper) {
+    public static void breakingEveryPieceDropsItself(GameTestHelper helper) {
         floor(helper);
         helper.setBlock(new BlockPos(4, 2, 8), Blocks.STONE);
-        for (Finish finish : List.of(FinishCatalog.BASE, PLUM, FinishCatalog.PAINTED.get(1))) {
-            for (FurnitureSpec spec : ArtSpikeCatalog.ALL) {
-                Block block = DecorBlocks.block(spec, finish);
+        for (FurnitureSpec spec : ArtSpikeCatalog.ALL) {
+                Block block = DecorBlocks.block(spec);
                 BlockPos pos = spec == ArtSpikeCatalog.SMALL_WALL_SHELF ? new BlockPos(4, 2, 7) : new BlockPos(2, 1, 2);
                 helper.setBlock(pos, block);
                 clearDrops(helper);
                 helper.getLevel().destroyBlock(helper.absolutePos(pos), true); // GameTestHelper.destroyBlock drops nothing
-                check(helper.getBlockState(pos).isAir(), spec.id() + " " + finish.id() + " not broken");
+                check(helper.getBlockState(pos).isAir(), spec.id() + " not broken");
                 check(dropped(helper, block.asItem()) == 1 && droppedAny(helper) == 1,
-                        spec.id() + " " + finish.id() + " dropped " + dropped(helper, block.asItem()) + " own, " + droppedAny(helper) + " total");
+                        spec.id() + " dropped " + dropped(helper, block.asItem()) + " own, " + droppedAny(helper) + " total");
             }
-        }
         helper.succeed();
     }
 

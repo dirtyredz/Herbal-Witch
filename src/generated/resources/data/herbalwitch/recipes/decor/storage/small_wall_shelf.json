@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "item": "minecraft:dark_oak_slab"
+    },
+    "T": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "T T"
+  ],
+  "result": {
+    "count": 2,
+    "item": "herbalwitch:decor/storage/small_wall_shelf"
+  },
+  "show_notification": true
+}
