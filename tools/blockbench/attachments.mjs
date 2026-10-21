@@ -7,12 +7,6 @@
 import { bundle } from '../models/preparations/bundles.mjs';
 import { explicitUvs } from '../models/geometry.mjs';
 
-/** The texture variables an attachment's generated geometry binds. */
-export function attachmentVariables(def) {
-  if (def.kind === 'bundle') return [`bundle_${def.herb}`, 'parts'];
-  throw new Error(`unknown attachment kind ${def.kind}`);
-}
-
 /** Generated elements (explicit UVs) for attachment `def` anchored at `origin`. */
 export function expandAttachment(def, origin) {
   if (def.kind !== 'bundle') throw new Error(`unknown attachment kind ${def.kind}`);
