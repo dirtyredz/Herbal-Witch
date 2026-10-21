@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "herbalwitch:block/botany/shade/valerian/stage_0"
+    },
+    "age=1": {
+      "model": "herbalwitch:block/botany/shade/valerian/stage_1"
+    },
+    "age=2": {
+      "model": "herbalwitch:block/botany/shade/valerian/stage_2"
+    },
+    "age=3": {
+      "model": "herbalwitch:block/botany/shade/valerian/stage_3"
+    }
+  }
+}

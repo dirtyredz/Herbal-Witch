@@ -1,0 +1,7 @@
+{
+  "discovery_chance": 0.03125,
+  "habitat": "herbalwitch:botany/habitat/dry",
+  "harvest_bonus_chance": 0.25,
+  "herb": "herbalwitch:botany/dry/thyme/plant",
+  "preferences": []
+}

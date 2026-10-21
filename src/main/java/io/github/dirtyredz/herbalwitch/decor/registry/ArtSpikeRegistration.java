@@ -8,6 +8,8 @@ import io.github.dirtyredz.herbalwitch.decor.catalog.Finish;
 import io.github.dirtyredz.herbalwitch.decor.catalog.FinishCatalog;
 import io.github.dirtyredz.herbalwitch.decor.catalog.FurnitureSpec;
 import io.github.dirtyredz.herbalwitch.decor.shape.ArtSpikeShapes;
+import io.github.dirtyredz.herbalwitch.decor.showcase.DecorShowcaseSection;
+import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseRegistry;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CarpetBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -47,6 +49,7 @@ public final class ArtSpikeRegistration {
         DecorBlocks.BLOCKS.register(modBus);
         DecorItems.ITEMS.register(modBus);
         DecorCreativeTab.TABS.register(modBus);
+        ShowcaseRegistry.register(new DecorShowcaseSection());
     }
 
     static BlockBehaviour.Properties properties(FurnitureSpec spec, Finish finish) {

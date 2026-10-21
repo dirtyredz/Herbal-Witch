@@ -1,0 +1,9 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#herbalwitch:botany/habitat/wet",
+  "features": [
+    "herbalwitch:botany/wet/mint",
+    "herbalwitch:botany/wet/nettle"
+  ],
+  "step": "vegetal_decoration"
+}

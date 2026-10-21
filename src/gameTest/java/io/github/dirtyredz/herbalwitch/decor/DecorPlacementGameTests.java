@@ -29,15 +29,15 @@ import net.minecraftforge.gametest.PrefixGameTestTemplate;
 import java.util.List;
 import java.util.Map;
 
-import static io.github.dirtyredz.herbalwitch.fixture.DecorFixtures.TEMPLATE;
-import static io.github.dirtyredz.herbalwitch.fixture.DecorFixtures.check;
-import static io.github.dirtyredz.herbalwitch.fixture.DecorFixtures.clearDrops;
-import static io.github.dirtyredz.herbalwitch.fixture.DecorFixtures.dropped;
-import static io.github.dirtyredz.herbalwitch.fixture.DecorFixtures.droppedAny;
-import static io.github.dirtyredz.herbalwitch.fixture.DecorFixtures.floor;
-import static io.github.dirtyredz.herbalwitch.fixture.DecorFixtures.placeOnFloor;
-import static io.github.dirtyredz.herbalwitch.fixture.DecorFixtures.player;
-import static io.github.dirtyredz.herbalwitch.fixture.DecorFixtures.useItemOn;
+import static io.github.dirtyredz.herbalwitch.fixture.WorldFixtures.TEMPLATE;
+import static io.github.dirtyredz.herbalwitch.fixture.WorldFixtures.check;
+import static io.github.dirtyredz.herbalwitch.fixture.WorldFixtures.clearDrops;
+import static io.github.dirtyredz.herbalwitch.fixture.WorldFixtures.dropped;
+import static io.github.dirtyredz.herbalwitch.fixture.WorldFixtures.droppedAny;
+import static io.github.dirtyredz.herbalwitch.fixture.WorldFixtures.floor;
+import static io.github.dirtyredz.herbalwitch.fixture.PlayerFixtures.placeOnFloor;
+import static io.github.dirtyredz.herbalwitch.fixture.PlayerFixtures.player;
+import static io.github.dirtyredz.herbalwitch.fixture.PlayerFixtures.useItemOn;
 
 /** Placement through the real item, facing, support rules, collision, neighbours and drops. */
 @GameTestHolder(HerbalWitch.MOD_ID)

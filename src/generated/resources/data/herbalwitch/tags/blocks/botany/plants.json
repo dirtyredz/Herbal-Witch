@@ -1,0 +1,18 @@
+{
+  "values": [
+    "herbalwitch:botany/temperate/lavender/plant",
+    "herbalwitch:botany/temperate/sage/plant",
+    "herbalwitch:botany/temperate/chamomile/plant",
+    "herbalwitch:botany/temperate/yarrow/plant",
+    "herbalwitch:botany/dry/rosemary/plant",
+    "herbalwitch:botany/dry/thyme/plant",
+    "herbalwitch:botany/wet/mint/plant",
+    "herbalwitch:botany/wet/nettle/plant",
+    "herbalwitch:botany/shade/valerian/plant",
+    "herbalwitch:botany/shade/mugwort/plant",
+    "herbalwitch:botany/woodland/belladonna/plant",
+    "herbalwitch:botany/woodland/nightshade/plant",
+    "herbalwitch:botany/woodland/wolfsbane/plant",
+    "herbalwitch:botany/woodland/mandrake/plant"
+  ]
+}

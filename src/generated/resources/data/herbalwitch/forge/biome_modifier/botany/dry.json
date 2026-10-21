@@ -1,0 +1,9 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#herbalwitch:botany/habitat/dry",
+  "features": [
+    "herbalwitch:botany/dry/rosemary",
+    "herbalwitch:botany/dry/thyme"
+  ],
+  "step": "vegetal_decoration"
+}

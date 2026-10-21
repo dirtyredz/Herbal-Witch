@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_dirt": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:dirt"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "herbalwitch:botany/garden/herb_bed"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_dirt",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "herbalwitch:botany/garden/herb_bed"
+    ]
+  },
+  "sends_telemetry_event": false
+}

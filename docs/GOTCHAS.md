@@ -29,3 +29,16 @@
   explicit death-clone and sync; SavedData must be marked dirty and kept on the Overworld; recipe
   reloads can remove a recipe mid-process; copied capture items must not duplicate a creature;
   Minecraft saves are not transactions across player, chunk and SavedData files.
+- **Shared datagen outputs have one writer.** Two providers writing `lang/en_us.json`, a tag file,
+  `global_loot_modifiers.json` or recipes overwrite each other (and vanilla names every
+  RecipeProvider "Recipes", which the generator refuses twice). Features contribute to
+  `HerbalWitchLanguageProvider`, `HerbalWitch{Block,Item}TagsProvider`, `HerbalWitchRecipeProvider`
+  and `HerbalWitchLootModifierProvider`.
+- **Herb plants survive without light.** Vanilla crops need light to survive, but light is not
+  computed while worldgen places patches, so herbs check soil only (growth still needs light).
+  GameTest areas have little sky light: growth tests put a light source beside the plant.
+- **Showcase sections must not touch registries while planning.** Placements carry lazy
+  `Supplier<BlockState>`s (lambdas, not `Blocks.X::defaultBlockState`, which evaluates `Blocks`
+  eagerly) so the plan is unit-testable without a Minecraft bootstrap.
+- **The showcase refuses an occupied plot.** Signs and barrels are block entities, so a second run
+  over a built showcase is refused by the preflight; use a fresh flat plot.

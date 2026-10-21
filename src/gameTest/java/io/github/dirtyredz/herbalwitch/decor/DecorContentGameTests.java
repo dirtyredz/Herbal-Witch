@@ -39,8 +39,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-import static io.github.dirtyredz.herbalwitch.fixture.DecorFixtures.TEMPLATE;
-import static io.github.dirtyredz.herbalwitch.fixture.DecorFixtures.check;
+import static io.github.dirtyredz.herbalwitch.fixture.WorldFixtures.TEMPLATE;
+import static io.github.dirtyredz.herbalwitch.fixture.WorldFixtures.check;
 
 /** Registries, block items, the creative tab, loaded recipes, tags and loot, as a dedicated server sees them. */
 @GameTestHolder(HerbalWitch.MOD_ID)
@@ -51,8 +51,8 @@ public final class DecorContentGameTests {
 
     @GameTest(template = TEMPLATE)
     public static void ninetyBlocksAndItemsUnderStableIds(GameTestHelper helper) {
-        long blocks = ForgeRegistries.BLOCKS.getKeys().stream().filter(k -> k.getNamespace().equals(HerbalWitch.MOD_ID)).count();
-        long items = ForgeRegistries.ITEMS.getKeys().stream().filter(k -> k.getNamespace().equals(HerbalWitch.MOD_ID)).count();
+        long blocks = ForgeRegistries.BLOCKS.getKeys().stream().filter(DecorContentGameTests::isDecor).count();
+        long items = ForgeRegistries.ITEMS.getKeys().stream().filter(DecorContentGameTests::isDecor).count();
         check(blocks == 90, "expected 90 blocks, found " + blocks);
         check(items == 90, "expected 90 items, found " + items);
         Map<String, String> families = Map.of("armchair", "seating", "apothecary_counter", "surfaces",
@@ -116,9 +116,9 @@ public final class DecorContentGameTests {
         expect(level, grid(new ItemStack(Items.GREEN_CARPET), new ItemStack(Items.STRING), new ItemStack(Items.RED_CARPET),
                 e, e, e, e, e, e), ArtSpikeCatalog.SMALL_RUG, 2);
         long crafting = level.getRecipeManager().getAllRecipesFor(RecipeType.CRAFTING).stream()
-                .filter(r -> r.getId().getNamespace().equals(HerbalWitch.MOD_ID)).count();
+                .filter(r -> isDecor(r.getId())).count();
         long stonecutting = level.getRecipeManager().getAllRecipesFor(RecipeType.STONECUTTING).stream()
-                .filter(r -> r.getId().getNamespace().equals(HerbalWitch.MOD_ID)).count();
+                .filter(r -> isDecor(r.getId())).count();
         check(crafting == 5, "expected 5 crafting recipes, loaded " + crafting);
         check(stonecutting == 90, "expected 90 restyling recipes, loaded " + stonecutting);
         helper.succeed();
@@ -165,6 +165,11 @@ public final class DecorContentGameTests {
             grid.setItem(i, stacks[i].copy());
         }
         return grid;
+    }
+
+    /** Decor's own ids; other features share the namespace. */
+    private static boolean isDecor(ResourceLocation id) {
+        return id.getNamespace().equals(HerbalWitch.MOD_ID) && id.getPath().startsWith("decor/");
     }
 
     private static void expect(ServerLevel level, TransientCraftingContainer grid, FurnitureSpec spec, int count) {

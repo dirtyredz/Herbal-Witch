@@ -1,12 +1,20 @@
 package io.github.dirtyredz.herbalwitch.data;
 
+import io.github.dirtyredz.herbalwitch.data.client.botany.BotanyItemModelProvider;
+import io.github.dirtyredz.herbalwitch.data.client.botany.BotanyModelProvider;
 import io.github.dirtyredz.herbalwitch.data.client.decor.DecorItemModelProvider;
-import io.github.dirtyredz.herbalwitch.data.client.decor.DecorLanguageProvider;
 import io.github.dirtyredz.herbalwitch.data.client.decor.DecorModelProvider;
+import io.github.dirtyredz.herbalwitch.data.client.language.HerbalWitchLanguageProvider;
+import io.github.dirtyredz.herbalwitch.data.server.botany.BotanyBiomeTagsProvider;
+import io.github.dirtyredz.herbalwitch.data.server.botany.BotanyBlockLoot;
+import io.github.dirtyredz.herbalwitch.data.server.botany.BotanyConditionProvider;
+
+import io.github.dirtyredz.herbalwitch.data.server.botany.BotanyWorldgenProvider;
 import io.github.dirtyredz.herbalwitch.data.server.decor.DecorBlockLoot;
-import io.github.dirtyredz.herbalwitch.data.server.decor.DecorBlockTagsProvider;
-import io.github.dirtyredz.herbalwitch.data.server.decor.DecorItemTagsProvider;
-import io.github.dirtyredz.herbalwitch.data.server.decor.DecorRecipeProvider;
+import io.github.dirtyredz.herbalwitch.data.server.recipes.HerbalWitchRecipeProvider;
+import io.github.dirtyredz.herbalwitch.data.server.loot.HerbalWitchLootModifierProvider;
+import io.github.dirtyredz.herbalwitch.data.server.tags.HerbalWitchBlockTagsProvider;
+import io.github.dirtyredz.herbalwitch.data.server.tags.HerbalWitchItemTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -19,7 +27,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-/** Registers the data providers for {@code runData}. Provider registration only; nothing here runs in a game. */
+/**
+ * Registers the data providers for {@code runData}. Provider registration only; nothing here runs in
+ * a game. Shared outputs (language, block/item tags, loot tables, global loot modifiers) each have
+ * one provider that features contribute to.
+ */
 public final class HerbalWitchDataProviders {
     private HerbalWitchDataProviders() {
     }
@@ -32,14 +44,21 @@ public final class HerbalWitchDataProviders {
 
         generator.addProvider(event.includeClient(), new DecorModelProvider(output, existingFiles));
         generator.addProvider(event.includeClient(), new DecorItemModelProvider(output, existingFiles));
-        generator.addProvider(event.includeClient(), new DecorLanguageProvider(output));
+        generator.addProvider(event.includeClient(), new BotanyModelProvider(output, existingFiles));
+        generator.addProvider(event.includeClient(), new BotanyItemModelProvider(output, existingFiles));
+        generator.addProvider(event.includeClient(), new HerbalWitchLanguageProvider(output));
 
-        generator.addProvider(event.includeServer(), new DecorRecipeProvider(output));
-        generator.addProvider(event.includeServer(), new LootTableProvider(output, Set.of(),
-                List.of(new LootTableProvider.SubProviderEntry(DecorBlockLoot::new, LootContextParamSets.BLOCK))));
-        DecorBlockTagsProvider blockTags = generator.addProvider(event.includeServer(),
-                new DecorBlockTagsProvider(output, lookup, existingFiles));
+        generator.addProvider(event.includeServer(), new HerbalWitchRecipeProvider(output));
+        generator.addProvider(event.includeServer(), new LootTableProvider(output, Set.of(), List.of(
+                new LootTableProvider.SubProviderEntry(DecorBlockLoot::new, LootContextParamSets.BLOCK),
+                new LootTableProvider.SubProviderEntry(BotanyBlockLoot::new, LootContextParamSets.BLOCK))));
+        HerbalWitchBlockTagsProvider blockTags = generator.addProvider(event.includeServer(),
+                new HerbalWitchBlockTagsProvider(output, lookup, existingFiles));
         generator.addProvider(event.includeServer(),
-                new DecorItemTagsProvider(output, lookup, blockTags.contentsGetter(), existingFiles));
+                new HerbalWitchItemTagsProvider(output, lookup, blockTags.contentsGetter(), existingFiles));
+        generator.addProvider(event.includeServer(), new BotanyBiomeTagsProvider(output, lookup, existingFiles));
+        generator.addProvider(event.includeServer(), new BotanyWorldgenProvider(output, lookup));
+        generator.addProvider(event.includeServer(), new BotanyConditionProvider(output));
+        generator.addProvider(event.includeServer(), new HerbalWitchLootModifierProvider(output));
     }
 }

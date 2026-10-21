@@ -1,0 +1,11 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#herbalwitch:botany/habitat/woodland",
+  "features": [
+    "herbalwitch:botany/woodland/belladonna",
+    "herbalwitch:botany/woodland/nightshade",
+    "herbalwitch:botany/woodland/wolfsbane",
+    "herbalwitch:botany/woodland/mandrake"
+  ],
+  "step": "vegetal_decoration"
+}

@@ -13,7 +13,9 @@ Detail per entry: docs/catalogue/{decor,stations,products}.md.
 | Facing, wall/surface/floor support, support-loss drops | 1 | done | DecorPlacementGameTests |
 | Lamp on/off with light 14, saved in the block state | 1 | done; two-client sync is an owner check | DecorInteractionGameTests |
 | Crafting of the dark oak base; stonecutter restyling 1:1 within a piece | 1 | done | DecorContentGameTests, DecorInteractionGameTests |
-| Generated original textures (32 px), tinted baked models | 1 | done; owner art review pending | GeneratedModelsTest |
+| Generated original textures (32 px), tinted baked models | 1 | done; owner art review pending | DecorModelsTest |
+| Fourteen herbs (4 ages, crop or bush), seeds, fresh herbs, herb bed, starter recipes, grass foraging, habitat worldgen, reloadable conditions | 2 | done (0.1.0-dev.2); owner art review pending | botany GameTests, BotanyResourcesTest, BotanyModelsTest |
+| `/herbalwitch showcase [section]` (operators): every registered block, labelled, on a flat plot | 2 | done | Showcase*GameTests, ShowcasePlanTest |
 
 ## Planned
 

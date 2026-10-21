@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "minecraft:dirt"
+    },
+    "S": {
+      "tag": "minecraft:wooden_slabs"
+    }
+  },
+  "pattern": [
+    "D D",
+    "SSS"
+  ],
+  "result": {
+    "count": 2,
+    "item": "herbalwitch:botany/garden/herb_bed"
+  },
+  "show_notification": true
+}

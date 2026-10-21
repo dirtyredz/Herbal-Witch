@@ -1,0 +1,54 @@
+{
+  "type": "minecraft:block",
+  "functions": [
+    {
+      "function": "minecraft:explosion_decay"
+    }
+  ],
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "herbalwitch:botany/woodland/mandrake/seeds"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "herbalwitch:botany/woodland/mandrake/plant",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "3"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 2.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "herbalwitch:botany/woodland/mandrake/fresh"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "herbalwitch:blocks/botany/woodland/mandrake/plant"
+}

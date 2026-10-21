@@ -1,0 +1,10 @@
+{
+  "discovery_chance": 0.015625,
+  "habitat": "herbalwitch:botany/habitat/woodland",
+  "harvest_bonus_chance": 0.25,
+  "herb": "herbalwitch:botany/woodland/wolfsbane/plant",
+  "preferences": [
+    "night",
+    "full_moon"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#herbalwitch:botany/habitat/temperate",
+  "features": [
+    "herbalwitch:botany/temperate/lavender",
+    "herbalwitch:botany/temperate/sage",
+    "herbalwitch:botany/temperate/chamomile",
+    "herbalwitch:botany/temperate/yarrow"
+  ],
+  "step": "vegetal_decoration"
+}

@@ -36,12 +36,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static io.github.dirtyredz.herbalwitch.fixture.DecorFixtures.TEMPLATE;
-import static io.github.dirtyredz.herbalwitch.fixture.DecorFixtures.check;
-import static io.github.dirtyredz.herbalwitch.fixture.DecorFixtures.click;
-import static io.github.dirtyredz.herbalwitch.fixture.DecorFixtures.floor;
-import static io.github.dirtyredz.herbalwitch.fixture.DecorFixtures.placeOnFloor;
-import static io.github.dirtyredz.herbalwitch.fixture.DecorFixtures.player;
+import static io.github.dirtyredz.herbalwitch.fixture.WorldFixtures.TEMPLATE;
+import static io.github.dirtyredz.herbalwitch.fixture.WorldFixtures.check;
+import static io.github.dirtyredz.herbalwitch.fixture.PlayerFixtures.click;
+import static io.github.dirtyredz.herbalwitch.fixture.WorldFixtures.floor;
+import static io.github.dirtyredz.herbalwitch.fixture.PlayerFixtures.placeOnFloor;
+import static io.github.dirtyredz.herbalwitch.fixture.PlayerFixtures.player;
 
 /** The lamp switch and its persistence, and stonecutter restyling. */
 @GameTestHolder(HerbalWitch.MOD_ID)

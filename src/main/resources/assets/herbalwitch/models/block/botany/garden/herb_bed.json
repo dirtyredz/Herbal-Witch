@@ -1,0 +1,66 @@
+{
+  "textures": {
+    "frame": "herbalwitch:block/material/wood_grain",
+    "soil": "herbalwitch:block/botany/garden/soil_dry",
+    "particle": "#soil"
+  },
+  "elements": [
+    {
+      "name": "soil",
+      "from": [2, 0, 2],
+      "to": [14, 13, 14],
+      "faces": {
+        "up": {"uv": [2, 2, 14, 14], "texture": "#soil"},
+        "down": {"uv": [2, 2, 14, 14], "texture": "#soil", "cullface": "down"}
+      }
+    },
+    {
+      "name": "board_north",
+      "from": [0, 0, 0],
+      "to": [16, 15, 2],
+      "faces": {
+        "north": {"uv": [0, 1, 16, 16], "texture": "#frame", "tintindex": 0, "cullface": "north"},
+        "south": {"uv": [0, 1, 16, 16], "texture": "#frame", "tintindex": 0},
+        "east": {"uv": [14, 1, 16, 16], "texture": "#frame", "tintindex": 0, "cullface": "east"},
+        "west": {"uv": [0, 1, 2, 16], "texture": "#frame", "tintindex": 0, "cullface": "west"},
+        "up": {"uv": [0, 0, 16, 2], "texture": "#frame", "tintindex": 0},
+        "down": {"uv": [0, 14, 16, 16], "texture": "#frame", "tintindex": 0, "cullface": "down"}
+      }
+    },
+    {
+      "name": "board_south",
+      "from": [0, 0, 14],
+      "to": [16, 15, 16],
+      "faces": {
+        "north": {"uv": [0, 1, 16, 16], "texture": "#frame", "tintindex": 0},
+        "south": {"uv": [0, 1, 16, 16], "texture": "#frame", "tintindex": 0, "cullface": "south"},
+        "east": {"uv": [0, 1, 2, 16], "texture": "#frame", "tintindex": 0, "cullface": "east"},
+        "west": {"uv": [14, 1, 16, 16], "texture": "#frame", "tintindex": 0, "cullface": "west"},
+        "up": {"uv": [0, 14, 16, 16], "texture": "#frame", "tintindex": 0},
+        "down": {"uv": [0, 0, 16, 2], "texture": "#frame", "tintindex": 0, "cullface": "down"}
+      }
+    },
+    {
+      "name": "board_west",
+      "from": [0, 0, 2],
+      "to": [2, 15, 14],
+      "faces": {
+        "east": {"uv": [2, 1, 14, 16], "texture": "#frame", "tintindex": 0},
+        "west": {"uv": [2, 1, 14, 16], "texture": "#frame", "tintindex": 0, "cullface": "west"},
+        "up": {"uv": [0, 2, 2, 14], "texture": "#frame", "tintindex": 0},
+        "down": {"uv": [0, 2, 2, 14], "texture": "#frame", "tintindex": 0, "cullface": "down"}
+      }
+    },
+    {
+      "name": "board_east",
+      "from": [14, 0, 2],
+      "to": [16, 15, 14],
+      "faces": {
+        "east": {"uv": [2, 1, 14, 16], "texture": "#frame", "tintindex": 0, "cullface": "east"},
+        "west": {"uv": [2, 1, 14, 16], "texture": "#frame", "tintindex": 0},
+        "up": {"uv": [14, 2, 16, 14], "texture": "#frame", "tintindex": 0},
+        "down": {"uv": [14, 2, 16, 14], "texture": "#frame", "tintindex": 0, "cullface": "down"}
+      }
+    }
+  ]
+}

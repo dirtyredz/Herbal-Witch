@@ -1,0 +1,18 @@
+{
+  "values": [
+    "herbalwitch:botany/temperate/lavender/seeds",
+    "herbalwitch:botany/temperate/sage/seeds",
+    "herbalwitch:botany/temperate/chamomile/seeds",
+    "herbalwitch:botany/temperate/yarrow/seeds",
+    "herbalwitch:botany/dry/rosemary/seeds",
+    "herbalwitch:botany/dry/thyme/seeds",
+    "herbalwitch:botany/wet/mint/seeds",
+    "herbalwitch:botany/wet/nettle/seeds",
+    "herbalwitch:botany/shade/valerian/seeds",
+    "herbalwitch:botany/shade/mugwort/seeds",
+    "herbalwitch:botany/woodland/belladonna/seeds",
+    "herbalwitch:botany/woodland/nightshade/seeds",
+    "herbalwitch:botany/woodland/wolfsbane/seeds",
+    "herbalwitch:botany/woodland/mandrake/seeds"
+  ]
+}

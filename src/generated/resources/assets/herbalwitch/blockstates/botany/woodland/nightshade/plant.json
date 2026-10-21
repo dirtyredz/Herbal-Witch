@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "herbalwitch:block/botany/woodland/nightshade/stage_0"
+    },
+    "age=1": {
+      "model": "herbalwitch:block/botany/woodland/nightshade/stage_1"
+    },
+    "age=2": {
+      "model": "herbalwitch:block/botany/woodland/nightshade/stage_2"
+    },
+    "age=3": {
+      "model": "herbalwitch:block/botany/woodland/nightshade/stage_3"
+    }
+  }
+}

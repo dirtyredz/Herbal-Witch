@@ -24,6 +24,11 @@ docs/ARCHITECTURE.md and docs/catalogue/).
 - **One catalogue.** Finishes only in `decor/catalog/FinishCatalog`, pieces only in their catalogue;
   update the independent lists in the tests to match. IDs (`decor/<family>/<piece>/<palette>/<finish>`)
   are permanent once a world uses them.
+- **Showcase:** every new block or feature must contribute to the showcase registry and its coverage
+  tests; update labels, supports, sample states/inventories, and documented bounds in the same change.
+  Sections register from their feature's registration (`showcase/layout/ShowcaseRegistry`).
+- **Shared datagen outputs** (en_us.json, block/item tags, recipes, global loot modifiers) each have
+  one provider; features contribute to it (docs/GOTCHAS.md).
 - **Layout:** every source and resource directory is declared in STRUCTURE.md `## Layout`; follow its
   structural rules (bootstrap-only roots, 12-file directories, 800-line files).
 - **Version** lives only in `gradle.properties` (`mod_version`).

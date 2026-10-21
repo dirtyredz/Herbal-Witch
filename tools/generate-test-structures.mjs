@@ -1,8 +1,8 @@
-// Generates the empty GameTest structure template (gzipped NBT, no dependencies).
+// Generates the GameTest structure templates (gzipped NBT, no dependencies).
 //
 //   node tools/generate-test-structures.mjs
 //
-// Writes src/gameTest/resources/data/herbalwitch/structures/empty.nbt: only a size and an air
+// Writes src/gameTest/resources/data/herbalwitch/structures/<name>.nbt: only a size and an air
 // palette; GameTests build their own floor. Adapted from Roundwood's generator (same author, MIT).
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { gzipSync } from 'node:zlib';
@@ -46,7 +46,10 @@ function structure([x, y, z]) {
 }
 
 mkdirSync(outDir, { recursive: true });
-for (const [name, size] of Object.entries({ empty: [9, 6, 9] })) {
+// empty: per-feature tests. showcase: the full /herbalwitch showcase box (plan width + entrance, plan depth + 1).
+// showcase_section: one small section and the boundary tests.
+const TEMPLATES = { empty: [9, 6, 9], showcase: [64, 10, 36], showcase_section: [16, 10, 12] };
+for (const [name, size] of Object.entries(TEMPLATES)) {
   writeFileSync(join(outDir, `${name}.nbt`), structure(size));
   console.log(`wrote ${name}.nbt ${size.join('x')}`);
 }

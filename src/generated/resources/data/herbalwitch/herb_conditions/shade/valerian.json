@@ -1,0 +1,9 @@
+{
+  "discovery_chance": 0.03125,
+  "habitat": "herbalwitch:botany/habitat/shade",
+  "harvest_bonus_chance": 0.25,
+  "herb": "herbalwitch:botany/shade/valerian/plant",
+  "preferences": [
+    "low_sky"
+  ]
+}
