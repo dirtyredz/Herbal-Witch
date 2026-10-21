@@ -53,7 +53,8 @@ art is reviewed, and the owner checklist.
   until their centre lines meet, then a short post rises to a small iron cap (about 4 x 4 x 3.5 px,
   nothing larger). No X, no leg ending past the other, no big caps.
 - **Stove-top vessels share a size:** the mortar and pestle is the kettle's size (about 9 px across,
-  ~10-11 tall); `mortar.mjs` draws it full size and scales it by one constant.
+  ~10-11 tall); its Blockbench project holds the scaled geometry (dev.5 drew it full size and scaled
+  it by 0.6).
 
 ## The house style (0.2.0)
 
@@ -76,8 +77,9 @@ One set: stations and furniture share a hardware language so they read together.
 magenta four- or five-petal flowers on olive vine sprigs. They belong on vessels, plaques, runners,
 the rug and the stove's cloth. Cushion fabric stays plain (tufting studs and piping only).
 
-**Shapes:** rounded silhouettes from stacked octagonal layers (`tools/models/shapes.mjs`: two
-crossing boxes, or exact octagons with 45-degree corner walls), chunky square posts with caps,
+**Shapes:** rounded silhouettes from stacked octagonal layers (rows of boxes tiled across the
+octagon, with 45-degree chamfer walls set 0.1 px inside an exposed top; never two crossing boxes,
+which z-fight), chunky square posts with caps,
 protruding hardware (rivets, knobs, clasps, hooks), draped runners with pointed hems, hanging herb
 bundles. Rotations only on one axis at 0, +-22.5 or +-45 degrees. Budgets: about 64 elements for a
 station cell or furniture piece, about 50 for a mature herb (a garden is many plants).
@@ -127,37 +129,56 @@ stone, plum glaze, gold and fire.
 
 ## How the art is made
 
-- **Textures** come only from `node tools/generate-textures.mjs` (seeded code in `tools/art/`).
-  32 x 32 for materials (two texels per model pixel), 16 x 16 for young herb, seed, fresh-herb and
-  product sprites; alpha is 0 or 255. Untinted: no tint index, no colour handler.
-- **Models** for stations, furniture, the herb bed and herbs come from
-  `node tools/generate-models.mjs` (`tools/models/`): position UVs at one unit per model pixel (so a
-  painted motif drawn at texture row v appears at model height 16 - v), decal UVs for stretched
-  sprites (ivy, runners, plaques, bundles, glass, flames, the rug), multiblocks authored as one
-  assembly and split into cells. The bundle and lantern templates under `preparations/templates/`
-  are still hand-authored JSON.
+- **Textures** come from `node tools/generate-textures.mjs` (seeded code in `tools/art/`), except
+  the rug and the lamp shade, which are painted in their Blockbench projects. 32 x 32 for materials
+  (two texels per model pixel), 16 x 16 for young herb, seed, fresh-herb and product sprites; alpha
+  is 0 or 255. Untinted: no tint index, no colour handler.
+- **One-off pieces are hand-editable** (owner direction: subtle adjustments in Blockbench). The six
+  stations, five furniture pieces and the oil lantern are Blockbench projects
+  (`src/art/blockbench/`, workflow in docs/BLOCKBENCH.md) compiled by
+  `node tools/compile-blockbench.mjs`: authored per-face UVs (stretched, flipped or rotated as
+  drawn), embedded textures, the item Display, named groups, multiblocks drawn whole and cut into
+  cells by the compiler. Shared materials are previews in the project; dried bundles inside them are
+  generated attachments, so Blockbench shows a preview where the compiled model shows the bundle.
+  Constraints: cubes only, one rotation axis at 0, +-22.5 or +-45 degrees, no tints, the piece's
+  bounds, no coplanar overlaps.
+- **Procedural models** for the herb bed, herbs and hung bundles come from
+  `node tools/generate-models.mjs` (`tools/models/`): position UVs at one unit per model pixel (so
+  a painted motif drawn at texture row v appears at model height 16 - v) and stretched sprites for
+  bundles and the parts atlas.
 - **Herbs:** every age is a 3D model of small cubes over the `botany/parts.png` swatch atlas; ages
   0-2 are derived from the authored mature form (tools/models/botany/plants.mjs). Dried bundles use
   the same atlas (tools/models/preparations/bundles.mjs).
-- **Faces:** the generator drops faces buried inside a solid box; organic models (herbs, bundles)
-  pull the smaller of two coplanar faces in by 0.12 px; built pieces are fixed by hand. The octagon
-  helpers tile their rows instead of crossing two boxes.
+- **Faces:** the generator drops faces buried inside a solid box and organic models (herbs) pull the
+  smaller of two coplanar faces in by 0.12 px; the Blockbench pieces keep their faces exactly as
+  authored (the migration kept dev.5's omissions), so a new overlap is fixed in Blockbench.
 
 ## Review (required before any jar swap)
 
-1. `node tools/generate-textures.mjs` and `node tools/generate-models.mjs`, then `.\gradlew.bat runData`.
+1. `node tools/generate-textures.mjs`, `node tools/generate-models.mjs` and
+   `node tools/compile-blockbench.mjs`, then `.\gradlew.bat runData` (Gradle runs the three
+   producers first anyway).
 2. `node tools/preview-models.mjs --output <job folder>/previews/<name> --references <job folder>`:
    family sheets (iso and front at one scale), herbs on beds, item GUI sheet, scenes (joined beds,
    growth, multiblocks lit and cold, vessels on the stove, furniture) and reference comparisons.
    It fails on any missing texture, unbound variable, unrendered model or z-fighting face pair.
 3. Look at every changed family against the references and this guide; record findings in the job's
-   notes. Any later art change needs new previews.
+   notes. Any later art change needs new previews. The sheets are rendered from the compiled models
+   (with bundles expanded), not from the Blockbench view; the manifest records the hashes of the
+   `.bbmodel` sources and the compiled models it shows.
 
 The previewer shows directional face shading only: no ambient occlusion, world light, shaders,
 animation, mipmaps or held-item extrusion; emissive faces are drawn full bright, and the GUI
 orientation follows the transform maths (not checked against a client).
 
-## Owner review checklist (0.2.0-dev.3)
+## Owner review checklist (0.2.0-dev.6)
+
+**dev.6 (Blockbench authoring):** no visual change intended; the pieces now come from Blockbench
+projects and compare identical to dev.5 headlessly. Check once in the trial instance: open a piece
+in Blockbench 5.2.2, save it unchanged and reopen it; make a small reversible geometry edit, a rug or
+lamp-shade texel edit and a Display edit, and see each after F3+T without restarting or a new jar
+(docs/BLOCKBENCH.md); all facings, lit/active states, multiblock seams, the kettle and pot on the
+stove, neighbour occlusion, held/frame/GUI views and shaders; two clients reloading the same pack.
 
 Status: **awaiting owner review.** Since dev.4: dried bundles are 2D inset sprites again (dev.5), the mortar is the kettle's size. Since dev.2: slim stemmed hung bundles, rack legs meeting at an apex under small caps. Since dev.1: 3D growth stages, one dark wood, rack legs on their
 feet, smaller kettle and pot, stovepipe out of the stove's back, solid hearth back, no flickering

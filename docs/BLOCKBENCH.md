@@ -1,0 +1,124 @@
+# Editing pieces in Blockbench - The Herbal Witch
+
+The owner's workflow for hand-adjusting the one-off pieces and seeing each save in game after
+F3+T, with no datagen and no new jar. How it works: docs/ARCHITECTURE.md ("Art pipeline"); why:
+docs/DECISIONS.md (0.2.0-dev.6); traps: docs/GOTCHAS.md.
+
+| Piece | Project |
+|---|---|
+| Tea kettle, infusion pot, mortar and pestle | `src/art/blockbench/stations/{kettle,infusion_pot,mortar}/` |
+| Drying rack, hearth, Witch's Stove (multiblocks) | `src/art/blockbench/stations/{drying_rack,hearth,stove}/` |
+| Armchair, apothecary chest (`apothecary_counter`), wall shelf, table lamp, small rug | `src/art/blockbench/decor/<piece>/` |
+| Oil lantern | `src/art/blockbench/preparations/oil_lantern/` |
+
+Each folder holds `<piece>.bbmodel` (what you edit) and `piece.json` (the Minecraft side: output
+files, texture bindings, which groups glow; edited by agents, not in Blockbench). Herbs, herb beds
+and the hung bundle blocks stay generated (`tools/models/`).
+
+## Once: install and set up
+
+1. **Install desktop Blockbench 5.2.2** (the Windows installer from
+   <https://github.com/JannisX11/blockbench/releases/tag/v5.2.2>). No plugin is needed. If
+   Blockbench offers an update, decline it: the pipeline reads project format 5.0 exactly and names
+   the version it found when a newer editor saved a file. A later version is adopted deliberately
+   (new fixtures, a parser check), not by accident.
+2. In **File > Preferences > Settings...**, category **Export**: leave **Embed Textures** on (the
+   default), and turn **Minified Project Files** off so a save stays readable in git diffs (the pipeline
+   reads either form).
+3. **Open a terminal in the mod folder** (`C:\Users\dirty\projects\minecraft-mods\mods\HerbalWitch`)
+   on the branch you are editing, and bring the art up to date once:
+   `.\gradlew.bat runData` (it runs the art producers first).
+4. **Start the watcher** and leave it running while you edit:
+
+   ```
+   node tools/compile-blockbench.mjs --dev-pack "C:/Users/dirty/MultiMC/instances/Evil Eye Trial Cozy/.minecraft" --watch
+   ```
+
+   It publishes `resourcepacks/HerbalWitch-dev-art/` in that instance (and touches nothing else
+   there), then prints `ready for F3+T`. Without `--watch` it publishes once and exits.
+5. **In game, once:** Options > Resource Packs, move **HerbalWitch-dev-art** to Selected and put it
+   at the **top** of the list, then Done. The game remembers the choice.
+
+### First session: prove the editor and the parser agree
+
+Open `stations/kettle/kettle.bbmodel`, change nothing, and **Save Project** (below). The watcher
+should print `published ... ready for F3+T` (an unchanged save publishes nothing new). Copy the
+saved file to `tools/blockbench/test/fixtures/editor-save/kettle.bbmodel`; from then on
+`project.test.mjs` checks that a genuine 5.2.2 save still compiles to the committed models (until
+then that test is reported as skipped).
+
+## The edit loop
+
+1. **Open** the piece: File > Open Model, pick its `.bbmodel`. Check File > **Project...**: the format
+   is **Java Block/Item** and **Format Version** reads **1.9 - 1.21.5** (do not change it). The
+   Textures panel lists the materials; they are embedded, with no file path.
+2. **Edit** (see "What you can change" below).
+3. **Save Project**: File > Save Project, **Ctrl+Alt+S**. (Ctrl+S, "Save Model", also writes the
+   `.bbmodel` for a project opened from one.) Never export Java JSON by hand: the compiler writes the
+   game files, including what Blockbench's own export would lose.
+4. Wait for `ready for F3+T` in the terminal (about two seconds), then press **F3+T** in game.
+   A red `NOT published` message means the game keeps the last good version; fix what it names and
+   save again.
+
+### What you can change
+
+- **Geometry:** move, resize, add or delete cubes. Rotations are one axis, in 22.5-degree steps up
+  to 45 degrees (Blockbench enforces this in this format version). Keep cubes inside the piece's
+  bounds (one block; the multiblocks span their cells).
+- **UVs:** per-face UV rectangles, flips and 90-degree UV rotations; clearing a face's texture
+  removes the face.
+- **Display:** the Display tab (top right) sets how the item looks in the hand, GUI, ground and item
+  frame. It is saved in the project and needs nothing else.
+- **Textures you own:** the **rug** (`rug`) and the **lamp shade** (`lamp_shade`) are painted in their
+  projects; paint them in Blockbench and save. Every other texture (wood, gold, iron, copper, plum,
+  glaze, fabrics, glass, ivy, stone, the herb atlas) is a shared house material: its copy in the
+  project is a preview, and painting it is refused (it would change every piece).
+- **Groups** are named for what they are (body, lid, handle, shade, frames/legs...). Some groups mean
+  something to the game:
+  - `shade` in the table lamp glows when the lamp is lit; `lit` in the oil lantern (coal and flames)
+    shows only while lit, and glows.
+  - `fire` in the hearth and stove is the overlay shown while lit (it glows); `bundles` in the drying
+    rack shows while it holds something.
+  - `bundle`, `bundle_0`..`bundle_3` (stove, apothecary chest, drying rack) are **bundle anchors**:
+    the dried bundle is generated from the shared bundle art at the group's pivot. Move the whole
+    group to move the bundle; the cubes inside it are only a preview and are ignored.
+  Keep these names; rename or regroup anything else freely.
+- **Multiblocks** (drying rack and hearth 2x2, stove 2x1) are edited whole, in place: the origin
+  cell is x 0..16, the second column x -16..0, the second row y 16..32 (the stovepipe may rise to
+  y 32 above the stove). The compiler cuts the assembly into the game's cells; a cube may cross a
+  seam.
+
+## When a save is refused
+
+| Message | Meaning |
+|---|---|
+| `the embedded preview differs from the shared ...` | A shared material was painted. Undo it; ask for a piece-owned texture if the piece needs its own. |
+| `... is not supported` (mesh, group rotation, tint, inflate, light_emission, a second rotation axis) | That Blockbench feature does not exist in Minecraft 1.20.1 block models; use cubes and element rotations. |
+| `project format 5.x` / `Minecraft target ...` | Blockbench was updated, or the project's Format Version changed; see "Once" step 1 and the Project dialog. |
+| `coplanar faces overlap` | Two faces lie in the same plane and would flicker (z-fight). Move one by 0.1 px or more. |
+| `leaves the permitted bounds` | A cube left the piece's space; bring it back, or ask for the bounds to change. |
+| `not valid JSON` | The file was read mid-save; the watcher retries by itself. |
+
+Some changes are not artwork and need an agent (code, datagen and a new jar): a new state or overlay
+group, a different cell layout, collision or hit boxes (the shapes live in Java and do not follow
+the model), or a piece that should stand on or support something differently. After datagen or a
+shared-texture change, restart the watcher.
+
+## Finishing
+
+1. Stop the watcher (Ctrl+C).
+2. Write the edits into the mod and check them:
+
+   ```
+   node tools/compile-blockbench.mjs
+   node --test "tools/blockbench/test/*.test.mjs" "tools/preview/test/*.test.mjs"
+   node tools/preview-models.mjs --output <job folder>/previews/<name> --references <job folder>
+   .\gradlew.bat test build
+   ```
+
+   (An agent normally does this and reviews the sheets.)
+3. Commit the `.bbmodel` files together with the regenerated models and textures.
+4. Once the next jar is installed, move **HerbalWitch-dev-art** back to Available (or delete the
+   folder) and press F3+T: the game shows the jar's art again.
+
+The pack is client-side only; a second client sees the edits only with its own copy of the pack.

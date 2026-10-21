@@ -5,7 +5,7 @@ Detail per entry: docs/catalogue/{decor,stations,products}.md.
 
 ## Implemented
 
-Version 0.2.0-dev.3 (local candidate; builds on the 0.1.0 content; dev.2 answered the ten dev.1 art findings, dev.3 the dev.2 bundle and rack findings). Owner review of art, station UIs and viewers is pending.
+Version 0.2.0-dev.6 (local candidate; builds on the 0.1.0 content; dev.2 answered the ten dev.1 art findings, dev.3 the dev.2 bundle and rack findings; dev.4 stopped the herb bed and rugs occluding neighbours, with an occlusion GameTest; dev.5 brought back 2D dried bundles and the kettle-sized mortar; dev.6 moves the one-off pieces to Blockbench authoring with no gameplay change). Owner review of art, station UIs and viewers is pending.
 
 | Feature | Milestone | Status | Evidence |
 |---|---|---|---|
@@ -32,8 +32,18 @@ Status: implemented, unit tests and GameTests passing; owner review in the trial
 | Stations redrawn in one house style; drying rack and hearth become 2x2 multiblocks (same block entity, menu, recipes) | implemented |
 | New Witch's Stove: two-wide range, two burners, hearth fuel rules and block entity; heat-source tags; craftable | implemented |
 | Furniture restyled (same five ids) | implemented |
-| `tools/generate-models.mjs` writes all models; `tools/preview-models.mjs` renders headless previews | implemented |
+| `tools/generate-models.mjs` writes all models (since dev.6 the one-off pieces come from `tools/compile-blockbench.mjs`); `tools/preview-models.mjs` renders headless previews | implemented |
 | Showcase: joined-bed garden section, stove section, multiblocks placed cell by cell | implemented |
+
+### 0.2.0-dev.6: Blockbench authoring
+
+No new gameplay: the same blocks, items, states and textures, authored differently.
+
+| Feature | Status |
+|---|---|
+| Twelve one-off pieces (six stations, five decor pieces, oil lantern) editable as Blockbench projects, compiled to the same resource paths | implemented; appearance identical to dev.5 |
+| Live dev-art resource pack for a trial instance (`--dev-pack ... --watch`, F3+T) | implemented; owner check in game pending |
+| Procedural families (herbs, herb beds, hung bundles, shared materials) | unchanged |
 
 ## Planned
 

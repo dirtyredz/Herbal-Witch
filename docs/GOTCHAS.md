@@ -12,18 +12,43 @@
   Generation is deterministic: run it twice and compare bytes after changing a provider.
 - **Every generated directory must stay under 12 entries** (`GeneratedResourcesTest`). Deeper variants
   get their own directory level.
-- **Models are generated: edit tools/models/, not the JSON.** `tools/generate-models.mjs` owns the
-  station, decor-template, herb and herb-bed model directories and deletes any JSON there it did not
-  write. UVs are position-based (one unit per model pixel, v = 16 - y on sides), so a motif painted
-  at texture row r shows at model height 16 - r/2: move the motif, not the UV. Decal textures
-  (ivy, runner, cloth, plaque, rug, flame, glass, bundles) stretch instead; `TemplateChecks`
-  knows the list.
+- **No model JSON is hand-edited.** Two producers own disjoint directories and each deletes stray
+  JSON only in its own: `tools/generate-models.mjs` (herbs, herb beds, hung bundles; edit
+  `tools/models/`) and `tools/compile-blockbench.mjs` (stations, furniture templates, the oil
+  lantern; edit the `.bbmodel` in `src/art/blockbench/`). Procedural UVs are position-based (one
+  unit per model pixel, v = 16 - y on sides), so a motif painted at texture row r shows at model
+  height 16 - r/2: move the motif, not the UV; bundle sprites and the parts atlas stretch instead.
+  Blockbench UVs are authored and kept exactly (`TemplateChecks.checkAuthored` skips the density
+  rule); the compiler never recomputes them from positions.
+- **Blockbench is pinned to 5.2.2** (project format 5.0, "Java Block/Item", Format Version
+  "1.9 - 1.21.5"). A save from a newer editor, a changed Format Version, meshes, group rotations,
+  tints, `light_emission` or a second rotation axis are refused with the project, element and field
+  named. Blockbench's `light_emission` does not exist in 1.20.1: glow is Forge's `forge_data`,
+  added by the compiler from `piece.json` emissive groups (and a plain Java export would drop it, so
+  nothing is exported by hand). Blockbench minifies saves by default; turn "Minified Project Files"
+  off so diffs stay readable.
+- **Shared textures are previews inside a project.** Every project embeds its textures, but only
+  `piece.json` `owned_textures` (the rug, the lamp shade) are written from Blockbench; the others
+  must match the procedural PNG pixel for pixel or the compile fails. After a palette change in
+  `tools/art/`, run `node tools/compile-blockbench.mjs --refresh-previews`. Colour under fully
+  transparent pixels is not compared (an editor canvas does not keep it).
+- **Multiblock seams are the compiler's.** Rack, hearth and stove are authored whole; cells are cut
+  in each element's unrotated frame, explicit UVs cropped (flips and UV rotations included), pivots
+  moved with the cell, faces created by a cut omitted and cullfaces recomputed per cell (authored
+  cullfaces count only in one-block pieces). A plane lying exactly on a seam belongs to both cells.
+- **The dev-art pack is not the jar.** It overrides the compiled models, the two owned textures and
+  the item models and blockstates that show them, in `resourcepacks/HerbalWitch-dev-art/` of the
+  instance given (never mods/, saves or config). New states, overlays, cells, collision or shapes
+  need code, datagen and a jar; after datagen or a shared-texture change restart the watcher (it
+  caches). The pack is client-side: each client needs its own copy. The trial instance is
+  packwiz-managed; its installer does not track this folder, but re-publish if a launch removed it.
 - **Faces may not span more than one texture.** A face longer than 16 pixels cannot have position
   UVs; multiblock pieces are split per cell (and the item assembly is the split pieces put back).
 - **Rotations are one axis, 0 / +-22.5 / +-45 degrees.** A rotated element's `from`/`to` is checked
   unrotated; after rotation it may lean slightly out of its cell (the rack legs, the pestle).
-- **Cutout only where needed.** A model is `minecraft:cutout` exactly when it uses an alpha texture
-  (glass, ivy, runner, cloth, flame, bundles); those textures' alpha is strictly 0 or 255.
+- **Cutout only where needed.** A model is `minecraft:cutout` exactly when a texture it uses has
+  transparent pixels (glass, ivy, runners, cloth, flame, bundle sprites); the compiler and
+  `TemplateChecks` read that from the PNG, never from variable names. Alpha is strictly 0 or 255.
 - **`GameTestHelper.destroyBlock` drops nothing** in 1.20.1; use `level.destroyBlock(pos, true)`.
 - **GameTest pass/fail beacons leak light** into neighbouring tests (block light 3 was observed).
   Light assertions run inside a sealed stone room.
@@ -78,8 +103,8 @@
   there clips it. Vessels on the burners stay clear of it.
 - **Coplanar faces z-fight, and the octagon trick made many.** Two boxes crossing to fake a rounded
   slab share their top and bottom planes over the centre; rotated chamfer walls share them too, with
-  different UVs, so the tops flickered in game (0.2.0-dev.1). Octagons now tile rows, chamfer walls
-  sit 0.1 px inside an exposed top, and the z-fighting sweep (`tools/preview/report/zfighting.mjs`,
+  different UVs, so the tops flickered in game (0.2.0-dev.1). The octagons were rebuilt as tiled rows
+  with chamfer walls 0.1 px inside an exposed top (now Blockbench geometry), and the z-fighting sweep (`tools/preview/report/zfighting.mjs`,
   run by the node tests and the previewer) fails on any same-facing overlap closer than 0.02 px,
   per model and per blockstate combination. Flush decorations need a real offset (0.1 px or more).
 - **A colour change can erase a state.** The 0.2.0 soil restyle made dry soil dark too, so moist

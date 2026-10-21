@@ -4,7 +4,7 @@ Forge 1.20.1 mod: woodland herbal witchcraft (herbs, stations, brewing, familiar
 an apothecary trade) together with a cottage furniture catalogue. Install on **both** the server and
 every client.
 
-**Status: private development, `0.2.0-dev.1` local candidate (the art pass).** Contains Milestone 1 (cottage decor
+**Status: private development, `0.2.0-dev.6` local candidate (the art pass).** Contains Milestone 1 (cottage decor
 in a single design), Milestone 2 (herbs and garden) and Milestone 3 (everyday preparation stations and
 products), all redrawn in 0.2.0-dev.1. Owner review of the art and station UIs is pending. Later systems are listed in
 docs/FEATURES.md. Not published; not in any pack.
@@ -124,6 +124,7 @@ Details: docs/COMPATIBILITY.md.
 cd mods/HerbalWitch
 node tools/generate-textures.mjs
 node tools/generate-models.mjs
+node tools/compile-blockbench.mjs
 node tools/generate-test-structures.mjs
 .\gradlew.bat runData
 .\gradlew.bat test build
@@ -131,17 +132,30 @@ node tools/generate-test-structures.mjs
 .\gradlew.bat runGameTestServer -PcompatProfile=all -PcompatModsDir=<mods folder with FD and Thirst jars>
 ```
 
+Gradle runs the three art producers before resources and datagen (`generateArt`) and their checks in
+`check` (`checkArt`); this needs Node 22+ on PATH (or `-PnodeExecutable=<path>`).
+
 `-PcompatProfile` is one of `base`, `emi`, `jei`, `viewers`, `farmersdelight`, `thirst`, `all`. The owner
 trial mods folder is `C:/Users/dirty/MultiMC/instances/Evil Eye Trial Cozy/.minecraft/mods`. The jar is
 `build/libs/herbalwitch-1.20.1-<version>.jar` (reobfuscated). CLAUDE.md has the full headless list.
 
 ### Model tools
 
-- `node tools/generate-models.mjs` writes every station, furniture, herb and herb-bed model.
+- `node tools/generate-models.mjs` writes the procedural families: herbs, herb beds and hung bundles.
+- `node tools/compile-blockbench.mjs` compiles the Blockbench projects under `src/art/blockbench/`
+  (stations, furniture, oil lantern) into models and the two textures they own. `--check` fails when
+  committed output is stale.
 - `node tools/preview-models.mjs --output <dir outside the repo> [--references <dir>]` renders headless
   previews (contact sheets, herbs on beds, item sheet, review scenes, reference comparisons, manifest).
   Check it with `node --test "tools/preview/test/*.test.mjs"`. Shading is approximate (no ambient
   occlusion, world light, shaders, animation or mipmaps).
+
+### Editing pieces in Blockbench
+
+The one-off pieces are Blockbench projects (desktop Blockbench 5.2.2). The workflow is in
+[docs/BLOCKBENCH.md](docs/BLOCKBENCH.md). To see edits in game without a new jar, run
+`node tools/compile-blockbench.mjs --dev-pack "C:/Users/dirty/MultiMC/instances/Evil Eye Trial Cozy/.minecraft" --watch`
+and press F3+T in the trial instance.
 
 ## Owner trial
 

@@ -3,7 +3,7 @@
 How the mod is put together. Code map: [STRUCTURE.md](../STRUCTURE.md).
 Plan of record: milestones 1-12 (docs/FEATURES.md); traceability: docs/catalogue/.
 
-## Current system (0.2.0-dev.3: Milestones 1-3 plus the art pass and its first review fixes)
+## Current system (0.2.0-dev.6: Milestones 1-3 plus the art pass and its review rounds through dev.6)
 
 Everything below is server-authoritative; clients get vanilla block updates, menu slots and menu data.
 No custom network channel exists. Paths are under `src/main/java/io/github/dirtyredz/herbalwitch/`.
@@ -39,8 +39,16 @@ Connection is visual only; moisture and enrichment are unchanged. The blockstate
 (`data/client/botany/garden/HerbBedBlockstates` + `HerbBedModels`) over part models under
 `models/block/botany/garden/parts/{wood,soil,moist}`.
 
-**Model and preview tooling.** `tools/generate-models.mjs` (with `tools/models/**`) writes every
-station, furniture, herb (template and mature) and herb-bed model, and the part models above.
+**Art pipeline.** Sources: procedural textures (`tools/art/`), procedural models (`tools/models/`:
+herbs, herb beds, hung bundles) and Blockbench projects (`src/art/blockbench/`: stations, furniture,
+oil lantern; a `.bbmodel` plus a `piece.json` each). Three producers (`generate-textures.mjs`,
+`generate-models.mjs`, `compile-blockbench.mjs`) each own disjoint paths, enforced by
+`tools/art/output.mjs` (write only declared paths, clean only own directories) and each has `--check`.
+They write the Minecraft assets under `src/main/resources`; Java datagen then adds blockstates and item
+wrappers that only name their parent model, everything into `src/generated`; the jar packages both.
+Item display lives in the compiled parent model, not Java; `ModelResolver` and the test fixtures merge
+inherited display. Gradle (`gradle/art.gradle`) runs the producers before resources and datagen
+(`generateArt`) and the checks in `check` (`checkArt`). The owner workflow is docs/BLOCKBENCH.md.
 `tools/preview-models.mjs` (with `tools/preview/**`) renders headless previews (family contact sheets,
 herbs on beds, item GUI sheet, review scenes, owner-reference comparisons, a manifest); tests:
 `node --test "tools/preview/test/*.test.mjs"`. Previews approximate directional shading only (no

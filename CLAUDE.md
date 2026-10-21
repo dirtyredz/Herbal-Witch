@@ -9,23 +9,31 @@ docs/ARCHITECTURE.md and docs/catalogue/).
 - **Standalone.** No RedzCore dependency and no code shared with other mods at runtime. Patterns from
   Roundwood/DankRecipeTransfer are adapted locally, with attribution where source was copied.
 - **Headless only.** Never run `runClient`. Verification, in `mods/HerbalWitch/`:
-  1. `node tools/generate-textures.mjs`, `node tools/generate-models.mjs` and `node tools/generate-test-structures.mjs`
+  1. `node tools/generate-textures.mjs`, `node tools/generate-models.mjs`, `node tools/compile-blockbench.mjs`
+     (textures first) and `node tools/generate-test-structures.mjs`; Gradle also runs the three art
+     producers before resources and datagen (`generateArt`) and their checks in `check` (`checkArt`),
+     so Node 22+ must be on PATH
   2. `.\gradlew.bat runData` (run it twice when generation changed: output must be byte-identical)
   3. `.\gradlew.bat test build`
   4. `.\gradlew.bat runGameTestServer` (one GameTest server at a time across the workspace)
   5. `git diff --check`, and from the workspace root `.\tools\sync-mod-files.ps1 -Check`
   6. Optional-mod runtime profiles: `.\gradlew.bat runGameTestServer -PcompatProfile=<base|emi|jei|viewers|farmersdelight|thirst|all> -PcompatModsDir=<mods folder>`
      (the folder supplies the Farmer's Delight and Thirst jars; see docs/COMPATIBILITY.md)
-  Art changes also: `node --test "tools/preview/test/*.test.mjs"` and
+  Art changes also: `node --test "tools/blockbench/test/*.test.mjs" "tools/blockbench/dev-art/test/*.test.mjs" "tools/preview/test/*.test.mjs"` and
   `node tools/preview-models.mjs --output <job folder>/previews/<name> --references <job folder>`,
   then review the sheets before any jar goes to a trial instance (docs/ART.md "Review").
   The owner checks visuals, transforms, shaders and two-client behaviour in the trial instance.
 - **Generated resources are source.** Change a provider, run `runData`, commit the regenerated
   `src/generated/resources/` with the code. Never hand-edit generated JSON. `GeneratedResourcesTest`
   holds the exact manifest; when a file is renamed or removed, delete `src/generated` and regenerate.
-- **Textures** come only from `tools/generate-textures.mjs` (explicit manifest). Station, furniture,
-  herb and herb-bed models come only from `tools/generate-models.mjs` (it deletes stray JSON in the
-  directories it owns); edit `tools/models/`, never the JSON. Materials are untinted: there is no
+- **Art has three producers with disjoint paths** (`tools/art/output.mjs`; each also has `--check`):
+  `tools/generate-textures.mjs` (every texture in `tools/art/catalogue.mjs`), `tools/generate-models.mjs`
+  (herbs, herb beds, hung bundles; edit `tools/models/`) and `tools/compile-blockbench.mjs` (the
+  stations, furniture and oil lantern, plus the rug and lamp-shade textures; edit the `.bbmodel` in
+  `src/art/blockbench/`, owner workflow docs/BLOCKBENCH.md). Never edit model JSON. One-off pieces
+  belong in Blockbench, not generator code; item display transforms live in the projects, so item
+  model providers only name a parent. Never launch Blockbench or a client; the owner edits and
+  checks in game, agents compile, compare and preview headless. Materials are untinted: there is no
   tint index, no colour handler and no runtime recolouring; a new look is a new texture. The house
   style and the owner's reference pieces are in docs/ART.md.
 - **One catalogue.** There is a single cottage design: `decor/catalog/FinishCatalog` has one entry

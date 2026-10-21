@@ -2,6 +2,38 @@
 
 Newest first.
 
+## 2026-10-21 - 0.2.0-dev.6: one-off pieces become Blockbench projects (hybrid pipeline)
+
+The owner makes subtle hand adjustments to the kettle, pot, furniture and the other one-offs, and
+generator code buried their shape. The twelve one-off pieces (six stations, five decor pieces, the oil
+lantern) are now Blockbench projects under `src/art/blockbench/`: a `.bbmodel` holds geometry, explicit
+UVs, display transforms and embedded textures; a sidecar `piece.json` holds the Minecraft side (output
+paths, texture bindings, owned textures, bounds, glow and exclusion groups, multiblock cells and overlays,
+attachments). `tools/compile-blockbench.mjs` compiles them deterministically into the same resource
+paths as before, and Blockbench is never run by the build. Herbs, herb beds, hung bundles and the shared
+materials (wood, metals, glaze, fabrics, glass, ivy, botany atlas) stay procedural; the projects embed
+copies of materials only as editor previews, checked pixel-for-pixel against the canonical PNG. Only
+the rug and lamp-shade textures are painted in Blockbench. Each producer writes only its declared paths
+(`tools/art/output.mjs`).
+
+The compiler is a narrow parser of Blockbench's internal format, pinned to desktop Blockbench 5.2.2,
+project format 5.0, "Java Block/Item" 1.9 - 1.21.5, per-face UVs and embedded textures. It rejects
+meshes, animations, group rotations, tint, light_emission, illegal rotations and unknown versions; the
+cost is format maintenance, since Blockbench documents that the format can change. Dried bundles stay
+generated from `tools/models/preparations/bundles.mjs`: in the project they are "attachment" groups
+whose pivot is the anchor, and compilation regenerates the bundle there (one bundle source, at the cost
+that Blockbench shows a preview). Multiblocks are authored whole and split by the compiler into cells and
+overlays. Item display transforms moved from Java into each project's Display settings and are compiled
+into the item's parent model, so a display edit needs no datagen. A dev resource pack
+(`--dev-pack ... --watch`) shows edits in game after F3+T. The migration was appearance-preserving
+(270 models, 461 block states and 50 textures identical to dev.5); no gameplay changed. Rejected:
+manual Java JSON export from Blockbench (two editable truths, loses forge_data and render_type,
+multiblock cells hand-split); running Blockbench headless in the build (an Electron editor, not a CLI,
+fragile in CI); a custom Blockbench plugin now (deferred until live attachment previews or editing Forge
+properties in Blockbench is needed); one project per generated state (states and cells are mechanical
+derivations of one design); migrating herbs, beds and bundles now (a later change can feed their base
+looks from Blockbench).
+
 ## 2026-10-21 - 0.2.0-dev.5: dried bundles back to 2D sprites, mortar at kettle size
 
 Owner feedback on dev.4: the first, flatter bundle look was better than the cube bundles; the mortar

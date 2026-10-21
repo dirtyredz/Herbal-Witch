@@ -6,6 +6,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseProject, writeProject } from '../project.mjs';
+import { compileAll } from '../compile.mjs';
 import { cube, group, projectText, SOLID } from './helpers.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -83,4 +84,24 @@ test('unsupported features are rejected naming the project, element and field', 
   ];
   for (const [fn, message] of cases) assert.throws(() => parseProject(mutate(fn), 'editor-fields'), message, String(message));
   assert.throws(() => parseProject('{"meta": {"format_version": "5.0"', 'half-saved'), /half-saved: not valid JSON.*still saving/);
+});
+
+test('genuine Blockbench 5.2.2 saves (fixtures/editor-save/<piece>.bbmodel) compile to the committed models', (t) => {
+  const dir = join(here, 'fixtures/editor-save');
+  const saves = readdirSync(dir).filter((f) => f.endsWith('.bbmodel'));
+  if (!saves.length) {
+    t.skip('no editor-saved project committed yet: docs/BLOCKBENCH.md "First session" adds one');
+    return;
+  }
+  const root = join(here, '../../..');
+  for (const file of saves) {
+    const piece = file.replace('.bbmodel', '');
+    const text = readFileSync(join(dir, file), 'utf8');
+    const p = parseProject(text, `editor-save/${file}`);
+    assert.ok(p.elements.length, file);
+    const result = compileAll(root, { readText: (f) => (f.split('\\').join('/').endsWith(`/${piece}/${file}`) ? text : readFileSync(f, 'utf8')) });
+    for (const [rel, model] of result.models) {
+      assert.equal(model, readFileSync(join(root, 'src/main/resources/assets/herbalwitch/models', rel), 'utf8'), `${file}: ${rel}`);
+    }
+  }
 });
