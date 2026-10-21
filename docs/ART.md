@@ -60,11 +60,15 @@ art is reviewed, and the owner checklist.
 
 One set: stations and furniture share a hardware language so they read together.
 
+Since 0.2.0-dev.8 every Blockbench piece owns its textures (`block/pieces/<piece>/<name>.png`, starting as
+copies of the house materials below); the `Texture` column names the original material and the shared
+wood and gold the procedural models still use.
+
 | Role | Colours | Texture |
 |---|---|---|
-| Dark brown wood, the armchair's (everything wooden) | #3B2416 .. #5A3A22 | `material/wood` (grain along U), `wood_post` (along V), `wood_end` |
+| Dark brown wood, the armchair's (everything wooden) | #3B2416 .. #5A3A22 | `material/wood` (grain along U), `wood_post` (along V), `wood_end` (shared by the herb bed and hung bundles) |
 | Charcoal iron (faint plum cast) | #2E2934 | `material/iron` |
-| Gold (rivets, studs, bands, knobs) | #9A681E, #D4A03A, #F2C95A | `material/gold` |
+| Gold (rivets, studs, bands, knobs) | #9A681E, #D4A03A, #F2C95A | `material/gold` (shared by the herb bed) |
 | Copper (handles, beaded rims) | #6E2E16 .. #C86834 | `material/copper` |
 | Dark plum (vessels, lids) | #2E1C36 .. #4A2E54 | `material/plum`, `stations/plum_painted`, `plum_lid` |
 | Charcoal stone (hearth) | #34303A .. #4A4550 | `stations/stone_dark` |
@@ -129,8 +133,11 @@ stone, plum glaze, gold and fire.
 
 ## How the art is made
 
-- **Textures** come from `node tools/generate-textures.mjs` (seeded code in `tools/art/`), except
-  the rug and the lamp shade, which are painted in their Blockbench projects. 32 x 32 for materials
+- **Textures** come from `node tools/generate-textures.mjs` (seeded code in `tools/art/`) for the
+  procedural families: herbs, soil, the herb atlas, sprites, GUI atlases, and the house wood and gold
+  the herb bed and hung bundles use. Every texture of every Blockbench piece is that piece's own,
+  painted in its project and exported by the compiler to `textures/block/pieces/<group>/<piece>/<name>.png`
+  (nothing else uses it, so painting never reaches another piece). 32 x 32 for materials
   (two texels per model pixel), 16 x 16 for young herb, seed, fresh-herb and product sprites; alpha
   is 0 or 255. Untinted: no tint index, no colour handler.
 - **One-off pieces are hand-editable** (owner direction: subtle adjustments in Blockbench). The six
@@ -138,8 +145,10 @@ stone, plum glaze, gold and fire.
   (`src/art/blockbench/`, workflow in docs/BLOCKBENCH.md) compiled by
   `node tools/compile-blockbench.mjs`: authored per-face UVs (stretched, flipped or rotated as
   drawn), embedded textures, the item Display, named groups, multiblocks drawn whole and cut into
-  cells by the compiler. Shared materials are previews in the project; dried bundles inside them are
-  generated attachments, so Blockbench shows a preview where the compiled model shows the bundle.
+  cells by the compiler. Every texture in a project is paintable; only the herb atlas and the bundle sprites
+  (`parts`, `bundle_<herb>`) are shared previews, because dried bundles inside the rack, stove and
+  apothecary chest are generated attachments: Blockbench shows a preview where the compiled model
+  shows the bundle.
   Constraints: cubes only, one rotation axis at 0, +-22.5 or +-45 degrees, no tints, the piece's
   bounds, no coplanar overlaps.
 - **Procedural models** for the herb bed, herbs and hung bundles come from

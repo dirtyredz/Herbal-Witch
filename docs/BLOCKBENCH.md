@@ -42,10 +42,9 @@ and the hung bundle blocks stay generated (`tools/models/`).
 ### First session: prove the editor and the parser agree
 
 Open `stations/kettle/kettle.bbmodel`, change nothing, and **Save Project** (below). The watcher
-should print `published ... ready for F3+T` (an unchanged save publishes nothing new). Copy the
-saved file to `tools/blockbench/test/fixtures/editor-save/kettle.bbmodel`; from then on
-`project.test.mjs` checks that a genuine 5.2.2 save still compiles to the committed models (until
-then that test is reported as skipped).
+should print `published ... ready for F3+T` (an unchanged save publishes nothing new). A genuine save of
+the kettle is committed as `tools/blockbench/test/fixtures/editor-save/kettle.bbmodel`;
+`project.test.mjs` checks that such a save still compiles to the committed models.
 
 ## The edit loop
 
@@ -69,10 +68,14 @@ then that test is reported as skipped).
   removes the face.
 - **Display:** the Display tab (top right) sets how the item looks in the hand, GUI, ground and item
   frame. It is saved in the project and needs nothing else.
-- **Textures you own:** the **rug** (`rug`) and the **lamp shade** (`lamp_shade`) are painted in their
-  projects; paint them in Blockbench and save. Every other texture (wood, gold, iron, copper, plum,
-  glaze, fabrics, glass, ivy, stone, the herb atlas) is a shared house material: its copy in the
-  project is a preview, and painting it is refused (it would change every piece).
+- **Textures you own:** every texture in a piece (wood, gold, iron, copper, plum, glaze, fabrics, glass,
+  ivy, stone, the rug, the lamp shade...) belongs to that piece alone and is paintable: paint it in
+  Blockbench and save, and only that piece changes. Each is its own texture in the Textures panel, so
+  a piece that has `wood` and `wood_v` (or `iron` and `iron_top`) has two to paint. They are exported
+  to `textures/block/pieces/<group>/<piece>/<name>.png`. Keep each texture's size (32 x 32, or the
+  rug's own) and pure transparent or opaque pixels. The one exception: the herb atlas (`parts`) and
+  the `bundle_*` sprites are the procedural herbs' art, drawn into the dried bundles; painting those
+  is refused. Shared textures cannot be added to a piece.
 - **Groups** are named for what they are (body, lid, handle, shade, frames/legs...). Some groups mean
   something to the game:
   - `shade` in the table lamp glows when the lamp is lit; `lit` in the oil lantern (coal and flames)
@@ -92,7 +95,7 @@ then that test is reported as skipped).
 
 | Message | Meaning |
 |---|---|
-| `the embedded preview differs from the shared ...` | A shared material was painted. Undo it; ask for a piece-owned texture if the piece needs its own. |
+| `the embedded preview differs from the shared ...` | The herb atlas or a bundle sprite was painted. Undo it; every other texture is yours to paint. |
 | `... is not supported` (mesh, group rotation, tint, inflate, light_emission, a second rotation axis) | That Blockbench feature does not exist in Minecraft 1.20.1 block models; use cubes and element rotations. |
 | `project format 5.x` / `Minecraft target ...` | Blockbench was updated, or the project's Format Version changed; see "Once" step 1 and the Project dialog. |
 | `coplanar faces overlap` | Two faces lie in the same plane and would flicker (z-fight). Move one by 0.1 px or more. |

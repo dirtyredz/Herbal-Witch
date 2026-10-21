@@ -27,16 +27,20 @@
   added by the compiler from `piece.json` emissive groups (and a plain Java export would drop it, so
   nothing is exported by hand). Blockbench minifies saves by default; turn "Minified Project Files"
   off so diffs stay readable.
-- **Shared textures are previews inside a project.** Every project embeds its textures, but only
-  `piece.json` `owned_textures` (the rug, the lamp shade) are written from Blockbench; the others
-  must match the procedural PNG pixel for pixel or the compile fails. After a palette change in
-  `tools/art/`, run `node tools/compile-blockbench.mjs --refresh-previews`. Colour under fully
+- **Every piece texture is the piece's own; only the herb atlas and bundle sprites are shared.**
+  Every texture a project binds is in `piece.json` `owned_textures`, at
+  `block/pieces/<project dir>/<variable>.png` (the catalogue's `owned_texture_dir` makes the compiler
+  enforce it), and is written from the embedded bitmap. The two shared kinds (`block/botany/parts`, the
+  `item/preparations/herbs/**/bundle` sprites) are previews that must match the procedural PNG pixel
+  for pixel or the compile fails; after a palette change in `tools/art/`, run
+  `node tools/compile-blockbench.mjs --refresh-previews`. Two variables of one piece that once shared a
+  material (`wood` and `wood_v`, `iron` and `iron_top`) are now separate PNGs: paint both. Colour under fully
   transparent pixels is not compared (an editor canvas does not keep it).
 - **Multiblock seams are the compiler's.** Rack, hearth and stove are authored whole; cells are cut
   in each element's unrotated frame, explicit UVs cropped (flips and UV rotations included), pivots
   moved with the cell, faces created by a cut omitted and cullfaces recomputed per cell (authored
   cullfaces count only in one-block pieces). A plane lying exactly on a seam belongs to both cells.
-- **The dev-art pack is not the jar.** It overrides the compiled models, the two owned textures and
+- **The dev-art pack is not the jar.** It overrides the compiled models, the owned textures and
   the item models and blockstates that show them, in `resourcepacks/HerbalWitch-dev-art/` of the
   instance given (never mods/, saves or config). New states, overlays, cells, collision or shapes
   need code, datagen and a jar; after datagen or a shared-texture change restart the watcher (it

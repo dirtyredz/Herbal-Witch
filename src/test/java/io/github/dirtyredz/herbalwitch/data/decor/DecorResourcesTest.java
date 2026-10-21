@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import static io.github.dirtyredz.herbalwitch.data.decor.DecorManifest.ids;
 import static io.github.dirtyredz.herbalwitch.data.decor.DecorManifest.pieceOf;
@@ -27,8 +26,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * and gold, with trailing ivy (art pass 0.2.0).
  */
 class DecorResourcesTest {
-    private static final Set<String> PALETTE = Set.of("wood", "wood_post", "glass", "tincture", "velvet",
-            "fabric_pink", "trim_purple", "gold", "iron", "paint_green", "runner", "runner_magenta", "ivy", "rug", "lamp_shade", "parts");
+    /** The herb atlas is the only texture a furniture template draws that no piece owns. */
+    private static final String SHARED_ATLAS = "herbalwitch:block/botany/parts";
 
     @Test
     void oneDesignAndFivePiecesWithStablePaths() {
@@ -95,7 +94,8 @@ class DecorResourcesTest {
             for (Map.Entry<String, String> texture : model.textures().entrySet()) {
                 if (!texture.getKey().equals("particle") && !texture.getKey().startsWith("bundle_")) { // bundle sprites are item art
                     String name = texture.getValue().substring(texture.getValue().lastIndexOf('/') + 1);
-                    assertTrue(PALETTE.contains(name), id + " uses " + texture.getValue());
+                    String owner = "herbalwitch:block/pieces/decor/" + template.replaceAll("_o(n|ff)$", "") + "/";
+                    assertTrue(texture.getValue().startsWith(owner) || texture.getValue().equals(SHARED_ATLAS), id + " uses " + texture.getValue() + ", which its piece does not own");
                     assertTrue(!name.contains("floral"), id + ": no floral fabric");
                 }
             }

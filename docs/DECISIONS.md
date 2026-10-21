@@ -2,6 +2,33 @@
 
 Newest first.
 
+## 2026-10-21 - 0.2.0-dev.8: every texture of a Blockbench piece belongs to that piece
+
+In dev.6 only the rug and lamp shade were piece-owned; wood, gold, iron, glaze and the rest were shared
+house materials whose embedded copy was a preview and whose painting was refused. The owner ruled that
+shared textures "are not working across all": a piece must be hand-paintable whole. Every texture a
+Blockbench piece binds is now its own PNG at `textures/block/pieces/<group>/<piece>/<variable>.png`,
+starting as a pixel-identical copy of the material it replaces (`tools/blockbench/migration/own-textures.mjs`
+did the move; appearance parity against the dev.7 output is `node tools/compile-blockbench.mjs --compare
+<baseline> --texture-map <alias.json>`). One PNG per texture variable, as in the editor: a piece with
+`wood` and `wood_v` has two files, and painting one leaves the other. `catalog.json` declares
+`owned_texture_dir`; with it, `piece.json` validation requires every binding to be owned at exactly that
+path, so a shared material cannot creep back. The particle texture now names one of the piece's own
+textures (the rug's was the shared wood).
+
+Stays shared: the herb atlas `block/botany/parts` and the `item/preparations/herbs/**/bundle` sprites,
+because the dried bundles on the rack, stove and apothecary chest are generated attachments from the
+procedural herbs (one bundle source); their embedded copies remain previews checked pixel for pixel. Also
+shared: `material/wood`, `wood_post`, `wood_end` and `gold`, which the procedural herb bed and hung
+bundles bind. Every other house material and all station materials lost their last user, so their
+producers (and the motif and pattern code only they used) were removed; the dev.7 palette now lives in
+the pieces' own PNGs, and `--refresh-previews` concerns only the two shared kinds. Cost: ~71 PNGs instead
+of ~35, and a repaint of a material across pieces is now a per-piece job.
+
+Also fixed: Blockbench 5.2.2 saves display rotation angles wrapped to -180..180 (225 becomes -135), so
+an unchanged save compiled to a different (equivalent) model; the compiler now normalises display
+rotations to 0..360, and the genuine kettle save is a committed fixture.
+
 ## 2026-10-21 - 0.2.0-dev.6: one-off pieces become Blockbench projects (hybrid pipeline)
 
 The owner makes subtle hand adjustments to the kettle, pot, furniture and the other one-offs, and

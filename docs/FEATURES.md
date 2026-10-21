@@ -5,7 +5,7 @@ Detail per entry: docs/catalogue/{decor,stations,products}.md.
 
 ## Implemented
 
-Version 0.2.0-dev.6 (local candidate; builds on the 0.1.0 content; dev.2 answered the ten dev.1 art findings, dev.3 the dev.2 bundle and rack findings; dev.4 stopped the herb bed and rugs occluding neighbours, with an occlusion GameTest; dev.5 brought back 2D dried bundles and the kettle-sized mortar; dev.6 moves the one-off pieces to Blockbench authoring with no gameplay change). Owner review of art, station UIs and viewers is pending.
+Version 0.2.0-dev.8 (local candidate; builds on the 0.1.0 content; dev.2 answered the ten dev.1 art findings, dev.3 the dev.2 bundle and rack findings; dev.4 stopped the herb bed and rugs occluding neighbours, with an occlusion GameTest; dev.5 brought back 2D dried bundles and the kettle-sized mortar; dev.6 moves the one-off pieces to Blockbench authoring with no gameplay change; dev.7 adds the herb bed inner corner; dev.8 makes every texture of every Blockbench piece the piece's own, paintable without touching another piece). Owner review of art, station UIs and viewers is pending.
 
 | Feature | Milestone | Status | Evidence |
 |---|---|---|---|
