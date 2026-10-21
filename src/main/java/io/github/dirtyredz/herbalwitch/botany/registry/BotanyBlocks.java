@@ -28,7 +28,7 @@ public final class BotanyBlocks {
     public static final String HERB_BED_PATH = "botany/garden/herb_bed";
     public static final RegistryObject<Block> HERB_BED = BLOCKS.register(HERB_BED_PATH, () -> new HerbBedBlock(
             BlockBehaviour.Properties.of().mapColor(MapColor.DIRT).strength(1.0F).sound(SoundType.WOOD).randomTicks()
-                    .ignitedByLava()));
+                    .noOcclusion().ignitedByLava()));
 
     static {
         for (HerbSpec herb : HerbCatalog.ALL) {

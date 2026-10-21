@@ -84,6 +84,7 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/stations/` — station GameTests; `process/` the shared process behaviour tests
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/preparations/` — product use and block GameTests
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/compat/` — optional-integration GameTests (profile dependent)
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/platform/` — cross-cutting block guards (occlusion)
 - `src/gameTest/resources/data/herbalwitch/structures/` — GameTest structure templates (`empty`, `showcase`, `showcase_section`); never in the release jar
 - `tools/` — deterministic Node tools: `generate-textures.mjs`, `generate-models.mjs`, `generate-test-structures.mjs`, `preview-models.mjs`; not packaged
 - `tools/image/` — PNG encode/decode, the bitmap font and contact-sheet composition shared by generators and the previewer

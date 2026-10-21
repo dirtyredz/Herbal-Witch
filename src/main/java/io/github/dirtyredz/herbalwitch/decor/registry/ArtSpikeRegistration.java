@@ -52,7 +52,7 @@ public final class ArtSpikeRegistration {
         if (spec.behavior() == FurnitureSpec.Behavior.RUG) {
             // Vanilla carpet: breaks instantly, wool sounds.
             return BlockBehaviour.Properties.of().mapColor(FinishCatalog.BASE.mapColor()).strength(0.1F).sound(SoundType.WOOL)
-                    .ignitedByLava();
+                    .noOcclusion().ignitedByLava();
         }
         boolean shelfOrLamp = spec.behavior() != FurnitureSpec.Behavior.FREESTANDING;
         return BlockBehaviour.Properties.of()

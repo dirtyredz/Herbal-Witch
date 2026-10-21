@@ -93,3 +93,9 @@
 - **Previews are approximations.** `tools/preview-models.mjs` shades faces like Minecraft but has no
   ambient occlusion, light, shaders, animation or item extrusion; its GUI orientation follows the
   transform maths and has not been compared with a client. The owner's in-game check still decides.
+- **A partial block that occludes makes the world see-through.** The herb bed (0.2.0-dev.3) had no
+  `noOcclusion()`, so neighbours culled the faces it only partly covered (rails are 1.75 px thick,
+  the model is hollow) and an x-ray strip showed in game. Every block that is not a full cube must
+  say `noOcclusion()` in its properties (beds, rugs, stations, furniture, bundles all do; `noCollission()` already implies it);
+  `BlockOcclusionGameTests` fails for any herbalwitch block that occludes without a full-cube
+  occlusion shape.
