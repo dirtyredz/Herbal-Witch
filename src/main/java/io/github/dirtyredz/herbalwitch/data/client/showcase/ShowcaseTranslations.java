@@ -3,7 +3,7 @@ package io.github.dirtyredz.herbalwitch.data.client.showcase;
 import io.github.dirtyredz.herbalwitch.botany.showcase.GardenShowcaseSection;
 import io.github.dirtyredz.herbalwitch.botany.showcase.HerbShowcaseSection;
 import io.github.dirtyredz.herbalwitch.decor.showcase.DecorShowcaseSection;
-import io.github.dirtyredz.herbalwitch.showcase.build.ShowcasePreflight;
+import io.github.dirtyredz.herbalwitch.showcase.construction.ShowcasePreflight;
 import net.minecraftforge.common.data.LanguageProvider;
 
 /** Showcase command results and failures, section headings and sign labels. */

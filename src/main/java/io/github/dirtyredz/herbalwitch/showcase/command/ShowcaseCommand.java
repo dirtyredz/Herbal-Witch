@@ -1,8 +1,8 @@
 package io.github.dirtyredz.herbalwitch.showcase.command;
 
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import io.github.dirtyredz.herbalwitch.showcase.build.ShowcaseBuilder;
-import io.github.dirtyredz.herbalwitch.showcase.build.ShowcasePreflight;
+import io.github.dirtyredz.herbalwitch.showcase.construction.ShowcaseBuilder;
+import io.github.dirtyredz.herbalwitch.showcase.construction.ShowcasePreflight;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcasePlan;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseRegistry;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseSection;

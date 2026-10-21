@@ -1,7 +1,7 @@
 package io.github.dirtyredz.herbalwitch.showcase;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.showcase.build.ShowcasePreflight;
+import io.github.dirtyredz.herbalwitch.showcase.construction.ShowcasePreflight;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcasePlan;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseRegistry;
 import net.minecraft.core.BlockPos;
