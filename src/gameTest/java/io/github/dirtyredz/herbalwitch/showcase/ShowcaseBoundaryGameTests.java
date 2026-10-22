@@ -61,6 +61,10 @@ public final class ShowcaseBoundaryGameTests {
     public static void anOccupiedPlotIsRefusedWithoutChanges(GameTestHelper helper) throws Exception {
         stoneFloor(helper, SECTION_X, SECTION_Z);
         ServerPlayer op = standing(helper, "op_twice", GameType.SURVIVAL);
+        // a neighbouring test's dropped item can drift into the plot and is (rightly) refused as an entity
+        helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class, new net.minecraft.world.phys.AABB(
+                helper.absolutePos(BlockPos.ZERO), helper.absolutePos(new BlockPos(SECTION_X, 10, SECTION_Z))).inflate(1))
+                .forEach(net.minecraft.world.entity.Entity::discard);
         if (run(helper, as(op, 2), "herbalwitch showcase garden") == 0) {
             var why = ShowcasePreflight.check(garden(), helper.getLevel(), op, helper.absolutePos(ORIGIN));
             check(false, "first build failed: " + why.map(c -> c.getString() + " " + c).orElse("preflight passed"));
