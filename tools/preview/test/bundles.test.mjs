@@ -3,7 +3,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { hungBundles, INSET } from '../../models/preparations/bundles.mjs';
-import { HERB_LIST } from '../../art/botany/herbs.mjs';
+import { HERB_LIST } from '../../art/content/botany/herbs.mjs';
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';

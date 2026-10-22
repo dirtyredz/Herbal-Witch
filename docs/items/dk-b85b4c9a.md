@@ -2,7 +2,7 @@
 id: dk-b85b4c9a
 type: task
 created: 2026-10-22
-status: todo
+status: wip
 since: 2026-10-22
 area: tools
 priority: P1

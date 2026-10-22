@@ -75,7 +75,7 @@ compiled like the other pieces; each owns its textures at
 - **The ritual circle sets `multiblock.assembly: false` in `piece.json`.** The ring is 16 cells around the
   altar and the item is a flat sprite, so the compiler writes the `part_<n>` and `active_<n>` models for
   the cells (32 files) and no `assembly` model. Do not add one: a 5 x 5 ring is too large for one item
-  model. The sprite is made by `tools/art/preparations/magic.mjs`, not in Blockbench.
+  model. The sprite is made by `tools/art/content/magic/sprites.mjs`, not in Blockbench.
 - The `active` groups are emissive overlays that show only while the piece is working (the ward stone
   while its ward is active), as for the altar.
 - Collision lives in Java (`CauldronShapes`, `StillShapes`, `BottlingBenchShapes`, `CharmWorkbenchShapes`,

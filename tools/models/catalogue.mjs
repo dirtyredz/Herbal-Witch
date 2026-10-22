@@ -4,7 +4,7 @@
 import { bed } from './botany/bed.mjs';
 import { herbModels } from './botany/plants.mjs';
 import { hungBundles } from './preparations/bundles.mjs';
-import { HERB_LIST } from '../art/botany/herbs.mjs';
+import { HERB_LIST } from '../art/content/botany/herbs.mjs';
 import { dropBuriedFaces, explicitUvs } from './geometry.mjs';
 import { modelJson, modelText } from './model-output.mjs';
 import { needsCutout } from './textures.mjs';

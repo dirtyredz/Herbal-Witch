@@ -3,7 +3,7 @@
 // edge and a dark purple corner ornament), the player inventory, the station's slot frames and EMPTY
 // progress arrow / flame outlines, plus the FILLED flame at (176, 0) and FILLED arrow at (176, 14)
 // that the screens clip to show progress. Deterministic, no dependencies.
-import { C, Sheet, hex, panel, slot, ghost, inventory } from '../interface/kit.mjs';
+import { C, Sheet, hex, panel, slot, ghost, inventory } from './kit.mjs';
 
 const GHOST_BOTTLE = [[1, 7, 8], [2, 7, 8], [3, 7, 8], [4, 6, 9], [5, 5, 10], [6, 4, 11], [7, 4, 11], [8, 4, 11], [9, 4, 11], [10, 4, 11], [11, 4, 11], [12, 5, 10], [13, 6, 9]];
 const GHOST_BOWL = [[6, 2, 13], [7, 2, 13], [8, 3, 12], [9, 3, 12], [10, 4, 11], [11, 5, 10], [12, 6, 9]];

@@ -4,10 +4,10 @@
 // colours. The three young ages are derived from it: the same plant scaled down toward its root,
 // thinned, with flowers first absent, then green buds, then partly open. Everything is rooted two
 // pixels below the block so the plant stands in the soil. Every face samples one colour swatch of
-// the parts atlas (tools/art/botany/parts.mjs); directional shading does the modelling. Budgets:
+// the parts atlas (tools/art/content/botany/parts.mjs); directional shading does the modelling. Budgets:
 // at most about 60 elements for a mature plant and far fewer young, so a full garden stays cheap.
 import { box } from '../geometry.mjs';
-import { swatchUv } from '../../art/botany/parts.mjs';
+import { swatchUv } from '../../art/content/botany/parts.mjs';
 import { rng } from '../../art/pixels.mjs';
 import { separateCoplanar } from './separate.mjs';
 

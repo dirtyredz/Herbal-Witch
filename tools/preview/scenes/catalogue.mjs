@@ -3,7 +3,7 @@
 // use real blockstates; vanilla blocks are labelled proxies. Each scene may name an owner
 // reference image (in the job folder) for a side-by-side comparison.
 
-import { HERB_LIST } from '../../art/botany/herbs.mjs';
+import { HERB_LIST } from '../../art/content/botany/herbs.mjs';
 
 const HW = 'herbalwitch:';
 const BED = `${HW}botany/garden/herb_bed`;

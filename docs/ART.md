@@ -157,7 +157,7 @@ one axis at 0, +-22.5 or +-45).
 Each piece owns every texture (no shared house materials), so painting one never changes the other or any
 station; models compile to `models/block/grimoire/<piece>/base.json`. The book item sprite
 (`item/grimoire/book.png`, 32 x 32) and the reader atlas (`gui/grimoire/reader.png`, 512 x 512) are
-procedural, in `tools/art/grimoire/{book,interface}.mjs`, drawn on the old grid and enlarged like the other
+procedural, in `tools/art/content/grimoire/book.mjs` and `tools/art/interface/grimoire.mjs`, drawn on the old grid and enlarged like the other
 sprites. Preview scenes `grimoire-study`, `grimoire-stand` and `grimoire-bookshelf-back` are in
 `tools/preview/scenes/catalogue.mjs`.
 
@@ -217,11 +217,11 @@ now 110 and the compiled block models 415.
 | Ritual circle (5 x 5 ring of 16 cells) | `src/art/blockbench/ritual/circle/` | `flame`, `glow`, `gold`, `iron`, `linen`, `pale_stone`, `runes`, `stone` |
 | Ward stone (1 block, `active`) | `src/art/blockbench/ward/ward_stone/` | `glow`, `gold`, `iron`, `ivy`, `pink`, `plum`, `stone` |
 
-The circle's item is a flat sprite (`tools/art/preparations/magic.mjs`) and its 32 compiled models
+The circle's item is a flat sprite (`tools/art/content/magic/sprites.mjs`) and its 32 compiled models
 (`part_<n>` and `active_<n>` per cell) have no `assembly`, because the compiler gained
 `multiblock.assembly: false`. The 16 advanced preparations, the mixtures, the familiar preparations,
-the charms and the circle item are procedural sprites (`tools/art/preparations/{advanced,magic}.mjs`); the
-four station interface atlases are in `tools/art/stations/interfaces.mjs` and the ward screen atlas in
+the charms and the circle item are procedural sprites (`tools/art/content/preparations/advanced.mjs` and `tools/art/content/magic/sprites.mjs`); the
+four station interface atlases are in `tools/art/interface/stations.mjs` and the ward screen atlas in
 `tools/art/interface/witch.mjs`. Preview sheets for the wave belong in
 `C:/Users/dirty/projects/artifacts/minecraft-mods/jobs/2026-10-22-herbal-witch-m7/previews/`.
 

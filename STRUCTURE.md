@@ -156,11 +156,13 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `tools/image/` — PNG encode/decode, the bitmap font and contact-sheet composition shared by generators and the previewer
 - `tools/preview/` — the headless model previewer: `assets/` (resource lookup, model inheritance, vanilla parents), `geometry/` (element baking, transforms, item sprites, coplanar-face detection), `render/` (cameras, rasterizer), `scenes/` (blockstate evaluation, review scenes), `report/` (coverage, the z-fighting sweep, sheets, manifest), `test/` (node --test)
 - `tools/art/` — shared pixel code (`pixels`, `motifs`), the set's texture density rule (`density`: two texels per model unit), the procedural texture manifest (`catalogue`) and ownership-checked output writing shared by the three producers (`output`); `interface/` (the house GUI kit and the decor storage atlases); `test/` (node --test: density)
-- `tools/art/botany/` — herb sprites per habitat group, the herb list, the parts atlas, garden soil
-- `tools/art/stations/` — the shared house wood and gold (`house`) and the interface atlases (`interfaces.mjs` holds the layout, the four advanced stations included)
+- `tools/art/content/botany/` — herb sprites per habitat group, the herb list, the parts atlas, garden soil
+- `tools/art/materials/` — shared house wood and gold (`house.mjs`)
+- `tools/art/interface/` — all GUI atlases (`stations`, `grimoire`, `decor`, `witch`) and the shared house GUI kit
 - `tools/models/` — the procedural model code: `geometry` (boxes, planes, position UVs, buried-face removal), `model-output` (model JSON serialisation shared with the Blockbench compiler), `textures`, `catalogue` (families and owned directories); `apothecary/botany/` (bed, herbs, coplanar separation for organic models), `preparations/` (dried bundles, also the Blockbench attachments)
-- `tools/art/preparations/` — preparation materials and product sprites; `advanced.mjs` (advanced, familiar and mixture sprites) and `magic.mjs` (charms and the circle item)
-- `tools/art/grimoire/` — the grimoire sprite (`book`) and the reader atlas (`interface`)
+- `tools/art/content/preparations/` — preparation materials and product sprites; `advanced.mjs` holds advanced, familiar and mixture sprites
+- `tools/art/content/magic/` — charm and circle item sprites (`sprites.mjs`)
+- `tools/art/content/grimoire/` — the grimoire book sprite (`book.mjs`)
 - `tools/blockbench/` — the Blockbench compiler: `project` (the pinned .bbmodel contract), `catalogue` (catalog.json, piece.json), `textures` (owned and shared slots), `assembly` (state outputs, multiblock cells and variants), `geometry/` (cell cutting and mirroring, legal item assemblies), `attachments` (generated bundles), `compile`
 - `tools/blockbench/migration/` — importer from model JSON and the appearance-parity comparator
 - `tools/blockbench/dev-art/` — the live dev-art resource pack: in-memory staging, validation, publication into a trial instance, save watching

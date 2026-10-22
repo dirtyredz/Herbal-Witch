@@ -79,7 +79,7 @@ Connection is visual only; moisture and enrichment are unchanged. The blockstate
 `models/block/botany/garden/parts/{wood,soil,moist}`.
 
 **Art pipeline.** Sources: procedural textures (`tools/art/`), procedural models (`tools/models/`:
-herbs, herb beds, hung bundles; the grimoire's book sprite and reader atlas in `tools/art/grimoire/`) and
+herbs, herb beds, hung bundles; the grimoire's book sprite and reader atlas in `tools/art/content/grimoire/` and `tools/art/interface/grimoire.mjs`) and
 Blockbench projects (`src/art/blockbench/`: stations, furniture, oil lantern, the grimoire stand and
 bookshelf, the ritual altar; a `.bbmodel` plus a `piece.json` each). Three producers (`generate-textures.mjs`,
 `generate-models.mjs`, `compile-blockbench.mjs`) each own disjoint paths, enforced by

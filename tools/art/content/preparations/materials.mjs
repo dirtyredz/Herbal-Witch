@@ -2,7 +2,7 @@
 // pink band, heads hanging down: it dries upside down) and a ground powder in a container that
 // varies by group (bowl, paper twist, glass vial, cloth pouch, stoppered jar). 16 x 16, alpha 0/255.
 // Also exports the small drawing kit the product sprites share (preparations/products.mjs).
-import { image, rng } from '../pixels.mjs';
+import { image, rng } from '../../pixels.mjs';
 import { R, hex, N, canvas, set, line, leaf, blob, bloom, berry, bell } from '../botany/sprites.mjs';
 
 const ramp = (a, b, c) => [hex(a), hex(b), hex(c)];

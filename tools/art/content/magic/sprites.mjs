@@ -2,7 +2,7 @@
 // the ritual circle kit. 16 x 16, alpha 0/255, outlined, drawn with the kit in preparations/materials.mjs.
 // Exports MAGIC as [[path relative to textures/item/, sprite function]].
 import { hex, set, line, leaf, R } from '../botany/sprites.mjs';
-import { P, rect, spans, item } from './materials.mjs';
+import { P, rect, spans, item } from '../preparations/materials.mjs';
 
 const ramp = (a, b, c) => [hex(a), hex(b), hex(c)];
 const GOLD = ramp('#8a5a14', '#d8a62c', '#f6dc6a');

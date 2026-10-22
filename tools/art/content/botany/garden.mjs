@@ -3,8 +3,8 @@
 // rails; watered soil is the same layout, near black and wet with cool glints, darker than the
 // rails. The two must stay far apart (BotanyModelsTest checks the luminance gap): the 0.2.0 art
 // pass made both dark and the watered state vanished. Seamless, so joined beds read as one.
-import { image, rng, clamp } from '../pixels.mjs';
-import { smoothNoise } from '../motifs.mjs';
+import { image, rng, clamp } from '../../pixels.mjs';
+import { smoothNoise } from '../../motifs.mjs';
 import { hex } from './sprites.mjs';
 
 const SIZE = 32;

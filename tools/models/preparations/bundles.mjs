@@ -10,8 +10,8 @@
 // Shared by the hung bundle block (ceiling and wall forms, one model pair per herb), the drying
 // rack, the stove and the apothecary counter.
 import { box, plane } from '../geometry.mjs';
-import { swatchUv } from '../../art/botany/parts.mjs';
-import { HERB_LIST } from '../../art/botany/herbs.mjs';
+import { swatchUv } from '../../art/content/botany/parts.mjs';
+import { HERB_LIST } from '../../art/content/botany/herbs.mjs';
 
 /** Minimum distance (model px) of a bundle plane from any cell boundary. */
 export const INSET = 0.75;

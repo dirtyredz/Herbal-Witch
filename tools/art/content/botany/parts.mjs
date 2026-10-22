@@ -1,7 +1,7 @@
 // The swatch atlas the 3D mature herbs are built from: an 8 x 8 grid of 4 x 4-texel colour swatches
 // (stems, leaf greens, petals, berries), each with a lighter top-left and soft speckle so a small
 // cube reads as a living surface. tools/models/botany/plants.mjs names swatches by SWATCHES index.
-import { image, rng, clamp } from '../pixels.mjs';
+import { image, rng, clamp } from '../../pixels.mjs';
 import { hex } from './sprites.mjs';
 
 /** Swatch names in atlas order (row by row, 8 per row). */

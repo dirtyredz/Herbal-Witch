@@ -7,24 +7,24 @@
 // materials, the soil and the herb atlas are drawn natively at 32 x 32; the item sprites are drawn on
 // a 16 x 16 grid and the GUI atlases on vanilla's 256 x 256 sheet, then enlarged 2x nearest-neighbour
 // (`drawnAt1x`), so they look exactly as before while their files carry the finer grid.
-import temperate from './botany/temperate.mjs';
-import dry from './botany/dry.mjs';
-import wet from './botany/wet.mjs';
-import shadeHerbs from './botany/shade.mjs';
-import woodland from './botany/woodland.mjs';
-import { soilDry, soilMoist } from './botany/garden.mjs';
-import { plantParts } from './botany/parts.mjs';
-import { HERB_LIST } from './botany/herbs.mjs';
-import * as house from './stations/house.mjs';
-import * as interfaces from './stations/interfaces.mjs';
+import temperate from './content/botany/temperate.mjs';
+import dry from './content/botany/dry.mjs';
+import wet from './content/botany/wet.mjs';
+import shadeHerbs from './content/botany/shade.mjs';
+import woodland from './content/botany/woodland.mjs';
+import { soilDry, soilMoist } from './content/botany/garden.mjs';
+import { plantParts } from './content/botany/parts.mjs';
+import { HERB_LIST } from './content/botany/herbs.mjs';
+import * as house from './materials/house.mjs';
+import * as interfaces from './interface/stations.mjs';
 import * as decorInterfaces from './interface/decor.mjs';
 import * as witchInterfaces from './interface/witch.mjs';
-import { PREPARATION_HERBS, bundleSprite, powderSprite } from './preparations/materials.mjs';
-import { PRODUCTS } from './preparations/products.mjs';
-import { ADVANCED } from './preparations/advanced.mjs';
-import { MAGIC } from './preparations/magic.mjs';
-import { book } from './grimoire/book.mjs';
-import { reader } from './grimoire/interface.mjs';
+import { PREPARATION_HERBS, bundleSprite, powderSprite } from './content/preparations/materials.mjs';
+import { PRODUCTS } from './content/preparations/products.mjs';
+import { ADVANCED } from './content/preparations/advanced.mjs';
+import { MAGIC } from './content/magic/sprites.mjs';
+import { book } from './content/grimoire/book.mjs';
+import { reader } from './interface/grimoire.mjs';
 import { upscale } from './pixels.mjs';
 import { TEXELS_PER_UNIT, checkDensity } from './density.mjs';
 
