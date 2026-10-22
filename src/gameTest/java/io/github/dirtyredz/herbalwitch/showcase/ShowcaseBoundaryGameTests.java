@@ -58,10 +58,13 @@ public final class ShowcaseBoundaryGameTests {
     }
 
     @GameTest(template = SECTION)
-    public static void anOccupiedPlotIsRefusedWithoutChanges(GameTestHelper helper) {
+    public static void anOccupiedPlotIsRefusedWithoutChanges(GameTestHelper helper) throws Exception {
         stoneFloor(helper, SECTION_X, SECTION_Z);
         ServerPlayer op = standing(helper, "op_twice", GameType.SURVIVAL);
-        check(run(helper, as(op, 2), "herbalwitch showcase garden") > 0, "first build failed");
+        if (run(helper, as(op, 2), "herbalwitch showcase garden") == 0) {
+            var why = ShowcasePreflight.check(garden(), helper.getLevel(), op, helper.absolutePos(ORIGIN));
+            check(false, "first build failed: " + why.map(c -> c.getString() + " " + c).orElse("preflight passed"));
+        }
         BlockPos probe = ORIGIN.offset(5, 2, 2);
         BlockState before = helper.getBlockState(probe);
         helper.setBlock(ORIGIN.offset(1, 4, 1), Blocks.DIRT);
