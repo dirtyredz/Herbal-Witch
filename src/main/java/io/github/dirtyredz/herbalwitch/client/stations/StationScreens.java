@@ -9,7 +9,7 @@ import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.MenuType;
 
-/** Registers each station menu's screen and its atlas layout (positions match tools/art/stations/interfaces.mjs). */
+/** Registers each station menu's screen and its atlas layout (positions match tools/art/interface/stations.mjs). */
 public final class StationScreens {
     private StationScreens() {
     }

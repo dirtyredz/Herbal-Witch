@@ -3,7 +3,6 @@ package io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.bottling_be
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item.PreparedMixtureItem;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.metadata.PreparationMetadata;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.AdvancedStationEntity;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.bottling_bench.BottlingBenchMenu;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.block.StationMenu;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessInventory;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationBlockEntities;

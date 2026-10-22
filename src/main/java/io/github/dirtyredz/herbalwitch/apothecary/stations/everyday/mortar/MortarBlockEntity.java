@@ -1,7 +1,6 @@
 package io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.mortar;
 
 import io.github.dirtyredz.herbalwitch.apothecary.stations.block.ProcessStationEntity;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.mortar.MortarMenu;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.block.StationMenu;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessInventory;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationBlockEntities;

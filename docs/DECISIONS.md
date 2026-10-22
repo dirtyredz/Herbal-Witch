@@ -2,6 +2,32 @@
 
 Newest first.
 
+## 2026-10-22 - 0.6.1: stable extension contracts before M8/M9
+
+- Group cultivation, preparations and processing under `apothecary/`; flatten station leaves.
+  The parent owns no implementation. Resource IDs, saves, registration order and protocol 4 stay fixed.
+- Features own their grimoire sources and register them with explicit reading order. Core consumers
+  use neutral summaries, discovery forms and live recipe views. This supersedes the M5 and M7
+  decisions below that forbade features from importing grimoire contracts. The fixed herb wire DTO
+  stays explicit; an extensible transport is deferred.
+- Shared values live in `platform/{recipe,inventory,time}`; online lookup/enumeration lives in
+  `platform/player/OnlinePlayers`. Policies stay in features. Typed recipe subclasses remain small
+  adapters for registered types and serializer bounds.
+- Durable witch mutation stays in `magic/witch/status`; paid operations use `WitchStatusService.spend`.
+  Participant preparation precedes debit. False results and runtime exceptions restore durable state
+  and invoke participant rollback; transient disturbance remains. Founding/designation keep their
+  no-energy conversion path. This does not provide crash atomicity or arbitrary world rollback.
+- Ward activation, controls, focus, index/ticks and reconciliation have separate owners. Preparations
+  share one drink/oil adapter and lazy timed-effect facts, retaining explicit special cases and labels.
+- Four screens share panel routing; recipe text and recipe-body rendering have dedicated homes.
+  Escape reaching the screen and failed-spend rollback on exception are the only intended corrections.
+- Art primitives are neutral modules; feature motifs/layouts keep feature homes. Distinct outline
+  algorithms and the reader atlas must retain exact PNG bytes, not merely similar appearance.
+- Singleton feature `grimoire/`, targeting and integration packages express ownership and remain.
+  Catalogue dispatch, TeachingNotifier/client-cache splits, nullable policy/slot layout and broader
+  furniture placement/storage predicates and migration scripts remain P2 follow-ups; this refactor adds no M8-M12 gameplay.
+
+
 ## 2026-10-22 - 0.6.0: advanced brewing, charms, ritual circle and ward stones (Milestone 7)
 
 Grouped because the choices lean on one another; each is short. These are the points where the
@@ -33,7 +59,7 @@ docs/catalogue/stations.md, docs/catalogue/products.md.
   compiled. The 32 compiled cell models are a documented exception to the 12-file directory cap.
 - **An unknown job schema is preserved byte for byte.** `ProcessJob` is SCHEMA 2 (schema 1 loads). A newer
   schema is never rewritten: the station idles until its inventory changes. Rejected: dropping the job.
-- **Preparation grimoire pages live in `grimoire/content/reference/`.** `AdvancedPreparationEntries` is
+- **Historical, superseded by 0.6.1: preparation pages lived in `grimoire/content/reference/`.** `AdvancedPreparationEntries` is
   grimoire code reading the brewing catalogues, because brewing must not import the grimoire.
 - **The witch picks the ritual target by looking at it, then opens the altar.** Garden Blessing targets a
   herb bed and Home Protection a ward stone; `client/ritual/RitualTargets` reads the aimed block before the
@@ -141,8 +167,8 @@ M5 plan's defaults; the owner's visual review of the 89 agent-drafted pieces is 
 - **Structure.** `decor/` groups into `structure/` (block, layout, support, access, placement item, shapes)
   and `behavior/` (seating, storage, sleeping, openings, lighting) to keep every level under ten entries;
   the plan's flatter `decor/{block,layout,support,...}` siblings were a deliberate deviation. The grimoire
-  source is `decor/grimoire/DecorEntries` (grimoire -> decor), not `decor/grimoire/`, which
-  would have made decor import grimoire against the dependency rule.
+  source was `grimoire/content/reference/DecorEntries` (grimoire -> decor), not `decor/grimoire/`.
+  That historical dependency rule is superseded by the 0.6.1 feature-owned contracts above.
 
 ## 2026-10-22 - 0.3.0: the grimoire is advisory, shallow and recipe-backed (Milestone 4)
 
@@ -434,7 +460,7 @@ any world can start without a lucky find.
 
 ## 2026-10-21 - Grouped permanent herb ids; habitat preferences in data
 
-Herb ids are `apothecary/botany/<group>/<herb>/...` with five permanent groups, which keeps every generated
+Herb ids are `botany/<group>/<herb>/...` with five permanent groups, which keeps every generated
 directory under the cap. Liked conditions and discovery chances are data, retunable without renames.
 
 ## 2026-10-21 - One cottage design replaces 18 finishes

@@ -1,7 +1,7 @@
 // The herb bed (owner references: reference-herb-bed-lavender.png, reference-joined-bed-2x2.png):
 // a dark wooden planter (the armchair's wood, owner ruling), two horizontal plank rails per side
 // with a groove between them, chunky square corner posts rising just above the rails with end-grain
-// caps and small gold rivets, and lumpy soil just below the rim (dry or wet: tools/art/botany/garden).
+// caps and small gold rivets, and lumpy soil just below the rim (dry or wet: tools/art/content/botany/garden).
 // The rails stop at the posts' faces so nothing overlaps (or z-fights) at a corner. Parts are authored for the north side and the
 // north-east corner; the multipart blockstate turns them (data/client/botany/garden/). Joined sides
 // show soil instead of a rail, so beds side by side read as one planter. Where two joined sides

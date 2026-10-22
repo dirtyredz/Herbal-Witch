@@ -1,7 +1,5 @@
 package io.github.dirtyredz.herbalwitch.platform.time;
 
-import io.github.dirtyredz.herbalwitch.platform.time.TickTime;
-
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

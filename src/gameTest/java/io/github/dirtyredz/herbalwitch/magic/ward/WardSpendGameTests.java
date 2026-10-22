@@ -6,7 +6,6 @@ import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.magic.ward.block.WardStoneBlockEntity;
 import io.github.dirtyredz.herbalwitch.magic.ward.registry.WardRegistration;
 import io.github.dirtyredz.herbalwitch.magic.ward.service.WardLifecycle;
-import io.github.dirtyredz.herbalwitch.magic.ward.service.WardService;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchState;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchStatusService;
 import net.minecraft.core.BlockPos;

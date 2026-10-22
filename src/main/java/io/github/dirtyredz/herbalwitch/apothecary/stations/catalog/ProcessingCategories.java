@@ -1,8 +1,6 @@
 package io.github.dirtyredz.herbalwitch.apothecary.stations.catalog;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationCatalog;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationSpec;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.List;

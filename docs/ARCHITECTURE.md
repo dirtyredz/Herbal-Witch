@@ -24,7 +24,7 @@ Botany supplies cached summaries keyed by condition-set identity; stations suppl
 generation. Recipe-manager, tag, definition and herb changes still invalidate server content, and
 client disconnect still clears all connection data. The herb wire record remains protocol 4.
 
-## Current system (0.6.0: Milestones 1-7 plus the art pass; furniture is Milestone 5, initiation and energy Milestone 6, advanced brewing, charms, circle and wards Milestone 7)
+## Current system (0.6.1 structural refactor: Milestones 1-7 plus the art pass; furniture is Milestone 5, initiation and energy Milestone 6, advanced brewing, charms, circle and wards Milestone 7)
 
 Everything below is server-authoritative; clients get vanilla block updates, menu slots and menu data.
 The one custom channel, `herbalwitch:main` (protocol "4", `platform/network/HerbalWitchNetwork`), carries
@@ -161,7 +161,7 @@ the GameTest template is 128 x 10 x 64 and `ShowcasePlanTest` fails if a plan ou
   slots), `ProcessJob` (exact shapeless matching; recipe id + content fingerprint), `ProcessCompletion`
   (pure capacity arithmetic), `ProcessRecipeJson`/`ProcessRecipeIndex` (one bounded format; per-type
   sorted cache). `ProcessStation` ties them to a block entity by composition. Since Milestone 7 `process/`
-  has four sub-packages: `recipe/` (the recipe type, JSON and wire format, index, `ProcessRequirements`),
+  has four sub-packages: `recipe/` (the recipe type, JSON and wire format, index; shared facts in `platform/recipe/`),
   `matching/` (`ProcessMatcher`), `execution/` (`ProcessCommit`, `ProcessExecutionPolicy`) and
   `authorization/` (below), and `apothecary/stations/block/ProcessStationEntity` is the shared block-entity base all
   eight process stations (four everyday, four advanced) sit on.
@@ -174,7 +174,7 @@ the GameTest template is 128 x 10 x 64 and `ShowcasePlanTest` fails if a plan ou
   station running.
 - *Heat:* `heat/` reads tags: `herbalwitch:heat_sources` (must be LIT where the block has that
   property) directly below, or one `herbalwitch:heat_conductors` block then a source. Waterlogged gives
-  none. Heated stations show Needs heat until then. The Witch's Stove (`apothecary/stations/stove/`) is a heat source
+  none. Heated stations show Needs heat until then. The Witch's Stove (`apothecary/stations/everyday/stove/`) is a heat source
   that reuses the hearth's block entity type, menu and screen.
 - *Multiblocks:* `platform/multiblock/` (`MultiblockLayout`, `MultiblockStructure`) describes a
   station's cells; layouts are named in `StationCatalog` (`StationSpec.layout`). The drying rack and
@@ -252,14 +252,13 @@ reads it as permission, and later magic must not either.
   `GrimoireContentSource`s (`GuideEntries`, `StationEntries`, `HerbEntries`, `StationRecipeEntries`), which run
   on both sides from the same inputs, so server and client build the same index. Later milestones add a
   source for their own entries. Recipe pages come from the recipes themselves and never depend on editorial
-  data; `ProcessingCategories` (`apothecary/stations/catalog`) is the one recipe-type-to-station mapping shared with
-  EMI and JEI.
+  data; `ProcessingCategories` (`apothecary/stations/catalog`) supplies category/station facts, and
+  `ProcessingRecipeBindings` resolves recipe types for adapters shared with EMI and JEI.
 - *Editorial data:* `data/<ns>/grimoire_entries/**.json` (`GrimoireDefinitionLoader`) holds prose, grouping,
   links and hints only; mechanics fields are rejected, the whole set is validated, an invalid reload keeps
   the previous set, and guide links are checked within the set.
 - *Build and reload ordering:* `ServerGrimoireContent` rebuilds with a new revision whenever the recipe
-  manager, the tag generation, the editorial set or the herb conditions are a different instance than at the
-  last build, checked on access. Listeners hear each revision: `ContentSync` (on datapack sync it sends the
+  manager, tag generation, editorial set or stable herb-summary identity changes, checked on access. Listeners hear each revision: `ContentSync` (on datapack sync it sends the
   editorial definitions and the server's herb conditions; recipe bodies come from vanilla recipe sync) and
   teaching, which cancels invitations whose recipe vanished or changed. Herb conditions are server-only, so clients use the synced summaries.
 - *Discoveries:* a personal capability (`herbalwitch:grimoire/discoveries`, server players only), stored by
@@ -294,16 +293,16 @@ reads it as permission, and later magic must not either.
   handlers are injected, and the client handler is installed by client code. `PayloadBounds` caps chunks at
   64 records and 24 KiB and the total at 4096; `ChunkAssembly` applies a snapshot atomically.
 - *Client:* `client/grimoire` is the two-page `GrimoireScreen`, `GrimoireView`, widgets, and the
-  `StationGrimoirePanel` button on station and hearth screens (station menus are untouched). Client state
+  `StationGrimoirePanel` shared through `GrimoirePanelHost` by process, hearth, altar and ward screens. Client state
   is cleared on disconnect and rebuilt on recipe and tag updates.
 
 **Witchcraft (`magic/witch/`, `magic/ritual/`, Milestone 6).** Becoming a witch, the energy a witch
 holds, and the altar where rituals happen. `witch` and `ritual` sit under a `magic/` grouping parent
 (DECISIONS) to keep the Java root narrow. Numbers and procedures: docs/catalogue/witchcraft.md.
-- *Dependencies:* `brewing` -> `magic/witch` (drinks restore energy); `grimoire` -> `magic/witch`
-  (witchcraft pages read the rules); `magic/ritual` -> `magic/witch`, `grimoire`, `botany`, `brewing`,
-  `platform`; `magic/witch` imports only `platform` and Minecraft/Forge. Nothing imports `magic/ritual`
-  except `data/`, `client/` and bootstrap.
+- *Dependencies:* `apothecary/brewing` -> `magic/witch` services for recovery. Magic presentation
+  adapters contribute grimoire contracts; core grimoire consumers do not import magic implementations.
+  Rituals use witch services, grimoire discovery contracts, botany/brewing and platform adapters.
+  Bootstrap/showcase and optional compatibility wiring remain explicit integration bridges (STRUCTURE.md).
 - *State (`witch/status`):* the capability `herbalwitch:witch/status`, server players only, schema 1:
   `{schema, initiated, initiation (uuid), energy, practice, tea, restful, sleepDay}`. Energy and
   practice are fixed-point hundredths; capacity is derived from practice and the rules and never saved.
@@ -311,15 +310,15 @@ holds, and the altar where rituals happen. `witch` and `ritual` sit under a `mag
   unchanged and the player is treated as a non-witch (logged; `/herbalwitch witch inspect` shows it).
   The clone copy runs once on death and End return regardless of keepInventory (the same
   revive/invalidate pattern as discoveries). Activities (rest, meditation) clear on death, logout and
-  dimension change. `WitchStatusService` is the only mutation API (check, debit, recover, award
-  practice, convert, snapshot, restore); M7 production uses it and M9 familiars must.
+  dimension change. `WitchStatusService` is the mutation API (named recovery, conversion and `spend` operations);
+  M7 production uses its transaction and M9 familiars must. Mutable helpers stay in `status/`.
 - *Rules (`witch/config`):* `WitchServerConfig` (`herbalwitch-server.toml`, per world) is validated as a
   whole into an immutable `WitchRules`. An invalid edit keeps the previous rules and logs. A valid
   change cancels pending invitations and running rituals, clamps energy without refilling and resends
   the rules. Clients receive them (`WitchRulesUpdate`) so the grimoire quotes live numbers; page prose
   never hard-codes one (a test enforces it).
-- *Energy (`witch/energy`):* `EnergyBalance` holds the numbers; `EnergyService`, `EnergyRecovery`,
-  `RecoveryConditions`, `SleepRecovery`, `DrinkRecovery` and `PracticeProgress` hold the rules;
+- *Energy (`witch/energy`):* `EnergyBalance` holds the numbers; `EnergyRecovery`, `RecoveryConditions`,
+  `DrinkRecovery` and `PracticeProgress` hold policy/arithmetic; `status/{EnergyService,SleepRecovery}` mutate state;
   `EnergyEvents` is the Forge adapter. Rest, meditation, the nature and moon bonus, sleep, energy tea
   and the restful infusion are specified in docs/catalogue/witchcraft.md. The sleep reward listens to
   `SleepFinishedTimeEvent`, the server's sleep-completion path, with `EnergyEvents.sleptThrough` as the
@@ -396,13 +395,25 @@ one fingerprint. Defaults are `processingPercent` 100, `gardenBlessingCost` 15, 
   `client/brewing/PreparationRenderers`, and ritual categories for JEI and EMI over
   `client/compat/ritual/RitualCardLayout`.
 - *Grimoire:* station pages for the four new stations; the witchcraft pages for brewing, preparations and
-  familiar preparations (`apothecary/brewing/grimoire/AdvancedPreparationEntries`, in `grimoire` because
-  `brewing` must not import it), wards, charms, the circle and the two circle rituals; 113 processing
+  familiar preparations (`apothecary/stations/grimoire/BrewingEntries` and
+  `apothecary/brewing/grimoire/AdvancedPreparationEntries`, registered by their owning features), wards, charms, the circle and the two circle rituals; 113 processing
   recipe pages.
+
+**Client presentation.** `client/recipe/RecipeText` owns counted stack copies, requirement text
+with an explicit current multiplier, and fractional duration strings. `ViewerLayout` is geometry
+only. `EntryPage` owns page flow, clipping, prose, links and teaching; `RecipeBody` renders live
+recipes. `GrimoirePanelHost` shares persistent panel initialization, tick, rendering, tooltip
+precedence and input fallback across processing, hearth, altar and ward screens. Escape bypasses
+focused search; other typing keys (including inventory) remain consumed by focused panel search.
+
+**Drawing ownership.** `tools/art/drawing/{sprites,plant-motifs,items}.mjs` supplies reusable
+primitives; seed layouts remain under `content/botany/seeds.mjs`. Herb and item outline algorithms
+retain their distinct edge/darkening rules. GUI atlases use `interface/kit.mjs`; the reader's slot
+call preserves its frame coordinates. Frozen manifest/PNG hashes guard byte parity.
 
 ## Whole-mod module map (plan section 2)
 
-Paths under `src/main/java/io/github/dirtyredz/herbalwitch/`. Implemented so far: decor, botany, stations, brewing,
+Paths under `src/main/java/io/github/dirtyredz/herbalwitch/`. Implemented so far: decor, apothecary/{botany,stations,brewing},
 showcase, platform/permission, platform/network, compat, grimoire and magic/{witch,ritual,charm,ward}. Later milestones create the rest when needed.
 
 | Home | Responsibility |
@@ -416,7 +427,7 @@ showcase, platform/permission, platform/network, compat, grimoire and magic/{wit
 | `companions/animals/{trust,capture,taming}/`, `companions/familiars/{bond,command,ability,home,recovery,species}/` | Animal relationships; familiar bonds without one god manager |
 | `magic/ritual/{catalog,registry,altar,circle,menu,session,action,network,grimoire,showcase}` (implemented, 0.5.0; `circle/` 0.6.0), `magic/ward/` and `magic/charm/` (implemented, 0.6.0), `magic/broom/`, `magic/wand/` | The altar, its menu, sessions and actions; the ritual circle; home wards; charms; broom entity; one class per wand mode |
 | `shop/{catalog,trade,order,persistence,block}/` | Offers, transactions, orders, persistence, counter/register |
-| `grimoire/{catalog,registry,access,content,knowledge,reading,network}/`, `grimoire/showcase/` (implemented) | Ids and registration; book, research blocks and reader menu (`access/{item,block,menu}`); recipe-backed entries and editorial reload; personal knowledge (`knowledge/{discovery,research,teaching}`); reader sessions and the missing-ingredient allocator (`reading/`); the six messages |
+| `grimoire/{catalog,registry,access,content,knowledge,reading,network}/`, `grimoire/showcase/` (implemented) | Ids and registration; book, research blocks and reader menu (`access/{item,block,menu}`); recipe-backed entries and editorial reload; personal knowledge (`knowledge/{discovery,research,teaching}`); reader sessions and ingredient requirements (`reading/`, using `platform/inventory`); the six messages |
 | `decor/{catalog,registry,showcase}/`, `decor/structure/`, `decor/behavior/{seating,storage,sleeping,openings,lighting}/` | Furniture (implemented, 0.4.0): the design and 94 pieces; shared structure (block, placement, support, shapes); one implementation per behaviour |
 | `client/<feature>/`, `client/compat/<viewer>/` | Screens, HUD, renderers, particles; optional EMI/JEI plugins (`client/placement/` is the shared structure preview; `client/witch/{hud}`, `client/ritual/{widgets}` are M6) |
 | `data/client/<feature>/`, `data/server/<feature>/` | Datagen per feature, consuming feature catalogues |

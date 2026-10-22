@@ -1,9 +1,5 @@
 package io.github.dirtyredz.herbalwitch.client.grimoire.widgets;
 
-
-
-
-
 import io.github.dirtyredz.herbalwitch.client.grimoire.GrimoireView;
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireEntry;

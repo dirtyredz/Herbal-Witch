@@ -4,8 +4,6 @@ import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
 
 import io.github.dirtyredz.herbalwitch.client.recipe.RecipeText;
 
-
-
 import io.github.dirtyredz.herbalwitch.client.grimoire.GrimoireClientState;
 import io.github.dirtyredz.herbalwitch.client.grimoire.GrimoireView;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireEntry;

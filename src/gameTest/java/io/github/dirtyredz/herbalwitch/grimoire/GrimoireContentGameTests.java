@@ -18,7 +18,6 @@ import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContent;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireEntry;
 import io.github.dirtyredz.herbalwitch.grimoire.content.ServerGrimoireContent;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.grimoire.StationRecipeEntries;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reference.GuideEntries;
 import io.github.dirtyredz.herbalwitch.apothecary.botany.grimoire.HerbEntries;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reload.GrimoireDefinitionLoader;

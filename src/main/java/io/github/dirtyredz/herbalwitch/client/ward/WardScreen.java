@@ -138,5 +138,4 @@ public class WardScreen extends GrimoirePanelHost<WardMenu> {
                 WitchRules.current().workings().wardHeight());
     }
 
-
 }

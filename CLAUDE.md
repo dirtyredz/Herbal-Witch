@@ -38,7 +38,7 @@ docs/ARCHITECTURE.md and docs/catalogue/).
   display anchors (`DisplaySpec`) for displays, and the independent manifests (`data/decor/manifest/`).
 - **Witch state, energy and the altar** (`magic/witch`, `magic/ritual`; docs/ARCHITECTURE.md "Witchcraft"):
   mutate a player's energy or practice only through `WitchStatusService`; paid changes use its
-  `spend` transaction (M7 production included, and M9 familiars will). Shared online lookup/enumeration
+  `WitchStatusService.spend` transaction (M7 production included, and M9 familiars will). Shared online lookup/enumeration
   belongs to `platform/player/OnlinePlayers`; features retain their own eligibility rules.
   Bump `HerbalWitchNetwork.PROTOCOL` (now "4") on any wire change and register new messages
   after the grimoire's. The founding record is world-global: GameTests that convert anyone close it, so

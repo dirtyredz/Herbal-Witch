@@ -4,7 +4,6 @@ import io.github.dirtyredz.herbalwitch.platform.player.OnlinePlayers;
 
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.EnergyService;
-import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchState;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchStatusService;
 import io.github.dirtyredz.herbalwitch.platform.permission.ActionContext;
 import io.github.dirtyredz.herbalwitch.platform.permission.ActionPermissionService;

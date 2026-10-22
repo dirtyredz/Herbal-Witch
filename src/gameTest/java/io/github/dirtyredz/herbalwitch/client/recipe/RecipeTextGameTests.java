@@ -2,12 +2,8 @@ package io.github.dirtyredz.herbalwitch.client.recipe;
 
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
 
-import io.github.dirtyredz.herbalwitch.client.recipe.RecipeText;
-
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.client.compat.ViewerLayout;
 import io.github.dirtyredz.herbalwitch.platform.recipe.ProcessRecipeDescription;
-import io.github.dirtyredz.herbalwitch.platform.recipe.ProcessRequirements;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.network.chat.contents.TranslatableContents;

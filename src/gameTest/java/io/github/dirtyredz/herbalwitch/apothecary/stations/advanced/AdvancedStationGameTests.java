@@ -14,7 +14,6 @@ import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.cauldron.Cau
 import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.charm_workbench.CharmWorkbenchBlockEntity;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.still.StillBlockEntity;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessInventory;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.process.authorization.StationOperations.Operation;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationBlocks;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationItems;
 import net.minecraft.core.BlockPos;

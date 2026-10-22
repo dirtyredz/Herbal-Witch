@@ -233,6 +233,16 @@ four station screens and the ward screen at several GUI scales, shaders off and 
 
 ## How the art is made
 
+The 0.6.1 tooling refactor preserves every generated PNG/model byte and the ordered manifest.
+Feature sprites live in `tools/art/content/{botany,preparations,magic,grimoire}/`; all GUI atlases
+live in `tools/art/interface/`, shared house materials in `tools/art/materials/`. Neutral canvas,
+line and outline primitives live in `drawing/sprites.mjs`, reusable plant forms in
+`drawing/plant-motifs.mjs`, item drawing in `drawing/items.mjs`. Seed layouts remain botanical.
+The herb outline (0.82 darkening, three neighbours, undefined outside) and item outline (0.6,
+four neighbours, null outside) are deliberately distinct. Reader-atlas kit reuse keeps original
+frame coordinates. `tools/art/test/refactor-parity.test.mjs` retains pre-refactor manifest/PNG hashes;
+never refresh those expected hashes to conceal an extraction difference. CLI paths are unchanged.
+
 - **Textures** come from `node tools/generate-textures.mjs` (seeded code in `tools/art/`) for the
   procedural families: herbs, soil, the herb atlas, sprites, GUI atlases, and the house wood and gold
   the herb bed and hung bundles use. Every texture of every Blockbench piece is that piece's own,

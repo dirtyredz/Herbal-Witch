@@ -87,5 +87,4 @@ public final class WardControls {
         return "profile";
     }
 
-
 }

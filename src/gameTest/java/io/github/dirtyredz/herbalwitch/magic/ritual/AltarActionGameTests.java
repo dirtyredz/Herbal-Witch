@@ -24,7 +24,6 @@ import io.github.dirtyredz.herbalwitch.magic.witch.initiation.founding.FoundingR
 import io.github.dirtyredz.herbalwitch.magic.witch.initiation.founding.FoundingService;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchCapability;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchStatusService;
-import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.server.MinecraftServer;

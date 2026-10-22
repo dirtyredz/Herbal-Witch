@@ -1,5 +1,12 @@
 # Gotchas - The Herbal Witch
 
+- **Duration rounding is intentional.** `TickTime` ceiling countdown helpers and fractional recipe
+  text are different operations: 50 ticks is three countdown seconds but the recipe argument is the
+  string `"2.5"`. Ward menu values clamp after converting ticks to seconds/minutes.
+- **All four panel hosts share Escape routing.** `GrimoirePanelHost` bypasses panel search for Escape
+  so the enclosing screen closes; focused search consumes other typing keys, including inventory.
+  Retain the panel/view across resize and altar widget rebuilds. Page tooltips precede host tooltips.
+
 Feature bootstrap order is not grimoire reading order: register sources with `GrimoireContent.Order`.
 Keep herb summary maps stable until the condition-set identity changes, and retain their iteration
 order for content chunks. Protocol 4 preference codes remain rain=0, low sky=1, night=2, full moon=3.

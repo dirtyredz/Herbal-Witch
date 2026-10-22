@@ -141,5 +141,4 @@ public final class WardActivation {
         return true;
     }
 
-
 }

@@ -51,7 +51,7 @@ The two grimoire pieces own their textures like the rest: the stand has `wood`, 
 `textures/block/pieces/grimoire/<piece>/<name>.png`. Stand: crossed foot, pedestal with gold collars, tilted
 board holding an open book, ribbon and ivy. Bookshelf: framed carcass, three shelves of volumes, crescent
 bookend, side moon, ivy. They have no groups the game treats specially. The grimoire's book sprite and reader
-atlas are procedural (`tools/art/grimoire/`), not painted in Blockbench.
+atlas are procedural (`tools/art/content/grimoire/book.mjs` and `tools/art/interface/grimoire.mjs`), not painted in Blockbench.
 
 The ritual altar (`ritual/altar`) is authored whole like the other multiblocks and cut into
 `part_0..3`. It owns fourteen textures at `textures/block/pieces/ritual/altar/`: `wood`, `wood_v`, `stone`,

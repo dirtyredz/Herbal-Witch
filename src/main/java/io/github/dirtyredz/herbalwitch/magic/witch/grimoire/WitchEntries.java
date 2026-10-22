@@ -4,7 +4,6 @@ import io.github.dirtyredz.herbalwitch.grimoire.catalog.WitchcraftKeys;
 
 import io.github.dirtyredz.herbalwitch.platform.time.TickTime;
 
-import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContent;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContentSource;

@@ -3,7 +3,6 @@ package io.github.dirtyredz.herbalwitch.magic.witch.status;
 import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyBalance;
 
 import io.github.dirtyredz.herbalwitch.magic.witch.status.EnergyService.Result;
-import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchState;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

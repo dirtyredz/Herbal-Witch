@@ -84,4 +84,3 @@ export function bell(cv, x, y, r) {
   set(cv, x + 1, y + 2, r[0]);
   set(cv, x, y + 2, r[1]);
 }
-

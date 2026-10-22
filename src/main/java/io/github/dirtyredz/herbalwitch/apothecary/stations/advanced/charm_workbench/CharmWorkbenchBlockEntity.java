@@ -1,7 +1,6 @@
 package io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.charm_workbench;
 
 import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.AdvancedStationEntity;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.charm_workbench.CharmWorkbenchMenu;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.block.StationMenu;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessInventory;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationBlockEntities;

@@ -1,6 +1,5 @@
 package io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.charm_workbench;
 
-import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.charm_workbench.CharmWorkbenchBlockEntity;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.block.StationMenu;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessInventory;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessStation;
@@ -12,7 +11,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.SimpleContainerData;
 
-/** The station slots, drawn to match its generated GUI atlas (tools/art/stations/interfaces.mjs). */
+/** The station slots, drawn to match its generated GUI atlas (tools/art/interface/stations.mjs). */
 public class CharmWorkbenchMenu extends StationMenu {
     public static final SlotSpec[] SLOTS = {
             new SlotSpec(CharmWorkbenchBlockEntity.INPUT_0, 30, 26),

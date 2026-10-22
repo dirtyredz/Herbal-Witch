@@ -2,7 +2,6 @@ package io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.hearth;
 
 import io.github.dirtyredz.herbalwitch.apothecary.stations.block.StationBlock;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.block.StationEntity;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.hearth.HearthMenu;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessCompletion;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessInventory;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationBlockEntities;

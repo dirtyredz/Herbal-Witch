@@ -2,7 +2,6 @@ package io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.kettle;
 
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.metadata.DrinkMetadata;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.block.ProcessStationEntity;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.kettle.KettleMenu;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.block.StationMenu;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessInventory;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationBlockEntities;

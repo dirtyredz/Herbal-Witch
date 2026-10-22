@@ -8,7 +8,6 @@ import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyItems;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationItems;
 import io.github.dirtyredz.herbalwitch.grimoire.catalog.WitchcraftKeys;
 import io.github.dirtyredz.herbalwitch.apothecary.botany.grimoire.HerbEntries;
-import io.github.dirtyredz.herbalwitch.grimoire.content.reload.GrimoireDefinitionLoader;
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;

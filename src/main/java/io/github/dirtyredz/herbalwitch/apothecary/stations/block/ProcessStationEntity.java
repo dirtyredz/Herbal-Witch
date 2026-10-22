@@ -1,7 +1,6 @@
 package io.github.dirtyredz.herbalwitch.apothecary.stations.block;
 
 import io.github.dirtyredz.herbalwitch.apothecary.stations.heat.HeatSources;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.block.StationMenu;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessInventory;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessJob;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessLayout;

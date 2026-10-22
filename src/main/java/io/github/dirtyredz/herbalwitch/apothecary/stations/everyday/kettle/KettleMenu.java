@@ -1,6 +1,5 @@
 package io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.kettle;
 
-import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.kettle.KettleBlockEntity;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.block.StationMenu;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessInventory;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessStation;

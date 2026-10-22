@@ -2,7 +2,6 @@ package io.github.dirtyredz.herbalwitch.magic.witch.status;
 
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
 import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyBalance;
-import io.github.dirtyredz.herbalwitch.magic.witch.status.EnergyService;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 

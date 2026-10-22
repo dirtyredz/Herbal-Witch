@@ -23,7 +23,6 @@ public final class GrimoireEntryTest {
     private static final EntryKey FIRST = EntryKey.of(EntryKey.Kind.GUIDE, "test:first");
     private static final EntryKey SECOND = EntryKey.of(EntryKey.Kind.GUIDE, "test:second");
 
-
     @GameTest(template = TEMPLATE)
     public static void constructorCopiesTheIconAndBodyList(GameTestHelper helper) {
         ItemStack icon = new ItemStack(Items.PAPER, 3);

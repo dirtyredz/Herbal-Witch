@@ -2,8 +2,6 @@ package io.github.dirtyredz.herbalwitch.magic.witch.status;
 
 import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyBalance;
 
-import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchState;
-
 /**
  * The daily sleep reward, pure. Only a genuine completed night's sleep counts (the server's
  * sleep-completion path with a long enough sleep, decided by the caller); entering a bed, setting a

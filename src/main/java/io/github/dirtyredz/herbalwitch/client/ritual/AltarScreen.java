@@ -193,5 +193,4 @@ public class AltarScreen extends GrimoirePanelHost<AltarMenu> implements CircleP
         graphics.drawString(font, title, 8, 6, INK, false);
     }
 
-
 }

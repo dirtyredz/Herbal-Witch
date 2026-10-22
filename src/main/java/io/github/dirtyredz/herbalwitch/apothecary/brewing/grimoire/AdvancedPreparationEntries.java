@@ -4,13 +4,11 @@ import io.github.dirtyredz.herbalwitch.grimoire.catalog.WitchcraftKeys;
 
 import io.github.dirtyredz.herbalwitch.platform.time.TickTime;
 
-
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.DrinkApplication;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.control.ControlEffects;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.repellent.TargetFilters;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.AdvancedProductCatalog;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.FamiliarPreparationCatalog;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.MixtureCatalog;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item.ThrowablePreparationItem;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.AdvancedPreparations;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.projectile.PreparationImpact;
@@ -18,7 +16,6 @@ import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContent;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContentSource;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireEntry;
-import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 

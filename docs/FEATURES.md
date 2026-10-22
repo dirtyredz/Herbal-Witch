@@ -5,6 +5,19 @@ Detail per entry: docs/catalogue/{decor,stations,products,witchcraft}.md.
 
 ## Implemented
 
+Version 0.6.1 is the structural prerequisite for M8/M9: grouped packages, feature-owned grimoire
+content, shared recipe/roster contracts, guarded witch spending, split ward services, unified
+preparations, shared client presentation and byte-identical art tooling. Gameplay, IDs, saves,
+registration order and protocol 4 are preserved. The only intended corrections are Escape reaching
+the enclosing screen and durable witch-state rollback when a spend participant throws.
+
+Local fast-gate evidence: 335 existing + 31 added JUnit tests; 75 existing + 4 added Node tests;
+171 existing + 26 added GameTest methods compile. Runtime GameTests and optional-mod qualification
+are delegated to the orchestrator after the committed handoff; no client was launched. Owner checks
+remain for all four panel hosts, changed-rule recipe text, drinks/oils, wards and two-client private
+updates. Headless preview review and all 2,693 baseline resource/art hashes are recorded locally.
+M8 animals and M9 familiars remain unimplemented. Partial P2 work is recorded in the open Docket items.
+
 Version 0.6.0 (local candidate): Milestone 7, advanced brewing, charms, the ritual circle and ward stones, is implemented on top of 0.5.0; see "0.6.0: advanced brewing, charms, circle and wards" below. Automated acceptance is tracked there; owner checks are pending.
 
 Version 0.5.0: Milestone 6, initiation and energy, is implemented on top of 0.4.0; see "0.5.0: initiation and energy" below. Automated acceptance is tracked there; owner checks are pending.

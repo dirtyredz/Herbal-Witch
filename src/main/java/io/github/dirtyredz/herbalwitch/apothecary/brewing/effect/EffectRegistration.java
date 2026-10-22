@@ -1,6 +1,5 @@
 package io.github.dirtyredz.herbalwitch.apothecary.brewing.effect;
 
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.PestRepellentEvents;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.combat.CombatEvents;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.control.ControlEvents;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.repellent.TargetFilters;

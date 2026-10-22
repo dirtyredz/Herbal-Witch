@@ -1,6 +1,5 @@
 package io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.infusion_pot;
 
-import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.infusion_pot.InfusionPotBlockEntity;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.block.StationMenu;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessInventory;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessStation;

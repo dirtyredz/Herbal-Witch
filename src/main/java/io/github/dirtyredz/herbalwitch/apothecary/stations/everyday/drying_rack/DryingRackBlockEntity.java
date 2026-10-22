@@ -1,7 +1,6 @@
 package io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.drying_rack;
 
 import io.github.dirtyredz.herbalwitch.apothecary.stations.block.ProcessStationEntity;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.drying_rack.DryingRackMenu;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.block.StationMenu;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessInventory;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationBlockEntities;

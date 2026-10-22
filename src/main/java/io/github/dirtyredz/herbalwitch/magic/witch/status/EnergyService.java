@@ -3,8 +3,6 @@ package io.github.dirtyredz.herbalwitch.magic.witch.status;
 import io.github.dirtyredz.herbalwitch.magic.witch.energy.PracticeProgress;
 import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyBalance;
 
-import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchState;
-
 import java.util.UUID;
 
 /**
