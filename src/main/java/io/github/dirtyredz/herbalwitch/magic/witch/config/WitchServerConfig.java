@@ -47,6 +47,20 @@ public final class WitchServerConfig {
     private static final ForgeConfigSpec.IntValue NATURE_BONUS;
     private static final ForgeConfigSpec.IntValue MOON_BONUS;
     private static final ForgeConfigSpec.IntValue BONUS_CAP;
+    private static final ForgeConfigSpec.IntValue PROCESSING_PERCENT;
+    private static final ForgeConfigSpec.IntValue GARDEN_BLESSING_COST;
+    private static final ForgeConfigSpec.IntValue GARDEN_BLESSING_TICKS;
+    private static final ForgeConfigSpec.IntValue HOME_PROTECTION_COST;
+    private static final ForgeConfigSpec.IntValue HOME_PROTECTION_TICKS;
+    private static final ForgeConfigSpec.IntValue WARD_ACTIVATION_COST;
+    private static final ForgeConfigSpec.IntValue WARD_CHARGE_SECONDS;
+    private static final ForgeConfigSpec.IntValue WARD_RADIUS;
+    private static final ForgeConfigSpec.IntValue WARD_FOCUS_RADIUS;
+    private static final ForgeConfigSpec.IntValue WARD_HEIGHT;
+    private static final ForgeConfigSpec.IntValue WARDS_PER_OWNER;
+    private static final ForgeConfigSpec.IntValue WARDS_PER_DIMENSION;
+    private static final ForgeConfigSpec.IntValue CHARM_CHARGE_SECONDS;
+    private static final ForgeConfigSpec.BooleanValue PREPARATION_PVP;
 
     static {
         WitchRules d = WitchRules.DEFAULTS;
@@ -86,6 +100,33 @@ public final class WitchServerConfig {
         MOON_BONUS = b.comment("Percent added under a visible full moon at night.").defineInRange("moonBonus", e.moonBonus(), 0, 100);
         BONUS_CAP = b.comment("Combined bonus ceiling, percent.").defineInRange("bonusCap", e.bonusCap(), 0, 100);
         b.pop();
+        WorkingRules w = d.workings();
+        b.comment("Workings: magical processing and the ritual circle (Milestone 7).").push("workings");
+        PROCESSING_PERCENT = b.comment("Percent applied to every witch recipe's energy cost (100 = as listed).")
+                .defineInRange("processingPercent", w.processingPercent(), 0, WorkingRules.MAX_PERCENT);
+        GARDEN_BLESSING_COST = b.comment("Energy the garden blessing spends.").defineInRange("gardenBlessingCost", w.gardenBlessingCost(), 0, maxE);
+        GARDEN_BLESSING_TICKS = b.comment("Ticks the garden blessing lasts.").defineInRange("gardenBlessingTicks", w.gardenBlessingTicks(), 1, maxT);
+        HOME_PROTECTION_COST = b.comment("Energy the home protection ritual spends.").defineInRange("homeProtectionCost", w.homeProtectionCost(), 0, maxE);
+        HOME_PROTECTION_TICKS = b.comment("Ticks the home protection ritual lasts.").defineInRange("homeProtectionTicks", w.homeProtectionTicks(), 1, maxT);
+        PREPARATION_PVP = b.comment("Whether harmful preparations may affect other players (server PvP, teams and protection still apply).")
+                .define("preparationPvp", w.preparationPvp());
+        b.pop();
+        b.comment("Home wards.").push("wards");
+        WARD_ACTIVATION_COST = b.comment("Energy a direct ward activation spends.").defineInRange("activationCost", w.wardActivationCost(), 0, maxE);
+        WARD_CHARGE_SECONDS = b.comment("Loaded seconds of protection one activation grants.")
+                .defineInRange("chargeSeconds", w.wardChargeSeconds(), 1, WorkingRules.MAX_SECONDS);
+        WARD_RADIUS = b.comment("Horizontal radius without a focus.").defineInRange("radius", w.wardRadius(), 1, WorkingRules.MAX_WARD_RADIUS);
+        WARD_FOCUS_RADIUS = b.comment("Horizontal radius with a hearth or stove focus.")
+                .defineInRange("focusRadius", w.wardFocusRadius(), 1, WorkingRules.MAX_WARD_RADIUS);
+        WARD_HEIGHT = b.comment("Vertical reach above and below the stone.").defineInRange("height", w.wardHeight(), 1, WorkingRules.MAX_WARD_HEIGHT);
+        WARDS_PER_OWNER = b.comment("Bound wards one witch may hold.").defineInRange("perOwner", w.wardsPerOwner(), 1, WorkingRules.MAX_WARDS_PER_OWNER);
+        WARDS_PER_DIMENSION = b.comment("Loaded active wards one dimension may hold.")
+                .defineInRange("perDimension", w.wardsPerDimension(), 1, WorkingRules.MAX_WARDS_PER_DIMENSION);
+        b.pop();
+        b.comment("Protective charms.").push("charms");
+        CHARM_CHARGE_SECONDS = b.comment("Equipped seconds a fresh charm lasts.")
+                .defineInRange("chargeSeconds", w.charmChargeSeconds(), 1, WorkingRules.MAX_SECONDS);
+        b.pop();
         SPEC = b.build();
     }
 
@@ -100,8 +141,12 @@ public final class WitchServerConfig {
                 ATTUNEMENT_COST.get(), REST_INTERVAL.get(), REST_AMOUNT.get(), MEDITATION_SETTLE.get(), MEDITATION_INTERVAL.get(),
                 MEDITATION_AMOUNT.get(), SLEEP_AMOUNT.get(), TEA_AMOUNT.get(), TEA_COOLDOWN.get(), RESTFUL_BONUS.get(),
                 RESTFUL_DURATION.get(), NATURE_BONUS.get(), MOON_BONUS.get(), BONUS_CAP.get());
+        WorkingRules workings = new WorkingRules(PROCESSING_PERCENT.get(), GARDEN_BLESSING_COST.get(), GARDEN_BLESSING_TICKS.get(),
+                HOME_PROTECTION_COST.get(), HOME_PROTECTION_TICKS.get(), WARD_ACTIVATION_COST.get(), WARD_CHARGE_SECONDS.get(),
+                WARD_RADIUS.get(), WARD_FOCUS_RADIUS.get(), WARD_HEIGHT.get(), WARDS_PER_OWNER.get(), WARDS_PER_DIMENSION.get(),
+                CHARM_CHARGE_SECONDS.get(), PREPARATION_PVP.get());
         return new WitchRules(FOUNDING_ENABLED.get(), INITIATION_ENABLED.get(), FOUNDING_TICKS.get(), INITIATION_TICKS.get(),
-                ATTUNEMENT_TICKS.get(), INVITE_EXPIRY.get(), INVITE_COOLDOWN.get(), energy);
+                ATTUNEMENT_TICKS.get(), INVITE_EXPIRY.get(), INVITE_COOLDOWN.get(), energy, workings);
     }
 
     /** Mod bus: the server config loaded or changed on disk. Applied on the server thread. */

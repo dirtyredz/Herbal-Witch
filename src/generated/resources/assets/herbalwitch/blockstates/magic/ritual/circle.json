@@ -1,0 +1,1316 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_0"
+      },
+      "when": {
+        "facing": "north",
+        "part": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_0"
+      },
+      "when": {
+        "active": "true",
+        "facing": "north",
+        "part": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_0",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "part": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_0",
+        "y": 90
+      },
+      "when": {
+        "active": "true",
+        "facing": "east",
+        "part": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_0",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "part": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_0",
+        "y": 180
+      },
+      "when": {
+        "active": "true",
+        "facing": "south",
+        "part": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_0",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "part": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_0",
+        "y": 270
+      },
+      "when": {
+        "active": "true",
+        "facing": "west",
+        "part": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_1"
+      },
+      "when": {
+        "facing": "north",
+        "part": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_1"
+      },
+      "when": {
+        "active": "true",
+        "facing": "north",
+        "part": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_1",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "part": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_1",
+        "y": 90
+      },
+      "when": {
+        "active": "true",
+        "facing": "east",
+        "part": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_1",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "part": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_1",
+        "y": 180
+      },
+      "when": {
+        "active": "true",
+        "facing": "south",
+        "part": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_1",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "part": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_1",
+        "y": 270
+      },
+      "when": {
+        "active": "true",
+        "facing": "west",
+        "part": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_2"
+      },
+      "when": {
+        "facing": "north",
+        "part": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_2"
+      },
+      "when": {
+        "active": "true",
+        "facing": "north",
+        "part": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_2",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "part": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_2",
+        "y": 90
+      },
+      "when": {
+        "active": "true",
+        "facing": "east",
+        "part": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_2",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "part": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_2",
+        "y": 180
+      },
+      "when": {
+        "active": "true",
+        "facing": "south",
+        "part": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_2",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "part": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_2",
+        "y": 270
+      },
+      "when": {
+        "active": "true",
+        "facing": "west",
+        "part": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_3"
+      },
+      "when": {
+        "facing": "north",
+        "part": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_3"
+      },
+      "when": {
+        "active": "true",
+        "facing": "north",
+        "part": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_3",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "part": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_3",
+        "y": 90
+      },
+      "when": {
+        "active": "true",
+        "facing": "east",
+        "part": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_3",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "part": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_3",
+        "y": 180
+      },
+      "when": {
+        "active": "true",
+        "facing": "south",
+        "part": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_3",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "part": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_3",
+        "y": 270
+      },
+      "when": {
+        "active": "true",
+        "facing": "west",
+        "part": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_4"
+      },
+      "when": {
+        "facing": "north",
+        "part": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_4"
+      },
+      "when": {
+        "active": "true",
+        "facing": "north",
+        "part": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_4",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "part": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_4",
+        "y": 90
+      },
+      "when": {
+        "active": "true",
+        "facing": "east",
+        "part": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_4",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "part": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_4",
+        "y": 180
+      },
+      "when": {
+        "active": "true",
+        "facing": "south",
+        "part": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_4",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "part": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_4",
+        "y": 270
+      },
+      "when": {
+        "active": "true",
+        "facing": "west",
+        "part": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_5"
+      },
+      "when": {
+        "facing": "north",
+        "part": "5"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_5"
+      },
+      "when": {
+        "active": "true",
+        "facing": "north",
+        "part": "5"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_5",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "part": "5"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_5",
+        "y": 90
+      },
+      "when": {
+        "active": "true",
+        "facing": "east",
+        "part": "5"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_5",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "part": "5"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_5",
+        "y": 180
+      },
+      "when": {
+        "active": "true",
+        "facing": "south",
+        "part": "5"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_5",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "part": "5"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_5",
+        "y": 270
+      },
+      "when": {
+        "active": "true",
+        "facing": "west",
+        "part": "5"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_6"
+      },
+      "when": {
+        "facing": "north",
+        "part": "6"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_6"
+      },
+      "when": {
+        "active": "true",
+        "facing": "north",
+        "part": "6"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_6",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "part": "6"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_6",
+        "y": 90
+      },
+      "when": {
+        "active": "true",
+        "facing": "east",
+        "part": "6"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_6",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "part": "6"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_6",
+        "y": 180
+      },
+      "when": {
+        "active": "true",
+        "facing": "south",
+        "part": "6"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_6",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "part": "6"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_6",
+        "y": 270
+      },
+      "when": {
+        "active": "true",
+        "facing": "west",
+        "part": "6"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_7"
+      },
+      "when": {
+        "facing": "north",
+        "part": "7"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_7"
+      },
+      "when": {
+        "active": "true",
+        "facing": "north",
+        "part": "7"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_7",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "part": "7"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_7",
+        "y": 90
+      },
+      "when": {
+        "active": "true",
+        "facing": "east",
+        "part": "7"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_7",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "part": "7"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_7",
+        "y": 180
+      },
+      "when": {
+        "active": "true",
+        "facing": "south",
+        "part": "7"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_7",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "part": "7"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_7",
+        "y": 270
+      },
+      "when": {
+        "active": "true",
+        "facing": "west",
+        "part": "7"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_8"
+      },
+      "when": {
+        "facing": "north",
+        "part": "8"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_8"
+      },
+      "when": {
+        "active": "true",
+        "facing": "north",
+        "part": "8"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_8",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "part": "8"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_8",
+        "y": 90
+      },
+      "when": {
+        "active": "true",
+        "facing": "east",
+        "part": "8"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_8",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "part": "8"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_8",
+        "y": 180
+      },
+      "when": {
+        "active": "true",
+        "facing": "south",
+        "part": "8"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_8",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "part": "8"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_8",
+        "y": 270
+      },
+      "when": {
+        "active": "true",
+        "facing": "west",
+        "part": "8"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_9"
+      },
+      "when": {
+        "facing": "north",
+        "part": "9"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_9"
+      },
+      "when": {
+        "active": "true",
+        "facing": "north",
+        "part": "9"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_9",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "part": "9"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_9",
+        "y": 90
+      },
+      "when": {
+        "active": "true",
+        "facing": "east",
+        "part": "9"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_9",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "part": "9"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_9",
+        "y": 180
+      },
+      "when": {
+        "active": "true",
+        "facing": "south",
+        "part": "9"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_9",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "part": "9"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_9",
+        "y": 270
+      },
+      "when": {
+        "active": "true",
+        "facing": "west",
+        "part": "9"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_10"
+      },
+      "when": {
+        "facing": "north",
+        "part": "10"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_10"
+      },
+      "when": {
+        "active": "true",
+        "facing": "north",
+        "part": "10"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_10",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "part": "10"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_10",
+        "y": 90
+      },
+      "when": {
+        "active": "true",
+        "facing": "east",
+        "part": "10"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_10",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "part": "10"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_10",
+        "y": 180
+      },
+      "when": {
+        "active": "true",
+        "facing": "south",
+        "part": "10"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_10",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "part": "10"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_10",
+        "y": 270
+      },
+      "when": {
+        "active": "true",
+        "facing": "west",
+        "part": "10"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_11"
+      },
+      "when": {
+        "facing": "north",
+        "part": "11"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_11"
+      },
+      "when": {
+        "active": "true",
+        "facing": "north",
+        "part": "11"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_11",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "part": "11"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_11",
+        "y": 90
+      },
+      "when": {
+        "active": "true",
+        "facing": "east",
+        "part": "11"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_11",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "part": "11"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_11",
+        "y": 180
+      },
+      "when": {
+        "active": "true",
+        "facing": "south",
+        "part": "11"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_11",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "part": "11"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_11",
+        "y": 270
+      },
+      "when": {
+        "active": "true",
+        "facing": "west",
+        "part": "11"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_12"
+      },
+      "when": {
+        "facing": "north",
+        "part": "12"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_12"
+      },
+      "when": {
+        "active": "true",
+        "facing": "north",
+        "part": "12"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_12",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "part": "12"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_12",
+        "y": 90
+      },
+      "when": {
+        "active": "true",
+        "facing": "east",
+        "part": "12"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_12",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "part": "12"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_12",
+        "y": 180
+      },
+      "when": {
+        "active": "true",
+        "facing": "south",
+        "part": "12"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_12",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "part": "12"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_12",
+        "y": 270
+      },
+      "when": {
+        "active": "true",
+        "facing": "west",
+        "part": "12"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_13"
+      },
+      "when": {
+        "facing": "north",
+        "part": "13"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_13"
+      },
+      "when": {
+        "active": "true",
+        "facing": "north",
+        "part": "13"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_13",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "part": "13"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_13",
+        "y": 90
+      },
+      "when": {
+        "active": "true",
+        "facing": "east",
+        "part": "13"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_13",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "part": "13"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_13",
+        "y": 180
+      },
+      "when": {
+        "active": "true",
+        "facing": "south",
+        "part": "13"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_13",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "part": "13"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_13",
+        "y": 270
+      },
+      "when": {
+        "active": "true",
+        "facing": "west",
+        "part": "13"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_14"
+      },
+      "when": {
+        "facing": "north",
+        "part": "14"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_14"
+      },
+      "when": {
+        "active": "true",
+        "facing": "north",
+        "part": "14"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_14",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "part": "14"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_14",
+        "y": 90
+      },
+      "when": {
+        "active": "true",
+        "facing": "east",
+        "part": "14"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_14",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "part": "14"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_14",
+        "y": 180
+      },
+      "when": {
+        "active": "true",
+        "facing": "south",
+        "part": "14"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_14",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "part": "14"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_14",
+        "y": 270
+      },
+      "when": {
+        "active": "true",
+        "facing": "west",
+        "part": "14"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_15"
+      },
+      "when": {
+        "facing": "north",
+        "part": "15"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_15"
+      },
+      "when": {
+        "active": "true",
+        "facing": "north",
+        "part": "15"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_15",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "part": "15"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_15",
+        "y": 90
+      },
+      "when": {
+        "active": "true",
+        "facing": "east",
+        "part": "15"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_15",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "part": "15"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_15",
+        "y": 180
+      },
+      "when": {
+        "active": "true",
+        "facing": "south",
+        "part": "15"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/part_15",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "part": "15"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/circle/active_15",
+        "y": 270
+      },
+      "when": {
+        "active": "true",
+        "facing": "west",
+        "part": "15"
+      }
+    }
+  ]
+}

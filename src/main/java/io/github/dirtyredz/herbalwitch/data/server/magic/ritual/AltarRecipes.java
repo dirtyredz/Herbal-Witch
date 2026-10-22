@@ -4,6 +4,7 @@ import io.github.dirtyredz.herbalwitch.magic.ritual.registry.RitualItems;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
 
@@ -25,6 +26,9 @@ public final class AltarRecipes {
                 .pattern("SAS").pattern("LGL").pattern("L L")
                 .define('S', Items.SMOOTH_STONE_SLAB).define('A', Items.AMETHYST_SHARD).define('L', Items.DARK_OAK_LOG)
                 .define('G', Tags.Items.INGOTS_GOLD)
+                .unlockedBy("has_amethyst_shard", has(Items.AMETHYST_SHARD)).save(writer);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, RitualItems.CIRCLE.get())
+                .requires(Items.SMOOTH_STONE_SLAB, 4).requires(Items.CALCITE, 2).requires(Items.AMETHYST_SHARD).requires(Items.GOLD_NUGGET)
                 .unlockedBy("has_amethyst_shard", has(Items.AMETHYST_SHARD)).save(writer);
     }
 }

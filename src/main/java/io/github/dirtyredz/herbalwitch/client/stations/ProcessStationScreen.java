@@ -1,6 +1,7 @@
 package io.github.dirtyredz.herbalwitch.client.stations;
 
 import io.github.dirtyredz.herbalwitch.client.grimoire.StationGrimoirePanel;
+import io.github.dirtyredz.herbalwitch.client.stations.widgets.MagicalProcessPanel;
 import io.github.dirtyredz.herbalwitch.stations.menu.StationMenu;
 import io.github.dirtyredz.herbalwitch.stations.process.ProcessStation;
 import io.github.dirtyredz.herbalwitch.stations.process.ProcessStatus;
@@ -17,10 +18,11 @@ import org.lwjgl.glfw.GLFW;
 import java.util.Optional;
 
 /**
- * The screen of a processing station (rack, mortar, kettle, infusion pot): its generated atlas,
- * the progress arrow, the heat flame for heated stations and the explicit status (missing input,
- * needs heat, working, output blocked). Purely a view of vanilla-synchronised menu data; it sends
- * nothing to the server. A "Grimoire" button opens the book beside it on the station's category.
+ * The screen of a processing station: its generated atlas, the progress arrow, the heat flame for
+ * heated stations and the explicit status (waiting, needs a witch, needs its witch nearby, needs
+ * energy, needs heat, output full, working). A view of vanilla-synchronised menu data; while a witch
+ * recipe is matched the {@link MagicalProcessPanel} beside it offers Start, Resume and Cancel (vanilla
+ * menu-button clicks). A "Grimoire" button opens the book on the other side on the station's category.
  *
  * @param <M> the station's menu
  */
@@ -34,22 +36,26 @@ public class ProcessStationScreen<M extends StationMenu> extends AbstractContain
 
     private final Layout layout;
     private final StationGrimoirePanel grimoire;
+    private final MagicalProcessPanel magic;
 
     public ProcessStationScreen(M menu, Inventory inventory, Component title, Layout layout) {
         super(menu, inventory, title);
         this.layout = layout;
         this.grimoire = new StationGrimoirePanel(Minecraft.getInstance().font, Optional.of(layout.category()), Optional.empty());
+        this.magic = new MagicalProcessPanel(menu);
     }
 
     @Override
     protected void init() {
         super.init();
         addRenderableWidget(grimoire.init(leftPos, topPos, imageWidth, imageHeight));
+        magic.init(leftPos, topPos, imageWidth, this::addRenderableWidget);
     }
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         renderBackground(graphics);
+        magic.render(graphics, font);
         super.render(graphics, mouseX, mouseY, partialTick);
         grimoire.render(graphics, mouseX, mouseY, partialTick);
         ItemStack page = grimoire.hovered();
@@ -76,7 +82,7 @@ public class ProcessStationScreen<M extends StationMenu> extends AbstractContain
         ProcessStatus status = ProcessStatus.byOrdinal(menu.data(ProcessStation.DATA_STATUS));
         int colour = switch (status) {
             case WORKING -> 0x2F5A2C;
-            case NEEDS_HEAT, OUTPUT_BLOCKED -> 0xB0305A;
+            case NEEDS_HEAT, OUTPUT_BLOCKED, NEEDS_WITCH, NEEDS_OPERATOR, NEEDS_ENERGY -> 0xB0305A;
             default -> 0x404040;
         };
         ProcessWidgets.status(graphics, font, Component.translatable(status.translationKey()), imageWidth - 8, titleLabelY, colour);
@@ -86,6 +92,7 @@ public class ProcessStationScreen<M extends StationMenu> extends AbstractContain
     protected void containerTick() {
         super.containerTick();
         grimoire.tick();
+        magic.update();
     }
 
     @Override

@@ -1,6 +1,8 @@
 package io.github.dirtyredz.herbalwitch.data.server.preparations;
 
 import io.github.dirtyredz.herbalwitch.botany.catalog.HerbCatalog;
+import io.github.dirtyredz.herbalwitch.brewing.effect.combat.WeaponCoating;
+import net.minecraft.tags.ItemTags;
 import io.github.dirtyredz.herbalwitch.botany.catalog.HerbSpec;
 import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationBlocks;
 import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationItems;
@@ -28,5 +30,6 @@ public final class PreparationTagContributions {
         for (HerbSpec herb : HerbCatalog.ALL) {
             tags.tag(PreparationTags.POWDERS).add(PreparationItems.powder(herb));
         }
+        tags.tag(WeaponCoating.COATABLE).addTag(ItemTags.SWORDS).addTag(ItemTags.AXES);
     }
 }

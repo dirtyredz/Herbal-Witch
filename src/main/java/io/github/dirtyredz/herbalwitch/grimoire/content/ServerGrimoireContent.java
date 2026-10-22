@@ -4,7 +4,7 @@ import io.github.dirtyredz.herbalwitch.botany.conditions.HerbConditionReloadList
 import io.github.dirtyredz.herbalwitch.botany.conditions.HerbConditions;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reload.GrimoireDefinition;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reload.GrimoireDefinitionLoader;
-import io.github.dirtyredz.herbalwitch.stations.process.ProcessRecipeIndex;
+import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipeIndex;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.item.crafting.RecipeManager;
 

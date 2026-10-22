@@ -1,6 +1,7 @@
 package io.github.dirtyredz.herbalwitch.magic.ritual.network;
 
 import io.github.dirtyredz.herbalwitch.platform.network.PayloadBounds;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 
 import java.util.Optional;
@@ -18,8 +19,15 @@ import java.util.UUID;
  * @param op          what to do
  * @param target      the player to invite ({@link Op#INVITE})
  * @param offer       the invitation id ({@link Op#ACCEPT}, {@link Op#DECLINE})
+ * @param place       the block the player chose for a circle ritual: the herb bed to bless ({@link Op#BLESS}) or the ward
+ *                    stone to charge ({@link Op#PROTECT}); the server revalidates it
  */
-public record AltarRequest(int containerId, long session, int rules, Op op, Optional<UUID> target, long offer) {
+public record AltarRequest(int containerId, long session, int rules, Op op, Optional<UUID> target, long offer, Optional<BlockPos> place) {
+    /** A request naming no place (every Milestone 6 operation). */
+    public AltarRequest(int containerId, long session, int rules, Op op, Optional<UUID> target, long offer) {
+        this(containerId, session, rules, op, target, offer, Optional.empty());
+    }
+
     public enum Op {
         FOUND,
         INVITE,
@@ -28,7 +36,9 @@ public record AltarRequest(int containerId, long session, int rules, Op op, Opti
         DECLINE,
         MEDITATE,
         ATTUNE,
-        STOP
+        STOP,
+        BLESS,
+        PROTECT
     }
 
     public void encode(FriendlyByteBuf buf) {
@@ -39,6 +49,8 @@ public record AltarRequest(int containerId, long session, int rules, Op op, Opti
         buf.writeBoolean(target.isPresent());
         target.ifPresent(buf::writeUUID);
         buf.writeLong(offer);
+        buf.writeBoolean(place.isPresent());
+        place.ifPresent(buf::writeBlockPos);
     }
 
     public static AltarRequest decode(FriendlyByteBuf buf) {
@@ -49,6 +61,7 @@ public record AltarRequest(int containerId, long session, int rules, Op op, Opti
         Op op = PayloadBounds.readEnum(buf, Op.class);
         Optional<UUID> target = buf.readBoolean() ? Optional.of(buf.readUUID()) : Optional.empty();
         long offer = buf.readLong();
-        return new AltarRequest(containerId, session, rules, op, target, offer);
+        Optional<BlockPos> place = buf.readBoolean() ? Optional.of(buf.readBlockPos()) : Optional.empty();
+        return new AltarRequest(containerId, session, rules, op, target, offer, place);
     }
 }

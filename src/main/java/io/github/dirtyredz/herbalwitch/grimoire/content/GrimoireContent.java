@@ -3,7 +3,7 @@ package io.github.dirtyredz.herbalwitch.grimoire.content;
 import com.mojang.logging.LogUtils;
 import io.github.dirtyredz.herbalwitch.botany.conditions.HerbConditions;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reload.GrimoireDefinition;
-import io.github.dirtyredz.herbalwitch.stations.process.ProcessRecipe;
+import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipe;
 import net.minecraft.world.item.crafting.RecipeManager;
 import org.slf4j.Logger;
 

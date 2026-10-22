@@ -1,0 +1,44 @@
+{
+  "type": "herbalwitch:processing/cauldron",
+  "base": {
+    "count": 1,
+    "ingredient": {
+      "type": "forge:partial_nbt",
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"minecraft:water\"}"
+    }
+  },
+  "duration": 600,
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "herbalwitch:preparations/herbs/shade/valerian/powder"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "herbalwitch:preparations/herbs/temperate/lavender/powder"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:red_mushroom"
+      }
+    }
+  ],
+  "requirements": {
+    "energy": 15,
+    "witch": true
+  },
+  "result": {
+    "item": "herbalwitch:preparations/mixtures/combat/sleep"
+  },
+  "returns": [
+    {
+      "item": "minecraft:glass_bottle"
+    }
+  ]
+}

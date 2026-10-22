@@ -6,6 +6,7 @@ import io.github.dirtyredz.herbalwitch.stations.registry.StationItems;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
@@ -18,7 +19,10 @@ import static io.github.dirtyredz.herbalwitch.data.server.recipes.HerbalWitchRec
  * Station assembly, each yielding one, shaped as the station's silhouette, with acquisition
  * advancements: rack (4 sticks, 2 string, 2 wooden slabs), mortar (3 smooth stone, flint, stick),
  * kettle (5 iron, 1 copper), hearth (6 bricks, campfire), stove (5 iron, 2 bricks, campfire),
- * infusion pot (4 bricks, 2 iron, glass bottle).
+ * infusion pot (4 bricks, 2 iron, glass bottle); and, shapeless, the production stations (Milestone 7):
+ * cauldron (cauldron, copper ingot, amethyst shard), still (4 copper ingots, 2 glass, iron ingot,
+ * amethyst shard), bottling bench (crafting table, 2 dark oak planks, 2 glass bottles, iron nugget) and
+ * charm workbench (crafting table, 2 dark oak planks, 2 string, gold ingot, amethyst shard).
  */
 public final class StationCraftingProvider {
     private StationCraftingProvider() {
@@ -47,5 +51,18 @@ public final class StationCraftingProvider {
         shaped(StationCatalog.INFUSION_POT).pattern("IGI").pattern("B B").pattern("B B")
                 .define('I', Tags.Items.INGOTS_IRON).define('G', Items.GLASS_BOTTLE).define('B', Items.BRICK)
                 .unlockedBy("has_brick", has(Items.BRICK)).save(writer);
+        shapeless(StationCatalog.CAULDRON).requires(Items.CAULDRON).requires(Items.COPPER_INGOT).requires(Items.AMETHYST_SHARD)
+                .unlockedBy("has_amethyst_shard", has(Items.AMETHYST_SHARD)).save(writer);
+        shapeless(StationCatalog.STILL).requires(Items.COPPER_INGOT, 4).requires(Items.GLASS, 2).requires(Items.IRON_INGOT)
+                .requires(Items.AMETHYST_SHARD).unlockedBy("has_amethyst_shard", has(Items.AMETHYST_SHARD)).save(writer);
+        shapeless(StationCatalog.BOTTLING_BENCH).requires(Items.CRAFTING_TABLE).requires(Items.DARK_OAK_PLANKS, 2)
+                .requires(Items.GLASS_BOTTLE, 2).requires(Items.IRON_NUGGET).unlockedBy("has_glass_bottle", has(Items.GLASS_BOTTLE)).save(writer);
+        shapeless(StationCatalog.CHARM_WORKBENCH).requires(Items.CRAFTING_TABLE).requires(Items.DARK_OAK_PLANKS, 2)
+                .requires(Items.STRING, 2).requires(Items.GOLD_INGOT).requires(Items.AMETHYST_SHARD)
+                .unlockedBy("has_amethyst_shard", has(Items.AMETHYST_SHARD)).save(writer);
+    }
+
+    private static ShapelessRecipeBuilder shapeless(StationSpec spec) {
+        return ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, StationItems.item(spec));
     }
 }

@@ -17,7 +17,8 @@ public final class GrimoireManifest {
     /** Guide entry -> number of pages. */
     public static final Map<String, Integer> GUIDES = guides();
     /** Station entry directories (one page each). */
-    public static final List<String> STATION_ENTRIES = List.of("drying_rack", "hearth", "infusion_pot", "kettle", "mortar", "stove");
+    public static final List<String> STATION_ENTRIES = List.of("drying_rack", "hearth", "infusion_pot", "kettle", "mortar", "stove",
+            "cauldron", "still", "bottling_bench", "charm_workbench");
     /** The herbs the reader names. */
     public static final List<String> HERBS = List.of("belladonna", "chamomile", "lavender", "mandrake", "mint", "mugwort",
             "nettle", "nightshade", "rosemary", "sage", "thyme", "valerian", "wolfsbane", "yarrow");

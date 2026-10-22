@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * The altar's four implemented actions, plain data: each one's permanent action identity
+ * The altar's actions, plain data (Milestone 6's four and the circle's two of Milestone 7): each one's permanent action identity
  * ({@code ritual/<name>}; not a recipe type) and the offering it takes from the payer's own main
  * inventory and offhand at completion. Durations and energy come from the server's rules.
  */
@@ -21,7 +21,12 @@ public enum AltarActionSpec {
     /** A witch meditates at an idle altar to recover energy. */
     MEDITATION(List.of()),
     /** A witch's optional practice: a fresh sage and a little energy, for capacity progression. */
-    ATTUNEMENT(List.of(offering("botany/temperate/sage/fresh")));
+    ATTUNEMENT(List.of(offering("botany/temperate/sage/fresh"))),
+    /** With a complete circle: enrich the existing herb beds of a chosen 5 x 5 area (Milestone 7). */
+    GARDEN_BLESSING(List.of(offering("preparations/herbs/wet/nettle/powder"), new Offering("minecraft:bone_meal", 1),
+            offering("preparations/garden/soil_tonic"))),
+    /** With a complete circle: charge an empty ward stone the witch may bind (Milestone 7). */
+    HOME_PROTECTION(List.of(offering("preparations/herbs/temperate/sage/powder"), new Offering("minecraft:amethyst_shard", 1)));
 
     /** One offered item: a registry id and how many. A written book must be a normally valid signed book. */
     public record Offering(String item, int count) {
@@ -48,5 +53,10 @@ public enum AltarActionSpec {
 
     public String key() {
         return name().toLowerCase(Locale.ROOT);
+    }
+
+    /** Whether the action needs a complete ritual circle around the altar. */
+    public boolean circle() {
+        return this == GARDEN_BLESSING || this == HOME_PROTECTION;
     }
 }

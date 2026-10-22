@@ -1,0 +1,42 @@
+{
+  "type": "herbalwitch:processing/infusion",
+  "base": {
+    "count": 1,
+    "ingredient": {
+      "item": "herbalwitch:preparations/ingredients/plant_oil"
+    }
+  },
+  "duration": 600,
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "herbalwitch:preparations/herbs/temperate/sage/powder"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:rotten_flesh"
+      }
+    }
+  ],
+  "packaging": {
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "requirements": {
+    "energy": 8,
+    "witch": true
+  },
+  "result": {
+    "item": "herbalwitch:preparations/advanced/oils/undead_repellent"
+  },
+  "returns": [
+    {
+      "item": "minecraft:glass_bottle"
+    }
+  ]
+}

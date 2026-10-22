@@ -1,6 +1,7 @@
 package io.github.dirtyredz.herbalwitch.magic.witch.network;
 
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
+import io.github.dirtyredz.herbalwitch.magic.witch.config.WorkingRules;
 import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyBalance;
 import io.github.dirtyredz.herbalwitch.platform.network.PayloadBounds;
 import io.netty.handler.codec.DecoderException;
@@ -29,6 +30,9 @@ public record WitchRulesUpdate(WitchRules rules) {
         for (int v : numbers(e)) {
             buf.writeVarInt(v);
         }
+        for (int v : rules.workings().numbers()) {
+            buf.writeVarInt(v);
+        }
     }
 
     private static int[] numbers(EnergyBalance e) {
@@ -55,7 +59,11 @@ public record WitchRulesUpdate(WitchRules rules) {
         }
         EnergyBalance energy = new EnergyBalance(v[0], thresholds, v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8], v[9], v[10], v[11],
                 v[12], v[13], v[14], v[15], v[16]);
-        WitchRules rules = new WitchRules(founding, initiation, t[0], t[1], t[2], t[3], t[4], energy);
+        int[] w = new int[WorkingRules.DEFAULTS.numbers().length];
+        for (int i = 0; i < w.length; i++) {
+            w[i] = buf.readVarInt();
+        }
+        WitchRules rules = new WitchRules(founding, initiation, t[0], t[1], t[2], t[3], t[4], energy, WorkingRules.of(w));
         if (!rules.problems().isEmpty()) {
             throw new DecoderException("invalid witch rules: " + rules.problems());
         }

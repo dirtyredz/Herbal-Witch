@@ -1,6 +1,10 @@
 package io.github.dirtyredz.herbalwitch.stations.registry;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
+import io.github.dirtyredz.herbalwitch.stations.advanced.bottling_bench.block.BottlingBenchBlockEntity;
+import io.github.dirtyredz.herbalwitch.stations.advanced.cauldron.block.CauldronBlockEntity;
+import io.github.dirtyredz.herbalwitch.stations.advanced.charm_workbench.block.CharmWorkbenchBlockEntity;
+import io.github.dirtyredz.herbalwitch.stations.advanced.still.block.StillBlockEntity;
 import io.github.dirtyredz.herbalwitch.stations.everyday.drying_rack.block.DryingRackBlockEntity;
 import io.github.dirtyredz.herbalwitch.stations.everyday.hearth.block.HearthBlockEntity;
 import io.github.dirtyredz.herbalwitch.stations.everyday.infusion_pot.block.InfusionPotBlockEntity;
@@ -31,6 +35,20 @@ public final class StationBlockEntities {
     @SuppressWarnings("DataFlowIssue")
     public static final RegistryObject<BlockEntityType<InfusionPotBlockEntity>> INFUSION_POT = TYPES.register(
             "stations/infusion_pot/station", () -> BlockEntityType.Builder.of(InfusionPotBlockEntity::new, StationBlocks.INFUSION_POT.get()).build(null));
+    @SuppressWarnings("DataFlowIssue")
+    public static final RegistryObject<BlockEntityType<CauldronBlockEntity>> CAULDRON = TYPES.register(
+            "stations/cauldron/station", () -> BlockEntityType.Builder.of(CauldronBlockEntity::new, StationBlocks.CAULDRON.get()).build(null));
+    @SuppressWarnings("DataFlowIssue")
+    public static final RegistryObject<BlockEntityType<StillBlockEntity>> STILL = TYPES.register(
+            "stations/still/station", () -> BlockEntityType.Builder.of(StillBlockEntity::new, StationBlocks.STILL.get()).build(null));
+    @SuppressWarnings("DataFlowIssue")
+    public static final RegistryObject<BlockEntityType<BottlingBenchBlockEntity>> BOTTLING_BENCH = TYPES.register(
+            "stations/bottling_bench/station", () -> BlockEntityType.Builder.of(BottlingBenchBlockEntity::new, StationBlocks.BOTTLING_BENCH.get())
+                    .build(null));
+    @SuppressWarnings("DataFlowIssue")
+    public static final RegistryObject<BlockEntityType<CharmWorkbenchBlockEntity>> CHARM_WORKBENCH = TYPES.register(
+            "stations/charm_workbench/station", () -> BlockEntityType.Builder.of(CharmWorkbenchBlockEntity::new,
+                    StationBlocks.CHARM_WORKBENCH.get()).build(null));
 
     private StationBlockEntities() {
     }

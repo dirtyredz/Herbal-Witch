@@ -67,6 +67,11 @@ public final class PlacementPreviewRenderer {
 
     /** Draws a resolved plan: see-through cell models, then a green (placeable) or red outline per cell. */
     public static void draw(RenderLevelStageEvent event, Minecraft mc, PlacementPlan plan, boolean placeable) {
+        draw(event, mc, plan, placeable ? 0.3F : 0.9F, placeable ? 0.9F : 0.25F, 0.3F);
+    }
+
+    /** Draws a plan with an outline of the given colour (a guide, such as the altar a circle needs). */
+    public static void draw(RenderLevelStageEvent event, Minecraft mc, PlacementPlan plan, float r, float g, float b) {
         PoseStack pose = event.getPoseStack();
         Vec3 camera = event.getCamera().getPosition();
         MultiBufferSource.BufferSource buffers = mc.renderBuffers().bufferSource();
@@ -82,10 +87,8 @@ public final class PlacementPreviewRenderer {
         }
         buffers.endBatch(RenderType.translucent());
         VertexConsumer lines = buffers.getBuffer(RenderType.lines());
-        float r = placeable ? 0.3F : 0.9F;
-        float g = placeable ? 0.9F : 0.25F;
         for (PlacementPreviewGeometry.Cell cell : cells) {
-            LevelRenderer.renderLineBox(pose, lines, cell.outline(), r, g, 0.3F, 0.8F);
+            LevelRenderer.renderLineBox(pose, lines, cell.outline(), r, g, b, 0.8F);
         }
         buffers.endBatch(RenderType.lines());
     }

@@ -12,7 +12,8 @@ import java.util.Set;
  * What the Blockbench pipeline must produce, written out independently of
  * src/art/blockbench/catalog.json and the compiler: the fourteen projects before Milestone 5 (with
  * their exact 34 model files and owned textures), then one project per Milestone 5 decor piece of
- * every wave whose art is drawn, with the models its cells and states compile to.
+ * every wave whose art is drawn, with the models its cells and states compile to, the altar (7
+ * models, Milestone 6) and the six Milestone 7 pieces (50 models).
  */
 public final class BlockbenchManifest {
     /** The Milestone 5 waves whose pieces have Blockbench projects. */
@@ -31,13 +32,23 @@ public final class BlockbenchManifest {
     public static final List<String> MILESTONE_6_MODELS = List.of("block/ritual/altar/active_2.json", "block/ritual/altar/active_3.json",
             "block/ritual/altar/assembly.json", "block/ritual/altar/part_0.json", "block/ritual/altar/part_1.json",
             "block/ritual/altar/part_2.json", "block/ritual/altar/part_3.json");
+    /**
+     * Milestone 7: the cauldron and the ward stone (a base and an active model each), the still (two
+     * cells stacked, an overlay on the lower one), the bottling bench and the charm workbench (two cells
+     * side by side, an overlay on each) and the ritual circle (sixteen ring cells, each with an overlay
+     * and no assembly): 2 + 4 + 5 + 5 + 32 + 2 = 50 compiled models.
+     */
+    public static final List<String> MILESTONE_7_PROJECTS = List.of("stations/cauldron", "stations/still", "stations/bottling_bench",
+            "stations/charm_workbench", "ritual/circle", "ward/ward_stone");
+    public static final List<String> MILESTONE_7_MODELS = milestone7Models();
     /** Project directories under src/art/blockbench, in catalogue order. */
     public static final List<String> PROJECTS = projects();
     /** Model directories (under models/) the compiler owns outright. */
     public static final List<String> MODEL_DIRS = List.of("block/stations/kettle", "block/stations/infusion_pot",
             "block/stations/mortar", "block/stations/drying_rack", "block/stations/hearth", "block/stations/stove",
             "block/decor/templates", "block/preparations/templates", "block/grimoire/stand", "block/grimoire/bookshelf",
-            "block/decor/pieces", "block/ritual/altar");
+            "block/decor/pieces", "block/ritual/altar", "block/stations/cauldron", "block/stations/still",
+            "block/stations/bottling_bench", "block/stations/charm_workbench", "block/ritual/circle", "block/ward/ward_stone");
     /** Textures (under textures/) the fourteen pre-M5 pieces own, painted in their projects: block/pieces/<project>/<texture>.png. */
     public static final List<String> TEXTURES = List.of(
             "block/pieces/decor/apothecary_counter/gold.png",
@@ -141,6 +152,28 @@ public final class BlockbenchManifest {
         List<String> out = new ArrayList<>(LEGACY_PROJECTS);
         pieces().forEach(p -> out.add(project(p)));
         out.addAll(MILESTONE_6_PROJECTS);
+        out.addAll(MILESTONE_7_PROJECTS);
+        return List.copyOf(out);
+    }
+
+    /** The Milestone 7 compiled models, written out per piece (the circle's sixteen cells in a loop), sorted. */
+    private static List<String> milestone7Models() {
+        List<String> out = new ArrayList<>(List.of(
+                "block/stations/cauldron/base.json", "block/stations/cauldron/active.json",
+                "block/stations/still/part_0.json", "block/stations/still/part_1.json", "block/stations/still/active_0.json",
+                "block/stations/still/assembly.json",
+                "block/stations/bottling_bench/part_0.json", "block/stations/bottling_bench/part_1.json",
+                "block/stations/bottling_bench/active_0.json", "block/stations/bottling_bench/active_1.json",
+                "block/stations/bottling_bench/assembly.json",
+                "block/stations/charm_workbench/part_0.json", "block/stations/charm_workbench/part_1.json",
+                "block/stations/charm_workbench/active_0.json", "block/stations/charm_workbench/active_1.json",
+                "block/stations/charm_workbench/assembly.json",
+                "block/ward/ward_stone/base.json", "block/ward/ward_stone/active.json"));
+        for (int i = 0; i < 16; i++) {
+            out.add("block/ritual/circle/part_" + i + ".json");
+            out.add("block/ritual/circle/active_" + i + ".json");
+        }
+        out.sort(null);
         return List.copyOf(out);
     }
 
@@ -198,6 +231,7 @@ public final class BlockbenchManifest {
         out.add("block/grimoire/stand/base.json");
         out.add("block/grimoire/bookshelf/base.json");
         out.addAll(MILESTONE_6_MODELS);
+        out.addAll(MILESTONE_7_MODELS);
         out.sort(null);
         return out;
     }

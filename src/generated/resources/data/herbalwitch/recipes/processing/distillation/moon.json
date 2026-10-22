@@ -1,0 +1,44 @@
+{
+  "type": "herbalwitch:processing/distillation",
+  "base": {
+    "count": 1,
+    "ingredient": {
+      "type": "forge:partial_nbt",
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"minecraft:water\"}"
+    }
+  },
+  "duration": 800,
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "herbalwitch:preparations/herbs/shade/mugwort/powder"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:amethyst_shard"
+      }
+    }
+  ],
+  "packaging": {
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "requirements": {
+    "energy": 10,
+    "witch": true
+  },
+  "result": {
+    "item": "herbalwitch:preparations/advanced/essences/moon"
+  },
+  "returns": [
+    {
+      "item": "minecraft:glass_bottle"
+    }
+  ]
+}

@@ -2,6 +2,7 @@ package io.github.dirtyredz.herbalwitch.data.client.magic.ritual;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.magic.ritual.altar.AltarBlock;
+import io.github.dirtyredz.herbalwitch.magic.ritual.circle.RitualCircleBlock;
 import io.github.dirtyredz.herbalwitch.magic.ritual.registry.RitualBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
@@ -19,6 +20,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
  */
 public class AltarModelProvider extends BlockStateProvider {
     public static final String DIR = "block/ritual/altar/";
+    public static final String CIRCLE_DIR = "block/ritual/circle/";
     private final ExistingFileHelper existing;
 
     public AltarModelProvider(PackOutput output, ExistingFileHelper existingFiles) {
@@ -44,6 +46,26 @@ public class AltarModelProvider extends BlockStateProvider {
                 if (overlay != null) {
                     states.part().modelFile(overlay).rotationY(rotation).addModel()
                             .condition(AltarBlock.FACING, facing).condition(AltarBlock.LAYOUT.part(), part).condition(AltarBlock.ACTIVE, true).end();
+                }
+            }
+        }
+        circle();
+    }
+
+    /** The ritual circle: every cell's permanent relief and, while a circle ritual runs, its glowing overlay. */
+    private void circle() {
+        MultiPartBlockStateBuilder states = getMultipartBuilder(RitualBlocks.CIRCLE.get());
+        for (int part = 0; part < RitualCircleBlock.LAYOUT.size(); part++) {
+            ModelFile base = models().getExistingFile(modLoc(CIRCLE_DIR + "part_" + part));
+            ResourceLocation glow = modLoc(CIRCLE_DIR + "active_" + part);
+            ModelFile overlay = existing.exists(glow, PackType.CLIENT_RESOURCES, ".json", "models") ? models().getExistingFile(glow) : null;
+            for (Direction facing : Direction.Plane.HORIZONTAL) {
+                int rotation = ((int) facing.toYRot() + 180) % 360;
+                states.part().modelFile(base).rotationY(rotation).addModel()
+                        .condition(RitualCircleBlock.FACING, facing).condition(RitualCircleBlock.LAYOUT.part(), part).end();
+                if (overlay != null) {
+                    states.part().modelFile(overlay).rotationY(rotation).addModel().condition(RitualCircleBlock.FACING, facing)
+                            .condition(RitualCircleBlock.LAYOUT.part(), part).condition(RitualCircleBlock.ACTIVE, true).end();
                 }
             }
         }

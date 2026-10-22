@@ -1,6 +1,10 @@
 package io.github.dirtyredz.herbalwitch.stations.registry;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
+import io.github.dirtyredz.herbalwitch.stations.advanced.bottling_bench.menu.BottlingBenchMenu;
+import io.github.dirtyredz.herbalwitch.stations.advanced.cauldron.menu.CauldronMenu;
+import io.github.dirtyredz.herbalwitch.stations.advanced.charm_workbench.menu.CharmWorkbenchMenu;
+import io.github.dirtyredz.herbalwitch.stations.advanced.still.menu.StillMenu;
 import io.github.dirtyredz.herbalwitch.stations.everyday.drying_rack.menu.DryingRackMenu;
 import io.github.dirtyredz.herbalwitch.stations.everyday.hearth.menu.HearthMenu;
 import io.github.dirtyredz.herbalwitch.stations.everyday.infusion_pot.menu.InfusionPotMenu;
@@ -26,6 +30,14 @@ public final class StationMenus {
             MENUS.register("stations/hearth", () -> IForgeMenuType.create(HearthMenu::new));
     public static final RegistryObject<MenuType<InfusionPotMenu>> INFUSION_POT =
             MENUS.register("stations/infusion_pot", () -> IForgeMenuType.create(InfusionPotMenu::new));
+    public static final RegistryObject<MenuType<CauldronMenu>> CAULDRON =
+            MENUS.register("stations/cauldron", () -> IForgeMenuType.create(CauldronMenu::new));
+    public static final RegistryObject<MenuType<StillMenu>> STILL =
+            MENUS.register("stations/still", () -> IForgeMenuType.create(StillMenu::new));
+    public static final RegistryObject<MenuType<BottlingBenchMenu>> BOTTLING_BENCH =
+            MENUS.register("stations/bottling_bench", () -> IForgeMenuType.create(BottlingBenchMenu::new));
+    public static final RegistryObject<MenuType<CharmWorkbenchMenu>> CHARM_WORKBENCH =
+            MENUS.register("stations/charm_workbench", () -> IForgeMenuType.create(CharmWorkbenchMenu::new));
 
     private StationMenus() {
     }

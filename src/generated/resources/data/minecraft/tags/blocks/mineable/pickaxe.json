@@ -5,6 +5,10 @@
     "herbalwitch:stations/hearth/station",
     "herbalwitch:stations/stove/station",
     "herbalwitch:stations/infusion_pot/station",
-    "herbalwitch:preparations/household/oil_lantern"
+    "herbalwitch:stations/cauldron/station",
+    "herbalwitch:stations/still/station",
+    "herbalwitch:preparations/household/oil_lantern",
+    "herbalwitch:magic/ritual/circle",
+    "herbalwitch:magic/ward/stone"
   ]
 }

@@ -105,11 +105,11 @@ public class GrimoireContentProvider implements DataProvider {
                 "A station keeps its ingredients in its own slots, reserved while it works, and fills its output when it is done. Closing its screen leaves it working.",
                 "The Grimoire button on a station's screen opens this book beside it, on that station's recipes."));
         pages.add(guide("heat", "Heat", List.of(StationEntries.key(StationCatalog.HEARTH), StationEntries.key(StationCatalog.STOVE)),
-                "The kettle and the infusion pot need heat from directly below: a lit hearth or stove, a lit campfire or magma. One hopper may stand between them and carry the heat.",
+                "The kettle, the infusion pot, the cauldron and the still need heat from directly below: a lit hearth or stove, a lit campfire or magma. One hopper may stand between them and carry the heat.",
                 "The hearth and the stove burn ordinary fuel. A waterlogged vessel gets no heat."));
         pages.add(guide("products", "Products", List.of(GuideEntries.key("preparation")),
                 "Teas, remedies, tonics, the salve, oils and garden products each do one thing today, written on their recipe page and their tooltip.",
-                "Witch energy is not part of this version. When witchcraft arrives, some preparations will matter for it too; what you make now keeps working as it does."));
+                "Some stronger preparations need a witch to make them, at the cauldron, the still or the charm workbench; anyone may use what is made."));
         pages.add(guide("missing_ingredients", "Counting Ingredients", List.of(GuideEntries.key("research")),
                 "Opened from a grimoire, a stand or a bookshelf, a recipe page counts what you carry against what it needs.",
                 "Only your main inventory and offhand count: not armour, containers you carry, nearby storage or a station's own slots. Nothing is ever taken.",
@@ -129,6 +129,10 @@ public class GrimoireContentProvider implements DataProvider {
         pages.add(station(StationCatalog.HEARTH, "Burns fuel to heat the kettle or infusion pot standing on it."));
         pages.add(station(StationCatalog.STOVE, "A stove with two burners, each heating the vessel above it."));
         pages.add(station(StationCatalog.INFUSION_POT, "Infuses powders into a base (honey, plant oil or water) and fills a bowl or bottle."));
+        pages.add(station(StationCatalog.CAULDRON, "A witch brews powders and a water bottle over heat into a mixture of four doses. Each batch waits for a witch to start it."));
+        pages.add(station(StationCatalog.STILL, "A witch distils essences and extracts from a water or oil base into a bottle. It stands two blocks tall over its heat."));
+        pages.add(station(StationCatalog.BOTTLING_BENCH, "Portions a whole mixture into four bottles or vials; gunpowder makes vials, paper adds a label. No witch needed."));
+        pages.add(station(StationCatalog.CHARM_WORKBENCH, "A witch works herbs, string and gold into protective charms here."));
         return pages;
     }
 

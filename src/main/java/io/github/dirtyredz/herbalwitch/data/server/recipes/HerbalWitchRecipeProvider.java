@@ -8,7 +8,13 @@ import io.github.dirtyredz.herbalwitch.data.server.preparations.PreparationCraft
 import io.github.dirtyredz.herbalwitch.data.server.stations.StationCraftingProvider;
 import io.github.dirtyredz.herbalwitch.data.server.stations.recipes.DryingRecipeProvider;
 import io.github.dirtyredz.herbalwitch.data.server.stations.recipes.GrindingRecipeProvider;
+import io.github.dirtyredz.herbalwitch.data.server.magic.ward.WardRecipes;
+import io.github.dirtyredz.herbalwitch.data.server.stations.recipes.BottlingRecipes;
+import io.github.dirtyredz.herbalwitch.data.server.stations.recipes.CauldronRecipes;
+import io.github.dirtyredz.herbalwitch.data.server.stations.recipes.CharmRecipes;
+import io.github.dirtyredz.herbalwitch.data.server.stations.recipes.DistillationRecipes;
 import io.github.dirtyredz.herbalwitch.data.server.stations.recipes.InfusionRecipeProvider;
+import io.github.dirtyredz.herbalwitch.data.server.stations.recipes.MagicalEverydayRecipes;
 import io.github.dirtyredz.herbalwitch.data.server.stations.recipes.SteepingRecipeProvider;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.PackOutput;
@@ -48,7 +54,13 @@ public class HerbalWitchRecipeProvider extends RecipeProvider {
         GrindingRecipeProvider.addTo(writer);
         SteepingRecipeProvider.addTo(writer);
         InfusionRecipeProvider.addTo(writer);
+        MagicalEverydayRecipes.addTo(writer);
+        CauldronRecipes.addTo(writer);
+        DistillationRecipes.addTo(writer);
+        BottlingRecipes.addTo(writer);
+        CharmRecipes.addTo(writer);
         GrimoireRecipes.addTo(writer);
         AltarRecipes.addTo(writer);
+        WardRecipes.addTo(writer);
     }
 }

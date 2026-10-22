@@ -1,13 +1,18 @@
 package io.github.dirtyredz.herbalwitch.client;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
+import io.github.dirtyredz.herbalwitch.client.brewing.PreparationRenderers;
 import io.github.dirtyredz.herbalwitch.client.decor.DecorClientRegistration;
 import io.github.dirtyredz.herbalwitch.client.grimoire.GrimoireScreens;
 import io.github.dirtyredz.herbalwitch.client.placement.PlacementPreviewRenderer;
 import io.github.dirtyredz.herbalwitch.client.ritual.AltarScreens;
+import io.github.dirtyredz.herbalwitch.client.ritual.CirclePlacementPreview;
+import io.github.dirtyredz.herbalwitch.client.ritual.RitualTargets;
 import io.github.dirtyredz.herbalwitch.client.stations.StationScreens;
 import io.github.dirtyredz.herbalwitch.client.witch.WitchClientConfig;
+import io.github.dirtyredz.herbalwitch.client.ward.WardBoundaryPreview;
 import io.github.dirtyredz.herbalwitch.client.witch.WitchClientEvents;
+import io.github.dirtyredz.herbalwitch.magic.ward.registry.WardRegistration;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
@@ -40,11 +45,15 @@ public final class HerbalWitchClient {
         event.enqueueWork(AltarScreens::register);
         event.enqueueWork(WitchClientEvents::setup);
         event.enqueueWork(() -> PlacementPreviewRenderer.register(MinecraftForge.EVENT_BUS));
+        event.enqueueWork(() -> CirclePlacementPreview.register(MinecraftForge.EVENT_BUS));
+        event.enqueueWork(() -> RitualTargets.register(MinecraftForge.EVENT_BUS));
+        event.enqueueWork(() -> WardBoundaryPreview.register(MinecraftForge.EVENT_BUS, WardRegistration.MENU.get()));
     }
 
     @SubscribeEvent
     public static void renderers(EntityRenderersEvent.RegisterRenderers event) {
         DecorClientRegistration.renderers(event);
+        PreparationRenderers.renderers(event);
     }
 
     @SubscribeEvent

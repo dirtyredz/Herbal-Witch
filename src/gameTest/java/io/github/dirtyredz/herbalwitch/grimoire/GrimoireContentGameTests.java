@@ -20,9 +20,9 @@ import io.github.dirtyredz.herbalwitch.platform.network.ChunkAssembly;
 import io.github.dirtyredz.herbalwitch.stations.description.ProcessingCategories;
 import io.github.dirtyredz.herbalwitch.stations.everyday.drying_rack.recipe.DryingRecipe;
 import io.github.dirtyredz.herbalwitch.stations.everyday.kettle.recipe.SteepingRecipe;
-import io.github.dirtyredz.herbalwitch.stations.process.ProcessRecipe;
-import io.github.dirtyredz.herbalwitch.stations.process.ProcessRecipeDescription;
-import io.github.dirtyredz.herbalwitch.stations.process.ProcessRecipeIndex;
+import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipe;
+import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipeDescription;
+import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipeIndex;
 import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
@@ -90,11 +90,14 @@ public final class GrimoireContentGameTests {
                 recipes++;
             }
         }
-        check(recipes == 50 && content.recipes().size() == 50, "baseline is 50 recipes, saw " + recipes + "/" + content.recipes().size());
-        // the editorial guides, the three witchcraft pages and the four altar action pages (Milestone 6)
-        check(content.entries().stream().filter(e -> e.key().kind() == EntryKey.Kind.GUIDE).count() == GuideEntries.ORDER.size() + 3 + 4, "guides");
+        check(recipes == 113 && content.recipes().size() == 113, "baseline is 113 recipes, saw " + recipes + "/" + content.recipes().size());
+        // the editorial guides, the three witchcraft pages, the six altar action pages (Milestones 6 and 7), the three
+        // advanced preparation pages, wards and charms (Milestone 7)
+        long guides = content.entries().stream().filter(e -> e.key().kind() == EntryKey.Kind.GUIDE).count();
+        check(guides == GuideEntries.ORDER.size() + 3 + 6 + 3 + 2, "guides: " + guides);
         check(content.entries().stream().filter(e -> e.key().kind() == EntryKey.Kind.HERB).count() == HerbCatalog.ALL.size(), "herbs");
-        check(content.entries().stream().filter(e -> e.key().kind() == EntryKey.Kind.STATION).count() == 6 + 1, "stations and the altar");
+        long stations = content.entries().stream().filter(e -> e.key().kind() == EntryKey.Kind.STATION).count();
+        check(stations == 10 + 2, "stations, the altar and the circle: " + stations);
         check(content.entries().get(0).key().equals(GuideEntries.key("getting_started")), "the book opens on getting started");
         helper.succeed();
     }

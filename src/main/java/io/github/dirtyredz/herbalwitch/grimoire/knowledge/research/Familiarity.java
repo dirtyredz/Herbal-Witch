@@ -5,7 +5,7 @@ import io.github.dirtyredz.herbalwitch.botany.catalog.HerbSpec;
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.content.recipe.StationRecipeEntries;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reference.HerbForms;
-import io.github.dirtyredz.herbalwitch.stations.process.ProcessRecipeDescription;
+import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipeDescription;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;

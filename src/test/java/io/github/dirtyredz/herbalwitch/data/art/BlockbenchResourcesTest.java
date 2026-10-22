@@ -22,8 +22,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * The Blockbench sources and what they compile to, against the independent BlockbenchManifest:
  * the catalogue lists exactly the expected projects at the pinned format, the compiler's model
- * directories hold exactly the compiled models (34 before Milestone 5, the altar's 7, plus each decor piece's cells
- * and states), the owned textures exist, sidecar cells agree with the catalogue, and no source file or
+ * directories hold exactly the compiled models (34 before Milestone 5, the altar's 7, the Milestone 7
+ * pieces' 50, plus each decor piece's cells and states), the owned textures exist, sidecar cells agree with the catalogue, and no source file or
  * compiled path leaks into the runtime resources, the datagen tree or a procedural directory.
  */
 class BlockbenchResourcesTest {
@@ -81,8 +81,8 @@ class BlockbenchResourcesTest {
             }
         }
         assertEquals(new TreeSet<>(BlockbenchManifest.models()), actual);
-        assertEquals(34 + BlockbenchManifest.MILESTONE_6_MODELS.size() + BlockbenchManifest.pieces().stream().mapToInt(p -> BlockbenchManifest.models(p).size()).sum(), actual.size());
-        assertEquals(34 + 7, BlockbenchManifest.models().size() - BlockbenchManifest.pieces().stream().mapToInt(p -> BlockbenchManifest.models(p).size()).sum());
+        assertEquals(34 + BlockbenchManifest.MILESTONE_6_MODELS.size() + BlockbenchManifest.MILESTONE_7_MODELS.size() + BlockbenchManifest.pieces().stream().mapToInt(p -> BlockbenchManifest.models(p).size()).sum(), actual.size());
+        assertEquals(34 + 7 + 50, BlockbenchManifest.models().size() - BlockbenchManifest.pieces().stream().mapToInt(p -> BlockbenchManifest.models(p).size()).sum());
         for (String model : BlockbenchManifest.models()) {
             assertFalse(Files.exists(ResourceFiles.GENERATED_ASSETS.resolve("models/" + model)), model + " also in the datagen tree");
         }
@@ -121,6 +121,23 @@ class BlockbenchResourcesTest {
                     c.getAsJsonArray().get(0).getAsInt(), c.getAsJsonArray().get(1).getAsInt(), c.getAsJsonArray().get(2).getAsInt())));
             assertEquals(catalogue, sidecar, piece.id() + " cells");
             assertEquals(piece.cells(), sidecar.size(), piece.id());
+        }
+    }
+
+    /** The altar and every Milestone 7 piece own their textures: each lives under the piece's own directory, so painting one never changes another. */
+    @Test
+    void milestoneSixAndSevenPiecesOwnTheirTexturesUnderTheirOwnDirectory() {
+        List<String> projects = new ArrayList<>(BlockbenchManifest.MILESTONE_6_PROJECTS);
+        projects.addAll(BlockbenchManifest.MILESTONE_7_PROJECTS);
+        for (String dir : projects) {
+            var owned = ResourceFiles.json(SOURCES.resolve(dir).resolve("piece.json")).getAsJsonObject("owned_textures").entrySet();
+            assertFalse(owned.isEmpty(), dir + " owns no textures");
+            for (var e : owned) {
+                assertEquals("herbalwitch:block/pieces/" + dir + "/" + e.getKey(), e.getValue().getAsString(), dir);
+                Path png = ResourceFiles.MAIN_ASSETS.resolve("textures/block/pieces/" + dir + "/" + e.getKey() + ".png");
+                assertTrue(Files.isRegularFile(png), png.toString());
+                assertFalse(Files.exists(ResourceFiles.GENERATED_ASSETS.resolve("textures/block/pieces/" + dir + "/" + e.getKey() + ".png")), dir);
+            }
         }
     }
 

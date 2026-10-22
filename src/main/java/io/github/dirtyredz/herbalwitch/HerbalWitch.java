@@ -6,7 +6,9 @@ import io.github.dirtyredz.herbalwitch.client.HerbalWitchClient;
 import io.github.dirtyredz.herbalwitch.data.HerbalWitchDataProviders;
 import io.github.dirtyredz.herbalwitch.decor.registry.DecorRegistration;
 import io.github.dirtyredz.herbalwitch.grimoire.registry.GrimoireRegistration;
+import io.github.dirtyredz.herbalwitch.magic.charm.registry.CharmRegistration;
 import io.github.dirtyredz.herbalwitch.magic.ritual.registry.RitualRegistration;
+import io.github.dirtyredz.herbalwitch.magic.ward.registry.WardRegistration;
 import io.github.dirtyredz.herbalwitch.magic.witch.registry.WitchRegistration;
 import io.github.dirtyredz.herbalwitch.platform.compat.CompatibilityRegistration;
 import io.github.dirtyredz.herbalwitch.showcase.command.ShowcaseCommandRegistration;
@@ -38,6 +40,8 @@ public final class HerbalWitch {
         GrimoireRegistration.register(modBus);
         WitchRegistration.register(modBus);
         RitualRegistration.register(modBus);
+        WardRegistration.register(modBus);
+        CharmRegistration.register(modBus);
         ShowcaseCommandRegistration.register();
         CompatibilityRegistration.register();
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> HerbalWitchClient::registerConfig);

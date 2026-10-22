@@ -1,8 +1,8 @@
 package io.github.dirtyredz.herbalwitch.stations.everyday.kettle.recipe;
 
-import io.github.dirtyredz.herbalwitch.stations.process.ProcessRecipe;
-import io.github.dirtyredz.herbalwitch.stations.process.ProcessRecipeDescription;
-import io.github.dirtyredz.herbalwitch.stations.process.ProcessRecipeJson;
+import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipe;
+import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipeDescription;
+import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipeJson;
 import io.github.dirtyredz.herbalwitch.stations.registry.StationRecipes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;

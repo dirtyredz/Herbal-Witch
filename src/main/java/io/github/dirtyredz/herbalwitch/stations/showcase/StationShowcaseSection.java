@@ -77,8 +77,8 @@ public final class StationShowcaseSection implements ShowcaseSection {
 
     /**
      * A station facing north at height {@code y}: one block at {@code x}, or a multiblock with its
-     * origin at local x = width - 1 (its other cells extend to the viewer's right, west, toward
-     * x = 0). Layouts come from the catalogue, so planning never touches the registries.
+     * origin at local x = x + width - 1 (its other cells extend to the viewer's right, west, toward
+     * x). Layouts come from the catalogue, so planning never touches the registries.
      */
     private static void station(List<ShowcasePlacement> out, Supplier<Block> block, MultiblockLayout layout, int x, int y,
                                 Consumer<BlockEntity> init) {
@@ -93,7 +93,7 @@ public final class StationShowcaseSection implements ShowcaseSection {
         for (int i = 0; i < layout.size(); i++) {
             int part = i;
             BlockPos at = layout.offset(Direction.NORTH, i);
-            out.add(ShowcasePlacement.content(width - 1 + at.getX(), y + at.getY(), 1 + at.getZ(),
+            out.add(ShowcasePlacement.content(x + width - 1 + at.getX(), y + at.getY(), 1 + at.getZ(),
                     () -> facingNorth(block.get()).setValue(layout.part(), part), i == 0 ? init : null));
         }
     }

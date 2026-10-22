@@ -1,0 +1,38 @@
+{
+  "type": "herbalwitch:processing/cauldron",
+  "base": {
+    "count": 1,
+    "ingredient": {
+      "type": "forge:partial_nbt",
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"minecraft:water\"}"
+    }
+  },
+  "duration": 600,
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "herbalwitch:preparations/herbs/woodland/nightshade/powder"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:ink_sac"
+      }
+    }
+  ],
+  "requirements": {
+    "energy": 10,
+    "witch": true
+  },
+  "result": {
+    "item": "herbalwitch:preparations/mixtures/combat/concealment"
+  },
+  "returns": [
+    {
+      "item": "minecraft:glass_bottle"
+    }
+  ]
+}

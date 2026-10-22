@@ -7,7 +7,11 @@ import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContentSource;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireEntry;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reference.WitchEntries;
 import io.github.dirtyredz.herbalwitch.magic.ritual.catalog.AltarActionSpec;
+import io.github.dirtyredz.herbalwitch.magic.ritual.action.GardenBlessingAction;
+import io.github.dirtyredz.herbalwitch.magic.ritual.action.GardenBlessingPlan;
+import io.github.dirtyredz.herbalwitch.magic.ritual.action.HomeProtectionAction;
 import io.github.dirtyredz.herbalwitch.magic.ritual.catalog.AltarCatalog;
+import io.github.dirtyredz.herbalwitch.magic.ritual.catalog.CircleCatalog;
 import io.github.dirtyredz.herbalwitch.magic.ritual.registry.RitualItems;
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
 import net.minecraft.network.chat.Component;
@@ -30,6 +34,7 @@ import java.util.function.Consumer;
 public final class AltarEntries implements GrimoireContentSource {
     public static final String PREFIX = "grimoire." + HerbalWitch.MOD_ID + ".ritual.";
     public static final EntryKey ALTAR = EntryKey.of(EntryKey.Kind.STATION, AltarCatalog.id());
+    public static final EntryKey CIRCLE = EntryKey.of(EntryKey.Kind.STATION, CircleCatalog.id());
 
     /** An action's page key, {@code guide|herbalwitch:ritual/<action>}. */
     public static EntryKey key(AltarActionSpec action) {
@@ -47,6 +52,12 @@ public final class AltarEntries implements GrimoireContentSource {
                 Component.translatable(PREFIX + "altar.scope"), Component.translatable(PREFIX + "altar.crafted"));
         out.accept(new GrimoireEntry(ALTAR, GrimoireContent.WITCHCRAFT, Component.translatable("block." + HerbalWitch.MOD_ID + "."
                 + AltarCatalog.PATH.replace('/', '.')), RitualItems.ALTAR.get().getDefaultInstance(), altar, actions, Optional.empty(), true,
+                Optional.empty()));
+        List<Component> circle = List.of(Component.translatable(PREFIX + "circle.0"), Component.translatable(PREFIX + "circle.size"),
+                Component.translatable(PREFIX + "circle.altar"), Component.translatable(PREFIX + "circle.crafted"));
+        out.accept(new GrimoireEntry(CIRCLE, GrimoireContent.WITCHCRAFT, Component.translatable("block." + HerbalWitch.MOD_ID + "."
+                + CircleCatalog.PATH.replace('/', '.')), RitualItems.CIRCLE.get().getDefaultInstance(), circle,
+                List.of(ALTAR, key(AltarActionSpec.GARDEN_BLESSING), key(AltarActionSpec.HOME_PROTECTION)), Optional.empty(), true,
                 Optional.empty()));
         for (AltarActionSpec action : AltarActionSpec.values()) {
             List<Component> body = new ArrayList<>();
@@ -73,8 +84,20 @@ public final class AltarEntries implements GrimoireContentSource {
                             WitchEntries.seconds(rules.attunementTicks())));
                     body.add(Component.translatable(PREFIX + "attunement.capacity"));
                 }
+                case GARDEN_BLESSING -> {
+                    body.add(Component.translatable(PREFIX + "garden_blessing.terms", rules.workings().gardenBlessingCost(),
+                            WitchEntries.seconds(rules.workings().gardenBlessingTicks())));
+                    body.add(Component.translatable(PREFIX + "garden_blessing.area", GardenBlessingPlan.SIZE, (int) GardenBlessingAction.REACH));
+                    body.add(Component.translatable(PREFIX + "circle.needed"));
+                }
+                case HOME_PROTECTION -> {
+                    body.add(Component.translatable(PREFIX + "home_protection.terms", rules.workings().homeProtectionCost(),
+                            WitchEntries.seconds(rules.workings().homeProtectionTicks())));
+                    body.add(Component.translatable(PREFIX + "home_protection.ward", (int) HomeProtectionAction.REACH));
+                    body.add(Component.translatable(PREFIX + "circle.needed"));
+                }
             }
-            List<EntryKey> links = new ArrayList<>(List.of(ALTAR));
+            List<EntryKey> links = new ArrayList<>(action.circle() ? List.of(ALTAR, CIRCLE) : List.of(ALTAR));
             WitchEntries.PAGES.forEach(p -> links.add(WitchEntries.key(p)));
             out.accept(new GrimoireEntry(key(action), GrimoireContent.WITCHCRAFT, Component.translatable(PREFIX + action.key() + ".title"),
                     RitualItems.ALTAR.get().getDefaultInstance(), body, links, Optional.empty(), true, Optional.empty()));

@@ -2,6 +2,7 @@ package io.github.dirtyredz.herbalwitch.data.client.magic.ritual;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.magic.ritual.catalog.AltarCatalog;
+import io.github.dirtyredz.herbalwitch.magic.ritual.catalog.CircleCatalog;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -24,5 +25,8 @@ public class AltarItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         getBuilder("item/" + AltarCatalog.PATH).parent(new ModelFile.UncheckedModelFile(modLoc(AltarModelProvider.DIR + "assembly")));
+        // the circle is too wide for one item model: its item is a flat sprite
+        getBuilder("item/" + CircleCatalog.PATH).parent(new ModelFile.UncheckedModelFile("item/generated"))
+                .texture("layer0", modLoc("item/" + CircleCatalog.PATH));
     }
 }

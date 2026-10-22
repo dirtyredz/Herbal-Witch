@@ -17,9 +17,11 @@ public final class StationTagContributions {
     }
 
     public static void blocks(HerbalWitchBlockTagsProvider.Sink tags) {
-        tags.tag(BlockTags.MINEABLE_WITH_AXE).add(StationBlocks.DRYING_RACK.get());
+        tags.tag(BlockTags.MINEABLE_WITH_AXE).add(StationBlocks.DRYING_RACK.get(), StationBlocks.BOTTLING_BENCH.get(),
+                StationBlocks.CHARM_WORKBENCH.get());
         tags.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(StationBlocks.MORTAR.get(), StationBlocks.KETTLE.get(),
-                StationBlocks.HEARTH.get(), StationBlocks.STOVE.get(), StationBlocks.INFUSION_POT.get());
+                StationBlocks.HEARTH.get(), StationBlocks.STOVE.get(), StationBlocks.INFUSION_POT.get(), StationBlocks.CAULDRON.get(),
+                StationBlocks.STILL.get());
         tags.tag(HeatSourceTags.HEAT_SOURCES).add(StationBlocks.HEARTH.get(), StationBlocks.STOVE.get(), Blocks.CAMPFIRE, Blocks.SOUL_CAMPFIRE, Blocks.MAGMA_BLOCK)
                 .addOptional(ResourceLocation.fromNamespaceAndPath("farmersdelight", "stove"));
         tags.tag(HeatSourceTags.HEAT_CONDUCTORS).add(Blocks.HOPPER)

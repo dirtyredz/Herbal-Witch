@@ -1,8 +1,10 @@
 package io.github.dirtyredz.herbalwitch.stations.process;
 
+import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -12,6 +14,7 @@ import net.minecraftforge.items.IItemHandler;
 
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * The part every processing station's block entity has in common, as a component (not a base
@@ -25,33 +28,18 @@ public final class ProcessStation {
     public static final int DATA_DURATION = 1;
     public static final int DATA_STATUS = 2;
     public static final int DATA_HEATED = 3;
-    public static final int DATA_COUNT = 4;
+    /** Energy one batch of the matched recipe costs here now (0 for ordinary recipes). */
+    public static final int DATA_ENERGY = 4;
+    /** Whose batch it is, seen by this menu's viewer: 0 nobody's, 1 the viewer's, 2 someone else's. */
+    public static final int DATA_OPERATOR = 5;
+    /** 1 when the matched recipe needs a witch. */
+    public static final int DATA_MAGICAL = 6;
+    public static final int DATA_COUNT = 7;
 
     private final ProcessInventory inventory;
     private final ProcessJob job;
     private boolean hot;
     private final Map<Direction, LazyOptional<IItemHandler>> sides = new EnumMap<>(Direction.class);
-    private final ContainerData data = new ContainerData() {
-        @Override
-        public int get(int index) {
-            return switch (index) {
-                case DATA_PROGRESS -> job.progress();
-                case DATA_DURATION -> job.duration();
-                case DATA_STATUS -> job.status().ordinal();
-                case DATA_HEATED -> hot ? 1 : 0;
-                default -> 0;
-            };
-        }
-
-        @Override
-        public void set(int index, int value) {
-        }
-
-        @Override
-        public int getCount() {
-            return DATA_COUNT;
-        }
-    };
 
     public ProcessStation(ProcessInventory inventory, ProcessJob job) {
         this.inventory = inventory;
@@ -67,13 +55,45 @@ public final class ProcessStation {
         return job;
     }
 
+    /** Menu data for a viewer-less menu (nothing is anybody's). */
     public ContainerData data() {
-        return data;
+        return data(null);
     }
 
-    public void tick(Level level, boolean heated) {
+    /** Menu data as {@code viewer} sees it (each open menu has its own view: the operator field is personal). */
+    public ContainerData data(Player viewer) {
+        UUID id = viewer == null ? null : viewer.getUUID();
+        return new ContainerData() {
+            @Override
+            public int get(int index) {
+                ProcessRecipe recipe = job.recipe();
+                return switch (index) {
+                    case DATA_PROGRESS -> job.progress();
+                    case DATA_DURATION -> job.duration();
+                    case DATA_STATUS -> job.status().ordinal();
+                    case DATA_HEATED -> hot ? 1 : 0;
+                    case DATA_ENERGY -> recipe == null ? 0 : job.policy().energyCost(recipe);
+                    case DATA_OPERATOR -> id == null ? 0 : job.policy().relation(id);
+                    case DATA_MAGICAL -> recipe != null && recipe.description().requirements().magical() ? 1 : 0;
+                    default -> 0;
+                };
+            }
+
+            @Override
+            public void set(int index, int value) {
+            }
+
+            @Override
+            public int getCount() {
+                return DATA_COUNT;
+            }
+        };
+    }
+
+    /** One loaded server tick of the station whose origin is {@code pos}. */
+    public void tick(Level level, BlockPos pos, boolean heated) {
         this.hot = heated;
-        job.tick(level, inventory, heated);
+        job.tick(level, pos, inventory, heated);
     }
 
     /** The automation handler for a side; empty for an unknown side. */

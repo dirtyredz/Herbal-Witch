@@ -1,6 +1,7 @@
 package io.github.dirtyredz.herbalwitch.magic.ritual.menu;
 
 import io.github.dirtyredz.herbalwitch.magic.ritual.catalog.AltarActionSpec;
+import io.github.dirtyredz.herbalwitch.magic.ritual.circle.CircleValidation;
 import io.github.dirtyredz.herbalwitch.magic.ritual.network.AltarPackets;
 import io.github.dirtyredz.herbalwitch.magic.ritual.network.AltarUpdate;
 import io.github.dirtyredz.herbalwitch.magic.ritual.session.AltarOffering;
@@ -65,13 +66,20 @@ public final class AltarMenuSync {
                 .map(o -> invitation(o, Optional.of(o.recipient()), now, site));
         List<AltarUpdate.Nearby> nearby = WitchStatusService.isWitch(player) ? nearby(player, menu) : List.of();
         Map<AltarActionSpec, List<AltarUpdate.Count>> counts = new EnumMap<>(AltarActionSpec.class);
-        for (AltarActionSpec action : List.of(AltarActionSpec.FOUNDING, AltarActionSpec.INITIATION, AltarActionSpec.ATTUNEMENT)) {
+        for (AltarActionSpec action : List.of(AltarActionSpec.FOUNDING, AltarActionSpec.INITIATION, AltarActionSpec.ATTUNEMENT,
+                AltarActionSpec.GARDEN_BLESSING, AltarActionSpec.HOME_PROTECTION)) {
             counts.put(action, AltarOffering.counts(player, AltarOffering.requirements(action)).stream()
                     .map(c -> new AltarUpdate.Count(c.have(), c.need())).toList());
         }
         boolean foundingOpen = player.getServer() != null && FoundingService.open(player.getServer());
         return new AltarUpdate(menu.containerId, menu.nonce(), foundingOpen, activity, incoming, outgoing, nearby, counts,
-                AltarSessionService.lastNotice(player.getUUID()));
+                AltarSessionService.lastNotice(player.getUUID()), circle(player, menu));
+    }
+
+    /** The circle around this altar, as its screen lists it. */
+    private static AltarUpdate.Circle circle(ServerPlayer player, AltarMenu menu) {
+        CircleValidation.Report report = CircleValidation.around(player.level(), menu.origin());
+        return new AltarUpdate.Circle(report.missing(), report.unloaded());
     }
 
     private static AltarUpdate.Activity activity(ServerPlayer player, AltarSession s) {

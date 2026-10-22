@@ -43,6 +43,11 @@ public final class AltarSessionService {
         /** An extra reason the session can no longer continue, or empty. */
         Optional<String> invalid(MinecraftServer server, AltarSession session);
 
+        /** Whether the session holds still this tick without progressing or ending (a circle cell in an unloaded chunk). */
+        default boolean paused(MinecraftServer server, AltarSession session) {
+            return false;
+        }
+
         /** One loaded tick of progress (after validation). */
         void tick(MinecraftServer server, AltarSession session);
 
@@ -190,6 +195,9 @@ public final class AltarSessionService {
         }
         if (reason.isPresent()) {
             cancel(session, reason.get());
+            return;
+        }
+        if (handler != null && handler.paused(server, session)) {
             return;
         }
         session.advance();

@@ -22,10 +22,18 @@ import java.util.function.Consumer;
  * @param inviteExpiry      ticks an initiation invitation stays open
  * @param inviteCooldown    ticks between one witch's invitations
  * @param energy            the energy economy
+ * @param workings          what magical processing, circle rituals, wards and charms cost or last (Milestone 7)
  */
 public record WitchRules(boolean foundingEnabled, boolean initiationEnabled, int foundingTicks, int initiationTicks,
-                         int attunementTicks, int inviteExpiry, int inviteCooldown, EnergyBalance energy) {
+                         int attunementTicks, int inviteExpiry, int inviteCooldown, EnergyBalance energy, WorkingRules workings) {
     public static final WitchRules DEFAULTS = new WitchRules(true, true, 200, 200, 100, 600, 100, EnergyBalance.DEFAULTS);
+
+    /** Rules with the default workings (Milestone 6 callers). */
+    public WitchRules(boolean foundingEnabled, boolean initiationEnabled, int foundingTicks, int initiationTicks, int attunementTicks,
+                      int inviteExpiry, int inviteCooldown, EnergyBalance energy) {
+        this(foundingEnabled, initiationEnabled, foundingTicks, initiationTicks, attunementTicks, inviteExpiry, inviteCooldown, energy,
+                WorkingRules.DEFAULTS);
+    }
 
     private static volatile WitchRules server = DEFAULTS;
     private static volatile WitchRules client = DEFAULTS;
@@ -34,6 +42,7 @@ public record WitchRules(boolean foundingEnabled, boolean initiationEnabled, int
     /** Why these rules are unusable; empty when valid. */
     public List<String> problems() {
         List<String> out = new ArrayList<>(energy.problems());
+        out.addAll(workings.problems());
         for (int[] t : new int[][] {{foundingTicks}, {initiationTicks}, {attunementTicks}, {inviteExpiry}}) {
             if (t[0] < 1 || t[0] > EnergyBalance.MAX_TICKS) {
                 out.add("durations must be 1.." + EnergyBalance.MAX_TICKS);
@@ -61,6 +70,9 @@ public record WitchRules(boolean foundingEnabled, boolean initiationEnabled, int
         }
         for (int t : e.thresholds()) {
             h = h * 31 + t;
+        }
+        for (int v : workings.numbers()) {
+            h = h * 31 + v;
         }
         return h;
     }

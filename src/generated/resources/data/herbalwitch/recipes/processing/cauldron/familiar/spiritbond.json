@@ -1,0 +1,44 @@
+{
+  "type": "herbalwitch:processing/cauldron",
+  "base": {
+    "count": 1,
+    "ingredient": {
+      "type": "forge:partial_nbt",
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"minecraft:water\"}"
+    }
+  },
+  "duration": 600,
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "herbalwitch:preparations/herbs/woodland/mandrake/powder"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:amethyst_shard"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "herbalwitch:preparations/advanced/essences/moon"
+      }
+    }
+  ],
+  "requirements": {
+    "energy": 15,
+    "witch": true
+  },
+  "result": {
+    "item": "herbalwitch:preparations/mixtures/familiar/spiritbond"
+  },
+  "returns": [
+    {
+      "item": "minecraft:glass_bottle"
+    }
+  ]
+}

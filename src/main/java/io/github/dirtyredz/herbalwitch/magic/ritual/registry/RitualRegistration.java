@@ -4,6 +4,8 @@ import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContent;
 import io.github.dirtyredz.herbalwitch.magic.ritual.action.AltarActions;
 import io.github.dirtyredz.herbalwitch.magic.ritual.action.AttunementAction;
 import io.github.dirtyredz.herbalwitch.magic.ritual.action.FoundingAction;
+import io.github.dirtyredz.herbalwitch.magic.ritual.action.GardenBlessingAction;
+import io.github.dirtyredz.herbalwitch.magic.ritual.action.HomeProtectionAction;
 import io.github.dirtyredz.herbalwitch.magic.ritual.action.InitiationAction;
 import io.github.dirtyredz.herbalwitch.magic.ritual.action.MeditationAction;
 import io.github.dirtyredz.herbalwitch.magic.ritual.catalog.AltarActionSpec;
@@ -12,6 +14,7 @@ import io.github.dirtyredz.herbalwitch.magic.ritual.menu.AltarMenuSync;
 import io.github.dirtyredz.herbalwitch.magic.ritual.network.AltarPackets;
 import io.github.dirtyredz.herbalwitch.magic.ritual.session.AltarSessionService;
 import io.github.dirtyredz.herbalwitch.magic.ritual.showcase.AltarShowcaseSection;
+import io.github.dirtyredz.herbalwitch.magic.ritual.showcase.CircleShowcaseSection;
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseRegistry;
 import io.github.dirtyredz.herbalwitch.stations.registry.StationCreativeTab;
@@ -43,6 +46,8 @@ public final class RitualRegistration {
         AltarSessionService.handle(AltarActionSpec.INITIATION, new InitiationAction());
         AltarSessionService.handle(AltarActionSpec.MEDITATION, new MeditationAction());
         AltarSessionService.handle(AltarActionSpec.ATTUNEMENT, new AttunementAction());
+        AltarSessionService.handle(AltarActionSpec.GARDEN_BLESSING, new GardenBlessingAction());
+        AltarSessionService.handle(AltarActionSpec.HOME_PROTECTION, new HomeProtectionAction());
         WitchRules.listen(rules -> AltarSessionService.cancelAll("rules_changed"));
 
         IEventBus forge = MinecraftForge.EVENT_BUS;
@@ -58,11 +63,13 @@ public final class RitualRegistration {
         forge.addListener(AltarActions::loggedOut);
 
         ShowcaseRegistry.register(new AltarShowcaseSection());
+        ShowcaseRegistry.register(new CircleShowcaseSection());
     }
 
     private static void creativeTab(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey().equals(StationCreativeTab.APOTHECARY.getKey())) {
             event.accept(RitualItems.ALTAR.get());
+            event.accept(RitualItems.CIRCLE.get());
         }
     }
 }

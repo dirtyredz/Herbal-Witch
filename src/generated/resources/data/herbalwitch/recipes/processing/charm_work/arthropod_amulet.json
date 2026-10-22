@@ -1,0 +1,31 @@
+{
+  "type": "herbalwitch:processing/charm_work",
+  "duration": 200,
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "herbalwitch:preparations/herbs/temperate/lavender/powder"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:gold_ingot"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:spider_eye"
+      }
+    }
+  ],
+  "requirements": {
+    "energy": 10,
+    "witch": true
+  },
+  "result": {
+    "item": "herbalwitch:magic/charms/arthropod_amulet"
+  }
+}

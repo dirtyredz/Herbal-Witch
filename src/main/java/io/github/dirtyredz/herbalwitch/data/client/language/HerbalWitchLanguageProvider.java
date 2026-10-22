@@ -7,6 +7,10 @@ import io.github.dirtyredz.herbalwitch.data.client.decor.DecorTranslations;
 import io.github.dirtyredz.herbalwitch.data.client.grimoire.GrimoireTranslations;
 import io.github.dirtyredz.herbalwitch.data.client.magic.ritual.AltarTranslations;
 import io.github.dirtyredz.herbalwitch.data.client.magic.witch.WitchTranslations;
+import io.github.dirtyredz.herbalwitch.data.client.magic.charm.CharmTranslations;
+import io.github.dirtyredz.herbalwitch.data.client.magic.ritual.CircleTranslations;
+import io.github.dirtyredz.herbalwitch.data.client.magic.ward.WardTranslations;
+import io.github.dirtyredz.herbalwitch.data.client.preparations.AdvancedTranslations;
 import io.github.dirtyredz.herbalwitch.data.client.preparations.PreparationTranslations;
 import io.github.dirtyredz.herbalwitch.data.client.showcase.ShowcaseTranslations;
 import io.github.dirtyredz.herbalwitch.data.client.stations.StationTranslations;
@@ -29,9 +33,13 @@ public class HerbalWitchLanguageProvider extends LanguageProvider {
         BotanyTranslations.addTo(this);
         StationTranslations.addTo(this);
         PreparationTranslations.addTo(this);
+        AdvancedTranslations.addTo(this);
         GrimoireTranslations.addTo(this);
         WitchTranslations.addTo(this);
         AltarTranslations.addTo(this);
+        CircleTranslations.addTo(this);
+        WardTranslations.addTo(this);
+        CharmTranslations.addTo(this);
         ShowcaseTranslations.addTo(this);
     }
 }

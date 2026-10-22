@@ -1,0 +1,38 @@
+{
+  "type": "herbalwitch:processing/cauldron",
+  "base": {
+    "count": 1,
+    "ingredient": {
+      "type": "forge:partial_nbt",
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"minecraft:water\"}"
+    }
+  },
+  "duration": 600,
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "herbalwitch:preparations/herbs/woodland/wolfsbane/powder"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:fermented_spider_eye"
+      }
+    }
+  ],
+  "requirements": {
+    "energy": 10,
+    "witch": true
+  },
+  "result": {
+    "item": "herbalwitch:preparations/mixtures/combat/weakening"
+  },
+  "returns": [
+    {
+      "item": "minecraft:glass_bottle"
+    }
+  ]
+}

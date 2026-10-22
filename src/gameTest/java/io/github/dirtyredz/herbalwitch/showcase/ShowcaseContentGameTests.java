@@ -113,12 +113,19 @@ public final class ShowcaseContentGameTests {
             }
         }
         check(blocks.getOrDefault(BotanyBlocks.herbBed(), 0) >= 56, "herb beds " + blocks.get(BotanyBlocks.herbBed()));
-        check(barrels == HerbCatalog.ALL.size() + 4, "sample barrels " + barrels); // one per herb, powders, products, grimoire and altar supplies
+        // one per herb, powders, products, grimoire and altar supplies; Milestone 7: three preparation barrels, circle supplies, charms
+        check(barrels == HerbCatalog.ALL.size() + 4 + 5, "sample barrels " + barrels);
         for (Block piece : GrimoireBlocks.all()) {
             check(blocks.getOrDefault(piece, 0) == 1, piece + " shown " + blocks.getOrDefault(piece, 0) + " times");
         }
         Block altar = io.github.dirtyredz.herbalwitch.magic.ritual.registry.RitualBlocks.ALTAR.get();
-        check(blocks.getOrDefault(altar, 0) == 4, "the altar shown in " + blocks.getOrDefault(altar, 0) + " cells, expected 4");
+        // the altar section's altar and the one inside the ritual circle
+        check(blocks.getOrDefault(altar, 0) == 8, "the altar shown in " + blocks.getOrDefault(altar, 0) + " cells, expected 8");
+        Block circle = io.github.dirtyredz.herbalwitch.magic.ritual.registry.RitualBlocks.CIRCLE.get();
+        check(blocks.getOrDefault(circle, 0) == io.github.dirtyredz.herbalwitch.magic.ritual.catalog.CircleCatalog.LAYOUT.size(),
+                "the circle shown in " + blocks.getOrDefault(circle, 0) + " cells");
+        Block ward = io.github.dirtyredz.herbalwitch.magic.ward.registry.WardRegistration.STONE.get();
+        check(blocks.getOrDefault(ward, 0) >= 1, "no ward stone");
         for (Block station : StationBlocks.all()) {
             check(blocks.getOrDefault(station, 0) >= 1, station + " missing from the showcase");
         }

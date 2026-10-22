@@ -3,7 +3,7 @@ package io.github.dirtyredz.herbalwitch.client.ritual;
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.client.grimoire.StationGrimoirePanel;
 import io.github.dirtyredz.herbalwitch.client.ritual.widgets.AltarActionPanel;
-import io.github.dirtyredz.herbalwitch.client.ritual.widgets.AltarUi;
+import io.github.dirtyredz.herbalwitch.client.ritual.widgets.CirclePanel;
 import io.github.dirtyredz.herbalwitch.client.ritual.widgets.InitiationPanel;
 import io.github.dirtyredz.herbalwitch.client.witch.WitchClientState;
 import io.github.dirtyredz.herbalwitch.magic.ritual.grimoire.AltarEntries;
@@ -15,6 +15,7 @@ import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
 import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyBalance;
 import io.github.dirtyredz.herbalwitch.magic.witch.network.WitchSnapshot;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.BlockPos;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
@@ -32,11 +33,11 @@ import java.util.UUID;
  * The altar screen (252 x 200 from {@code textures/gui/witch/altar.png}), with no slots: the
  * player's own status and energy on the left with the altar's actions (founding for a non-witch,
  * meditation and attunement for a witch), consent on the right (an incoming invitation, or a witch's
- * nearby list and invitation), the running ritual's progress across the bottom, and the last result
+ * nearby list and invitation; a witch can switch it to the ritual circle's two rituals), the running ritual's progress across the bottom, and the last result
  * or interruption. Everything shown comes from the server's private updates and snapshot; buttons
  * send intent only. The grimoire opens beside it on the altar's page.
  */
-public class AltarScreen extends AbstractContainerScreen<AltarMenu> implements AltarUi {
+public class AltarScreen extends AbstractContainerScreen<AltarMenu> implements CirclePanel.CircleUi {
     public static final ResourceLocation ATLAS = ResourceLocation.fromNamespaceAndPath(HerbalWitch.MOD_ID, "textures/gui/witch/altar.png");
     private static final String UI = "ritual.herbalwitch.ui.";
     private static final int INK = 0xFF3B2416;
@@ -48,6 +49,8 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> implements A
     private final List<Line> lines = new ArrayList<>();
     private final AltarActionPanel actions = new AltarActionPanel();
     private final InitiationPanel initiation = new InitiationPanel();
+    private final CirclePanel circle = new CirclePanel();
+    private boolean circleView;
     private StationGrimoirePanel grimoire;
     private int built = -1;
     private Optional<AltarUpdate.Activity> activity = Optional.empty();
@@ -101,7 +104,15 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> implements A
             }
         } else if (witch) {
             actions.witch(this, u, status.get(), left, y, COLUMN);
-            initiation.initiator(this, u, status.get(), right, top, COLUMN);
+            button(Component.translatable(UI + (circleView ? "view_initiation" : "view_circle")), right, top, COLUMN, true, () -> {
+                circleView = !circleView;
+                refresh();
+            });
+            if (circleView) {
+                circle.witch(this, u, status.get(), right, top + 18, COLUMN);
+            } else {
+                initiation.initiator(this, u, status.get(), right, top + 18, COLUMN);
+            }
         } else {
             int h = initiation.recipient(this, u, right, top, COLUMN);
             if (h == 0) {
@@ -133,6 +144,12 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> implements A
     @Override
     public void send(AltarRequest.Op op, Optional<UUID> target, long offer) {
         AltarPackets.sendToServer(new AltarRequest(menu.containerId, menu.nonce(), WitchRules.current().fingerprint(), op, target, offer));
+    }
+
+    @Override
+    public void send(AltarRequest.Op op, Optional<BlockPos> place) {
+        AltarPackets.sendToServer(new AltarRequest(menu.containerId, menu.nonce(), WitchRules.current().fingerprint(), op, Optional.empty(), 0,
+                place));
     }
 
     @Override

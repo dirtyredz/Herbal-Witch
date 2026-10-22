@@ -2,9 +2,10 @@ package io.github.dirtyredz.herbalwitch.data.server.stations.recipes;
 
 import com.google.gson.JsonObject;
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.stations.process.ProcessRecipeDescription;
-import io.github.dirtyredz.herbalwitch.stations.process.ProcessRecipeJson;
-import io.github.dirtyredz.herbalwitch.stations.process.ProcessRecipeSerializer;
+import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipeDescription;
+import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipeJson;
+import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipeSerializer;
+import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRequirements;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -33,6 +34,7 @@ public final class ProcessingRecipeBuilder {
     private final List<ItemStack> returns = new ArrayList<>();
     private ItemStack result = ItemStack.EMPTY;
     private int duration;
+    private ProcessRequirements requirements = ProcessRequirements.NONE;
 
     private ProcessingRecipeBuilder(ProcessRecipeSerializer<?> serializer, int duration) {
         this.serializer = serializer;
@@ -68,7 +70,18 @@ public final class ProcessingRecipeBuilder {
     }
 
     public ProcessingRecipeBuilder packaging(ItemLike item) {
-        packaging = new ProcessRecipeDescription.Counted(Ingredient.of(item), 1);
+        return packaging(item, 1);
+    }
+
+    /** Counted packaging (the bottling bench fills four bottles from one mixture). */
+    public ProcessingRecipeBuilder packaging(ItemLike item, int count) {
+        packaging = new ProcessRecipeDescription.Counted(Ingredient.of(item), count);
+        return this;
+    }
+
+    /** A witch recipe: a witch starts each batch and pays {@code energy} (before the server multiplier). */
+    public ProcessingRecipeBuilder witch(int energy) {
+        requirements = ProcessRequirements.witch(energy);
         return this;
     }
 
@@ -86,11 +99,17 @@ public final class ProcessingRecipeBuilder {
         return result(item, 1);
     }
 
+    /** A result with bounded data (a labelled preparation). */
+    public ProcessingRecipeBuilder result(ItemStack stack) {
+        result = stack.copy();
+        return this;
+    }
+
     /** Saves as {@code herbalwitch:<path>}. */
     public void save(Consumer<FinishedRecipe> writer, String path) {
         ProcessRecipeDescription description = ProcessRecipeJson.validate(new ProcessRecipeDescription(ingredients,
                 Optional.ofNullable(base), Optional.ofNullable(packaging), result, returns, duration,
-                serializer.bounds().heated()), serializer.bounds());
+                serializer.bounds().heated(), requirements), serializer.bounds());
         ResourceLocation id = ResourceLocation.fromNamespaceAndPath(HerbalWitch.MOD_ID, path);
         writer.accept(new FinishedRecipe() {
             @Override

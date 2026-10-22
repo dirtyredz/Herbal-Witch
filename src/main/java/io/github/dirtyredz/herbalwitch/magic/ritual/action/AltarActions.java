@@ -54,6 +54,8 @@ public final class AltarActions {
             case DECLINE -> InitiationAction.decline(sender, request.offer());
             case MEDITATE -> MeditationAction.begin(sender, menu.get());
             case ATTUNE -> AttunementAction.begin(sender, menu.get());
+            case BLESS -> GardenBlessingAction.begin(sender, menu.get(), request.place());
+            case PROTECT -> HomeProtectionAction.begin(sender, menu.get(), request.place());
             case STOP -> AltarSessionService.of(sender.getUUID()).map(s -> {
                 AltarSessionService.cancel(s, "stopped");
                 return "cancel.stopped";

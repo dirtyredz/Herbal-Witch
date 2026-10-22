@@ -2,6 +2,7 @@ package io.github.dirtyredz.herbalwitch.data.client.stations;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.platform.multiblock.MultiblockLayout;
+import io.github.dirtyredz.herbalwitch.stations.advanced.AdvancedStationBlock;
 import io.github.dirtyredz.herbalwitch.stations.block.StationBlock;
 import io.github.dirtyredz.herbalwitch.stations.catalog.StationCatalog;
 import io.github.dirtyredz.herbalwitch.stations.catalog.StationSpec;
@@ -22,9 +23,10 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 
 /**
  * Station blockstates over the authored models ({@code models/block/stations/<station>/}), turned
- * to the block's facing. A one-block station selects {@code base}. A multiblock station is
- * multipart: each cell shows its permanent {@code part_<n>} and, while lit or active, its overlay
- * ({@code fire_<n>} for the hearth and stove, {@code bundles_<n>} for the rack) where one exists.
+ * to the block's facing. A one-block station selects {@code base} (a production station {@code active}
+ * while it works). A multiblock station is multipart: each cell shows its permanent {@code part_<n>}
+ * and, while lit or active, its overlay where one exists ({@link #overlay}: {@code fire_<n>} for the
+ * hearth and stove, {@code bundles_<n>} for the rack, {@code active_<n>} for the production stations).
  */
 public class StationModelProvider extends BlockStateProvider {
     private final ExistingFileHelper existing;
@@ -45,6 +47,12 @@ public class StationModelProvider extends BlockStateProvider {
             Block block = StationBlocks.block(spec);
             if (block instanceof StationBlock station && station.layout() != null) {
                 multiblock(spec, block, station.layout());
+            } else if (block instanceof AdvancedStationBlock) {
+                ModelFile base = model(spec, "base");
+                ModelFile active = model(spec, "active");
+                getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder()
+                        .modelFile(state.getValue(AdvancedStationBlock.ACTIVE) ? active : base)
+                        .rotationY(rotation(state.getValue(StationBlock.FACING))).build());
             } else {
                 ModelFile base = model(spec, "base");
                 getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder()
@@ -54,8 +62,8 @@ public class StationModelProvider extends BlockStateProvider {
     }
 
     private void multiblock(StationSpec spec, Block block, MultiblockLayout layout) {
-        BooleanProperty shown = block.defaultBlockState().hasProperty(DryingRackBlock.ACTIVE) ? DryingRackBlock.ACTIVE : HearthBlock.LIT;
-        String overlay = shown == DryingRackBlock.ACTIVE ? "bundles_" : "fire_";
+        BooleanProperty shown = shown(block);
+        String overlay = overlay(block);
         MultiPartBlockStateBuilder states = getMultipartBuilder(block);
         for (int part = 0; part < layout.size(); part++) {
             ModelFile base = model(spec, "part_" + part);
@@ -69,6 +77,22 @@ public class StationModelProvider extends BlockStateProvider {
                 }
             }
         }
+    }
+
+    /** The state that shows a multiblock's overlay. */
+    static BooleanProperty shown(Block block) {
+        if (block instanceof AdvancedStationBlock) {
+            return AdvancedStationBlock.ACTIVE;
+        }
+        return block.defaultBlockState().hasProperty(DryingRackBlock.ACTIVE) ? DryingRackBlock.ACTIVE : HearthBlock.LIT;
+    }
+
+    /** The overlay models' name prefix. */
+    static String overlay(Block block) {
+        if (block instanceof AdvancedStationBlock) {
+            return "active_";
+        }
+        return block.defaultBlockState().hasProperty(DryingRackBlock.ACTIVE) ? "bundles_" : "fire_";
     }
 
     private ResourceLocation location(StationSpec spec, String name) {

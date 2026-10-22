@@ -2,6 +2,7 @@ package io.github.dirtyredz.herbalwitch.stations.registry;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.botany.registry.BotanyCreativeTab;
+import io.github.dirtyredz.herbalwitch.brewing.product.registry.AdvancedPreparations;
 import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationItems;
 import io.github.dirtyredz.herbalwitch.stations.catalog.StationCatalog;
 import net.minecraft.core.registries.Registries;
@@ -27,6 +28,7 @@ public final class StationCreativeTab {
             .displayItems((parameters, output) -> {
                 StationItems.all().forEach(output::accept);
                 PreparationItems.all().forEach(output::accept);
+                AdvancedPreparations.all().forEach(output::accept);
             })
             .build());
 

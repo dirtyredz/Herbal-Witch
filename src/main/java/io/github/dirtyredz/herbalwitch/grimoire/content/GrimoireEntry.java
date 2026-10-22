@@ -1,7 +1,7 @@
 package io.github.dirtyredz.herbalwitch.grimoire.content;
 
 import io.github.dirtyredz.herbalwitch.grimoire.content.reload.GrimoireDefinition;
-import io.github.dirtyredz.herbalwitch.stations.process.ProcessRecipe;
+import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipe;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 

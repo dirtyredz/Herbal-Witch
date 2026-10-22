@@ -2,8 +2,8 @@ package io.github.dirtyredz.herbalwitch.client.compat.jei;
 
 import io.github.dirtyredz.herbalwitch.client.compat.ViewerLayout;
 import io.github.dirtyredz.herbalwitch.stations.description.ProcessingCategories;
-import io.github.dirtyredz.herbalwitch.stations.process.ProcessRecipe;
-import io.github.dirtyredz.herbalwitch.stations.process.ProcessRecipeDescription;
+import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipe;
+import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipeDescription;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -79,5 +79,7 @@ public class JeiProcessCategory implements IRecipeCategory<ProcessRecipe> {
     public void draw(ProcessRecipe recipe, IRecipeSlotsView slots, GuiGraphics graphics, double mouseX, double mouseY) {
         graphics.drawString(Minecraft.getInstance().font, "->", ViewerLayout.ARROW_X + 6, ViewerLayout.ARROW_Y + 4, 0x404040, false);
         graphics.drawString(Minecraft.getInstance().font, ViewerLayout.footer(recipe.description()), 0, ViewerLayout.TEXT_Y, 0x404040, false);
+        ViewerLayout.requirements(recipe.description()).ifPresent(r -> graphics.drawString(Minecraft.getInstance().font, r, 0,
+                ViewerLayout.REQUIREMENTS_Y, 0x6A2A5A, false));
     }
 }

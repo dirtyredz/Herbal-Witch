@@ -14,10 +14,10 @@ base {
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 // Optional-mod runtime profile for headless adapter checks (docs/COMPATIBILITY.md):
-//   -PcompatProfile=base|emi|jei|viewers|farmersdelight|thirst|all   (default base: no optional mods)
+//   -PcompatProfile=base|emi|jei|viewers|farmersdelight|thirst|curios|all   (default base: no optional mods)
 // Farmer's Delight and Thirst Was Taken come from a local mods folder: -PcompatModsDir=<folder>.
 def compatProfile = (project.findProperty('compatProfile') ?: 'base').toString()
-if (!(compatProfile in ['base', 'emi', 'jei', 'viewers', 'farmersdelight', 'thirst', 'all'])) {
+if (!(compatProfile in ['base', 'emi', 'jei', 'viewers', 'farmersdelight', 'thirst', 'curios', 'all'])) {
     throw new GradleException("Unknown compatProfile '${compatProfile}'")
 }
 def needsLocalMods = compatProfile in ['farmersdelight', 'thirst', 'all']
@@ -99,6 +99,8 @@ repositories {
     // Recipe viewer APIs (compile-only; the jar ships no viewer classes).
     maven { url = 'https://maven.blamejared.com/' }
     maven { url = 'https://maven.terraformersmc.com/releases/' }
+    // Curios API (compile-only; the jar ships no Curios classes).
+    maven { url = 'https://maven.theillusivec4.top/' }
     if (compatModsDir) {
         flatDir { dirs compatModsDir }
     }
@@ -111,6 +113,7 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
     compileOnly fg.deobf("dev.emi:emi-forge:${emi_version}:api")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api")
 
     // -PcompatProfile=<base|emi|jei|viewers|farmersdelight|thirst|all> puts optional mods on the
     // dev runtime (runGameTestServer, runServer) to test the adapters. Never part of a normal build.
@@ -119,6 +122,9 @@ dependencies {
     }
     if (compatProfile in ['emi', 'viewers', 'all']) {
         runtimeOnly fg.deobf("dev.emi:emi-forge:${emi_version}")
+    }
+    if (compatProfile in ['curios', 'all']) {
+        runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
     }
     if (compatProfile in ['farmersdelight', 'all']) {
         runtimeOnly fg.deobf("local:FarmersDelight-${minecraft_version}:${farmersdelight_version}")

@@ -8,8 +8,10 @@ import java.util.Set;
 
 /**
  * The complete, immutable layout of a showcase run, planned before any write. Sections stand side
- * by side along +x with a {@link #GAP}-block aisle; each gets a heading sign in row {@code z = 0}
- * and its own placements from {@code z = 1}. The plan covers the whole box: one floor layer plus
+ * by side along +x with a {@link #GAP}-block aisle, packed into rows no wider than {@link #ROW_WIDTH}
+ * (a section that would not fit starts a new row behind the deepest section of the one before, a
+ * {@link #GAP}-block aisle between rows); each gets a heading sign in its first row and its own
+ * placements from the row after. The plan covers the whole box: one floor layer plus
  * {@link #HEIGHT}{@code - 1} layers cleared above it, and the placements. Bounded by
  * {@link #MAX_WIDTH} x {@link #HEIGHT} x {@link #MAX_DEPTH} and {@link #MAX_CELLS} writes; a plan
  * that would exceed them is refused before anything is written.
@@ -20,9 +22,11 @@ public final class ShowcasePlan {
     public static final int MAX_DEPTH = 128;
     public static final int MAX_CELLS = 65_536;
     public static final int GAP = 2;
+    /** The widest a row may grow: the full width less the entrance aisle the showcase template keeps. */
+    public static final int ROW_WIDTH = MAX_WIDTH - GAP;
 
     /** Where a section landed in the plan. */
-    public record SectionArea(String id, int x, int width, int depth, int placements) {
+    public record SectionArea(String id, int x, int z, int width, int depth, int placements) {
     }
 
     /** Thrown when a plan breaks a cap or two placements share a cell. */
@@ -51,7 +55,9 @@ public final class ShowcasePlan {
         List<ShowcasePlacement> all = new ArrayList<>();
         List<SectionArea> areas = new ArrayList<>();
         int x = 0;
-        int depth = 1;
+        int rowZ = 0;
+        int rowDepth = 1;
+        int width = 0;
         for (ShowcaseSection section : sections) {
             List<ShowcasePlacement> own = new ArrayList<>();
             own.add(ShowcasePlacement.label(0, 0, ShowcasePlacement.Line.translated(section.titleKey())));
@@ -65,15 +71,20 @@ public final class ShowcasePlan {
                 sectionWidth = Math.max(sectionWidth, p.x() + 1);
                 sectionDepth = Math.max(sectionDepth, p.z() + 2);
             }
-            for (ShowcasePlacement p : own) {
-                all.add(p.offset(x, 0));
+            if (x > 0 && x + sectionWidth > ROW_WIDTH) {
+                rowZ += rowDepth + GAP;
+                rowDepth = 1;
+                x = 0;
             }
-            areas.add(new SectionArea(section.id(), x, sectionWidth, sectionDepth, own.size()));
-            depth = Math.max(depth, sectionDepth);
+            for (ShowcasePlacement p : own) {
+                all.add(p.offset(x, rowZ));
+            }
+            areas.add(new SectionArea(section.id(), x, rowZ, sectionWidth, sectionDepth, own.size()));
+            rowDepth = Math.max(rowDepth, sectionDepth);
+            width = Math.max(width, x + sectionWidth);
             x += sectionWidth + GAP;
         }
-        int width = x - GAP;
-        ShowcasePlan plan = new ShowcasePlan(sort(all), areas, width, depth);
+        ShowcasePlan plan = new ShowcasePlan(sort(all), areas, width, rowZ + rowDepth);
         plan.validate();
         return plan;
     }

@@ -1,0 +1,42 @@
+{
+  "type": "herbalwitch:processing/distillation",
+  "base": {
+    "count": 1,
+    "ingredient": {
+      "item": "herbalwitch:preparations/ingredients/plant_oil"
+    }
+  },
+  "duration": 800,
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "herbalwitch:preparations/herbs/woodland/belladonna/powder"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:spider_eye"
+      }
+    }
+  ],
+  "packaging": {
+    "count": 1,
+    "ingredient": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "requirements": {
+    "energy": 15,
+    "witch": true
+  },
+  "result": {
+    "item": "herbalwitch:preparations/familiar/essences/venomleaf"
+  },
+  "returns": [
+    {
+      "item": "minecraft:glass_bottle"
+    }
+  ]
+}

@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public final class HerbalWitchNetwork {
     /** Bump whenever any message's wire format changes. */
-    public static final String PROTOCOL = "3";
+    public static final String PROTOCOL = "4";
     public static final ResourceLocation CHANNEL_ID = ResourceLocation.fromNamespaceAndPath(HerbalWitch.MOD_ID, "main");
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(CHANNEL_ID, () -> PROTOCOL,
             PROTOCOL::equals, PROTOCOL::equals);

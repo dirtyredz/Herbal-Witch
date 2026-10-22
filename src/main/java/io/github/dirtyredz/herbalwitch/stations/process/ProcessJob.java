@@ -1,5 +1,10 @@
 package io.github.dirtyredz.herbalwitch.stations.process;
 
+import io.github.dirtyredz.herbalwitch.stations.process.execution.ProcessCommit;
+import io.github.dirtyredz.herbalwitch.stations.process.execution.ProcessExecutionPolicy;
+import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipe;
+import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipeIndex;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -7,21 +12,30 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Optional;
 
 /**
- * One station's running job: which recipe, which inventory counts it has reserved in place, and how
- * far it has got. The job re-matches only when the inventory's revision or the recipe generation
- * changes; a changed or removed recipe (or changed inputs) cancels the reservation and resets
- * progress, leaving every item where it is. Progress advances one per loaded server tick while
- * heat (if needed) is present and the products fit; an unloaded station simply does not tick, so
- * there is no catch-up. Completion consumes the reserved counts and adds the result and returns
- * together, once.
+ * One station's running job: which recipe, which inventory counts it reserves in place, and how far
+ * it has got. The job re-matches only when the inventory's revision or the recipe generation
+ * changes; a changed or removed recipe (or changed inputs) drops the reservation, forgets any
+ * authorisation and resets progress, leaving every item where it is. Progress advances one per loaded
+ * server tick while the execution policy allows it, heat (if needed) is present and the products fit;
+ * an unloaded station simply does not tick, so there is no catch-up. Completion goes through the
+ * policy, which applies the {@link ProcessCommit} (consume the reserved counts, add the result and
+ * returns, once) and settles any payment around it.
+ *
+ * <p>Saved jobs carry a schema: 1 (ordinary, Milestone 3) loads unchanged; 2 adds the policy's
+ * authorisation. A job of an unknown schema is kept byte for byte and does nothing until the
+ * station's contents change, so a newer save is never misread and its items stay removable.
  */
 public final class ProcessJob {
-    public static final int SCHEMA = 1;
+    public static final int SCHEMA = 2;
+    public static final int LEGACY_SCHEMA = 1;
 
-    /** Adjusts the result from the inputs it is made of (e.g. carrying the water's purity into a tea). */
+    /**
+     * Adjusts the result from the inputs it is made of (carrying a water's purity into a tea). Pure:
+     * capacity checks call it before completion, so it must never mutate or spend anything.
+     */
     @FunctionalInterface
     public interface ResultDecorator {
         ItemStack decorate(ItemStack result, ProcessInventory inventory, int[] reservation);
@@ -31,21 +45,30 @@ public final class ProcessJob {
     private final ProcessLayout layout;
     private final boolean needsHeat;
     private final ResultDecorator decorator;
+    private final ProcessExecutionPolicy policy;
 
     private ProcessRecipe recipe;
     private ResourceLocation recipeId;
     private String fingerprint = "";
     private int[] reservation;
+    private boolean held;
     private int progress;
     private long seenRevision = -1;
     private long seenGeneration = -1;
     private ProcessStatus status = ProcessStatus.MISSING_INPUT;
+    private CompoundTag unsupported;
 
-    public ProcessJob(RecipeType<? extends ProcessRecipe> type, ProcessLayout layout, boolean needsHeat, ResultDecorator decorator) {
+    public ProcessJob(RecipeType<? extends ProcessRecipe> type, ProcessLayout layout, boolean needsHeat, ResultDecorator decorator,
+                      ProcessExecutionPolicy policy) {
         this.type = type;
         this.layout = layout;
         this.needsHeat = needsHeat;
         this.decorator = decorator;
+        this.policy = policy;
+    }
+
+    public ProcessJob(RecipeType<? extends ProcessRecipe> type, ProcessLayout layout, boolean needsHeat, ResultDecorator decorator) {
+        this(type, layout, needsHeat, decorator, ProcessExecutionPolicy.ORDINARY);
     }
 
     public ProcessJob(RecipeType<? extends ProcessRecipe> type, ProcessLayout layout, boolean needsHeat) {
@@ -64,12 +87,29 @@ public final class ProcessJob {
         return recipe == null ? 0 : recipe.description().duration();
     }
 
+    /** The matched recipe, or null. */
     public ProcessRecipe recipe() {
         return recipe;
     }
 
-    /** One loaded server tick. {@code hot} is whether heat reaches the station now. */
-    public void tick(Level level, ProcessInventory inventory, boolean hot) {
+    public ProcessExecutionPolicy policy() {
+        return policy;
+    }
+
+    /** Whether a saved job of an unsupported schema is being preserved (the station does nothing). */
+    public boolean unsupported() {
+        return unsupported != null;
+    }
+
+    /** One loaded server tick at {@code pos}. {@code hot} is whether heat reaches the station now. */
+    public void tick(Level level, BlockPos pos, ProcessInventory inventory, boolean hot) {
+        if (unsupported != null) {
+            if (inventory.revision() == 0) {
+                status = ProcessStatus.MISSING_INPUT;
+                return;
+            }
+            unsupported = null; // the contents changed: the preserved job is gone with them
+        }
         if (inventory.revision() != seenRevision || ProcessRecipeIndex.generation() != seenGeneration) {
             refresh(level, inventory);
         }
@@ -77,18 +117,41 @@ public final class ProcessJob {
             status = ProcessStatus.MISSING_INPUT;
             return;
         }
+        ProcessExecutionPolicy.Site site = new ProcessExecutionPolicy.Site(level, pos);
+        hold(inventory, policy.holds(recipe, site));
+        Optional<ProcessStatus> gate = policy.gate(recipe, site);
+        if (gate.isPresent()) {
+            status = gate.get();
+            return;
+        }
         if (needsHeat && !hot) {
             status = ProcessStatus.NEEDS_HEAT;
             return;
         }
-        if (!canComplete(inventory)) {
+        if (!commit(inventory).fits()) {
             status = ProcessStatus.OUTPUT_BLOCKED;
             return;
         }
         status = ProcessStatus.WORKING;
-        progress++;
+        if (progress < recipe.description().duration()) {
+            progress++;
+        }
         if (progress >= recipe.description().duration()) {
-            complete(inventory);
+            complete(inventory, site);
+        }
+    }
+
+    /** Locks or releases the matched counts; losing the hold (an authorisation ended) restarts progress. */
+    private void hold(ProcessInventory inventory, boolean hold) {
+        if (hold == held) {
+            return;
+        }
+        held = hold;
+        if (hold) {
+            inventory.reserve(reservation);
+        } else {
+            inventory.clearReservation();
+            progress = 0;
         }
     }
 
@@ -105,54 +168,59 @@ public final class ProcessJob {
         boolean same = found.getId().equals(recipeId) && found.fingerprint().equals(fingerprint) && Arrays.equals(counts, reservation);
         if (!same) {
             progress = 0;
+            policy.reset();
         }
         recipe = found;
         recipeId = found.getId();
         fingerprint = found.fingerprint();
         reservation = counts;
-        inventory.reserve(counts);
+        if (held) {
+            inventory.reserve(counts);
+        }
     }
 
-    private void cancel(ProcessInventory inventory) {
+    /** Drops the recipe, its reservation, its progress and any authorisation; every item stays. */
+    public void cancel(ProcessInventory inventory) {
         recipe = null;
         recipeId = null;
         fingerprint = "";
         reservation = null;
         progress = 0;
+        held = false;
+        inventory.clearReservation();
+        policy.reset();
+    }
+
+    /**
+     * Ends an authorised batch without completing it (the operator's cancel): progress restarts and the
+     * inputs are released; the recipe stays matched, so a new Start can follow.
+     */
+    public void release(ProcessInventory inventory) {
+        policy.reset();
+        progress = 0;
+        held = false;
         inventory.clearReservation();
     }
 
-    private ItemStack product(ProcessInventory inventory) {
-        return decorator.decorate(recipe.description().result(), inventory, reservation);
+    private ProcessCommit commit(ProcessInventory inventory) {
+        ItemStack result = decorator.decorate(recipe.description().result(), inventory, reservation);
+        return new ProcessCommit(inventory, layout, reservation, result, recipe.description().returns());
     }
 
-    private boolean canComplete(ProcessInventory inventory) {
-        List<ProcessCompletion.Amount> returns = recipe.description().returns().stream().map(ProcessInventory::amountOf).toList();
-        if (layout.output() < 0 || (!returns.isEmpty() && layout.returns() < 0)) {
-            return false;
+    private void complete(ProcessInventory inventory, ProcessExecutionPolicy.Site site) {
+        ProcessCommit commit = commit(inventory);
+        Optional<ProcessStatus> refused = policy.complete(recipe, site, commit);
+        if (refused.isPresent()) {
+            status = refused.get(); // nothing changed; it completes once the policy allows it
+            return;
         }
-        ProcessCompletion.Amount returnSlot = layout.returns() < 0 ? ProcessCompletion.Amount.EMPTY : inventory.amount(layout.returns());
-        return ProcessCompletion.canComplete(inventory.amount(layout.output()), ProcessInventory.amountOf(product(inventory)),
-                returnSlot, returns);
-    }
-
-    private void complete(ProcessInventory inventory) {
-        ItemStack result = product(inventory);
-        int[] counts = reservation;
-        List<ItemStack> returns = recipe.description().returns();
-        cancel(inventory);
-        for (int slot = 0; slot < counts.length; slot++) {
-            if (counts[slot] > 0) {
-                inventory.consume(slot, counts[slot]);
-            }
-        }
-        inventory.insertInternal(layout.output(), result);
-        for (ItemStack r : returns) {
-            inventory.insertInternal(layout.returns(), r);
-        }
+        cancel(inventory); // one batch done: the next re-matches (and a magical one needs a new start)
     }
 
     public CompoundTag save() {
+        if (unsupported != null) {
+            return unsupported.copy();
+        }
         CompoundTag tag = new CompoundTag();
         tag.putInt("Schema", SCHEMA);
         if (recipeId != null) {
@@ -161,6 +229,7 @@ public final class ProcessJob {
             tag.putIntArray("Reserved", reservation);
             tag.putInt("Progress", progress);
         }
+        policy.save(tag);
         return tag;
     }
 
@@ -170,47 +239,28 @@ public final class ProcessJob {
         recipeId = null;
         fingerprint = "";
         reservation = null;
+        held = false;
         progress = 0;
         seenRevision = -1;
         seenGeneration = -1;
-        if (tag.getInt("Schema") == SCHEMA && tag.contains("Recipe")) {
+        unsupported = null;
+        policy.reset();
+        if (tag.isEmpty()) {
+            return;
+        }
+        int schema = tag.getInt("Schema");
+        if (schema != LEGACY_SCHEMA && schema != SCHEMA) {
+            unsupported = tag.copy();
+            return;
+        }
+        if (tag.contains("Recipe")) {
             recipeId = ResourceLocation.tryParse(tag.getString("Recipe"));
             fingerprint = tag.getString("Fingerprint");
             reservation = tag.getIntArray("Reserved");
             progress = tag.getInt("Progress");
         }
-    }
-
-    /**
-     * Assigns each ingredient its own matching slot so that every occupied slot is used; returns the
-     * slot index per ingredient, or null. {@code matches[i][s]}: ingredient i is satisfied by slot s.
-     */
-    public static int[] assign(boolean[][] matches, boolean[] occupied) {
-        int occupiedCount = 0;
-        for (boolean o : occupied) {
-            occupiedCount += o ? 1 : 0;
+        if (schema == SCHEMA) {
+            policy.load(tag);
         }
-        if (matches.length != occupiedCount) {
-            return null;
-        }
-        int[] chosen = new int[matches.length];
-        return assign(matches, occupied, new boolean[occupied.length], chosen, 0) ? chosen : null;
-    }
-
-    private static boolean assign(boolean[][] matches, boolean[] occupied, boolean[] used, int[] chosen, int i) {
-        if (i == matches.length) {
-            return true;
-        }
-        for (int s = 0; s < occupied.length; s++) {
-            if (occupied[s] && !used[s] && matches[i][s]) {
-                used[s] = true;
-                chosen[i] = s;
-                if (assign(matches, occupied, used, chosen, i + 1)) {
-                    return true;
-                }
-                used[s] = false;
-            }
-        }
-        return false;
     }
 }

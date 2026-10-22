@@ -1,5 +1,6 @@
 package io.github.dirtyredz.herbalwitch.client.grimoire.widgets;
 
+import io.github.dirtyredz.herbalwitch.client.compat.ViewerLayout;
 import io.github.dirtyredz.herbalwitch.client.grimoire.GrimoireClientState;
 import io.github.dirtyredz.herbalwitch.client.grimoire.GrimoireView;
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
@@ -7,8 +8,8 @@ import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireEntry;
 import io.github.dirtyredz.herbalwitch.grimoire.network.ReaderUpdate;
 import io.github.dirtyredz.herbalwitch.grimoire.reading.ingredients.IngredientRequirements;
 import io.github.dirtyredz.herbalwitch.stations.description.ProcessingCategories;
-import io.github.dirtyredz.herbalwitch.stations.process.ProcessRecipe;
-import io.github.dirtyredz.herbalwitch.stations.process.ProcessRecipeDescription;
+import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipe;
+import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipeDescription;
 import io.github.dirtyredz.herbalwitch.stations.registry.StationBlocks;
 import net.minecraft.Util;
 import net.minecraft.client.gui.Font;
@@ -187,6 +188,10 @@ public final class RecipePage {
             graphics.drawString(font, view.text("heat"), x + 62, cy + 1, TextButton.PINK, false);
         }
         cy += 12;
+        java.util.Optional<Component> witch = ViewerLayout.requirements(d);
+        if (witch.isPresent()) {
+            cy = paragraph(graphics, witch.get(), cy, TextButton.PINK);
+        }
         if (!d.returns().isEmpty()) {
             cy = paragraph(graphics, view.text("returns"), cy, TextButton.FAINT);
         }

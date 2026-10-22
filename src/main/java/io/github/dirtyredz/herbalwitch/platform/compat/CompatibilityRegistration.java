@@ -1,5 +1,6 @@
 package io.github.dirtyredz.herbalwitch.platform.compat;
 
+import io.github.dirtyredz.herbalwitch.platform.compat.curios.CuriosCharmAdapter;
 import io.github.dirtyredz.herbalwitch.platform.compat.thirst.ThirstIntegration;
 import net.minecraftforge.fml.ModList;
 
@@ -11,6 +12,7 @@ import net.minecraftforge.fml.ModList;
 public final class CompatibilityRegistration {
     public static final String THIRST = "thirst";
     public static final String FARMERS_DELIGHT = "farmersdelight";
+    public static final String CURIOS = "curios";
 
     private CompatibilityRegistration() {
     }
@@ -18,6 +20,9 @@ public final class CompatibilityRegistration {
     public static void register() {
         if (ModList.get().isLoaded(THIRST)) {
             ThirstIntegration.register();
+        }
+        if (ModList.get().isLoaded(CURIOS)) {
+            CuriosCharmAdapter.register();
         }
     }
 }

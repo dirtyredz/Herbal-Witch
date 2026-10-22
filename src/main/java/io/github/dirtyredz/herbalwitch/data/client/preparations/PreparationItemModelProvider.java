@@ -6,6 +6,7 @@ import io.github.dirtyredz.herbalwitch.botany.catalog.HerbSpec;
 import io.github.dirtyredz.herbalwitch.brewing.product.catalog.EverydayProductCatalog;
 import io.github.dirtyredz.herbalwitch.brewing.product.catalog.HerbalMaterialCatalog;
 import io.github.dirtyredz.herbalwitch.brewing.product.catalog.ProductSpec;
+import io.github.dirtyredz.herbalwitch.brewing.product.registry.AdvancedPreparations;
 import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
@@ -33,6 +34,9 @@ public class PreparationItemModelProvider extends ItemModelProvider {
             sprite(HerbalMaterialCatalog.powderPath(herb));
         }
         for (ProductSpec product : EverydayProductCatalog.ALL) {
+            sprite(product.path());
+        }
+        for (ProductSpec product : AdvancedPreparations.specs()) {
             sprite(product.path());
         }
         getBuilder("item/" + PreparationBlocks.OIL_LANTERN_PATH)

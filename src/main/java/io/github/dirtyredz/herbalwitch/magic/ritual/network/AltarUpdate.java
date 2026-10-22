@@ -16,11 +16,12 @@ import java.util.UUID;
  * ticks): public founding eligibility (no world records), the altar's current operation and its
  * progress, this player's own incoming and outgoing invitations, the nearby non-witches a witch could
  * invite (at most {@link #MAX_NEARBY}), have/need counts of each offering from this player's own
- * main inventory and offhand, and the last result or interruption. Never another player's energy.
+ * main inventory and offhand, the ritual circle around the altar (which of its cells are missing or
+ * unloaded), and the last result or interruption. Never another player's energy.
  */
 public record AltarUpdate(int containerId, long session, boolean foundingOpen, Optional<Activity> activity, Optional<Invitation> incoming,
                           Optional<Invitation> outgoing, List<Nearby> nearby, Map<AltarActionSpec, List<Count>> counts,
-                          Optional<String> notice) {
+                          Optional<String> notice, Circle circle) {
     public static final int MAX_NEARBY = 16;
     private static final int MAX_NAME = 64;
     private static final int MAX_REQUIREMENTS = 8;
@@ -37,6 +38,20 @@ public record AltarUpdate(int containerId, long session, boolean foundingOpen, O
     }
 
     public record Count(int have, int need) {
+    }
+
+    /** The circle around the altar: the cell indices that are missing (or wrong) and that lie in unloaded chunks. */
+    public record Circle(List<Integer> missing, List<Integer> unloaded) {
+        public static final int MAX_CELLS = 16;
+
+        public Circle {
+            missing = List.copyOf(missing);
+            unloaded = List.copyOf(unloaded);
+        }
+
+        public boolean complete() {
+            return missing.isEmpty() && unloaded.isEmpty();
+        }
     }
 
     public AltarUpdate {
@@ -85,6 +100,10 @@ public record AltarUpdate(int containerId, long session, boolean foundingOpen, O
         });
         buf.writeBoolean(notice.isPresent());
         notice.ifPresent(n -> buf.writeUtf(n, PayloadBounds.MAX_TEXT));
+        for (List<Integer> cells : List.of(circle.missing(), circle.unloaded())) {
+            buf.writeVarInt(cells.size());
+            cells.forEach(buf::writeVarInt);
+        }
     }
 
     public static AltarUpdate decode(FriendlyByteBuf buf) {
@@ -112,7 +131,17 @@ public record AltarUpdate(int containerId, long session, boolean foundingOpen, O
             counts.put(action, list);
         }
         Optional<String> notice = buf.readBoolean() ? Optional.of(PayloadBounds.readString(buf, PayloadBounds.MAX_TEXT)) : Optional.empty();
-        return new AltarUpdate(containerId, session, foundingOpen, activity, incoming, outgoing, nearby, counts, notice);
+        List<List<Integer>> cells = new ArrayList<>();
+        for (int k = 0; k < 2; k++) {
+            int size = PayloadBounds.readCount(buf, Circle.MAX_CELLS);
+            List<Integer> list = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                list.add(buf.readVarInt());
+            }
+            cells.add(list);
+        }
+        return new AltarUpdate(containerId, session, foundingOpen, activity, incoming, outgoing, nearby, counts, notice,
+                new Circle(cells.get(0), cells.get(1)));
     }
 
     private static Optional<Invitation> readInvitation(FriendlyByteBuf buf) {

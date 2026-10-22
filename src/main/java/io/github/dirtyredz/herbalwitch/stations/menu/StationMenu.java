@@ -1,6 +1,7 @@
 package io.github.dirtyredz.herbalwitch.stations.menu;
 
 import io.github.dirtyredz.herbalwitch.stations.process.ProcessInventory;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -24,10 +25,17 @@ public abstract class StationMenu extends AbstractContainerMenu {
     public record SlotSpec(int slot, int x, int y) {
     }
 
+    /** What a server-side menu does with a button click (Start, Resume, Cancel); absent on clients and ordinary stations. */
+    @FunctionalInterface
+    public interface Operations {
+        boolean operate(ServerPlayer player, int button);
+    }
+
     protected final ContainerData data;
     private final ContainerLevelAccess access;
     private final Block block;
     private final int stationSlots;
+    private Operations operations;
 
     protected StationMenu(MenuType<?> type, int id, Inventory player, ProcessInventory inventory, ContainerData data,
                           ContainerLevelAccess access, Block block, SlotSpec... slots) {
@@ -52,6 +60,18 @@ public abstract class StationMenu extends AbstractContainerMenu {
 
     public int data(int index) {
         return data.get(index);
+    }
+
+    /** Server side: lets this menu's buttons operate the station (magical stations only). */
+    public StationMenu withOperations(Operations handler) {
+        this.operations = handler;
+        return this;
+    }
+
+    /** Vanilla's menu-button click, already checked against the open menu and its validity. */
+    @Override
+    public boolean clickMenuButton(Player player, int id) {
+        return operations != null && player instanceof ServerPlayer serverPlayer && operations.operate(serverPlayer, id);
     }
 
     @Override

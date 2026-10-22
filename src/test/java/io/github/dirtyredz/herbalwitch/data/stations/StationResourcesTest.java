@@ -8,6 +8,10 @@ import io.github.dirtyredz.herbalwitch.data.fixture.ModelResolver;
 import io.github.dirtyredz.herbalwitch.data.fixture.ResourceFiles;
 import io.github.dirtyredz.herbalwitch.data.fixture.TextureDensity;
 import io.github.dirtyredz.herbalwitch.data.fixture.TemplateChecks;
+import io.github.dirtyredz.herbalwitch.data.magic.charm.CharmManifest;
+import io.github.dirtyredz.herbalwitch.data.magic.ritual.CircleManifest;
+import io.github.dirtyredz.herbalwitch.data.magic.ward.WardManifest;
+import io.github.dirtyredz.herbalwitch.data.preparations.AdvancedManifest;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -20,12 +24,19 @@ import java.util.TreeSet;
 import static io.github.dirtyredz.herbalwitch.data.fixture.ResourceFiles.generated;
 import static io.github.dirtyredz.herbalwitch.data.fixture.ResourceFiles.generatedFiles;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /** The stations' generated data and authored art: assembly recipes, the processing matrix, models, GUIs, heat tags. */
 class StationResourcesTest {
-    private static final Map<String, Integer> DURATIONS = Map.of("drying", 1200, "grinding", 100, "steeping", 200, "infusion", 600);
+    private static final Map<String, Integer> DURATIONS = Map.of("drying", 1200, "grinding", 100, "steeping", 200, "infusion", 600,
+            "cauldron", 600, "distillation", 800, "bottling", 100, "charm_work", 200);
+    /** One-block stations that show a second model while active (the others never change shape). */
+    private static final Set<String> ACTIVE_ONE_BLOCK = Set.of("cauldron");
+    private static final String WATER_BOTTLE = "Potion:\\\"minecraft:water\\\"";
+    private static final String GLASS_BOTTLE_STACK = "{\"count\":1,\"ingredient\":{\"item\":\"minecraft:glass_bottle\"}}";
+    private static final String BOTTLE_RETURN ="[{\"item\":\"minecraft:glass_bottle\"}]";
 
     @Test
     void stationsAssembleFromThePlannedIngredients() {
@@ -54,6 +65,48 @@ class StationResourcesTest {
         });
     }
 
+    /** The four Milestone 7 stations, the ritual circle and the ward stone are assembled shapeless from these ingredients. */
+    @Test
+    void witchBlocksAssembleShapelessFromThePlannedIngredients() {
+        Map<String, Map<String, Integer>> expected = Map.of(
+                StationManifest.station("cauldron"), Map.of("minecraft:cauldron", 1, "minecraft:copper_ingot", 1, "minecraft:amethyst_shard", 1),
+                StationManifest.station("still"), Map.of("minecraft:copper_ingot", 4, "minecraft:glass", 2, "minecraft:iron_ingot", 1,
+                        "minecraft:amethyst_shard", 1),
+                StationManifest.station("bottling_bench"), Map.of("minecraft:crafting_table", 1, "minecraft:dark_oak_planks", 2,
+                        "minecraft:glass_bottle", 2, "minecraft:iron_nugget", 1),
+                StationManifest.station("charm_workbench"), Map.of("minecraft:crafting_table", 1, "minecraft:dark_oak_planks", 2,
+                        "minecraft:string", 2, "minecraft:gold_ingot", 1, "minecraft:amethyst_shard", 1),
+                CircleManifest.ID, Map.of("minecraft:smooth_stone_slab", 4, "minecraft:calcite", 2, "minecraft:amethyst_shard", 1,
+                        "minecraft:gold_nugget", 1),
+                WardManifest.ID, Map.of("minecraft:stone_bricks", 4, "minecraft:amethyst_shard", 1, "minecraft:gold_ingot", 1));
+        expected.forEach((id, counts) -> {
+            JsonObject recipe = generated("data/herbalwitch/recipes/" + id + ".json");
+            assertEquals("minecraft:crafting_shapeless", recipe.get("type").getAsString(), id);
+            Map<String, Integer> actual = new HashMap<>();
+            for (JsonElement ingredient : recipe.getAsJsonArray("ingredients")) {
+                actual.merge(ingredient.getAsJsonObject().get("item").getAsString(), 1, Integer::sum);
+            }
+            assertEquals(counts, actual, id);
+            assertEquals("herbalwitch:" + id, recipe.getAsJsonObject("result").get("item").getAsString(), id);
+        });
+    }
+
+    /** Ordinary recipes carry no requirements; a witch recipe carries exactly {witch: true, energy: N} from the manifest. */
+    private static void assertRequirements(String path, JsonObject recipe) {
+        Integer energy = AdvancedManifest.WITCH_ENERGY.get(path.substring("processing/".length()));
+        if (path.startsWith("processing/charm_work/")) {
+            energy = CharmManifest.ENERGY.get(path.substring("processing/charm_work/".length()));
+        }
+        if (energy == null) {
+            assertFalse(recipe.has("requirements"), path + " is ordinary work");
+            return;
+        }
+        JsonObject requirements = recipe.getAsJsonObject("requirements");
+        assertEquals(Set.of("witch", "energy"), requirements.keySet(), path);
+        assertTrue(requirements.get("witch").getAsBoolean(), path);
+        assertEquals(energy.intValue(), requirements.get("energy").getAsInt(), path);
+    }
+
     @Test
     void processingRecipesAreTheFullMatrixWithTheirDurationsAndContainers() {
         Set<String> actual = new TreeSet<>();
@@ -67,16 +120,67 @@ class StationResourcesTest {
             assertEquals(DURATIONS.get(type), recipe.get("duration").getAsInt(), path);
             switch (type) {
                 case "steeping" -> {
-                    assertTrue(recipe.getAsJsonObject("base").toString().contains("Potion:\\\"minecraft:water\\\""), path);
+                    assertTrue(recipe.getAsJsonObject("base").toString().contains(WATER_BOTTLE), path);
                     assertTrue(!recipe.has("returns") && !recipe.has("packaging"), path + ": the water bottle becomes the drink");
                 }
                 case "infusion" -> {
                     assertTrue(recipe.has("base") && recipe.has("packaging"), path);
-                    assertEquals("[{\"item\":\"minecraft:glass_bottle\"}]", recipe.getAsJsonArray("returns").toString(), path);
+                    assertEquals(BOTTLE_RETURN, recipe.getAsJsonArray("returns").toString(), path);
+                }
+                case "cauldron" -> {
+                    assertTrue(recipe.getAsJsonObject("base").toString().contains(WATER_BOTTLE), path + ": brewed from a water bottle");
+                    assertFalse(recipe.has("packaging"), path + ": the mixture is not poured into anything yet");
+                    assertEquals(BOTTLE_RETURN, recipe.getAsJsonArray("returns").toString(), path);
+                    assertTrue(recipe.getAsJsonArray("ingredients").size() <= 3, path);
+                }
+                case "distillation" -> {
+                    // the venomleaf extract is distilled from plant oil, the other essences from water
+                    String base = recipe.getAsJsonObject("base").toString();
+                    assertTrue(path.endsWith("/venomleaf") ? base.contains("preparations/ingredients/plant_oil") : base.contains(WATER_BOTTLE), path);
+                    assertEquals(GLASS_BOTTLE_STACK, recipe.getAsJsonObject("packaging").toString(), path);
+                    assertEquals(BOTTLE_RETURN, recipe.getAsJsonArray("returns").toString(), path);
+                }
+                case "bottling" -> {
+                    assertFalse(recipe.has("base"), path);
+                    assertEquals("{\"count\":4,\"ingredient\":{\"item\":\"minecraft:glass_bottle\"}}", recipe.getAsJsonObject("packaging").toString(), path);
+                    assertEquals(4, recipe.getAsJsonObject("result").get("count").getAsInt(), path + ": a mixture is four doses");
+                    assertFalse(recipe.has("returns"), path);
+                }
+                case "charm_work" -> {
+                    assertTrue(!recipe.has("base") && !recipe.has("packaging") && !recipe.has("returns"), path);
+                    assertEquals(3, recipe.getAsJsonArray("ingredients").size(), path);
                 }
                 default -> assertTrue(!recipe.has("base") && !recipe.has("packaging"), path);
             }
+            assertRequirements(path, recipe);
         }
+    }
+
+    /**
+     * Bottling is ordinary work: every mixture has a plain and a labelled recipe (labelled takes one paper more and
+     * labels the result), a vial mixture also takes gunpowder, and each bottles the product its mixture is named for.
+     */
+    @Test
+    void bottlingTurnsEachMixtureIntoItsProductPlainOrLabelled() {
+        AdvancedManifest.BOTTLED.forEach((mixture, product) -> {
+            for (boolean labelled : new boolean[] {false, true}) {
+                String path = "processing/bottling/" + mixture + "/" + (labelled ? "labelled" : "plain");
+                JsonObject recipe = generated("data/herbalwitch/recipes/" + path + ".json");
+                List<String> inputs = new ArrayList<>();
+                recipe.getAsJsonArray("ingredients").forEach(e -> inputs.add(e.getAsJsonObject().getAsJsonObject("ingredient").get("item").getAsString()));
+                List<String> expected = new ArrayList<>(List.of("herbalwitch:preparations/mixtures/" + mixture));
+                if (AdvancedManifest.THROWN.contains(mixture)) {
+                    expected.add("minecraft:gunpowder");
+                }
+                if (labelled) {
+                    expected.add("minecraft:paper");
+                }
+                assertEquals(expected, inputs, path);
+                JsonObject result = recipe.getAsJsonObject("result");
+                assertEquals("herbalwitch:preparations/" + product, result.get("item").getAsString(), path);
+                assertEquals(labelled, result.has("nbt") && result.get("nbt").getAsString().contains("HerbalWitchLabel"), path);
+            }
+        });
     }
 
     @Test
@@ -102,7 +206,16 @@ class StationResourcesTest {
                     .getAsJsonObject("variants");
             Set<String> models = new TreeSet<>();
             variants.entrySet().forEach(v -> models.add(v.getValue().getAsJsonObject().get("model").getAsString()));
-            assertEquals(Set.of("herbalwitch:block/stations/" + station + "/base"), models, station);
+            String dir = "herbalwitch:block/stations/" + station + "/";
+            if (ACTIVE_ONE_BLOCK.contains(station)) {
+                // a working station swaps to its active model, turned to the same facing
+                assertEquals(Set.of(dir + "base", dir + "active"), models, station);
+                assertEquals(8, variants.size(), station);
+                variants.entrySet().forEach(v -> assertEquals(dir + (v.getKey().contains("active=true") ? "active" : "base"),
+                        v.getValue().getAsJsonObject().get("model").getAsString(), station + " " + v.getKey()));
+            } else {
+                assertEquals(Set.of(dir + "base"), models, station);
+            }
             models.forEach(m -> assertTrue(TemplateChecks.checkAuthored(m) >= 6, m));
             assertEquals("herbalwitch:block/stations/" + station + "/base",
                     ModelResolver.resolve("herbalwitch:item/" + StationManifest.station(station)).chain().get(1));
@@ -120,8 +233,9 @@ class StationResourcesTest {
         Map<String, Integer> turns = Map.of("north", 0, "east", 90, "south", 180, "west", 270);
         StationManifest.MULTIBLOCKS.forEach((station, cells) -> {
             String dir = "herbalwitch:block/stations/" + station + "/";
-            String shown = station.equals("drying_rack") ? "active" : "lit";
-            String overlay = station.equals("drying_rack") ? "bundles_" : "fire_";
+            // the state an overlay shows on and its model prefix: bundles while drying, fire while lit, "active" for the witch stations
+            String shown = StationManifest.SHOWN.get(station);
+            String overlay = StationManifest.OVERLAYS.get(station);
             JsonObject states = generated("assets/herbalwitch/blockstates/" + StationManifest.station(station) + ".json");
             assertTrue(states.has("multipart"), station);
             for (int part = 0; part < cells; part++) {
@@ -133,9 +247,11 @@ class StationResourcesTest {
                         assertEquals(dir + "part_" + part, applied.get(0).model(), what);
                         applied.forEach(a -> assertEquals(facing.getValue(), a.y(), what));
                         assertTrue(applied.size() <= 2, what);
-                        if (!on) {
-                            assertEquals(1, applied.size(), what + " shows its overlay");
-                        } else if (applied.size() == 2) {
+                        boolean hasOverlay = java.nio.file.Files.isRegularFile(ModelResolver.modelFile(dir + overlay + part));
+                        if (!on || !hasOverlay) {
+                            assertEquals(1, applied.size(), what + " shows an overlay it should not");
+                        } else {
+                            assertEquals(2, applied.size(), what + " lacks its overlay");
                             assertEquals(dir + overlay + part, applied.get(1).model(), what);
                         }
                     }
@@ -156,6 +272,23 @@ class StationResourcesTest {
             ItemDisplays.assertInherited("herbalwitch:item/" + StationManifest.station(station));
             TemplateChecks.checkAuthored(dir + "assembly", new double[] {-16, 0, 0}, new double[] {16, 32, 16});
         });
+    }
+
+    /** The witch stations drop themselves (a multiblock only from its origin cell) and mine with the tool of their material. */
+    @Test
+    void witchStationsDropThemselvesAndMineWithTheirTool() {
+        String axe = generated("data/minecraft/tags/blocks/mineable/axe.json").getAsJsonArray("values").toString();
+        String pickaxe = generated("data/minecraft/tags/blocks/mineable/pickaxe.json").getAsJsonArray("values").toString();
+        for (String station : List.of("cauldron", "still", "bottling_bench", "charm_workbench")) {
+            String id = StationManifest.station(station);
+            String loot = generated("data/herbalwitch/loot_tables/blocks/" + id + ".json").toString();
+            assertTrue(loot.contains("\"name\":\"herbalwitch:" + id + "\""), station);
+            assertTrue(loot.contains("minecraft:survives_explosion"), station);
+            assertEquals(StationManifest.MULTIBLOCKS.containsKey(station), loot.contains("\"part\":\"0\""), station + " drops from its origin only");
+            boolean wooden = station.endsWith("_bench") || station.endsWith("_workbench");
+            assertTrue((wooden ? axe : pickaxe).contains("\"herbalwitch:" + id + "\""), station + " mines with the tool of its material");
+            assertFalse((wooden ? pickaxe : axe).contains("\"herbalwitch:" + id + "\""), station);
+        }
     }
 
     @Test

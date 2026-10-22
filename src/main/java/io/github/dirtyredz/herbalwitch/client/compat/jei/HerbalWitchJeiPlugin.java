@@ -1,8 +1,10 @@
 package io.github.dirtyredz.herbalwitch.client.compat.jei;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
+import io.github.dirtyredz.herbalwitch.client.compat.ritual.RitualCardLayout;
+import io.github.dirtyredz.herbalwitch.magic.ritual.registry.RitualItems;
 import io.github.dirtyredz.herbalwitch.stations.description.ProcessingCategories;
-import io.github.dirtyredz.herbalwitch.stations.process.ProcessRecipe;
+import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipe;
 import io.github.dirtyredz.herbalwitch.stations.registry.StationItems;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -18,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * JEI support: the same four categories as EMI, from the same recipe descriptions and
+ * JEI support: the same categories as EMI (processing types and the rituals), from the same recipe descriptions and
  * {@link ProcessingCategories}, with each station as catalyst. Loaded by JEI only when JEI is
  * installed; no transfer handlers. Every recipe is shown whatever the player has discovered.
  */
@@ -39,6 +41,7 @@ public class HerbalWitchJeiPlugin implements IModPlugin {
             registration.addRecipeCategories(new JeiProcessCategory(type(category), category,
                     registration.getJeiHelpers().getGuiHelper(), new ItemStack(StationItems.item(category.station()))));
         }
+        registration.addRecipeCategories(new JeiRitualCategory(registration.getJeiHelpers().getGuiHelper(), new ItemStack(RitualItems.ALTAR.get())));
     }
 
     @Override
@@ -51,6 +54,7 @@ public class HerbalWitchJeiPlugin implements IModPlugin {
                     Minecraft.getInstance().level.getRecipeManager().getAllRecipesFor(category.type().get()));
             registration.addRecipes(type(category), recipes);
         }
+        registration.addRecipes(JeiRitualCategory.TYPE, RitualCardLayout.actions());
     }
 
     @Override
@@ -58,5 +62,7 @@ public class HerbalWitchJeiPlugin implements IModPlugin {
         for (ProcessingCategories.Category category : ProcessingCategories.ALL) {
             registration.addRecipeCatalyst(new ItemStack(StationItems.item(category.station())), type(category));
         }
+        registration.addRecipeCatalyst(new ItemStack(RitualItems.ALTAR.get()), JeiRitualCategory.TYPE);
+        registration.addRecipeCatalyst(new ItemStack(RitualItems.CIRCLE.get()), JeiRitualCategory.TYPE);
     }
 }

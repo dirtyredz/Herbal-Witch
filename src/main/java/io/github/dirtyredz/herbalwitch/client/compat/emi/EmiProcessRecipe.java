@@ -7,8 +7,8 @@ import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
 import io.github.dirtyredz.herbalwitch.client.compat.ViewerLayout;
-import io.github.dirtyredz.herbalwitch.stations.process.ProcessRecipe;
-import io.github.dirtyredz.herbalwitch.stations.process.ProcessRecipeDescription;
+import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipe;
+import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipeDescription;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
@@ -49,5 +49,6 @@ public class EmiProcessRecipe extends BasicEmiRecipe {
             widgets.addSlot(EmiStack.of(returns.get(i)), ViewerLayout.returnX(i), ViewerLayout.RESULT_Y).recipeContext(this);
         }
         widgets.addText(ViewerLayout.footer(description), 0, ViewerLayout.TEXT_Y, 0x404040, false);
+        ViewerLayout.requirements(description).ifPresent(r -> widgets.addText(r, 0, ViewerLayout.REQUIREMENTS_Y, 0x6A2A5A, false));
     }
 }

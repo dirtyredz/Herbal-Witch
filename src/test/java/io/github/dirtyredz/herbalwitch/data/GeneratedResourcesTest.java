@@ -4,8 +4,12 @@ import com.google.gson.JsonObject;
 import io.github.dirtyredz.herbalwitch.data.botany.BotanyManifest;
 import io.github.dirtyredz.herbalwitch.data.decor.DecorManifest;
 import io.github.dirtyredz.herbalwitch.data.grimoire.GrimoireManifest;
+import io.github.dirtyredz.herbalwitch.data.magic.charm.CharmManifest;
 import io.github.dirtyredz.herbalwitch.data.magic.ritual.AltarManifest;
+import io.github.dirtyredz.herbalwitch.data.magic.ritual.CircleManifest;
+import io.github.dirtyredz.herbalwitch.data.magic.ward.WardManifest;
 import io.github.dirtyredz.herbalwitch.data.magic.witch.WitchManifest;
+import io.github.dirtyredz.herbalwitch.data.preparations.AdvancedManifest;
 import io.github.dirtyredz.herbalwitch.data.preparations.PreparationManifest;
 import io.github.dirtyredz.herbalwitch.data.showcase.ShowcaseManifest;
 import io.github.dirtyredz.herbalwitch.data.stations.StationManifest;
@@ -49,7 +53,8 @@ class GeneratedResourcesTest {
     static Map<String, String> expectedLang() {
         Map<String, String> lang = new LinkedHashMap<>();
         for (Map<String, String> part : List.of(DecorManifest.lang(), BotanyManifest.lang(), StationManifest.lang(),
-                PreparationManifest.lang(), ShowcaseManifest.lang(), GrimoireManifest.lang(), WitchManifest.lang(), AltarManifest.lang())) {
+                PreparationManifest.lang(), ShowcaseManifest.lang(), GrimoireManifest.lang(), WitchManifest.lang(), AltarManifest.lang(),
+                AdvancedManifest.lang(), CharmManifest.lang(), CircleManifest.lang(), WardManifest.lang())) {
             part.forEach((key, value) -> {
                 assertFalse(lang.containsKey(key), "two features claim " + key);
                 lang.put(key, value);
@@ -68,6 +73,10 @@ class GeneratedResourcesTest {
         expected.addAll(GrimoireManifest.files());
         expected.addAll(WitchManifest.files());
         expected.addAll(AltarManifest.files());
+        expected.addAll(AdvancedManifest.files());
+        expected.addAll(CharmManifest.files());
+        expected.addAll(CircleManifest.files());
+        expected.addAll(WardManifest.files());
         assertEquals(expected, generatedFiles());
     }
 

@@ -10,7 +10,7 @@ import io.github.dirtyredz.herbalwitch.grimoire.content.ServerGrimoireContent;
 import io.github.dirtyredz.herbalwitch.grimoire.content.recipe.StationRecipeEntries;
 import io.github.dirtyredz.herbalwitch.platform.compat.CompatibilityRegistration;
 import io.github.dirtyredz.herbalwitch.stations.description.ProcessingCategories;
-import io.github.dirtyredz.herbalwitch.stations.process.ProcessRecipe;
+import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipe;
 import io.github.dirtyredz.herbalwitch.platform.compat.thirst.ThirstIntegration;
 import io.github.dirtyredz.herbalwitch.stations.heat.HeatSources;
 import io.github.dirtyredz.herbalwitch.stations.registry.StationBlocks;

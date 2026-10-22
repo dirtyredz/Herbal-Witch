@@ -7,6 +7,7 @@ import io.github.dirtyredz.herbalwitch.grimoire.content.reference.GuideEntries;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reference.HerbEntries;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reference.DecorEntries;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reference.StationEntries;
+import io.github.dirtyredz.herbalwitch.grimoire.content.reference.AdvancedPreparationEntries;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reference.WitchEntries;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reload.GrimoireDefinitionLoader;
 import io.github.dirtyredz.herbalwitch.grimoire.knowledge.discovery.DiscoveryEvents;
@@ -46,6 +47,7 @@ public final class GrimoireRegistration {
 
         GrimoireContent.register(new GuideEntries());
         GrimoireContent.register(new WitchEntries());
+        GrimoireContent.register(new AdvancedPreparationEntries());
         GrimoireContent.register(new StationEntries());
         GrimoireContent.register(new DecorEntries());
         GrimoireContent.register(new HerbEntries());

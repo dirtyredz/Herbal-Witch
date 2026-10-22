@@ -32,6 +32,10 @@ public final class StationScreens {
         process(StationMenus.MORTAR.get(), mortar);
         process(StationMenus.KETTLE.get(), kettle);
         process(StationMenus.INFUSION_POT.get(), pot);
+        process(StationMenus.CAULDRON.get(), new Layout(atlas("cauldron"), 92, 34, 50, 36, ProcessingCategories.CAULDRON.id()));
+        process(StationMenus.STILL.get(), new Layout(atlas("still"), 79, 34, 81, 54, ProcessingCategories.DISTILLATION.id()));
+        process(StationMenus.BOTTLING_BENCH.get(), new Layout(atlas("bottling_bench"), 92, 34, -1, 0, ProcessingCategories.BOTTLING.id()));
+        process(StationMenus.CHARM_WORKBENCH.get(), new Layout(atlas("charm_workbench"), 92, 34, -1, 0, ProcessingCategories.CHARM_WORK.id()));
         MenuScreens.register(StationMenus.HEARTH.get(), HearthScreen::new);
     }
 }
