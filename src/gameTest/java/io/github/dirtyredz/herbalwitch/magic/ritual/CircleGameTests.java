@@ -108,7 +108,7 @@ public final class CircleGameTests {
         circle(helper);
         bed(helper, BED, true);
         bed(helper, BED.east(), true);
-        bed(helper, BED.north(), true);
+        bed(helper, BED.south(), true); // north of the bed is a circle cell
         ServerPlayer w = witch(helper, "m7_circle_gardener", FRONT);
         blessingOffering(w);
         int before = energy(w);
@@ -120,7 +120,7 @@ public final class CircleGameTests {
         check(s.running() && !enriched(helper, BED), "blessed early");
         advance(s, 1);
         check(s.state() == AltarSession.State.COMPLETED, "did not complete: " + s.state());
-        check(enriched(helper, BED) && enriched(helper, BED.east()) && enriched(helper, BED.north()), "a bed in the square was missed");
+        check(enriched(helper, BED) && enriched(helper, BED.east()) && enriched(helper, BED.south()), "a bed in the square was missed");
         check(energy(w) == before - EnergyService.units(WitchRules.server().workings().gardenBlessingCost()), "paid "
                 + (before - energy(w)));
         check(count(w, Items.BONE_MEAL) == 0 && count(w, PreparationItems.powder(HerbCatalog.NETTLE)) == 0
