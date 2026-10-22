@@ -121,6 +121,14 @@ public class WardStoneBlock extends BaseEntityBlock {
         return (tickLevel, tickPos, tickState, entity) -> ((WardStoneBlockEntity) entity).serverTick();
     }
 
+    /** Shows (or hides) the charged look. */
+    public static void show(ServerLevel level, BlockPos pos, boolean active) {
+        BlockState state = level.getBlockState(pos);
+        if (state.getBlock() instanceof WardStoneBlock && state.getValue(ACTIVE) != active) {
+            level.setBlock(pos, state.setValue(ACTIVE, active), Block.UPDATE_ALL);
+        }
+    }
+
     /** Light of a charged ward. */
     public static int light(BlockState state) {
         return state.getValue(ACTIVE) ? WardCatalog.ACTIVE_LIGHT : 0;

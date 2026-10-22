@@ -11,6 +11,8 @@ import io.github.dirtyredz.herbalwitch.platform.time.TickTime;
 import io.github.dirtyredz.herbalwitch.magic.ward.persistence.WardRecord;
 import io.github.dirtyredz.herbalwitch.magic.ward.persistence.WardSavedData;
 import io.github.dirtyredz.herbalwitch.magic.ward.registry.WardRegistration;
+import io.github.dirtyredz.herbalwitch.magic.ward.service.WardIndex;
+import io.github.dirtyredz.herbalwitch.magic.ward.service.WardLifecycle;
 import io.github.dirtyredz.herbalwitch.magic.ward.service.WardService;
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
 import io.github.dirtyredz.herbalwitch.platform.network.RateLimit;
@@ -137,13 +139,13 @@ public class WardMenu extends AbstractContainerMenu {
             if (!WardSavedData.get(level).writable()) {
                 return index == DATA_STATE ? 3 : 0;
             }
-            Optional<WardRecord> record = WardService.record(level, pos);
+            Optional<WardRecord> record = WardLifecycle.record(level, pos);
             return switch (index) {
                 case DATA_SECONDS -> record.map(r -> Math.min(Short.MAX_VALUE, TickTime.ceilingSeconds(r.charge()))).orElse(0);
                 case DATA_RADIUS -> record.map(WardRecord::radius).orElse(WitchRules.server().workings().wardRadius());
                 case DATA_MAX_RADIUS -> maxRadius();
                 case DATA_PROFILE -> record.map(r -> r.profile().ordinal()).orElse(2);
-                case DATA_STATE -> record.filter(WardRecord::charged).map(r -> WardService.indexed(r.id()) ? 1 : 2).orElse(0);
+                case DATA_STATE -> record.filter(WardRecord::charged).map(r -> WardIndex.loaded().contains(r.id()) ? 1 : 2).orElse(0);
                 case DATA_OWNER -> record.flatMap(WardRecord::owner).map(o -> o.equals(viewer.getUUID()) ? 1 : 2).orElse(0);
                 default -> 0;
             };

@@ -6,7 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.Block;
 
-import static io.github.dirtyredz.herbalwitch.magic.ward.service.WardService.rules;
+import static io.github.dirtyredz.herbalwitch.magic.ward.service.WardContext.rules;
 
 /** Loaded functional hearth/stove detection and the resulting maximum radius; light state is irrelevant. */
 public final class WardFocus {

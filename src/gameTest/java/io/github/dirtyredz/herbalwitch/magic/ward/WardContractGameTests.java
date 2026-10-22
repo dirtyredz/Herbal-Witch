@@ -48,7 +48,7 @@ public final class WardContractGameTests {
         var owner = witch(helper, "ward_focus_contract", STONE.north());
         var rules = WitchRules.server().workings();
         // Foreign wards left in the shared index by other tests would make the wider focused box overlap.
-        for (var stale : WardService.index().all()) WardService.index().remove(stale.id());
+        for (var stale : WardIndex.loaded().all()) WardIndex.loaded().remove(stale.id());
         check(!WardFocus.focused(level, pos), "unexpected initial focus");
         check(WardFocus.maxRadius(level, pos) == rules.wardRadius(), "base maximum changed");
         for (var focus : new net.minecraft.world.level.block.Block[]{StationBlocks.HEARTH.get(), StationBlocks.STOVE.get()}) {
@@ -60,14 +60,14 @@ public final class WardContractGameTests {
         // Activating re-states the stone; a bare multiblock focus cell drops on that shape update, so the focus returns after it.
         helper.setBlock(STONE.east(), StationBlocks.STOVE.get().defaultBlockState());
         check(WardFocus.focused(level, pos), "focus lost after activation");
-        var record = WardService.record(level, pos).orElseThrow();
+        var record = WardLifecycle.record(level, pos).orElseThrow();
         String chosen = WardControls.radius(owner, level, pos, 1000);
         check(record.radius() == rules.wardFocusRadius(), "chosen focused radius: " + chosen + " radius=" + record.radius()
-                + " index=" + WardService.index().all());
+                + " index=" + WardIndex.loaded().all());
         helper.setBlock(STONE.east(), Blocks.AIR);
         WardLifecycle.loaded(level, pos, (WardStoneBlockEntity) level.getBlockEntity(pos));
         helper.runAfterDelay(1, () -> {
-            check(WardService.entry(record.id()).radius() == rules.wardRadius(), "lost focus did not clamp effective radius");
+            check(WardIndex.loaded().entry(record.id()).radius() == rules.wardRadius(), "lost focus did not clamp effective radius");
             check(record.radius() == rules.wardFocusRadius(), "focus loss erased the chosen radius");
             WardControls.deactivate(owner, level, pos);
             check(WardActivation.activate(owner, level, pos).equals("activated"), "reactivation");
@@ -84,7 +84,7 @@ public final class WardContractGameTests {
         var pos = helper.absolutePos(STONE);
         helper.setBlock(STONE, WardRegistration.STONE.get());
         var owner = witch(helper, "ward_route_contract", STONE.north());
-        for (var stale : WardService.index().all()) WardService.index().remove(stale.id()); // other tests' wards must not overlap this one
+        for (var stale : WardIndex.loaded().all()) WardIndex.loaded().remove(stale.id()); // other tests' wards must not overlap this one
         setEnergy(owner, 0);
         owner.setPos(pos.getX() + 100, pos.getY(), pos.getZ());
         int before = practice(owner);
@@ -120,13 +120,13 @@ public final class WardContractGameTests {
             check(WardActivation.refusal(owner, level, pos).orElseThrow().equals("owner_limit"), "owner cap");
             records.forEach(r -> data.retire(r.id()));
             for (int i = 0; i < WardCatalog.CENTRES_PER_CHUNK; i++) {
-                WardService.index().add(new WardIndex.Entry(-100 - i, level.dimension().location().toString(), pos,
+                WardIndex.loaded().add(new WardIndex.Entry(-100 - i, level.dimension().location().toString(), pos,
                         1, 1, WardCatalog.Profile.BOTH, owner.getUUID()));
             }
             check(WardActivation.refusal(owner, level, pos).orElseThrow().equals("chunk_limit"), "chunk cap must precede overlap");
         } finally {
             records.forEach(r -> data.retire(r.id()));
-            for (int i = 0; i < WardCatalog.CENTRES_PER_CHUNK; i++) WardService.index().remove(-100 - i);
+            for (int i = 0; i < WardCatalog.CENTRES_PER_CHUNK; i++) WardIndex.loaded().remove(-100 - i);
         }
         helper.succeed();
     }
@@ -139,12 +139,12 @@ public final class WardContractGameTests {
         helper.setBlock(STONE, WardRegistration.STONE.get());
         var owner = witch(helper, "ward_unload_contract", STONE.north());
         check(WardActivation.activate(owner, level, pos).equals("activated"), "activation");
-        var record = WardService.record(level, pos).orElseThrow();
+        var record = WardLifecycle.record(level, pos).orElseThrow();
         var state = level.getBlockState(pos);
         int charge = record.charge();
         WardLifecycle.unloaded(level, pos, record.id());
         level.removeBlockEntity(pos);
-        check(!WardService.indexed(record.id()), "unloaded ward still protects");
+        check(!WardIndex.loaded().contains(record.id()), "unloaded ward still protects");
         helper.runAfterDelay(20, () -> {
             check(record.charge() == charge, "unloaded charge ran down");
             var restored = new WardStoneBlockEntity(pos, state);
@@ -153,10 +153,10 @@ public final class WardContractGameTests {
             WardLifecycle.loaded(level, pos, restored);
             helper.runAfterDelay(1, () -> {
                 check(record.charge() >= charge - 1, "reload caught up unloaded ticks");
-                check(WardService.indexed(record.id()), "reload did not index");
+                check(WardIndex.loaded().contains(record.id()), "reload did not index");
                 WardSavedData.get(level).charge(record, 1);
                 WardService.tick(level, pos, restored);
-                check(!record.charged() && !WardService.indexed(record.id()), "expiry left protection");
+                check(!record.charged() && !WardIndex.loaded().contains(record.id()), "expiry left protection");
                 WardControls.release(owner, level, pos);
                 helper.succeed();
             });

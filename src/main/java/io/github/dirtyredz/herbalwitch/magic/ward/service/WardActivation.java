@@ -1,5 +1,6 @@
 package io.github.dirtyredz.herbalwitch.magic.ward.service;
 
+import io.github.dirtyredz.herbalwitch.magic.ward.block.WardStoneBlock;
 import io.github.dirtyredz.herbalwitch.magic.ward.block.WardStoneBlockEntity;
 import io.github.dirtyredz.herbalwitch.magic.ward.catalog.WardCatalog;
 import io.github.dirtyredz.herbalwitch.magic.ward.persistence.WardRecord;
@@ -16,11 +17,9 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.Optional;
 
-import static io.github.dirtyredz.herbalwitch.magic.ward.service.WardService.rules;
-import static io.github.dirtyredz.herbalwitch.magic.ward.service.WardService.stone;
-import static io.github.dirtyredz.herbalwitch.magic.ward.service.WardService.index;
-import static io.github.dirtyredz.herbalwitch.magic.ward.service.WardService.show;
+import static io.github.dirtyredz.herbalwitch.magic.ward.service.WardContext.rules;
 import static io.github.dirtyredz.herbalwitch.magic.ward.service.WardFocus.maxRadius;
+import static io.github.dirtyredz.herbalwitch.magic.ward.service.WardLifecycle.index;
 
 /** Activation checks and charging through the direct spend or already-paid ritual path. */
 public final class WardActivation {
@@ -38,7 +37,7 @@ public final class WardActivation {
      * activation adds), or empty. Used by direct activation and by the home protection ritual.
      */
     public static Optional<String> refusal(ServerPlayer witch, ServerLevel level, BlockPos pos) {
-        Optional<WardStoneBlockEntity> stone = stone(level, pos);
+        Optional<WardStoneBlockEntity> stone = WardStoneBlockEntity.at(level, pos);
         if (stone.isEmpty()) {
             return Optional.of("no_stone");
         }
@@ -64,14 +63,14 @@ public final class WardActivation {
             return Optional.of("world_limit");
         }
         String dimension = level.dimension().location().toString();
-        if (WardService.index().active(dimension) >= rules().wardsPerDimension()) {
+        if (WardIndex.loaded().active(dimension) >= rules().wardsPerDimension()) {
             return Optional.of("dimension_limit");
         }
-        if (WardService.index().centres(dimension, pos) >= WardCatalog.CENTRES_PER_CHUNK) {
+        if (WardIndex.loaded().centres(dimension, pos) >= WardCatalog.CENTRES_PER_CHUNK) {
             return Optional.of("chunk_limit");
         }
         int radius = Math.min(record.map(WardRecord::radius).orElse(rules().wardRadius()), maxRadius(level, pos));
-        if (WardService.index().overlaps(dimension, pos, radius, rules().wardHeight(), record.map(WardRecord::id).orElse(-1L))) {
+        if (WardIndex.loaded().overlaps(dimension, pos, radius, rules().wardHeight(), record.map(WardRecord::id).orElse(-1L))) {
             return Optional.of("overlap");
         }
         if (!EntityActionPermission.checkProtect(level, witch.getUUID(), pos).allowed()) {
@@ -118,7 +117,7 @@ public final class WardActivation {
 
     /** Binds (if unbound), charges and indexes the stone's record. */
     private static boolean charge(ServerPlayer witch, ServerLevel level, BlockPos pos) {
-        WardStoneBlockEntity stone = stone(level, pos).orElse(null);
+        WardStoneBlockEntity stone = WardStoneBlockEntity.at(level, pos).orElse(null);
         if (stone == null) {
             return false;
         }
@@ -137,7 +136,7 @@ public final class WardActivation {
         }
         data.charge(record, chargeTicks());
         index(level, record);
-        show(level, pos, true);
+        WardStoneBlock.show(level, pos, true);
         return true;
     }
 

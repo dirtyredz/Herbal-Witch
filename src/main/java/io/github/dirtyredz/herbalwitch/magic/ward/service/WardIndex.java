@@ -37,6 +37,13 @@ public final class WardIndex {
         }
     }
 
+    private static final WardIndex LOADED = new WardIndex();
+
+    /** The server's loaded, charged wards (cleared at server start and stop). */
+    public static WardIndex loaded() {
+        return LOADED;
+    }
+
     private final Map<Long, Entry> entries = new LinkedHashMap<>();
     private final Map<String, Map<Long, List<Entry>>> byChunk = new HashMap<>();
 

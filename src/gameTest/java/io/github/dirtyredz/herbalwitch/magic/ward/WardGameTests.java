@@ -13,7 +13,7 @@ import io.github.dirtyredz.herbalwitch.magic.ward.catalog.WardCatalog;
 import io.github.dirtyredz.herbalwitch.magic.ward.persistence.WardRecord;
 import io.github.dirtyredz.herbalwitch.magic.ward.registry.WardRegistration;
 import io.github.dirtyredz.herbalwitch.magic.ward.service.WardIndex;
-import io.github.dirtyredz.herbalwitch.magic.ward.service.WardService;
+import io.github.dirtyredz.herbalwitch.magic.ward.service.WardLifecycle;
 import io.github.dirtyredz.herbalwitch.magic.ward.targeting.WardProtection;
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.EnergyService;
@@ -57,7 +57,7 @@ public final class WardGameTests {
     }
 
     private static WardRecord record(GameTestHelper helper, BlockPos abs) {
-        return WardService.record(helper.getLevel(), abs).orElseThrow(() -> new net.minecraft.gametest.framework.GameTestAssertException(
+        return WardLifecycle.record(helper.getLevel(), abs).orElseThrow(() -> new net.minecraft.gametest.framework.GameTestAssertException(
                 "the stone has no record"));
     }
 
@@ -72,14 +72,14 @@ public final class WardGameTests {
         int cost = EnergyService.units(WitchRules.server().workings().wardActivationCost());
         setEnergy(owner, cost - 1);
         check(WardActivation.activate(owner, level, abs).equals("not_enough_energy"), "charged without the energy");
-        check(WardService.record(level, abs).isEmpty(), "a refused activation bound the stone");
+        check(WardLifecycle.record(level, abs).isEmpty(), "a refused activation bound the stone");
         setEnergy(owner, cost * 2);
         int practice = practice(owner);
         check(WardActivation.activate(owner, level, abs).equals("activated"), "the owner could not charge it");
         check(energy(owner) == cost && practice(owner) == practice + cost, "paid " + (cost * 2 - energy(owner)) + " with practice "
                 + (practice(owner) - practice));
         WardRecord record = record(helper, abs);
-        check(record.ownedBy(owner.getUUID()) && record.charged() && WardService.indexed(record.id()), "not bound, charged and active");
+        check(record.ownedBy(owner.getUUID()) && record.charged() && WardIndex.loaded().contains(record.id()), "not bound, charged and active");
         check(helper.getBlockState(STONE).getValue(WardStoneBlock.ACTIVE), "a charged stone does not show it");
         check(WardActivation.activate(owner, level, abs).equals("already_charged"), "a charged ward was topped up");
         check(energy(owner) == cost, "a refused top-up spent energy");
@@ -96,7 +96,7 @@ public final class WardGameTests {
         helper.runAfterDelay(10, () -> {
             check(record(helper, abs).charge() < charge, "the charge does not run down");
             check(WardControls.deactivate(owner, level, abs).equals("deactivated"), "the owner could not end it");
-            check(!WardService.indexed(record.id()) && !helper.getBlockState(STONE).getValue(WardStoneBlock.ACTIVE), "still active");
+            check(!WardIndex.loaded().contains(record.id()) && !helper.getBlockState(STONE).getValue(WardStoneBlock.ACTIVE), "still active");
             check(WardControls.release(owner, level, abs).equals("released") && record(helper, abs).owner().isEmpty(), "not released");
             helper.succeed();
         });
@@ -119,7 +119,7 @@ public final class WardGameTests {
         check(record.profile() == WardCatalog.Profile.BOTH, "a new ward does not guard against both families");
         zombie.setTarget(owner);
         check(zombie.getTarget() == null, "a zombie chose a player inside the ward");
-        WardIndex.Entry entry = WardService.entry(record.id());
+        WardIndex.Entry entry = WardIndex.loaded().entry(record.id());
         for (int i = 0; i < 2 * entry.radius() / WardProtection.SLICE + 2; i++) {
             WardProtection.sweep(level, entry);
         }
@@ -144,7 +144,7 @@ public final class WardGameTests {
             helper.spawn(EntityType.ZOMBIE, new BlockPos(4, 1, 6)).setNoAi(true);
         }
         check(WardActivation.activate(owner, level, abs).equals("activated"), "not charged");
-        WardIndex.Entry entry = WardService.entry(record(helper, abs).id());
+        WardIndex.Entry entry = WardIndex.loaded().entry(record(helper, abs).id());
         int most = 0;
         for (int i = 0; i < 2 * entry.radius() / WardProtection.SLICE + 2; i++) {
             most = Math.max(most, WardProtection.sweep(level, entry));
@@ -164,12 +164,12 @@ public final class WardGameTests {
         long id = record(helper, abs).id();
         BlockPos copy = stone(helper, new BlockPos(1, 1, 1));
         ((WardStoneBlockEntity) level.getBlockEntity(copy)).setRecordId(id);
-        check(WardService.record(level, copy).isEmpty(), "a copied record id took over another stone's ward");
-        check(WardService.indexed(id) && record(helper, abs).charged(), "the copy disturbed the real ward");
+        check(WardLifecycle.record(level, copy).isEmpty(), "a copied record id took over another stone's ward");
+        check(WardIndex.loaded().contains(id) && record(helper, abs).charged(), "the copy disturbed the real ward");
         level.destroyBlock(abs, true);
-        check(!WardService.indexed(id), "a broken stone still protects");
+        check(!WardIndex.loaded().contains(id), "a broken stone still protects");
         helper.setBlock(STONE, WardRegistration.STONE.get().defaultBlockState());
-        check(WardService.record(level, abs).isEmpty(), "a new stone inherited the broken one's ward");
+        check(WardLifecycle.record(level, abs).isEmpty(), "a new stone inherited the broken one's ward");
         helper.succeed();
     }
 }

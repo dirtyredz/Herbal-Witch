@@ -1,5 +1,6 @@
 package io.github.dirtyredz.herbalwitch.magic.ward.service;
 
+import io.github.dirtyredz.herbalwitch.magic.ward.block.WardStoneBlock;
 import io.github.dirtyredz.herbalwitch.magic.ward.persistence.WardRecord;
 import io.github.dirtyredz.herbalwitch.magic.ward.persistence.WardSavedData;
 import net.minecraft.core.BlockPos;
@@ -8,12 +9,10 @@ import net.minecraft.server.level.ServerPlayer;
 
 import java.util.Optional;
 
-import static io.github.dirtyredz.herbalwitch.magic.ward.service.WardService.rules;
-import static io.github.dirtyredz.herbalwitch.magic.ward.service.WardService.record;
-import static io.github.dirtyredz.herbalwitch.magic.ward.service.WardService.unindex;
-import static io.github.dirtyredz.herbalwitch.magic.ward.service.WardService.show;
-import static io.github.dirtyredz.herbalwitch.magic.ward.service.WardService.index;
+import static io.github.dirtyredz.herbalwitch.magic.ward.service.WardContext.rules;
 import static io.github.dirtyredz.herbalwitch.magic.ward.service.WardFocus.maxRadius;
+import static io.github.dirtyredz.herbalwitch.magic.ward.service.WardLifecycle.index;
+import static io.github.dirtyredz.herbalwitch.magic.ward.service.WardLifecycle.record;
 
 /** Owner settings, deactivation and release. Menu access checks remain with the menu. */
 public final class WardControls {
@@ -31,8 +30,8 @@ public final class WardControls {
             return "not_owner";
         }
         WardSavedData.get(level).charge(record.get(), 0);
-        unindex(record.get().id());
-        show(level, pos, false);
+        WardIndex.loaded().remove(record.get().id());
+        WardStoneBlock.show(level, pos, false);
         return "deactivated";
     }
 
@@ -48,8 +47,8 @@ public final class WardControls {
         WardSavedData data = WardSavedData.get(level);
         data.charge(record.get(), 0);
         data.bind(record.get(), null);
-        unindex(record.get().id());
-        show(level, pos, false);
+        WardIndex.loaded().remove(record.get().id());
+        WardStoneBlock.show(level, pos, false);
         return "released";
     }
 
@@ -64,7 +63,7 @@ public final class WardControls {
         if (next == r.radius()) {
             return "radius_limit";
         }
-        if (r.charged() && WardService.index().overlaps(r.dimension(), pos, Math.min(next, maxRadius(level, pos)), rules().wardHeight(), r.id())) {
+        if (r.charged() && WardIndex.loaded().overlaps(r.dimension(), pos, Math.min(next, maxRadius(level, pos)), rules().wardHeight(), r.id())) {
             return "overlap";
         }
         WardSavedData.get(level).radius(r, next);

@@ -15,6 +15,8 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.Optional;
+
 /**
  * A ward stone's entity: only the id of its record in {@code WardSavedData} (0 before the first
  * activation creates one). No inventory, no charge here: the saved data owns that. It reconciles its
@@ -26,6 +28,14 @@ public class WardStoneBlockEntity extends BlockEntity implements MenuProvider {
 
     public WardStoneBlockEntity(BlockPos pos, BlockState state) {
         super(WardRegistration.STONE_ENTITY.get(), pos, state);
+    }
+
+    /** The stone at {@code pos}, if it is one and loaded. */
+    public static Optional<WardStoneBlockEntity> at(ServerLevel level, BlockPos pos) {
+        if (!level.isLoaded(pos) || !(level.getBlockEntity(pos) instanceof WardStoneBlockEntity stone)) {
+            return Optional.empty();
+        }
+        return Optional.of(stone);
     }
 
     public long recordId() {

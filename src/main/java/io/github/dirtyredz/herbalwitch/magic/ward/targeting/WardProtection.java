@@ -3,7 +3,6 @@ package io.github.dirtyredz.herbalwitch.magic.ward.targeting;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.repellent.RepellentProfiles;
 import io.github.dirtyredz.herbalwitch.magic.ward.catalog.WardCatalog;
 import io.github.dirtyredz.herbalwitch.magic.ward.service.WardIndex;
-import io.github.dirtyredz.herbalwitch.magic.ward.service.WardService;
 import io.github.dirtyredz.herbalwitch.platform.permission.entity.EntityActionPermission;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
@@ -54,7 +53,7 @@ public final class WardProtection {
     /** Whether some active ward stops {@code mob} choosing {@code player} now. */
     public static boolean protects(ServerLevel level, Mob mob, Player player) {
         String dimension = level.dimension().location().toString();
-        for (WardIndex.Entry ward : WardService.index().covering(dimension, player.blockPosition())) {
+        for (WardIndex.Entry ward : WardIndex.loaded().covering(dimension, player.blockPosition())) {
             if (matches(ward.profile(), mob) && allowed(level, ward, mob, player)) {
                 return true;
             }

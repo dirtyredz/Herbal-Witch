@@ -15,7 +15,7 @@ import io.github.dirtyredz.herbalwitch.magic.ritual.circle.RitualCircleBlock;
 import io.github.dirtyredz.herbalwitch.magic.ritual.menu.AltarMenu;
 import io.github.dirtyredz.herbalwitch.magic.ritual.session.AltarSession;
 import io.github.dirtyredz.herbalwitch.magic.ward.registry.WardRegistration;
-import io.github.dirtyredz.herbalwitch.magic.ward.service.WardService;
+import io.github.dirtyredz.herbalwitch.magic.ward.service.WardLifecycle;
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.EnergyService;
 import net.minecraft.core.BlockPos;
@@ -165,7 +165,7 @@ public final class CircleGameTests {
         AltarSession s = session(w);
         advance(s, WitchRules.server().workings().homeProtectionTicks());
         check(s.state() == AltarSession.State.COMPLETED, "did not complete: " + s.state());
-        check(WardService.record(helper.getLevel(), abs).map(r -> r.charged() && r.ownedBy(w.getUUID())).orElse(false),
+        check(WardLifecycle.record(helper.getLevel(), abs).map(r -> r.charged() && r.ownedBy(w.getUUID())).orElse(false),
                 "the stone was not charged and bound");
         check(energy(w) == before - EnergyService.units(WitchRules.server().workings().homeProtectionCost()), "paid " + (before - energy(w)));
         check(count(w, Items.AMETHYST_SHARD) == 0, "the offering was not consumed");
