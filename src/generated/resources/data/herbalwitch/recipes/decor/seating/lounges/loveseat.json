@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    "W W",
+    "WWW",
+    "PPP"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/seating/loveseat"
+  },
+  "show_notification": true
+}

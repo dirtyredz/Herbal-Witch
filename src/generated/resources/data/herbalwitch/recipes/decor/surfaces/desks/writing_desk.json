@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": {
+      "item": "minecraft:feather"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "S": {
+      "item": "minecraft:dark_oak_slab"
+    }
+  },
+  "pattern": [
+    "SFS",
+    "PSP",
+    "P P"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/surfaces/writing_desk"
+  },
+  "show_notification": true
+}

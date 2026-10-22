@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:book"
+    },
+    "H": {
+      "item": "minecraft:chest"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "S": {
+      "item": "minecraft:dark_oak_slab"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "HBH",
+    "PSP"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/storage/rolltop_desk"
+  },
+  "show_notification": true
+}

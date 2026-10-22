@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:compass"
+    },
+    "G": {
+      "item": "minecraft:gold_nugget"
+    },
+    "S": {
+      "item": "minecraft:dark_oak_slab"
+    },
+    "T": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "GCG",
+    " T ",
+    "SSS"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/fixtures/globe_stand"
+  },
+  "show_notification": true
+}

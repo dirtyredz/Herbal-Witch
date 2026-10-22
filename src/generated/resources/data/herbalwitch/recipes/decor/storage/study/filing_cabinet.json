@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "H": {
+      "item": "minecraft:chest"
+    },
+    "N": {
+      "item": "minecraft:iron_nugget"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    }
+  },
+  "pattern": [
+    "PNP",
+    "PHP",
+    "PNP"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/storage/filing_cabinet"
+  },
+  "show_notification": true
+}

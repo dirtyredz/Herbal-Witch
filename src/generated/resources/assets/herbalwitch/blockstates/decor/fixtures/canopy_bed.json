@@ -1,0 +1,724 @@
+{
+  "variants": {
+    "cell=0,facing=east,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_0",
+      "y": 270
+    },
+    "cell=0,facing=east,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_0",
+      "y": 270
+    },
+    "cell=0,facing=east,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_0",
+      "y": 270
+    },
+    "cell=0,facing=east,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_0",
+      "y": 270
+    },
+    "cell=0,facing=north,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_0",
+      "y": 180
+    },
+    "cell=0,facing=north,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_0",
+      "y": 180
+    },
+    "cell=0,facing=north,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_0",
+      "y": 180
+    },
+    "cell=0,facing=north,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_0",
+      "y": 180
+    },
+    "cell=0,facing=south,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_0"
+    },
+    "cell=0,facing=south,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_0"
+    },
+    "cell=0,facing=south,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_0"
+    },
+    "cell=0,facing=south,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_0"
+    },
+    "cell=0,facing=west,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_0",
+      "y": 90
+    },
+    "cell=0,facing=west,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_0",
+      "y": 90
+    },
+    "cell=0,facing=west,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_0",
+      "y": 90
+    },
+    "cell=0,facing=west,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_0",
+      "y": 90
+    },
+    "cell=1,facing=east,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_1",
+      "y": 270
+    },
+    "cell=1,facing=east,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_1",
+      "y": 270
+    },
+    "cell=1,facing=east,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_1",
+      "y": 270
+    },
+    "cell=1,facing=east,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_1",
+      "y": 270
+    },
+    "cell=1,facing=north,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_1",
+      "y": 180
+    },
+    "cell=1,facing=north,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_1",
+      "y": 180
+    },
+    "cell=1,facing=north,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_1",
+      "y": 180
+    },
+    "cell=1,facing=north,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_1",
+      "y": 180
+    },
+    "cell=1,facing=south,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_1"
+    },
+    "cell=1,facing=south,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_1"
+    },
+    "cell=1,facing=south,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_1"
+    },
+    "cell=1,facing=south,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_1"
+    },
+    "cell=1,facing=west,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_1",
+      "y": 90
+    },
+    "cell=1,facing=west,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_1",
+      "y": 90
+    },
+    "cell=1,facing=west,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_1",
+      "y": 90
+    },
+    "cell=1,facing=west,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_1",
+      "y": 90
+    },
+    "cell=10,facing=east,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_10",
+      "y": 270
+    },
+    "cell=10,facing=east,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_10",
+      "y": 270
+    },
+    "cell=10,facing=east,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_10",
+      "y": 270
+    },
+    "cell=10,facing=east,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_10",
+      "y": 270
+    },
+    "cell=10,facing=north,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_10",
+      "y": 180
+    },
+    "cell=10,facing=north,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_10",
+      "y": 180
+    },
+    "cell=10,facing=north,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_10",
+      "y": 180
+    },
+    "cell=10,facing=north,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_10",
+      "y": 180
+    },
+    "cell=10,facing=south,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_10"
+    },
+    "cell=10,facing=south,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_10"
+    },
+    "cell=10,facing=south,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_10"
+    },
+    "cell=10,facing=south,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_10"
+    },
+    "cell=10,facing=west,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_10",
+      "y": 90
+    },
+    "cell=10,facing=west,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_10",
+      "y": 90
+    },
+    "cell=10,facing=west,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_10",
+      "y": 90
+    },
+    "cell=10,facing=west,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_10",
+      "y": 90
+    },
+    "cell=11,facing=east,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_11",
+      "y": 270
+    },
+    "cell=11,facing=east,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_11",
+      "y": 270
+    },
+    "cell=11,facing=east,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_11",
+      "y": 270
+    },
+    "cell=11,facing=east,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_11",
+      "y": 270
+    },
+    "cell=11,facing=north,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_11",
+      "y": 180
+    },
+    "cell=11,facing=north,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_11",
+      "y": 180
+    },
+    "cell=11,facing=north,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_11",
+      "y": 180
+    },
+    "cell=11,facing=north,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_11",
+      "y": 180
+    },
+    "cell=11,facing=south,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_11"
+    },
+    "cell=11,facing=south,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_11"
+    },
+    "cell=11,facing=south,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_11"
+    },
+    "cell=11,facing=south,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_11"
+    },
+    "cell=11,facing=west,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_11",
+      "y": 90
+    },
+    "cell=11,facing=west,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_11",
+      "y": 90
+    },
+    "cell=11,facing=west,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_11",
+      "y": 90
+    },
+    "cell=11,facing=west,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_11",
+      "y": 90
+    },
+    "cell=2,facing=east,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_2",
+      "y": 270
+    },
+    "cell=2,facing=east,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_2",
+      "y": 270
+    },
+    "cell=2,facing=east,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_2",
+      "y": 270
+    },
+    "cell=2,facing=east,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_2",
+      "y": 270
+    },
+    "cell=2,facing=north,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_2",
+      "y": 180
+    },
+    "cell=2,facing=north,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_2",
+      "y": 180
+    },
+    "cell=2,facing=north,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_2",
+      "y": 180
+    },
+    "cell=2,facing=north,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_2",
+      "y": 180
+    },
+    "cell=2,facing=south,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_2"
+    },
+    "cell=2,facing=south,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_2"
+    },
+    "cell=2,facing=south,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_2"
+    },
+    "cell=2,facing=south,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_2"
+    },
+    "cell=2,facing=west,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_2",
+      "y": 90
+    },
+    "cell=2,facing=west,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_2",
+      "y": 90
+    },
+    "cell=2,facing=west,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_2",
+      "y": 90
+    },
+    "cell=2,facing=west,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_2",
+      "y": 90
+    },
+    "cell=3,facing=east,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_3",
+      "y": 270
+    },
+    "cell=3,facing=east,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_3",
+      "y": 270
+    },
+    "cell=3,facing=east,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_3",
+      "y": 270
+    },
+    "cell=3,facing=east,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_3",
+      "y": 270
+    },
+    "cell=3,facing=north,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_3",
+      "y": 180
+    },
+    "cell=3,facing=north,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_3",
+      "y": 180
+    },
+    "cell=3,facing=north,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_3",
+      "y": 180
+    },
+    "cell=3,facing=north,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_3",
+      "y": 180
+    },
+    "cell=3,facing=south,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_3"
+    },
+    "cell=3,facing=south,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_3"
+    },
+    "cell=3,facing=south,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_3"
+    },
+    "cell=3,facing=south,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_3"
+    },
+    "cell=3,facing=west,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_3",
+      "y": 90
+    },
+    "cell=3,facing=west,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_3",
+      "y": 90
+    },
+    "cell=3,facing=west,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_3",
+      "y": 90
+    },
+    "cell=3,facing=west,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_3",
+      "y": 90
+    },
+    "cell=4,facing=east,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_4",
+      "y": 270
+    },
+    "cell=4,facing=east,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_4",
+      "y": 270
+    },
+    "cell=4,facing=east,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_4",
+      "y": 270
+    },
+    "cell=4,facing=east,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_4",
+      "y": 270
+    },
+    "cell=4,facing=north,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_4",
+      "y": 180
+    },
+    "cell=4,facing=north,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_4",
+      "y": 180
+    },
+    "cell=4,facing=north,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_4",
+      "y": 180
+    },
+    "cell=4,facing=north,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_4",
+      "y": 180
+    },
+    "cell=4,facing=south,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_4"
+    },
+    "cell=4,facing=south,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_4"
+    },
+    "cell=4,facing=south,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_4"
+    },
+    "cell=4,facing=south,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_4"
+    },
+    "cell=4,facing=west,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_4",
+      "y": 90
+    },
+    "cell=4,facing=west,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_4",
+      "y": 90
+    },
+    "cell=4,facing=west,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_4",
+      "y": 90
+    },
+    "cell=4,facing=west,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_4",
+      "y": 90
+    },
+    "cell=5,facing=east,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_5",
+      "y": 270
+    },
+    "cell=5,facing=east,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_5",
+      "y": 270
+    },
+    "cell=5,facing=east,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_5",
+      "y": 270
+    },
+    "cell=5,facing=east,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_5",
+      "y": 270
+    },
+    "cell=5,facing=north,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_5",
+      "y": 180
+    },
+    "cell=5,facing=north,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_5",
+      "y": 180
+    },
+    "cell=5,facing=north,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_5",
+      "y": 180
+    },
+    "cell=5,facing=north,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_5",
+      "y": 180
+    },
+    "cell=5,facing=south,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_5"
+    },
+    "cell=5,facing=south,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_5"
+    },
+    "cell=5,facing=south,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_5"
+    },
+    "cell=5,facing=south,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_5"
+    },
+    "cell=5,facing=west,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_5",
+      "y": 90
+    },
+    "cell=5,facing=west,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_5",
+      "y": 90
+    },
+    "cell=5,facing=west,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_5",
+      "y": 90
+    },
+    "cell=5,facing=west,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_5",
+      "y": 90
+    },
+    "cell=6,facing=east,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_6",
+      "y": 270
+    },
+    "cell=6,facing=east,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_6",
+      "y": 270
+    },
+    "cell=6,facing=east,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_6",
+      "y": 270
+    },
+    "cell=6,facing=east,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_6",
+      "y": 270
+    },
+    "cell=6,facing=north,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_6",
+      "y": 180
+    },
+    "cell=6,facing=north,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_6",
+      "y": 180
+    },
+    "cell=6,facing=north,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_6",
+      "y": 180
+    },
+    "cell=6,facing=north,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_6",
+      "y": 180
+    },
+    "cell=6,facing=south,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_6"
+    },
+    "cell=6,facing=south,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_6"
+    },
+    "cell=6,facing=south,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_6"
+    },
+    "cell=6,facing=south,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_6"
+    },
+    "cell=6,facing=west,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_6",
+      "y": 90
+    },
+    "cell=6,facing=west,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_6",
+      "y": 90
+    },
+    "cell=6,facing=west,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_6",
+      "y": 90
+    },
+    "cell=6,facing=west,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_6",
+      "y": 90
+    },
+    "cell=7,facing=east,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_7",
+      "y": 270
+    },
+    "cell=7,facing=east,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_7",
+      "y": 270
+    },
+    "cell=7,facing=east,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_7",
+      "y": 270
+    },
+    "cell=7,facing=east,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_7",
+      "y": 270
+    },
+    "cell=7,facing=north,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_7",
+      "y": 180
+    },
+    "cell=7,facing=north,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_7",
+      "y": 180
+    },
+    "cell=7,facing=north,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_7",
+      "y": 180
+    },
+    "cell=7,facing=north,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_7",
+      "y": 180
+    },
+    "cell=7,facing=south,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_7"
+    },
+    "cell=7,facing=south,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_7"
+    },
+    "cell=7,facing=south,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_7"
+    },
+    "cell=7,facing=south,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_7"
+    },
+    "cell=7,facing=west,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_7",
+      "y": 90
+    },
+    "cell=7,facing=west,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_7",
+      "y": 90
+    },
+    "cell=7,facing=west,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_7",
+      "y": 90
+    },
+    "cell=7,facing=west,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_7",
+      "y": 90
+    },
+    "cell=8,facing=east,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_8",
+      "y": 270
+    },
+    "cell=8,facing=east,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_8",
+      "y": 270
+    },
+    "cell=8,facing=east,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_8",
+      "y": 270
+    },
+    "cell=8,facing=east,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_8",
+      "y": 270
+    },
+    "cell=8,facing=north,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_8",
+      "y": 180
+    },
+    "cell=8,facing=north,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_8",
+      "y": 180
+    },
+    "cell=8,facing=north,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_8",
+      "y": 180
+    },
+    "cell=8,facing=north,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_8",
+      "y": 180
+    },
+    "cell=8,facing=south,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_8"
+    },
+    "cell=8,facing=south,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_8"
+    },
+    "cell=8,facing=south,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_8"
+    },
+    "cell=8,facing=south,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_8"
+    },
+    "cell=8,facing=west,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_8",
+      "y": 90
+    },
+    "cell=8,facing=west,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_8",
+      "y": 90
+    },
+    "cell=8,facing=west,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_8",
+      "y": 90
+    },
+    "cell=8,facing=west,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_8",
+      "y": 90
+    },
+    "cell=9,facing=east,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_9",
+      "y": 270
+    },
+    "cell=9,facing=east,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_9",
+      "y": 270
+    },
+    "cell=9,facing=east,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_9",
+      "y": 270
+    },
+    "cell=9,facing=east,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_9",
+      "y": 270
+    },
+    "cell=9,facing=north,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_9",
+      "y": 180
+    },
+    "cell=9,facing=north,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_9",
+      "y": 180
+    },
+    "cell=9,facing=north,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_9",
+      "y": 180
+    },
+    "cell=9,facing=north,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_9",
+      "y": 180
+    },
+    "cell=9,facing=south,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_9"
+    },
+    "cell=9,facing=south,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_9"
+    },
+    "cell=9,facing=south,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_9"
+    },
+    "cell=9,facing=south,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_9"
+    },
+    "cell=9,facing=west,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_9",
+      "y": 90
+    },
+    "cell=9,facing=west,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_9",
+      "y": 90
+    },
+    "cell=9,facing=west,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_9",
+      "y": 90
+    },
+    "cell=9,facing=west,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/canopy_bed/part_9",
+      "y": 90
+    }
+  }
+}

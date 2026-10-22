@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "herbalwitch:block/decor/pieces/seating/chairs/reading_chair/base",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "herbalwitch:block/decor/pieces/seating/chairs/reading_chair/base"
+    },
+    "facing=south": {
+      "model": "herbalwitch:block/decor/pieces/seating/chairs/reading_chair/base",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "herbalwitch:block/decor/pieces/seating/chairs/reading_chair/base",
+      "y": 270
+    }
+  }
+}

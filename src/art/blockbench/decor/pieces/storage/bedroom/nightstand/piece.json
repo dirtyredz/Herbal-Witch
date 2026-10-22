@@ -1,0 +1,38 @@
+{
+  "project": "nightstand.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/nightstand/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/nightstand/wood_v",
+    "paint": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/nightstand/paint",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/nightstand/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/nightstand/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/nightstand/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/nightstand/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/nightstand/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/nightstand/wood_v",
+    "paint": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/nightstand/paint",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/nightstand/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/nightstand/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/nightstand/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/decor/pieces/storage/bedroom/nightstand/base",
+      "item": true
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "T": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    "WW ",
+    "WWW",
+    "PTP"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/seating/chaise_lounge"
+  },
+  "show_notification": true
+}

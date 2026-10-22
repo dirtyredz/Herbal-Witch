@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    }
+  },
+  "pattern": [
+    "PGP",
+    "PIP",
+    "PGP"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/fixtures/mirror"
+  },
+  "show_notification": true
+}

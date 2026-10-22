@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "tag": "minecraft:beds"
+    },
+    "T": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    "TWT",
+    "T T",
+    "TBT"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/fixtures/canopy_bed"
+  },
+  "show_notification": true
+}

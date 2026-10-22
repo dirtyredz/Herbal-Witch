@@ -1,0 +1,49 @@
+{
+  "project": "dresser.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/dresser/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/dresser/wood_v",
+    "paint": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/dresser/paint",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/dresser/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/dresser/gold",
+    "runner_magenta": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/dresser/runner_magenta",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/dresser/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/dresser/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/dresser/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/dresser/wood_v",
+    "paint": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/dresser/paint",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/dresser/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/dresser/gold",
+    "runner_magenta": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/dresser/runner_magenta",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/dresser/ivy"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/storage/bedroom/dresser",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ]
+    ]
+  }
+}

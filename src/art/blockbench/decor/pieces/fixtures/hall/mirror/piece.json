@@ -1,0 +1,47 @@
+{
+  "project": "mirror.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/mirror/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/mirror/wood_v",
+    "mirror": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/mirror/mirror",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/mirror/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/mirror/plum",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/mirror/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/mirror/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/mirror/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/mirror/wood_v",
+    "mirror": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/mirror/mirror",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/mirror/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/mirror/plum",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/mirror/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      32,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/fixtures/hall/mirror",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ]
+    ]
+  }
+}

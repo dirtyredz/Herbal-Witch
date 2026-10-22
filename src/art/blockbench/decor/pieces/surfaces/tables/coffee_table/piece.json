@@ -1,0 +1,49 @@
+{
+  "project": "coffee_table.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/coffee_table/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/coffee_table/wood_v",
+    "gold": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/coffee_table/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/coffee_table/plum",
+    "books": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/coffee_table/books",
+    "enamel": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/coffee_table/enamel",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/coffee_table/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/coffee_table/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/coffee_table/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/coffee_table/wood_v",
+    "gold": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/coffee_table/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/coffee_table/plum",
+    "books": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/coffee_table/books",
+    "enamel": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/coffee_table/enamel",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/coffee_table/ivy"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/surfaces/tables/coffee_table",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ]
+    ]
+  }
+}

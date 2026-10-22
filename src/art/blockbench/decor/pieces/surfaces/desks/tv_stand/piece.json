@@ -1,0 +1,63 @@
+{
+  "project": "tv_stand.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/wood_v",
+    "gold": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/plum",
+    "lantern_glass": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/lantern_glass",
+    "glaze": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/glaze",
+    "globe": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/globe",
+    "brass": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/brass",
+    "books": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/books",
+    "enamel": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/enamel",
+    "pale_stone": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/pale_stone",
+    "runner": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/runner",
+    "linen": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/linen",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/wood_v",
+    "gold": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/plum",
+    "lantern_glass": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/lantern_glass",
+    "glaze": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/glaze",
+    "globe": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/globe",
+    "brass": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/brass",
+    "books": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/books",
+    "enamel": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/enamel",
+    "pale_stone": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/pale_stone",
+    "runner": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/runner",
+    "linen": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/linen",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/tv_stand/ivy"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/surfaces/desks/tv_stand",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ]
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "minecraft:wool_carpets"
+    },
+    "S": {
+      "item": "minecraft:dark_oak_slab"
+    },
+    "T": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "SCS",
+    "T T"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/surfaces/coffee_table"
+  },
+  "show_notification": true
+}

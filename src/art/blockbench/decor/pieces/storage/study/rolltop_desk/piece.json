@@ -1,0 +1,57 @@
+{
+  "project": "rolltop_desk.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/study/rolltop_desk/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/study/rolltop_desk/wood_v",
+    "paint": "herbalwitch:block/pieces/decor/pieces/storage/study/rolltop_desk/paint",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/study/rolltop_desk/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/study/rolltop_desk/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/study/rolltop_desk/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/storage/study/rolltop_desk/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/study/rolltop_desk/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/study/rolltop_desk/wood_v",
+    "paint": "herbalwitch:block/pieces/decor/pieces/storage/study/rolltop_desk/paint",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/study/rolltop_desk/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/study/rolltop_desk/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/study/rolltop_desk/ivy"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      32,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/storage/study/rolltop_desk",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        0
+      ]
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "project": "wardrobe.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/wardrobe/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/wardrobe/wood_v",
+    "paint": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/wardrobe/paint",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/wardrobe/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/wardrobe/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/wardrobe/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/wardrobe/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/wardrobe/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/wardrobe/wood_v",
+    "paint": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/wardrobe/paint",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/wardrobe/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/wardrobe/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/wardrobe/ivy"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      32,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/storage/bedroom/wardrobe",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        0
+      ]
+    ]
+  }
+}

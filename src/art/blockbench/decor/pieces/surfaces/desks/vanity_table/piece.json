@@ -1,0 +1,63 @@
+{
+  "project": "vanity_table.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/vanity_table/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/vanity_table/wood_v",
+    "gold": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/vanity_table/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/vanity_table/plum",
+    "paint": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/vanity_table/paint",
+    "mirror": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/vanity_table/mirror",
+    "brass": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/vanity_table/brass",
+    "pale_stone": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/vanity_table/pale_stone",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/vanity_table/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/vanity_table/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/vanity_table/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/vanity_table/wood_v",
+    "gold": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/vanity_table/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/vanity_table/plum",
+    "paint": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/vanity_table/paint",
+    "mirror": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/vanity_table/mirror",
+    "brass": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/vanity_table/brass",
+    "pale_stone": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/vanity_table/pale_stone",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/vanity_table/ivy"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      32,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/surfaces/desks/vanity_table",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        0
+      ]
+    ]
+  }
+}

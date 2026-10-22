@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    "WWW",
+    "WWW",
+    "PPP"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/seating/sofa"
+  },
+  "show_notification": true
+}

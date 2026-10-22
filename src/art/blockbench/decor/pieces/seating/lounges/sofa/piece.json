@@ -1,0 +1,54 @@
+{
+  "project": "sofa.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/seating/lounges/sofa/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/seating/lounges/sofa/wood_v",
+    "velvet": "herbalwitch:block/pieces/decor/pieces/seating/lounges/sofa/velvet",
+    "pink": "herbalwitch:block/pieces/decor/pieces/seating/lounges/sofa/pink",
+    "plum": "herbalwitch:block/pieces/decor/pieces/seating/lounges/sofa/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/seating/lounges/sofa/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/seating/lounges/sofa/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/seating/lounges/sofa/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/seating/lounges/sofa/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/seating/lounges/sofa/wood_v",
+    "velvet": "herbalwitch:block/pieces/decor/pieces/seating/lounges/sofa/velvet",
+    "pink": "herbalwitch:block/pieces/decor/pieces/seating/lounges/sofa/pink",
+    "plum": "herbalwitch:block/pieces/decor/pieces/seating/lounges/sofa/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/seating/lounges/sofa/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/seating/lounges/sofa/ivy"
+  },
+  "bounds": {
+    "min": [
+      -32,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/seating/lounges/sofa",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        2,
+        0,
+        0
+      ]
+    ]
+  }
+}

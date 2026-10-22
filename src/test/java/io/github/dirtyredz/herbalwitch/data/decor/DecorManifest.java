@@ -18,7 +18,7 @@ public final class DecorManifest {
     /** Delivery order of the waves. */
     public static final List<String> WAVES = List.of("M1", "A", "B", "C");
     /** The last delivered wave (FurnitureCatalog.DELIVERED). */
-    public static final String DELIVERED = "A";
+    public static final String DELIVERED = "B";
     /** The five 0.1.0 pieces' authored templates (lamps add _off / _on). */
     public static final Map<String, String> TEMPLATES = Map.of("armchair", "armchair", "apothecary_counter", "apothecary_counter",
             "small_wall_shelf", "wall_shelf", "table_lamp", "table_lamp", "small_rug", "rug");
@@ -95,6 +95,9 @@ public final class DecorManifest {
         REFUSALS.forEach(r -> lang.put("message.herbalwitch.placement." + r, null));
         lang.put("message.herbalwitch.seat.occupied", null);
         lang.put("message.herbalwitch.seat.no_room", null);
+        for (String door : List.of("hinge_right", "open_left", "open_right")) {
+            lang.put("showcase.herbalwitch.label.decor." + door, null);
+        }
         // the furniture reference pages: one line per piece and the shared facts
         for (Piece piece : pieces()) {
             lang.put("grimoire.herbalwitch.decor." + piece.family() + "." + piece.id(), null);

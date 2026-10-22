@@ -1,0 +1,124 @@
+{
+  "variants": {
+    "cell=0,facing=east,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_0",
+      "y": 270
+    },
+    "cell=0,facing=east,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_0",
+      "y": 270
+    },
+    "cell=0,facing=east,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_0",
+      "y": 270
+    },
+    "cell=0,facing=east,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_0",
+      "y": 270
+    },
+    "cell=0,facing=north,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_0",
+      "y": 180
+    },
+    "cell=0,facing=north,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_0",
+      "y": 180
+    },
+    "cell=0,facing=north,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_0",
+      "y": 180
+    },
+    "cell=0,facing=north,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_0",
+      "y": 180
+    },
+    "cell=0,facing=south,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_0"
+    },
+    "cell=0,facing=south,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_0"
+    },
+    "cell=0,facing=south,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_0"
+    },
+    "cell=0,facing=south,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_0"
+    },
+    "cell=0,facing=west,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_0",
+      "y": 90
+    },
+    "cell=0,facing=west,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_0",
+      "y": 90
+    },
+    "cell=0,facing=west,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_0",
+      "y": 90
+    },
+    "cell=0,facing=west,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_0",
+      "y": 90
+    },
+    "cell=1,facing=east,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_1",
+      "y": 270
+    },
+    "cell=1,facing=east,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_1",
+      "y": 270
+    },
+    "cell=1,facing=east,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_1",
+      "y": 270
+    },
+    "cell=1,facing=east,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_1",
+      "y": 270
+    },
+    "cell=1,facing=north,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_1",
+      "y": 180
+    },
+    "cell=1,facing=north,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_1",
+      "y": 180
+    },
+    "cell=1,facing=north,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_1",
+      "y": 180
+    },
+    "cell=1,facing=north,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_1",
+      "y": 180
+    },
+    "cell=1,facing=south,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_1"
+    },
+    "cell=1,facing=south,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_1"
+    },
+    "cell=1,facing=south,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_1"
+    },
+    "cell=1,facing=south,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_1"
+    },
+    "cell=1,facing=west,occupied=false,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_1",
+      "y": 90
+    },
+    "cell=1,facing=west,occupied=false,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_1",
+      "y": 90
+    },
+    "cell=1,facing=west,occupied=true,part=foot": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_1",
+      "y": 90
+    },
+    "cell=1,facing=west,occupied=true,part=head": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/bedroom/bed/part_1",
+      "y": 90
+    }
+  }
+}

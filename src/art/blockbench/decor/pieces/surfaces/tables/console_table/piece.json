@@ -1,0 +1,57 @@
+{
+  "project": "console_table.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/console_table/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/console_table/wood_v",
+    "gold": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/console_table/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/console_table/plum",
+    "paint": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/console_table/paint",
+    "runner_magenta": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/console_table/runner_magenta",
+    "runner": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/console_table/runner",
+    "brass": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/console_table/brass",
+    "linen": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/console_table/linen",
+    "glaze": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/console_table/glaze",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/console_table/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/console_table/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/console_table/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/console_table/wood_v",
+    "gold": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/console_table/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/console_table/plum",
+    "paint": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/console_table/paint",
+    "runner_magenta": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/console_table/runner_magenta",
+    "runner": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/console_table/runner",
+    "brass": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/console_table/brass",
+    "linen": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/console_table/linen",
+    "glaze": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/console_table/glaze",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/console_table/ivy"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/surfaces/tables/console_table",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ]
+    ]
+  }
+}

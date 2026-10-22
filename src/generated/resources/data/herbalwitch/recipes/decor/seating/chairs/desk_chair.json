@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    "P  ",
+    "PWP",
+    " I "
+  ],
+  "result": {
+    "item": "herbalwitch:decor/seating/desk_chair"
+  },
+  "show_notification": true
+}

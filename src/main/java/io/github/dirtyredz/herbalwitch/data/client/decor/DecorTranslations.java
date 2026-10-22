@@ -3,6 +3,7 @@ package io.github.dirtyredz.herbalwitch.data.client.decor;
 import io.github.dirtyredz.herbalwitch.decor.behavior.seating.SeatingService;
 import io.github.dirtyredz.herbalwitch.decor.registry.DecorBlocks;
 import io.github.dirtyredz.herbalwitch.decor.registry.DecorCreativeTab;
+import io.github.dirtyredz.herbalwitch.decor.showcase.DecorShowcaseSamples;
 import io.github.dirtyredz.herbalwitch.platform.placement.PlacementChecks;
 import net.minecraftforge.common.data.LanguageProvider;
 
@@ -26,6 +27,9 @@ public final class DecorTranslations {
         lang.add(key(PlacementChecks.Problem.DENIED), "You may not build there.");
         lang.add(SeatingService.OCCUPIED, "Someone is already sitting there.");
         lang.add(SeatingService.NO_ROOM, "There is no room to sit there.");
+        lang.add(DecorShowcaseSamples.LABEL + "hinge_right", "Right hinge");
+        lang.add(DecorShowcaseSamples.LABEL + "open_left", "Open, left");
+        lang.add(DecorShowcaseSamples.LABEL + "open_right", "Open, right");
     }
 
     private static String key(PlacementChecks.Problem problem) {

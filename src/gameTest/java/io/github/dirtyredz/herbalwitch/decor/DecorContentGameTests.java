@@ -1,6 +1,8 @@
 package io.github.dirtyredz.herbalwitch.decor;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
+import io.github.dirtyredz.herbalwitch.decor.behavior.openings.DecorDoorBlock;
+import io.github.dirtyredz.herbalwitch.decor.behavior.sleeping.DecorBedBlock;
 import io.github.dirtyredz.herbalwitch.decor.structure.DecorAssemblyBlock;
 import io.github.dirtyredz.herbalwitch.decor.catalog.FurnitureBehavior;
 import io.github.dirtyredz.herbalwitch.decor.catalog.FurnitureCatalog;
@@ -84,6 +86,8 @@ public final class DecorContentGameTests {
             Block block = DecorBlocks.block(spec);
             boolean ok = switch (spec.behavior()) {
                 case LIGHT -> block instanceof DecorLightBlock;
+                case BED -> block instanceof DecorBedBlock;
+                case DOOR -> block instanceof DecorDoorBlock;
                 case RUG -> spec.multiblock() ? block instanceof DecorAssemblyBlock : block.getClass() == CarpetBlock.class;
                 default -> block instanceof DecorAssemblyBlock;
             };

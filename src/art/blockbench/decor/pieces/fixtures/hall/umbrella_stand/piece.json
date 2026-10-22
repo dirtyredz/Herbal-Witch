@@ -1,0 +1,44 @@
+{
+  "project": "umbrella_stand.bbmodel",
+  "textures": {
+    "wicker": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/umbrella_stand/wicker",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/umbrella_stand/wood_v",
+    "copper": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/umbrella_stand/copper",
+    "iron": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/umbrella_stand/iron",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/umbrella_stand/gold",
+    "slate": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/umbrella_stand/slate",
+    "pink": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/umbrella_stand/pink",
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/umbrella_stand/wood",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/umbrella_stand/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/umbrella_stand/wicker"
+  },
+  "owned_textures": {
+    "wicker": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/umbrella_stand/wicker",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/umbrella_stand/wood_v",
+    "copper": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/umbrella_stand/copper",
+    "iron": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/umbrella_stand/iron",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/umbrella_stand/gold",
+    "slate": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/umbrella_stand/slate",
+    "pink": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/umbrella_stand/pink",
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/umbrella_stand/wood",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/umbrella_stand/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/decor/pieces/fixtures/hall/umbrella_stand/base",
+      "item": true
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "project": "filing_cabinet.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/study/filing_cabinet/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/study/filing_cabinet/wood_v",
+    "paint": "herbalwitch:block/pieces/decor/pieces/storage/study/filing_cabinet/paint",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/study/filing_cabinet/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/study/filing_cabinet/gold",
+    "brass": "herbalwitch:block/pieces/decor/pieces/storage/study/filing_cabinet/brass",
+    "plaque": "herbalwitch:block/pieces/decor/pieces/storage/study/filing_cabinet/plaque",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/study/filing_cabinet/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/storage/study/filing_cabinet/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/study/filing_cabinet/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/study/filing_cabinet/wood_v",
+    "paint": "herbalwitch:block/pieces/decor/pieces/storage/study/filing_cabinet/paint",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/study/filing_cabinet/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/study/filing_cabinet/gold",
+    "brass": "herbalwitch:block/pieces/decor/pieces/storage/study/filing_cabinet/brass",
+    "plaque": "herbalwitch:block/pieces/decor/pieces/storage/study/filing_cabinet/plaque",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/study/filing_cabinet/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      32,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/storage/study/filing_cabinet",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ]
+    ]
+  }
+}

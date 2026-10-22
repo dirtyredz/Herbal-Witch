@@ -1,0 +1,49 @@
+{
+  "project": "chaise_lounge.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/seating/lounges/chaise_lounge/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/seating/lounges/chaise_lounge/wood_v",
+    "velvet": "herbalwitch:block/pieces/decor/pieces/seating/lounges/chaise_lounge/velvet",
+    "pink": "herbalwitch:block/pieces/decor/pieces/seating/lounges/chaise_lounge/pink",
+    "plum": "herbalwitch:block/pieces/decor/pieces/seating/lounges/chaise_lounge/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/seating/lounges/chaise_lounge/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/seating/lounges/chaise_lounge/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/seating/lounges/chaise_lounge/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/seating/lounges/chaise_lounge/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/seating/lounges/chaise_lounge/wood_v",
+    "velvet": "herbalwitch:block/pieces/decor/pieces/seating/lounges/chaise_lounge/velvet",
+    "pink": "herbalwitch:block/pieces/decor/pieces/seating/lounges/chaise_lounge/pink",
+    "plum": "herbalwitch:block/pieces/decor/pieces/seating/lounges/chaise_lounge/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/seating/lounges/chaise_lounge/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/seating/lounges/chaise_lounge/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      32
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/seating/lounges/chaise_lounge",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ]
+  }
+}

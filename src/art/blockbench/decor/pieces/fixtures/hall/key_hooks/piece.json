@@ -1,0 +1,40 @@
+{
+  "project": "key_hooks.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/key_hooks/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/key_hooks/wood_v",
+    "brass": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/key_hooks/brass",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/key_hooks/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/key_hooks/plum",
+    "iron": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/key_hooks/iron",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/key_hooks/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/key_hooks/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/key_hooks/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/key_hooks/wood_v",
+    "brass": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/key_hooks/brass",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/key_hooks/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/key_hooks/plum",
+    "iron": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/key_hooks/iron",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/key_hooks/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/decor/pieces/fixtures/hall/key_hooks/base",
+      "item": true
+    }
+  ]
+}

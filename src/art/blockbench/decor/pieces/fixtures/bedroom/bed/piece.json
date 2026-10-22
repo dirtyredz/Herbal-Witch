@@ -1,0 +1,51 @@
+{
+  "project": "bed.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/bed/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/bed/wood_v",
+    "linen": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/bed/linen",
+    "velvet": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/bed/velvet",
+    "pink": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/bed/pink",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/bed/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/bed/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/bed/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/bed/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/bed/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/bed/wood_v",
+    "linen": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/bed/linen",
+    "velvet": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/bed/velvet",
+    "pink": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/bed/pink",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/bed/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/bed/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/bed/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      32
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/fixtures/bedroom/bed",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:bricks"
+    },
+    "L": {
+      "item": "minecraft:dark_oak_log"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "B B",
+    "BLB"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/fixtures/fireplace"
+  },
+  "show_notification": true
+}

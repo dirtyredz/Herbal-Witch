@@ -1,0 +1,40 @@
+{
+  "project": "globe_stand.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/globe_stand/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/globe_stand/wood_v",
+    "globe": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/globe_stand/globe",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/globe_stand/gold",
+    "brass": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/globe_stand/brass",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/globe_stand/plum",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/globe_stand/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/globe_stand/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/globe_stand/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/globe_stand/wood_v",
+    "globe": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/globe_stand/globe",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/globe_stand/gold",
+    "brass": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/globe_stand/brass",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/globe_stand/plum",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/globe_stand/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/decor/pieces/fixtures/hall/globe_stand/base",
+      "item": true
+    }
+  ]
+}

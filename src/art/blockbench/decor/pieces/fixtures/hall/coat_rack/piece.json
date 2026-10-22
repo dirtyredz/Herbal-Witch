@@ -1,0 +1,49 @@
+{
+  "project": "coat_rack.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/coat_rack/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/coat_rack/wood_v",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/coat_rack/plum",
+    "pink": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/coat_rack/pink",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/coat_rack/gold",
+    "slate": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/coat_rack/slate",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/coat_rack/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/coat_rack/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/coat_rack/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/coat_rack/wood_v",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/coat_rack/plum",
+    "pink": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/coat_rack/pink",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/coat_rack/gold",
+    "slate": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/coat_rack/slate",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/hall/coat_rack/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      32,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/fixtures/hall/coat_rack",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ]
+    ]
+  }
+}

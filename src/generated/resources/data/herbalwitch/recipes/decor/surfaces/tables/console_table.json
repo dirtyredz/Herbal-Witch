@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "item": "minecraft:dark_oak_slab"
+    },
+    "T": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "T T",
+    "T T"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/surfaces/console_table"
+  },
+  "show_notification": true
+}

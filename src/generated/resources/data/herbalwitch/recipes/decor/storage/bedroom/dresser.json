@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:gold_nugget"
+    },
+    "H": {
+      "item": "minecraft:chest"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "S": {
+      "item": "minecraft:dark_oak_slab"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "HGH",
+    "PPP"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/storage/dresser"
+  },
+  "show_notification": true
+}

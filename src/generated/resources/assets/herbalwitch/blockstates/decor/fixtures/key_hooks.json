@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/hall/key_hooks/base",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/hall/key_hooks/base"
+    },
+    "facing=south": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/hall/key_hooks/base",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/hall/key_hooks/base",
+      "y": 270
+    }
+  }
+}

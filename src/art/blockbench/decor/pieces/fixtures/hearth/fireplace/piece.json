@@ -1,0 +1,71 @@
+{
+  "project": "fireplace.bbmodel",
+  "textures": {
+    "stone": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/fireplace/stone",
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/fireplace/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/fireplace/wood_v",
+    "pale_stone": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/fireplace/pale_stone",
+    "iron": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/fireplace/iron",
+    "log": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/fireplace/log",
+    "coals": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/fireplace/coals",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/fireplace/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/fireplace/plum",
+    "plaque": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/fireplace/plaque",
+    "brass": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/fireplace/brass",
+    "linen": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/fireplace/linen",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/fireplace/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/fireplace/stone"
+  },
+  "owned_textures": {
+    "stone": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/fireplace/stone",
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/fireplace/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/fireplace/wood_v",
+    "pale_stone": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/fireplace/pale_stone",
+    "iron": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/fireplace/iron",
+    "log": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/fireplace/log",
+    "coals": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/fireplace/coals",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/fireplace/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/fireplace/plum",
+    "plaque": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/fireplace/plaque",
+    "brass": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/fireplace/brass",
+    "linen": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/fireplace/linen",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/fireplace/ivy"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      32,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/fixtures/hearth/fireplace",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        0
+      ]
+    ]
+  }
+}

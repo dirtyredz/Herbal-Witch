@@ -1,0 +1,42 @@
+{
+  "project": "desk_chair.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/seating/chairs/desk_chair/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/seating/chairs/desk_chair/wood_v",
+    "velvet": "herbalwitch:block/pieces/decor/pieces/seating/chairs/desk_chair/velvet",
+    "pink": "herbalwitch:block/pieces/decor/pieces/seating/chairs/desk_chair/pink",
+    "plum": "herbalwitch:block/pieces/decor/pieces/seating/chairs/desk_chair/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/seating/chairs/desk_chair/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/seating/chairs/desk_chair/ivy",
+    "iron": "herbalwitch:block/pieces/decor/pieces/seating/chairs/desk_chair/iron",
+    "particle": "herbalwitch:block/pieces/decor/pieces/seating/chairs/desk_chair/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/seating/chairs/desk_chair/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/seating/chairs/desk_chair/wood_v",
+    "velvet": "herbalwitch:block/pieces/decor/pieces/seating/chairs/desk_chair/velvet",
+    "pink": "herbalwitch:block/pieces/decor/pieces/seating/chairs/desk_chair/pink",
+    "plum": "herbalwitch:block/pieces/decor/pieces/seating/chairs/desk_chair/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/seating/chairs/desk_chair/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/seating/chairs/desk_chair/ivy",
+    "iron": "herbalwitch:block/pieces/decor/pieces/seating/chairs/desk_chair/iron"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/decor/pieces/seating/chairs/desk_chair/base",
+      "item": true
+    }
+  ]
+}

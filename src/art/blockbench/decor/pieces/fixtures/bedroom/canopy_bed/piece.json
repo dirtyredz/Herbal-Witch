@@ -1,0 +1,101 @@
+{
+  "project": "canopy_bed.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/canopy_bed/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/canopy_bed/wood_v",
+    "linen": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/canopy_bed/linen",
+    "velvet": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/canopy_bed/velvet",
+    "pink": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/canopy_bed/pink",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/canopy_bed/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/canopy_bed/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/canopy_bed/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/canopy_bed/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/canopy_bed/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/canopy_bed/wood_v",
+    "linen": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/canopy_bed/linen",
+    "velvet": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/canopy_bed/velvet",
+    "pink": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/canopy_bed/pink",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/canopy_bed/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/canopy_bed/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/bedroom/canopy_bed/ivy"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      48,
+      32
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/fixtures/bedroom/canopy_bed",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        1
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1
+      ],
+      [
+        0,
+        2,
+        0
+      ],
+      [
+        1,
+        2,
+        0
+      ],
+      [
+        0,
+        2,
+        1
+      ],
+      [
+        1,
+        2,
+        1
+      ]
+    ]
+  }
+}

@@ -5,6 +5,8 @@ import io.github.dirtyredz.herbalwitch.decor.catalog.FinishCatalog;
 import io.github.dirtyredz.herbalwitch.decor.catalog.FurnitureBehavior;
 import io.github.dirtyredz.herbalwitch.decor.catalog.FurnitureSpec;
 import io.github.dirtyredz.herbalwitch.decor.behavior.lighting.DecorLightBlock;
+import io.github.dirtyredz.herbalwitch.decor.behavior.openings.DecorDoorBlock;
+import io.github.dirtyredz.herbalwitch.decor.behavior.sleeping.DecorBedBlock;
 import io.github.dirtyredz.herbalwitch.decor.behavior.seating.SeatingBlock;
 import io.github.dirtyredz.herbalwitch.decor.behavior.storage.StorageFurnitureBlock;
 import net.minecraft.world.level.block.Block;
@@ -29,6 +31,8 @@ public final class DecorBlockFactory {
             case SEATING -> new SeatingBlock(spec, properties);
             case STORAGE, DISPLAY -> new StorageFurnitureBlock(spec, properties);
             case LIGHT -> new DecorLightBlock(spec, properties);
+            case BED -> new DecorBedBlock(spec, properties);
+            case DOOR -> new DecorDoorBlock(spec, properties);
             case RUG -> spec.multiblock() ? new DecorAssemblyBlock(spec, properties) : new CarpetBlock(properties);
             default -> new DecorAssemblyBlock(spec, properties);
         };

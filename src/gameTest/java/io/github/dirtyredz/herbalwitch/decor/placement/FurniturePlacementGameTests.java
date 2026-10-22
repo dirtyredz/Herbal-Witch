@@ -186,6 +186,7 @@ public final class FurniturePlacementGameTests {
         floor(helper);
         FurnitureSpec bench = SeatingCatalog.BENCH;
         List<BlockPos> cells = cells(bench, TARGET, Direction.NORTH);
+        cells.forEach(c -> helper.setBlock(c.below(), Blocks.DIRT)); // grass needs soil to stand
         cells.forEach(c -> helper.setBlock(c, Blocks.GRASS)); // replaceable, must come back
         Consumer<BlockEvent.EntityMultiPlaceEvent> cancel = event -> event.setCanceled(true);
         MinecraftForge.EVENT_BUS.addListener(cancel);

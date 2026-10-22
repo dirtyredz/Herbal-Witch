@@ -1,0 +1,45 @@
+{
+  "project": "bookshelf.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/study/bookshelf/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/study/bookshelf/wood_v",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/study/bookshelf/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/study/bookshelf/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/study/bookshelf/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/storage/study/bookshelf/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/study/bookshelf/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/study/bookshelf/wood_v",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/study/bookshelf/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/study/bookshelf/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/study/bookshelf/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      32,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/storage/study/bookshelf",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ]
+    ]
+  }
+}

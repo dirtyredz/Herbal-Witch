@@ -1,0 +1,38 @@
+{
+  "project": "shoe_cabinet.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/shoe_cabinet/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/shoe_cabinet/wood_v",
+    "paint": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/shoe_cabinet/paint",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/shoe_cabinet/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/shoe_cabinet/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/shoe_cabinet/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/shoe_cabinet/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/shoe_cabinet/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/shoe_cabinet/wood_v",
+    "paint": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/shoe_cabinet/paint",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/shoe_cabinet/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/shoe_cabinet/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/bedroom/shoe_cabinet/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/decor/pieces/storage/bedroom/shoe_cabinet/base",
+      "item": true
+    }
+  ]
+}

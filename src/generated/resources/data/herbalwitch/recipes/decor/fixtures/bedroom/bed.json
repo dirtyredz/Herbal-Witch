@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "tag": "minecraft:beds"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "T": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "T T",
+    "PBP"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/fixtures/bed"
+  },
+  "show_notification": true
+}

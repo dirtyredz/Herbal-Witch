@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "S": {
+      "item": "minecraft:dark_oak_slab"
+    }
+  },
+  "pattern": [
+    "PGP",
+    "SSS",
+    "P P"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/surfaces/vanity_table"
+  },
+  "show_notification": true
+}

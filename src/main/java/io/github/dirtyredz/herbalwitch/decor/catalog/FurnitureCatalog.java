@@ -22,7 +22,7 @@ import java.util.stream.Stream;
  */
 public final class FurnitureCatalog {
     /** The last delivered wave; every piece up to and including it is registered. */
-    public static final Wave DELIVERED = Wave.A;
+    public static final Wave DELIVERED = Wave.B;
 
     /** Every described piece, delivered or not, in creative-tab order. */
     public static final List<FurnitureSpec> DESCRIBED = Stream.of(SeatingCatalog.ALL, SurfacesCatalog.ALL, StorageCatalog.ALL,
