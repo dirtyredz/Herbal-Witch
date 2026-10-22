@@ -95,25 +95,15 @@ public final class MagicalProcessPolicy implements ProcessExecutionPolicy {
         }
         ServerPlayer payer = OnlinePlayers.find(operator.player()).orElseThrow();
         int units = EnergyService.units(operator.energy());
-        Optional<WitchState> before = WitchStatusService.snapshot(payer);
-        if (before.isEmpty()) {
-            return Optional.of(ProcessStatus.NEEDS_WITCH);
-        }
-        try {
-            commit.apply();
-            if (WitchStatusService.debit(payer, units) != EnergyService.Result.OK) {
-                commit.rollback();
-                WitchStatusService.restore(payer, before.get());
-                return Optional.of(ProcessStatus.NEEDS_ENERGY);
-            }
-            WitchStatusService.awardPractice(payer, units);
-        } catch (RuntimeException e) {
-            commit.rollback();
-            WitchStatusService.restore(payer, before.get());
-            throw e;
-        }
-        WitchStatusService.flush(payer);
-        return Optional.empty();
+        boolean completed = WitchStatusService.spend(payer, units, new WitchStatusService.Change() {
+            @Override
+            public boolean prepare() { commit.apply(); return true; }
+            @Override
+            public boolean apply() { return true; }
+            @Override
+            public void rollback() { commit.rollback(); }
+        });
+        return completed ? Optional.empty() : Optional.of(ProcessStatus.NEEDS_ENERGY);
     }
 
     @Override

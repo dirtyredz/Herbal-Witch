@@ -206,17 +206,12 @@ public final class WardService {
         if (WitchStatusService.check(witch, units) != EnergyService.Result.OK) {
             return "not_enough_energy";
         }
-        Optional<WitchState> before = WitchStatusService.snapshot(witch);
-        if (WitchStatusService.debit(witch, units) != EnergyService.Result.OK) {
-            return "not_enough_energy";
-        }
-        if (!charge(witch, level, pos)) {
-            before.ifPresent(s -> WitchStatusService.restore(witch, s));
-            return "failed";
-        }
-        WitchStatusService.awardPractice(witch, units);
-        WitchStatusService.flush(witch);
-        return "activated";
+        boolean[] attempted = {false};
+        boolean activated = WitchStatusService.spend(witch, units, () -> {
+            attempted[0] = true;
+            return charge(witch, level, pos);
+        });
+        return activated ? "activated" : attempted[0] ? "failed" : "not_enough_energy";
     }
 
     /** The ritual route: the ritual already paid; checks again and charges. */

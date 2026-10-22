@@ -1,5 +1,13 @@
 # Gotchas - The Herbal Witch
 
+- **Paid operations use `WitchStatusService.spend`, in hundredths.** Put inventory consumption in
+  `Change.prepare`, the paid change in `apply`, and participant-owned restoration in `rollback`.
+  `afterPractice` preserves success side effects that precede the private update. No participant runs
+  on invalid, unaffordable or read-only state. Durable witch state is restored on false or exception;
+  arbitrary world mutations and already-sent notifications remain the participant's responsibility.
+  Founding and designation keep their no-energy path: a founder is not yet a witch and designation
+  may have no payer, so neither may use a witch-only zero-cost spend.
+
 - **Fake players use independent `OnlinePlayers.register(...)` scopes.** Close the scope when its
   fixture ends; never replace another feature's roster. Closing teaching registrations must preserve
   witch fixtures. Server stop closes every remaining scope, and removed fakes are never returned.

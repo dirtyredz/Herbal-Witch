@@ -85,37 +85,56 @@ public final class ConversionCommit {
         if (foundingClaim.isPresent() && !FoundingService.beginCommit(server, foundingClaim.get())) {
             return Outcome.NOT_PERSISTED;
         }
-        Optional<WitchState> payerState = payer.flatMap(WitchStatusService::snapshot);
         Optional<WitchState> recipientState = WitchStatusService.snapshot(recipient);
         java.util.Map<Integer, ItemStack> payerSlots = payer.map(offering::backup).orElse(java.util.Map.of());
         List<ItemStack> recipientItems = copy(recipient.getInventory());
-        try {
-            payer.ifPresent(offering::consume);
-            if (payer.isPresent() && energyUnits > 0 && WitchStatusService.debit(payer.get(), energyUnits) != EnergyService.Result.OK) {
-                throw new IllegalStateException("debit refused after its check");
+        boolean paid = payer.isPresent() && energyUnits > 0;
+        WitchStatusService.Change change = new WitchStatusService.Change() {
+            @Override
+            public boolean prepare() { payer.ifPresent(offering::consume); return true; }
+            @Override
+            public boolean apply() {
+                if (!WitchStatusService.convert(recipient, UUID.randomUUID())) {
+                    throw new IllegalStateException("conversion refused after its check");
+                }
+                if (!recipient.getInventory().add(new ItemStack(GrimoireItems.BOOK.get()))) {
+                    throw new IllegalStateException("the grimoire did not fit after its check");
+                }
+                return true;
             }
-            if (!WitchStatusService.convert(recipient, UUID.randomUUID())) {
-                throw new IllegalStateException("conversion refused after its check");
+            @Override
+            public void afterPractice() { payer.ifPresent(p -> p.getInventory().setChanged()); }
+            @Override
+            public void rollback() {
+                payer.ifPresent(p -> AltarOffering.restore(p, payerSlots));
+                restore(recipient.getInventory(), recipientItems);
+                recipientState.ifPresent(s -> WitchStatusService.restore(recipient, s));
+                foundingClaim.ifPresent(claim -> FoundingService.abortCommit(server, claim));
             }
-            if (!recipient.getInventory().add(new ItemStack(GrimoireItems.BOOK.get()))) {
-                throw new IllegalStateException("the grimoire did not fit after its check");
+        };
+        if (paid) {
+            // Paid initiation has a witch payer; its recipient's conversion notifications still
+            // precede the gift, payer practice/update and discovery grants.
+            try {
+                if (!WitchStatusService.spend(payer.orElseThrow(), energyUnits, change)) { return Outcome.FAILED; }
+            } catch (RuntimeException e) {
+                return Outcome.FAILED;
             }
-        } catch (RuntimeException e) {
-            payer.ifPresent(p -> AltarOffering.restore(p, payerSlots));
-            restore(recipient.getInventory(), recipientItems);
-            payer.ifPresent(p -> payerState.ifPresent(s -> WitchStatusService.restore(p, s)));
-            recipientState.ifPresent(s -> WitchStatusService.restore(recipient, s));
-            foundingClaim.ifPresent(claim -> FoundingService.abortCommit(server, claim));
-            return Outcome.FAILED;
+        } else {
+            // A founder is not yet a witch and designation has no payer. Neither uses witch-only spending.
+            try {
+                change.prepare();
+                change.apply();
+            } catch (RuntimeException e) {
+                change.rollback();
+                return Outcome.FAILED;
+            }
         }
         foundingClaim.ifPresent(claim -> FoundingService.complete(server, claim, recipient.getUUID()));
-        payer.ifPresent(p -> {
-            if (energyUnits > 0) {
-                WitchStatusService.awardPractice(p, energyUnits);
-            }
-            p.getInventory().setChanged();
-            WitchStatusService.flush(p);
-        });
+        if (!paid) {
+            change.afterPractice();
+            payer.ifPresent(WitchStatusService::flush);
+        }
         List<EntryKey> learned = new ArrayList<>();
         WitchcraftKeys.CONVERSION_PAGES.forEach(page -> learned.add(WitchcraftKeys.key(page)));
         learned.add(AltarEntries.key(session.action()));

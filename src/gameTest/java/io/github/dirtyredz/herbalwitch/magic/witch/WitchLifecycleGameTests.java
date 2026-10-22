@@ -48,7 +48,7 @@ public final class WitchLifecycleGameTests {
         WitchCapability cap = WitchCapability.of(fresh).orElseThrow();
         check(!cap.state().initiated() && cap.state().energyUnits() == 0 && cap.writable(), "fresh player: " + cap.state());
         ServerPlayer w = witch(helper, "lc_saved", FEET);
-        WitchStatusService.debit(w, 2_500);
+        StatusFixtures.debit(w, 2_500);
         CompoundTag saved = WitchCapability.of(w).orElseThrow().save();
         WitchCapability reloaded = new WitchCapability();
         reloaded.load(saved);
@@ -61,8 +61,8 @@ public final class WitchLifecycleGameTests {
     public static void deathAndReturnFromTheEndCopyStatusOnceWithoutRefill(GameTestHelper helper) {
         for (boolean died : new boolean[] {true, false}) {
             ServerPlayer old = witch(helper, "lc_old_" + died, FEET);
-            WitchStatusService.debit(old, 4_000);
-            WitchStatusService.awardPractice(old, 6_000);
+            StatusFixtures.debit(old, 4_000);
+            StatusFixtures.practice(old, 6_000);
             StatusFixtures.tea(WitchCapability.of(old).orElseThrow().state(), 300);
             WitchState before = WitchCapability.of(old).orElseThrow().state().copy();
             ServerPlayer replacement = player(helper, "lc_new_" + died, FEET);

@@ -56,18 +56,27 @@ public final class WitchStatusService {
         return EnergyService.check(cap.get().state(), units);
     }
 
-    /** Spends {@code units}; nothing changes unless OK. Spending breaks passive rest. */
-    public static EnergyService.Result debit(ServerPlayer player, int units) {
+    /** A participating synchronous change, with inventory preparation before the energy debit. */
+    @FunctionalInterface
+    public interface Change {
+        default boolean prepare() { return true; }
+        boolean apply();
+        /** Success-only side effects that must precede the private status update. */
+        default void afterPractice() { }
+        default void rollback() { }
+    }
+
+    /**
+     * Pays in hundredths, applies a change, awards successful practice and synchronizes once.
+     * Refusal and RuntimeException restore durable witch state and participating mutations.
+     * Notifications already emitted by a participant and arbitrary world files are not retracted.
+     */
+    public static boolean spend(ServerPlayer player, int units, Change change) {
         Optional<WitchCapability> cap = of(player);
-        if (cap.isEmpty() || !cap.get().writable()) {
-            return EnergyService.Result.NOT_WITCH;
-        }
-        EnergyService.Result result = EnergyService.debit(cap.get().state(), units);
-        if (result == EnergyService.Result.OK && units > 0) {
-            cap.get().disturb();
-            cap.get().changed();
-        }
-        return result;
+        if (cap.isEmpty()) { return false; }
+        WitchCapability c = cap.get();
+        return WitchSpend.run(c.state(), c.writable(), balance(), units, change,
+                () -> { c.disturb(); c.changed(); }, () -> c.changed(true), () -> flush(player));
     }
 
     /** Restores up to {@code units} (clamped to capacity); returns what was added. */
@@ -81,17 +90,6 @@ public final class WitchStatusService {
             cap.get().changed();
         }
         return added;
-    }
-
-    /** Records successful expenditure after a completed operation; returns thresholds newly crossed. */
-    public static int awardPractice(ServerPlayer player, int units) {
-        Optional<WitchCapability> cap = of(player);
-        if (cap.isEmpty() || !cap.get().writable()) {
-            return 0;
-        }
-        int crossed = EnergyService.awardPractice(cap.get().state(), balance(), units);
-        cap.get().changed();
-        return crossed;
     }
 
     /** A copy of the durable state, for an operation's rollback. */

@@ -88,11 +88,20 @@ public final class AttunementAction implements AltarSessionService.Handler {
         if (!AltarSessionService.completeOnce(session)) {
             return;
         }
-        p.offering().consume(witch);
-        WitchStatusService.debit(witch, p.energyUnits());
-        WitchStatusService.awardPractice(witch, p.energyUnits());
-        DiscoveryService.grant(witch, AltarEntries.key(AltarActionSpec.ATTUNEMENT));
-        WitchStatusService.flush(witch);
+        var slots = p.offering().backup(witch);
+        if (!WitchStatusService.spend(witch, p.energyUnits(), new WitchStatusService.Change() {
+            @Override
+            public boolean prepare() { p.offering().consume(witch); return true; }
+            @Override
+            public boolean apply() { return true; }
+            @Override
+            public void afterPractice() { DiscoveryService.grant(witch, AltarEntries.key(AltarActionSpec.ATTUNEMENT)); }
+            @Override
+            public void rollback() { AltarOffering.restore(witch, slots); }
+        })) {
+            AltarSessionService.notice(witch, "not_enough_energy");
+            return;
+        }
         boolean complete = WitchCapability.of(witch)
                 .map(c -> PracticeProgress.complete(WitchRules.server().energy(), c.state().practiceSpent())).orElse(false);
         AltarSessionService.notice(witch, complete ? "attunement.done_max" : "attunement.done");

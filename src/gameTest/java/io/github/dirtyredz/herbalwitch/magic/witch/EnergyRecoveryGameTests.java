@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.magic.witch;
 
+import io.github.dirtyredz.herbalwitch.magic.witch.status.StatusFixtures;
+
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.DrinkApplication;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.EverydayProductCatalog;
@@ -58,7 +60,7 @@ public final class EnergyRecoveryGameTests {
     public static void energyTeaRestoresAWitchOnceThenWaitsForItsCooldown(GameTestHelper helper) {
         floor(helper);
         ServerPlayer w = witch(helper, "er_tea", FEET);
-        WitchStatusService.debit(w, 6_000);
+        StatusFixtures.debit(w, 6_000);
         w.getFoodData().setFoodLevel(10);
         ItemStack after = drink(helper, w, tea(2));
         check(WitchStatusService.energyUnits(w) == 4_000 + 2_500, "tea restores 25: " + WitchStatusService.energyUnits(w));
@@ -87,7 +89,7 @@ public final class EnergyRecoveryGameTests {
     public static void restfulInfusionPreparesTheNextRewardedSleepOnce(GameTestHelper helper) {
         floor(helper);
         ServerPlayer w = witch(helper, "er_restful", FEET);
-        WitchStatusService.debit(w, 9_000);
+        StatusFixtures.debit(w, 9_000);
         w.getStats().setValue(w, Stats.CUSTOM.get(Stats.TIME_SINCE_REST), 50_000);
         drink(helper, w, new ItemStack(PreparationItems.product(EverydayProductCatalog.RESTFUL_INFUSION)));
         check(w.getStats().getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)) == 0, "the rest statistic still resets");
@@ -109,7 +111,7 @@ public final class EnergyRecoveryGameTests {
     public static void stillnessRestoresEnergyAndMovementResetsIt(GameTestHelper helper) {
         floor(helper);
         ServerPlayer w = witch(helper, "er_rest", FEET);
-        WitchStatusService.debit(w, 5_000);
+        StatusFixtures.debit(w, 5_000);
         EnergyBalance b = WitchRules.server().energy();
         int pct = RecoveryConditions.bonusPercent(w, b);
         for (int i = 0; i < b.restInterval() + 1; i++) {

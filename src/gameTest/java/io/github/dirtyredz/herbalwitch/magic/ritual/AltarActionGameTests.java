@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.magic.ritual;
 
+import io.github.dirtyredz.herbalwitch.magic.witch.status.StatusFixtures;
+
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
 import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyItems;
@@ -182,7 +184,7 @@ public final class AltarActionGameTests {
     public static void meditationSettlesRestoresAndStopsWhenFull(GameTestHelper helper) {
         altar(helper);
         ServerPlayer w = witch(helper, "aa_meditating", FRONT);
-        WitchStatusService.debit(w, 300);
+        StatusFixtures.debit(w, 300);
         AltarMenu menu = open(helper, w);
         check(MeditationAction.begin(w, menu).equals("meditation.begun"), "meditation did not begin");
         AltarSession s = session(w);

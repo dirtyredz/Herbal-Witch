@@ -68,24 +68,13 @@ public final class CircleRituals {
      */
     public static boolean pay(ServerPlayer witch, AltarOffering offering, int units, BooleanSupplier change) {
         Map<Integer, ItemStack> slots = offering.backup(witch);
-        Optional<WitchState> before = WitchStatusService.snapshot(witch);
-        if (before.isEmpty()) {
-            return false;
-        }
-        try {
-            offering.consume(witch);
-            if (WitchStatusService.debit(witch, units) != EnergyService.Result.OK || !change.getAsBoolean()) {
-                AltarOffering.restore(witch, slots);
-                WitchStatusService.restore(witch, before.get());
-                return false;
-            }
-        } catch (RuntimeException e) {
-            AltarOffering.restore(witch, slots);
-            WitchStatusService.restore(witch, before.get());
-            throw e;
-        }
-        WitchStatusService.awardPractice(witch, units);
-        WitchStatusService.flush(witch);
-        return true;
+        return WitchStatusService.spend(witch, units, new WitchStatusService.Change() {
+            @Override
+            public boolean prepare() { offering.consume(witch); return true; }
+            @Override
+            public boolean apply() { return change.getAsBoolean(); }
+            @Override
+            public void rollback() { AltarOffering.restore(witch, slots); }
+        });
     }
 }

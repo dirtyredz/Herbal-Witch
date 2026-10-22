@@ -33,6 +33,14 @@ enter through named `WitchStatusService` operations. `WitchStatusSync` owns epoc
 snapshot/rules emission behind the existing service entry points; save fields and protocol stay fixed.
 GameTest setup uses helpers in its own status package, which are excluded from the release jar.
 
+`WitchStatusService.spend(player, units, change)` coordinates paid operations in hundredths:
+check, snapshot, participant preparation, debit, change, successful practice, success side effects,
+then private synchronization. False results and runtime exceptions restore durable witch state;
+participants restore their inventories or recipients. A rollback exception cannot prevent durable
+restoration or replace an original exception. Transient disturbance remains set after a debit.
+Founding and designation retain their separate no-energy conversion path. This is a synchronous
+boundary, without crash atomicity or retraction of already-emitted conversion notifications.
+
 **Decor (`decor/`).** One cottage design (`FinishCatalog`, a single entry) and 94 pieces described in
 seven family catalogues (`decor/catalog/pieces/`), each a `FurnitureSpec`: id, family, art group, wave,
 behaviour (`FurnitureBehavior`), mount (`MountSpec`: support and cells, `(right, up, depth)` from the
