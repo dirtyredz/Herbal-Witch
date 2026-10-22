@@ -1,6 +1,6 @@
-package io.github.dirtyredz.herbalwitch.client.witch;
+package io.github.dirtyredz.herbalwitch.client.magic.witch;
 
-import io.github.dirtyredz.herbalwitch.client.witch.hud.EnergyOverlay;
+import io.github.dirtyredz.herbalwitch.client.magic.witch.hud.EnergyOverlay;
 import io.github.dirtyredz.herbalwitch.magic.witch.network.WitchPackets;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;

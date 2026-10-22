@@ -1,4 +1,4 @@
-package io.github.dirtyredz.herbalwitch.client.ritual;
+package io.github.dirtyredz.herbalwitch.client.magic.ritual;
 
 import io.github.dirtyredz.herbalwitch.apothecary.botany.garden.HerbBedBlock;
 import io.github.dirtyredz.herbalwitch.magic.ward.block.WardStoneBlock;

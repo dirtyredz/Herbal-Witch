@@ -1,4 +1,4 @@
-package io.github.dirtyredz.herbalwitch.client.ritual;
+package io.github.dirtyredz.herbalwitch.client.magic.ritual;
 
 import io.github.dirtyredz.herbalwitch.client.placement.PlacementPreviewRenderer;
 import io.github.dirtyredz.herbalwitch.magic.ritual.altar.AltarBlock;

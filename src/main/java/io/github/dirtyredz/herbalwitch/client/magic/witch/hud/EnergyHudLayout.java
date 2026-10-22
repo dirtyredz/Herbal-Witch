@@ -1,4 +1,4 @@
-package io.github.dirtyredz.herbalwitch.client.witch.hud;
+package io.github.dirtyredz.herbalwitch.client.magic.witch.hud;
 
 /**
  * Where the energy HUD goes and how its fill moves, as pure arithmetic (no client classes, so it is

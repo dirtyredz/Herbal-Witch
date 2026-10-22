@@ -1,6 +1,6 @@
-package io.github.dirtyredz.herbalwitch.client.witch;
+package io.github.dirtyredz.herbalwitch.client.magic.witch;
 
-import io.github.dirtyredz.herbalwitch.client.witch.hud.EnergyHudLayout;
+import io.github.dirtyredz.herbalwitch.client.magic.witch.hud.EnergyHudLayout;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;

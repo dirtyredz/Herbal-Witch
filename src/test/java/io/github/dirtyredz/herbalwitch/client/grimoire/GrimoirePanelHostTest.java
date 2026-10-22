@@ -1,9 +1,9 @@
 package io.github.dirtyredz.herbalwitch.client.grimoire;
 
-import io.github.dirtyredz.herbalwitch.client.ritual.AltarScreen;
+import io.github.dirtyredz.herbalwitch.client.magic.ritual.AltarScreen;
 import io.github.dirtyredz.herbalwitch.client.stations.HearthScreen;
 import io.github.dirtyredz.herbalwitch.client.stations.ProcessStationScreen;
-import io.github.dirtyredz.herbalwitch.client.ward.WardScreen;
+import io.github.dirtyredz.herbalwitch.client.magic.ward.WardScreen;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;

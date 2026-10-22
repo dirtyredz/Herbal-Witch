@@ -1,4 +1,4 @@
-package io.github.dirtyredz.herbalwitch.client.ritual;
+package io.github.dirtyredz.herbalwitch.client.magic.ritual;
 
 import io.github.dirtyredz.herbalwitch.magic.ritual.network.AltarPackets;
 import io.github.dirtyredz.herbalwitch.magic.ritual.network.AltarUpdate;

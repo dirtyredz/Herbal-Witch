@@ -1,6 +1,6 @@
-package io.github.dirtyredz.herbalwitch.client.ritual.widgets;
+package io.github.dirtyredz.herbalwitch.client.magic.ritual.widgets;
 
-import io.github.dirtyredz.herbalwitch.client.ritual.RitualTargets;
+import io.github.dirtyredz.herbalwitch.client.magic.ritual.RitualTargets;
 import io.github.dirtyredz.herbalwitch.magic.ritual.catalog.AltarActionSpec;
 import io.github.dirtyredz.herbalwitch.magic.ritual.network.AltarRequest;
 import io.github.dirtyredz.herbalwitch.magic.ritual.network.AltarUpdate;

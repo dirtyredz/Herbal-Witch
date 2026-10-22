@@ -1,4 +1,4 @@
-package io.github.dirtyredz.herbalwitch.client.ward;
+package io.github.dirtyredz.herbalwitch.client.magic.ward;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.client.grimoire.GrimoirePanelHost;

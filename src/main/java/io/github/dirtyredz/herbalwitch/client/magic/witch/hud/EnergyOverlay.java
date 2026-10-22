@@ -1,8 +1,8 @@
-package io.github.dirtyredz.herbalwitch.client.witch.hud;
+package io.github.dirtyredz.herbalwitch.client.magic.witch.hud;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.client.witch.WitchClientConfig;
-import io.github.dirtyredz.herbalwitch.client.witch.WitchClientState;
+import io.github.dirtyredz.herbalwitch.client.magic.witch.WitchClientConfig;
+import io.github.dirtyredz.herbalwitch.client.magic.witch.WitchClientState;
 import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyBalance;
 import io.github.dirtyredz.herbalwitch.magic.witch.network.WitchSnapshot;
 import net.minecraft.client.Minecraft;

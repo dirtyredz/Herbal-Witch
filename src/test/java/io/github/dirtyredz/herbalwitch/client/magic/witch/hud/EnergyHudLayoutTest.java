@@ -1,7 +1,7 @@
-package io.github.dirtyredz.herbalwitch.client.witch.hud;
+package io.github.dirtyredz.herbalwitch.client.magic.witch.hud;
 
-import io.github.dirtyredz.herbalwitch.client.witch.hud.EnergyHudLayout.Anchor;
-import io.github.dirtyredz.herbalwitch.client.witch.hud.EnergyHudLayout.Placement;
+import io.github.dirtyredz.herbalwitch.client.magic.witch.hud.EnergyHudLayout.Anchor;
+import io.github.dirtyredz.herbalwitch.client.magic.witch.hud.EnergyHudLayout.Placement;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

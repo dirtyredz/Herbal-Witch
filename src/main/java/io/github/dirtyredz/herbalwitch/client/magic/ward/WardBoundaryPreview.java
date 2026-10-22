@@ -1,4 +1,4 @@
-package io.github.dirtyredz.herbalwitch.client.ward;
+package io.github.dirtyredz.herbalwitch.client.magic.ward;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

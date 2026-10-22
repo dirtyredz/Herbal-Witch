@@ -1,4 +1,4 @@
-package io.github.dirtyredz.herbalwitch.client.ritual.widgets;
+package io.github.dirtyredz.herbalwitch.client.magic.ritual.widgets;
 
 import io.github.dirtyredz.herbalwitch.magic.ritual.network.AltarRequest;
 import net.minecraft.network.chat.Component;

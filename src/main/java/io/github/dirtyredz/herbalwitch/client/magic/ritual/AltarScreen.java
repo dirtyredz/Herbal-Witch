@@ -1,11 +1,11 @@
-package io.github.dirtyredz.herbalwitch.client.ritual;
+package io.github.dirtyredz.herbalwitch.client.magic.ritual;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.client.grimoire.GrimoirePanelHost;
-import io.github.dirtyredz.herbalwitch.client.ritual.widgets.AltarActionPanel;
-import io.github.dirtyredz.herbalwitch.client.ritual.widgets.CirclePanel;
-import io.github.dirtyredz.herbalwitch.client.ritual.widgets.InitiationPanel;
-import io.github.dirtyredz.herbalwitch.client.witch.WitchClientState;
+import io.github.dirtyredz.herbalwitch.client.magic.ritual.widgets.AltarActionPanel;
+import io.github.dirtyredz.herbalwitch.client.magic.ritual.widgets.CirclePanel;
+import io.github.dirtyredz.herbalwitch.client.magic.ritual.widgets.InitiationPanel;
+import io.github.dirtyredz.herbalwitch.client.magic.witch.WitchClientState;
 import io.github.dirtyredz.herbalwitch.magic.ritual.grimoire.AltarEntries;
 import io.github.dirtyredz.herbalwitch.magic.ritual.menu.AltarMenu;
 import io.github.dirtyredz.herbalwitch.magic.ritual.network.AltarPackets;

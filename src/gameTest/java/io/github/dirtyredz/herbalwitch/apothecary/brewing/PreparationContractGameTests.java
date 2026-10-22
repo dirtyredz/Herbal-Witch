@@ -1,4 +1,4 @@
-package io.github.dirtyredz.herbalwitch.preparations;
+package io.github.dirtyredz.herbalwitch.apothecary.brewing;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.AdvancedProductCatalog;

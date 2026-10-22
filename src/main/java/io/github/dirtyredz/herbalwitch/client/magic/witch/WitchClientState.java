@@ -1,4 +1,4 @@
-package io.github.dirtyredz.herbalwitch.client.witch;
+package io.github.dirtyredz.herbalwitch.client.magic.witch;
 
 import io.github.dirtyredz.herbalwitch.client.grimoire.GrimoireClientState;
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
