@@ -1,0 +1,134 @@
+{
+  "textures": {
+    "glow": "herbalwitch:block/pieces/ritual/circle/glow",
+    "particle": "herbalwitch:block/pieces/ritual/circle/stone"
+  },
+  "elements": [
+    {
+      "from": [
+        11.4,
+        2,
+        4.5
+      ],
+      "to": [
+        12.6,
+        2.12,
+        7.5
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "up": {
+          "uv": [
+            11.4,
+            4.5,
+            12.6,
+            7.5
+          ],
+          "texture": "#glow"
+        },
+        "north": {
+          "uv": [
+            3.4,
+            13.88,
+            4.6,
+            14
+          ],
+          "texture": "#glow"
+        },
+        "south": {
+          "uv": [
+            11.4,
+            13.88,
+            12.6,
+            14
+          ],
+          "texture": "#glow"
+        },
+        "west": {
+          "uv": [
+            4.5,
+            13.88,
+            7.5,
+            14
+          ],
+          "texture": "#glow"
+        },
+        "east": {
+          "uv": [
+            8.5,
+            13.88,
+            11.5,
+            14
+          ],
+          "texture": "#glow"
+        }
+      }
+    },
+    {
+      "from": [
+        11.4,
+        2,
+        10.5
+      ],
+      "to": [
+        12.6,
+        2.12,
+        13.5
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "up": {
+          "uv": [
+            11.4,
+            10.5,
+            12.6,
+            13.5
+          ],
+          "texture": "#glow"
+        },
+        "north": {
+          "uv": [
+            3.4,
+            13.88,
+            4.6,
+            14
+          ],
+          "texture": "#glow"
+        },
+        "south": {
+          "uv": [
+            11.4,
+            13.88,
+            12.6,
+            14
+          ],
+          "texture": "#glow"
+        },
+        "west": {
+          "uv": [
+            10.5,
+            13.88,
+            13.5,
+            14
+          ],
+          "texture": "#glow"
+        },
+        "east": {
+          "uv": [
+            2.5,
+            13.88,
+            5.5,
+            14
+          ],
+          "texture": "#glow"
+        }
+      }
+    }
+  ]
+}

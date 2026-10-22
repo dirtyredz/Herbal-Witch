@@ -1,0 +1,49 @@
+{
+  "project": "ward_stone.bbmodel",
+  "textures": {
+    "stone": "herbalwitch:block/pieces/ward/ward_stone/stone",
+    "iron": "herbalwitch:block/pieces/ward/ward_stone/iron",
+    "gold": "herbalwitch:block/pieces/ward/ward_stone/gold",
+    "plum": "herbalwitch:block/pieces/ward/ward_stone/plum",
+    "pink": "herbalwitch:block/pieces/ward/ward_stone/pink",
+    "ivy": "herbalwitch:block/pieces/ward/ward_stone/ivy",
+    "glow": "herbalwitch:block/pieces/ward/ward_stone/glow",
+    "particle": "herbalwitch:block/pieces/ward/ward_stone/stone"
+  },
+  "owned_textures": {
+    "stone": "herbalwitch:block/pieces/ward/ward_stone/stone",
+    "iron": "herbalwitch:block/pieces/ward/ward_stone/iron",
+    "gold": "herbalwitch:block/pieces/ward/ward_stone/gold",
+    "plum": "herbalwitch:block/pieces/ward/ward_stone/plum",
+    "pink": "herbalwitch:block/pieces/ward/ward_stone/pink",
+    "ivy": "herbalwitch:block/pieces/ward/ward_stone/ivy",
+    "glow": "herbalwitch:block/pieces/ward/ward_stone/glow"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/ward/ward_stone/base",
+      "item": true,
+      "exclude": [
+        "active"
+      ]
+    },
+    {
+      "model": "block/ward/ward_stone/active",
+      "emissive": [
+        "active"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "project": "cauldron.bbmodel",
+  "textures": {
+    "iron": "herbalwitch:block/pieces/stations/cauldron/iron",
+    "plum": "herbalwitch:block/pieces/stations/cauldron/plum",
+    "copper": "herbalwitch:block/pieces/stations/cauldron/copper",
+    "gold": "herbalwitch:block/pieces/stations/cauldron/gold",
+    "pink": "herbalwitch:block/pieces/stations/cauldron/pink",
+    "glow": "herbalwitch:block/pieces/stations/cauldron/glow",
+    "particle": "herbalwitch:block/pieces/stations/cauldron/iron"
+  },
+  "owned_textures": {
+    "iron": "herbalwitch:block/pieces/stations/cauldron/iron",
+    "plum": "herbalwitch:block/pieces/stations/cauldron/plum",
+    "copper": "herbalwitch:block/pieces/stations/cauldron/copper",
+    "gold": "herbalwitch:block/pieces/stations/cauldron/gold",
+    "pink": "herbalwitch:block/pieces/stations/cauldron/pink",
+    "glow": "herbalwitch:block/pieces/stations/cauldron/glow"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/stations/cauldron/base",
+      "item": true,
+      "exclude": [
+        "active"
+      ]
+    },
+    {
+      "model": "block/stations/cauldron/active",
+      "emissive": [
+        "active"
+      ]
+    }
+  ]
+}

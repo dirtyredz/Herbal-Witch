@@ -51,7 +51,7 @@ function mirrorCentre(cells) {
  * The model outputs of a multiblock: part_<n> (permanent, every cell), <overlay>_<n> (only cells
  * an overlay reaches), <variant>_<n> (every cell: the permanent geometry with its own glowing
  * groups, exclusions or mirroring) and the assembly (the item, the parts put back, with `shift`
- * the move that kept it inside the legal model box).
+ * the move that kept it inside the legal model box), unless the descriptor says assembly: false.
  */
 export function multiblockOutputs(piece, elements) {
   const m = piece.multiblock;
@@ -81,6 +81,7 @@ export function multiblockOutputs(piece, elements) {
       out.push({ path: `${m.dir}/${v.name}_${i}`, elements: withCullfaces(cellEls) });
     });
   }
+  if (m.assembly === false) return out; // too large for one item model: the item names its own (a sprite)
   const assembled = parts.flatMap((els, i) => shift(els, cellOffset(cells[i])));
   const d = legalShift(bounds(assembled));
   out.push({ path: `${m.dir}/assembly`, elements: withCullfaces(shift(assembled, d)), item: true, shift: d });

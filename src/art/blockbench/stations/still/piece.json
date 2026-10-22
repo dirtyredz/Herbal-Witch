@@ -1,0 +1,62 @@
+{
+  "project": "still.bbmodel",
+  "textures": {
+    "copper": "herbalwitch:block/pieces/stations/still/copper",
+    "iron": "herbalwitch:block/pieces/stations/still/iron",
+    "brass": "herbalwitch:block/pieces/stations/still/brass",
+    "gold": "herbalwitch:block/pieces/stations/still/gold",
+    "glass": "herbalwitch:block/pieces/stations/still/glass",
+    "lantern_glass": "herbalwitch:block/pieces/stations/still/lantern_glass",
+    "pages": "herbalwitch:block/pieces/stations/still/pages",
+    "plum": "herbalwitch:block/pieces/stations/still/plum",
+    "glow": "herbalwitch:block/pieces/stations/still/glow",
+    "pink": "herbalwitch:block/pieces/stations/still/pink",
+    "particle": "herbalwitch:block/pieces/stations/still/copper"
+  },
+  "owned_textures": {
+    "copper": "herbalwitch:block/pieces/stations/still/copper",
+    "iron": "herbalwitch:block/pieces/stations/still/iron",
+    "brass": "herbalwitch:block/pieces/stations/still/brass",
+    "gold": "herbalwitch:block/pieces/stations/still/gold",
+    "glass": "herbalwitch:block/pieces/stations/still/glass",
+    "lantern_glass": "herbalwitch:block/pieces/stations/still/lantern_glass",
+    "pages": "herbalwitch:block/pieces/stations/still/pages",
+    "plum": "herbalwitch:block/pieces/stations/still/plum",
+    "glow": "herbalwitch:block/pieces/stations/still/glow",
+    "pink": "herbalwitch:block/pieces/stations/still/pink"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      32,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/stations/still",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ]
+    ],
+    "overlays": [
+      {
+        "name": "active",
+        "group": "active",
+        "emissive": true
+      }
+    ]
+  }
+}

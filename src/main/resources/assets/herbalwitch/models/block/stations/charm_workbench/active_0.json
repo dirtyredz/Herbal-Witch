@@ -1,0 +1,362 @@
+{
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "pink": "herbalwitch:block/pieces/stations/charm_workbench/pink",
+    "flame": "herbalwitch:block/pieces/stations/charm_workbench/flame",
+    "glow": "herbalwitch:block/pieces/stations/charm_workbench/glow",
+    "particle": "herbalwitch:block/pieces/stations/charm_workbench/wood"
+  },
+  "elements": [
+    {
+      "from": [
+        0.1,
+        13.5,
+        3.9
+      ],
+      "to": [
+        1.1,
+        14.5,
+        4.9
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "down": {
+          "uv": [
+            0.1,
+            11.1,
+            1.1,
+            12.1
+          ],
+          "texture": "#pink"
+        },
+        "up": {
+          "uv": [
+            0.1,
+            3.9,
+            1.1,
+            4.9
+          ],
+          "texture": "#pink"
+        },
+        "north": {
+          "uv": [
+            14.9,
+            1.5,
+            15.9,
+            2.5
+          ],
+          "texture": "#pink"
+        },
+        "south": {
+          "uv": [
+            0.1,
+            1.5,
+            1.1,
+            2.5
+          ],
+          "texture": "#pink"
+        },
+        "west": {
+          "uv": [
+            3.9,
+            1.5,
+            4.9,
+            2.5
+          ],
+          "texture": "#pink"
+        },
+        "east": {
+          "uv": [
+            11.1,
+            1.5,
+            12.1,
+            2.5
+          ],
+          "texture": "#pink"
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        13.2,
+        3.6
+      ],
+      "to": [
+        1.4,
+        13.3,
+        5.2
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "down": {
+          "uv": [
+            0,
+            10.8,
+            1.4,
+            12.4
+          ],
+          "texture": "#glow"
+        },
+        "up": {
+          "uv": [
+            0,
+            3.6,
+            1.4,
+            5.2
+          ],
+          "texture": "#glow"
+        },
+        "north": {
+          "uv": [
+            14.6,
+            2.7,
+            16,
+            2.8
+          ],
+          "texture": "#glow"
+        },
+        "south": {
+          "uv": [
+            0,
+            2.7,
+            1.4,
+            2.8
+          ],
+          "texture": "#glow"
+        },
+        "east": {
+          "uv": [
+            10.8,
+            2.7,
+            12.4,
+            2.8
+          ],
+          "texture": "#glow"
+        }
+      }
+    },
+    {
+      "from": [
+        14.05,
+        14.8,
+        9.15
+      ],
+      "to": [
+        14.35,
+        15.7,
+        9.45
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "down": {
+          "uv": [
+            14.05,
+            6.55,
+            14.35,
+            6.85
+          ],
+          "texture": "#flame"
+        },
+        "up": {
+          "uv": [
+            14.05,
+            9.15,
+            14.35,
+            9.45
+          ],
+          "texture": "#flame"
+        },
+        "north": {
+          "uv": [
+            1.65,
+            0.3,
+            1.95,
+            1.2
+          ],
+          "texture": "#flame"
+        },
+        "south": {
+          "uv": [
+            14.05,
+            0.3,
+            14.35,
+            1.2
+          ],
+          "texture": "#flame"
+        },
+        "west": {
+          "uv": [
+            9.15,
+            0.3,
+            9.45,
+            1.2
+          ],
+          "texture": "#flame"
+        },
+        "east": {
+          "uv": [
+            6.55,
+            0.3,
+            6.85,
+            1.2
+          ],
+          "texture": "#flame"
+        }
+      }
+    },
+    {
+      "from": [
+        2.8,
+        14.7,
+        3.2
+      ],
+      "to": [
+        3.1,
+        15,
+        3.5
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "down": {
+          "uv": [
+            2.8,
+            12.5,
+            3.1,
+            12.8
+          ],
+          "texture": "#glow"
+        },
+        "up": {
+          "uv": [
+            2.8,
+            3.2,
+            3.1,
+            3.5
+          ],
+          "texture": "#glow"
+        },
+        "north": {
+          "uv": [
+            12.9,
+            1,
+            13.2,
+            1.3
+          ],
+          "texture": "#glow"
+        },
+        "south": {
+          "uv": [
+            2.8,
+            1,
+            3.1,
+            1.3
+          ],
+          "texture": "#glow"
+        },
+        "west": {
+          "uv": [
+            3.2,
+            1,
+            3.5,
+            1.3
+          ],
+          "texture": "#glow"
+        },
+        "east": {
+          "uv": [
+            12.5,
+            1,
+            12.8,
+            1.3
+          ],
+          "texture": "#glow"
+        }
+      }
+    },
+    {
+      "from": [
+        0.6,
+        15.4,
+        4.8
+      ],
+      "to": [
+        0.9,
+        15.7,
+        5.1
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "down": {
+          "uv": [
+            0.6,
+            10.9,
+            0.9,
+            11.2
+          ],
+          "texture": "#glow"
+        },
+        "up": {
+          "uv": [
+            0.6,
+            4.8,
+            0.9,
+            5.1
+          ],
+          "texture": "#glow"
+        },
+        "north": {
+          "uv": [
+            15.1,
+            0.3,
+            15.4,
+            0.6
+          ],
+          "texture": "#glow"
+        },
+        "south": {
+          "uv": [
+            0.6,
+            0.3,
+            0.9,
+            0.6
+          ],
+          "texture": "#glow"
+        },
+        "west": {
+          "uv": [
+            4.8,
+            0.3,
+            5.1,
+            0.6
+          ],
+          "texture": "#glow"
+        },
+        "east": {
+          "uv": [
+            10.9,
+            0.3,
+            11.2,
+            0.6
+          ],
+          "texture": "#glow"
+        }
+      }
+    }
+  ]
+}

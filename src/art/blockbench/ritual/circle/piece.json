@@ -1,0 +1,129 @@
+{
+  "project": "circle.bbmodel",
+  "textures": {
+    "stone": "herbalwitch:block/pieces/ritual/circle/stone",
+    "pale_stone": "herbalwitch:block/pieces/ritual/circle/pale_stone",
+    "runes": "herbalwitch:block/pieces/ritual/circle/runes",
+    "gold": "herbalwitch:block/pieces/ritual/circle/gold",
+    "linen": "herbalwitch:block/pieces/ritual/circle/linen",
+    "iron": "herbalwitch:block/pieces/ritual/circle/iron",
+    "flame": "herbalwitch:block/pieces/ritual/circle/flame",
+    "glow": "herbalwitch:block/pieces/ritual/circle/glow",
+    "particle": "herbalwitch:block/pieces/ritual/circle/stone"
+  },
+  "owned_textures": {
+    "stone": "herbalwitch:block/pieces/ritual/circle/stone",
+    "pale_stone": "herbalwitch:block/pieces/ritual/circle/pale_stone",
+    "runes": "herbalwitch:block/pieces/ritual/circle/runes",
+    "gold": "herbalwitch:block/pieces/ritual/circle/gold",
+    "linen": "herbalwitch:block/pieces/ritual/circle/linen",
+    "iron": "herbalwitch:block/pieces/ritual/circle/iron",
+    "flame": "herbalwitch:block/pieces/ritual/circle/flame",
+    "glow": "herbalwitch:block/pieces/ritual/circle/glow"
+  },
+  "bounds": {
+    "min": [
+      -64,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      80
+    ]
+  },
+  "multiblock": {
+    "dir": "block/ritual/circle",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        2,
+        0,
+        0
+      ],
+      [
+        3,
+        0,
+        0
+      ],
+      [
+        4,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1
+      ],
+      [
+        4,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        2
+      ],
+      [
+        4,
+        0,
+        2
+      ],
+      [
+        0,
+        0,
+        3
+      ],
+      [
+        4,
+        0,
+        3
+      ],
+      [
+        0,
+        0,
+        4
+      ],
+      [
+        1,
+        0,
+        4
+      ],
+      [
+        2,
+        0,
+        4
+      ],
+      [
+        3,
+        0,
+        4
+      ],
+      [
+        4,
+        0,
+        4
+      ]
+    ],
+    "overlays": [
+      {
+        "name": "active",
+        "group": "active",
+        "emissive": true
+      }
+    ],
+    "assembly": false
+  }
+}

@@ -1,0 +1,372 @@
+{
+  "textures": {
+    "stone": "herbalwitch:block/pieces/ritual/circle/stone",
+    "pale_stone": "herbalwitch:block/pieces/ritual/circle/pale_stone",
+    "runes": "herbalwitch:block/pieces/ritual/circle/runes",
+    "gold": "herbalwitch:block/pieces/ritual/circle/gold",
+    "particle": "herbalwitch:block/pieces/ritual/circle/stone"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        1,
+        16
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#pale_stone"
+        },
+        "north": {
+          "uv": [
+            0,
+            15,
+            16,
+            16
+          ],
+          "texture": "#pale_stone",
+          "cullface": "north"
+        },
+        "south": {
+          "uv": [
+            0,
+            15,
+            16,
+            16
+          ],
+          "texture": "#pale_stone",
+          "cullface": "south"
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        1,
+        2
+      ],
+      "to": [
+        16,
+        2,
+        6
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            0,
+            2,
+            16,
+            6
+          ],
+          "texture": "#stone"
+        },
+        "north": {
+          "uv": [
+            0,
+            14,
+            16,
+            15
+          ],
+          "texture": "#stone"
+        },
+        "south": {
+          "uv": [
+            0,
+            14,
+            16,
+            15
+          ],
+          "texture": "#stone"
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        1,
+        10.5
+      ],
+      "to": [
+        16,
+        1.25,
+        11.5
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            0,
+            10.5,
+            16,
+            11.5
+          ],
+          "texture": "#gold"
+        },
+        "north": {
+          "uv": [
+            0,
+            14.75,
+            16,
+            15
+          ],
+          "texture": "#gold"
+        },
+        "south": {
+          "uv": [
+            0,
+            14.75,
+            16,
+            15
+          ],
+          "texture": "#gold"
+        }
+      }
+    },
+    {
+      "from": [
+        4.5,
+        2,
+        0.5
+      ],
+      "to": [
+        11.5,
+        2.8,
+        7.5
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            4.5,
+            0.5,
+            11.5,
+            7.5
+          ],
+          "texture": "#stone"
+        },
+        "north": {
+          "uv": [
+            4.5,
+            13.2,
+            11.5,
+            14
+          ],
+          "texture": "#stone"
+        },
+        "south": {
+          "uv": [
+            4.5,
+            13.2,
+            11.5,
+            14
+          ],
+          "texture": "#stone"
+        },
+        "west": {
+          "uv": [
+            0.5,
+            13.2,
+            7.5,
+            14
+          ],
+          "texture": "#stone"
+        },
+        "east": {
+          "uv": [
+            8.5,
+            13.2,
+            15.5,
+            14
+          ],
+          "texture": "#stone"
+        }
+      }
+    },
+    {
+      "from": [
+        5.5,
+        2.8,
+        1.5
+      ],
+      "to": [
+        10.5,
+        5.8,
+        6.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            5.5,
+            10.2,
+            10.5,
+            13.2
+          ],
+          "texture": "#runes"
+        },
+        "south": {
+          "uv": [
+            16,
+            3,
+            16,
+            5.4
+          ],
+          "texture": "#runes"
+        },
+        "west": {
+          "uv": [
+            1.5,
+            10.2,
+            6.5,
+            13.2
+          ],
+          "texture": "#runes"
+        },
+        "east": {
+          "uv": [
+            9.5,
+            10.2,
+            14.5,
+            13.2
+          ],
+          "texture": "#runes"
+        }
+      }
+    },
+    {
+      "from": [
+        5.8,
+        5.8,
+        1.8
+      ],
+      "to": [
+        10.2,
+        6.4,
+        6.2
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            5.8,
+            1.8,
+            10.2,
+            6.2
+          ],
+          "texture": "#stone"
+        },
+        "north": {
+          "uv": [
+            5.8,
+            9.6,
+            10.2,
+            10.2
+          ],
+          "texture": "#stone"
+        },
+        "south": {
+          "uv": [
+            5.8,
+            9.6,
+            10.2,
+            10.2
+          ],
+          "texture": "#stone"
+        },
+        "west": {
+          "uv": [
+            1.8,
+            9.6,
+            6.2,
+            10.2
+          ],
+          "texture": "#stone"
+        },
+        "east": {
+          "uv": [
+            9.8,
+            9.6,
+            14.2,
+            10.2
+          ],
+          "texture": "#stone"
+        }
+      }
+    },
+    {
+      "from": [
+        5.2,
+        5,
+        1.2
+      ],
+      "to": [
+        10.8,
+        5.35,
+        6.8
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            5.2,
+            9.2,
+            10.8,
+            14.8
+          ],
+          "texture": "#gold"
+        },
+        "up": {
+          "uv": [
+            5.2,
+            1.2,
+            10.8,
+            6.8
+          ],
+          "texture": "#gold"
+        },
+        "north": {
+          "uv": [
+            5.2,
+            10.65,
+            10.8,
+            11
+          ],
+          "texture": "#gold"
+        },
+        "south": {
+          "uv": [
+            5.2,
+            10.65,
+            10.8,
+            11
+          ],
+          "texture": "#gold"
+        },
+        "west": {
+          "uv": [
+            1.2,
+            10.65,
+            6.8,
+            11
+          ],
+          "texture": "#gold"
+        },
+        "east": {
+          "uv": [
+            9.2,
+            10.65,
+            14.8,
+            11
+          ],
+          "texture": "#gold"
+        }
+      }
+    }
+  ]
+}

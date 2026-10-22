@@ -12,7 +12,7 @@ import { declaredCells, cellProblems } from './geometry/cells.mjs';
 export const SOURCE_DIR = 'src/art/blockbench';
 const KEYS = new Set(['project', 'textures', 'owned_textures', 'bounds', 'outputs', 'multiblock', 'attachments']);
 const OUTPUT_KEYS = new Set(['model', 'item', 'exclude', 'emissive']);
-const MULTIBLOCK_KEYS = new Set(['dir', 'cells', 'overflow', 'overlays', 'variants']);
+const MULTIBLOCK_KEYS = new Set(['dir', 'cells', 'overflow', 'overlays', 'variants', 'assembly']);
 const VARIANT_KEYS = new Set(['name', 'emissive', 'exclude', 'mirror']);
 const ATTACHMENT_KINDS = { bundle: ['herb', 'width', 'height', 'across'] };
 
@@ -93,6 +93,7 @@ export function validatePiece(json, dir, catalogue) {
       if (problems.length) fail(where, `multiblock.cells: ${problems.join('; ')}`);
     }
     if (!owns(`${m.dir}/x`)) fail(where, `multiblock.dir ${m.dir} is outside the compiler's model_dirs`);
+    if (m.assembly !== undefined && m.assembly !== false) fail(where, 'multiblock.assembly may only be false (no item assembly: the item has its own model)');
     const names = new Set(['part', 'assembly']);
     for (const o of m.overlays ?? []) {
       if (!o.name || !o.group) fail(where, 'each overlay needs name and group');

@@ -125,7 +125,7 @@ test('every committed multiblock: its cells put back are exactly its item assemb
   const read = (p) => JSON.parse(readFileSync(join(models, `${p}.json`), 'utf8'));
   const round = (k, v) => (typeof v === 'number' ? Math.round(v * 1e4) / 1e4 : v);
   const key = (e) => JSON.stringify({ ...e, faces: Object.fromEntries(Object.entries(e.faces).map(([f, { cullface, ...rest }]) => [f, rest])) }, round);
-  for (const [station, w, h] of [['drying_rack', 2, 2], ['hearth', 2, 2], ['stove', 2, 1]]) {
+  for (const [station, w, h] of [['drying_rack', 2, 2], ['hearth', 2, 2], ['stove', 2, 1], ['still', 1, 2], ['bottling_bench', 2, 1], ['charm_workbench', 2, 1]]) {
     const cells = rectangle(w, h);
     const parts = cells.flatMap((c, i) => shift(read(`${station}/part_${i}`).elements, [-16 * c.right, 16 * c.up, 0]));
     const assembly = read(`${station}/assembly`).elements;

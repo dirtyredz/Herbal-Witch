@@ -15,7 +15,13 @@
     "block/grimoire/stand",
     "block/grimoire/bookshelf",
     "block/decor/pieces",
-    "block/ritual/altar"
+    "block/ritual/altar",
+    "block/stations/cauldron",
+    "block/stations/still",
+    "block/stations/bottling_bench",
+    "block/stations/charm_workbench",
+    "block/ritual/circle",
+    "block/ward/ward_stone"
   ],
   "projects": [
     "stations/kettle",
@@ -121,6 +127,12 @@
     "decor/pieces/openings/frames/door",
     "decor/pieces/openings/frames/window",
     "decor/pieces/openings/frames/archway",
-    "ritual/altar"
+    "ritual/altar",
+    "stations/cauldron",
+    "stations/still",
+    "stations/bottling_bench",
+    "stations/charm_workbench",
+    "ritual/circle",
+    "ward/ward_stone"
   ]
 }

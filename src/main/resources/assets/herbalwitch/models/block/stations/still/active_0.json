@@ -1,0 +1,216 @@
+{
+  "textures": {
+    "glow": "herbalwitch:block/pieces/stations/still/glow",
+    "pink": "herbalwitch:block/pieces/stations/still/pink",
+    "particle": "herbalwitch:block/pieces/stations/still/copper"
+  },
+  "elements": [
+    {
+      "from": [
+        11.8,
+        11.4,
+        5.8
+      ],
+      "to": [
+        14.2,
+        13.2,
+        8.2
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "down": {
+          "uv": [
+            11.8,
+            7.8,
+            14.2,
+            10.2
+          ],
+          "texture": "#pink"
+        },
+        "up": {
+          "uv": [
+            11.8,
+            5.8,
+            14.2,
+            8.2
+          ],
+          "texture": "#pink"
+        },
+        "north": {
+          "uv": [
+            1.8,
+            2.8,
+            4.2,
+            4.6
+          ],
+          "texture": "#pink"
+        },
+        "south": {
+          "uv": [
+            11.8,
+            2.8,
+            14.2,
+            4.6
+          ],
+          "texture": "#pink"
+        },
+        "west": {
+          "uv": [
+            5.8,
+            2.8,
+            8.2,
+            4.6
+          ],
+          "texture": "#pink"
+        },
+        "east": {
+          "uv": [
+            7.8,
+            2.8,
+            10.2,
+            4.6
+          ],
+          "texture": "#pink"
+        }
+      }
+    },
+    {
+      "from": [
+        12.8,
+        14,
+        6.8
+      ],
+      "to": [
+        13.2,
+        14.6,
+        7.2
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "down": {
+          "uv": [
+            12.8,
+            8.8,
+            13.2,
+            9.2
+          ],
+          "texture": "#glow"
+        },
+        "up": {
+          "uv": [
+            12.8,
+            6.8,
+            13.2,
+            7.2
+          ],
+          "texture": "#glow"
+        },
+        "north": {
+          "uv": [
+            2.8,
+            1.4,
+            3.2,
+            2
+          ],
+          "texture": "#glow"
+        },
+        "south": {
+          "uv": [
+            12.8,
+            1.4,
+            13.2,
+            2
+          ],
+          "texture": "#glow"
+        },
+        "west": {
+          "uv": [
+            6.8,
+            1.4,
+            7.2,
+            2
+          ],
+          "texture": "#glow"
+        },
+        "east": {
+          "uv": [
+            8.8,
+            1.4,
+            9.2,
+            2
+          ],
+          "texture": "#glow"
+        }
+      }
+    },
+    {
+      "from": [
+        7.3,
+        5.6,
+        1.6
+      ],
+      "to": [
+        8.7,
+        6.8,
+        1.75
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "down": {
+          "uv": [
+            7.3,
+            14.25,
+            8.7,
+            14.4
+          ],
+          "texture": "#glow"
+        },
+        "up": {
+          "uv": [
+            7.3,
+            1.6,
+            8.7,
+            1.75
+          ],
+          "texture": "#glow"
+        },
+        "north": {
+          "uv": [
+            7.3,
+            9.2,
+            8.7,
+            10.4
+          ],
+          "texture": "#glow"
+        },
+        "west": {
+          "uv": [
+            1.6,
+            9.2,
+            1.75,
+            10.4
+          ],
+          "texture": "#glow"
+        },
+        "east": {
+          "uv": [
+            14.25,
+            9.2,
+            14.4,
+            10.4
+          ],
+          "texture": "#glow"
+        }
+      }
+    }
+  ]
+}

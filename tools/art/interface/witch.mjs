@@ -13,6 +13,11 @@
 //   (  0,  0) 252 x 200  the panel: wood frame, parchment, a vine along the top, a faint divider at x 124..125
 //   (  0, 204) 120 x 8   progress frame (dark wood, plum track)
 //   (  0, 214) 116 x 4   progress fill (violet to pink)
+//
+// ward (WardScreen):
+//   (  0,   0) 200 x 150  the panel: wood frame, parchment, a vine along the top, a faint divider at y 74..75
+//   (  0, 154) 120 x   8  charge bar frame (dark wood, plum track inside x 2..117, y 2..5)
+//   (  0, 164) 116 x   4  charge fill (violet to pink, lit top row)
 import { C, Sheet, hex } from './kit.mjs';
 import { rng } from '../pixels.mjs';
 
@@ -94,12 +99,11 @@ export const energy = () => {
   return s.image();
 };
 
-/** The altar screen atlas. */
-export const altar = () => {
-  const s = new Sheet();
-  const W = 252;
-  const H = 200;
-  const rand = rng(7303);
+/**
+ * A W x H witchcraft screen panel at the sheet origin: wood frame, bevelled parchment with `specks`
+ * fibre flecks, gold corner studs and a vine along the top frame. `rand` is the panel's seeded source.
+ */
+function screenPanel(s, W, H, rand, specks) {
   s.rect(0, 0, W, H, C.edge);
   for (let yy = 1; yy < H - 1; yy++) {
     for (let x = 1; x < W - 1; x++) {
@@ -110,11 +114,11 @@ export const altar = () => {
   s.rect(3, 3, W - 6, H - 6, C.parchLo);
   s.rect(4, 4, W - 7, H - 7, C.parchHi);
   s.rect(4, 4, W - 8, H - 8, C.parch);
-  for (let i = 0; i < 260; i++) s.set(6 + Math.floor(rand() * (W - 12)), 6 + Math.floor(rand() * (H - 12)), rand() < 0.5 ? C.parchHi : C.parchLo);
-  // a faint ruled divider between the two columns, and a rule above the notice line
-  for (let yy = 16; yy < H - 24; yy += 2) s.set(124, yy, C.parchLo);
-  for (let x = 8; x < W - 8; x += 2) s.set(x, H - 22, C.parchLo);
-  // gold corner studs and a vine along the top frame
+  for (let i = 0; i < specks; i++) s.set(6 + Math.floor(rand() * (W - 12)), 6 + Math.floor(rand() * (H - 12)), rand() < 0.5 ? C.parchHi : C.parchLo);
+}
+
+/** Gold corner studs and a vine along the top frame of a W x H panel. */
+function ornament(s, W, H) {
   for (const [cx, cy] of [[1, 1], [W - 4, 1], [1, H - 4], [W - 4, H - 4]]) {
     s.rect(cx, cy, 3, 3, GOLD);
     s.set(cx + 2, cy + 2, GOLD_LO);
@@ -128,7 +132,32 @@ export const altar = () => {
       s.set(x + 1, vy + 1, vine[2]);
     }
   }
+}
+
+/** The altar screen atlas. */
+export const altar = () => {
+  const s = new Sheet();
+  const W = 252;
+  const H = 200;
+  screenPanel(s, W, H, rng(7303), 260);
+  // a faint ruled divider between the two columns, and a rule above the notice line
+  for (let yy = 16; yy < H - 24; yy += 2) s.set(124, yy, C.parchLo);
+  for (let x = 8; x < W - 8; x += 2) s.set(x, H - 22, C.parchLo);
+  ornament(s, W, H);
   frame(s, 0, 204, 120, 8);
   gradient(s, 0, 214, 116, 4);
+  return s.image();
+};
+
+/** The ward screen atlas: status above a faint horizontal divider, settings below. */
+export const ward = () => {
+  const s = new Sheet();
+  const W = 200;
+  const H = 150;
+  screenPanel(s, W, H, rng(7304), 155);
+  for (let x = 8; x < W - 8; x++) s.set(x, 74 + (x % 2), C.parchLo);
+  ornament(s, W, H);
+  frame(s, 0, 154, 120, 8);
+  gradient(s, 0, 164, 116, 4);
   return s.image();
 };

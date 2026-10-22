@@ -1,0 +1,143 @@
+{
+  "textures": {
+    "glow": "herbalwitch:block/pieces/stations/charm_workbench/glow",
+    "particle": "herbalwitch:block/pieces/stations/charm_workbench/wood"
+  },
+  "elements": [
+    {
+      "from": [
+        15.8,
+        13.2,
+        3.6
+      ],
+      "to": [
+        16,
+        13.3,
+        5.2
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "down": {
+          "uv": [
+            15.8,
+            10.8,
+            16,
+            12.4
+          ],
+          "texture": "#glow"
+        },
+        "up": {
+          "uv": [
+            15.8,
+            3.6,
+            16,
+            5.2
+          ],
+          "texture": "#glow"
+        },
+        "north": {
+          "uv": [
+            0,
+            2.7,
+            0.2,
+            2.8
+          ],
+          "texture": "#glow"
+        },
+        "south": {
+          "uv": [
+            15.8,
+            2.7,
+            16,
+            2.8
+          ],
+          "texture": "#glow"
+        },
+        "west": {
+          "uv": [
+            3.6,
+            2.7,
+            5.2,
+            2.8
+          ],
+          "texture": "#glow"
+        }
+      }
+    },
+    {
+      "from": [
+        14.5,
+        15.1,
+        5.8
+      ],
+      "to": [
+        14.8,
+        15.4,
+        6.1
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "down": {
+          "uv": [
+            14.5,
+            9.9,
+            14.8,
+            10.2
+          ],
+          "texture": "#glow"
+        },
+        "up": {
+          "uv": [
+            14.5,
+            5.8,
+            14.8,
+            6.1
+          ],
+          "texture": "#glow"
+        },
+        "north": {
+          "uv": [
+            1.2,
+            0.6,
+            1.5,
+            0.9
+          ],
+          "texture": "#glow"
+        },
+        "south": {
+          "uv": [
+            14.5,
+            0.6,
+            14.8,
+            0.9
+          ],
+          "texture": "#glow"
+        },
+        "west": {
+          "uv": [
+            5.8,
+            0.6,
+            6.1,
+            0.9
+          ],
+          "texture": "#glow"
+        },
+        "east": {
+          "uv": [
+            9.9,
+            0.6,
+            10.2,
+            0.9
+          ],
+          "texture": "#glow"
+        }
+      }
+    }
+  ]
+}

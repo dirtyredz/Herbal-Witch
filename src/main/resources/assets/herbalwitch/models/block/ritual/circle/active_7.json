@@ -1,0 +1,269 @@
+{
+  "textures": {
+    "glow": "herbalwitch:block/pieces/ritual/circle/glow",
+    "particle": "herbalwitch:block/pieces/ritual/circle/stone"
+  },
+  "elements": [
+    {
+      "from": [
+        11.4,
+        2,
+        0.5
+      ],
+      "to": [
+        12.6,
+        2.12,
+        3.5
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "up": {
+          "uv": [
+            11.4,
+            0.5,
+            12.6,
+            3.5
+          ],
+          "texture": "#glow"
+        },
+        "north": {
+          "uv": [
+            3.4,
+            13.88,
+            4.6,
+            14
+          ],
+          "texture": "#glow"
+        },
+        "south": {
+          "uv": [
+            11.4,
+            13.88,
+            12.6,
+            14
+          ],
+          "texture": "#glow"
+        },
+        "west": {
+          "uv": [
+            0.5,
+            13.88,
+            3.5,
+            14
+          ],
+          "texture": "#glow"
+        },
+        "east": {
+          "uv": [
+            12.5,
+            13.88,
+            15.5,
+            14
+          ],
+          "texture": "#glow"
+        }
+      }
+    },
+    {
+      "from": [
+        11.4,
+        2,
+        12.5
+      ],
+      "to": [
+        12.6,
+        2.12,
+        15.5
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "up": {
+          "uv": [
+            11.4,
+            12.5,
+            12.6,
+            15.5
+          ],
+          "texture": "#glow"
+        },
+        "north": {
+          "uv": [
+            3.4,
+            13.88,
+            4.6,
+            14
+          ],
+          "texture": "#glow"
+        },
+        "south": {
+          "uv": [
+            11.4,
+            13.88,
+            12.6,
+            14
+          ],
+          "texture": "#glow"
+        },
+        "west": {
+          "uv": [
+            12.5,
+            13.88,
+            15.5,
+            14
+          ],
+          "texture": "#glow"
+        },
+        "east": {
+          "uv": [
+            0.5,
+            13.88,
+            3.5,
+            14
+          ],
+          "texture": "#glow"
+        }
+      }
+    },
+    {
+      "from": [
+        9.38,
+        3.1,
+        7.75
+      ],
+      "to": [
+        9.5,
+        4.3,
+        8.25
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "west": {
+          "uv": [
+            7.75,
+            11.7,
+            8.25,
+            12.9
+          ],
+          "texture": "#glow"
+        }
+      }
+    },
+    {
+      "from": [
+        9.38,
+        4.3,
+        6.5
+      ],
+      "to": [
+        9.5,
+        4.8,
+        9.5
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "west": {
+          "uv": [
+            6.5,
+            11.2,
+            9.5,
+            11.7
+          ],
+          "texture": "#glow"
+        }
+      }
+    },
+    {
+      "from": [
+        9.38,
+        4.8,
+        7.75
+      ],
+      "to": [
+        9.5,
+        5,
+        8.25
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "west": {
+          "uv": [
+            7.75,
+            11,
+            8.25,
+            11.2
+          ],
+          "texture": "#glow"
+        }
+      }
+    },
+    {
+      "from": [
+        9.38,
+        3.1,
+        6.2
+      ],
+      "to": [
+        9.5,
+        3.6,
+        6.7
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "west": {
+          "uv": [
+            6.2,
+            12.4,
+            6.7,
+            12.9
+          ],
+          "texture": "#glow"
+        }
+      }
+    },
+    {
+      "from": [
+        9.38,
+        3.1,
+        9.3
+      ],
+      "to": [
+        9.5,
+        3.6,
+        9.8
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "west": {
+          "uv": [
+            9.3,
+            12.4,
+            9.8,
+            12.9
+          ],
+          "texture": "#glow"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "project": "bottling_bench.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/stations/bottling_bench/wood",
+    "wood_v": "herbalwitch:block/pieces/stations/bottling_bench/wood_v",
+    "iron": "herbalwitch:block/pieces/stations/bottling_bench/iron",
+    "copper": "herbalwitch:block/pieces/stations/bottling_bench/copper",
+    "gold": "herbalwitch:block/pieces/stations/bottling_bench/gold",
+    "glass": "herbalwitch:block/pieces/stations/bottling_bench/glass",
+    "pages": "herbalwitch:block/pieces/stations/bottling_bench/pages",
+    "plum": "herbalwitch:block/pieces/stations/bottling_bench/plum",
+    "linen": "herbalwitch:block/pieces/stations/bottling_bench/linen",
+    "paint": "herbalwitch:block/pieces/stations/bottling_bench/paint",
+    "glow": "herbalwitch:block/pieces/stations/bottling_bench/glow",
+    "pink": "herbalwitch:block/pieces/stations/bottling_bench/pink",
+    "particle": "herbalwitch:block/pieces/stations/bottling_bench/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/stations/bottling_bench/wood",
+    "wood_v": "herbalwitch:block/pieces/stations/bottling_bench/wood_v",
+    "iron": "herbalwitch:block/pieces/stations/bottling_bench/iron",
+    "copper": "herbalwitch:block/pieces/stations/bottling_bench/copper",
+    "gold": "herbalwitch:block/pieces/stations/bottling_bench/gold",
+    "glass": "herbalwitch:block/pieces/stations/bottling_bench/glass",
+    "pages": "herbalwitch:block/pieces/stations/bottling_bench/pages",
+    "plum": "herbalwitch:block/pieces/stations/bottling_bench/plum",
+    "linen": "herbalwitch:block/pieces/stations/bottling_bench/linen",
+    "paint": "herbalwitch:block/pieces/stations/bottling_bench/paint",
+    "glow": "herbalwitch:block/pieces/stations/bottling_bench/glow",
+    "pink": "herbalwitch:block/pieces/stations/bottling_bench/pink"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/stations/bottling_bench",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ]
+    ],
+    "overlays": [
+      {
+        "name": "active",
+        "group": "active",
+        "emissive": true
+      }
+    ]
+  }
+}

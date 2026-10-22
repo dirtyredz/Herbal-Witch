@@ -1,4 +1,4 @@
-// Station GUI atlases: five 256 x 256 RGBA sheets in the vanilla container layout. Each has the
+// Station GUI atlases: nine 256 x 256 RGBA sheets in the vanilla container layout. Each has the
 // 176 x 166 background panel at (0, 0) (dark wood frame, parchment inside, a vine flourish on the top
 // edge and a dark purple corner ornament), the player inventory, the station's slot frames and EMPTY
 // progress arrow / flame outlines, plus the FILLED flame at (176, 0) and FILLED arrow at (176, 14)
@@ -99,4 +99,43 @@ export const hearth = () => atlas((s) => {
   ghost(s, 80, 44, GHOST_COAL);
   slot(s, 116, 44);
   emptyFlame(s, 81, 26);
+});
+
+export const cauldron = () => atlas((s) => {
+  for (const x of [30, 48, 66]) slot(s, x, 17);
+  slot(s, 48, 53);
+  ghost(s, 48, 53, GHOST_BOTTLE);
+  slot(s, 124, 35);
+  slot(s, 124, 58);
+  emptyArrow(s, 92, 34);
+  emptyFlame(s, 50, 36);
+});
+
+export const still = () => atlas((s) => {
+  slot(s, 30, 17);
+  slot(s, 48, 17);
+  slot(s, 30, 53);
+  ghost(s, 30, 53, GHOST_BOTTLE);
+  slot(s, 48, 53);
+  ghost(s, 48, 53, GHOST_BOTTLE);
+  slot(s, 116, 35);
+  slot(s, 116, 58);
+  emptyArrow(s, 79, 34);
+  emptyFlame(s, 81, 54);
+});
+
+export const bottling_bench = () => atlas((s) => {
+  for (const x of [30, 48, 66]) slot(s, x, 17);
+  slot(s, 48, 53);
+  ghost(s, 48, 53, GHOST_BOTTLE);
+  slot(s, 124, 35);
+  slot(s, 124, 58);
+  emptyArrow(s, 92, 34);
+});
+
+export const charm_workbench = () => atlas((s) => {
+  for (const x of [30, 48, 66]) slot(s, x, 26);
+  slot(s, 124, 35);
+  slot(s, 124, 58);
+  emptyArrow(s, 92, 34);
 });

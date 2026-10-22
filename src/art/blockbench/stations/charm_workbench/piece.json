@@ -1,0 +1,70 @@
+{
+  "project": "charm_workbench.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/stations/charm_workbench/wood",
+    "wood_v": "herbalwitch:block/pieces/stations/charm_workbench/wood_v",
+    "iron": "herbalwitch:block/pieces/stations/charm_workbench/iron",
+    "gold": "herbalwitch:block/pieces/stations/charm_workbench/gold",
+    "brass": "herbalwitch:block/pieces/stations/charm_workbench/brass",
+    "plum": "herbalwitch:block/pieces/stations/charm_workbench/plum",
+    "pink": "herbalwitch:block/pieces/stations/charm_workbench/pink",
+    "linen": "herbalwitch:block/pieces/stations/charm_workbench/linen",
+    "ivy": "herbalwitch:block/pieces/stations/charm_workbench/ivy",
+    "stone": "herbalwitch:block/pieces/stations/charm_workbench/stone",
+    "glass": "herbalwitch:block/pieces/stations/charm_workbench/glass",
+    "flame": "herbalwitch:block/pieces/stations/charm_workbench/flame",
+    "glow": "herbalwitch:block/pieces/stations/charm_workbench/glow",
+    "paint": "herbalwitch:block/pieces/stations/charm_workbench/paint",
+    "particle": "herbalwitch:block/pieces/stations/charm_workbench/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/stations/charm_workbench/wood",
+    "wood_v": "herbalwitch:block/pieces/stations/charm_workbench/wood_v",
+    "iron": "herbalwitch:block/pieces/stations/charm_workbench/iron",
+    "gold": "herbalwitch:block/pieces/stations/charm_workbench/gold",
+    "brass": "herbalwitch:block/pieces/stations/charm_workbench/brass",
+    "plum": "herbalwitch:block/pieces/stations/charm_workbench/plum",
+    "pink": "herbalwitch:block/pieces/stations/charm_workbench/pink",
+    "linen": "herbalwitch:block/pieces/stations/charm_workbench/linen",
+    "ivy": "herbalwitch:block/pieces/stations/charm_workbench/ivy",
+    "stone": "herbalwitch:block/pieces/stations/charm_workbench/stone",
+    "glass": "herbalwitch:block/pieces/stations/charm_workbench/glass",
+    "flame": "herbalwitch:block/pieces/stations/charm_workbench/flame",
+    "glow": "herbalwitch:block/pieces/stations/charm_workbench/glow",
+    "paint": "herbalwitch:block/pieces/stations/charm_workbench/paint"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/stations/charm_workbench",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ]
+    ],
+    "overlays": [
+      {
+        "name": "active",
+        "group": "active",
+        "emissive": true
+      }
+    ]
+  }
+}
