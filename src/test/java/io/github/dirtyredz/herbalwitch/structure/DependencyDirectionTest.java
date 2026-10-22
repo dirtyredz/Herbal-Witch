@@ -45,6 +45,21 @@ class DependencyDirectionTest {
     }
 
     @Test
+    void wardServicePackageDependsDownwardsOnly() throws IOException {
+        // WardService (ticking, server lifecycle) sits on top; its siblings use WardIndex/WardContext/WardLifecycle.
+        var sibling = Pattern.compile("\\bWardService\\b");
+        for (Path file : javaFiles(ROOT.resolve("magic/ward/service"))) {
+            if (!file.getFileName().toString().equals("WardService.java")) reject(file, sibling);
+        }
+    }
+
+    @Test
+    void fakePlayerRegistrationIsGameTestOnly() throws IOException {
+        var forbidden = Pattern.compile("OnlinePlayers\\s*\\.\\s*(?:register|Registration)\\b|import static [\\w.]*OnlinePlayers\\.register");
+        for (Path file : javaFiles(ROOT)) reject(file, forbidden);
+    }
+
+    @Test
     void durableMutatorsStayInsideTheStatusPackage() {
         for (var method : WitchState.class.getDeclaredMethods()) {
             if (method.getName().startsWith("set") || Set.of("initiate", "restoreFrom").contains(method.getName())) {

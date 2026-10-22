@@ -1,6 +1,7 @@
 package io.github.dirtyredz.herbalwitch.platform.permission.entity;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
+import io.github.dirtyredz.herbalwitch.platform.player.OnlinePlayers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -106,7 +107,7 @@ public final class EntityActionPermission {
      * never establish player PvP and is refused around unsupported claims.
      */
     public static Denial checkHarmByPrincipal(ServerLevel level, UUID principal, LivingEntity target) {
-        ServerPlayer online = principal == null || level.getServer() == null ? null : level.getServer().getPlayerList().getPlayer(principal);
+        ServerPlayer online = principal == null ? null : OnlinePlayers.find(principal).orElse(null);
         if (online != null) {
             return checkHarm(online, target);
         }
@@ -135,7 +136,7 @@ public final class EntityActionPermission {
         if (ProtectionAdapters.restricted()) {
             return Denial.CLAIMS;
         }
-        ServerPlayer online = owner == null || level.getServer() == null ? null : level.getServer().getPlayerList().getPlayer(owner);
+        ServerPlayer online = owner == null ? null : OnlinePlayers.find(owner).orElse(null);
         if (online != null && online.level() == level && !mayInteract(level, online, pos)) {
             return Denial.SPAWN_PROTECTION;
         }
