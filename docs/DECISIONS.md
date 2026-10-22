@@ -141,7 +141,7 @@ M5 plan's defaults; the owner's visual review of the 89 agent-drafted pieces is 
 - **Structure.** `decor/` groups into `structure/` (block, layout, support, access, placement item, shapes)
   and `behavior/` (seating, storage, sleeping, openings, lighting) to keep every level under ten entries;
   the plan's flatter `decor/{block,layout,support,...}` siblings were a deliberate deviation. The grimoire
-  source is `grimoire/content/reference/DecorEntries` (grimoire -> decor), not `decor/grimoire/`, which
+  source is `decor/grimoire/DecorEntries` (grimoire -> decor), not `decor/grimoire/`, which
   would have made decor import grimoire against the dependency rule.
 
 ## 2026-10-22 - 0.3.0: the grimoire is advisory, shallow and recipe-backed (Milestone 4)

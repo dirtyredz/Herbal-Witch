@@ -2,7 +2,7 @@ package io.github.dirtyredz.herbalwitch.magic.witch.command;
 
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
 import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyBalance;
-import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyService;
+import io.github.dirtyredz.herbalwitch.magic.witch.status.EnergyService;
 import io.github.dirtyredz.herbalwitch.magic.witch.energy.PracticeProgress;
 import io.github.dirtyredz.herbalwitch.magic.witch.initiation.InitiationConsent;
 import io.github.dirtyredz.herbalwitch.magic.witch.initiation.InitiationEvents;

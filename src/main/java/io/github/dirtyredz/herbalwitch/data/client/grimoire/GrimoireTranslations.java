@@ -8,9 +8,9 @@ import io.github.dirtyredz.herbalwitch.data.server.grimoire.GrimoireContentProvi
 import io.github.dirtyredz.herbalwitch.grimoire.access.item.GrimoireItem;
 import io.github.dirtyredz.herbalwitch.grimoire.access.menu.GrimoireAccess;
 import io.github.dirtyredz.herbalwitch.grimoire.catalog.GrimoireCatalog;
-import io.github.dirtyredz.herbalwitch.grimoire.content.recipe.StationRecipeEntries;
-import io.github.dirtyredz.herbalwitch.grimoire.content.reference.HerbEntries;
-import io.github.dirtyredz.herbalwitch.grimoire.content.reference.StationEntries;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.grimoire.StationRecipeEntries;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.grimoire.HerbEntries;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.grimoire.StationEntries;
 import io.github.dirtyredz.herbalwitch.grimoire.knowledge.research.ResearchService;
 import io.github.dirtyredz.herbalwitch.grimoire.knowledge.teaching.TeachingService;
 import io.github.dirtyredz.herbalwitch.grimoire.registry.GrimoireBlocks;

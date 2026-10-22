@@ -7,9 +7,9 @@ import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.Prepa
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContent;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireEntry;
 import io.github.dirtyredz.herbalwitch.grimoire.content.ServerGrimoireContent;
-import io.github.dirtyredz.herbalwitch.grimoire.content.recipe.StationRecipeEntries;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.grimoire.StationRecipeEntries;
 import io.github.dirtyredz.herbalwitch.platform.compat.CompatibilityRegistration;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.description.ProcessingCategories;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.ProcessingCategories;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipe;
 import io.github.dirtyredz.herbalwitch.platform.compat.thirst.ThirstIntegration;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.heat.HeatSources;

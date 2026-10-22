@@ -2,8 +2,8 @@ package io.github.dirtyredz.herbalwitch.client.stations;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.client.stations.ProcessStationScreen.Layout;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.description.ProcessingCategories;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.menu.StationMenu;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.ProcessingCategories;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.block.StationMenu;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationMenus;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.resources.ResourceLocation;

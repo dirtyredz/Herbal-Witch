@@ -1,6 +1,6 @@
 package io.github.dirtyredz.herbalwitch.magic.ritual.session;
 
-import io.github.dirtyredz.herbalwitch.grimoire.reading.ingredients.MissingIngredients;
+import io.github.dirtyredz.herbalwitch.platform.inventory.MissingIngredients;
 import io.github.dirtyredz.herbalwitch.magic.ritual.catalog.AltarActionSpec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;

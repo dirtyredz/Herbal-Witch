@@ -1,7 +1,7 @@
 package io.github.dirtyredz.herbalwitch.client.stations.widgets;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.menu.StationMenu;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.block.StationMenu;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessStation;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessStatus;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.authorization.StationOperations;

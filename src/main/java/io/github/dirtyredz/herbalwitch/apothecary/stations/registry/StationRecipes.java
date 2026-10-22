@@ -1,14 +1,14 @@
 package io.github.dirtyredz.herbalwitch.apothecary.stations.registry;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.bottling_bench.recipe.BottlingRecipe;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.cauldron.recipe.CauldronRecipe;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.charm_workbench.recipe.CharmRecipe;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.still.recipe.DistillationRecipe;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.drying_rack.recipe.DryingRecipe;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.infusion_pot.recipe.InfusionRecipe;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.kettle.recipe.SteepingRecipe;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.mortar.recipe.GrindingRecipe;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.bottling_bench.BottlingRecipe;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.cauldron.CauldronRecipe;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.charm_workbench.CharmRecipe;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.still.DistillationRecipe;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.drying_rack.DryingRecipe;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.infusion_pot.InfusionRecipe;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.kettle.SteepingRecipe;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.mortar.GrindingRecipe;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipe;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipeSerializer;
 import net.minecraft.core.registries.Registries;

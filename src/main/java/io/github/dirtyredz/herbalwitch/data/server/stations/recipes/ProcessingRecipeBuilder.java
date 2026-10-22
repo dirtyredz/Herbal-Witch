@@ -2,10 +2,10 @@ package io.github.dirtyredz.herbalwitch.data.server.stations.recipes;
 
 import com.google.gson.JsonObject;
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipeDescription;
+import io.github.dirtyredz.herbalwitch.platform.recipe.ProcessRecipeDescription;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipeJson;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipeSerializer;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRequirements;
+import io.github.dirtyredz.herbalwitch.platform.recipe.ProcessRequirements;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;

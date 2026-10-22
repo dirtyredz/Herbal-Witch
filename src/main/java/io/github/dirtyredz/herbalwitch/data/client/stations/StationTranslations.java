@@ -3,7 +3,7 @@ package io.github.dirtyredz.herbalwitch.data.client.stations;
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationCatalog;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationSpec;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.description.ProcessingCategories;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.ProcessingCategories;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessStatus;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.authorization.StationOperations;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationBlocks;

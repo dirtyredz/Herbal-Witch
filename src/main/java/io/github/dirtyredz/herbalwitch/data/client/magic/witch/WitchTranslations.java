@@ -1,6 +1,6 @@
 package io.github.dirtyredz.herbalwitch.data.client.magic.witch;
 
-import io.github.dirtyredz.herbalwitch.grimoire.content.reference.WitchEntries;
+import io.github.dirtyredz.herbalwitch.magic.witch.grimoire.WitchEntries;
 import io.github.dirtyredz.herbalwitch.magic.witch.command.WitchCommand;
 import io.github.dirtyredz.herbalwitch.magic.witch.initiation.InitiationConsent;
 import net.minecraftforge.common.data.LanguageProvider;

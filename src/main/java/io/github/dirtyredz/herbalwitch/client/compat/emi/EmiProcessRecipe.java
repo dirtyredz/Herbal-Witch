@@ -8,7 +8,7 @@ import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
 import io.github.dirtyredz.herbalwitch.client.compat.ViewerLayout;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipe;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipeDescription;
+import io.github.dirtyredz.herbalwitch.platform.recipe.ProcessRecipeDescription;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;

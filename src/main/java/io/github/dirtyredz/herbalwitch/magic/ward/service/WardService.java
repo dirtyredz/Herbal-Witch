@@ -8,7 +8,7 @@ import io.github.dirtyredz.herbalwitch.magic.ward.persistence.WardSavedData;
 import io.github.dirtyredz.herbalwitch.magic.ward.targeting.WardProtection;
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WorkingRules;
-import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyService;
+import io.github.dirtyredz.herbalwitch.magic.witch.status.EnergyService;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchState;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchStatusService;
 import io.github.dirtyredz.herbalwitch.platform.permission.ActionContext;

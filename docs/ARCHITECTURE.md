@@ -49,7 +49,7 @@ origin), seats or slots. `FurnitureCatalog.ALL` is what is registered (every wav
   before 0.4.0 creates an empty inventory the first time it is used.
 - *Access:* `structure/FurnitureAccess` lets any non-spectator within reach use furniture (adventure mode
   included); building permission applies to placement only.
-- *Grimoire:* `grimoire/content/reference/DecorEntries` contributes one public `furniture|` page per piece
+- *Grimoire:* `decor/grimoire/DecorEntries` contributes one public `furniture|` page per piece
   (blurb, size, mounting, use, seats or slots, crafting; lookalikes link their station).
 
 **Botany (`apothecary/botany/`).**
@@ -142,7 +142,7 @@ the GameTest template is 128 x 10 x 64 and `ShowcasePlanTest` fails if a plan ou
 - *Advanced stations and witch recipes (Milestone 7).* The Witch's Cauldron (one block, heat below,
   `cauldron`, 600 ticks, water base), the Copper Still (1 x 2 tall, heat, `distillation`, 800 ticks), the
   Bottling Bench (2 x 1, `bottling`, 100 ticks, no witch) and the Charm Workbench (2 x 1, `charm_work`,
-  200 ticks) live under `apothecary/stations/advanced/<station>/{block,menu,recipe}` on one `AdvancedStationBlock` and
+  200 ticks) live under `apothecary/stations/advanced/<station>/` on one `AdvancedStationBlock` and
   `AdvancedStationEntity`; they place through `StructurePlacementItem` and show an `active` state.
   A recipe carries `requirements` (`"requirements": {"witch": true, "energy": N}`), on the wire and in the
   fingerprint; `effectiveEnergy(percent)` rounds up and `processingPercent` (WorkingRules) scales it. Each
@@ -203,7 +203,7 @@ reads it as permission, and later magic must not either.
   `GrimoireContentSource`s (`GuideEntries`, `StationEntries`, `HerbEntries`, `StationRecipeEntries`), which run
   on both sides from the same inputs, so server and client build the same index. Later milestones add a
   source for their own entries. Recipe pages come from the recipes themselves and never depend on editorial
-  data; `ProcessingCategories` (`apothecary/stations/description`) is the one recipe-type-to-station mapping shared with
+  data; `ProcessingCategories` (`apothecary/stations/catalog`) is the one recipe-type-to-station mapping shared with
   EMI and JEI.
 - *Editorial data:* `data/<ns>/grimoire_entries/**.json` (`GrimoireDefinitionLoader`) holds prose, grouping,
   links and hints only; mechanics fields are rejected, the whole set is validated, an invalid reload keeps
@@ -307,7 +307,7 @@ holds, and the altar where rituals happen. `witch` and `ritual` sit under a `mag
   `[hud]`) and `hud/` (`EnergyOverlay`, `EnergyHudLayout`); `client/ritual` is `AltarScreen` and its
   widgets.
 - *Grimoire:* the category "Witchcraft": `witchcraft/status`, `witchcraft/energy` and
-  `witchcraft/recovery` (guide kind, `grimoire/content/reference/WitchEntries`), the altar station page
+  `witchcraft/recovery` (guide kind, `magic/witch/grimoire/WitchEntries`), the altar station page
   and `ritual/{founding,initiation,meditation,attunement}` (`magic/ritual/grimoire/AltarEntries`).
 
 **Advanced witchcraft (`magic/charm/`, `magic/ritual/circle/`, `magic/ward/`, Milestone 7).** Numbers and
@@ -347,7 +347,7 @@ one fingerprint. Defaults are `processingPercent` 100, `gardenBlessingCost` 15, 
   `client/brewing/PreparationRenderers`, and ritual categories for JEI and EMI over
   `client/compat/ritual/RitualCardLayout`.
 - *Grimoire:* station pages for the four new stations; the witchcraft pages for brewing, preparations and
-  familiar preparations (`grimoire/content/reference/AdvancedPreparationEntries`, in `grimoire` because
+  familiar preparations (`apothecary/brewing/grimoire/AdvancedPreparationEntries`, in `grimoire` because
   `brewing` must not import it), wards, charms, the circle and the two circle rituals; 113 processing
   recipe pages.
 

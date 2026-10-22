@@ -9,7 +9,7 @@ import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
 import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyBalance;
 import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyEvents;
 import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyRecovery;
-import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyService;
+import io.github.dirtyredz.herbalwitch.magic.witch.status.EnergyService;
 import io.github.dirtyredz.herbalwitch.magic.witch.initiation.InitiationEvents;
 import io.github.dirtyredz.herbalwitch.magic.witch.initiation.RitualSite;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchCapability;

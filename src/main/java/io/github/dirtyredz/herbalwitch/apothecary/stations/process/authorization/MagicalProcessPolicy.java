@@ -1,7 +1,7 @@
 package io.github.dirtyredz.herbalwitch.apothecary.stations.process.authorization;
 
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
-import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyService;
+import io.github.dirtyredz.herbalwitch.magic.witch.status.EnergyService;
 import io.github.dirtyredz.herbalwitch.magic.witch.initiation.InitiationEvents;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchState;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchStatusService;

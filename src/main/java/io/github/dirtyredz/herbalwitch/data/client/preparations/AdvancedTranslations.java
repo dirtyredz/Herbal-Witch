@@ -9,7 +9,7 @@ import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.metadata.Prepa
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.AdvancedPreparations;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationEffects;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.showcase.AdvancedPreparationShowcaseSection;
-import io.github.dirtyredz.herbalwitch.grimoire.content.reference.AdvancedPreparationEntries;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.grimoire.AdvancedPreparationEntries;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.LanguageProvider;
 

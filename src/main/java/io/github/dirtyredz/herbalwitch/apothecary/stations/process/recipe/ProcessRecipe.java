@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe;
 
+import io.github.dirtyredz.herbalwitch.platform.recipe.ProcessRecipeDescription;
+
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessInventory;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessLayout;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.matching.ProcessMatcher;

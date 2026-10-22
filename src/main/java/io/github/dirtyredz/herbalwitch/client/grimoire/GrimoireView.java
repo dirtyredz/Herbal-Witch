@@ -2,7 +2,7 @@ package io.github.dirtyredz.herbalwitch.client.grimoire;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.client.grimoire.widgets.EntryList;
-import io.github.dirtyredz.herbalwitch.client.grimoire.widgets.RecipePage;
+import io.github.dirtyredz.herbalwitch.client.grimoire.widgets.EntryPage;
 import io.github.dirtyredz.herbalwitch.client.grimoire.widgets.TeachingPanel;
 import io.github.dirtyredz.herbalwitch.client.grimoire.widgets.TextButton;
 import io.github.dirtyredz.herbalwitch.grimoire.access.menu.GrimoireAccess;
@@ -45,7 +45,7 @@ public final class GrimoireView {
     private final Layout layout;
     private final Optional<ReaderLink> reader;
     private final EntryList list;
-    private final RecipePage page;
+    private final EntryPage page;
     private final TeachingPanel teaching;
     private final Deque<EntryKey> history = new ArrayDeque<>();
     private Optional<EntryKey> current = Optional.empty();
@@ -59,7 +59,7 @@ public final class GrimoireView {
         this.layout = layout;
         this.reader = reader;
         this.list = new EntryList(this, font, initialFilter, category);
-        this.page = new RecipePage(this, font);
+        this.page = new EntryPage(this, font);
         this.teaching = new TeachingPanel(this, font);
     }
 

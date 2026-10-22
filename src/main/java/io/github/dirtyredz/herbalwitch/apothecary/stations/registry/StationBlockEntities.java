@@ -1,15 +1,15 @@
 package io.github.dirtyredz.herbalwitch.apothecary.stations.registry;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.bottling_bench.block.BottlingBenchBlockEntity;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.cauldron.block.CauldronBlockEntity;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.charm_workbench.block.CharmWorkbenchBlockEntity;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.still.block.StillBlockEntity;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.drying_rack.block.DryingRackBlockEntity;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.hearth.block.HearthBlockEntity;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.infusion_pot.block.InfusionPotBlockEntity;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.kettle.block.KettleBlockEntity;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.mortar.block.MortarBlockEntity;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.bottling_bench.BottlingBenchBlockEntity;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.cauldron.CauldronBlockEntity;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.charm_workbench.CharmWorkbenchBlockEntity;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.still.StillBlockEntity;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.drying_rack.DryingRackBlockEntity;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.hearth.HearthBlockEntity;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.infusion_pot.InfusionPotBlockEntity;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.kettle.KettleBlockEntity;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.mortar.MortarBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;

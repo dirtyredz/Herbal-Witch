@@ -1,6 +1,8 @@
 package io.github.dirtyredz.herbalwitch.grimoire.reading.ingredients;
 
-import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipeDescription;
+import io.github.dirtyredz.herbalwitch.platform.inventory.MissingIngredients;
+
+import io.github.dirtyredz.herbalwitch.platform.recipe.ProcessRecipeDescription;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 

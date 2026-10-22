@@ -4,7 +4,7 @@ import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationSpec;
 import io.github.dirtyredz.herbalwitch.platform.multiblock.MultiblockLayout;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationCatalog;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.hearth.block.HearthBlockEntity;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.hearth.HearthBlockEntity;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationBlocks;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcasePlacement;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcasePlacement.Line;

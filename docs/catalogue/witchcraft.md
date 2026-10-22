@@ -258,7 +258,7 @@ x 8 x 28 in 0.5.0; from 0.6.0 sections pack into rows no wider than 126 and the 
 
 Tests: pure unit tests under `src/test/.../magic/` and `client/witch/hud/` (0.6.0: `ritual/CircleLayoutTest`,
 `ritual/GardenBlessingPlanTest`, `ward/WardCodecTest`, `ward/WardIndexTest`,
-`apothecary/stations/process/recipe/ProcessRequirementsTest`, `apothecary/brewing/PreparationCatalogTest`); resource tests
+`platform/recipe/ProcessRequirementsTest`, `apothecary/brewing/PreparationCatalogTest`); resource tests
 `data/magic/{ritual,witch,ward,charm}` and `data/preparations/Advanced*`; GameTests under
 `src/gameTest/.../magic/{witch,ritual,ward,charm}` (WitchLifecycle, EnergyRecovery, AltarPlacement,
 AltarAction, AltarShowcase; 0.6.0: CircleGameTests, WardGameTests, CharmGameTests) with the fixture

@@ -8,7 +8,7 @@ import io.github.dirtyredz.herbalwitch.magic.ritual.session.AltarSession;
 import io.github.dirtyredz.herbalwitch.magic.ritual.session.AltarSessionService;
 import io.github.dirtyredz.herbalwitch.magic.ritual.session.AltarSessions;
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
-import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyService;
+import io.github.dirtyredz.herbalwitch.magic.witch.status.EnergyService;
 import io.github.dirtyredz.herbalwitch.magic.witch.initiation.InitiationConsent;
 import io.github.dirtyredz.herbalwitch.magic.witch.initiation.InitiationEvents;
 import io.github.dirtyredz.herbalwitch.magic.witch.initiation.InitiationOffer;

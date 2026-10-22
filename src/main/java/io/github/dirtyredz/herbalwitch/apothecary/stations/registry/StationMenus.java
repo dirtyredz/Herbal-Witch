@@ -1,15 +1,15 @@
 package io.github.dirtyredz.herbalwitch.apothecary.stations.registry;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.bottling_bench.menu.BottlingBenchMenu;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.cauldron.menu.CauldronMenu;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.charm_workbench.menu.CharmWorkbenchMenu;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.still.menu.StillMenu;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.drying_rack.menu.DryingRackMenu;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.hearth.menu.HearthMenu;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.infusion_pot.menu.InfusionPotMenu;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.kettle.menu.KettleMenu;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.mortar.menu.MortarMenu;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.bottling_bench.BottlingBenchMenu;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.cauldron.CauldronMenu;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.charm_workbench.CharmWorkbenchMenu;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.still.StillMenu;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.drying_rack.DryingRackMenu;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.hearth.HearthMenu;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.infusion_pot.InfusionPotMenu;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.kettle.KettleMenu;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.mortar.MortarMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.registries.DeferredRegister;

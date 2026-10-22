@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe;
 
+import io.github.dirtyredz.herbalwitch.platform.recipe.ProcessRecipeDescription;
+
 import com.google.gson.JsonObject;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;

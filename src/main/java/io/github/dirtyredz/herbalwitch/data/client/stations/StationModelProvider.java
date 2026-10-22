@@ -6,8 +6,8 @@ import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.AdvancedStat
 import io.github.dirtyredz.herbalwitch.apothecary.stations.block.StationBlock;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationCatalog;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationSpec;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.drying_rack.block.DryingRackBlock;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.hearth.block.HearthBlock;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.drying_rack.DryingRackBlock;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.hearth.HearthBlock;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;

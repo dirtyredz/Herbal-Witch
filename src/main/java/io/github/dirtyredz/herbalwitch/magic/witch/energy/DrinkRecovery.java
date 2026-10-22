@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.magic.witch.energy;
 
+import io.github.dirtyredz.herbalwitch.magic.witch.status.EnergyService;
+
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchCapability;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchStatusService;

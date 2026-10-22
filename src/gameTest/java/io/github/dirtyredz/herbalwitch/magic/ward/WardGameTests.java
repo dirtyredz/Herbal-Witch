@@ -10,7 +10,7 @@ import io.github.dirtyredz.herbalwitch.magic.ward.service.WardIndex;
 import io.github.dirtyredz.herbalwitch.magic.ward.service.WardService;
 import io.github.dirtyredz.herbalwitch.magic.ward.targeting.WardProtection;
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
-import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyService;
+import io.github.dirtyredz.herbalwitch.magic.witch.status.EnergyService;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;

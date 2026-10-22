@@ -9,10 +9,10 @@ import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.Advan
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationItems;
 import io.github.dirtyredz.herbalwitch.magic.charm.catalog.CharmCatalog;
 import io.github.dirtyredz.herbalwitch.magic.charm.registry.CharmItems;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.bottling_bench.block.BottlingBenchBlockEntity;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.cauldron.block.CauldronBlockEntity;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.charm_workbench.block.CharmWorkbenchBlockEntity;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.still.block.StillBlockEntity;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.bottling_bench.BottlingBenchBlockEntity;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.cauldron.CauldronBlockEntity;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.charm_workbench.CharmWorkbenchBlockEntity;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.still.StillBlockEntity;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessInventory;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.authorization.StationOperations.Operation;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationBlocks;

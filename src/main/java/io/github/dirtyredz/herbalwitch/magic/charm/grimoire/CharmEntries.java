@@ -5,7 +5,7 @@ import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContent;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContentSource;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireEntry;
-import io.github.dirtyredz.herbalwitch.grimoire.content.reference.WitchEntries;
+import io.github.dirtyredz.herbalwitch.magic.witch.grimoire.WitchEntries;
 import io.github.dirtyredz.herbalwitch.magic.charm.catalog.CharmCatalog;
 import io.github.dirtyredz.herbalwitch.magic.charm.registry.CharmItems;
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;

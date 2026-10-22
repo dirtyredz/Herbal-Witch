@@ -1,5 +1,8 @@
 package io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe;
 
+import io.github.dirtyredz.herbalwitch.platform.recipe.ProcessRequirements;
+import io.github.dirtyredz.herbalwitch.platform.recipe.ProcessRecipeDescription;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

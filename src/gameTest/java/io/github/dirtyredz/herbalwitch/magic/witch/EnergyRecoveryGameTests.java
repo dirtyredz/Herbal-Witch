@@ -9,7 +9,7 @@ import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyBalance;
 import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyEvents;
 import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyRecovery;
 import io.github.dirtyredz.herbalwitch.magic.witch.energy.RecoveryConditions;
-import io.github.dirtyredz.herbalwitch.magic.witch.energy.SleepRecovery;
+import io.github.dirtyredz.herbalwitch.magic.witch.status.SleepRecovery;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchCapability;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchStatusService;
 import net.minecraft.core.BlockPos;

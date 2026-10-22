@@ -5,7 +5,7 @@ import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reference.GuideEntries;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reference.HerbForms;
-import io.github.dirtyredz.herbalwitch.grimoire.content.reference.StationEntries;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.grimoire.StationEntries;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reload.GrimoireDefinition;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reload.GrimoireDefinitionLoader;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationCatalog;

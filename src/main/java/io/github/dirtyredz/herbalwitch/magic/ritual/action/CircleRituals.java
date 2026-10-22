@@ -6,7 +6,7 @@ import io.github.dirtyredz.herbalwitch.magic.ritual.circle.RitualCircleBlock;
 import io.github.dirtyredz.herbalwitch.magic.ritual.session.AltarOffering;
 import io.github.dirtyredz.herbalwitch.magic.ritual.session.AltarSession;
 import io.github.dirtyredz.herbalwitch.magic.ritual.session.AltarSessionService;
-import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyService;
+import io.github.dirtyredz.herbalwitch.magic.witch.status.EnergyService;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchState;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchStatusService;
 import net.minecraft.core.BlockPos;

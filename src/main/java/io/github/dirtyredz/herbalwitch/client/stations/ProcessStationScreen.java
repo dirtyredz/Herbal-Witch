@@ -2,7 +2,7 @@ package io.github.dirtyredz.herbalwitch.client.stations;
 
 import io.github.dirtyredz.herbalwitch.client.grimoire.StationGrimoirePanel;
 import io.github.dirtyredz.herbalwitch.client.stations.widgets.MagicalProcessPanel;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.menu.StationMenu;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.block.StationMenu;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessStation;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessStatus;
 import net.minecraft.client.Minecraft;

@@ -3,7 +3,7 @@ package io.github.dirtyredz.herbalwitch.client.compat.jei;
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.client.compat.ritual.RitualCardLayout;
 import io.github.dirtyredz.herbalwitch.magic.ritual.registry.RitualItems;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.description.ProcessingCategories;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.ProcessingCategories;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipe;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationItems;
 import mezz.jei.api.IModPlugin;

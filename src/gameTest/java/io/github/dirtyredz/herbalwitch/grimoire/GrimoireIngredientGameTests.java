@@ -9,7 +9,7 @@ import io.github.dirtyredz.herbalwitch.grimoire.network.ReaderRequest;
 import io.github.dirtyredz.herbalwitch.grimoire.network.ReaderUpdate;
 import io.github.dirtyredz.herbalwitch.grimoire.reading.ReaderService;
 import io.github.dirtyredz.herbalwitch.grimoire.reading.ingredients.IngredientRequirements;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipeDescription;
+import io.github.dirtyredz.herbalwitch.platform.recipe.ProcessRecipeDescription;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;

@@ -1,14 +1,14 @@
 package io.github.dirtyredz.herbalwitch.magic.ritual.action;
 
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
-import io.github.dirtyredz.herbalwitch.grimoire.content.reference.WitchEntries;
+import io.github.dirtyredz.herbalwitch.magic.witch.grimoire.WitchEntries;
 import io.github.dirtyredz.herbalwitch.grimoire.knowledge.discovery.DiscoveryService;
 import io.github.dirtyredz.herbalwitch.grimoire.registry.GrimoireItems;
 import io.github.dirtyredz.herbalwitch.magic.ritual.grimoire.AltarEntries;
 import io.github.dirtyredz.herbalwitch.magic.ritual.session.AltarOffering;
 import io.github.dirtyredz.herbalwitch.magic.ritual.session.AltarSession;
 import io.github.dirtyredz.herbalwitch.magic.ritual.session.AltarSessionService;
-import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyService;
+import io.github.dirtyredz.herbalwitch.magic.witch.status.EnergyService;
 import io.github.dirtyredz.herbalwitch.magic.witch.initiation.founding.FoundingService;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchState;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchStatusService;

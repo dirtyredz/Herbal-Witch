@@ -15,7 +15,7 @@ import io.github.dirtyredz.herbalwitch.magic.ritual.session.AltarSession;
 import io.github.dirtyredz.herbalwitch.magic.ward.registry.WardRegistration;
 import io.github.dirtyredz.herbalwitch.magic.ward.service.WardService;
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
-import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyService;
+import io.github.dirtyredz.herbalwitch.magic.witch.status.EnergyService;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTest;

@@ -4,7 +4,7 @@ import io.github.dirtyredz.herbalwitch.decor.catalog.FurnitureBehavior;
 import io.github.dirtyredz.herbalwitch.decor.catalog.FurnitureCatalog;
 import io.github.dirtyredz.herbalwitch.decor.catalog.FurnitureSpec;
 import io.github.dirtyredz.herbalwitch.decor.catalog.MountSpec.Support;
-import io.github.dirtyredz.herbalwitch.grimoire.content.reference.DecorEntries;
+import io.github.dirtyredz.herbalwitch.decor.grimoire.DecorEntries;
 import net.minecraftforge.common.data.LanguageProvider;
 
 import java.util.Locale;
