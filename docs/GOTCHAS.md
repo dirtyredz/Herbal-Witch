@@ -182,5 +182,8 @@
 - **Tabletops are drawn below the cell top, collide at it.** Drafted tops sit at y 14.5-15 so props fit
   inside the cell; their collision reaches y 16 so a lamp's centre support holds, and a lamp stands a pixel
   above the drawn top.
+- **GameTest batches reuse plots.** With more than 100 tests the second batch runs where the first stood,
+  and dropped items left by a first-batch test are still there; a test that must start with no entities
+  (the showcase preflight) clears items in its area first.
 - **ANU tasks are space separated.** `tools/anu-test.ps1 -Tasks "test runGameTestServer"`; a comma list is
   one unknown task name.
