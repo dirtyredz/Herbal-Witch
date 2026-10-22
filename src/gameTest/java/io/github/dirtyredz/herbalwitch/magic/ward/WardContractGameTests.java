@@ -57,6 +57,9 @@ public final class WardContractGameTests {
             check(WardFocus.maxRadius(level, pos) == rules.wardFocusRadius(), "focused maximum changed");
         }
         check(WardActivation.activate(owner, level, pos).equals("activated"), "activation");
+        // Activating re-states the stone; a bare multiblock focus cell drops on that shape update, so the focus returns after it.
+        helper.setBlock(STONE.east(), StationBlocks.STOVE.get().defaultBlockState());
+        check(WardFocus.focused(level, pos), "focus lost after activation");
         var record = WardService.record(level, pos).orElseThrow();
         String chosen = WardControls.radius(owner, level, pos, 1000);
         check(record.radius() == rules.wardFocusRadius(), "chosen focused radius: " + chosen + " radius=" + record.radius()
@@ -81,11 +84,14 @@ public final class WardContractGameTests {
         var pos = helper.absolutePos(STONE);
         helper.setBlock(STONE, WardRegistration.STONE.get());
         var owner = witch(helper, "ward_route_contract", STONE.north());
+        for (var stale : WardService.index().all()) WardService.index().remove(stale.id()); // other tests' wards must not overlap this one
         setEnergy(owner, 0);
         owner.setPos(pos.getX() + 100, pos.getY(), pos.getZ());
         int before = practice(owner);
-        check(WardActivation.activate(owner, level, pos).equals("too_far"), "reach must precede energy");
-        check(WardActivation.activateByRitual(owner, level, pos).equals("activated"), "already-paid ritual checked reach/energy");
+        String direct = WardActivation.activate(owner, level, pos);
+        check(direct.equals("too_far"), "reach must precede energy: " + direct);
+        String ritual = WardActivation.activateByRitual(owner, level, pos);
+        check(ritual.equals("activated"), "already-paid ritual checked reach/energy: " + ritual);
         check(energy(owner) == 0 && practice(owner) == before, "ritual charged/practiced twice");
         var stranger = player(helper, "ward_route_stranger", STONE.north());
         check(WardActivation.refusal(stranger, level, pos).orElseThrow().equals("already_charged"), "charged must precede owner/witch checks");
