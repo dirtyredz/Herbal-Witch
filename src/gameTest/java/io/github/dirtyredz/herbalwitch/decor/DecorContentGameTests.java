@@ -1,7 +1,7 @@
 package io.github.dirtyredz.herbalwitch.decor;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.decor.behavior.openings.DecorDoorBlock;
+import io.github.dirtyredz.herbalwitch.decor.behavior.DecorDoorBlock;
 import io.github.dirtyredz.herbalwitch.decor.behavior.sleeping.DecorBedBlock;
 import io.github.dirtyredz.herbalwitch.decor.structure.DecorAssemblyBlock;
 import io.github.dirtyredz.herbalwitch.decor.catalog.FurnitureBehavior;
@@ -15,7 +15,7 @@ import io.github.dirtyredz.herbalwitch.decor.catalog.pieces.SurfacesCatalog;
 import io.github.dirtyredz.herbalwitch.decor.catalog.pieces.TextilesCatalog;
 import io.github.dirtyredz.herbalwitch.decor.structure.FurniturePlacementItem;
 import io.github.dirtyredz.herbalwitch.decor.structure.FurnitureLayouts;
-import io.github.dirtyredz.herbalwitch.decor.behavior.lighting.DecorLightBlock;
+import io.github.dirtyredz.herbalwitch.decor.behavior.DecorLightBlock;
 import io.github.dirtyredz.herbalwitch.decor.registry.DecorBlocks;
 import io.github.dirtyredz.herbalwitch.decor.registry.DecorCreativeTab;
 import io.github.dirtyredz.herbalwitch.decor.registry.DecorItems;

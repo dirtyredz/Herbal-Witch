@@ -2,9 +2,7 @@ package io.github.dirtyredz.herbalwitch.decor.structure;
 
 import io.github.dirtyredz.herbalwitch.decor.catalog.FurnitureSpec;
 import io.github.dirtyredz.herbalwitch.decor.catalog.MountSpec.Support;
-import io.github.dirtyredz.herbalwitch.decor.structure.FurnitureLayouts;
 import io.github.dirtyredz.herbalwitch.decor.structure.shape.FurnitureShapes;
-import io.github.dirtyredz.herbalwitch.decor.structure.FurnitureSupport;
 import io.github.dirtyredz.herbalwitch.platform.multiblock.MultiblockLayout;
 import io.github.dirtyredz.herbalwitch.platform.multiblock.MultiblockStructure;
 import io.github.dirtyredz.herbalwitch.platform.placement.StructurePlacement;

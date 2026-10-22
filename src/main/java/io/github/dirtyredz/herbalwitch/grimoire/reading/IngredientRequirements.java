@@ -1,4 +1,4 @@
-package io.github.dirtyredz.herbalwitch.grimoire.reading.ingredients;
+package io.github.dirtyredz.herbalwitch.grimoire.reading;
 
 import io.github.dirtyredz.herbalwitch.platform.inventory.MissingIngredients;
 

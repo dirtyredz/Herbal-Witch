@@ -4,10 +4,28 @@
 // rails. The two must stay far apart (BotanyModelsTest checks the luminance gap): the 0.2.0 art
 // pass made both dark and the watered state vanished. Seamless, so joined beds read as one.
 import { image, rng, clamp } from '../../pixels.mjs';
-import { smoothNoise } from '../../motifs.mjs';
 import { hex } from '../../drawing/sprites.mjs';
 
 const SIZE = 32;
+
+/** Soft value noise in [0,1) from a seeded random source, smoothed over `cell` texels (tiles at size). */
+function smoothNoise(rand, size, cell) {
+  const n = Math.ceil(size / cell);
+  const pts = Array.from({ length: n * n }, () => rand());
+  const at = (i, j) => pts[((j % n) + n) % n * n + (((i % n) + n) % n)];
+  return (x, y) => {
+    const fx = x / cell;
+    const fy = y / cell;
+    const i = Math.floor(fx);
+    const j = Math.floor(fy);
+    const tx = fx - i;
+    const ty = fy - j;
+    const s = (t) => t * t * (3 - 2 * t);
+    const a = at(i, j) + (at(i + 1, j) - at(i, j)) * s(tx);
+    const b = at(i, j + 1) + (at(i + 1, j + 1) - at(i, j + 1)) * s(tx);
+    return a + (b - a) * s(ty);
+  };
+}
 
 function soil(seed, base, lump, shadowC, speck) {
   const rand = rng(seed);

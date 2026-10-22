@@ -1,7 +1,7 @@
 package io.github.dirtyredz.herbalwitch.data.server.botany;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.apothecary.botany.worldgen.HerbWorldgen;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.HerbWorldgen;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;

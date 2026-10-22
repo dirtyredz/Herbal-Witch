@@ -1,4 +1,4 @@
-package io.github.dirtyredz.herbalwitch.apothecary.botany.worldgen;
+package io.github.dirtyredz.herbalwitch.apothecary.botany;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;

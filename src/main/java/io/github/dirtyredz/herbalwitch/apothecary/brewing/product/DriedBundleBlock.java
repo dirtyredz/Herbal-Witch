@@ -1,4 +1,4 @@
-package io.github.dirtyredz.herbalwitch.apothecary.brewing.product.block;
+package io.github.dirtyredz.herbalwitch.apothecary.brewing.product;
 
 import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbSpec;
 import net.minecraft.core.BlockPos;

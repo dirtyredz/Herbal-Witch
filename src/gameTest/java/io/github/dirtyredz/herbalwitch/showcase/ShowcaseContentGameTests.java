@@ -9,7 +9,7 @@ import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyItems;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationBlocks;
 import io.github.dirtyredz.herbalwitch.decor.structure.DecorAssemblyBlock;
 import io.github.dirtyredz.herbalwitch.decor.catalog.FurnitureBehavior;
-import io.github.dirtyredz.herbalwitch.decor.behavior.lighting.DecorLightBlock;
+import io.github.dirtyredz.herbalwitch.decor.behavior.DecorLightBlock;
 import io.github.dirtyredz.herbalwitch.decor.showcase.DecorShowcaseSamples;
 import io.github.dirtyredz.herbalwitch.decor.registry.DecorBlocks;
 import io.github.dirtyredz.herbalwitch.grimoire.knowledge.discovery.DiscoveryCapability;

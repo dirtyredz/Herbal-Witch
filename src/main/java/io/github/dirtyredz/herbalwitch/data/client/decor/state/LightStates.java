@@ -4,7 +4,7 @@ import io.github.dirtyredz.herbalwitch.data.client.decor.DecorModelProvider;
 import io.github.dirtyredz.herbalwitch.decor.structure.DecorAssemblyBlock;
 import io.github.dirtyredz.herbalwitch.decor.catalog.FurnitureSpec;
 import io.github.dirtyredz.herbalwitch.decor.structure.FurnitureLayouts;
-import io.github.dirtyredz.herbalwitch.decor.behavior.lighting.DecorLightBlock;
+import io.github.dirtyredz.herbalwitch.decor.behavior.DecorLightBlock;
 import io.github.dirtyredz.herbalwitch.platform.multiblock.MultiblockLayout;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ConfiguredModel;

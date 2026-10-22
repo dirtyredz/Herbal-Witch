@@ -3,7 +3,7 @@ package io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry;
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
 import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbSpec;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.block.DriedBundleBlock;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.DriedBundleBlock;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.HerbalMaterialCatalog;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.lighting.OilLanternBlock;
 import net.minecraft.world.level.block.Block;

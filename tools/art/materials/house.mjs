@@ -2,9 +2,9 @@
 // brown wood, its end grain, and polished gold. 32 x 32, untinted, opaque. Blockbench pieces own
 // their textures instead (docs/ART.md "Textures").
 import { rng, clamp, shade, image } from '../pixels.mjs';
-import { GOLD } from '../motifs.mjs';
 
 const SIZE = 32;
+const GOLD = [[154, 104, 30], [212, 160, 58], [242, 201, 90]]; // shadow, mid, light
 
 /**
  * The house's dark brown wood (the armchair's, the owner's standard for the whole set): rich grain
@@ -41,17 +41,6 @@ export function woodEnd() {
     const d = Math.hypot((x % 16) - 7.5, (y % 16) - 7.5);
     const ring = d % 3 < 1 ? 0.72 : 1;
     return shade([66, 40, 25], ring * (0.92 + rand() * 0.14));
-  });
-}
-
-/** Charcoal iron with a faint plum cast, soft hammered mottling and a few bright specks. */
-export function ironDark() {
-  const rand = rng(9104);
-  const n = smoothNoise(rng(9105), SIZE, 6);
-  return image(SIZE, (x, y) => {
-    let f = 0.82 + n(x, y) * 0.3 + (rand() - 0.5) * 0.08;
-    if (rand() < 0.015) f *= 1.5;
-    return shade([46, 41, 52], f);
   });
 }
 

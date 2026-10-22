@@ -1,4 +1,4 @@
-package io.github.dirtyredz.herbalwitch.decor.behavior.lighting;
+package io.github.dirtyredz.herbalwitch.decor.behavior;
 
 import io.github.dirtyredz.herbalwitch.decor.structure.DecorAssemblyBlock;
 import io.github.dirtyredz.herbalwitch.decor.catalog.FurnitureSpec;

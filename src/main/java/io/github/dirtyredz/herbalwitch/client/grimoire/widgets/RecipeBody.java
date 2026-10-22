@@ -8,7 +8,7 @@ import io.github.dirtyredz.herbalwitch.client.grimoire.GrimoireClientState;
 import io.github.dirtyredz.herbalwitch.client.grimoire.GrimoireView;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireEntry;
 import io.github.dirtyredz.herbalwitch.grimoire.network.ReaderUpdate;
-import io.github.dirtyredz.herbalwitch.grimoire.reading.ingredients.IngredientRequirements;
+import io.github.dirtyredz.herbalwitch.grimoire.reading.IngredientRequirements;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.ProcessingCategories;
 import io.github.dirtyredz.herbalwitch.platform.recipe.RecipeView;
 import io.github.dirtyredz.herbalwitch.platform.recipe.ProcessRecipeDescription;

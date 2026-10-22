@@ -6,7 +6,7 @@ import io.github.dirtyredz.herbalwitch.platform.recipe.ProcessRecipeDescription;
 
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessInventory;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessLayout;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.process.matching.ProcessMatcher;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessMatcher;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;

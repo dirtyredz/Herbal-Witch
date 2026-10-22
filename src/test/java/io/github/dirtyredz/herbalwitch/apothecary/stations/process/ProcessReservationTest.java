@@ -1,6 +1,5 @@
 package io.github.dirtyredz.herbalwitch.apothecary.stations.process;
 
-import io.github.dirtyredz.herbalwitch.apothecary.stations.process.matching.ProcessMatcher;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;

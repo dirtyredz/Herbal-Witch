@@ -8,7 +8,7 @@ import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.network.ReaderRequest;
 import io.github.dirtyredz.herbalwitch.grimoire.network.ReaderUpdate;
 import io.github.dirtyredz.herbalwitch.grimoire.reading.ReaderService;
-import io.github.dirtyredz.herbalwitch.grimoire.reading.ingredients.IngredientRequirements;
+import io.github.dirtyredz.herbalwitch.grimoire.reading.IngredientRequirements;
 import io.github.dirtyredz.herbalwitch.platform.recipe.ProcessRecipeDescription;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;

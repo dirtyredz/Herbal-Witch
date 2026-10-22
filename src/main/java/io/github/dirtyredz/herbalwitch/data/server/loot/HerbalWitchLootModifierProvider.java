@@ -2,7 +2,7 @@ package io.github.dirtyredz.herbalwitch.data.server.loot;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.apothecary.botany.foraging.HerbForageModifier;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.foraging.ResinDropModifier;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.ResinDropModifier;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraftforge.common.data.GlobalLootModifierProvider;

@@ -1,4 +1,4 @@
-package io.github.dirtyredz.herbalwitch.apothecary.brewing.product.foraging;
+package io.github.dirtyredz.herbalwitch.apothecary.brewing.product;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

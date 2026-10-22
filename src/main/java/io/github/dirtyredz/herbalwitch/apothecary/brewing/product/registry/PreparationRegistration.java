@@ -19,7 +19,7 @@ import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item.HerbalDri
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.foraging.ResinDropModifier;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.ResinDropModifier;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.showcase.AdvancedPreparationShowcaseSection;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.showcase.PreparationShowcaseSection;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseRegistry;

@@ -1,7 +1,6 @@
 package io.github.dirtyredz.herbalwitch.grimoire.reading;
 
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
-import io.github.dirtyredz.herbalwitch.grimoire.reading.ingredients.IngredientRequirements;
 
 import java.util.List;
 import java.util.Optional;

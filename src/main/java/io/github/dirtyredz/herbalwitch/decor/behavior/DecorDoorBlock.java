@@ -1,4 +1,4 @@
-package io.github.dirtyredz.herbalwitch.decor.behavior.openings;
+package io.github.dirtyredz.herbalwitch.decor.behavior;
 
 import io.github.dirtyredz.herbalwitch.decor.catalog.FurnitureSpec;
 import io.github.dirtyredz.herbalwitch.decor.structure.FurnitureLayouts;

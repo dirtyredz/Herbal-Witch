@@ -1,4 +1,4 @@
-package io.github.dirtyredz.herbalwitch.apothecary.stations.process.matching;
+package io.github.dirtyredz.herbalwitch.apothecary.stations.process;
 
 /**
  * Exact shapeless slot assignment, pure: each ingredient takes its own matching slot and every

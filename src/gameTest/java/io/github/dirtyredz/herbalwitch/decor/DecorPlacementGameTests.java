@@ -2,7 +2,7 @@ package io.github.dirtyredz.herbalwitch.decor;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.decor.catalog.FurnitureCatalog;
-import io.github.dirtyredz.herbalwitch.decor.behavior.lighting.DecorLightBlock;
+import io.github.dirtyredz.herbalwitch.decor.behavior.DecorLightBlock;
 import io.github.dirtyredz.herbalwitch.decor.catalog.pieces.SeatingCatalog;
 import io.github.dirtyredz.herbalwitch.decor.catalog.pieces.SurfacesCatalog;
 import io.github.dirtyredz.herbalwitch.decor.catalog.pieces.StorageCatalog;

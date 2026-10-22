@@ -1,7 +1,7 @@
 package io.github.dirtyredz.herbalwitch.decor.openings;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.decor.behavior.openings.DecorDoorBlock;
+import io.github.dirtyredz.herbalwitch.decor.behavior.DecorDoorBlock;
 import io.github.dirtyredz.herbalwitch.decor.catalog.pieces.OpeningsCatalog;
 import io.github.dirtyredz.herbalwitch.decor.registry.DecorItems;
 import net.minecraft.core.BlockPos;

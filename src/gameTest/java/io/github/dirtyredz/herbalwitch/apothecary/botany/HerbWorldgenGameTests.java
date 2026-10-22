@@ -7,7 +7,6 @@ import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbSpec;
 import io.github.dirtyredz.herbalwitch.apothecary.botany.crop.HerbCropBlock;
 import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyBlocks;
 import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyTags;
-import io.github.dirtyredz.herbalwitch.apothecary.botany.worldgen.HerbWorldgen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
