@@ -2,6 +2,19 @@
 
 Newest first.
 
+## 2026-10-22 - M8 foundation: exact species and lazy care state
+
+`companions/` uses the remaining root grouping slot and will also hold M9 familiars. Ordinary
+relationships remain in an animal capability; familiar bond authority will stay separate. The
+entity-tag provider is extracted to the shared tag writers with M7 memberships unchanged.
+Malformed or future care data is preserved and disables mutation. Inspection does not allocate
+a relationship, and the eight-player default capacity never evicts an existing record.
+
+Deviation from the older M8 plan: goats also use vanilla Brain behavior (`Goat.getBrain` and
+`customServerAiStep` in the mapped 1.20.1 code). Like axolotls, they are excluded from generic
+goal-selector attraction/calming; sleep remains the intended settling route for transport.
+All other section 7 defaults are retained. Version remains 0.6.1 while M8 acceptance is pending.
+
 ## 2026-10-22 - Review round 2: one-way ward package, numeric grimoire priorities
 
 - `WardService` is the top of `magic/ward/service` (server lifecycle, ticks); activation, controls,

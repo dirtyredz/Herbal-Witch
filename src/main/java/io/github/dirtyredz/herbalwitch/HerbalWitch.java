@@ -46,6 +46,7 @@ public final class HerbalWitch {
         RitualRegistration.register(modBus);
         WardRegistration.register(modBus);
         CharmRegistration.register(modBus);
+        io.github.dirtyredz.herbalwitch.companions.animals.registry.AnimalRegistration.register(modBus);
         ShowcaseCommandRegistration.register();
         CompatibilityRegistration.register();
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> HerbalWitchClient::registerConfig);

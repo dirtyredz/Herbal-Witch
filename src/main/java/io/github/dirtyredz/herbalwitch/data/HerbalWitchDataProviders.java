@@ -28,7 +28,7 @@ import io.github.dirtyredz.herbalwitch.data.server.magic.witch.EnergyBiomeTagsPr
 import io.github.dirtyredz.herbalwitch.data.server.recipes.HerbalWitchRecipeProvider;
 import io.github.dirtyredz.herbalwitch.data.server.loot.HerbalWitchLootModifierProvider;
 import io.github.dirtyredz.herbalwitch.data.server.preparations.PreparationBlockLoot;
-import io.github.dirtyredz.herbalwitch.data.server.preparations.PreparationEntityTagsProvider;
+import io.github.dirtyredz.herbalwitch.data.server.tags.HerbalWitchEntityTagsProvider;
 import io.github.dirtyredz.herbalwitch.data.server.stations.StationBlockLoot;
 import io.github.dirtyredz.herbalwitch.data.server.tags.HerbalWitchBlockTagsProvider;
 import io.github.dirtyredz.herbalwitch.data.server.tags.HerbalWitchItemTagsProvider;
@@ -90,7 +90,7 @@ public final class HerbalWitchDataProviders {
                 new HerbalWitchItemTagsProvider(output, lookup, blockTags.contentsGetter(), existingFiles));
         generator.addProvider(event.includeServer(), new BotanyBiomeTagsProvider(output, lookup, existingFiles));
         generator.addProvider(event.includeServer(), new EnergyBiomeTagsProvider(output, lookup, existingFiles));
-        generator.addProvider(event.includeServer(), new PreparationEntityTagsProvider(output, lookup, existingFiles));
+        generator.addProvider(event.includeServer(), new HerbalWitchEntityTagsProvider(output, lookup, existingFiles));
         generator.addProvider(event.includeServer(), new BotanyWorldgenProvider(output, lookup));
         generator.addProvider(event.includeServer(), new BotanyConditionProvider(output));
         generator.addProvider(event.includeServer(), new HerbalWitchLootModifierProvider(output));

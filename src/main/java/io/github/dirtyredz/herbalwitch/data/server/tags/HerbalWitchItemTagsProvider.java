@@ -52,5 +52,6 @@ public class HerbalWitchItemTagsProvider extends ItemTagsProvider {
         CharmTagContributions.items(sink);
         BotanyTagContributions.items(sink);
         PreparationTagContributions.items(sink);
+        io.github.dirtyredz.herbalwitch.data.server.animals.AnimalTagContributions.items(sink);
     }
 }

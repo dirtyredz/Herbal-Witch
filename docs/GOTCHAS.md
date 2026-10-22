@@ -1,5 +1,12 @@
 # Gotchas - The Herbal Witch
 
+- **Goats use a Brain too.** Generic goal-selector calming/attraction cannot safely govern goat
+  navigation. Keep goats and axolotls out of those AI tags; bats retain native flight. A tag cannot
+  supply a missing behavior or serialization adapter.
+- **Animal care clocks are loaded time.** Never subtract world time on load. Unknown capability
+  schemas and malformed records round-trip untouched and refuse mutation; inspection must not
+  allocate relationship entries or evict one to make room.
+
 - **Duration rounding is intentional.** `TickTime` ceiling countdown helpers and fractional recipe
   text are different operations: 50 ticks is three countdown seconds but the recipe argument is the
   string `"2.5"`. Ward menu values clamp after converting ticks to seconds/minutes.

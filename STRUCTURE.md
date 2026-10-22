@@ -12,6 +12,7 @@ herbalwitch/
   HerbalWitch.java
   apothecary/                 botany/ -> cultivation; brewing/ -> preparations; stations/ -> processing
   client/                    screens, rendering, recipe text and optional viewers; magic/ -> ritual, ward, witch
+  companions/                grouping parent: animals/ care and transport; future familiars/ consume trust views
   data/                      generated resources, one writer per shared output
   decor/                     catalogue, structures and furniture behaviour
   grimoire/                  contracts, content, knowledge, reading and transport
@@ -54,6 +55,18 @@ herbalwitch/
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/process/recipe/` — the recipe type, its JSON and wire format and reload-aware index; shared description/requirements live in `platform/recipe/`
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/registry/` — station registers, `ProcessingRecipeBindings` type lookup, the apothecary tab, bootstrap and showcase registration
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/showcase/` — the parameterised station showcase section
+
+**src/main/java: companions (M8 in progress)**
+
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/` and `companions/animals/` — grouping parents only.
+- `companions/animals/catalog/`, `species/`, `config/`, `registry/` — bait identities, exact species profiles and live eligibility, validated server limits, bootstrap and tags.
+- `companions/animals/trust/` — lazy Mob capability, immutable personal views, schema codec and loaded-clock lifecycle.
+- `companions/animals/care/taming/` — authoritative native-owner/keeper resolution; care responsibilities group beneath `care/` to keep the animal root narrow.
+- `src/main/java/io/github/dirtyredz/herbalwitch/data/server/animals/` — contributions to the sole tag writers.
+- `src/main/java/io/github/dirtyredz/herbalwitch/data/server/tags/HerbalWitchEntityTagsProvider.java` — sole entity-tag writer; preparations and animals contribute independently.
+- `src/test/java/io/github/dirtyredz/herbalwitch/companions/animals/{trust,species}/` — pure relationship, codec, eligibility and bounds tests.
+- `src/test/java/io/github/dirtyredz/herbalwitch/data/animals/` — independent animal resource manifest and exact tag matrix.
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/companions/animals/` — real-entity capability and ownership tests, compiled locally and run by the orchestrator.
 
 **src/main/java: client**
 

@@ -77,6 +77,7 @@ class GeneratedResourcesTest {
         expected.addAll(CharmManifest.files());
         expected.addAll(CircleManifest.files());
         expected.addAll(WardManifest.files());
+        expected.addAll(io.github.dirtyredz.herbalwitch.data.animals.AnimalManifest.files());
         assertEquals(expected, generatedFiles());
     }
 

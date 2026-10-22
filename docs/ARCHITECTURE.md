@@ -30,6 +30,14 @@ client disconnect still clears all connection data. The herb wire record remains
 
 ## Current system (0.6.1 structural refactor: Milestones 1-7 plus the art pass; furniture is Milestone 5, initiation and energy Milestone 6, advanced brewing, charms, circle and wards Milestone 7)
 
+M8 groundwork adds `companions/animals`: exact profiles and datapack membership are separate;
+tags can revoke a tested adapter but cannot create one. Every server Mob receives a small lazy
+provider (`herbalwitch:animals/care`); only initialized state advances its persisted loaded clock.
+Schema 1 preserves unsupported/malformed payloads unchanged and refuses mutation. Personal trust
+views are immutable, capacity refuses a new player without eviction, and native ownership wins
+over the keeper unless representations conflict (then ownership-sensitive actions fail closed).
+This foundation does not yet expose care items or transport and does not close M8.
+
 Everything below is server-authoritative; clients get vanilla block updates, menu slots and menu data.
 The one custom channel, `herbalwitch:main` (protocol "4", `platform/network/HerbalWitchNetwork`), carries
 the grimoire's six bounded messages, the witch's two (`WitchSnapshot`, `WitchRulesUpdate`) and the
