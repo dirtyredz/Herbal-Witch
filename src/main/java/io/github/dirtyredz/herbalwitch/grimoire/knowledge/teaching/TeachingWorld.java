@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.grimoire.knowledge.teaching;
 
+import io.github.dirtyredz.herbalwitch.platform.player.OnlinePlayers;
+
 import io.github.dirtyredz.herbalwitch.grimoire.access.menu.GrimoireMenu;
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.content.ServerGrimoireContent;
@@ -8,8 +10,6 @@ import io.github.dirtyredz.herbalwitch.platform.recipe.RecipeView;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -22,31 +22,19 @@ import java.util.UUID;
  * server's current content.
  */
 public final class TeachingWorld implements TeachingService.World {
-    private static volatile Collection<ServerPlayer> testPlayers = List.of();
     private final MinecraftServer server;
 
     public TeachingWorld(MinecraftServer server) {
         this.server = server;
     }
 
-    /** GameTest seam: fake players to treat as online. Pass an empty list to clear. */
-    public static void setTestPlayers(Collection<ServerPlayer> players) {
-        testPlayers = List.copyOf(players);
-    }
-
     public Optional<ServerPlayer> player(UUID id) {
-        ServerPlayer online = server.getPlayerList().getPlayer(id);
-        if (online != null) {
-            return Optional.of(online);
-        }
-        return testPlayers.stream().filter(p -> p.getUUID().equals(id) && !p.isRemoved()).findFirst();
+        return OnlinePlayers.find(id);
     }
 
     /** Players the teacher could invite now, by name. */
     public List<ServerPlayer> nearby(ServerPlayer teacher) {
-        List<ServerPlayer> candidates = new ArrayList<>(server.getPlayerList().getPlayers());
-        testPlayers.stream().filter(p -> !candidates.contains(p)).forEach(candidates::add);
-        return candidates.stream().filter(p -> p != teacher && close(teacher, p))
+        return OnlinePlayers.all().stream().filter(p -> p != teacher && close(teacher, p))
                 .sorted(Comparator.comparing(p -> p.getGameProfile().getName())).toList();
     }
 

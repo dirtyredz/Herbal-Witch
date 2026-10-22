@@ -1,5 +1,9 @@
 # Gotchas - The Herbal Witch
 
+- **Fake players use independent `OnlinePlayers.register(...)` scopes.** Close the scope when its
+  fixture ends; never replace another feature's roster. Closing teaching registrations must preserve
+  witch fixtures. Server stop closes every remaining scope, and removed fakes are never returned.
+
 - **Never run `runClient` from an agent.** GameTests are the headless check; the owner verifies
   visuals, item transforms, shaders and two-client sync in the mod's test instance.
 - **Client classes stay in `client/`.** `HerbalWitchClient` is a `Dist.CLIENT` subscriber; feature and

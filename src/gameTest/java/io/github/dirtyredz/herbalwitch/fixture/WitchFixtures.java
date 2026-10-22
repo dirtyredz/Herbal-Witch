@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.fixture;
 
+import io.github.dirtyredz.herbalwitch.platform.player.OnlinePlayers;
+
 import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
 import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyItems;
 import io.github.dirtyredz.herbalwitch.magic.ritual.altar.AltarBlock;
@@ -8,7 +10,6 @@ import io.github.dirtyredz.herbalwitch.magic.ritual.registry.RitualBlocks;
 import io.github.dirtyredz.herbalwitch.magic.ritual.session.AltarSession;
 import io.github.dirtyredz.herbalwitch.magic.ritual.session.AltarSessionService;
 import io.github.dirtyredz.herbalwitch.magic.ritual.showcase.AltarShowcaseSection;
-import io.github.dirtyredz.herbalwitch.magic.witch.initiation.InitiationEvents;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchStatusService;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -34,6 +35,7 @@ public final class WitchFixtures {
     /** Where a participant stands: in front of the altar, within reach. */
     public static final BlockPos FRONT = new BlockPos(4, 1, 2);
     private static final List<ServerPlayer> REGISTERED = new ArrayList<>();
+    private static OnlinePlayers.Registration registration;
 
     private WitchFixtures() {
     }
@@ -47,9 +49,10 @@ public final class WitchFixtures {
     /** A survival fake player standing at {@code feet}, known to the consent and session lookups. */
     public static ServerPlayer player(GameTestHelper helper, String name, BlockPos feet) {
         ServerPlayer player = GrimoireFixtures.standing(helper, name, feet);
-        REGISTERED.removeIf(p -> p.getUUID().equals(player.getUUID()) || p.isRemoved());
+        REGISTERED.removeIf(p -> p.getUUID().equals(player.getUUID()) || p.isRemoved() || p.getServer() != player.getServer());
         REGISTERED.add(player);
-        InitiationEvents.setTestPlayers(REGISTERED);
+        if (registration != null) { registration.close(); }
+        registration = OnlinePlayers.register(REGISTERED);
         return player;
     }
 

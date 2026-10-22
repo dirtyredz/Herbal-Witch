@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.magic.witch.initiation;
 
+import io.github.dirtyredz.herbalwitch.platform.player.OnlinePlayers;
+
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchStatusService;
 import net.minecraft.network.chat.Component;
@@ -11,7 +13,6 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -24,8 +25,6 @@ import java.util.UUID;
  */
 public final class InitiationEvents {
     private static final int SWEEP_INTERVAL = 20;
-    private static volatile Collection<ServerPlayer> testPlayers = List.of();
-    private static MinecraftServer server;
     private static InitiationConsent consent;
 
     private InitiationEvents() {
@@ -41,30 +40,12 @@ public final class InitiationEvents {
 
     /** A fresh consent service (also for GameTests that need a clean slate). */
     public static void start(MinecraftServer s) {
-        server = s;
-        consent = new InitiationConsent(s::getTickCount, id -> player(id).map(WitchStatusService::isWitch).orElse(false),
+        consent = new InitiationConsent(s::getTickCount, id -> OnlinePlayers.find(id).map(WitchStatusService::isWitch).orElse(false),
                 () -> WitchRules.server().inviteExpiry(), () -> WitchRules.server().inviteCooldown());
     }
 
     public static void serverStopped(ServerStoppedEvent event) {
         consent = null;
-        server = null;
-    }
-
-    /** GameTest seam: fake players to treat as online. */
-    public static void setTestPlayers(Collection<ServerPlayer> players) {
-        testPlayers = List.copyOf(players);
-    }
-
-    public static Optional<ServerPlayer> player(UUID id) {
-        if (server == null) {
-            return Optional.empty();
-        }
-        ServerPlayer online = server.getPlayerList().getPlayer(id);
-        if (online != null) {
-            return Optional.of(online);
-        }
-        return testPlayers.stream().filter(p -> p.getUUID().equals(id) && !p.isRemoved()).findFirst();
     }
 
     /** A witch invites {@code recipient} at {@code site}; both are told. */
@@ -130,8 +111,8 @@ public final class InitiationEvents {
     /** Tells both players an invitation ended and why. */
     public static void ended(List<InitiationOffer> offers, InitiationConsent.Result why) {
         for (InitiationOffer offer : offers) {
-            player(offer.recipient()).ifPresent(p -> p.displayClientMessage(Component.translatable(why.messageKey()), true));
-            offer.initiator().flatMap(InitiationEvents::player)
+            OnlinePlayers.find(offer.recipient()).ifPresent(p -> p.displayClientMessage(Component.translatable(why.messageKey()), true));
+            offer.initiator().flatMap(OnlinePlayers::find)
                     .ifPresent(p -> p.displayClientMessage(Component.translatable(why.messageKey()), true));
         }
     }

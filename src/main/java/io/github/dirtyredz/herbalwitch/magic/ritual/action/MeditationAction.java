@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.magic.ritual.action;
 
+import io.github.dirtyredz.herbalwitch.platform.player.OnlinePlayers;
+
 import io.github.dirtyredz.herbalwitch.magic.ritual.catalog.AltarActionSpec;
 import io.github.dirtyredz.herbalwitch.magic.ritual.menu.AltarMenu;
 import io.github.dirtyredz.herbalwitch.magic.ritual.session.AltarSession;
@@ -10,7 +12,6 @@ import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyBalance;
 import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyEvents;
 import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyRecovery;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.EnergyService;
-import io.github.dirtyredz.herbalwitch.magic.witch.initiation.InitiationEvents;
 import io.github.dirtyredz.herbalwitch.magic.witch.initiation.RitualSite;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchCapability;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchStatusService;
@@ -57,7 +58,7 @@ public final class MeditationAction implements AltarSessionService.Handler {
     @Override
     public Optional<String> invalid(MinecraftServer server, AltarSession session) {
         Payload p = session.payload();
-        Optional<ServerPlayer> witch = InitiationEvents.player(session.subject());
+        Optional<ServerPlayer> witch = OnlinePlayers.find(session.subject());
         if (witch.isEmpty()) {
             return Optional.of("left");
         }
@@ -75,7 +76,7 @@ public final class MeditationAction implements AltarSessionService.Handler {
         if (!EnergyRecovery.meditationGrant(session.elapsed(), b.meditationSettle(), b.meditationInterval())) {
             return;
         }
-        ServerPlayer witch = InitiationEvents.player(session.subject()).orElse(null);
+        ServerPlayer witch = OnlinePlayers.find(session.subject()).orElse(null);
         if (witch == null) {
             return;
         }
@@ -95,6 +96,6 @@ public final class MeditationAction implements AltarSessionService.Handler {
 
     @Override
     public void cancelled(MinecraftServer server, AltarSession session, String reason) {
-        InitiationEvents.player(session.subject()).flatMap(WitchCapability::of).ifPresent(c -> c.setMeditating(false));
+        OnlinePlayers.find(session.subject()).flatMap(WitchCapability::of).ifPresent(c -> c.setMeditating(false));
     }
 }

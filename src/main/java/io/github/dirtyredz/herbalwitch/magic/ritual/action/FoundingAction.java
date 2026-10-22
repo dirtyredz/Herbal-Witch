@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.magic.ritual.action;
 
+import io.github.dirtyredz.herbalwitch.platform.player.OnlinePlayers;
+
 import io.github.dirtyredz.herbalwitch.magic.ritual.catalog.AltarActionSpec;
 import io.github.dirtyredz.herbalwitch.magic.ritual.menu.AltarMenu;
 import io.github.dirtyredz.herbalwitch.magic.ritual.session.AltarOffering;
@@ -7,7 +9,6 @@ import io.github.dirtyredz.herbalwitch.magic.ritual.session.AltarSession;
 import io.github.dirtyredz.herbalwitch.magic.ritual.session.AltarSessionService;
 import io.github.dirtyredz.herbalwitch.magic.ritual.session.AltarSessions;
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
-import io.github.dirtyredz.herbalwitch.magic.witch.initiation.InitiationEvents;
 import io.github.dirtyredz.herbalwitch.magic.witch.initiation.RitualSite;
 import io.github.dirtyredz.herbalwitch.magic.witch.initiation.founding.FoundingService;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchStatusService;
@@ -72,7 +73,7 @@ public final class FoundingAction implements AltarSessionService.Handler {
     @Override
     public Optional<String> invalid(MinecraftServer server, AltarSession session) {
         Payload p = session.payload();
-        Optional<ServerPlayer> candidate = InitiationEvents.player(session.subject());
+        Optional<ServerPlayer> candidate = OnlinePlayers.find(session.subject());
         if (candidate.isEmpty() || !p.offering().intact(candidate.get())) {
             return Optional.of("inputs_changed");
         }
@@ -89,7 +90,7 @@ public final class FoundingAction implements AltarSessionService.Handler {
     @Override
     public void complete(MinecraftServer server, AltarSession session) {
         Payload p = session.payload();
-        ServerPlayer candidate = InitiationEvents.player(session.subject()).orElse(null);
+        ServerPlayer candidate = OnlinePlayers.find(session.subject()).orElse(null);
         if (candidate == null) {
             AltarSessionService.cancel(session, "left");
             return;

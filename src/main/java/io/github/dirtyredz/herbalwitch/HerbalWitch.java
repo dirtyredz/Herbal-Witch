@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch;
 
+import io.github.dirtyredz.herbalwitch.platform.player.OnlinePlayers;
+
 import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyRegistration;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationRegistration;
 import io.github.dirtyredz.herbalwitch.client.HerbalWitchClient;
@@ -33,6 +35,8 @@ public final class HerbalWitch {
 
     public HerbalWitch() {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(OnlinePlayers::serverStarted);
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(OnlinePlayers::serverStopped);
         DecorRegistration.register(modBus);
         BotanyRegistration.register(modBus);
         StationRegistration.register(modBus);

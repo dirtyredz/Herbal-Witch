@@ -1,9 +1,10 @@
 package io.github.dirtyredz.herbalwitch.magic.ritual.session;
 
+import io.github.dirtyredz.herbalwitch.platform.player.OnlinePlayers;
+
 import io.github.dirtyredz.herbalwitch.magic.ritual.altar.AltarBlock;
 import io.github.dirtyredz.herbalwitch.magic.ritual.catalog.AltarActionSpec;
 import io.github.dirtyredz.herbalwitch.magic.ritual.menu.AltarMenu;
-import io.github.dirtyredz.herbalwitch.magic.witch.initiation.InitiationEvents;
 import io.github.dirtyredz.herbalwitch.magic.witch.initiation.RitualSite;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -154,7 +155,7 @@ public final class AltarSessionService {
     /** Tells every participant (action bar) and remembers it for their altar screen. */
     public static void notifyAll(AltarSession session, String suffix) {
         for (UUID id : session.participants()) {
-            InitiationEvents.player(id).ifPresent(p -> notice(p, suffix));
+            OnlinePlayers.find(id).ifPresent(p -> notice(p, suffix));
         }
     }
 
@@ -216,7 +217,7 @@ public final class AltarSessionService {
             return Optional.of("altar_gone");
         }
         for (Map.Entry<UUID, Long> e : session.menus().entrySet()) {
-            Optional<ServerPlayer> p = InitiationEvents.player(e.getKey());
+            Optional<ServerPlayer> p = OnlinePlayers.find(e.getKey());
             if (p.isEmpty() || !p.get().isAlive()) {
                 return Optional.of("left");
             }

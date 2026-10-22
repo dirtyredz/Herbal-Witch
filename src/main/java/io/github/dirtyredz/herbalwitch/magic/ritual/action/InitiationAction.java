@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.magic.ritual.action;
 
+import io.github.dirtyredz.herbalwitch.platform.player.OnlinePlayers;
+
 import io.github.dirtyredz.herbalwitch.magic.ritual.catalog.AltarActionSpec;
 import io.github.dirtyredz.herbalwitch.magic.ritual.menu.AltarAccess;
 import io.github.dirtyredz.herbalwitch.magic.ritual.menu.AltarMenu;
@@ -38,7 +40,7 @@ public final class InitiationAction implements AltarSessionService.Handler {
 
     /** A witch invites {@code target} from this altar; returns the notice suffix. */
     public static String invite(ServerPlayer initiator, AltarMenu menu, UUID target) {
-        Optional<ServerPlayer> recipient = InitiationEvents.player(target);
+        Optional<ServerPlayer> recipient = OnlinePlayers.find(target);
         if (recipient.isEmpty() || !AltarAccess.mayUse(recipient.get(), menu.origin())) {
             return "initiation.not_near";
         }
@@ -101,7 +103,7 @@ public final class InitiationAction implements AltarSessionService.Handler {
             if (!WitchRules.server().initiationEnabled()) {
                 return "consent.disabled";
             }
-            ServerPlayer initiator = offer.initiator().flatMap(InitiationEvents::player).orElse(null);
+            ServerPlayer initiator = offer.initiator().flatMap(OnlinePlayers::find).orElse(null);
             if (initiator == null || !(initiator.containerMenu instanceof AltarMenu theirs) || !theirs.origin().equals(menu.origin())
                     || !theirs.stillValid(initiator)) {
                 return "initiation.initiator_away";
@@ -143,7 +145,7 @@ public final class InitiationAction implements AltarSessionService.Handler {
     @Override
     public Optional<String> invalid(MinecraftServer server, AltarSession session) {
         Payload p = session.payload();
-        Optional<ServerPlayer> payer = session.payer().flatMap(InitiationEvents::player);
+        Optional<ServerPlayer> payer = session.payer().flatMap(OnlinePlayers::find);
         if (session.payer().isPresent()) {
             if (payer.isEmpty() || !p.offering().intact(payer.get())) {
                 return Optional.of("inputs_changed");
@@ -162,8 +164,8 @@ public final class InitiationAction implements AltarSessionService.Handler {
     @Override
     public void complete(MinecraftServer server, AltarSession session) {
         Payload p = session.payload();
-        Optional<ServerPlayer> payer = session.payer().flatMap(InitiationEvents::player);
-        ServerPlayer recipient = InitiationEvents.player(session.subject()).orElse(null);
+        Optional<ServerPlayer> payer = session.payer().flatMap(OnlinePlayers::find);
+        ServerPlayer recipient = OnlinePlayers.find(session.subject()).orElse(null);
         if (recipient == null || session.payer().isPresent() && payer.isEmpty()) {
             AltarSessionService.cancel(session, "left");
             return;

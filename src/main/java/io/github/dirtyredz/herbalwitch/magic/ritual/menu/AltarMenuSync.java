@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.magic.ritual.menu;
 
+import io.github.dirtyredz.herbalwitch.platform.player.OnlinePlayers;
+
 import io.github.dirtyredz.herbalwitch.magic.ritual.catalog.AltarActionSpec;
 import io.github.dirtyredz.herbalwitch.magic.ritual.circle.CircleValidation;
 import io.github.dirtyredz.herbalwitch.magic.ritual.network.AltarPackets;
@@ -85,12 +87,12 @@ public final class AltarMenuSync {
     private static AltarUpdate.Activity activity(ServerPlayer player, AltarSession s) {
         boolean mine = s.involves(player.getUUID());
         String with = s.participants().stream().filter(id -> !id.equals(player.getUUID())).findFirst()
-                .flatMap(InitiationEvents::player).map(p -> p.getGameProfile().getName()).orElse("");
+                .flatMap(OnlinePlayers::find).map(p -> p.getGameProfile().getName()).orElse("");
         return new AltarUpdate.Activity(s.action(), s.elapsed(), s.duration(), mine, with);
     }
 
     private static AltarUpdate.Invitation invitation(InitiationOffer o, Optional<UUID> other, long now, RitualSite here) {
-        String name = other.flatMap(InitiationEvents::player).map(p -> p.getGameProfile().getName()).orElse("");
+        String name = other.flatMap(OnlinePlayers::find).map(p -> p.getGameProfile().getName()).orElse("");
         return new AltarUpdate.Invitation(o.id(), name, o.administrative(), o.ticksLeft(now), o.site().map(here::equals).orElse(false));
     }
 

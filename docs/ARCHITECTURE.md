@@ -22,6 +22,11 @@ description and fingerprint without station execution. Grimoire pages retain tha
 owns permanent discovery keys, and `platform/time/TickTime` distinguishes rounded countdowns from
 fractional recipe duration text.
 
+**Online players.** `platform/player/OnlinePlayers` owns lookup and enumeration for one server,
+wired once by `HerbalWitch`. Real players take precedence over independently scoped fake registrations;
+removed fakes and registrations from a stopped server are excluded. Initiation owns consent only.
+Teaching keeps its own range, dimension, eligibility and name-order rules over the shared roster.
+
 **Decor (`decor/`).** One cottage design (`FinishCatalog`, a single entry) and 94 pieces described in
 seven family catalogues (`decor/catalog/pieces/`), each a `FurnitureSpec`: id, family, art group, wave,
 behaviour (`FurnitureBehavior`), mount (`MountSpec`: support and cells, `(right, up, depth)` from the

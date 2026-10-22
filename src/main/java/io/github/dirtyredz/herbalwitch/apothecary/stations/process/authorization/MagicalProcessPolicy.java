@@ -1,8 +1,9 @@
 package io.github.dirtyredz.herbalwitch.apothecary.stations.process.authorization;
 
+import io.github.dirtyredz.herbalwitch.platform.player.OnlinePlayers;
+
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.EnergyService;
-import io.github.dirtyredz.herbalwitch.magic.witch.initiation.InitiationEvents;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchState;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchStatusService;
 import io.github.dirtyredz.herbalwitch.platform.permission.ActionContext;
@@ -63,7 +64,7 @@ public final class MagicalProcessPolicy implements ProcessExecutionPolicy {
         if (operator == null) {
             return Optional.of(ProcessStatus.NEEDS_WITCH);
         }
-        Optional<ServerPlayer> payer = InitiationEvents.player(operator.player());
+        Optional<ServerPlayer> payer = OnlinePlayers.find(operator.player());
         if (payer.isEmpty() || !payer.get().isAlive() || payer.get().level() != site.level()) {
             leased = false; // left, died or travelled: the recorded payer must resume
             return Optional.of(ProcessStatus.NEEDS_OPERATOR);
@@ -92,7 +93,7 @@ public final class MagicalProcessPolicy implements ProcessExecutionPolicy {
             reset();
             return Optional.of(ProcessStatus.NEEDS_WITCH);
         }
-        ServerPlayer payer = InitiationEvents.player(operator.player()).orElseThrow();
+        ServerPlayer payer = OnlinePlayers.find(operator.player()).orElseThrow();
         int units = EnergyService.units(operator.energy());
         Optional<WitchState> before = WitchStatusService.snapshot(payer);
         if (before.isEmpty()) {

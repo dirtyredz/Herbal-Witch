@@ -8,6 +8,8 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 ## Layout
 
 - `src/main/java/io/github/dirtyredz/herbalwitch/platform/time/` — tick constants and explicit ceiling/fractional duration formatting
+- `src/main/java/io/github/dirtyredz/herbalwitch/platform/player/` — server-lifecycle online roster and independently scoped fake registrations
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/platform/player/` — roster precedence, removal and lifecycle contracts
 - `src/main/java/io/github/dirtyredz/herbalwitch/platform/recipe/` — immutable processing facts, live `RecipeView` and ordered ingredient queries
 - `src/main/java/io/github/dirtyredz/herbalwitch/platform/inventory/` — deterministic missing-ingredient allocation
 - `src/test/java/io/github/dirtyredz/herbalwitch/platform/time/` — duration boundaries and fractional text

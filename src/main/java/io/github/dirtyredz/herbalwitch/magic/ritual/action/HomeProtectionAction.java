@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.magic.ritual.action;
 
+import io.github.dirtyredz.herbalwitch.platform.player.OnlinePlayers;
+
 import io.github.dirtyredz.herbalwitch.grimoire.knowledge.discovery.DiscoveryService;
 import io.github.dirtyredz.herbalwitch.magic.ritual.catalog.AltarActionSpec;
 import io.github.dirtyredz.herbalwitch.magic.ritual.grimoire.AltarEntries;
@@ -11,7 +13,6 @@ import io.github.dirtyredz.herbalwitch.magic.ritual.session.AltarSessions;
 import io.github.dirtyredz.herbalwitch.magic.ward.service.WardService;
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.EnergyService;
-import io.github.dirtyredz.herbalwitch.magic.witch.initiation.InitiationEvents;
 import io.github.dirtyredz.herbalwitch.magic.witch.initiation.RitualSite;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchStatusService;
 import net.minecraft.core.BlockPos;
@@ -79,7 +80,7 @@ public final class HomeProtectionAction implements AltarSessionService.Handler {
     @Override
     public Optional<String> invalid(MinecraftServer server, AltarSession session) {
         Payload p = session.payload();
-        Optional<ServerPlayer> witch = InitiationEvents.player(session.subject());
+        Optional<ServerPlayer> witch = OnlinePlayers.find(session.subject());
         if (witch.isEmpty() || !p.offering().intact(witch.get())) {
             return Optional.of("inputs_changed");
         }
@@ -101,7 +102,7 @@ public final class HomeProtectionAction implements AltarSessionService.Handler {
     @Override
     public void complete(MinecraftServer server, AltarSession session) {
         Payload p = session.payload();
-        ServerPlayer witch = InitiationEvents.player(session.subject()).orElse(null);
+        ServerPlayer witch = OnlinePlayers.find(session.subject()).orElse(null);
         ServerLevel level = AltarSessionService.level(session.site()).orElse(null);
         if (witch == null || level == null || !p.offering().intact(witch)) {
             AltarSessionService.cancel(session, "inputs_changed");

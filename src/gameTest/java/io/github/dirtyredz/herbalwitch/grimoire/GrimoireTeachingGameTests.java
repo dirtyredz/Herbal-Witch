@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.grimoire;
 
+import io.github.dirtyredz.herbalwitch.platform.player.OnlinePlayers;
+
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.grimoire.access.menu.GrimoireMenu;
 import io.github.dirtyredz.herbalwitch.grimoire.catalog.GrimoireCatalog;
@@ -8,7 +10,6 @@ import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContent;
 import io.github.dirtyredz.herbalwitch.grimoire.knowledge.discovery.DiscoveryService;
 import io.github.dirtyredz.herbalwitch.grimoire.knowledge.teaching.TeachingEvents;
 import io.github.dirtyredz.herbalwitch.grimoire.knowledge.teaching.TeachingService;
-import io.github.dirtyredz.herbalwitch.grimoire.knowledge.teaching.TeachingWorld;
 import io.github.dirtyredz.herbalwitch.grimoire.network.TeachingRequest;
 import io.github.dirtyredz.herbalwitch.grimoire.network.TeachingUpdate;
 import net.minecraft.core.BlockPos;
@@ -49,7 +50,8 @@ public final class GrimoireTeachingGameTests {
     }
 
     /** A teacher who knows the tea, at an open stand, and a pupil with an open book, two blocks apart. */
-    private record Pair(ServerPlayer teacher, GrimoireMenu teacherMenu, ServerPlayer pupil, GrimoireMenu pupilMenu) {
+    private record Pair(ServerPlayer teacher, GrimoireMenu teacherMenu, ServerPlayer pupil, GrimoireMenu pupilMenu,
+                        OnlinePlayers.Registration online) {
     }
 
     private static Pair pair(GameTestHelper helper, String name) {
@@ -58,11 +60,11 @@ public final class GrimoireTeachingGameTests {
         place(helper, GrimoireCatalog.STAND, stand);
         ServerPlayer teacher = standing(helper, "teach_" + name + "_t", new BlockPos(4, 1, 3));
         ServerPlayer pupil = standing(helper, "teach_" + name + "_p", new BlockPos(5, 1, 2));
-        TeachingWorld.setTestPlayers(List.of(teacher, pupil));
+        OnlinePlayers.Registration online = OnlinePlayers.register(List.of(teacher, pupil));
         DiscoveryService.grant(teacher, TEA);
         GrimoireMenu teacherMenu = openBlock(helper, teacher, GrimoireCatalog.STAND, stand);
         check(teacherMenu != null, "the stand did not open");
-        return new Pair(teacher, teacherMenu, pupil, openBook(pupil));
+        return new Pair(teacher, teacherMenu, pupil, openBook(pupil), online);
     }
 
     private static TeachingRequest request(GameTestHelper helper, GrimoireMenu menu, TeachingRequest.Op op, UUID other) {
@@ -73,7 +75,7 @@ public final class GrimoireTeachingGameTests {
         TeachingEvents.cancelInvolving(p.teacher().getUUID());
         p.teacher().closeContainer();
         p.pupil().closeContainer();
-        TeachingWorld.setTestPlayers(List.of());
+        p.online().close();
         helper.succeed();
     }
 
@@ -124,7 +126,7 @@ public final class GrimoireTeachingGameTests {
     public static void spoofedAndReplayedAcceptancesTeachNothing(GameTestHelper helper) {
         Pair p = pair(helper, "spoof");
         ServerPlayer intruder = standing(helper, "teach_spoof_i", new BlockPos(3, 1, 2));
-        TeachingWorld.setTestPlayers(List.of(p.teacher(), p.pupil(), intruder));
+        p.online().add(intruder);
         GrimoireMenu intruderMenu = openBook(intruder);
         TeachingEvents.handle(p.teacher(), request(helper, p.teacherMenu(), TeachingRequest.Op.INVITE, p.pupil().getUUID()));
         TeachingEvents.handle(intruder, request(helper, intruderMenu, TeachingRequest.Op.ACCEPT, p.teacher().getUUID()));
@@ -149,7 +151,7 @@ public final class GrimoireTeachingGameTests {
         service().cancelInvolving(p.teacher().getUUID());
         // a fresh offer after the cooldown, then the teacher logs out
         ServerPlayer teacher2 = standing(helper, "teach_reload_t2", new BlockPos(4, 1, 3));
-        TeachingWorld.setTestPlayers(List.of(p.teacher(), p.pupil(), teacher2));
+        p.online().add(teacher2);
         DiscoveryService.grant(teacher2, TEA);
         p.teacher().closeContainer();
         GrimoireMenu menu2 = openBlock(helper, teacher2, GrimoireCatalog.STAND, new BlockPos(4, 1, 4));
