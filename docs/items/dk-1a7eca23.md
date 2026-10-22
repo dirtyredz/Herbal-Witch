@@ -2,7 +2,7 @@
 id: dk-1a7eca23
 type: task
 created: 2026-10-22
-status: todo
+status: done
 since: 2026-10-22
 area: structure
 priority: P1
