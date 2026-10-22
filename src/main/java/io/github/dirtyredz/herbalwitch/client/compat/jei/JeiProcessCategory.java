@@ -1,6 +1,7 @@
 package io.github.dirtyredz.herbalwitch.client.compat.jei;
 
 import io.github.dirtyredz.herbalwitch.client.compat.ViewerLayout;
+import io.github.dirtyredz.herbalwitch.stations.description.ProcessingCategories;
 import io.github.dirtyredz.herbalwitch.stations.process.ProcessRecipe;
 import io.github.dirtyredz.herbalwitch.stations.process.ProcessRecipeDescription;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -21,10 +22,10 @@ import java.util.List;
 /** One processing type as a JEI category, laid out by {@link ViewerLayout}. */
 public class JeiProcessCategory implements IRecipeCategory<ProcessRecipe> {
     private final RecipeType<ProcessRecipe> type;
-    private final ViewerLayout.Category category;
+    private final ProcessingCategories.Category category;
     private final IDrawable icon;
 
-    public JeiProcessCategory(RecipeType<ProcessRecipe> type, ViewerLayout.Category category, IGuiHelper gui, ItemStack station) {
+    public JeiProcessCategory(RecipeType<ProcessRecipe> type, ProcessingCategories.Category category, IGuiHelper gui, ItemStack station) {
         this.type = type;
         this.category = category;
         this.icon = gui.createDrawableItemStack(station);

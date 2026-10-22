@@ -19,6 +19,8 @@ import * as house from './stations/house.mjs';
 import * as interfaces from './stations/interfaces.mjs';
 import { PREPARATION_HERBS, bundleSprite, powderSprite } from './preparations/materials.mjs';
 import { PRODUCTS } from './preparations/products.mjs';
+import { book } from './grimoire/book.mjs';
+import { reader } from './grimoire/interface.mjs';
 import { upscale } from './pixels.mjs';
 import { TEXELS_PER_UNIT, checkDensity } from './density.mjs';
 
@@ -62,6 +64,7 @@ function drawnManifest() {
     out.push([`item/preparations/herbs/${group}/${herb}/powder.png`, drawnAt1x(powderSprite(group, herb))]);
   }
   for (const [rel, make] of PRODUCTS) out.push([`item/preparations/${rel}`, drawnAt1x(make)]);
+  out.push(['item/grimoire/book.png', drawnAt1x(book)], ['gui/grimoire/reader.png', drawnAt1x(reader)]);
   return out;
 }
 
