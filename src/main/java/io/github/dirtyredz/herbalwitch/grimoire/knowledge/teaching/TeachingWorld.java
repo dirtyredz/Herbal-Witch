@@ -4,7 +4,7 @@ import io.github.dirtyredz.herbalwitch.grimoire.access.menu.GrimoireMenu;
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.content.ServerGrimoireContent;
 import io.github.dirtyredz.herbalwitch.grimoire.knowledge.discovery.DiscoveryService;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipe;
+import io.github.dirtyredz.herbalwitch.platform.recipe.RecipeView;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 
@@ -75,7 +75,7 @@ public final class TeachingWorld implements TeachingService.World {
 
     @Override
     public Optional<String> fingerprint(EntryKey recipe) {
-        return ServerGrimoireContent.get(server).recipe(recipe).map(ProcessRecipe::fingerprint);
+        return ServerGrimoireContent.get(server).recipe(recipe).map(RecipeView::fingerprint);
     }
 
     @Override

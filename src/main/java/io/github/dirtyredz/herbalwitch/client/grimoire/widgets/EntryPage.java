@@ -1,5 +1,8 @@
 package io.github.dirtyredz.herbalwitch.client.grimoire.widgets;
 
+import io.github.dirtyredz.herbalwitch.platform.time.TickTime;
+
+
 import io.github.dirtyredz.herbalwitch.client.compat.ViewerLayout;
 import io.github.dirtyredz.herbalwitch.client.grimoire.GrimoireClientState;
 import io.github.dirtyredz.herbalwitch.client.grimoire.GrimoireView;
@@ -8,7 +11,7 @@ import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireEntry;
 import io.github.dirtyredz.herbalwitch.grimoire.network.ReaderUpdate;
 import io.github.dirtyredz.herbalwitch.grimoire.reading.ingredients.IngredientRequirements;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.ProcessingCategories;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipe;
+import io.github.dirtyredz.herbalwitch.platform.recipe.RecipeView;
 import io.github.dirtyredz.herbalwitch.platform.recipe.ProcessRecipeDescription;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationBlocks;
 import net.minecraft.Util;
@@ -128,18 +131,18 @@ public final class EntryPage {
     }
 
     private int teaser(GuiGraphics graphics, GrimoireEntry entry, int cy) {
-        ProcessRecipe recipe = entry.recipe().orElseThrow();
-        cy = station(graphics, recipe, cy);
+        RecipeView recipe = entry.recipe().orElseThrow();
+        cy = station(graphics, entry, cy);
         return paragraph(graphics, entry.hint().orElse(view.text("unknown")), cy + 2, TextButton.PLUM);
     }
 
-    private int station(GuiGraphics graphics, ProcessRecipe recipe, int cy) {
-        Component station = ProcessingCategories.byType(recipe.getType())
+    private int station(GuiGraphics graphics, GrimoireEntry entry, int cy) {
+        Component station = ProcessingCategories.ALL.stream().filter(c -> c.id().equals(entry.category())).findFirst()
                 .map(c -> StationBlocks.block(c.station()).getName()).orElse(Component.literal("?"));
         return paragraph(graphics, view.text("station", station), cy, TextButton.INK);
     }
 
-    private int recipe(GuiGraphics graphics, GrimoireEntry entry, ProcessRecipe recipe, int cy, int mouseX, int mouseY) {
+    private int recipe(GuiGraphics graphics, GrimoireEntry entry, RecipeView recipe, int cy, int mouseX, int mouseY) {
         ProcessRecipeDescription d = recipe.description();
         List<IngredientRequirements.Requirement> requirements = IngredientRequirements.of(d);
         Optional<ReaderUpdate> counts = view.reader().flatMap(r ->
@@ -179,10 +182,10 @@ public final class EntryPage {
             rx += 25;
         }
         cy += 21;
-        cy = station(graphics, recipe, cy);
+        cy = station(graphics, entry, cy);
         graphics.blit(GrimoireView.ATLAS, x, cy, 50, 184, 9, 9);
         graphics.drawString(font, Component.translatable(ProcessingCategories.footerKey(false),
-                ProcessingCategories.seconds(d.duration())), x + 12, cy + 1, TextButton.INK, false);
+                TickTime.fractionalSeconds(d.duration())), x + 12, cy + 1, TextButton.INK, false);
         if (d.heated()) {
             graphics.blit(GrimoireView.ATLAS, x + 50, cy, 40, 184, 9, 9);
             graphics.drawString(font, view.text("heat"), x + 62, cy + 1, TextButton.PINK, false);

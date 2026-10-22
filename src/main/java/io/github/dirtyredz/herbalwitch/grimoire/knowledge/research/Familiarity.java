@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.grimoire.knowledge.research;
 
+import io.github.dirtyredz.herbalwitch.platform.recipe.RecipeIngredients;
+
 import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
 import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbSpec;
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
@@ -74,6 +76,6 @@ public final class Familiarity implements Predicate<Ingredient> {
 
     /** The recipe's rules: primary ingredients decide, base and package when there are none. */
     public static ResearchEligibility<Ingredient> eligibility(ProcessRecipeDescription description) {
-        return new ResearchEligibility<>(StationRecipeEntries.primaries(description), StationRecipeEntries.secondaries(description));
+        return new ResearchEligibility<>(RecipeIngredients.primaries(description), RecipeIngredients.secondaries(description));
     }
 }

@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.client.compat.jei;
 
+import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.ProcessingRecipeBindings;
+
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.client.compat.ritual.RitualCardLayout;
 import io.github.dirtyredz.herbalwitch.magic.ritual.registry.RitualItems;
@@ -51,7 +53,7 @@ public class HerbalWitchJeiPlugin implements IModPlugin {
         }
         for (ProcessingCategories.Category category : ProcessingCategories.ALL) {
             List<ProcessRecipe> recipes = new ArrayList<>(
-                    Minecraft.getInstance().level.getRecipeManager().getAllRecipesFor(category.type().get()));
+                    Minecraft.getInstance().level.getRecipeManager().getAllRecipesFor(ProcessingRecipeBindings.type(category)));
             registration.addRecipes(type(category), recipes);
         }
         registration.addRecipes(JeiRitualCategory.TYPE, RitualCardLayout.actions());

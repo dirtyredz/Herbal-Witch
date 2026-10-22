@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.compat;
 
+import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.ProcessingRecipeBindings;
+
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.EverydayProductCatalog;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.ProductSpec;
@@ -79,8 +81,8 @@ public final class CompatibilityGameTests {
         GrimoireContent content = ServerGrimoireContent.get(helper.getLevel().getServer());
         for (ProcessingCategories.Category category : ProcessingCategories.ALL) {
             check(ProcessingCategories.byStation(category.station()).orElseThrow() == category, category.id() + " station mapping");
-            for (ProcessRecipe recipe : helper.getLevel().getRecipeManager().getAllRecipesFor(category.type().get())) {
-                check(ProcessingCategories.byType(recipe.getType()).orElseThrow() == category, recipe.getId() + " type mapping");
+            for (ProcessRecipe recipe : helper.getLevel().getRecipeManager().getAllRecipesFor(ProcessingRecipeBindings.type(category))) {
+                check(ProcessingRecipeBindings.byType(recipe.getType()).orElseThrow() == category, recipe.getId() + " type mapping");
                 GrimoireEntry page = content.get(StationRecipeEntries.key(recipe.getId())).orElseThrow();
                 check(page.category().equals(category.id()), recipe.getId() + " is under " + page.category());
                 check(page.recipe().orElseThrow().description() == recipe.description(), recipe.getId() + " copied its description");

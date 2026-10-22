@@ -1,7 +1,8 @@
 package io.github.dirtyredz.herbalwitch.magic.ritual.action;
 
+import io.github.dirtyredz.herbalwitch.grimoire.catalog.WitchcraftKeys;
+
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
-import io.github.dirtyredz.herbalwitch.magic.witch.grimoire.WitchEntries;
 import io.github.dirtyredz.herbalwitch.grimoire.knowledge.discovery.DiscoveryService;
 import io.github.dirtyredz.herbalwitch.grimoire.registry.GrimoireItems;
 import io.github.dirtyredz.herbalwitch.magic.ritual.grimoire.AltarEntries;
@@ -116,7 +117,7 @@ public final class ConversionCommit {
             WitchStatusService.flush(p);
         });
         List<EntryKey> learned = new ArrayList<>();
-        WitchEntries.PAGES.forEach(page -> learned.add(WitchEntries.key(page)));
+        WitchcraftKeys.CONVERSION_PAGES.forEach(page -> learned.add(WitchcraftKeys.key(page)));
         learned.add(AltarEntries.key(session.action()));
         DiscoveryService.grantAll(recipient, learned);
         payer.filter(p -> p != recipient).ifPresent(p -> DiscoveryService.grant(p, AltarEntries.key(session.action())));

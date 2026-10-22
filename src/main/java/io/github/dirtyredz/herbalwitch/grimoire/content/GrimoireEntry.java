@@ -1,7 +1,7 @@
 package io.github.dirtyredz.herbalwitch.grimoire.content;
 
 import io.github.dirtyredz.herbalwitch.grimoire.content.reload.GrimoireDefinition;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipe;
+import io.github.dirtyredz.herbalwitch.platform.recipe.RecipeView;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * One page of the grimoire, immutable. A recipe entry holds the live {@link ProcessRecipe}, and its
+ * One page of the grimoire, immutable. A recipe entry holds the live {@link RecipeView}, and its
  * page is drawn from that recipe's description, never from a copy: ingredients, counts, result,
  * returns, time and heat are always the current recipe's. Editorial definitions add prose, grouping,
  * links and hints only.
@@ -28,11 +28,17 @@ import java.util.Optional;
  * @param recipe   the live recipe of a recipe entry
  */
 public record GrimoireEntry(EntryKey key, String category, Component title, ItemStack icon, List<Component> body,
-                            List<EntryKey> links, Optional<Component> hint, boolean always, Optional<ProcessRecipe> recipe) {
+                            List<EntryKey> links, Optional<Component> hint, boolean always, Optional<RecipeView> recipe) {
     public GrimoireEntry {
         body = List.copyOf(body);
         links = List.copyOf(new LinkedHashSet<>(links));
         icon = icon.copy();
+    }
+
+    /** A public, hintless page without a recipe; other entry kinds keep their explicit flags. */
+    public static GrimoireEntry page(EntryKey key, String category, Component title, ItemStack icon,
+                                     List<Component> body, List<EntryKey> links) {
+        return new GrimoireEntry(key, category, title, icon, body, links, Optional.empty(), true, Optional.empty());
     }
 
     @Override

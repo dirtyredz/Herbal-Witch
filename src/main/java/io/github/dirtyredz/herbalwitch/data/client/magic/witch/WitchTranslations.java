@@ -1,6 +1,7 @@
 package io.github.dirtyredz.herbalwitch.data.client.magic.witch;
 
-import io.github.dirtyredz.herbalwitch.magic.witch.grimoire.WitchEntries;
+import io.github.dirtyredz.herbalwitch.grimoire.catalog.WitchcraftKeys;
+
 import io.github.dirtyredz.herbalwitch.magic.witch.command.WitchCommand;
 import io.github.dirtyredz.herbalwitch.magic.witch.initiation.InitiationConsent;
 import net.minecraftforge.common.data.LanguageProvider;
@@ -23,7 +24,7 @@ public final class WitchTranslations {
                 "An operator offers to make you a witch. Open any Witch's Altar to accept or decline.");
         commands(lang);
         lang.add("hud.herbalwitch.energy", "%s / %s");
-        pages().forEach((suffix, text) -> lang.add(WitchEntries.PREFIX + suffix, text));
+        pages().forEach((suffix, text) -> lang.add(WitchcraftKeys.PREFIX + suffix, text));
     }
 
     static Map<InitiationConsent.Result, String> consent() {

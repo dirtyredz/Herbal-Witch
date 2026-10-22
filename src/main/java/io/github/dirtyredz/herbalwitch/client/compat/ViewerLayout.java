@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.client.compat;
 
+import io.github.dirtyredz.herbalwitch.platform.time.TickTime;
+
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.ProcessingCategories;
 import io.github.dirtyredz.herbalwitch.platform.recipe.ProcessRecipeDescription;
@@ -61,6 +63,6 @@ public final class ViewerLayout {
     /** "10 s" or "10 s, needs heat". */
     public static Component footer(ProcessRecipeDescription description) {
         return Component.translatable(ProcessingCategories.footerKey(description.heated()),
-                ProcessingCategories.seconds(description.duration()));
+                TickTime.fractionalSeconds(description.duration()));
     }
 }

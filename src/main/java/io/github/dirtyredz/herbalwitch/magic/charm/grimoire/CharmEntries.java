@@ -1,18 +1,20 @@
 package io.github.dirtyredz.herbalwitch.magic.charm.grimoire;
 
+import io.github.dirtyredz.herbalwitch.grimoire.catalog.WitchcraftKeys;
+
+import io.github.dirtyredz.herbalwitch.platform.time.TickTime;
+
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContent;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContentSource;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireEntry;
-import io.github.dirtyredz.herbalwitch.magic.witch.grimoire.WitchEntries;
 import io.github.dirtyredz.herbalwitch.magic.charm.catalog.CharmCatalog;
 import io.github.dirtyredz.herbalwitch.magic.charm.registry.CharmItems;
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
 import net.minecraft.network.chat.Component;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Consumer;
 
 /**
@@ -21,7 +23,7 @@ import java.util.function.Consumer;
  * active rules, the strengths from the catalogue); the prose holds none.
  */
 public final class CharmEntries implements GrimoireContentSource {
-    public static final String PREFIX = WitchEntries.PREFIX + "charms.";
+    public static final String PREFIX = WitchcraftKeys.PREFIX + "charms.";
     public static final EntryKey KEY = EntryKey.of(EntryKey.Kind.GUIDE, HerbalWitch.MOD_ID + ":witchcraft/charms");
 
     @Override
@@ -30,13 +32,12 @@ public final class CharmEntries implements GrimoireContentSource {
         List<Component> body = List.of(
                 Component.translatable(PREFIX + "0"),
                 Component.translatable(PREFIX + "wear"),
-                Component.translatable(PREFIX + "charge", WitchEntries.minutes(seconds * 20)),
+                Component.translatable(PREFIX + "charge", TickTime.ceilingMinutes(seconds * 20)),
                 Component.translatable(PREFIX + "sachet", CharmCatalog.PROTECTIVE_SACHET.percent(), half(CharmCatalog.PROTECTIVE_SACHET.cap())),
                 Component.translatable(PREFIX + "amulets", CharmCatalog.UNDEAD_AMULET.percent(), half(CharmCatalog.UNDEAD_AMULET.cap())),
                 Component.translatable(PREFIX + "limits"));
-        out.accept(new GrimoireEntry(KEY, GrimoireContent.WITCHCRAFT, Component.translatable(PREFIX + "title"),
-                CharmItems.item(CharmCatalog.PROTECTIVE_SACHET).getDefaultInstance(), body, List.of(), Optional.empty(), true,
-                Optional.empty()));
+        out.accept(GrimoireEntry.page(KEY, GrimoireContent.WITCHCRAFT, Component.translatable(PREFIX + "title"),
+                CharmItems.item(CharmCatalog.PROTECTIVE_SACHET).getDefaultInstance(), body, List.of()));
     }
 
     /** Health as hearts, for page text. */

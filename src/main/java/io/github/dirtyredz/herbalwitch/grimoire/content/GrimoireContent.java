@@ -3,7 +3,7 @@ package io.github.dirtyredz.herbalwitch.grimoire.content;
 import com.mojang.logging.LogUtils;
 import io.github.dirtyredz.herbalwitch.apothecary.botany.conditions.HerbConditions;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reload.GrimoireDefinition;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipe;
+import io.github.dirtyredz.herbalwitch.platform.recipe.RecipeView;
 import net.minecraft.world.item.crafting.RecipeManager;
 import org.slf4j.Logger;
 
@@ -105,7 +105,7 @@ public final class GrimoireContent {
     }
 
     /** The live recipe behind a recipe key, if it is present in this revision. */
-    public Optional<ProcessRecipe> recipe(EntryKey key) {
+    public Optional<RecipeView> recipe(EntryKey key) {
         return get(key).flatMap(GrimoireEntry::recipe);
     }
 

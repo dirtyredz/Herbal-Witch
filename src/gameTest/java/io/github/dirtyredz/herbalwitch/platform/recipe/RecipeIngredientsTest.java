@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.platform.recipe;
 
+import io.github.dirtyredz.herbalwitch.platform.recipe.RecipeIngredients;
+
 import io.github.dirtyredz.herbalwitch.apothecary.stations.grimoire.StationRecipeEntries;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -29,9 +31,9 @@ public final class RecipeIngredientsTest {
         ProcessRecipeDescription d = new ProcessRecipeDescription(List.of(new ProcessRecipeDescription.Counted(primary, 2)),
                 Optional.of(new ProcessRecipeDescription.Counted(base, 1)), Optional.of(new ProcessRecipeDescription.Counted(packaging, 4)),
                 new ItemStack(Items.STICK), List.of(new ItemStack(Items.BUCKET)), 50, false);
-        assertEquals(List.of(primary), StationRecipeEntries.primaries(d));
-        assertEquals(List.of(base, packaging), StationRecipeEntries.secondaries(d));
-        assertEquals(List.of(primary, base, packaging), StationRecipeEntries.allIngredients(d));
+        assertEquals(List.of(primary), RecipeIngredients.primaries(d));
+        assertEquals(List.of(base, packaging), RecipeIngredients.secondaries(d));
+        assertEquals(List.of(primary, base, packaging), RecipeIngredients.allIngredients(d));
         helper.succeed();
     }
 
@@ -39,7 +41,7 @@ public final class RecipeIngredientsTest {
     public static void absentRolesAndReturnedContainersDoNotBecomeInputs(GameTestHelper helper) {
         ProcessRecipeDescription d = new ProcessRecipeDescription(List.of(), Optional.empty(), Optional.empty(),
                 new ItemStack(Items.PAPER), List.of(new ItemStack(Items.BUCKET)), 50, false);
-        assertTrue(StationRecipeEntries.allIngredients(d).isEmpty());
+        assertTrue(RecipeIngredients.allIngredients(d).isEmpty());
         helper.succeed();
     }
 

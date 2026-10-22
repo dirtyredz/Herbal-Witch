@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.client.compat.ritual;
 
+import io.github.dirtyredz.herbalwitch.platform.time.TickTime;
+
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.magic.ritual.catalog.AltarActionSpec;
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
@@ -59,19 +61,16 @@ public final class RitualCardLayout {
         WorkingRules w = rules.workings();
         EnergyBalance e = rules.energy();
         Component terms = switch (action) {
-            case FOUNDING -> Component.translatable(KEY + "time", seconds(rules.foundingTicks()));
-            case INITIATION -> Component.translatable(KEY + "terms", seconds(rules.initiationTicks()), e.initiationCost());
+            case FOUNDING -> Component.translatable(KEY + "time", TickTime.ceilingSeconds(rules.foundingTicks()));
+            case INITIATION -> Component.translatable(KEY + "terms", TickTime.ceilingSeconds(rules.initiationTicks()), e.initiationCost());
             case MEDITATION -> Component.translatable(KEY + "open");
-            case ATTUNEMENT -> Component.translatable(KEY + "terms", seconds(rules.attunementTicks()), e.attunementCost());
-            case GARDEN_BLESSING -> Component.translatable(KEY + "terms", seconds(w.gardenBlessingTicks()), w.gardenBlessingCost());
-            case HOME_PROTECTION -> Component.translatable(KEY + "terms", seconds(w.homeProtectionTicks()), w.homeProtectionCost());
+            case ATTUNEMENT -> Component.translatable(KEY + "terms", TickTime.ceilingSeconds(rules.attunementTicks()), e.attunementCost());
+            case GARDEN_BLESSING -> Component.translatable(KEY + "terms", TickTime.ceilingSeconds(w.gardenBlessingTicks()), w.gardenBlessingCost());
+            case HOME_PROTECTION -> Component.translatable(KEY + "terms", TickTime.ceilingSeconds(w.homeProtectionTicks()), w.homeProtectionCost());
         };
         return List.of(Component.translatable("grimoire." + HerbalWitch.MOD_ID + ".ritual." + action.key() + ".title"),
                 Component.translatable(KEY + (action.circle() ? "needs_circle" : "needs_altar")), terms,
                 Component.translatable(KEY + "result." + action.key()));
     }
 
-    private static int seconds(int ticks) {
-        return (ticks + 19) / 20;
-    }
 }

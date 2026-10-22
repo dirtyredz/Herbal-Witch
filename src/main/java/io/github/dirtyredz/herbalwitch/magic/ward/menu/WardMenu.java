@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.magic.ward.menu;
 
+import io.github.dirtyredz.herbalwitch.platform.time.TickTime;
+
 import io.github.dirtyredz.herbalwitch.magic.ward.persistence.WardRecord;
 import io.github.dirtyredz.herbalwitch.magic.ward.persistence.WardSavedData;
 import io.github.dirtyredz.herbalwitch.magic.ward.registry.WardRegistration;
@@ -131,7 +133,7 @@ public class WardMenu extends AbstractContainerMenu {
             }
             Optional<WardRecord> record = WardService.record(level, pos);
             return switch (index) {
-                case DATA_SECONDS -> record.map(r -> Math.min(Short.MAX_VALUE, (r.charge() + 19) / 20)).orElse(0);
+                case DATA_SECONDS -> record.map(r -> Math.min(Short.MAX_VALUE, TickTime.ceilingSeconds(r.charge()))).orElse(0);
                 case DATA_RADIUS -> record.map(WardRecord::radius).orElse(WitchRules.server().workings().wardRadius());
                 case DATA_MAX_RADIUS -> maxRadius();
                 case DATA_PROFILE -> record.map(r -> r.profile().ordinal()).orElse(2);

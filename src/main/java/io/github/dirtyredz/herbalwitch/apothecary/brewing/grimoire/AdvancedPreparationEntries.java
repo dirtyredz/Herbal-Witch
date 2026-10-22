@@ -1,6 +1,9 @@
 package io.github.dirtyredz.herbalwitch.apothecary.brewing.grimoire;
 
-import io.github.dirtyredz.herbalwitch.magic.witch.grimoire.WitchEntries;
+import io.github.dirtyredz.herbalwitch.grimoire.catalog.WitchcraftKeys;
+
+import io.github.dirtyredz.herbalwitch.platform.time.TickTime;
+
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.advanced.DrinkApplications;
@@ -22,7 +25,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Consumer;
 
 /**
@@ -32,13 +34,9 @@ import java.util.function.Consumer;
  * themselves come from the live recipes; these pages quote numbers only as arguments.
  */
 public final class AdvancedPreparationEntries implements GrimoireContentSource {
-    public static final String PREFIX = WitchEntries.PREFIX;
+    public static final String PREFIX = WitchcraftKeys.PREFIX;
     /** The pages, in reading order. */
     public static final List<String> PAGES = List.of("brewing", "preparations", "familiar");
-
-    public static EntryKey key(String page) {
-        return EntryKey.of(EntryKey.Kind.GUIDE, HerbalWitch.MOD_ID + ":witchcraft/" + page);
-    }
 
     @Override
     public void contribute(GrimoireContent.Inputs inputs, Consumer<GrimoireEntry> out) {
@@ -52,10 +50,10 @@ public final class AdvancedPreparationEntries implements GrimoireContentSource {
                         Component.translatable(PREFIX + "brewing.bottling", MixtureCatalog.DOSES));
                 case "preparations" -> List.of(
                         Component.translatable(PREFIX + "preparations.0"),
-                        Component.translatable(PREFIX + "preparations.drinks", WitchEntries.seconds(DrinkApplications.HEALING_COOLDOWN)),
+                        Component.translatable(PREFIX + "preparations.drinks", TickTime.ceilingSeconds(DrinkApplications.HEALING_COOLDOWN)),
                         Component.translatable(PREFIX + "preparations.throwing", (int) PreparationImpact.RADIUS,
-                                WitchEntries.seconds(ThrowablePreparationItem.COOLDOWN)),
-                        Component.translatable(PREFIX + "preparations.control", WitchEntries.seconds(ControlEffects.IMMUNITY_TICKS)),
+                                TickTime.ceilingSeconds(ThrowablePreparationItem.COOLDOWN)),
+                        Component.translatable(PREFIX + "preparations.control", TickTime.ceilingSeconds(ControlEffects.IMMUNITY_TICKS)),
                         Component.translatable(PREFIX + "preparations.sight", (int) TargetFilters.NEAR),
                         Component.translatable(PREFIX + "preparations.oils"),
                         Component.translatable(PREFIX + "preparations.consent"));
@@ -69,9 +67,9 @@ public final class AdvancedPreparationEntries implements GrimoireContentSource {
                 case "preparations" -> AdvancedPreparations.item(AdvancedProductCatalog.POISON).getDefaultInstance();
                 default -> AdvancedPreparations.item(FamiliarPreparationCatalog.GUARDIAN).getDefaultInstance();
             };
-            List<EntryKey> links = PAGES.stream().filter(p -> !p.equals(page)).map(AdvancedPreparationEntries::key).toList();
-            out.accept(new GrimoireEntry(key(page), GrimoireContent.WITCHCRAFT, Component.translatable(PREFIX + page + ".title"), icon, body,
-                    links, Optional.empty(), true, Optional.empty()));
+            List<EntryKey> links = PAGES.stream().filter(p -> !p.equals(page)).map(WitchcraftKeys::key).toList();
+            out.accept(GrimoireEntry.page(WitchcraftKeys.key(page), GrimoireContent.WITCHCRAFT, Component.translatable(PREFIX + page + ".title"), icon, body,
+                    links));
         }
     }
 }

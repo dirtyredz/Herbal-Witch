@@ -29,8 +29,10 @@ public final class GrimoireEntryTest {
         ItemStack icon = new ItemStack(Items.PAPER, 3);
         icon.getOrCreateTag().putString("origin", "before");
         List<Component> body = new ArrayList<>(List.of(Component.literal("body")));
-        GrimoireEntry entry = new GrimoireEntry(KEY, "guide", Component.literal("title"), icon, body,
-                List.of(), Optional.empty(), true, Optional.empty());
+        GrimoireEntry entry = GrimoireEntry.page(KEY, "guide", Component.literal("title"), icon, body, List.of());
+        assertTrue(entry.always());
+        assertTrue(entry.hint().isEmpty());
+        assertTrue(entry.recipe().isEmpty());
         icon.setCount(1);
         icon.getOrCreateTag().putString("origin", "after");
         body.clear();
@@ -50,8 +52,8 @@ public final class GrimoireEntryTest {
 
     @GameTest(template = TEMPLATE)
     public static void linksDeduplicateInFirstOccurrenceOrder(GameTestHelper helper) {
-        GrimoireEntry entry = new GrimoireEntry(KEY, "guide", Component.literal("title"), ItemStack.EMPTY, List.of(),
-                List.of(SECOND, FIRST, SECOND, FIRST), Optional.empty(), true, Optional.empty());
+        GrimoireEntry entry = GrimoireEntry.page(KEY, "guide", Component.literal("title"), ItemStack.EMPTY, List.of(),
+                List.of(SECOND, FIRST, SECOND, FIRST));
         assertEquals(List.of(SECOND, FIRST), entry.links());
         assertEquals(List.of(FIRST), entry.withLinksIn(FIRST::equals).links());
         helper.succeed();

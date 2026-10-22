@@ -1,5 +1,9 @@
 package io.github.dirtyredz.herbalwitch.grimoire;
 
+import io.github.dirtyredz.herbalwitch.platform.recipe.RecipeView;
+
+import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.ProcessingRecipeBindings;
+
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
 import io.github.dirtyredz.herbalwitch.apothecary.botany.conditions.HerbConditionReloadListener;
@@ -81,7 +85,7 @@ public final class GrimoireContentGameTests {
         GrimoireContent content = content(helper);
         int recipes = 0;
         for (ProcessingCategories.Category category : ProcessingCategories.ALL) {
-            for (ProcessRecipe r : helper.getLevel().getRecipeManager().getAllRecipesFor(category.type().get())) {
+            for (ProcessRecipe r : helper.getLevel().getRecipeManager().getAllRecipesFor(ProcessingRecipeBindings.type(category))) {
                 GrimoireEntry entry = content.get(StationRecipeEntries.key(r.getId())).orElse(null);
                 check(entry != null, r.getId() + " has no page");
                 check(entry.recipe().orElseThrow() == r, r.getId() + " page does not hold the live recipe");
@@ -132,7 +136,7 @@ public final class GrimoireContentGameTests {
         SteepingRecipe slower = new SteepingRecipe(tea.getId(), new ProcessRecipeDescription(d.ingredients(), d.base(), d.packaging(),
                 d.result(), d.returns(), d.duration() * 2, d.heated()));
         changed.add(slower);
-        ProcessRecipe shown = build(helper, changed).recipe(TEA).orElseThrow();
+        RecipeView shown = build(helper, changed).recipe(TEA).orElseThrow();
         check(shown.description().duration() == d.duration() * 2, "the page shows a stale duration");
         check(!shown.fingerprint().equals(((ProcessRecipe) tea).fingerprint()), "the changed recipe kept its fingerprint");
         helper.succeed();

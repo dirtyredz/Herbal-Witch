@@ -1,5 +1,9 @@
 package io.github.dirtyredz.herbalwitch.apothecary.stations.grimoire;
 
+import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.ProcessingRecipeBindings;
+
+import io.github.dirtyredz.herbalwitch.platform.recipe.RecipeIngredients;
+
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.EverydayProductCatalog;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item.ProductTooltips;
@@ -21,7 +25,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeManager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -49,7 +52,7 @@ public final class StationRecipeEntries implements GrimoireContentSource {
     public static List<ProcessRecipe> recipes(RecipeManager manager) {
         List<ProcessRecipe> out = new ArrayList<>();
         for (ProcessingCategories.Category category : ProcessingCategories.ALL) {
-            manager.getAllRecipesFor(category.type().get()).stream()
+            manager.getAllRecipesFor(ProcessingRecipeBindings.type(category)).stream()
                     .sorted(Comparator.comparing(r -> r.getId().toString()))
                     .forEach(out::add);
         }
@@ -60,7 +63,7 @@ public final class StationRecipeEntries implements GrimoireContentSource {
     public void contribute(GrimoireContent.Inputs inputs, Consumer<GrimoireEntry> out) {
         RecipeManager manager = inputs.recipes();
         for (ProcessRecipe recipe : recipes(manager)) {
-            ProcessingCategories.Category category = ProcessingCategories.byType(recipe.getType()).orElseThrow();
+            ProcessingCategories.Category category = ProcessingRecipeBindings.byType(recipe.getType()).orElseThrow();
             ProcessRecipeDescription d = recipe.description();
             ItemStack result = d.result();
             List<Component> body = new ArrayList<>();
@@ -69,7 +72,7 @@ public final class StationRecipeEntries implements GrimoireContentSource {
             }
             List<EntryKey> links = new ArrayList<>();
             links.add(StationEntries.key(category.station()));
-            for (Ingredient ingredient : allIngredients(d)) {
+            for (Ingredient ingredient : RecipeIngredients.allIngredients(d)) {
                 for (ItemStack stack : ingredient.getItems()) {
                     HerbForms.herbOf(stack.getItem()).ifPresent(h -> links.add(HerbForms.key(h)));
                 }
@@ -78,26 +81,6 @@ public final class StationRecipeEntries implements GrimoireContentSource {
             out.accept(new GrimoireEntry(key(recipe.getId()), category.id(), result.getHoverName(), result, body, links,
                     Optional.of(Component.translatable(HINT)), false, Optional.of(recipe)));
         }
-    }
-
-    /** Primary ingredients, then the base and the package. */
-    public static List<Ingredient> allIngredients(ProcessRecipeDescription d) {
-        List<Ingredient> all = new ArrayList<>(primaries(d));
-        all.addAll(secondaries(d));
-        return all;
-    }
-
-    /** The counted station ingredients (not the base liquid or the package). */
-    public static List<Ingredient> primaries(ProcessRecipeDescription d) {
-        return d.ingredients().stream().map(ProcessRecipeDescription.Counted::ingredient).toList();
-    }
-
-    /** The base liquid and the package, when the recipe names them. */
-    public static List<Ingredient> secondaries(ProcessRecipeDescription d) {
-        List<Ingredient> out = new ArrayList<>();
-        d.base().ifPresent(c -> out.add(c.ingredient()));
-        d.packaging().ifPresent(c -> out.add(c.ingredient()));
-        return out;
     }
 
     /** Keys of the recipes whose result the ingredient accepts. */
@@ -110,7 +93,7 @@ public final class StationRecipeEntries implements GrimoireContentSource {
     public static List<EntryKey> usingAny(RecipeManager manager, List<ItemStack> stacks) {
         Set<EntryKey> keys = new LinkedHashSet<>();
         for (ProcessRecipe recipe : recipes(manager)) {
-            if (allIngredients(recipe.description()).stream().anyMatch(i -> stacks.stream().anyMatch(i))) {
+            if (RecipeIngredients.allIngredients(recipe.description()).stream().anyMatch(i -> stacks.stream().anyMatch(i))) {
                 keys.add(key(recipe.getId()));
             }
         }
@@ -125,8 +108,5 @@ public final class StationRecipeEntries implements GrimoireContentSource {
         return set.contains(item);
     }
 
-    /** Display stacks of an ingredient, for pages and search. */
-    public static List<ItemStack> stacks(Ingredient ingredient) {
-        return Arrays.asList(ingredient.getItems());
-    }
+
 }

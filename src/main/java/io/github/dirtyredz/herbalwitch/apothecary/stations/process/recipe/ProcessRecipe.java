@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe;
 
+import io.github.dirtyredz.herbalwitch.platform.recipe.RecipeView;
+
 import io.github.dirtyredz.herbalwitch.platform.recipe.ProcessRecipeDescription;
 
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessInventory;
@@ -20,7 +22,7 @@ import net.minecraft.world.level.Level;
  * Matching never mutates anything; the station consumes on completion. Each type has its own
  * subclass, recipe type and serializer.
  */
-public abstract class ProcessRecipe implements Recipe<Container> {
+public abstract class ProcessRecipe implements Recipe<Container>, RecipeView {
     private final ResourceLocation id;
     private final ProcessRecipeDescription description;
     private final String fingerprint;

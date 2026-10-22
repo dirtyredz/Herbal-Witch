@@ -13,6 +13,15 @@ altar's two (`AltarRequest`, `AltarUpdate`), registered in that order; any wire 
 grew `WitchRulesUpdate` with the working rules, no new message). Paths
 are under `src/main/java/io/github/dirtyredz/herbalwitch/`.
 
+**Shared read contracts.** `platform/recipe/RecipeView` exposes a live recipe's identity,
+description and fingerprint without station execution. Grimoire pages retain that same object;
+`RecipeIngredients` supplies primary, base and packaging queries in their original order.
+`apothecary/stations/catalog/ProcessingCategories` contains registry-free category facts, while
+`registry/ProcessingRecipeBindings` resolves their registered types. Public hintless pages use
+`GrimoireEntry.page`; hinted and recipe entries keep explicit flags. `grimoire/catalog/WitchcraftKeys`
+owns permanent discovery keys, and `platform/time/TickTime` distinguishes rounded countdowns from
+fractional recipe duration text.
+
 **Decor (`decor/`).** One cottage design (`FinishCatalog`, a single entry) and 94 pieces described in
 seven family catalogues (`decor/catalog/pieces/`), each a `FurnitureSpec`: id, family, art group, wave,
 behaviour (`FurnitureBehavior`), mount (`MountSpec`: support and cells, `(right, up, depth)` from the

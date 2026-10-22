@@ -1,5 +1,9 @@
 package io.github.dirtyredz.herbalwitch.magic.witch.grimoire;
 
+import io.github.dirtyredz.herbalwitch.grimoire.catalog.WitchcraftKeys;
+
+import io.github.dirtyredz.herbalwitch.platform.time.TickTime;
+
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContent;
@@ -12,7 +16,6 @@ import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -24,13 +27,9 @@ import java.util.stream.Collectors;
  * discovery; it grants and authorises nothing.
  */
 public final class WitchEntries implements GrimoireContentSource {
-    public static final String PREFIX = "grimoire." + HerbalWitch.MOD_ID + ".witchcraft.";
+    public static final String PREFIX = WitchcraftKeys.PREFIX;
     /** The pages, in reading order. */
-    public static final List<String> PAGES = List.of("status", "energy", "recovery");
-
-    public static EntryKey key(String page) {
-        return EntryKey.of(EntryKey.Kind.GUIDE, HerbalWitch.MOD_ID + ":witchcraft/" + page);
-    }
+    public static final List<String> PAGES = WitchcraftKeys.CONVERSION_PAGES;
 
     @Override
     public void contribute(GrimoireContent.Inputs inputs, Consumer<GrimoireEntry> out) {
@@ -52,28 +51,20 @@ public final class WitchEntries implements GrimoireContentSource {
                     body.add(Component.translatable(PREFIX + "energy.exhaustion"));
                 }
                 case "recovery" -> {
-                    body.add(Component.translatable(PREFIX + "recovery.rest", e.restAmount(), seconds(e.restInterval())));
-                    body.add(Component.translatable(PREFIX + "recovery.meditation", seconds(e.meditationSettle()), e.meditationAmount(),
-                            seconds(e.meditationInterval())));
+                    body.add(Component.translatable(PREFIX + "recovery.rest", e.restAmount(), TickTime.ceilingSeconds(e.restInterval())));
+                    body.add(Component.translatable(PREFIX + "recovery.meditation", TickTime.ceilingSeconds(e.meditationSettle()), e.meditationAmount(),
+                            TickTime.ceilingSeconds(e.meditationInterval())));
                     body.add(Component.translatable(PREFIX + "recovery.sleep", e.sleepAmount()));
-                    body.add(Component.translatable(PREFIX + "recovery.tea", e.teaAmount(), seconds(e.teaCooldown())));
-                    body.add(Component.translatable(PREFIX + "recovery.restful", e.restfulBonus(), minutes(e.restfulDuration())));
+                    body.add(Component.translatable(PREFIX + "recovery.tea", e.teaAmount(), TickTime.ceilingSeconds(e.teaCooldown())));
+                    body.add(Component.translatable(PREFIX + "recovery.restful", e.restfulBonus(), TickTime.ceilingMinutes(e.restfulDuration())));
                     body.add(Component.translatable(PREFIX + "recovery.bonus", e.natureBonus(), e.moonBonus(), e.bonusCap()));
                 }
                 default -> throw new IllegalStateException(page);
             }
-            List<EntryKey> links = PAGES.stream().filter(p -> !p.equals(page)).map(WitchEntries::key).toList();
-            out.accept(new GrimoireEntry(key(page), GrimoireContent.WITCHCRAFT, Component.translatable(PREFIX + page + ".title"),
-                    GrimoireItems.BOOK.get().getDefaultInstance(), body, links, Optional.empty(), true, Optional.empty()));
+            List<EntryKey> links = PAGES.stream().filter(p -> !p.equals(page)).map(WitchcraftKeys::key).toList();
+            out.accept(GrimoireEntry.page(WitchcraftKeys.key(page), GrimoireContent.WITCHCRAFT, Component.translatable(PREFIX + page + ".title"),
+                    GrimoireItems.BOOK.get().getDefaultInstance(), body, links));
         }
     }
 
-    /** Ticks as whole seconds (rounded up), for page text. */
-    public static int seconds(int ticks) {
-        return (ticks + 19) / 20;
-    }
-
-    public static int minutes(int ticks) {
-        return (ticks + 1199) / 1200;
-    }
 }

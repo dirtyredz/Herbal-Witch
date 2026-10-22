@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Consumer;
 
 /**
@@ -86,8 +85,8 @@ public final class DecorEntries implements GrimoireContentSource {
                 body.add(Component.translatable(FUNCTIONAL_ALTAR));
                 links.add(ALTAR);
             }
-            out.accept(new GrimoireEntry(key(spec), GrimoireContent.FURNITURE, DecorBlocks.block(spec).getName(),
-                    DecorBlocks.block(spec).asItem().getDefaultInstance(), body, links, Optional.empty(), true, Optional.empty()));
+            out.accept(GrimoireEntry.page(key(spec), GrimoireContent.FURNITURE, DecorBlocks.block(spec).getName(),
+                    DecorBlocks.block(spec).asItem().getDefaultInstance(), body, links));
         }
     }
 }

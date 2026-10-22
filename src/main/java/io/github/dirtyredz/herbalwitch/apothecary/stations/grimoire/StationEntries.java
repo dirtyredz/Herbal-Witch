@@ -57,9 +57,8 @@ public final class StationEntries implements GrimoireContentSource {
                 body.add(Component.translatable(MULTIBLOCK, station.layout().size()));
             }
             links.add(GuideEntries.key("heat"));
-            out.accept(new GrimoireEntry(key(station), GrimoireContent.STATIONS,
-                    StationBlocks.block(station).getName(), StationItems.item(station).getDefaultInstance(), body, links,
-                    Optional.empty(), true, Optional.empty()));
+            out.accept(GrimoireEntry.page(key(station), GrimoireContent.STATIONS,
+                    StationBlocks.block(station).getName(), StationItems.item(station).getDefaultInstance(), body, links));
         }
     }
 }

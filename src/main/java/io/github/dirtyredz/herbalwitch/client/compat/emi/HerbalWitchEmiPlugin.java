@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.client.compat.emi;
 
+import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.ProcessingRecipeBindings;
+
 import dev.emi.emi.api.EmiEntrypoint;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
@@ -26,7 +28,7 @@ public class HerbalWitchEmiPlugin implements EmiPlugin {
             EmiRecipeCategory emi = new EmiRecipeCategory(category.typeId(), station);
             registry.addCategory(emi);
             registry.addWorkstation(emi, station);
-            addRecipes(registry, emi, category.type().get());
+            addRecipes(registry, emi, ProcessingRecipeBindings.type(category));
         }
         EmiStack altar = EmiStack.of(RitualItems.ALTAR.get());
         EmiRecipeCategory rituals = new EmiRecipeCategory(RitualCardLayout.CATEGORY, altar);

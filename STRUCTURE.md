@@ -7,6 +7,16 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 
 ## Layout
 
+- `src/main/java/io/github/dirtyredz/herbalwitch/platform/time/` — tick constants and explicit ceiling/fractional duration formatting
+- `src/main/java/io/github/dirtyredz/herbalwitch/platform/recipe/` — immutable processing facts, live `RecipeView` and ordered ingredient queries
+- `src/main/java/io/github/dirtyredz/herbalwitch/platform/inventory/` — deterministic missing-ingredient allocation
+- `src/test/java/io/github/dirtyredz/herbalwitch/platform/time/` — duration boundaries and fractional text
+- `src/test/java/io/github/dirtyredz/herbalwitch/platform/recipe/` — processing requirement codec and bounds
+- `src/test/java/io/github/dirtyredz/herbalwitch/platform/inventory/` — allocation characterization
+- `src/test/java/io/github/dirtyredz/herbalwitch/apothecary/stations/catalog/` — registry-free category facts
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/platform/recipe/` — registered ingredient semantics and ordering
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/grimoire/content/` — entry flags, defensive copies and link order
+
 - `src/main/java/io/github/dirtyredz/herbalwitch/` — mod bootstrap (`HerbalWitch.java`) only
 - `src/main/java/io/github/dirtyredz/herbalwitch/decor/catalog/` — plain descriptors: the single cottage finish, the piece descriptor, behaviours, mounts, the whole catalogue
 - `src/main/java/io/github/dirtyredz/herbalwitch/decor/catalog/pieces/` — the seven family catalogues (94 pieces)
