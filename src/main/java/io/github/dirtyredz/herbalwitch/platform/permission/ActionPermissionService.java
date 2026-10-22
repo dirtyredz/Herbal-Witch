@@ -27,6 +27,20 @@ public final class ActionPermissionService {
     }
 
     /**
+     * Whether a player may use (not build at) a position: loaded, inside the world border and build
+     * height, and not refused by the level's interaction rules (spawn protection). Deliberately not
+     * {@link #mayModify}: using an altar or a chair is not building, so adventure players may.
+     * Forge's own interaction events still apply on the way in.
+     */
+    public static boolean mayUse(ActionContext context) {
+        Level level = context.level();
+        return level.isLoaded(context.pos())
+                && level.getWorldBorder().isWithinBounds(context.pos())
+                && !level.isOutsideBuildHeight(context.pos())
+                && level.mayInteract(context.player(), context.pos());
+    }
+
+    /**
      * {@link #mayModify} plus Forge's place event at the position. Call before setting the block;
      * nothing is written here.
      */

@@ -94,6 +94,7 @@
     "herbalwitch:botany/garden/herb_bed",
     "herbalwitch:stations/drying_rack/station",
     "herbalwitch:grimoire/stand",
-    "herbalwitch:grimoire/bookshelf"
+    "herbalwitch:grimoire/bookshelf",
+    "herbalwitch:magic/ritual/altar"
   ]
 }

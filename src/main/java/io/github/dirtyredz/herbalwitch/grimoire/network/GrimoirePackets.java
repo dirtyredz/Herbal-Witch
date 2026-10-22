@@ -1,23 +1,15 @@
 package io.github.dirtyredz.herbalwitch.grimoire.network;
 
-import io.github.dirtyredz.herbalwitch.platform.network.HerbalWitchNetwork;
-import net.minecraft.network.FriendlyByteBuf;
+import io.github.dirtyredz.herbalwitch.platform.network.Messages;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.common.util.FakePlayer;
-import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.NetworkEvent;
-import net.minecraftforge.network.PacketDistributor;
 
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 /**
- * Registers the grimoire's six messages on the mod channel, each with one fixed direction (Forge
- * drops a message arriving the wrong way), and routes them to handlers wired by the feature's
- * registration: server handlers for requests, a client handler installed by client-only code. This
- * class holds no policy and imports no gameplay service, so transport and rules stay apart.
+ * Registers the grimoire's six messages on the mod channel ({@link Messages}: one fixed direction
+ * each) and routes them to handlers wired by the feature's registration: server handlers for
+ * requests, a client handler installed by client-only code. This class holds no policy and imports no
+ * gameplay service, so transport and rules stay apart.
  */
 public final class GrimoirePackets {
     /** What the server does with a request; the player is always the sender. */
@@ -48,12 +40,19 @@ public final class GrimoirePackets {
     /** Called once at bootstrap. */
     public static void register(ServerHandlers handlers) {
         server = handlers;
-        toServer(ReaderRequest.class, ReaderRequest::encode, ReaderRequest::decode, (p, m) -> server.reader(p, m));
-        toServer(TeachingRequest.class, TeachingRequest::encode, TeachingRequest::decode, (p, m) -> server.teaching(p, m));
-        toClient(ReaderUpdate.class, ReaderUpdate::encode, ReaderUpdate::decode, m -> client.reader(m));
-        toClient(DiscoveryUpdate.class, DiscoveryUpdate::encode, DiscoveryUpdate::decode, m -> client.discovery(m));
-        toClient(ContentUpdate.class, ContentUpdate::encode, ContentUpdate::decode, m -> client.content(m));
-        toClient(TeachingUpdate.class, TeachingUpdate::encode, TeachingUpdate::decode, m -> client.teaching(m));
+        Messages.toServer(ReaderRequest.class, ReaderRequest::encode, ReaderRequest::decode, (p, m) -> server.reader(p, m));
+        Messages.toServer(TeachingRequest.class, TeachingRequest::encode, TeachingRequest::decode, (p, m) -> server.teaching(p, m));
+        Messages.toClient(ReaderUpdate.class, ReaderUpdate::encode, ReaderUpdate::decode, m -> withClient(c -> c.reader(m)));
+        Messages.toClient(DiscoveryUpdate.class, DiscoveryUpdate::encode, DiscoveryUpdate::decode, m -> withClient(c -> c.discovery(m)));
+        Messages.toClient(ContentUpdate.class, ContentUpdate::encode, ContentUpdate::decode, m -> withClient(c -> c.content(m)));
+        Messages.toClient(TeachingUpdate.class, TeachingUpdate::encode, TeachingUpdate::decode, m -> withClient(c -> c.teaching(m)));
+    }
+
+    private static void withClient(java.util.function.Consumer<ClientHandlers> action) {
+        ClientHandlers c = client;
+        if (c != null) {
+            action.accept(c);
+        }
     }
 
     /** Client wiring installs its handler during client setup. */
@@ -72,35 +71,10 @@ public final class GrimoirePackets {
         if (o != null) {
             o.accept(player, message);
         }
-        if (!(player instanceof FakePlayer) && player.connection != null) {
-            HerbalWitchNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), message);
-        }
+        Messages.send(player, message);
     }
 
     public static void sendToServer(Object message) {
-        HerbalWitchNetwork.CHANNEL.sendToServer(message);
-    }
-
-    private static <M> void toServer(Class<M> type, BiConsumer<M, FriendlyByteBuf> encoder, Function<FriendlyByteBuf, M> decoder,
-                                     BiConsumer<ServerPlayer, M> handler) {
-        HerbalWitchNetwork.CHANNEL.messageBuilder(type, HerbalWitchNetwork.nextId(), NetworkDirection.PLAY_TO_SERVER)
-                .encoder(encoder).decoder(decoder)
-                .consumerMainThread((M message, Supplier<NetworkEvent.Context> context) -> {
-                    ServerPlayer sender = context.get().getSender();
-                    if (sender != null && server != null) {
-                        handler.accept(sender, message);
-                    }
-                }).add();
-    }
-
-    private static <M> void toClient(Class<M> type, BiConsumer<M, FriendlyByteBuf> encoder, Function<FriendlyByteBuf, M> decoder,
-                                     Consumer<M> handler) {
-        HerbalWitchNetwork.CHANNEL.messageBuilder(type, HerbalWitchNetwork.nextId(), NetworkDirection.PLAY_TO_CLIENT)
-                .encoder(encoder).decoder(decoder)
-                .consumerMainThread((M message, Supplier<NetworkEvent.Context> context) -> {
-                    if (client != null) {
-                        handler.accept(message);
-                    }
-                }).add();
+        Messages.sendToServer(message);
     }
 }

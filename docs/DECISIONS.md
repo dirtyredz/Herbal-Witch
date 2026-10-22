@@ -2,6 +2,56 @@
 
 Newest first.
 
+## 2026-10-22 - 0.5.0: initiation and energy (Milestone 6)
+
+Grouped because the choices lean on one another; each is short. Procedures and numbers:
+docs/catalogue/witchcraft.md.
+
+- **Rules are synced to clients for page numbers.** The grimoire's Witchcraft pages quote the live server
+  rules (`WitchRulesUpdate`); prose never hard-codes a number and a test enforces it. Rejected: fixed
+  numbers in prose, which a config edit would make false.
+- **The tea cooldown is saved for every player.** Energy tea is food for everyone; the 1,200-tick
+  cooldown is an authoritative saved value for every player and counts online ticks, so a non-witch
+  cannot be used to skip it and a witch cannot relog around it. The vanilla item cooldown only mirrors
+  it. A cup started or finished during it is refused and nothing is consumed.
+- **No InitiationRequest or InitiationUpdate messages.** Consent requests go through the menu-bound
+  `AltarRequest` and invitation state rides `AltarUpdate`; notifications are chat lines. One request
+  path means one set of checks (menu id, session nonce, rules fingerprint, rate limit).
+- **Shared `StructurePlacementItem` and one preview.** The altar needed exactly furniture's checked,
+  previewed placement, so the body of `FurniturePlacementItem` moved to
+  `platform/placement/StructurePlacementItem` and the preview to `client/placement/` (any structure item
+  is previewed). `platform/geometry/CellShapes` and `platform/network/Messages` and `RateLimit` were
+  extracted the same way. Rejected: a second placement item and preview for the altar.
+- **`magic/` grouping parent.** `witch` and `ritual` live under `magic/` (`magic/witch`, `magic/ritual`)
+  to keep the Java root at a readable width; the plan named a top-level `witch/`. A deliberate
+  deviation, and it matches the module map's existing `magic/` home for rituals.
+- **Founder exclusivity over crash ambiguity.** The first conversion by any route closes founding for
+  good. A durable COMMITTING claim is written right before the irreversible completion; a world that
+  loads in COMMITTING, or an unreadable record, is NEEDS_REVIEW and stays closed until an operator
+  resolves it, with nothing replayed. Minecraft saves are not transactional across player and world
+  files, so a crash between the claim and the player save cannot be made certain. Rejected: automatic
+  reopening, which could found two lineages.
+- **Attunement is solo practice.** One fresh sage and 10 energy, 100 ticks, awards practice, no partner
+  (still available at full practice, labelled "no further capacity"). Practice comes from successfully
+  spent energy; a witch grows by doing, not by waiting.
+- **The restful infusion prepares sleep.** It resets TIME_SINCE_REST and forces no sleep, as before; for
+  witches it prepares the next rewarded sleep (+30, non-stacking, re-drinking refreshes the 24,000-tick
+  duration). A non-rewarded sleep does not consume it. Rejected: instant energy, which duplicates energy
+  tea and rewards drinking over resting.
+- **Offerings come from the payer's own inventory (zero-slot menu).** The altar menu has no slots; the
+  exact stacks are captured at the start and consumed at completion from the main inventory and
+  offhand. Nothing can be stored in the altar, so nothing is lost or dropped when it breaks. Tradeoff:
+  moving a captured offering stack cancels the ritual.
+- **A distinct functional altar beside the decorative altar table.** The M5 `decor/fixtures/altar_table`
+  stays decoration; its page now links the functional altar. Rejected: converting the table, which would
+  change ids worlds already use.
+- **Explicit consent, designation included.** Initiation needs an invitation the recipient accepts; the
+  operator's `designate` is also an invitation (no initiator, offering or energy), accepted at any valid
+  altar. Nobody becomes a witch by proximity, command or accident.
+- **A survival founder and no NPC.** The first witch is a player who gathers the offering and performs
+  the founding, in any time, moon or dimension, once per world. Rejected: a witch NPC or quest giver that
+  would own the lineage and make a server depend on one entity.
+
 ## 2026-10-22 - 0.4.0: the full furniture catalogue (Milestone 5, waves A, B, C)
 
 Grouped because the choices lean on one another; each is short. Implemented overnight by agents from the
@@ -71,7 +121,7 @@ Grouped because the choices lean on one another; each is short.
   recipe page never depends on editorial data, so a pack that removes a recipe removes its page and cannot
   invent one.
 - **Discovery ownership is independent.** The grimoire capability (`herbalwitch:grimoire/discoveries`) stays
-  the authority when witch status arrives in Milestone 6; initiation will contribute through
+  the authority over witch status (Milestone 6); founding and initiation contribute through
   `DiscoveryService` and `GrimoireContentSource`, not by moving the data. Unknown kinds and unreadable data are
   preserved rather than dropped.
 - **The research blocks hold nothing.** The stand and the Witch's Bookshelf are single cells with no block
@@ -303,7 +353,8 @@ classes load only with the mod. No foreign classes ship in the jar.
 ## 2026-10-21 - Energy tea and restful infusion: witch-energy benefits staged to M6
 
 Both ship now as ordinary items (food value, cooldown, rest-statistic reset). The +25 and +30 energy
-effects wait for the energy system in Milestone 6.
+effects wait for the energy system in Milestone 6. (Delivered in 0.5.0; the restful infusion prepares
+the next rewarded sleep rather than granting energy at once, see the 0.5.0 entry.)
 
 ## 2026-10-21 - Fixed station appearances; a finite oil lantern consumes lantern oil
 

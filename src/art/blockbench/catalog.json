@@ -14,7 +14,8 @@
     "block/preparations/templates",
     "block/grimoire/stand",
     "block/grimoire/bookshelf",
-    "block/decor/pieces"
+    "block/decor/pieces",
+    "block/ritual/altar"
   ],
   "projects": [
     "stations/kettle",
@@ -119,6 +120,7 @@
     "decor/pieces/fixtures/hearth/firepit",
     "decor/pieces/openings/frames/door",
     "decor/pieces/openings/frames/window",
-    "decor/pieces/openings/frames/archway"
+    "decor/pieces/openings/frames/archway",
+    "ritual/altar"
   ]
 }

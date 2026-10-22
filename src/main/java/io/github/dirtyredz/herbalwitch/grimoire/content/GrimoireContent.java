@@ -27,6 +27,7 @@ public final class GrimoireContent {
     public static final String STATIONS = "stations";
     public static final String HERBS = "herbs";
     public static final String FURNITURE = "furniture";
+    public static final String WITCHCRAFT = "witchcraft";
     private static final Logger LOGGER = LogUtils.getLogger();
     private static final List<GrimoireContentSource> SOURCES = new CopyOnWriteArrayList<>();
 

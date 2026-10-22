@@ -1,11 +1,13 @@
 # Features - The Herbal Witch
 
 Implemented versus planned, by milestone. Acceptance evidence is linked when a milestone closes.
-Detail per entry: docs/catalogue/{decor,stations,products}.md.
+Detail per entry: docs/catalogue/{decor,stations,products,witchcraft}.md.
 
 ## Implemented
 
-Version 0.4.0 (local candidate): Milestone 5, the full furniture catalogue (94 pieces), is implemented on top of 0.3.0; see "0.4.0: the furniture catalogue" below. Headless acceptance passed (unit tests, GameTests on the ANU CI runner); owner visual and two-client checks are pending.
+Version 0.5.0 (local candidate): Milestone 6, initiation and energy, is implemented on top of 0.4.0; see "0.5.0: initiation and energy" below. Automated acceptance is tracked there; owner checks are pending.
+
+Version 0.4.0: Milestone 5, the full furniture catalogue (94 pieces), is implemented on top of 0.3.0; see "0.4.0: the furniture catalogue" below. Headless acceptance passed (unit tests, GameTests on the ANU CI runner); owner visual and two-client checks are pending.
 
 Version 0.3.0: Milestone 4, the grimoire, is implemented on top of the 0.2.0-dev.10 content below. Automated acceptance passed (118 unit tests, 97 GameTests); owner playtesting and the EMI/JEI profiles are pending.
 
@@ -25,11 +27,43 @@ Version 0.2.0-dev.10 (local candidate; builds on the 0.1.0 content; dev.2 answer
 | Bundles, powders, 7 drinks, salve, oils, garden products, oil lantern, warmth and pest-repellent effects, resin | 3 | done | PreparationUseGameTests, PreparationBlockGameTests, PreparationResourcesTest |
 | EMI and JEI categories; Farmer's Delight heat both ways; Thirst Was Taken hydration and purity | 3 | done; viewers are owner checks | CompatibilityGameTests (`-PcompatProfile=all`) |
 
+### 0.5.0: initiation and energy (Milestone 6)
+
+Status: implemented. Automated acceptance: pure unit tests, resource tests and GameTests
+(WitchLifecycle, EnergyRecovery, AltarPlacement, AltarAction, AltarShowcase) are written; their results
+are recorded in the milestone report, and a green ANU run closes the wave. Not covered: a true
+out-of-process server restart (restart semantics are covered by codec and state unit tests and the
+durable-persist failure GameTest), and the vanilla sleep path (fake players never complete it, so the
+sleep reward is tested through `EnergyEvents.sleptThrough`). Detail: docs/catalogue/witchcraft.md,
+docs/ARCHITECTURE.md ("Witchcraft"), docs/DECISIONS.md ("0.5.0"). Protocol "3".
+
+| Feature | Status |
+|---|---|
+| Witch capability `herbalwitch:witch/status` (schema 1): initiated, energy, practice, tea cooldown, restful preparation, sleep day; private snapshots with epoch and revision | implemented |
+| Energy: capacity from practice (100, ten thresholds, +10 each, final 200), passive rest, meditation, sleep, energy tea, restful infusion, nature and moon bonus | implemented |
+| Functional ritual altar (2 x 1 x 2, one item, shared previewed placement, `active` state), zero-slot menu, 252 x 200 screen | implemented; art is an agent first draft |
+| Founding of the first lineage by a survival player (one per world, durable claim, NEEDS_REVIEW on crash ambiguity) | implemented |
+| Consenting initiation, operator `designate`, `inspect`, `founding inspect` and `founding resolve` | implemented |
+| Attunement (solo practice) | implemented |
+| Energy HUD and `herbalwitch-client.toml` `[hud]`; `herbalwitch-server.toml` rules synced to clients | implemented |
+| Grimoire category "Witchcraft" (status, energy, recovery, altar, four ritual pages); founding and initiation grant the witchcraft and action discoveries | implemented |
+| Showcase section `altar`; showcase 126 x 8 x 28 | implemented |
+| Energy spent by production or familiars | not implemented (M7, M9) |
+
+Scope notes: M7 production consumes energy only through `WitchStatusService`; M9 familiar powers charge
+the owner the same way. Nothing else spends energy yet.
+
+Owner checks pending: solo founding; two-client initiation accept and decline; energy privacy;
+reconnect and death; simultaneous attempts at one altar; the HUD at several GUI scales with chat and
+other overlays; placement preview against result in every facing; the active and idle altar art (the
+moon glow is orange, from the hearth's glow texture, and may want violet); item transforms; shaders;
+resource reload; sleep in vanilla beds and M5 beds.
+
 ### 0.4.0: the furniture catalogue (Milestone 5)
 
 Status: implemented; headless verified (unit tests, GameTests on the ANU CI runner). Owner visual and
 two-client checks pending. Detail: docs/catalogue/decor.md (exact catalogue), docs/ARCHITECTURE.md
-("Decor"), docs/DECISIONS.md ("0.4.0"). The showcase is now 117 x 8 x 28 (it was 86 x 8 x 28).
+("Decor"), docs/DECISIONS.md ("0.4.0"). The showcase became 117 x 8 x 28 (it was 86 x 8 x 28); 0.5.0 made it 126 x 8 x 28.
 
 | Feature | Status |
 |---|---|
@@ -104,10 +138,9 @@ No new gameplay: the same blocks, items, states and textures, authored different
 
 | Milestone | Scope |
 |---|---|
-| 6 | Initiation and energy: witch capability, consent, founding ritual, altar, energy HUD and recovery |
-| 7 | Advanced brewing, charms, rituals, wards: cauldron, still, bottling bench, charm bench, ritual circle, ward stone |
+| 7 | Advanced brewing, charms, rituals, wards: cauldron, still, bottling bench, charm bench, ritual circle, ward stone; production spends energy through `WitchStatusService` |
 | 8 | Ordinary animals: trust, bait, calming, sleep, earned taming, healing, capture/release |
-| 9 | Multiple familiars: binding, roster, seven commands, homes, equipment, abilities, familiar brews, revival |
+| 9 | Multiple familiars: binding, roster, seven commands, homes, equipment, abilities, familiar brews, revival; familiar powers charge the owner's energy through `WitchStatusService` |
 | 10 | Broom and wand |
 | 11 | Apothecary commerce: register, counters, stock, offers, proceeds, history, order board |
 | 12 | Complete-release qualification |

@@ -37,7 +37,7 @@ import java.util.Map;
  * and the shared structure lifecycle: breaking any cell removes the whole piece through ordinary
  * neighbour updates (only the origin's loot table drops the item), creative breaking drops nothing,
  * losing support tears it down the same way. Placement goes through
- * {@code decor/item/FurniturePlacementItem} and this block's {@link StructurePlacement} answers.
+ * {@link FurniturePlacementItem} and this block's {@link StructurePlacement} answers.
  * Behaviours (seating, storage, light) extend it with their own use; none adds a machine.
  */
 public class DecorAssemblyBlock extends Block implements StructurePlacement {

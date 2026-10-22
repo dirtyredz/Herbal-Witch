@@ -6,6 +6,7 @@ import io.github.dirtyredz.herbalwitch.data.decor.DecorManifest;
 import io.github.dirtyredz.herbalwitch.data.decor.manifest.DecorPieces;
 import io.github.dirtyredz.herbalwitch.decor.showcase.DecorShowcaseSection;
 import io.github.dirtyredz.herbalwitch.grimoire.showcase.GrimoireShowcaseSection;
+import io.github.dirtyredz.herbalwitch.magic.ritual.showcase.AltarShowcaseSection;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcasePlacement;
 import org.junit.jupiter.api.Test;
 
@@ -67,6 +68,22 @@ class ShowcaseCoverageTest {
                 "showcase.herbalwitch.label.grimoire.discovery", "showcase.herbalwitch.label.grimoire.research",
                 "showcase.herbalwitch.label.grimoire.missing", "showcase.herbalwitch.label.grimoire.teaching"), labels);
         assertEquals(7, GrimoireShowcaseSection.supplies().size(), "two grimoires and one preparation chain's supplies");
+    }
+
+    /** The whole idle altar (its four cells), one supply barrel, and its sign row in order. */
+    @Test
+    void theAltarShowsItsFourCellsSuppliesAndSigns() {
+        List<ShowcasePlacement> placements = new AltarShowcaseSection().placements();
+        List<ShowcasePlacement> content = placements.stream().filter(p -> p.kind() == ShowcasePlacement.Kind.CONTENT).toList();
+        assertEquals(5, content.size(), "four altar cells and a supply barrel");
+        assertEquals(1, content.stream().filter(p -> p.init() != null).count(), "one stocked barrel");
+        assertEquals(4, content.stream().filter(p -> p.x() <= 1).count(), "the altar stands at x 0..1");
+        List<String> labels = placements.stream().filter(p -> p.kind() == ShowcasePlacement.Kind.LABEL)
+                .map(p -> p.lines().get(0).text()).toList();
+        assertEquals(List.of("Witch's Altar", "showcase.herbalwitch.label.altar.use", "showcase.herbalwitch.label.altar.founding",
+                "showcase.herbalwitch.label.altar.supplies", "showcase.herbalwitch.label.altar.initiation",
+                "showcase.herbalwitch.label.altar.recovery", "showcase.herbalwitch.label.altar.practice"), labels);
+        assertEquals(9, AltarShowcaseSection.supplies().size(), "the founding offering, a second set, a grimoire and the drinks");
     }
 
     @Test

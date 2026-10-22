@@ -46,7 +46,9 @@ disagree the code wins. How it works: docs/ARCHITECTURE.md ("Decor"); why: docs/
   commode, washstand), the icebox, mirror, planter box and wishing well simulate nothing.
 - **Lookalikes are not stations.** The work table, altar table, decorative drying rack, kitchen range,
   fireplace and firepit are furniture; none works as the station it resembles (docs/catalogue/stations.md,
-  "Decor lookalikes"). Their grimoire pages link the working station.
+  "Decor lookalikes"). Their grimoire pages link the working station. The altar table stays decorative
+  in 0.5.0 (unchanged id, recipe and behaviour); only its grimoire page now links the functional Ritual
+  Altar (`magic/ritual/altar`, docs/catalogue/stations.md), which is a separate block, not a furniture piece.
 - **The bookshelf stays two pieces.** `decor/storage/bookshelf` is a nine-slot display; the grimoire's
   `grimoire/bookshelf` is a storage-free research block with its own id, block and model.
 - **Names differ from ids in places:** `tv_stand` is the Curio Cabinet, `fridge` the Icebox,

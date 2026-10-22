@@ -26,7 +26,17 @@ public final class PayloadBounds {
     /** Characters of one line of text or a translation key. */
     public static final int MAX_TEXT = 512;
 
+    /** Encoded bytes of one feature request (client to server). */
+    public static final int MAX_REQUEST_BYTES = 4 * 1024;
+
     private PayloadBounds() {
+    }
+
+    /** Refuses a request buffer larger than {@code max} bytes before anything is decoded. */
+    public static void requireAtMost(FriendlyByteBuf buf, int max) {
+        if (buf.readableBytes() > max) {
+            throw new DecoderException("payload of " + buf.readableBytes() + " bytes exceeds " + max);
+        }
     }
 
     /** A UTF-8 string of at most {@code max} characters. */

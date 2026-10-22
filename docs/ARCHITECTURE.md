@@ -3,12 +3,14 @@
 How the mod is put together. Code map: [STRUCTURE.md](../STRUCTURE.md).
 Plan of record: milestones 1-12 (docs/FEATURES.md); traceability: docs/catalogue/.
 
-## Current system (0.4.0: Milestones 1-5 plus the art pass; furniture is Milestone 5)
+## Current system (0.5.0: Milestones 1-6 plus the art pass; furniture is Milestone 5, initiation and energy Milestone 6)
 
 Everything below is server-authoritative; clients get vanilla block updates, menu slots and menu data.
-The one custom channel, `herbalwitch:main` (protocol "2", `platform/network/HerbalWitchNetwork`), carries
-only the grimoire's six bounded messages (protocol 2: entry keys may name furniture pages). Paths are
-under `src/main/java/io/github/dirtyredz/herbalwitch/`.
+The one custom channel, `herbalwitch:main` (protocol "3", `platform/network/HerbalWitchNetwork`), carries
+the grimoire's six bounded messages, the witch's two (`WitchSnapshot`, `WitchRulesUpdate`) and the
+altar's two (`AltarRequest`, `AltarUpdate`), registered in that order; any wire change bumps the protocol
+(protocol 2 let entry keys name furniture pages; protocol 3 added the witch and altar messages). Paths
+are under `src/main/java/io/github/dirtyredz/herbalwitch/`.
 
 **Decor (`decor/`).** One cottage design (`FinishCatalog`, a single entry) and 94 pieces described in
 seven family catalogues (`decor/catalog/pieces/`), each a `FurnitureSpec`: id, family, art group, wave,
@@ -21,13 +23,16 @@ origin), seats or slots. `FurnitureCatalog.ALL` is what is registered (every wav
   (vanilla `BedBlock` with a `cell` property) and `behavior/openings/DecorDoorBlock` (vanilla `DoorBlock`);
   the 0.1.0 small rug stays vanilla carpet. Support (`structure/FurnitureSupport`): floor, wall, ceiling,
   corner or carpet, checked per supported cell and never through an unloaded chunk.
-- *Placement:* `structure/FurniturePlacementItem` asks the block for its origin state (facing, a door's
+- *Placement:* `structure/FurniturePlacementItem` extends the shared `platform/placement/StructurePlacementItem`
+  (also the altar's item). It asks the block for its origin state (facing, a door's
   hinge, a bed's direction), resolves the plan (`platform/placement/PlacementResolver`: the anchor cell on
   the aimed cell; a hanging piece anchors its top cell), checks every cell (`PlacementChecks`: loaded,
   border, height, replaceable, entities, support, then the build permission) and commits it
   (`PlacementCommit`, inside Forge's snapshot capture: one multi-place event, deferred neighbour updates,
-  a full restore including the item on cancellation). The client preview (`client/decor/placement/`)
-  draws the same plan as see-through models with a green or red outline.
+  a full restore including the item on cancellation). The client preview (`client/placement/`, shared by
+  every `StructurePlacementItem`: furniture and the altar) draws the same plan as see-through models with
+  a green or red outline. Per-cell collision shapes come from assembly boxes through the shared
+  `platform/geometry/CellShapes` (`FurnitureShapes` and `AltarShapes` use it).
 - *Teardown:* breaking any cell removes the piece through neighbour updates; only cell 0 has loot (a
   door's lower half, a bed's foot), so one item drops; creative removes the origin quietly; losing support
   and explosions take the same path; multi-cell pieces refuse pistons.
@@ -75,7 +80,7 @@ Connection is visual only; moisture and enrichment are unchanged. The blockstate
 **Art pipeline.** Sources: procedural textures (`tools/art/`), procedural models (`tools/models/`:
 herbs, herb beds, hung bundles; the grimoire's book sprite and reader atlas in `tools/art/grimoire/`) and
 Blockbench projects (`src/art/blockbench/`: stations, furniture, oil lantern, the grimoire stand and
-bookshelf; a `.bbmodel` plus a `piece.json` each). Three producers (`generate-textures.mjs`,
+bookshelf, the ritual altar; a `.bbmodel` plus a `piece.json` each). Three producers (`generate-textures.mjs`,
 `generate-models.mjs`, `compile-blockbench.mjs`) each own disjoint paths, enforced by
 `tools/art/output.mjs` (write only declared paths, clean only own directories) and each has `--check`.
 They write the Minecraft assets under `src/main/resources`; Java datagen then adds blockstates and item
@@ -95,7 +100,8 @@ ambient occlusion, world light, shaders, animation, mipmaps or item extrusion).
 sections with no world access (lazy state suppliers keep it unit-testable). `construction/` runs the
 preflight (loaded, border, build height, permission, solid floor, no block entities, no entities) and
 only then the builder, the sole world writer. `command/` registers `/herbalwitch showcase` (level 2).
-Each feature registers its own section; coverage tests require every block to appear.
+Each feature registers its own section; coverage tests require every block to appear. The altar's
+section (`magic/ritual/showcase`) builds an idle altar and a supply barrel and starts nothing.
 
 **Stations (`stations/`).**
 - *Composition:* `StationBlock`, `StationEntity` and `StationMenu` carry block and menu boilerplate.
@@ -167,7 +173,8 @@ reads it as permission, and later magic must not either.
   the herb; a carried result discovers the recipe; so do all primary ingredients being familiar (a carried stack
   passes the ingredient, or a known herb's registered form does). Main inventory and offhand only. The
   service is the seam later features use to grant discoveries; the grimoire capability stays authoritative
-  even when witch status (Milestone 6) arrives.
+  over witch status (Milestone 6): completing founding or initiation grants the witchcraft and action
+  page discoveries through it, as records, never permission.
 - *Research and teaching:* `ResearchService` (`ResearchEligibility`, `Familiarity`) at a stand or bookshelf:
   one familiar primary ingredient, instant, free, nothing consumed (no-primary recipes use base or package).
   `TeachingService` is pure rules with an injected clock and world (`TeachingWorld` is the server adapter and
@@ -192,25 +199,87 @@ reads it as permission, and later magic must not either.
   `StationGrimoirePanel` button on station and hearth screens (station menus are untouched). Client state
   is cleared on disconnect and rebuilt on recipe and tag updates.
 
+**Witchcraft (`magic/witch/`, `magic/ritual/`, Milestone 6).** Becoming a witch, the energy a witch
+holds, and the altar where rituals happen. `witch` and `ritual` sit under a `magic/` grouping parent
+(DECISIONS) to keep the Java root narrow. Numbers and procedures: docs/catalogue/witchcraft.md.
+- *Dependencies:* `brewing` -> `magic/witch` (drinks restore energy); `grimoire` -> `magic/witch`
+  (witchcraft pages read the rules); `magic/ritual` -> `magic/witch`, `grimoire`, `botany`, `brewing`,
+  `platform`; `magic/witch` imports only `platform` and Minecraft/Forge. Nothing imports `magic/ritual`
+  except `data/`, `client/` and bootstrap.
+- *State (`witch/status`):* the capability `herbalwitch:witch/status`, server players only, schema 1:
+  `{schema, initiated, initiation (uuid), energy, practice, tea, restful, sleepDay}`. Energy and
+  practice are fixed-point hundredths; capacity is derived from practice and the rules and never saved.
+  Missing data is a fresh non-witch. A missing or unsupported schema, or a malformed field, is preserved
+  unchanged and the player is treated as a non-witch (logged; `/herbalwitch witch inspect` shows it).
+  The clone copy runs once on death and End return regardless of keepInventory (the same
+  revive/invalidate pattern as discoveries). Activities (rest, meditation) clear on death, logout and
+  dimension change. `WitchStatusService` is the only mutation API (check, debit, recover, award
+  practice, convert, snapshot, restore); M7 production and M9 familiars must use it.
+- *Rules (`witch/config`):* `WitchServerConfig` (`herbalwitch-server.toml`, per world) is validated as a
+  whole into an immutable `WitchRules`. An invalid edit keeps the previous rules and logs. A valid
+  change cancels pending invitations and running rituals, clamps energy without refilling and resends
+  the rules. Clients receive them (`WitchRulesUpdate`) so the grimoire quotes live numbers; page prose
+  never hard-codes one (a test enforces it).
+- *Energy (`witch/energy`):* `EnergyBalance` holds the numbers; `EnergyService`, `EnergyRecovery`,
+  `RecoveryConditions`, `SleepRecovery`, `DrinkRecovery` and `PracticeProgress` hold the rules;
+  `EnergyEvents` is the Forge adapter. Rest, meditation, the nature and moon bonus, sleep, energy tea
+  and the restful infusion are specified in docs/catalogue/witchcraft.md. The sleep reward listens to
+  `SleepFinishedTimeEvent`, the server's sleep-completion path, with `EnergyEvents.sleptThrough` as the
+  seam tests drive.
+- *Founding (`witch/initiation/founding`):* `FoundingSavedData` in the Overworld
+  (`data/herbalwitch_founding.dat`, schema 1) with states OPEN, CLAIMED, COMMITTING, COMPLETE and
+  NEEDS_REVIEW. CLAIMED is transient (a restart reopens). COMMITTING is a durable claim written straight
+  to the file right before the irreversible completion; if that write fails, completion aborts before
+  anything is consumed. A world loaded in COMMITTING, or an unreadable record, is NEEDS_REVIEW. The first
+  conversion by any route closes OPEN. There is no automatic reopening; an operator resolves a review
+  state (`/herbalwitch witch founding`).
+- *Initiation (`witch/initiation`):* `InitiationConsent` holds invitations (one outgoing per witch, one
+  incoming per recipient, expiry and cooldown, duplicates never extend). Acceptance revalidates both
+  players, the altar, sessions, status, the offering and the cost, takes the invitation by its exact id
+  (a replay or a spoofed id does nothing), then starts the ritual. There are no InitiationRequest or
+  InitiationUpdate messages: consent requests ride the menu-bound `AltarRequest` and invitation state
+  rides `AltarUpdate`; notifications are chat lines.
+- *Altar (`magic/ritual`):* `altar/` is the 2 x 1 x 2 multi-cell block and its block entity;
+  `menu/AltarMenu` has zero slots (offerings come from the payer's main inventory and offhand at
+  completion, exact stacks captured at the start); `menu/AltarAccess` decides use (alive, non-spectator,
+  same dimension, whole altar loaded, eyes within 4 blocks of the footprint with line of sight,
+  `ActionPermissionService.mayUse`, adventure allowed); `session/` holds one operation per altar and one
+  per player; `action/` holds founding, initiation, meditation and attunement behind `AltarActions`;
+  `catalog/AltarCatalog` names the actions. Requests are rate-limited (`platform/network/RateLimit`,
+  5 per second per player), bounded (`PayloadBounds.MAX_REQUEST_BYTES` 4096) and must name the open
+  menu id, the session nonce and the current rules fingerprint. `ActionPermissionService.mayUse` is
+  use, not build: loaded, border, height and spawn protection.
+- *Snapshots:* the witch's own state reaches only that player: a new epoch on login, respawn and
+  dimension change, a revision that increments, at most every 5 ticks, and immediately after a
+  conversion or ritual result. The client ignores an older epoch or revision and clears on disconnect and
+  on local player replacement. The witch and grimoire client caches are separate: the rules packet
+  invalidates the grimoire content so pages requote the numbers.
+- *Client:* `client/witch` holds `WitchClientState`, `WitchClientConfig` (`herbalwitch-client.toml`
+  `[hud]`) and `hud/` (`EnergyOverlay`, `EnergyHudLayout`); `client/ritual` is `AltarScreen` and its
+  widgets.
+- *Grimoire:* the category "Witchcraft": `witchcraft/status`, `witchcraft/energy` and
+  `witchcraft/recovery` (guide kind, `grimoire/content/reference/WitchEntries`), the altar station page
+  and `ritual/{founding,initiation,meditation,attunement}` (`magic/ritual/grimoire/AltarEntries`).
+
 ## Whole-mod module map (plan section 2)
 
 Paths under `src/main/java/io/github/dirtyredz/herbalwitch/`. Implemented so far: decor, botany, stations, brewing,
-showcase, platform/permission, platform/network, compat and grimoire. Later milestones create the rest when needed.
+showcase, platform/permission, platform/network, compat, grimoire and magic/{witch,ritual}. Later milestones create the rest when needed.
 
 | Home | Responsibility |
 |---|---|
 | `HerbalWitch.java` | Bootstrap only: registries, config, event wiring |
 | `platform/network/`, `platform/config/`, `platform/permission/`, `platform/compat/<integration>/` | Channel + payload bounds; config registration; shared authorization boundary; optional integrations (foreign imports only here) |
-| `witch/status/`, `witch/energy/`, `witch/initiation/` | Player capability and lifecycle; spending/recovery/progression; consent and founding |
+| `magic/witch/{status,energy,initiation(+founding),config,network,command,registry}` (implemented, 0.5.0; the plan named top-level `witch/`) | Player capability and lifecycle; spending/recovery/progression; consent and founding; rules; wire; operator commands |
 | `botany/catalog/`, `crop/`, `foraging/`, `worldgen/` | Herb definitions, growth, gathering, placement (worldgen never owns cultivation rules) |
 | `stations/everyday/<station>/`, `stations/process/` | One package per station (block, menu, recipe); shared processing by composition (implemented) |
 | `brewing/product/`, `effect/`, `application/` | Products; effect mechanics; how an effect reaches a target |
 | `companions/animals/{trust,capture,taming}/`, `companions/familiars/{bond,command,ability,home,recovery,species}/` | Animal relationships; familiar bonds without one god manager |
-| `magic/ritual/`, `magic/ward/`, `magic/broom/`, `magic/wand/` | Rituals and altar adapters; home wards; broom entity; one class per wand mode |
+| `magic/ritual/{catalog,registry,altar,menu,session,action,network,grimoire,showcase}` (implemented, 0.5.0), `magic/ward/`, `magic/broom/`, `magic/wand/` | The altar, its menu, sessions and actions; home wards; broom entity; one class per wand mode |
 | `shop/{catalog,trade,order,persistence,block}/` | Offers, transactions, orders, persistence, counter/register |
 | `grimoire/{catalog,registry,access,content,knowledge,reading,network}/`, `grimoire/showcase/` (implemented) | Ids and registration; book, research blocks and reader menu (`access/{item,block,menu}`); recipe-backed entries and editorial reload; personal knowledge (`knowledge/{discovery,research,teaching}`); reader sessions and the missing-ingredient allocator (`reading/`); the six messages |
 | `decor/{catalog,registry,showcase}/`, `decor/structure/`, `decor/behavior/{seating,storage,sleeping,openings,lighting}/` | Furniture (implemented, 0.4.0): the design and 94 pieces; shared structure (block, placement, support, shapes); one implementation per behaviour |
-| `client/<feature>/`, `client/compat/<viewer>/` | Screens, HUD, renderers, particles; optional EMI/JEI plugins |
+| `client/<feature>/`, `client/compat/<viewer>/` | Screens, HUD, renderers, particles; optional EMI/JEI plugins (`client/placement/` is the shared structure preview; `client/witch/{hud}`, `client/ritual/{widgets}` are M6) |
 | `data/client/<feature>/`, `data/server/<feature>/` | Datagen per feature, consuming feature catalogues |
 
 ## Authority and synchronisation (rows not marked implemented are planned)
@@ -218,9 +287,9 @@ showcase, platform/permission, platform/network, compat and grimoire. Later mile
 | State | Authoritative home | Client sees |
 |---|---|---|
 | Discoveries (implemented, Milestone 4: `herbalwitch:grimoire/discoveries`, schema 1) | Versioned player capability, server players only | Private snapshot on login/respawn/dimension change; bounded deltas |
-| Witch status, energy, practice | Versioned player capability (Milestone 6) | Private snapshot on login/respawn/dimension change; bounded deltas |
+| Witch status, energy, practice (implemented, Milestone 6: `herbalwitch:witch/status`, schema 1) | Versioned player capability, server players only | Private snapshot (epoch + revision) on login/respawn/dimension change and after conversions and ritual results; rules for the grimoire |
 | Station inventories and progress (implemented) | Station block entity | Vanilla menu slots/data |
-| Founding eligibility | Overworld `FoundingSavedData` | Eligibility/result only |
+| Founding eligibility (implemented, Milestone 6) | Overworld `FoundingSavedData`, schema 1 | Eligibility/result only, through the altar's `AltarUpdate` |
 | Animal trust/ownership | Entity capability (vanilla ownership kept) | Interacting player, trackers |
 | Familiar bonds, commands, homes, recovery | Overworld `FamiliarSavedData` by bond id | Owner's roster; visual state nearby |
 | Capture payloads | Overworld `CaptureSavedData` | Opaque token + display summary on the item |

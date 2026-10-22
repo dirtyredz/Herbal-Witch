@@ -26,13 +26,18 @@ public final class BlockbenchManifest {
             "stations/drying_rack", "stations/hearth", "stations/stove", "decor/armchair", "decor/apothecary_counter",
             "decor/wall_shelf", "decor/table_lamp", "decor/rug", "preparations/oil_lantern", "grimoire/stand",
             "grimoire/bookshelf");
+    /** Milestone 6: the functional altar (its active overlay reaches the upper cells only). */
+    public static final List<String> MILESTONE_6_PROJECTS = List.of("ritual/altar");
+    public static final List<String> MILESTONE_6_MODELS = List.of("block/ritual/altar/active_2.json", "block/ritual/altar/active_3.json",
+            "block/ritual/altar/assembly.json", "block/ritual/altar/part_0.json", "block/ritual/altar/part_1.json",
+            "block/ritual/altar/part_2.json", "block/ritual/altar/part_3.json");
     /** Project directories under src/art/blockbench, in catalogue order. */
     public static final List<String> PROJECTS = projects();
     /** Model directories (under models/) the compiler owns outright. */
     public static final List<String> MODEL_DIRS = List.of("block/stations/kettle", "block/stations/infusion_pot",
             "block/stations/mortar", "block/stations/drying_rack", "block/stations/hearth", "block/stations/stove",
             "block/decor/templates", "block/preparations/templates", "block/grimoire/stand", "block/grimoire/bookshelf",
-            "block/decor/pieces");
+            "block/decor/pieces", "block/ritual/altar");
     /** Textures (under textures/) the fourteen pre-M5 pieces own, painted in their projects: block/pieces/<project>/<texture>.png. */
     public static final List<String> TEXTURES = List.of(
             "block/pieces/decor/apothecary_counter/gold.png",
@@ -135,6 +140,7 @@ public final class BlockbenchManifest {
     private static List<String> projects() {
         List<String> out = new ArrayList<>(LEGACY_PROJECTS);
         pieces().forEach(p -> out.add(project(p)));
+        out.addAll(MILESTONE_6_PROJECTS);
         return List.copyOf(out);
     }
 
@@ -191,6 +197,7 @@ public final class BlockbenchManifest {
         out.add("block/preparations/templates/oil_lantern_on.json");
         out.add("block/grimoire/stand/base.json");
         out.add("block/grimoire/bookshelf/base.json");
+        out.addAll(MILESTONE_6_MODELS);
         out.sort(null);
         return out;
     }

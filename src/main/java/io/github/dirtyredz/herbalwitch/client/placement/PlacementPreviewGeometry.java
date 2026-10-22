@@ -1,4 +1,4 @@
-package io.github.dirtyredz.herbalwitch.client.decor.placement;
+package io.github.dirtyredz.herbalwitch.client.placement;
 
 import io.github.dirtyredz.herbalwitch.platform.placement.PlacementPlan;
 import net.minecraft.core.BlockPos;

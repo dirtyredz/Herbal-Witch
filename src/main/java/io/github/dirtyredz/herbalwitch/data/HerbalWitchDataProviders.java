@@ -7,6 +7,8 @@ import io.github.dirtyredz.herbalwitch.data.client.decor.DecorModelProvider;
 import io.github.dirtyredz.herbalwitch.data.client.grimoire.GrimoireItemModelProvider;
 import io.github.dirtyredz.herbalwitch.data.client.grimoire.GrimoireModelProvider;
 import io.github.dirtyredz.herbalwitch.data.client.language.HerbalWitchLanguageProvider;
+import io.github.dirtyredz.herbalwitch.data.client.magic.ritual.AltarItemModelProvider;
+import io.github.dirtyredz.herbalwitch.data.client.magic.ritual.AltarModelProvider;
 import io.github.dirtyredz.herbalwitch.data.client.preparations.PreparationItemModelProvider;
 import io.github.dirtyredz.herbalwitch.data.client.preparations.PreparationModelProvider;
 import io.github.dirtyredz.herbalwitch.data.client.stations.StationItemModelProvider;
@@ -18,6 +20,8 @@ import io.github.dirtyredz.herbalwitch.data.server.botany.BotanyWorldgenProvider
 import io.github.dirtyredz.herbalwitch.data.server.decor.DecorBlockLoot;
 import io.github.dirtyredz.herbalwitch.data.server.grimoire.GrimoireBlockLoot;
 import io.github.dirtyredz.herbalwitch.data.server.grimoire.GrimoireContentProvider;
+import io.github.dirtyredz.herbalwitch.data.server.magic.ritual.AltarBlockLoot;
+import io.github.dirtyredz.herbalwitch.data.server.magic.witch.EnergyBiomeTagsProvider;
 import io.github.dirtyredz.herbalwitch.data.server.recipes.HerbalWitchRecipeProvider;
 import io.github.dirtyredz.herbalwitch.data.server.loot.HerbalWitchLootModifierProvider;
 import io.github.dirtyredz.herbalwitch.data.server.preparations.PreparationBlockLoot;
@@ -62,6 +66,8 @@ public final class HerbalWitchDataProviders {
         generator.addProvider(event.includeClient(), new PreparationItemModelProvider(output, existingFiles));
         generator.addProvider(event.includeClient(), new GrimoireModelProvider(output, existingFiles));
         generator.addProvider(event.includeClient(), new GrimoireItemModelProvider(output, existingFiles));
+        generator.addProvider(event.includeClient(), new AltarModelProvider(output, existingFiles));
+        generator.addProvider(event.includeClient(), new AltarItemModelProvider(output, existingFiles));
         generator.addProvider(event.includeClient(), new HerbalWitchLanguageProvider(output));
 
         generator.addProvider(event.includeServer(), new HerbalWitchRecipeProvider(output));
@@ -70,12 +76,14 @@ public final class HerbalWitchDataProviders {
                 new LootTableProvider.SubProviderEntry(BotanyBlockLoot::new, LootContextParamSets.BLOCK),
                 new LootTableProvider.SubProviderEntry(StationBlockLoot::new, LootContextParamSets.BLOCK),
                 new LootTableProvider.SubProviderEntry(PreparationBlockLoot::new, LootContextParamSets.BLOCK),
-                new LootTableProvider.SubProviderEntry(GrimoireBlockLoot::new, LootContextParamSets.BLOCK))));
+                new LootTableProvider.SubProviderEntry(GrimoireBlockLoot::new, LootContextParamSets.BLOCK),
+                new LootTableProvider.SubProviderEntry(AltarBlockLoot::new, LootContextParamSets.BLOCK))));
         HerbalWitchBlockTagsProvider blockTags = generator.addProvider(event.includeServer(),
                 new HerbalWitchBlockTagsProvider(output, lookup, existingFiles));
         generator.addProvider(event.includeServer(),
                 new HerbalWitchItemTagsProvider(output, lookup, blockTags.contentsGetter(), existingFiles));
         generator.addProvider(event.includeServer(), new BotanyBiomeTagsProvider(output, lookup, existingFiles));
+        generator.addProvider(event.includeServer(), new EnergyBiomeTagsProvider(output, lookup, existingFiles));
         generator.addProvider(event.includeServer(), new PreparationEntityTagsProvider(output, lookup, existingFiles));
         generator.addProvider(event.includeServer(), new BotanyWorldgenProvider(output, lookup));
         generator.addProvider(event.includeServer(), new BotanyConditionProvider(output));

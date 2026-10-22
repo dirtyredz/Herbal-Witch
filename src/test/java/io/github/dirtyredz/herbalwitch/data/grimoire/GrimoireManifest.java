@@ -97,7 +97,7 @@ public final class GrimoireManifest {
             lang.put("grimoire.herbalwitch.teaching." + message, null);
         }
         for (String ui : List.of("accept", "alternatives", "back", "category.all", "category.furniture", "category.guide", "category.herbs",
-                "category.stations", "choose", "counting", "decline", "empty", "filter.all", "filter.known", "filter.research",
+                "category.stations", "category.witchcraft", "choose", "counting", "decline", "empty", "filter.all", "filter.known", "filter.research",
                 "have", "heat", "invite", "invited", "missing", "nobody", "offered", "open", "open.tooltip", "open_for_counts",
                 "ready", "research", "returns", "role.base", "role.ingredient", "role.packaging", "scope", "search", "see_also",
                 "station", "teach", "unknown", "withdraw")) {

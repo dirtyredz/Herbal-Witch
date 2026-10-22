@@ -126,6 +126,7 @@ public final class DecorReferenceTranslations {
         lang.add(DecorEntries.SIZE, "Takes %s x %s x %s blocks (wide, deep, high).");
         lang.add(DecorEntries.CRAFTED, "Crafted at a crafting table.");
         lang.add(DecorEntries.LOOKALIKE, "It is furniture, not a working station.");
+        lang.add(DecorEntries.FUNCTIONAL_ALTAR, "Only the Witch's Altar performs rituals; this table is decoration.");
         Map<Support, String> mounts = Map.of(Support.FREE, "Stands anywhere.", Support.FLOOR, "Stands on a solid floor.",
                 Support.WALL, "Hangs on a solid wall, facing away from it.", Support.CEILING, "Hangs from a solid ceiling.",
                 Support.CORNER, "Fits into a corner: a solid wall behind it and another on its left.",

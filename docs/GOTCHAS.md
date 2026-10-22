@@ -68,7 +68,8 @@
 - **`GameTestHelper.relativePos` is not the inverse of `absolutePos`** in 1.20.1 (from Roundwood).
 - **The datagen cache is not source.** `src/generated/resources/.cache/` is ignored and excluded from
   the jar.
-- **Capabilities, SavedData, recipe reloads, capture tokens** (later milestones): capabilities need
+- **Capabilities, SavedData, recipe reloads, capture tokens** (the first two are implemented in the grimoire and
+  witch state; capture tokens are later): capabilities need
   explicit death-clone and sync; SavedData must be marked dirty and kept on the Overworld; recipe
   reloads can remove a recipe mid-process; copied capture items must not duplicate a creature;
   Minecraft saves are not transactions across player, chunk and SavedData files.
@@ -185,5 +186,28 @@
 - **GameTest batches reuse plots.** With more than 100 tests the second batch runs where the first stood,
   and dropped items left by a first-batch test are still there; a test that must start with no entities
   (the showcase preflight) clears items in its area first.
+- **The founding record is world-global.** Any GameTest that converts anyone to a witch closes it for the
+  whole test world, so founding tests reset it (`FoundingService.resetForTest`) and run their rituals
+  synchronously inside the test (`WitchFixtures.advance`), never across ticks of a batch.
+- **A valid server-config change cancels invitations and rituals.** `herbalwitch-server.toml` is
+  validated as a whole; a valid edit installs the new rules, cancels pending invitations and running
+  rituals, clamps energy without refilling it and resends the rules. An invalid edit changes nothing.
+- **The sleep reward needs the server's sleep-completion event.** It listens to `SleepFinishedTimeEvent`
+  (players asleep for 100 ticks or more), so `/time set`, entering a bed and setting spawn never reward,
+  and only a strictly newer day pays. Fake players never complete the vanilla sleep path, so tests drive
+  `EnergyEvents.sleptThrough`.
+- **The tea cooldown is saved for every player and counts online ticks.** It is not the vanilla item
+  cooldown, which only mirrors it and is restored after login or respawn.
+- **Witch state must revive and invalidate on clone**, exactly like discoveries (the capability is already
+  invalidated on the old player when the clone event fires), and copies once on death and End return
+  regardless of keepInventory.
+- **Witch and grimoire client caches are separate.** The rules packet (`WitchRulesUpdate`) invalidates the
+  grimoire content so the witchcraft pages requote the numbers; prose never hard-codes a rule value and a
+  test enforces it.
+- **Saves are not transactional across player and world files.** A crash between the durable founding claim
+  (COMMITTING) and the player save leaves the record NEEDS_REVIEW; an operator resolves it
+  (`/herbalwitch witch founding resolve`) without replaying anything.
+- **Fake players do not appear in level entity lists.** The altar's nearby-invite list cannot see them, so
+  GameTests invite by UUID.
 - **ANU tasks are space separated.** `tools/anu-test.ps1 -Tasks "test runGameTestServer"`; a comma list is
   one unknown task name.

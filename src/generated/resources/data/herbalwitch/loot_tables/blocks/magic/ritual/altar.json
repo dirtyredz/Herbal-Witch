@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "herbalwitch:magic/ritual/altar",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "part": "0"
+              }
+            }
+          ],
+          "name": "herbalwitch:magic/ritual/altar"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "herbalwitch:blocks/magic/ritual/altar"
+}

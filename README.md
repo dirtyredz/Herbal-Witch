@@ -4,14 +4,15 @@ Forge 1.20.1 mod: woodland herbal witchcraft (herbs, stations, brewing, familiar
 an apothecary trade) together with a cottage furniture catalogue. Install on **both** the server and
 every client.
 
-**Status: private development, `0.4.0` local candidate (Milestone 5, the full furniture catalogue).**
+**Status: private development, `0.5.0` local candidate (Milestone 6, initiation and energy).**
 Contains Milestone 1 (cottage decor in a single design), Milestone 2 (herbs and garden), Milestone 3
 (everyday preparation stations and products), Milestone 4 (the grimoire: discovery, recipe lookup,
-missing ingredients, research blocks and teaching) and Milestone 5 (94 furniture pieces). Automated
-acceptance passed headless (unit tests and GameTests on the ANU CI runner); owner review of the art
-(the 89 new pieces are agent first drafts), the station UIs, the grimoire and the furniture behaviour in
-game, with two clients, is pending. Later systems are listed in docs/FEATURES.md.
-Not published; not in any pack.
+missing ingredients, research blocks and teaching), Milestone 5 (94 furniture pieces) and Milestone 6
+(the ritual altar, becoming a witch, and the energy later witchcraft will spend). Automated acceptance
+for M1 to M5 passed headless (unit tests and GameTests on the ANU CI runner); M6 acceptance is tracked in
+docs/FEATURES.md. Owner review of the art (the 89 M5 pieces and the altar are agent first drafts), the
+station UIs, the grimoire, the furniture and the witch behaviour in game, with two clients, is pending.
+Later systems are listed in docs/FEATURES.md. Not published; not in any pack.
 
 ## Supported versions
 
@@ -46,6 +47,9 @@ Not published; not in any pack.
 - **Apothecary** (tab "Apothecary"): six stations (the drying rack and hearth are 2x2 multiblocks; the new Witch's Stove is a two-wide
   range), dried bundles, powders, seven drinks, a salve,
   oils, garden products and a finite oil lantern (docs/catalogue/stations.md, products.md).
+- **Witchcraft** (tab "Apothecary"): the ritual altar, the founding of the first lineage, initiation of
+  consenting players, and the energy a witch recovers by resting, meditating, sleeping and drinking
+  energy tea (see "Witchcraft" below; docs/catalogue/witchcraft.md).
 - **Grimoire** (tab "Apothecary"): a portable book, a Grimoire Stand and a Witch's Bookshelf. They open the
   same recipe-backed reader (see "The Grimoire" below).
 
@@ -136,18 +140,57 @@ advisory: nothing in the game is locked behind it, and the recipe viewers (EMI, 
 - **Editorial pages:** guide text lives in data packs (`data/<ns>/grimoire_entries/`), prose only; recipe pages always
   come from the actual recipes.
 
+## Witchcraft
+
+Energy is the budget later witchcraft will spend. A witch has a capacity (100 to start, growing with
+practice) and an energy level; non-witches have neither. In this milestone only the altar's own rituals
+spend energy; the later production and familiar systems will.
+
+- **The altar:** `SAS` / `LGL` / `L L`: 2 smooth stone slabs (S), an amethyst shard (A), 4 dark oak
+  logs (L), a gold ingot (G); Apothecary tab, broken fastest with an axe. One item places the whole
+  altar (2 wide, 1 deep, 2 high) through the same previewed, checked placement as furniture. Both
+  bottom cells need a sturdy floor.
+- **Founding (the first witch):** nobody starts as a witch. One player founds the lineage at an altar
+  while carrying fresh lavender, fresh sage, fresh mint, fresh chamomile, an amethyst shard and any
+  written book (all consumed). The ritual runs 200 ticks with the altar open, in range and unhurt. The
+  founder becomes a witch, receives one Grimoire (an empty main slot is required, otherwise nothing is
+  consumed) and starts with full energy. Once any player has become a witch, founding is closed.
+- **Initiation:** a witch at an altar invites a nearby player who can also use that altar. The recipient
+  gets a chat line, opens the same altar and chooses "Accept and begin" or "Decline". The initiator
+  brings fresh sage, fresh lavender and an amethyst shard and pays 50 energy; the recipient pays
+  nothing. Both keep the altar open for 200 ticks. Nobody is initiated without accepting, and
+  cancelling or interrupting consumes nothing. The initiator gains 50 practice.
+- **Recovering energy:** resting still (1 per 100 ticks), meditating at an idle altar (2 per 20 ticks
+  after a 40-tick settle, stopping at full), a completed night's sleep (+30, once per day) and a cup of
+  energy tea (+25, one cup per 1,200 online ticks). A restful infusion prepares the next rewarded sleep
+  for +30 more. Resting and meditating in nature biomes or under a full moon recover up to 25% more.
+  Zero energy never harms a witch; paid actions are refused with a reason.
+- **Practice and capacity:** an attunement (one fresh sage and 10 energy, 100 ticks) is solo practice.
+  Ten practice thresholds (50 to 500) each add 10 capacity, to a final 200.
+- **The HUD:** witches see an energy bar and number. `herbalwitch-client.toml` `[hud]`: `enabled`
+  (true), `anchor` (nine-way, `BOTTOM_LEFT`), `offsetX` (8), `offsetY` (18, clears the chat input),
+  `scale` (1.0, range 0.25 to 4), `numeric` (true), `recoveryIndicator` (true).
+- **Rules:** the numbers above are defaults of `herbalwitch-server.toml` (per world). The grimoire's
+  Witchcraft pages quote the live values. A valid edit cancels open invitations and running rituals.
+- **Operators (permission level 2):** `/herbalwitch witch inspect <player>`; `/herbalwitch witch
+  designate <player>` (an invitation with no initiator, offering or energy, accepted at any valid
+  altar); `/herbalwitch witch founding inspect`; `/herbalwitch witch founding resolve <claim> close`
+  (for a founding record flagged for review after a crash; see docs/catalogue/witchcraft.md).
+
 ## Showcase command
 
 `/herbalwitch showcase [section]` builds a labelled sample of every registered block, for owner review
 and testing. It needs permission level 2 (operators; a non-op, in survival or creative, and the console
 are refused). Sections: `decor`, `herbs`, `garden`, `drying_rack`, `mortar`, `kettle`, `hearth`,
-`stove`, `infusion_pot`, `preparations`, `grimoire`; with no section it builds all of them. The grimoire
+`stove`, `infusion_pot`, `preparations`, `grimoire`, `altar`; with no section it builds all of them. The grimoire
   section (both research blocks, a barrel with two grimoires and supplies, signs) grants no knowledge.
+The `altar` section (an idle altar, a supply barrel and signs) initiates nobody, touches no founding
+record, grants no energy and starts no ritual.
 The `decor` section is a footprint-aware grid of all 94 pieces with signs, with wall pieces on walls and
 hanging pieces under ceilings, lights lit, storage stocked and the door in its four states.
 
 - **Where:** the box starts 2 blocks east of you on your row and extends east and south. The floor is
-  the block you stand on. Height 8 (floor layer plus 7 cleared). The full layout is 117 x 8 x 28 (it was 86 x 8 x 28 before 0.4.0);
+  the block you stand on. Height 8 (floor layer plus 7 cleared). The full layout is 126 x 8 x 28 (it was 117 before 0.5.0 and 86 before 0.4.0);
   hard caps are 128 x 8 x 128 and 65,536 writes.
 - **Destructive:** the whole box is replaced: terrain (grass, dirt, stone, plants, leaves, logs, water) is cleared (no drops) and the floor laid (grass blocks under the garden and herbs, smooth stone elsewhere), then the floor,
   supports, samples and signs are placed. There is no undo.
@@ -192,7 +235,7 @@ Gradle runs the three art producers before resources and datagen (`generateArt`)
 
 - `node tools/generate-models.mjs` writes the procedural families: herbs, herb beds and hung bundles.
 - `node tools/compile-blockbench.mjs` compiles the Blockbench projects under `src/art/blockbench/`
-  (stations, furniture, oil lantern, the grimoire stand and bookshelf) into models and the textures each piece owns. `--check` fails when
+  (stations, furniture, oil lantern, the grimoire stand and bookshelf, the altar) into models and the textures each piece owns. `--check` fails when
   committed output is stale.
 - `node tools/preview-models.mjs --output <dir outside the repo> [--references <dir>]` renders headless
   previews (contact sheets, herbs on beds, item sheet, review scenes, reference comparisons, manifest).

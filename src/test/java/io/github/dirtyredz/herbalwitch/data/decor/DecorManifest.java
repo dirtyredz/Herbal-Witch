@@ -102,7 +102,7 @@ public final class DecorManifest {
         for (Piece piece : pieces()) {
             lang.put("grimoire.herbalwitch.decor." + piece.family() + "." + piece.id(), null);
         }
-        for (String fact : List.of("size", "crafted", "lookalike")) {
+        for (String fact : List.of("size", "crafted", "lookalike", "functional_altar")) {
             lang.put("grimoire.herbalwitch.decor." + fact, null);
         }
         for (String mount : List.of("free", "floor", "wall", "ceiling", "corner", "carpet")) {

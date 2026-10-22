@@ -178,6 +178,29 @@ for stored ones. Collision boxes were derived once from the drafts and are hand-
 reshaped model needs an agent to update them. Wave previews (drafts per piece, montages per wave) are in
 `C:/Users/dirty/projects/artifacts/minecraft-mods/jobs/2026-10-22-herbal-witch-m5/previews/`.
 
+## The ritual altar (0.5.0, agent first draft)
+
+The functional altar (`herbalwitch:magic/ritual/altar`, docs/catalogue/witchcraft.md) is a Blockbench
+project, **authored by an agent as a first draft for the owner to refine**, built with the M5 kit: 185
+elements in dark wood, charcoal rune stone, a plum runner, gold hardware and ivy. An upright moon shrine
+at the back distinguishes it from the low decorative altar table (`decor/fixtures/altar_table`, which
+stays decoration).
+
+| Piece | Project | Owned textures (`textures/block/pieces/ritual/altar/`) |
+|---|---|---|
+| Ritual altar (2 wide, 1 deep, 2 high) | `src/art/blockbench/ritual/altar/{altar.bbmodel,piece.json}` | `wood`, `wood_v`, `stone`, `iron`, `plum`, `pink`, `gold`, `brass`, `linen`, `ivy`, `flame`, `glow`, `moon`, `runes` |
+
+It compiles to `models/block/ritual/altar/`: `part_0..3`, the `active_2` and `active_3` overlays and the
+assembly. The `active` group is the emissive overlay (candle flames, glowing rune strips, the moon glow,
+motes); it shows only in the `active` blockstate, which every cell takes while a ritual runs (light 7,
+visual only, no heat). The GUI atlases come from the texture producer (`tools/art/interface/witch.mjs`):
+`textures/gui/witch/energy.png` (bar frame, fill, cracked empty state, the rest leaf and meditation moon
+icons) and `altar.png` (panel, progress bar).
+
+Owner checks pending: the active and idle art, the orange glow at the moon (it comes from the hearth's
+glow texture and may want a violet one), item transforms and shaders. Previews are in
+`C:/Users/dirty/projects/artifacts/minecraft-mods/jobs/2026-10-22-herbal-witch-m6/previews/`.
+
 ## How the art is made
 
 - **Textures** come from `node tools/generate-textures.mjs` (seeded code in `tools/art/`) for the
@@ -191,7 +214,7 @@ reshaped model needs an agent to update them. Wave previews (drafts per piece, m
   natively at 32 and drop the enlargement for it. Alpha is 0 or 255. Untinted: no tint index, no
   colour handler.
 - **One-off pieces are hand-editable** (owner direction: subtle adjustments in Blockbench). The six
-  stations, the furniture (five pieces, and 89 more since 0.4.0), the oil lantern and the two grimoire blocks are Blockbench projects
+  stations, the furniture (five pieces, and 89 more since 0.4.0), the oil lantern, the two grimoire blocks and the ritual altar (0.5.0) are Blockbench projects
   (`src/art/blockbench/`, workflow in docs/BLOCKBENCH.md) compiled by
   `node tools/compile-blockbench.mjs`: authored per-face UVs (stretched, flipped or rotated as
   drawn), embedded textures, the item Display, named groups, multiblocks drawn whole and cut into
@@ -260,6 +283,9 @@ plot, then walk it.
    without support, beside walls and full blocks (no x-ray strips), held and GUI views of the book, the
    reader at normal GUI scales (readable text, recipe pages), the station "Grimoire" button; shaders
    off and on.
+6. **Altar (0.5.0 first draft):** idle and active (ritual running) in all four facings; the moon glow
+   colour; item in hand, GUI and ground; the placement preview against the result; the altar screen and
+   the energy HUD at several GUI scales; shaders off and on.
 
 Feedback wanted: per piece keep / change (what); whether "more blocks" means new furniture pieces
 (such as the 2-wide dresser) as well as richer models.

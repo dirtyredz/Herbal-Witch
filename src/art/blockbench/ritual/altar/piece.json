@@ -1,0 +1,80 @@
+{
+  "project": "altar.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/ritual/altar/wood",
+    "wood_v": "herbalwitch:block/pieces/ritual/altar/wood_v",
+    "stone": "herbalwitch:block/pieces/ritual/altar/stone",
+    "iron": "herbalwitch:block/pieces/ritual/altar/iron",
+    "plum": "herbalwitch:block/pieces/ritual/altar/plum",
+    "pink": "herbalwitch:block/pieces/ritual/altar/pink",
+    "gold": "herbalwitch:block/pieces/ritual/altar/gold",
+    "brass": "herbalwitch:block/pieces/ritual/altar/brass",
+    "linen": "herbalwitch:block/pieces/ritual/altar/linen",
+    "ivy": "herbalwitch:block/pieces/ritual/altar/ivy",
+    "flame": "herbalwitch:block/pieces/ritual/altar/flame",
+    "glow": "herbalwitch:block/pieces/ritual/altar/glow",
+    "moon": "herbalwitch:block/pieces/ritual/altar/moon",
+    "runes": "herbalwitch:block/pieces/ritual/altar/runes",
+    "particle": "herbalwitch:block/pieces/ritual/altar/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/ritual/altar/wood",
+    "wood_v": "herbalwitch:block/pieces/ritual/altar/wood_v",
+    "stone": "herbalwitch:block/pieces/ritual/altar/stone",
+    "iron": "herbalwitch:block/pieces/ritual/altar/iron",
+    "plum": "herbalwitch:block/pieces/ritual/altar/plum",
+    "pink": "herbalwitch:block/pieces/ritual/altar/pink",
+    "gold": "herbalwitch:block/pieces/ritual/altar/gold",
+    "brass": "herbalwitch:block/pieces/ritual/altar/brass",
+    "linen": "herbalwitch:block/pieces/ritual/altar/linen",
+    "ivy": "herbalwitch:block/pieces/ritual/altar/ivy",
+    "flame": "herbalwitch:block/pieces/ritual/altar/flame",
+    "glow": "herbalwitch:block/pieces/ritual/altar/glow",
+    "moon": "herbalwitch:block/pieces/ritual/altar/moon",
+    "runes": "herbalwitch:block/pieces/ritual/altar/runes"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      32,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/ritual/altar",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        0
+      ]
+    ],
+    "overlays": [
+      {
+        "name": "active",
+        "group": "active",
+        "emissive": true
+      }
+    ]
+  }
+}

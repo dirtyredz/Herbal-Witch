@@ -31,10 +31,18 @@ docs/ARCHITECTURE.md and docs/catalogue/).
   closes only on the full gate plus a green ANU run and reviewed preview sheets.
 - **Furniture** (docs/ARCHITECTURE.md "Decor"): every piece is one `FurnitureSpec` in its family catalogue
   (`decor/catalog/pieces/`) with its behaviour and mount; never add a block class per piece. Every piece
-  places through `FurniturePlacementItem` (the checked, previewed structure placement); new pieces need a
+  places through `FurniturePlacementItem` (which extends the shared `platform/placement/StructurePlacementItem`,
+  the checked, previewed structure placement the altar also uses); new pieces need a
   Blockbench project whose sidecar cells match the catalogue, collision boxes in their family's Shapes
   class, a recipe in their family's recipe contributor, a grimoire line (`DecorReferenceTranslations`),
   display anchors (`DisplaySpec`) for displays, and the independent manifests (`data/decor/manifest/`).
+- **Witch state, energy and the altar** (`magic/witch`, `magic/ritual`; docs/ARCHITECTURE.md "Witchcraft"):
+  mutate a player's energy or practice only through `WitchStatusService` (M7 production and M9
+  familiars included). Bump `HerbalWitchNetwork.PROTOCOL` on any wire change and register new messages
+  after the grimoire's. The founding record is world-global: GameTests that convert anyone close it, so
+  they reset it (`FoundingService.resetForTest`) and run their rituals synchronously. Grimoire prose
+  never hard-codes a witch number (the rules are quoted from the synced rules; a test enforces it).
+  Mod builds are tried only in the dedicated mod test instance, never an `Evil Eye Trial *` instance.
 - **Generated resources are source.** Change a provider, run `runData`, commit the regenerated
   `src/generated/resources/` with the code. Never hand-edit generated JSON. `GeneratedResourcesTest`
   holds the exact manifest; when a file is renamed or removed, delete `src/generated` and regenerate.

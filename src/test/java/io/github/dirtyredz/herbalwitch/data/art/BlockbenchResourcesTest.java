@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * The Blockbench sources and what they compile to, against the independent BlockbenchManifest:
  * the catalogue lists exactly the expected projects at the pinned format, the compiler's model
- * directories hold exactly the compiled models (34 before Milestone 5, plus each decor piece's cells
+ * directories hold exactly the compiled models (34 before Milestone 5, the altar's 7, plus each decor piece's cells
  * and states), the owned textures exist, sidecar cells agree with the catalogue, and no source file or
  * compiled path leaks into the runtime resources, the datagen tree or a procedural directory.
  */
@@ -81,8 +81,8 @@ class BlockbenchResourcesTest {
             }
         }
         assertEquals(new TreeSet<>(BlockbenchManifest.models()), actual);
-        assertEquals(34 + BlockbenchManifest.pieces().stream().mapToInt(p -> BlockbenchManifest.models(p).size()).sum(), actual.size());
-        assertEquals(34, BlockbenchManifest.models().size() - BlockbenchManifest.pieces().stream().mapToInt(p -> BlockbenchManifest.models(p).size()).sum());
+        assertEquals(34 + BlockbenchManifest.MILESTONE_6_MODELS.size() + BlockbenchManifest.pieces().stream().mapToInt(p -> BlockbenchManifest.models(p).size()).sum(), actual.size());
+        assertEquals(34 + 7, BlockbenchManifest.models().size() - BlockbenchManifest.pieces().stream().mapToInt(p -> BlockbenchManifest.models(p).size()).sum());
         for (String model : BlockbenchManifest.models()) {
             assertFalse(Files.exists(ResourceFiles.GENERATED_ASSETS.resolve("models/" + model)), model + " also in the datagen tree");
         }

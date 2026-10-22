@@ -30,6 +30,12 @@ public final class DecorEntries implements GrimoireContentSource {
     public static final String SIZE = PREFIX + "size";
     public static final String CRAFTED = PREFIX + "crafted";
     public static final String LOOKALIKE = PREFIX + "lookalike";
+    public static final String FUNCTIONAL_ALTAR = PREFIX + "functional_altar";
+    /**
+     * The functional altar's page (Milestone 6), named by key so decor's reference never depends on
+     * the ritual feature; the link is dropped if that page is absent.
+     */
+    public static final EntryKey ALTAR = EntryKey.of(EntryKey.Kind.STATION, HerbalWitch.MOD_ID + ":magic/ritual/altar");
     /** Decorative pieces that resemble a working station, and the station they point to. */
     public static final Map<String, StationSpec> LOOKALIKES = Map.of(
             "drying_rack_decor", StationCatalog.DRYING_RACK,
@@ -73,6 +79,10 @@ public final class DecorEntries implements GrimoireContentSource {
             if (station != null) {
                 body.add(Component.translatable(LOOKALIKE));
                 links.add(StationEntries.key(station));
+            }
+            if (spec.id().equals("altar_table")) {
+                body.add(Component.translatable(FUNCTIONAL_ALTAR));
+                links.add(ALTAR);
             }
             out.accept(new GrimoireEntry(key(spec), GrimoireContent.FURNITURE, DecorBlocks.block(spec).getName(),
                     DecorBlocks.block(spec).asItem().getDefaultInstance(), body, links, Optional.empty(), true, Optional.empty()));

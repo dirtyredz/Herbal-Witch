@@ -12,6 +12,7 @@ docs/DECISIONS.md (0.2.0-dev.6); traps: docs/GOTCHAS.md.
 | The 89 pieces added in 0.4.0 (first drafts) | `src/art/blockbench/decor/pieces/<family>/<group>/<piece>/` (see below) |
 | Oil lantern | `src/art/blockbench/preparations/oil_lantern/` |
 | Grimoire Stand, Witch's Bookshelf (first drafts by an agent, for you to refine) | `src/art/blockbench/grimoire/{stand,bookshelf}/` |
+| Ritual altar (0.5.0, first draft by an agent, 2 x 1 x 2 multiblock) | `src/art/blockbench/ritual/altar/` |
 
 ### The 0.4.0 furniture projects
 
@@ -48,6 +49,16 @@ The two grimoire pieces own their textures like the rest: the stand has `wood`, 
 board holding an open book, ribbon and ivy. Bookshelf: framed carcass, three shelves of volumes, crescent
 bookend, side moon, ivy. They have no groups the game treats specially. The grimoire's book sprite and reader
 atlas are procedural (`tools/art/grimoire/`), not painted in Blockbench.
+
+The ritual altar (`ritual/altar`) is authored whole like the other multiblocks and cut into
+`part_0..3`. It owns fourteen textures at `textures/block/pieces/ritual/altar/`: `wood`, `wood_v`, `stone`,
+`iron`, `plum`, `pink`, `gold`, `brass`, `linen`, `ivy`, `flame`, `glow`, `moon`, `runes`. Its `active`
+group (candle flames, glowing rune strips, the moon glow, motes) is an emissive overlay named in
+`piece.json` `overlays`; it shows only while a ritual runs and compiles to `active_2` and `active_3`.
+Collision lives in Java (`AltarShapes`, from the assembly boxes) and does not follow the model; a reshaped
+altar needs an agent to update it. The glow is currently orange (the hearth's glow texture); repaint the
+`glow` texture if you want violet. Preview evidence:
+`C:/Users/dirty/projects/artifacts/minecraft-mods/jobs/2026-10-22-herbal-witch-m6/previews/`.
 
 ## Once: install and set up
 

@@ -1,0 +1,246 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/altar/part_0"
+      },
+      "when": {
+        "facing": "north",
+        "part": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/altar/part_0",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "part": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/altar/part_0",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "part": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/altar/part_0",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "part": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/altar/part_1"
+      },
+      "when": {
+        "facing": "north",
+        "part": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/altar/part_1",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "part": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/altar/part_1",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "part": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/altar/part_1",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "part": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/altar/part_2"
+      },
+      "when": {
+        "facing": "north",
+        "part": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/altar/active_2"
+      },
+      "when": {
+        "active": "true",
+        "facing": "north",
+        "part": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/altar/part_2",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "part": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/altar/active_2",
+        "y": 90
+      },
+      "when": {
+        "active": "true",
+        "facing": "east",
+        "part": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/altar/part_2",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "part": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/altar/active_2",
+        "y": 180
+      },
+      "when": {
+        "active": "true",
+        "facing": "south",
+        "part": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/altar/part_2",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "part": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/altar/active_2",
+        "y": 270
+      },
+      "when": {
+        "active": "true",
+        "facing": "west",
+        "part": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/altar/part_3"
+      },
+      "when": {
+        "facing": "north",
+        "part": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/altar/active_3"
+      },
+      "when": {
+        "active": "true",
+        "facing": "north",
+        "part": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/altar/part_3",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "part": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/altar/active_3",
+        "y": 90
+      },
+      "when": {
+        "active": "true",
+        "facing": "east",
+        "part": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/altar/part_3",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "part": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/altar/active_3",
+        "y": 180
+      },
+      "when": {
+        "active": "true",
+        "facing": "south",
+        "part": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/altar/part_3",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "part": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "herbalwitch:block/ritual/altar/active_3",
+        "y": 270
+      },
+      "when": {
+        "active": "true",
+        "facing": "west",
+        "part": "3"
+      }
+    }
+  ]
+}

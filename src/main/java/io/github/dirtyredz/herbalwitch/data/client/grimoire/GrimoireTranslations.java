@@ -55,6 +55,7 @@ public final class GrimoireTranslations {
         Map<String, String> ui = Map.ofEntries(
                 Map.entry("search", "Search"), Map.entry("category.all", "All pages"), Map.entry("category.guide", "Guides"),
                 Map.entry("category.stations", "Stations"), Map.entry("category.herbs", "Herbs"), Map.entry("category.furniture", "Furnishings"),
+                Map.entry("category.witchcraft", "Witchcraft"),
                 Map.entry("filter.all", "Everything"), Map.entry("filter.known", "Known"), Map.entry("filter.research", "Researchable"),
                 Map.entry("empty", "Nothing here yet."), Map.entry("choose", "Choose a page from the index."),
                 Map.entry("unknown", "You have not discovered this yet."), Map.entry("station", "Station: %s"),

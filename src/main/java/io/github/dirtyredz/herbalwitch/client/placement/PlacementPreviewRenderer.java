@@ -1,11 +1,10 @@
-package io.github.dirtyredz.herbalwitch.client.decor.placement;
+package io.github.dirtyredz.herbalwitch.client.placement;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import io.github.dirtyredz.herbalwitch.decor.structure.FurniturePlacementItem;
 import io.github.dirtyredz.herbalwitch.platform.placement.PlacementChecks;
 import io.github.dirtyredz.herbalwitch.platform.placement.PlacementPlan;
-import io.github.dirtyredz.herbalwitch.platform.placement.StructurePlacement;
+import io.github.dirtyredz.herbalwitch.platform.placement.StructurePlacementItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -27,21 +26,21 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Hammer-style placement preview: while the player holds a furniture item and aims at a block, the
- * very plan the server would place ({@link FurniturePlacementItem#plan}, the shared resolver) is
- * drawn as see-through models of every cell in its real states (a door's hinge, a bed's direction)
- * with a green outline, or red when the client can already tell the place will not do (occupied,
- * unsupported, outside the world). Permission is the server's to judge: the preview never claims it.
- * No packets, no client-only positioning, no alternate anchors.
+ * Hammer-style placement preview for every checked structure item (furniture, the altar): while the
+ * player holds one and aims at a block, the very plan the server would place
+ * ({@link StructurePlacementItem#plan}, the shared resolver) is drawn as see-through models of every
+ * cell in its real states with a green outline, or red when the client can already tell the place
+ * will not do (occupied, unsupported, outside the world). Permission is the server's to judge: the
+ * preview never claims it. No packets, no client-only positioning, no alternate anchors.
  */
-public final class FurniturePlacementPreview {
+public final class PlacementPreviewRenderer {
     private static final float ALPHA = 0.55F;
 
-    private FurniturePlacementPreview() {
+    private PlacementPreviewRenderer() {
     }
 
     public static void register(IEventBus forgeBus) {
-        forgeBus.addListener(FurniturePlacementPreview::render);
+        forgeBus.addListener(PlacementPreviewRenderer::render);
     }
 
     private static void render(RenderLevelStageEvent event) {
@@ -54,19 +53,20 @@ public final class FurniturePlacementPreview {
         }
         for (InteractionHand hand : InteractionHand.values()) {
             ItemStack stack = mc.player.getItemInHand(hand);
-            if (stack.getItem() instanceof FurniturePlacementItem item && item.getBlock() instanceof StructurePlacement structure) {
+            if (stack.getItem() instanceof StructurePlacementItem item) {
                 BlockPlaceContext context = new BlockPlaceContext(new UseOnContext(mc.player, hand, hit));
                 if (!context.canPlace()) {
                     return;
                 }
                 Optional<PlacementPlan> plan = item.plan(context);
-                plan.ifPresent(p -> draw(event, mc, p, PlacementChecks.checkGeometry(context, p, structure).isEmpty()));
+                plan.ifPresent(p -> draw(event, mc, p, PlacementChecks.checkGeometry(context, p, item.structure()).isEmpty()));
                 return;
             }
         }
     }
 
-    private static void draw(RenderLevelStageEvent event, Minecraft mc, PlacementPlan plan, boolean placeable) {
+    /** Draws a resolved plan: see-through cell models, then a green (placeable) or red outline per cell. */
+    public static void draw(RenderLevelStageEvent event, Minecraft mc, PlacementPlan plan, boolean placeable) {
         PoseStack pose = event.getPoseStack();
         Vec3 camera = event.getCamera().getPosition();
         MultiBufferSource.BufferSource buffers = mc.renderBuffers().bufferSource();

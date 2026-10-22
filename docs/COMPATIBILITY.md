@@ -45,7 +45,7 @@ Milestones are derived from plan section 3; exact dependency versions are pinned
 | EMI / JEI | Separate optional client-only plugins on shared recipe descriptions; test neither, each alone, both; transfer buttons only after a tested server transfer endpoint | 3 (first categories), 4 (shared descriptions) | EMI 1.1.24+1.20.1, JEI 15.62.0.219 (owner check for viewers) |
 | Oculus / Embeddium | Baked models first; restricted BERs and bounded particles; owner checks shader off/on, reloads, glass, shadows, item displays | 1 onward (owner check per decor wave) | not yet; pin the trial instance's version when implemented |
 | AppleSkin | Normal food/item contracts; no separate HUD hook unless an observed need appears | 3 | no adapter; not separately tested |
-| Claims / PvP | Custom actions route through the permission service and Forge events; supported claim adapters tested explicitly; recognized but unsupported protection systems disable affected automated actions by default; harmful player targeting off by default | 6-7 | not yet; pin the trial instance's version when implemented |
+| Claims / PvP | Custom actions route through the permission service and Forge events; supported claim adapters tested explicitly; recognized but unsupported protection systems disable affected automated actions by default; harmful player targeting off by default | 6-7 | M6 altar use routes through `ActionPermissionService.mayUse` and Forge events only, no claim adapter (see "Witchcraft"); not yet tested against a claim mod; pin the trial instance's version when implemented |
 
 ## Furniture (0.4.0, Milestone 5)
 
@@ -63,6 +63,19 @@ What the 94-piece furniture catalogue does with other mods today (docs/catalogue
 - **Not tested:** the optional-mod profiles (EMI, JEI, Farmer's Delight, Thirst) were not rerun for this
   milestone, and no furniture mod (Supplementaries, Macaw's, Roundwood), shader pack or claim mod was run
   against the catalogue. The owner checks neighbouring-block occlusion and shaders in the trial instance.
+
+## Witchcraft (0.5.0, Milestone 6)
+
+- **No new optional integrations.** The altar, energy and initiation need no foreign mod, and no foreign
+  classes were added.
+- **Thirst Was Taken:** the Thirst profile still applies to energy tea. Hydration from the Thirst adapter is
+  unchanged; the energy benefit for witches is independent of it.
+- **Protection mods:** altar use goes through `ActionPermissionService.mayUse` (use, not build: loaded,
+  world border, build height and spawn protection; adventure mode may use the altar) plus Forge's
+  interaction events. Placing the altar is a normal checked structure placement. There is no universal
+  claims-mod support and no claim adapter; a claim mod that cancels interaction events stops altar use.
+- **Not tested:** the optional-mod profiles were not rerun for this milestone, and no claim mod was run
+  against the altar.
 
 ## Rule
 

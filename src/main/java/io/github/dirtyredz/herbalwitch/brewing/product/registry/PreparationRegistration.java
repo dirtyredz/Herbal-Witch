@@ -3,6 +3,11 @@ package io.github.dirtyredz.herbalwitch.brewing.product.registry;
 import com.mojang.serialization.Codec;
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.brewing.effect.PestRepellentEvents;
+import io.github.dirtyredz.herbalwitch.brewing.product.catalog.EverydayProductCatalog;
+import io.github.dirtyredz.herbalwitch.brewing.product.item.HerbalDrinkItem;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import io.github.dirtyredz.herbalwitch.brewing.product.foraging.ResinDropModifier;
 import io.github.dirtyredz.herbalwitch.brewing.product.showcase.PreparationShowcaseSection;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseRegistry;
@@ -31,6 +36,15 @@ public final class PreparationRegistration {
         PreparationEffects.EFFECTS.register(modBus);
         LOOT_MODIFIERS.register(modBus);
         MinecraftForge.EVENT_BUS.addListener(PestRepellentEvents::onChangeTarget);
+        MinecraftForge.EVENT_BUS.addListener((PlayerEvent.PlayerLoggedInEvent event) -> syncTeaCooldown(event.getEntity()));
+        MinecraftForge.EVENT_BUS.addListener((PlayerEvent.PlayerRespawnEvent event) -> syncTeaCooldown(event.getEntity()));
         ShowcaseRegistry.register(new PreparationShowcaseSection());
+    }
+
+    /** The saved energy-tea cooldown outlives the vanilla item cooldown: show it again on a new player object. */
+    private static void syncTeaCooldown(Player player) {
+        if (player instanceof ServerPlayer serverPlayer) {
+            HerbalDrinkItem.syncCooldown(serverPlayer, PreparationItems.product(EverydayProductCatalog.ENERGY_TEA));
+        }
     }
 }

@@ -14,7 +14,7 @@ Module paths are relative to `io.github.dirtyredz.herbalwitch`. Milestones are f
 | Infusion pot | Slowly prepare salves, oils, repellents, lantern oils | infusion pot | `stations/everyday/infusion_pot/` | infusion | no | 3 | done (0.1.0-dev.3): StationProcessingGameTests, PreparationUseGameTests |
 | Distillation still | Refine rare essences and advanced extracts | still | `stations/still/` | distillation | yes (advanced brew) | 7 | not started |
 | Apothecary bottling bench | Bottle, portion, label, package mixtures | bottling bench | `stations/bottling_bench/` | bottling | no (plan silent; assumed packaging only) | 7 | not started |
-| Altar and ritual circle | Initiation, familiar binding, home blessings, revival, wards | altar (basic M6), ritual circle, decor Altar Table links here | `magic/ritual/` | rituals | yes (initiation: existing witch; founder ritual: survival) | 6 (altar); 7 (circle, rituals) | not started |
+| Altar and ritual circle | Initiation, familiar binding, home blessings, revival, wards | altar (M6), ritual circle, decor Altar Table links here | `magic/ritual/` | rituals | yes (initiation: existing witch; founder ritual: survival) | 6 (altar); 7 (circle, rituals) | altar done (0.5.0): see "The ritual altar" below; circle not started |
 | Charm workbench | Sachets, amulets, animal capture charms, protection tokens | charm workbench, decor Work Table candidate | `stations/charm_workbench/` | charm work | assumed yes (magical); confirm at M7 | 7 | not started |
 | Grimoire stand / witch bookshelf | Research herbs, recipes, rituals | grimoire stand, witch bookshelf | `grimoire/access/block/` (with `grimoire/content/`, `grimoire/knowledge/`) | none (reads all recipes) | no | 4 | done (0.3.0): automated acceptance passed (unit tests, GameTests); owner checks pending |
 | Familiar beds, nests and perches | Assign rest locations and recovery | bed, nest, perch | `companions/familiars/home/` | none | owner must be bound witch | 9 | not started |
@@ -73,6 +73,26 @@ all recipes and run no job) and no storage; the Milestone 5 storage/display book
 readers. The portable Grimoire (`herbalwitch:grimoire/book`, stack of one) opens the index anywhere and
 the station screens show a "Grimoire" button while it is carried. Models are first drafts, see docs/ART.md.
 
+## The ritual altar (Milestone 6, 0.5.0)
+
+| Block | Id | Footprint | Recipe | Interface |
+|---|---|---|---|---|
+| Ritual Altar | `herbalwitch:magic/ritual/altar` (block, item, block entity and menu share it) | 2 wide x 1 deep x 2 high; cells in canonical order, part 0 the origin | `SAS` / `LGL` / `L L`: 2 smooth stone slabs, amethyst shard, 4 dark oak logs, gold ingot; Apothecary tab, axe | Zero-slot menu: no inventory, offerings come from the user's own main inventory and offhand |
+
+- **Placement:** one item places the whole altar through the shared checked placement
+  (`StructurePlacementItem`) with the shared preview; both bottom cells need a sturdy floor.
+- **Teardown:** breaking any cell, losing support or an explosion removes the altar with one drop (the
+  origin's loot); creative drops nothing; pistons refuse it. It is `noOcclusion`.
+- **State:** `active` is a blockstate on every cell while a ritual runs (light 7, visual only, no heat).
+- **Use:** the user must be alive, not a spectator, in the same dimension, with the whole altar loaded,
+  eyes within 4 blocks of the footprint with line of sight, and pass `ActionPermissionService.mayUse`
+  (adventure mode is allowed). One operation per altar and one per player; an invitation does not lock it.
+- **Actions:** founding, initiation, meditation, attunement (docs/catalogue/witchcraft.md). Each has an
+  explicit start and is cancelled by closing the menu, leaving range or being hurt.
+- **Screen:** 252 x 200, two columns (status and actions on the left, consent on the right), a progress
+  bar, the last notice, and a Grimoire button that opens the book beside it on the altar page.
+- **Ritual circle:** still planned for Milestone 7; the altar does not use one.
+
 ## Look and size (0.2.0-dev.2)
 
 House style: the armchair's dark brown wood, charcoal iron, gold rivets, bands and studs, gold crescent moons
@@ -107,7 +127,7 @@ grimoire page of the decor piece links the working station instead.
 | Fireplace (`fixtures/fireplace`) and Firepit (`fixtures/firepit`) | hearth surround and fire | Hearth (`stations/everyday/hearth/`): the heat source for kettle and infusion pot. The firepit lights up and toggles like a lamp but heats nothing |
 | Kitchen Range (`fixtures/stove_oven`) | range with an oven door | Witch's Stove (`stations/stove/`): two burners, hearth fuel rules |
 | Work Table (`surfaces/work_table`) | broad worktable | Mortar and pestle (grinding); the charm workbench candidate is still planned (M7) |
-| Altar Table (`fixtures/altar_table`) | dark table with moon motifs | Infusion pot for preparing (altar and ritual circle are still planned, M6/M7) |
+| Altar Table (`fixtures/altar_table`) | dark table with moon motifs | The functional Ritual Altar (`magic/ritual/altar`, 0.5.0) for founding, initiation and meditation; the infusion pot for preparing. The ritual circle is still planned (M7) |
 
 The recipes differ on purpose: for example the decor rack is string, sticks and slabs, and the
 Kitchen Range takes a furnace but never smelts. Dried bundles remain flat 2D sprites on the working

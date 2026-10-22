@@ -10,8 +10,8 @@ Duration defaults: utility 60-120 s, combat control 5-10 s, familiar buffs 180 s
 |---|---|---|---|---|---|---|---|
 | Healing salves | healing | Infusion pot | salve | no | usable only when hurt: +4 health, 32 ticks, 10 s cooldown, bowl back. Infusion pot: yarrow + chamomile, honey bottle, bowl (600 ticks) | 3 | done |
 | Recovery teas | healing | Tea kettle | drink | no | Regeneration I 90 s. Kettle: chamomile + yarrow + water bottle (200 ticks) | 3 | done |
-| Energy-restoring teas | energy | Tea kettle | drink | no (use needs a witch to benefit) | food 4 / 0.5 saturation, 60 s item cooldown; the +25 witch energy waits for M6. Kettle: mint + sugar + water bottle | 3 | done |
-| Restful sleep infusions | energy | Tea kettle | drink | no | resets the time-since-rest statistic (phantoms), forces no sleep; the sleep energy waits for M6. Kettle: lavender + valerian + water bottle | 3 | done |
+| Energy-restoring teas | energy | Tea kettle | drink | no (use needs a witch to benefit) | food 4 / 0.5 saturation for everyone; for witches +25 energy (0.5.0). One cup per 1,200 online ticks (60 s) for every player, a saved cooldown (see "Energy tea and restful infusion" below). Kettle: mint + sugar + water bottle | 3 / 6 | done |
+| Restful sleep infusions | energy | Tea kettle | drink | no | resets the time-since-rest statistic (phantoms), forces no sleep; for witches it prepares the next rewarded sleep (+30 more, 0.5.0). Kettle: lavender + valerian + water bottle | 3 / 6 | done |
 | Warmth remedy | environment | Tea kettle | drink | no | Warmth 90 s (freezing never builds, clears). Kettle: rosemary + blaze powder + water bottle | 3 | done |
 | Cooling remedy | environment | Tea kettle | drink | no | Fire Resistance 60 s. Kettle: mint + snowball + water bottle | 3 | done |
 | Night vision potion | utility | Brewing cauldron | drink | yes | night vision, 60-120 s | 7 | planned |
@@ -76,8 +76,19 @@ Every processing recipe above has a recipe-backed page in the grimoire (drying, 
 infusion), built from the registered recipes themselves (`StationRecipeEntries`); there are no hand-written
 product pages. A product is discovered when it is carried, or when
 all of a recipe's primary ingredients are familiar. Discovery is advisory only: product effects, cooldowns
-and delivery are exactly as in the tables above, and nothing is gated by knowledge. Witch energy effects
-stay deferred to Milestone 6.
+and delivery are exactly as in the tables above, and nothing is gated by knowledge.
+
+## Energy tea and restful infusion (0.5.0, Milestone 6)
+
+The two drinks that carry witch energy. Numbers are defaults of `herbalwitch-server.toml`
+(docs/catalogue/witchcraft.md); the grimoire quotes the live values.
+
+| | Energy tea | Restful infusion |
+|---|---|---|
+| Non-witch | food 4 / 0.5 saturation, as before; hydration from the Thirst adapter if installed | resets the time-since-rest statistic, forces no sleep, as before |
+| Witch | the same food, plus +25 energy (capped at capacity) | the same reset, plus it prepares the next rewarded sleep: +30 more energy, non-stacking; drinking again refreshes the 24,000-tick duration |
+| Cooldown | 1,200 online ticks, authoritative and saved for every player; a cup started or finished during it is refused and nothing is consumed. The vanilla item cooldown only mirrors it and is restored after login or respawn | none |
+| Notes | at zero energy a witch can drink it; nothing hurts at zero | a sleep that is not rewarded (not a strictly newer day, or under 100 ticks asleep) does not consume the preparation |
 
 ## Herbs
 

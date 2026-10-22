@@ -52,6 +52,18 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `src/main/java/io/github/dirtyredz/herbalwitch/grimoire/showcase/` — the grimoire showcase section
 - `src/main/java/io/github/dirtyredz/herbalwitch/platform/network/` — the mod's channel, payload bounds and chunked snapshot assembly (no gameplay policy)
 - `src/main/java/io/github/dirtyredz/herbalwitch/stations/description/` — the processing categories (recipe type to station) the grimoire, EMI and JEI share
+- `src/main/java/io/github/dirtyredz/herbalwitch/magic/witch/` — witch status and energy (Milestone 6): `status/` (state, codec, capability, lifecycle, the status service and private sync), `energy/` (balance, arithmetic, practice, recovery, sleep, drinks), `initiation/` (consent; `founding/` the world record), `config/` (server rules), `network/` (snapshot, rules), `command/`, `registry/`
+- `src/main/java/io/github/dirtyredz/herbalwitch/magic/ritual/` — the functional altar (Milestone 6): `catalog/`, `registry/`, `altar/` (block, origin entity, shapes), `menu/` (zero-slot menu, access, screen sync), `session/` (sessions, offerings, the server lifecycle), `action/` (founding, initiation, meditation, attunement, the conversion commit, request dispatch), `network/`, `grimoire/`, `showcase/`
+- `src/main/java/io/github/dirtyredz/herbalwitch/client/placement/` — the placement preview shared by every checked structure item
+- `src/main/java/io/github/dirtyredz/herbalwitch/client/witch/` — the witch client cache, HUD settings and wiring; `hud/` (the energy overlay and its pure layout)
+- `src/main/java/io/github/dirtyredz/herbalwitch/client/ritual/` — the altar screen and its client state; `widgets/` (action and consent panels)
+- `src/main/java/io/github/dirtyredz/herbalwitch/data/client/magic/` — `ritual/` (altar states, item model, English), `witch/` (witch English)
+- `src/main/java/io/github/dirtyredz/herbalwitch/data/server/magic/` — `ritual/` (altar crafting, loot, tags), `witch/` (the nature biome tag)
+- `src/main/resources/assets/herbalwitch/models/block/ritual/` — the altar's compiled models (`part_<n>`, `active_<n>`, `assembly`; compiled from src/art/blockbench by tools/compile-blockbench.mjs)
+- `src/main/resources/assets/herbalwitch/textures/gui/witch/` — the energy HUD and altar screen atlases (generated)
+- `src/test/java/io/github/dirtyredz/herbalwitch/magic/` — pure witch and ritual tests: `witch/` (status, energy, initiation, founding, payloads), `ritual/` (sessions)
+- `src/test/java/io/github/dirtyredz/herbalwitch/client/` — pure client arithmetic tests (`witch/hud/`)
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/magic/` — witch (`witch/`) and altar (`ritual/`) GameTests
 - `src/main/java/io/github/dirtyredz/herbalwitch/showcase/command/` — `/herbalwitch showcase` registration and execution
 - `src/main/java/io/github/dirtyredz/herbalwitch/showcase/layout/` — section contract, registry, placements and the bounded plan (no world writes)
 - `src/main/java/io/github/dirtyredz/herbalwitch/showcase/construction/` — preflight checks, the builder and sign labels (the only world writes)

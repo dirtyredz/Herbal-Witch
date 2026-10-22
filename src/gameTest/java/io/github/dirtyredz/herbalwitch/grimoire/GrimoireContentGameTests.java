@@ -91,9 +91,10 @@ public final class GrimoireContentGameTests {
             }
         }
         check(recipes == 50 && content.recipes().size() == 50, "baseline is 50 recipes, saw " + recipes + "/" + content.recipes().size());
-        check(content.entries().stream().filter(e -> e.key().kind() == EntryKey.Kind.GUIDE).count() == GuideEntries.ORDER.size(), "guides");
+        // the editorial guides, the three witchcraft pages and the four altar action pages (Milestone 6)
+        check(content.entries().stream().filter(e -> e.key().kind() == EntryKey.Kind.GUIDE).count() == GuideEntries.ORDER.size() + 3 + 4, "guides");
         check(content.entries().stream().filter(e -> e.key().kind() == EntryKey.Kind.HERB).count() == HerbCatalog.ALL.size(), "herbs");
-        check(content.entries().stream().filter(e -> e.key().kind() == EntryKey.Kind.STATION).count() == 6, "stations");
+        check(content.entries().stream().filter(e -> e.key().kind() == EntryKey.Kind.STATION).count() == 6 + 1, "stations and the altar");
         check(content.entries().get(0).key().equals(GuideEntries.key("getting_started")), "the book opens on getting started");
         helper.succeed();
     }

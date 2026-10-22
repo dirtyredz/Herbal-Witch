@@ -9,9 +9,9 @@ public final class EverydayProductCatalog {
     public static final ProductSpec RECOVERY_TEA = new ProductSpec("drinks", "recovery_tea", "Recovery Tea", Kind.DRINK,
             "Regeneration I, 1:30");
     public static final ProductSpec ENERGY_TEA = new ProductSpec("drinks", "energy_tea", "Energy Tea", Kind.DRINK,
-            "Restores hunger; one cup a minute");
+            "Restores hunger, and a witch's energy; one cup at a time");
     public static final ProductSpec RESTFUL_INFUSION = new ProductSpec("drinks", "restful_infusion", "Restful Infusion", Kind.DRINK,
-            "Rested: phantoms forget you");
+            "Rested: phantoms forget you; a witch sleeps deeper");
     public static final ProductSpec WARMTH_REMEDY = new ProductSpec("drinks", "warmth_remedy", "Warmth Remedy", Kind.DRINK,
             "Warmth, 1:30: no freezing");
     public static final ProductSpec COOLING_REMEDY = new ProductSpec("drinks", "cooling_remedy", "Cooling Remedy", Kind.DRINK,
