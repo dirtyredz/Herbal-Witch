@@ -53,7 +53,7 @@ public final class GardenBedConnectionGameTests {
     @GameTest(template = TEMPLATE)
     public static void playerPlacedBedsJoinInRowsSquaresAndRings(GameTestHelper helper) {
         floor(helper);
-        ServerPlayer player = player(helper, "gardener", GameType.SURVIVAL, Direction.NORTH);
+        ServerPlayer player = player(helper, "bed_joiner", GameType.SURVIVAL, Direction.NORTH);
         // a ring of eight around an empty centre (1..3, 1..3)
         for (int x = 1; x <= 3; x++) {
             for (int z = 1; z <= 3; z++) {

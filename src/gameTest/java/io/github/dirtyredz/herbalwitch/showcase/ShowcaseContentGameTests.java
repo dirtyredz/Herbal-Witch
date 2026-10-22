@@ -59,7 +59,15 @@ public final class ShowcaseContentGameTests {
     public static void theFullShowcaseHoldsEveryRegisteredBlock(GameTestHelper helper) throws Exception {
         stoneFloor(helper, FULL_X, FULL_Z);
         var op = standing(helper, "op_full", GameType.CREATIVE);
-        check(run(helper, as(op, 2), "herbalwitch showcase") > 0, "showcase failed");
+        // the second GameTest batch reuses the first batch's plots: dropped items left there are entities the preflight refuses
+        helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class, new net.minecraft.world.phys.AABB(
+                helper.absolutePos(BlockPos.ZERO), helper.absolutePos(new BlockPos(FULL_X, 10, FULL_Z))).inflate(1))
+                .forEach(net.minecraft.world.entity.Entity::discard);
+        if (run(helper, as(op, 2), "herbalwitch showcase") == 0) {
+            var why = io.github.dirtyredz.herbalwitch.showcase.construction.ShowcasePreflight.check(ShowcasePlan.of(ShowcaseRegistry.sections()),
+                    helper.getLevel(), op, helper.absolutePos(io.github.dirtyredz.herbalwitch.fixture.ShowcaseFixtures.ORIGIN));
+            check(false, "showcase failed: " + why.map(c -> c.getString()).orElse("preflight passed"));
+        }
         check(DiscoveryCapability.of(op).map(c -> c.state().size()).orElse(0) == 0, "building the showcase granted discoveries");
         ShowcasePlan plan = ShowcasePlan.of(ShowcaseRegistry.sections());
         Map<Block, Integer> blocks = new HashMap<>();

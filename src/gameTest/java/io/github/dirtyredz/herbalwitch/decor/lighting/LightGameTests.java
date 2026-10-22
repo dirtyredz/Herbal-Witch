@@ -73,7 +73,7 @@ public final class LightGameTests {
                 }
             }
         }
-        ServerPlayer player = player(helper, "lamplighter", GameType.SURVIVAL, Direction.SOUTH);
+        ServerPlayer player = player(helper, "lamp_switcher", GameType.SURVIVAL, Direction.SOUTH);
         player.moveTo(helper.absolutePos(at.north()).getX() + 0.5, helper.absolutePos(at).getY(), helper.absolutePos(at.north()).getZ() + 0.5);
         check(useItemOn(helper, player, new ItemStack(DecorItems.item(lamp)), at.below(), Direction.UP).consumesAction(), "lamp not placed");
         check(click(helper, player, at.above()).consumesAction(), "clicking the upper cell did nothing");
@@ -95,7 +95,7 @@ public final class LightGameTests {
         FurnitureSpec pendant = LightingCatalog.PENDANT_LIGHT; // two high, hangs from its top cell
         BlockPos ceiling = new BlockPos(4, 5, 4);
         helper.setBlock(ceiling, Blocks.STONE);
-        ServerPlayer player = player(helper, "hanger", GameType.SURVIVAL, Direction.SOUTH);
+        ServerPlayer player = player(helper, "lamp_hanger", GameType.SURVIVAL, Direction.SOUTH);
         check(useItemOn(helper, player, new ItemStack(DecorItems.item(pendant)), ceiling, Direction.DOWN).consumesAction(), "not hung");
         MultiblockLayout layout = FurnitureLayouts.of(pendant);
         List<BlockPos> cells = new ArrayList<>(List.of(ceiling.below(), ceiling.below(2)));

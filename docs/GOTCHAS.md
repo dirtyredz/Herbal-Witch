@@ -156,7 +156,9 @@
   page returns if the recipe does.
 - **Fake players never join the player list.** Range and teaching checks go through `TeachingWorld`, the test
   seam, so GameTests can drive them. `FakePlayerFactory` caches by name, so `GrimoireFixtures` gives each test a
-  unique fake-player name; reuse leaks one test's inventory and discoveries into the next.
+  unique fake-player name; reuse leaks one test's inventory and discoveries into the next. Two tests that share a
+  name pass alone and fail once a change of test count puts them in one batch (0.5.0: "lamplighter" emptied the
+  lantern test's hand); `GameTestPlayerNamesTest` refuses any literal name used by two test files.
 - **Cell order is a contract.** A furniture piece's cells are numbered by height, then depth, then to the
   right (`MultiblockLayout.boxCells`); the Blockbench sidecar (`piece.json` `multiblock.cells`) must list the
   same cells in the same order, or `part_<n>` models land on the wrong blocks. `BlockbenchResourcesTest`
