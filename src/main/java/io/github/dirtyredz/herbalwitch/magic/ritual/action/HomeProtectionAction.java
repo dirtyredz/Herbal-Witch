@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.magic.ritual.action;
 
+import io.github.dirtyredz.herbalwitch.magic.ward.service.WardActivation;
+
 import io.github.dirtyredz.herbalwitch.platform.player.OnlinePlayers;
 
 import io.github.dirtyredz.herbalwitch.grimoire.knowledge.discovery.DiscoveryService;
@@ -50,7 +52,7 @@ public final class HomeProtectionAction implements AltarSessionService.Handler {
         if (stone.isEmpty() || Vec3.atCenterOf(stone.get()).distanceTo(Vec3.atCenterOf(menu.origin())) > REACH) {
             return "home_protection.no_ward";
         }
-        Optional<String> refusal = WardService.refusal(witch, level, stone.get());
+        Optional<String> refusal = WardActivation.refusal(witch, level, stone.get());
         if (refusal.isPresent()) {
             return "home_protection." + refusal.get();
         }
@@ -112,7 +114,7 @@ public final class HomeProtectionAction implements AltarSessionService.Handler {
             AltarSessionService.cancel(session, "circle_broken");
             return;
         }
-        if (WardService.refusal(witch, level, p.stone()).isPresent()) {
+        if (WardActivation.refusal(witch, level, p.stone()).isPresent()) {
             AltarSessionService.cancel(session, "ward_changed");
             return;
         }
@@ -125,7 +127,7 @@ public final class HomeProtectionAction implements AltarSessionService.Handler {
         }
         CircleRituals.glow(session, false);
         boolean done = CircleRituals.pay(witch, p.offering(), p.energyUnits(),
-                () -> "activated".equals(WardService.activateByRitual(witch, level, p.stone())));
+                () -> "activated".equals(WardActivation.activateByRitual(witch, level, p.stone())));
         if (!done) {
             AltarSessionService.notice(witch, "cancel.ward_changed");
             return;

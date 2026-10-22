@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.magic.ritual;
 
+import io.github.dirtyredz.herbalwitch.magic.ward.service.WardControls;
+
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
 import io.github.dirtyredz.herbalwitch.apothecary.botany.garden.HerbBedBlock;
@@ -167,7 +169,7 @@ public final class CircleGameTests {
                 "the stone was not charged and bound");
         check(energy(w) == before - EnergyService.units(WitchRules.server().workings().homeProtectionCost()), "paid " + (before - energy(w)));
         check(count(w, Items.AMETHYST_SHARD) == 0, "the offering was not consumed");
-        check(WardService.deactivate(w, helper.getLevel(), abs).equals("deactivated"), "cleanup");
+        check(WardControls.deactivate(w, helper.getLevel(), abs).equals("deactivated"), "cleanup");
         helper.succeed();
     }
 }

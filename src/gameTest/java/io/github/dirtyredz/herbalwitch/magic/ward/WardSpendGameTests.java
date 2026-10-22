@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.magic.ward;
 
+import io.github.dirtyredz.herbalwitch.magic.ward.service.WardActivation;
+
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.magic.ward.block.WardStoneBlockEntity;
 import io.github.dirtyredz.herbalwitch.magic.ward.registry.WardRegistration;
@@ -41,7 +43,7 @@ public final class WardSpendGameTests {
         WitchState before = WitchStatusService.snapshot(owner).orElseThrow();
         try {
             try {
-                WardService.activate(owner, helper.getLevel(), pos);
+                WardActivation.activate(owner, helper.getLevel(), pos);
                 check(false, "charge did not reach the throwing stone");
             } catch (RuntimeException thrown) {
                 check(thrown == failure, "activation replaced the original exception");

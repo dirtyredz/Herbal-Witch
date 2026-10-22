@@ -8,31 +8,18 @@ import io.github.dirtyredz.herbalwitch.magic.ward.persistence.WardSavedData;
 import io.github.dirtyredz.herbalwitch.magic.ward.targeting.WardProtection;
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WorkingRules;
-import io.github.dirtyredz.herbalwitch.magic.witch.status.EnergyService;
-import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchState;
-import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchStatusService;
-import io.github.dirtyredz.herbalwitch.platform.permission.ActionContext;
-import io.github.dirtyredz.herbalwitch.platform.permission.ActionPermissionService;
-import io.github.dirtyredz.herbalwitch.platform.permission.entity.EntityActionPermission;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
 
 import java.util.Optional;
 
 /**
- * The wards on a running server: activation (directly at the stone, or by the circle's home
- * protection ritual, which pays its own energy), the owner's settings, deactivation and release, and
- * each charged ward's loaded ticks. One activation grants the rules' charge; a charged ward is never
- * topped up and a deactivated one refunds nothing. Every outcome is a key suffix
- * ({@code ward.herbalwitch.<outcome>}). Charge, owner and settings live only in {@link WardSavedData};
- * the index is rebuilt from loaded stones.
+ * The loaded ward index, lifecycle reset and bounded ticks/sweeps. WardLifecycle is the sole
+ * stone/record reconciliation authority; activation, controls and focus have separate owners.
  */
 public final class WardService {
     public static final String KEY = "ward.herbalwitch.";
@@ -54,11 +41,6 @@ public final class WardService {
         return WitchRules.server().workings();
     }
 
-    /** Loaded ticks of protection one activation grants. */
-    public static int chargeTicks() {
-        return rules().wardChargeSeconds() * 20;
-    }
-
     // ---------------------------------------------------------------- index
 
     public static WardIndex index() {
@@ -75,7 +57,7 @@ public final class WardService {
 
     /** Indexes a charged ward unless it would overlap another active one (then it stays unindexed and protects nothing). */
     static boolean index(ServerLevel level, WardRecord record) {
-        record.setFocused(focused(level, BlockPos.of(record.pos())));
+        record.setFocused(WardFocus.focused(level, BlockPos.of(record.pos())));
         WardIndex.Entry entry = entryOf(record);
         if (INDEX.overlaps(entry.dimension(), entry.centre(), entry.radius(), entry.height(), record.id())) {
             INDEX.remove(record.id());
@@ -93,26 +75,6 @@ public final class WardService {
         WorkingRules r = rules();
         return new WardIndex.Entry(record.id(), record.dimension(), BlockPos.of(record.pos()),
                 record.effectiveRadius(r.wardRadius(), r.wardFocusRadius()), r.wardHeight(), record.profile(), record.owner().orElse(null));
-    }
-
-    /** Whether a functional hearth or stove stands within {@link WardCatalog#FOCUS_REACH} (loaded cells only). */
-    public static boolean focused(ServerLevel level, BlockPos stone) {
-        int reach = WardCatalog.FOCUS_REACH;
-        for (BlockPos p : BlockPos.betweenClosed(stone.offset(-reach, -2, -reach), stone.offset(reach, 2, reach))) {
-            if (!level.isLoaded(p)) {
-                continue;
-            }
-            Block block = level.getBlockState(p).getBlock();
-            if (block == StationBlocks.HEARTH.get() || block == StationBlocks.STOVE.get()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /** The largest radius the stone may be set to now. */
-    public static int maxRadius(ServerLevel level, BlockPos stone) {
-        return focused(level, stone) ? rules().wardFocusRadius() : rules().wardRadius();
     }
 
     /** Shows (or hides) the charged look. */
@@ -138,184 +100,6 @@ public final class WardService {
         return stone(level, pos).flatMap(s -> WardLifecycle.reconciled(level, pos, s));
     }
 
-    // ---------------------------------------------------------------- activation
-
-    /**
-     * Why {@code witch} may not activate the stone now (ignoring energy and reach, which only direct
-     * activation adds), or empty. Used by direct activation and by the home protection ritual.
-     */
-    public static Optional<String> refusal(ServerPlayer witch, ServerLevel level, BlockPos pos) {
-        Optional<WardStoneBlockEntity> stone = stone(level, pos);
-        if (stone.isEmpty()) {
-            return Optional.of("no_stone");
-        }
-        WardSavedData data = WardSavedData.get(level);
-        if (!data.writable()) {
-            return Optional.of("unsupported");
-        }
-        Optional<WardRecord> record = WardLifecycle.reconciled(level, pos, stone.get());
-        if (record.isPresent() && record.get().charged()) {
-            return Optional.of("already_charged");
-        }
-        if (record.flatMap(WardRecord::owner).filter(o -> !o.equals(witch.getUUID())).isPresent()) {
-            return Optional.of("not_owner");
-        }
-        if (!WitchStatusService.isWitch(witch)) {
-            return Optional.of("not_witch");
-        }
-        boolean binding = record.flatMap(WardRecord::owner).isEmpty();
-        if (binding && data.boundTo(witch.getUUID()) >= rules().wardsPerOwner()) {
-            return Optional.of("owner_limit");
-        }
-        if (record.isEmpty() && data.size() >= WardCatalog.MAX_RECORDS) {
-            return Optional.of("world_limit");
-        }
-        String dimension = level.dimension().location().toString();
-        if (INDEX.active(dimension) >= rules().wardsPerDimension()) {
-            return Optional.of("dimension_limit");
-        }
-        if (INDEX.centres(dimension, pos) >= WardCatalog.CENTRES_PER_CHUNK) {
-            return Optional.of("chunk_limit");
-        }
-        int radius = Math.min(record.map(WardRecord::radius).orElse(rules().wardRadius()), maxRadius(level, pos));
-        if (INDEX.overlaps(dimension, pos, radius, rules().wardHeight(), record.map(WardRecord::id).orElse(-1L))) {
-            return Optional.of("overlap");
-        }
-        if (!EntityActionPermission.checkProtect(level, witch.getUUID(), pos).allowed()) {
-            return Optional.of("protected");
-        }
-        return Optional.empty();
-    }
-
-    /** Whether the witch stands close enough and may use the stone. */
-    public static boolean reaches(ServerPlayer player, BlockPos pos) {
-        return player.isAlive() && !player.isSpectator() && player.position().distanceTo(Vec3.atCenterOf(pos)) <= WardCatalog.REACH
-                && ActionPermissionService.mayUse(ActionContext.of(player, player.level(), pos));
-    }
-
-    /** Direct activation: the witch pays the activation cost and gains practice from it. */
-    public static String activate(ServerPlayer witch, ServerLevel level, BlockPos pos) {
-        Optional<String> refusal = refusal(witch, level, pos);
-        if (refusal.isPresent()) {
-            return refusal.get();
-        }
-        if (!reaches(witch, pos)) {
-            return "too_far";
-        }
-        int units = EnergyService.units(rules().wardActivationCost());
-        if (WitchStatusService.check(witch, units) != EnergyService.Result.OK) {
-            return "not_enough_energy";
-        }
-        boolean[] attempted = {false};
-        boolean activated = WitchStatusService.spend(witch, units, () -> {
-            attempted[0] = true;
-            return charge(witch, level, pos);
-        });
-        return activated ? "activated" : attempted[0] ? "failed" : "not_enough_energy";
-    }
-
-    /** The ritual route: the ritual already paid; checks again and charges. */
-    public static String activateByRitual(ServerPlayer witch, ServerLevel level, BlockPos pos) {
-        Optional<String> refusal = refusal(witch, level, pos);
-        if (refusal.isPresent()) {
-            return refusal.get();
-        }
-        return charge(witch, level, pos) ? "activated" : "failed";
-    }
-
-    /** Binds (if unbound), charges and indexes the stone's record. */
-    private static boolean charge(ServerPlayer witch, ServerLevel level, BlockPos pos) {
-        WardStoneBlockEntity stone = stone(level, pos).orElse(null);
-        if (stone == null) {
-            return false;
-        }
-        WardSavedData data = WardSavedData.get(level);
-        Optional<WardRecord> existing = WardLifecycle.reconciled(level, pos, stone);
-        WardRecord record = existing.orElseGet(() -> data.create(level, pos, rules().wardRadius()).orElse(null));
-        if (record == null) {
-            return false;
-        }
-        stone.setRecordId(record.id());
-        if (record.owner().isEmpty()) {
-            data.bind(record, witch.getUUID());
-        }
-        if (record.radius() > maxRadius(level, pos)) {
-            data.radius(record, maxRadius(level, pos));
-        }
-        data.charge(record, chargeTicks());
-        index(level, record);
-        show(level, pos, true);
-        return true;
-    }
-
-    // ---------------------------------------------------------------- the owner's controls
-
-    /** Ends the protection now; the remaining charge is discarded. */
-    public static String deactivate(ServerPlayer owner, ServerLevel level, BlockPos pos) {
-        Optional<WardRecord> record = record(level, pos);
-        if (record.isEmpty() || !record.get().charged()) {
-            return "not_charged";
-        }
-        if (!record.get().ownedBy(owner.getUUID())) {
-            return "not_owner";
-        }
-        WardSavedData.get(level).charge(record.get(), 0);
-        unindex(record.get().id());
-        show(level, pos, false);
-        return "deactivated";
-    }
-
-    /** Unbinds the stone from its owner, ending any protection (nothing refunded). */
-    public static String release(ServerPlayer owner, ServerLevel level, BlockPos pos) {
-        Optional<WardRecord> record = record(level, pos);
-        if (record.isEmpty() || record.get().owner().isEmpty()) {
-            return "unbound";
-        }
-        if (!record.get().ownedBy(owner.getUUID())) {
-            return "not_owner";
-        }
-        WardSavedData data = WardSavedData.get(level);
-        data.charge(record.get(), 0);
-        data.bind(record.get(), null);
-        unindex(record.get().id());
-        show(level, pos, false);
-        return "released";
-    }
-
-    /** Changes the chosen radius by {@code delta}, within 1 and the current maximum; an active ward must not overlap. */
-    public static String radius(ServerPlayer owner, ServerLevel level, BlockPos pos, int delta) {
-        Optional<WardRecord> record = record(level, pos);
-        if (record.isEmpty() || !record.get().ownedBy(owner.getUUID())) {
-            return record.isEmpty() ? "unbound" : "not_owner";
-        }
-        WardRecord r = record.get();
-        int next = Math.max(1, Math.min(maxRadius(level, pos), r.radius() + delta));
-        if (next == r.radius()) {
-            return "radius_limit";
-        }
-        if (r.charged() && INDEX.overlaps(r.dimension(), pos, Math.min(next, maxRadius(level, pos)), rules().wardHeight(), r.id())) {
-            return "overlap";
-        }
-        WardSavedData.get(level).radius(r, next);
-        if (r.charged()) {
-            index(level, r);
-        }
-        return "radius";
-    }
-
-    /** Cycles the target profile (undead, arthropods, both). */
-    public static String profile(ServerPlayer owner, ServerLevel level, BlockPos pos) {
-        Optional<WardRecord> record = record(level, pos);
-        if (record.isEmpty() || !record.get().ownedBy(owner.getUUID())) {
-            return record.isEmpty() ? "unbound" : "not_owner";
-        }
-        WardSavedData.get(level).profile(record.get(), record.get().profile().next());
-        if (record.get().charged()) {
-            index(level, record.get());
-        }
-        return "profile";
-    }
-
     // ---------------------------------------------------------------- ticking
 
     /** One loaded tick of a charged stone: the charge runs down (protecting or not) and the ward sweeps. */
@@ -335,7 +119,7 @@ public final class WardService {
         }
         if ((level.getGameTime() + record.id()) % WardCatalog.SWEEP_INTERVAL == 0) {
             boolean wasFocused = record.focused();
-            boolean focused = focused(level, pos);
+            boolean focused = WardFocus.focused(level, pos);
             if (focused != wasFocused || !indexed(record.id())) {
                 index(level, record); // the focus came or went: the radius changes now
             } else {

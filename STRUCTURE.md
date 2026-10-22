@@ -198,7 +198,7 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 | Products | `apothecary/brewing/product/**`, `apothecary/brewing/application/**`, `apothecary/brewing/effect/**`, `apothecary/brewing/projectile/*` | Bundles, powders, drinks, salve, oils, garden products, oil lantern, the 16 advanced preparations, mixtures, effects, thrown preparations |
 | Charms | `magic/charm/**`, `platform/compat/curios/*` | Sachet and amulets, worn rules and charge, the Curios slot adapter |
 | Ritual circle | `magic/ritual/circle/*`, `magic/ritual/action/{Circle,GardenBlessing,HomeProtection}*` | The 5x5 ring, its validation, Garden Blessing and Home Protection |
-| Wards | `magic/ward/**` | Ward stone, persisted records and chunk index, bounded target-suppression sweeps |
+| Wards | `magic/ward/**` | `WardActivation`, `WardControls`, `WardFocus`; `WardService` index/ticks, `WardLifecycle` reconciliation, bounded target-suppression sweeps |
 | Metadata carrier | `apothecary/brewing/product/metadata/DrinkMetadata` | Water-to-drink data hand-off; the Thirst adapter installs it |
 | Showcase | `showcase/{layout,construction,command}`, `*/showcase/` sections | Plan (pure), preflight and builder (world writes), command |
 | Permission | `platform/permission/**` | `ActionContext` + `ActionPermissionService`; `entity/` the one boundary for harmful entity actions |

@@ -1,5 +1,11 @@
 package io.github.dirtyredz.herbalwitch.magic.ward.menu;
 
+import io.github.dirtyredz.herbalwitch.magic.ward.service.WardFocus;
+
+import io.github.dirtyredz.herbalwitch.magic.ward.service.WardControls;
+
+import io.github.dirtyredz.herbalwitch.magic.ward.service.WardActivation;
+
 import io.github.dirtyredz.herbalwitch.platform.time.TickTime;
 
 import io.github.dirtyredz.herbalwitch.magic.ward.persistence.WardRecord;
@@ -101,12 +107,12 @@ public class WardMenu extends AbstractContainerMenu {
             return true;
         }
         String outcome = switch (Button.values()[id]) {
-            case ACTIVATE -> WardService.activate(server, level, pos);
-            case DEACTIVATE -> WardService.deactivate(server, level, pos);
-            case RELEASE -> WardService.release(server, level, pos);
-            case RADIUS_DOWN -> WardService.radius(server, level, pos, -1);
-            case RADIUS_UP -> WardService.radius(server, level, pos, 1);
-            case PROFILE -> WardService.profile(server, level, pos);
+            case ACTIVATE -> WardActivation.activate(server, level, pos);
+            case DEACTIVATE -> WardControls.deactivate(server, level, pos);
+            case RELEASE -> WardControls.release(server, level, pos);
+            case RADIUS_DOWN -> WardControls.radius(server, level, pos, -1);
+            case RADIUS_UP -> WardControls.radius(server, level, pos, 1);
+            case PROFILE -> WardControls.profile(server, level, pos);
         };
         server.displayClientMessage(Component.translatable(WardService.KEY + outcome), true);
         return true;
@@ -146,7 +152,7 @@ public class WardMenu extends AbstractContainerMenu {
         private int maxRadius() {
             if (level.getGameTime() - scanned >= 20) {
                 scanned = level.getGameTime();
-                maxRadius = WardService.maxRadius(level, pos);
+                maxRadius = WardFocus.maxRadius(level, pos);
             }
             return maxRadius;
         }

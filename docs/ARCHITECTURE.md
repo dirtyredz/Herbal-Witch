@@ -3,6 +3,12 @@
 How the mod is put together. Code map: [STRUCTURE.md](../STRUCTURE.md).
 Plan of record: milestones 1-12 (docs/FEATURES.md); traceability: docs/catalogue/.
 
+Ward responsibilities are explicit in `magic/ward/service`: `WardActivation` owns refusal order and
+direct/already-paid ritual charging, `WardControls` owns owner settings/release, and `WardFocus`
+scans loaded cells for a functional hearth or stove (unlit blocks count). `WardService` owns the
+loaded index and bounded ticks/sweeps; `WardLifecycle` alone reconciles stones with saved records.
+Unloaded wards neither protect nor consume charge, and loading never catches up elapsed time.
+
 ## Current system (0.6.0: Milestones 1-7 plus the art pass; furniture is Milestone 5, initiation and energy Milestone 6, advanced brewing, charms, circle and wards Milestone 7)
 
 Everything below is server-authoritative; clients get vanilla block updates, menu slots and menu data.
