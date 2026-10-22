@@ -20,12 +20,16 @@ M8 ordinary-animal implementation is now a candidate on this branch; M9 familiar
 M8 adds six baits, personal loaded-time care state, existing-salve targeting, temporary goal-based
 calming, reused M7 sleep, earned native taming/keepers, a private grimoire card, verified capture
 checkpoints/reconciliation/recovery and sixteen showcase habitats. Exact boundaries and defaults:
-[catalogue/animals.md](catalogue/animals.md). Local fast gate: 405 JUnit tests and 81 Node tests pass,
-223 GameTests compile, and two datagen runs leave all 1,051 generated files byte-identical. Baseline
+[catalogue/animals.md](catalogue/animals.md). Local fast gate: 406 JUnit tests and 81 Node tests pass,
+223 GameTests compile, and the implementation's two datagen runs left all 1,051 generated files byte-identical. Baseline
 source declarations were 371 JUnit and 197 GameTests (not a separately executed baseline run).
-All three art checks pass; nine animal sprites and the full preview gallery were inspected. ANU
-GameTests, restart/fault scenarios, optional profiles and owner visuals are not claimed as passed.
-Version promotion to 0.7.0 awaits that qualification. Partial P2 work remains in its open Docket items.
+All three art checks pass; nine animal sprites and the full preview gallery were inspected.
+ANU job `HerbalWitch-m8-animals-0.7.0-20261022-185625-ed2` at `60cfacf` passed 406 JUnit and all
+223 required GameTests (97 seconds). It fixes the first run's eight failures: the showcase's wrong
+sleep-vial registry, the same lookup in the projectile fixture, premature navigation/transport
+fixtures, and the pre-M8 grimoire expectations. The original order pin remains intact with explicit
+M8 additions. Restart/fault scenarios, optional profiles and owner visuals remain unqualified;
+version promotion to 0.7.0 awaits complete automated acceptance. Follow-ups remain in Docket.
 
 Version 0.6.0 (local candidate): Milestone 7, advanced brewing, charms, the ritual circle and ward stones, is implemented on top of 0.5.0; see "0.6.0: advanced brewing, charms, circle and wards" below. Automated acceptance is tracked there; owner checks are pending.
 
