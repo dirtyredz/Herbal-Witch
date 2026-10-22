@@ -59,28 +59,28 @@ public final class WitchState {
     }
 
     /** Conversion: the player becomes a witch with this identity (services only). */
-    public void initiate(UUID id) {
+    void initiate(UUID id) {
         initiated = true;
         initiationId = id;
     }
 
-    public void setEnergyUnits(int units) {
+    void setEnergyUnits(int units) {
         energyUnits = Math.max(0, units);
     }
 
-    public void setPracticeSpent(int units) {
+    void setPracticeSpent(int units) {
         practiceSpent = Math.max(0, units);
     }
 
-    public void setTeaCooldownTicks(int ticks) {
+    void setTeaCooldownTicks(int ticks) {
         teaCooldownTicks = Math.max(0, ticks);
     }
 
-    public void setRestfulTicks(int ticks) {
+    void setRestfulTicks(int ticks) {
         restfulTicks = Math.max(0, ticks);
     }
 
-    public void setLastSleepRewardDay(long day) {
+    void setLastSleepRewardDay(long day) {
         lastSleepRewardDay = day;
     }
 
@@ -92,7 +92,7 @@ public final class WitchState {
     }
 
     /** Takes every field from a snapshot (a failed operation's rollback). */
-    public void restoreFrom(WitchState other) {
+    void restoreFrom(WitchState other) {
         initiated = other.initiated;
         initiationId = other.initiationId;
         energyUnits = other.energyUnits;

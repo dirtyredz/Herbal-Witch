@@ -43,7 +43,7 @@ public final class EnergyService {
     }
 
     /** Spends {@code units}; nothing changes unless the result is {@link Result#OK}. */
-    public static Result debit(WitchState state, int units) {
+    static Result debit(WitchState state, int units) {
         Result check = check(state, units);
         if (check == Result.OK) {
             state.setEnergyUnits(state.energyUnits() - units);
@@ -55,7 +55,7 @@ public final class EnergyService {
      * Restores up to {@code units}, clamped to capacity; returns how many were actually added (0 for a
      * non-witch, a negative amount or a full witch).
      */
-    public static int recover(WitchState state, EnergyBalance balance, int units) {
+    static int recover(WitchState state, EnergyBalance balance, int units) {
         if (units <= 0 || !state.initiated()) {
             return 0;
         }
@@ -71,7 +71,7 @@ public final class EnergyService {
      * newly crossed. Capacity grows with them but the new room is not filled. Practice stops counting
      * at the final threshold.
      */
-    public static int awardPractice(WitchState state, EnergyBalance balance, int units) {
+    static int awardPractice(WitchState state, EnergyBalance balance, int units) {
         if (units <= 0 || !state.initiated()) {
             return 0;
         }
@@ -82,13 +82,13 @@ public final class EnergyService {
     }
 
     /** Conversion: a witch with this identity and a full initial capacity. */
-    public static void initiate(WitchState state, EnergyBalance balance, UUID initiationId) {
+    static void initiate(WitchState state, EnergyBalance balance, UUID initiationId) {
         state.initiate(initiationId);
         state.setEnergyUnits(capacityUnits(state, balance));
     }
 
     /** A balance change: energy above the recomputed capacity is clamped; nothing is refilled. */
-    public static boolean clamp(WitchState state, EnergyBalance balance) {
+    static boolean clamp(WitchState state, EnergyBalance balance) {
         int capacity = capacityUnits(state, balance);
         if (state.energyUnits() > capacity) {
             state.setEnergyUnits(capacity);

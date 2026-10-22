@@ -32,7 +32,7 @@ public final class SleepRecovery {
      * @param newDayTime      the Overworld day time the sleep woke the world to
      * @param sleptLongEnough the player slept through the vanilla minimum (100 ticks) on the completion path
      */
-    public static Outcome completed(WitchState state, EnergyBalance balance, long newDayTime, boolean sleptLongEnough) {
+    static Outcome completed(WitchState state, EnergyBalance balance, long newDayTime, boolean sleptLongEnough) {
         if (!state.initiated() || !sleptLongEnough) {
             return Outcome.NONE;
         }

@@ -3,9 +3,6 @@ package io.github.dirtyredz.herbalwitch.magic.witch.status;
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
 import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyBalance;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.EnergyService;
-import io.github.dirtyredz.herbalwitch.magic.witch.network.WitchPackets;
-import io.github.dirtyredz.herbalwitch.magic.witch.network.WitchRulesUpdate;
-import io.github.dirtyredz.herbalwitch.magic.witch.network.WitchSnapshot;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 
@@ -13,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Consumer;
 
 /**
@@ -26,7 +22,6 @@ import java.util.function.Consumer;
  */
 public final class WitchStatusService {
     public static final int SYNC_INTERVAL = 5;
-    private static final AtomicLong EPOCHS = new AtomicLong();
     private static final List<Consumer<ServerPlayer>> CONVERSIONS = new CopyOnWriteArrayList<>();
 
     private WitchStatusService() {
@@ -143,42 +138,46 @@ public final class WitchStatusService {
         sendRules(player);
     }
 
-    // ---------------------------------------------------------------- synchronisation
-
-    /** Login, respawn or a dimension change: a new epoch and a full snapshot now. */
-    public static void resync(ServerPlayer player) {
-        of(player).ifPresent(c -> c.newEpoch(EPOCHS.incrementAndGet()));
-        flush(player);
+    /** Starts the saved tea cooldown for everyone and recovers energy only for witches. */
+    public static int energyTea(ServerPlayer player) {
+        of(player).filter(WitchCapability::writable).ifPresent(c -> c.state().setTeaCooldownTicks(balance().teaCooldown()));
+        return recover(player, EnergyService.units(balance().teaAmount()));
     }
 
-    /** Sends the snapshot now if anything changed. */
-    public static void flush(ServerPlayer player) {
-        of(player).ifPresent(c -> c.changed(true));
-        tick(player);
+    /** Refreshes, rather than stacks, a witch's preparation for the next rewarded sleep. */
+    public static boolean restfulInfusion(ServerPlayer player) {
+        return of(player).filter(c -> c.writable() && c.state().initiated()).map(c -> {
+            c.state().setRestfulTicks(balance().restfulDuration());
+            c.changed();
+            return true;
+        }).orElse(false);
     }
 
-    /** Sends a pending snapshot when due (every server tick per player). */
-    public static void tick(ServerPlayer player) {
+    /** Online countdowns run before rest eligibility and preserve the existing expiry notification. */
+    public static void tickCountdowns(ServerPlayer player) {
+        of(player).filter(c -> c.writable() && player.getServer() != null).ifPresent(c -> {
+            WitchState state = c.state();
+            if (state.teaCooldownTicks() > 0) {
+                state.setTeaCooldownTicks(state.teaCooldownTicks() - 1);
+            }
+            if (state.restfulTicks() > 0) {
+                state.setRestfulTicks(state.restfulTicks() - 1);
+                if (state.restfulTicks() == 0) { c.changed(); }
+            }
+        });
+    }
+
+    public static SleepRecovery.Outcome completedSleep(ServerPlayer player, long newDayTime, boolean sleptLongEnough) {
         Optional<WitchCapability> cap = of(player);
-        if (cap.isEmpty() || player.getServer() == null) {
-            return;
-        }
-        WitchCapability c = cap.get();
-        long now = player.getServer().getTickCount();
-        if (!c.due(now, SYNC_INTERVAL)) {
-            return;
-        }
-        WitchState s = c.state();
-        WitchSnapshot.Recovering recovering = c.meditating() ? WitchSnapshot.Recovering.MEDITATION
-                : c.rest().resting() && s.initiated() ? WitchSnapshot.Recovering.REST : WitchSnapshot.Recovering.NONE;
-        WitchSnapshot snapshot = c.sent(now, recovering, s.initiated(), s.energyUnits(), EnergyService.capacityUnits(s, balance()),
-                s.practiceSpent(), s.restfulTicks() > 0);
-        if (snapshot != null) {
-            WitchPackets.send(player, snapshot);
-        }
+        if (cap.isEmpty() || !cap.get().writable()) { return SleepRecovery.Outcome.NONE; }
+        SleepRecovery.Outcome outcome = SleepRecovery.completed(cap.get().state(), balance(), newDayTime, sleptLongEnough);
+        if (outcome.rewarded()) { cap.get().changed(true); }
+        return outcome;
     }
 
-    public static void sendRules(ServerPlayer player) {
-        WitchPackets.send(player, new WitchRulesUpdate(WitchRules.server()));
-    }
+    /** Login, respawn or dimension change: a new epoch and a full snapshot. */
+    public static void resync(ServerPlayer player) { WitchStatusSync.resync(player); }
+    public static void flush(ServerPlayer player) { WitchStatusSync.flush(player); }
+    public static void tick(ServerPlayer player) { WitchStatusSync.tick(player); }
+    public static void sendRules(ServerPlayer player) { WitchStatusSync.sendRules(player); }
 }

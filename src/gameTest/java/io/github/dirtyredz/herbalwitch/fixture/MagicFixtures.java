@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.fixture;
 
+import io.github.dirtyredz.herbalwitch.magic.witch.status.StatusFixtures;
+
 import io.github.dirtyredz.herbalwitch.magic.ritual.altar.AltarBlock;
 import io.github.dirtyredz.herbalwitch.magic.ritual.circle.CircleLayout;
 import io.github.dirtyredz.herbalwitch.magic.ritual.circle.RitualCircleBlock;
@@ -56,7 +58,7 @@ public final class MagicFixtures {
 
     /** Sets a witch's energy (units: hundredths). */
     public static void setEnergy(ServerPlayer player, int units) {
-        WitchCapability.of(player).ifPresent(c -> c.state().setEnergyUnits(units));
+        WitchCapability.of(player).ifPresent(c -> StatusFixtures.energy(c.state(), units));
     }
 
     /** A complete altar facing north at {@link WitchFixtures#ALTAR} inside a complete ritual circle, on a stone floor. */

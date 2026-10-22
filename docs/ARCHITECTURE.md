@@ -27,6 +27,12 @@ wired once by `HerbalWitch`. Real players take precedence over independently sco
 removed fakes and registrations from a stopped server are excluded. Initiation owns consent only.
 Teaching keeps its own range, dimension, eligibility and name-order rules over the shared roster.
 
+**Witch mutation boundary.** Durable `WitchState` setters and the mutating energy/sleep arithmetic
+are package-private in `magic/witch/status`. Drink recovery, online countdowns and completed sleep
+enter through named `WitchStatusService` operations. `WitchStatusSync` owns epochs and private
+snapshot/rules emission behind the existing service entry points; save fields and protocol stay fixed.
+GameTest setup uses helpers in its own status package, which are excluded from the release jar.
+
 **Decor (`decor/`).** One cottage design (`FinishCatalog`, a single entry) and 94 pieces described in
 seven family catalogues (`decor/catalog/pieces/`), each a `FurnitureSpec`: id, family, art group, wave,
 behaviour (`FurnitureBehavior`), mount (`MountSpec`: support and cells, `(right, up, depth)` from the

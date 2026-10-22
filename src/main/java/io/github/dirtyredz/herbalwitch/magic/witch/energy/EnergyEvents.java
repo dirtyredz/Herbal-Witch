@@ -46,15 +46,7 @@ public final class EnergyEvents {
         }
         WitchCapability c = cap.get();
         WitchState state = c.state();
-        if (state.teaCooldownTicks() > 0) {
-            state.setTeaCooldownTicks(state.teaCooldownTicks() - 1);
-        }
-        if (state.restfulTicks() > 0) {
-            state.setRestfulTicks(state.restfulTicks() - 1);
-            if (state.restfulTicks() == 0) {
-                c.changed();
-            }
-        }
+        WitchStatusService.tickCountdowns(player);
         boolean disturbed = c.takeDisturbed();
         if (!state.initiated() || c.meditating()) {
             c.rest().reset();
@@ -100,14 +92,6 @@ public final class EnergyEvents {
 
     /** One player's completed sleep (the seam GameTests drive, since fake players never tick their sleep counter). */
     public static SleepRecovery.Outcome sleptThrough(ServerPlayer player, long newDayTime, boolean sleptLongEnough) {
-        Optional<WitchCapability> cap = WitchCapability.of(player);
-        if (cap.isEmpty() || !cap.get().writable()) {
-            return new SleepRecovery.Outcome(false, 0, false);
-        }
-        SleepRecovery.Outcome outcome = SleepRecovery.completed(cap.get().state(), balance(), newDayTime, sleptLongEnough);
-        if (outcome.rewarded()) {
-            cap.get().changed(true);
-        }
-        return outcome;
+        return WitchStatusService.completedSleep(player, newDayTime, sleptLongEnough);
     }
 }

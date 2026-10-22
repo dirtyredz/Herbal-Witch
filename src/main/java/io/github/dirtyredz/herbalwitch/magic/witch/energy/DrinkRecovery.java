@@ -1,6 +1,5 @@
 package io.github.dirtyredz.herbalwitch.magic.witch.energy;
 
-import io.github.dirtyredz.herbalwitch.magic.witch.status.EnergyService;
 
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
 import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchCapability;
@@ -37,16 +36,11 @@ public final class DrinkRecovery {
 
     /** A cup of energy tea was drunk: starts the cooldown; returns the energy units a witch gained. */
     public static int energyTea(ServerPlayer player) {
-        WitchCapability.of(player).filter(WitchCapability::writable).ifPresent(c -> c.state().setTeaCooldownTicks(balance().teaCooldown()));
-        return WitchStatusService.recover(player, EnergyService.units(balance().teaAmount()));
+        return WitchStatusService.energyTea(player);
     }
 
     /** A restful infusion was drunk: a witch's next rewarded sleep is prepared (refreshing, never stacking). */
     public static boolean restfulInfusion(ServerPlayer player) {
-        return WitchCapability.of(player).filter(c -> c.writable() && c.state().initiated()).map(c -> {
-            c.state().setRestfulTicks(balance().restfulDuration());
-            c.changed();
-            return true;
-        }).orElse(false);
+        return WitchStatusService.restfulInfusion(player);
     }
 }

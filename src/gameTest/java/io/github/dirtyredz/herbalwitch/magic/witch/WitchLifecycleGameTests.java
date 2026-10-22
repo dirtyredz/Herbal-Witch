@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.magic.witch;
 
+import io.github.dirtyredz.herbalwitch.magic.witch.status.StatusFixtures;
+
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyEvents;
 import io.github.dirtyredz.herbalwitch.magic.witch.network.WitchPackets;
@@ -61,14 +63,14 @@ public final class WitchLifecycleGameTests {
             ServerPlayer old = witch(helper, "lc_old_" + died, FEET);
             WitchStatusService.debit(old, 4_000);
             WitchStatusService.awardPractice(old, 6_000);
-            WitchCapability.of(old).orElseThrow().state().setTeaCooldownTicks(300);
+            StatusFixtures.tea(WitchCapability.of(old).orElseThrow().state(), 300);
             WitchState before = WitchCapability.of(old).orElseThrow().state().copy();
             ServerPlayer replacement = player(helper, "lc_new_" + died, FEET);
             WitchLifecycleEvents.clone(new PlayerEvent.Clone(replacement, old, died));
             WitchState after = WitchCapability.of(replacement).orElseThrow().state();
             check(after.sameAs(before), (died ? "death" : "end return") + " changed the state: " + before + " -> " + after);
             check(after.initiated() && after.energyUnits() == 6_000, "status kept and energy not refilled: " + after);
-            after.setEnergyUnits(1);
+            StatusFixtures.energy(after, 1);
             check(before.energyUnits() == 6_000, "the copy is independent");
         }
         helper.succeed();
@@ -101,8 +103,8 @@ public final class WitchLifecycleGameTests {
     public static void cooldownsAdvanceOnlyOnOnlineTicks(GameTestHelper helper) {
         ServerPlayer w = witch(helper, "lc_cooling", FEET);
         WitchState state = WitchCapability.of(w).orElseThrow().state();
-        state.setTeaCooldownTicks(50);
-        state.setRestfulTicks(30);
+        StatusFixtures.tea(state, 50);
+        StatusFixtures.restful(state, 30);
         for (int i = 0; i < 20; i++) {
             EnergyEvents.tick(w);
         }
