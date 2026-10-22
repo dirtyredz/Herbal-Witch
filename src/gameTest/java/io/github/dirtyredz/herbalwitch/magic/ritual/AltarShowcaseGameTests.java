@@ -48,13 +48,13 @@ public final class AltarShowcaseGameTests {
         ServerPlayer op = standing(helper, "op_altar", GameType.SURVIVAL);
         FoundingRecord.State before = FoundingService.data(helper.getLevel().getServer()).record().state();
         check(run(helper, as(op, 2), "herbalwitch showcase altar") > 0, "the altar section was not built");
-        // the section's content starts one row behind its heading: the origin stands at section (1, 1, 1)
-        BlockPos origin = helper.absolutePos(ORIGIN.offset(1, 1, 2));
+        // the section's content starts one row behind its heading: the origin stands at section (2, 1, 1)
+        BlockPos origin = helper.absolutePos(ORIGIN.offset(2, 1, 3));
         check(helper.getLevel().getBlockState(origin).getBlock() instanceof AltarBlock && AltarAccess.complete(helper.getLevel(), origin),
                 "no complete altar at " + origin + ": " + helper.getLevel().getBlockState(origin));
         check(!helper.getLevel().getBlockState(origin).getValue(AltarBlock.ACTIVE), "the showcase altar glows");
         check(!AltarSessionService.busy(helper.getLevel(), origin), "the showcase started a ritual");
-        if (helper.getLevel().getBlockEntity(helper.absolutePos(ORIGIN.offset(3, 1, 2))) instanceof Container barrel) {
+        if (helper.getLevel().getBlockEntity(helper.absolutePos(ORIGIN.offset(5, 1, 3))) instanceof Container barrel) {
             int stacks = 0;
             for (int i = 0; i < barrel.getContainerSize(); i++) {
                 stacks += barrel.getItem(i).isEmpty() ? 0 : 1;

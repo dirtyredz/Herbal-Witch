@@ -26,6 +26,7 @@ import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Block;
@@ -174,6 +175,10 @@ public final class ShowcaseContentGameTests {
         ServerPlayer op = standing(helper, name, GameType.CREATIVE);
         // the second GameTest batch reuses the first batch's plots: dropped items left there are entities the preflight refuses
         helper.getLevel().getEntitiesOfClass(ItemEntity.class, new AABB(
+                helper.absolutePos(BlockPos.ZERO), helper.absolutePos(new BlockPos(FULL_X, 10, FULL_Z))).inflate(1))
+                .forEach(Entity::discard);
+        // a plot this large collects wandering animals, which the preflight refuses as entities
+        helper.getLevel().getEntitiesOfClass(Mob.class, new AABB(
                 helper.absolutePos(BlockPos.ZERO), helper.absolutePos(new BlockPos(FULL_X, 10, FULL_Z))).inflate(1))
                 .forEach(Entity::discard);
         return op;
