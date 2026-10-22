@@ -28,6 +28,7 @@ import static io.github.dirtyredz.herbalwitch.fixture.MagicFixtures.energy;
 import static io.github.dirtyredz.herbalwitch.fixture.MagicFixtures.operate;
 import static io.github.dirtyredz.herbalwitch.fixture.MagicFixtures.practice;
 import static io.github.dirtyredz.herbalwitch.fixture.MagicFixtures.setEnergy;
+import static io.github.dirtyredz.herbalwitch.fixture.MagicFixtures.start;
 import static io.github.dirtyredz.herbalwitch.fixture.StationFixtures.inventory;
 import static io.github.dirtyredz.herbalwitch.fixture.StationFixtures.place;
 import static io.github.dirtyredz.herbalwitch.fixture.StationFixtures.tick;
@@ -86,7 +87,7 @@ public final class MagicalProcessGameTests {
         ServerPlayer w = witch(helper, "m7_grinder", NEAR);
         int before = energy(w);
         int practice = practice(w);
-        check(operate(helper, w, AT, Operation.START).equals("started"), "start refused");
+        start(helper, w, AT);
         check(inv.reserved(MortarBlockEntity.INPUT_0) == 0, "reserved before its first tick");
         tick(helper, AT, 1);
         check(inv.reserved(MortarBlockEntity.INPUT_0) == 1, "a started batch holds its inputs");
@@ -109,7 +110,7 @@ public final class MagicalProcessGameTests {
         ProcessInventory inv = mortar(helper);
         ServerPlayer payer = witch(helper, "m7_payer", NEAR);
         ServerPlayer other = witch(helper, "m7_rival", NEAR);
-        check(operate(helper, payer, AT, Operation.START).equals("started"), "start refused");
+        start(helper, payer, AT);
         tick(helper, AT, 10);
         int progress = job(helper).progress();
         io.github.dirtyredz.herbalwitch.fixture.GrimoireFixtures.moveTo(helper, payer, new BlockPos(4, 1, 40));
@@ -135,9 +136,10 @@ public final class MagicalProcessGameTests {
         ProcessInventory inv = mortar(helper);
         ServerPlayer w = witch(helper, "m7_tired", NEAR);
         setEnergy(w, EnergyService.units(4));
-        check(operate(helper, w, AT, Operation.START).equals("not_enough_energy"), "started without the energy");
+        String refused = operate(helper, w, AT, Operation.START);
+        check(refused.equals("not_enough_energy"), "started without the energy: " + refused);
         setEnergy(w, EnergyService.units(5));
-        check(operate(helper, w, AT, Operation.START).equals("started"), "start refused");
+        start(helper, w, AT);
         tick(helper, AT, 10);
         setEnergy(w, EnergyService.units(4));
         tick(helper, AT, DUST);

@@ -113,7 +113,8 @@ public final class CircleGameTests {
         blessingOffering(w);
         int before = energy(w);
         AltarMenu menu = open(helper, w);
-        check(GardenBlessingAction.begin(w, menu, Optional.of(helper.absolutePos(BED))).equals("garden_blessing.begun"), "did not begin");
+        String begun = GardenBlessingAction.begin(w, menu, Optional.of(helper.absolutePos(BED)));
+        check(begun.equals("garden_blessing.begun"), "did not begin: " + begun);
         AltarSession s = session(w);
         advance(s, WitchRules.server().workings().gardenBlessingTicks() - 1);
         check(s.running() && !enriched(helper, BED), "blessed early");
@@ -137,8 +138,8 @@ public final class CircleGameTests {
         ServerPlayer w = witch(helper, "m7_circle_clumsy", FRONT);
         blessingOffering(w);
         int before = energy(w);
-        check(GardenBlessingAction.begin(w, open(helper, w), Optional.of(helper.absolutePos(BED))).equals("garden_blessing.begun"),
-                "did not begin");
+        String begun = GardenBlessingAction.begin(w, open(helper, w), Optional.of(helper.absolutePos(BED)));
+        check(begun.equals("garden_blessing.begun"), "did not begin: " + begun);
         AltarSession s = session(w);
         advance(s, 10);
         helper.getLevel().setBlock(gap(helper), Blocks.AIR.defaultBlockState(), 2);
@@ -157,7 +158,8 @@ public final class CircleGameTests {
         ServerPlayer w = witch(helper, "m7_circle_warden", FRONT);
         carry(w, new ItemStack(PreparationItems.powder(HerbCatalog.SAGE)), new ItemStack(Items.AMETHYST_SHARD));
         int before = energy(w);
-        check(HomeProtectionAction.begin(w, open(helper, w), Optional.of(abs)).equals("home_protection.begun"), "did not begin");
+        String begun = HomeProtectionAction.begin(w, open(helper, w), Optional.of(abs));
+        check(begun.equals("home_protection.begun"), "did not begin: " + begun);
         AltarSession s = session(w);
         advance(s, WitchRules.server().workings().homeProtectionTicks());
         check(s.state() == AltarSession.State.COMPLETED, "did not complete: " + s.state());

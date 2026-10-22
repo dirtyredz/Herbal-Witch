@@ -28,7 +28,7 @@ import net.minecraft.core.Direction;
 import net.minecraftforge.gametest.GameTestHolder;
 import net.minecraftforge.gametest.PrefixGameTestTemplate;
 
-import static io.github.dirtyredz.herbalwitch.fixture.MagicFixtures.operate;
+import static io.github.dirtyredz.herbalwitch.fixture.MagicFixtures.start;
 import static io.github.dirtyredz.herbalwitch.fixture.StationFixtures.campfire;
 import static io.github.dirtyredz.herbalwitch.fixture.StationFixtures.inventory;
 import static io.github.dirtyredz.herbalwitch.fixture.StationFixtures.place;
@@ -65,7 +65,7 @@ public final class AdvancedStationGameTests {
         inv.setStackInSlot(CauldronBlockEntity.INPUT_1, new ItemStack(Items.CARROT));
         inv.setStackInSlot(CauldronBlockEntity.BASE, water());
         ServerPlayer w = witch(helper, "m7_brewer", NEAR);
-        check(operate(helper, w, AT, Operation.START).equals("started"), "start refused");
+        start(helper, w, AT);
         tick(helper, AT, 300);
         check(helper.getBlockState(AT).getValue(AdvancedStationBlock.ACTIVE), "a working cauldron shows it");
         tick(helper, AT, 300);
@@ -90,7 +90,7 @@ public final class AdvancedStationGameTests {
         inv.setStackInSlot(StillBlockEntity.BASE, water());
         inv.setStackInSlot(StillBlockEntity.PACKAGING, new ItemStack(Items.GLASS_BOTTLE));
         ServerPlayer w = witch(helper, "m7_distiller", NEAR);
-        check(operate(helper, w, AT, Operation.START).equals("started"), "start refused");
+        start(helper, w, AT);
         tick(helper, AT, 800);
         check(inv.getStackInSlot(StillBlockEntity.OUTPUT).is(AdvancedPreparations.item(AdvancedProductCatalog.MOON_ESSENCE)),
                 "made " + inv.getStackInSlot(StillBlockEntity.OUTPUT));
@@ -136,7 +136,7 @@ public final class AdvancedStationGameTests {
         inv.setStackInSlot(CharmWorkbenchBlockEntity.INPUT_1, new ItemStack(PreparationItems.powder(HerbCatalog.LAVENDER)));
         inv.setStackInSlot(CharmWorkbenchBlockEntity.INPUT_2, new ItemStack(Items.STRING, 2));
         ServerPlayer w = witch(helper, "m7_charmer", NEAR);
-        check(operate(helper, w, bench, Operation.START).equals("started"), "start refused");
+        start(helper, w, bench);
         tick(helper, bench, 200);
         check(inv.getStackInSlot(CharmWorkbenchBlockEntity.OUTPUT).is(CharmItems.item(CharmCatalog.PROTECTIVE_SACHET)),
                 "made " + inv.getStackInSlot(CharmWorkbenchBlockEntity.OUTPUT));

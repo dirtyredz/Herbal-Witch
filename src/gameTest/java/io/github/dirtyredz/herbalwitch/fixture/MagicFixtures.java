@@ -26,11 +26,24 @@ public final class MagicFixtures {
     private MagicFixtures() {
     }
 
-    /** Presses a station operation as {@code player}; returns the outcome suffix. */
+    /**
+     * Presses a station operation as {@code player}; returns the outcome suffix. A station matches its
+     * recipe on its tick and a menu click always follows at least one, so a station that has not ticked
+     * since its contents were set ticks once first.
+     */
     public static String operate(GameTestHelper helper, ServerPlayer player, BlockPos station, StationOperations.Operation op) {
         ProcessStationEntity entity = (ProcessStationEntity) helper.getBlockEntity(station);
+        if (entity.station().job().recipe() == null) {
+            StationFixtures.tick(helper, station, 1);
+        }
         return StationOperations.operate(player, op, entity.station(), entity.magic(),
                 new ProcessExecutionPolicy.Site(helper.getLevel(), helper.absolutePos(station)));
+    }
+
+    /** Starts one batch as {@code player}, failing the test with the refusal otherwise. */
+    public static void start(GameTestHelper helper, ServerPlayer player, BlockPos station) {
+        String outcome = operate(helper, player, station, StationOperations.Operation.START);
+        WorldFixtures.check(outcome.equals("started"), "start refused: " + outcome);
     }
 
     public static int energy(ServerPlayer player) {

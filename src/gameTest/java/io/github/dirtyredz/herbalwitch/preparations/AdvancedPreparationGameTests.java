@@ -69,13 +69,13 @@ public final class AdvancedPreparationGameTests {
         ItemStack left = draught.getItem().finishUsingItem(draught, helper.getLevel(), drinker);
         check(drinker.hasEffect(MobEffects.NIGHT_VISION), "no night vision");
         check(left.is(Items.GLASS_BOTTLE), "the bottle did not come back: " + left);
-        ItemStack healing = new ItemStack(AdvancedPreparations.item(AdvancedProductCatalog.HEALING));
-        check(healing.getItem().finishUsingItem(healing, helper.getLevel(), drinker).is(healing.getItem()),
-                "healing was drunk at full health");
+        net.minecraft.world.item.Item healingItem = AdvancedPreparations.item(AdvancedProductCatalog.HEALING);
+        ItemStack healing = new ItemStack(healingItem);
+        check(healingItem.finishUsingItem(healing, helper.getLevel(), drinker).is(healingItem), "healing was drunk at full health");
         drinker.setHealth(10.0F);
-        healing.getItem().finishUsingItem(healing, helper.getLevel(), drinker);
+        healingItem.finishUsingItem(healing, helper.getLevel(), drinker);
         check(drinker.getHealth() == 16.0F, "healing restored to " + drinker.getHealth());
-        check(drinker.getCooldowns().isOnCooldown(healing.getItem()), "healing has no cooldown");
+        check(drinker.getCooldowns().isOnCooldown(healingItem), "healing has no cooldown");
         helper.succeed();
     }
 
