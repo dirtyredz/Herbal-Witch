@@ -2,7 +2,7 @@ package io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.ContainerReturns;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.advanced.FamiliarPreparationApplications;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.FamiliarPreparationApplications;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.ProductSpec;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.metadata.PreparationMetadata;
 import net.minecraft.ChatFormatting;

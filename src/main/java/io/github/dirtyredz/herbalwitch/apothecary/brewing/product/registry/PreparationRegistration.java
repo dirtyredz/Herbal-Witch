@@ -1,17 +1,9 @@
 package io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry;
 
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.EffectRegistration;
+
 import com.mojang.serialization.Codec;
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.PestRepellentEvents;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.combat.CombatEvents;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.control.ControlEvents;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.repellent.TargetFilters;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.projectile.ProjectileLimits;
-import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
-import io.github.dirtyredz.herbalwitch.platform.permission.entity.EntityActionPermission;
-import io.github.dirtyredz.herbalwitch.platform.permission.entity.HarmAttribution;
-import net.minecraftforge.event.server.ServerStoppedEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.EverydayProductCatalog;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item.HerbalDrinkItem;
 import net.minecraft.server.level.ServerPlayer;
@@ -47,30 +39,11 @@ public final class PreparationRegistration {
         PreparationEffects.EFFECTS.register(modBus);
         BrewingEntities.TYPES.register(modBus);
         LOOT_MODIFIERS.register(modBus);
-        MinecraftForge.EVENT_BUS.addListener(PestRepellentEvents::onChangeTarget);
-        registerAdvanced();
+        EffectRegistration.register();
         MinecraftForge.EVENT_BUS.addListener((PlayerEvent.PlayerLoggedInEvent event) -> syncTeaCooldown(event.getEntity()));
         MinecraftForge.EVENT_BUS.addListener((PlayerEvent.PlayerRespawnEvent event) -> syncTeaCooldown(event.getEntity()));
         ShowcaseRegistry.register(new PreparationShowcaseSection());
         ShowcaseRegistry.register(new AdvancedPreparationShowcaseSection());
-    }
-
-    /**
-     * Milestone 7: the acquisition filters, hard-control and combat events, delayed-harm rechecks and
-     * projectile bookkeeping; the entity permission boundary reads the configured preparation PvP.
-     */
-    private static void registerAdvanced() {
-        IEventBus forge = MinecraftForge.EVENT_BUS;
-        forge.addListener(TargetFilters::onChangeTarget);
-        forge.addListener(ControlEvents::onAttack);
-        forge.addListener(EventPriority.LOWEST, ControlEvents::onDamage);
-        forge.addListener(ControlEvents::onExpired);
-        forge.addListener(ControlEvents::onRemoved);
-        forge.addListener(ControlEvents::onLivingTick);
-        forge.addListener(EventPriority.LOWEST, CombatEvents::onDamage);
-        forge.addListener(HarmAttribution::onHurt);
-        forge.addListener((ServerStoppedEvent event) -> ProjectileLimits.clear());
-        EntityActionPermission.pvpSetting(() -> WitchRules.server().workings().preparationPvp());
     }
 
     /** The saved energy-tea cooldown outlives the vanilla item cooldown: show it again on a new player object. */

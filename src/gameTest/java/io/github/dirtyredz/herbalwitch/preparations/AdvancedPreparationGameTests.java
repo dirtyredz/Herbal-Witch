@@ -1,10 +1,10 @@
 package io.github.dirtyredz.herbalwitch.preparations;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.advanced.FamiliarPreparationApplications;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.advanced.OilApplications;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.advanced.ThrowableApplications;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.advanced.ThrowableApplications.Burst;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.FamiliarPreparationApplications;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.OilApplication;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.ThrowableApplications;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.ThrowableApplications.Burst;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.combat.CombatEvents;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.combat.WeaponCoating;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.control.ControlEffects;
@@ -84,7 +84,7 @@ public final class AdvancedPreparationGameTests {
         floor(helper);
         ServerPlayer hunter = standing(helper, "m7_hunter", FEET);
         hunter.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(Items.IRON_SWORD));
-        check(OilApplications.apply(hunter, OilApplications.Oil.VENOM), "the blade was not coated");
+        check(OilApplication.apply(hunter, OilApplication.Oil.VENOM), "the blade was not coated");
         ItemStack blade = hunter.getOffhandItem();
         hunter.setItemInHand(InteractionHand.OFF_HAND, ItemStack.EMPTY);
         hunter.setItemInHand(InteractionHand.MAIN_HAND, blade);
@@ -95,7 +95,7 @@ public final class AdvancedPreparationGameTests {
         check(WeaponCoating.read(blade, now).map(c -> c.hits() == WeaponCoating.HITS - 1).orElse(false), "a hit was not spent");
         ItemStack bare = new ItemStack(Items.STICK);
         hunter.setItemInHand(InteractionHand.OFF_HAND, bare);
-        check(!OilApplications.apply(hunter, OilApplications.Oil.VENOM), "a stick took a coating");
+        check(!OilApplication.apply(hunter, OilApplication.Oil.VENOM), "a stick took a coating");
         helper.succeed();
     }
 
@@ -146,7 +146,7 @@ public final class AdvancedPreparationGameTests {
         Zombie z = zombie(helper, new BlockPos(4, 1, 5));
         z.setTarget(wearer);
         check(z.getTarget() == wearer, "the zombie could not choose the wearer beforehand");
-        check(OilApplications.apply(wearer, OilApplications.Oil.UNDEAD_REPELLENT), "the repellent was not applied");
+        check(OilApplication.apply(wearer, OilApplication.Oil.UNDEAD_REPELLENT), "the repellent was not applied");
         check(z.getTarget() == null, "applying did not clear the existing target");
         z.setTarget(wearer);
         check(z.getTarget() == null, "the undead chose a wearer of their repellent");

@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item;
 
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.metadata.PreparationMetadata;
+
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.ContainerReturns;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.DrinkApplication;
 import io.github.dirtyredz.herbalwitch.magic.witch.energy.DrinkRecovery;
@@ -33,10 +35,17 @@ public class HerbalDrinkItem extends Item {
     public static final int USE_TICKS = 32;
 
     private final DrinkApplication.Drink drink;
+    private final boolean labels;
 
     public HerbalDrinkItem(Properties properties, DrinkApplication.Drink drink) {
+        this(properties, drink, false);
+    }
+
+    /** Advanced preparations show their bottling label; everyday drinks retain their original tooltip. */
+    public HerbalDrinkItem(Properties properties, DrinkApplication.Drink drink, boolean labels) {
         super(properties);
         this.drink = drink;
+        this.labels = labels;
     }
 
     public DrinkApplication.Drink drink() {
@@ -66,7 +75,7 @@ public class HerbalDrinkItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        if (!level.isClientSide && coolingDown(player)) {
+        if (!DrinkApplication.usable(player, drink) || !level.isClientSide && coolingDown(player)) {
             return InteractionResultHolder.fail(player.getItemInHand(hand));
         }
         return ItemUtils.startUsingInstantly(level, player, hand);
@@ -74,6 +83,9 @@ public class HerbalDrinkItem extends Item {
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
+        if (!DrinkApplication.usable(user, drink)) {
+            return stack;
+        }
         if (!level.isClientSide) {
             if (coolingDown(user)) {
                 return stack;
@@ -84,6 +96,8 @@ public class HerbalDrinkItem extends Item {
                 player.awardStat(Stats.ITEM_USED.get(this));
                 if (drink == DrinkApplication.Drink.ENERGY) {
                     player.getCooldowns().addCooldown(this, DrinkRecovery.teaCooldownLength());
+                } else if (drink == DrinkApplication.Drink.HEALING) {
+                    player.getCooldowns().addCooldown(this, DrinkApplication.HEALING_COOLDOWN);
                 }
             }
         }
@@ -103,5 +117,6 @@ public class HerbalDrinkItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, Level level, List<Component> lines, TooltipFlag flag) {
         ProductTooltips.append(this, lines);
+        if (labels) PreparationMetadata.appendLabel(stack, lines);
     }
 }

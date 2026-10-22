@@ -1,4 +1,4 @@
-package io.github.dirtyredz.herbalwitch.apothecary.brewing.application.advanced;
+package io.github.dirtyredz.herbalwitch.apothecary.brewing.application;
 
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.ProductSpec;
 import net.minecraft.server.level.ServerPlayer;

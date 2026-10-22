@@ -1,6 +1,7 @@
-package io.github.dirtyredz.herbalwitch.apothecary.brewing.application.advanced;
+package io.github.dirtyredz.herbalwitch.apothecary.brewing.application;
 
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.DrinkApplication;
+import io.github.dirtyredz.herbalwitch.platform.time.TickTime;
+
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.control.ControlEffects;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.repellent.TargetFilters;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationEffects;
@@ -21,7 +22,7 @@ import net.minecraft.world.entity.player.Player;
  * binding and sleep follow the hard-control rules. A delayed poison on a player records who threw it.
  */
 public final class ThrowableApplications {
-    public static final int SECOND = DrinkApplication.SECOND;
+    public static final int SECOND = TickTime.SECOND;
 
     /** The thrown preparations. */
     public enum Burst {

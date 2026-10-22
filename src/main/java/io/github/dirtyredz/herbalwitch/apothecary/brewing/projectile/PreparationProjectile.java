@@ -1,6 +1,6 @@
 package io.github.dirtyredz.herbalwitch.apothecary.brewing.projectile;
 
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.advanced.ThrowableApplications.Burst;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.ThrowableApplications.Burst;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.AdvancedProductCatalog;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item.ThrowablePreparationItem;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.AdvancedPreparations;

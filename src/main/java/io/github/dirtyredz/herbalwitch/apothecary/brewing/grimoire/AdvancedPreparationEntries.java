@@ -5,8 +5,7 @@ import io.github.dirtyredz.herbalwitch.grimoire.catalog.WitchcraftKeys;
 import io.github.dirtyredz.herbalwitch.platform.time.TickTime;
 
 
-import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.advanced.DrinkApplications;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.DrinkApplication;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.control.ControlEffects;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.repellent.TargetFilters;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.AdvancedProductCatalog;
@@ -50,7 +49,7 @@ public final class AdvancedPreparationEntries implements GrimoireContentSource {
                         Component.translatable(PREFIX + "brewing.bottling", MixtureCatalog.DOSES));
                 case "preparations" -> List.of(
                         Component.translatable(PREFIX + "preparations.0"),
-                        Component.translatable(PREFIX + "preparations.drinks", TickTime.ceilingSeconds(DrinkApplications.HEALING_COOLDOWN)),
+                        Component.translatable(PREFIX + "preparations.drinks", TickTime.ceilingSeconds(DrinkApplication.HEALING_COOLDOWN)),
                         Component.translatable(PREFIX + "preparations.throwing", (int) PreparationImpact.RADIUS,
                                 TickTime.ceilingSeconds(ThrowablePreparationItem.COOLDOWN)),
                         Component.translatable(PREFIX + "preparations.control", TickTime.ceilingSeconds(ControlEffects.IMMUNITY_TICKS)),

@@ -9,6 +9,12 @@ scans loaded cells for a functional hearth or stove (unlit blocks count). `WardS
 loaded index and bounded ticks/sweeps; `WardLifecycle` alone reconciles stones with saved records.
 Unloaded wards neither protect nor consume charge, and loading never catches up elapsed time.
 
+Preparations use one `DrinkApplication` and one `OilApplication`, with shared lazy `TimedEffect`
+facts. Tea, restful infusion, healing, coating and target clearing remain explicit operations.
+`HerbalDrinkItem`/`HerbalOilItem` own the use boundaries and container returns; construction data
+retains the former advanced preparations' label presentation. `EffectRegistration` installs the
+existing effect listeners in their original order and priorities.
+
 ## Current system (0.6.0: Milestones 1-7 plus the art pass; furniture is Milestone 5, initiation and energy Milestone 6, advanced brewing, charms, circle and wards Milestone 7)
 
 Everything below is server-authoritative; clients get vanilla block updates, menu slots and menu data.
@@ -198,7 +204,7 @@ server side, through the permission boundary for garden actions; failures consum
 - *Advanced preparations (Milestone 7).* `AdvancedProductCatalog` holds 16 (four drinks, six thrown vials,
   four oils, blinding dust, the moon essence ingredient), `FamiliarPreparationCatalog` ten familiar
   preparations (they refuse with "available with familiar bonding" until M9 installs
-  `application/advanced/FamiliarPreparationApplications`) and `MixtureCatalog` 17 four-dose mixtures that
+  `application/FamiliarPreparationApplications`) and `MixtureCatalog` 17 four-dose mixtures that
   the bottling bench portions into four bottles (gunpowder and paper variants give labelled vials, a flag
   in the item NBT). Effects are `MobEffect`s with ids `brewing/effects/<x>` (binding, sleep, steadfast,
   concealment, dazzled, thorns, undead and arthropod repellent), so persistence is vanilla's; steadfast

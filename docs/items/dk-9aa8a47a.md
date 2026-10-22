@@ -18,3 +18,7 @@ HW review round 1.
 
 - PreparationRegistration.registerAdvanced():62 registers 9 effect listeners, clears projectile limits, installs PvP into EntityActionPermission. Direction: brewing/effect/EffectRegistration.
 - AdvancedPreparations.java:55 maps 16 products by string switch on spec.id(); throwables() re-derives delivery kind. Direction: delivery kind on ProductSpec/catalogue; registry loop dispatches on it.
+
+## Implementation outcome (2026-10-22)
+
+Included portion complete: effect/EffectRegistration now installs preparation effect listeners in their original order/priorities, with projectile cleanup and PvP binding. Verified in the full offline fast gate with unchanged resources. Remaining P2 scope is deferred as specified: replace AdvancedPreparations string-id dispatch through product/catalogue delivery data and stop re-deriving throwable delivery kinds. Item remains open for that work.

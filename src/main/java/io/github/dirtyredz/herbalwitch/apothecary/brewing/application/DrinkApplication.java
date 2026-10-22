@@ -1,5 +1,9 @@
 package io.github.dirtyredz.herbalwitch.apothecary.brewing.application;
 
+import io.github.dirtyredz.herbalwitch.platform.time.TickTime;
+
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.TimedEffect;
+
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationEffects;
 import io.github.dirtyredz.herbalwitch.magic.witch.energy.DrinkRecovery;
 import net.minecraft.server.level.ServerPlayer;
@@ -18,30 +22,35 @@ import java.util.function.Supplier;
  * (phantoms), forces no sleep, and prepares a witch's next rewarded sleep.
  */
 public final class DrinkApplication {
-    public static final int SECOND = 20;
+    public static final float HEALING = 6.0F;
+    public static final int HEALING_COOLDOWN = 10 * TickTime.SECOND;
 
-    /** The seven kettle drinks. */
+    /** Kettle drinks and utility draughts. No enum ordinal is persisted. */
     public enum Drink {
-        RECOVERY(() -> MobEffects.REGENERATION, 90 * SECOND, 0),
+        RECOVERY(() -> MobEffects.REGENERATION, 90 * TickTime.SECOND, 0),
         ENERGY(null, 0, 0),
         RESTFUL(null, 0, 0),
-        WARMTH(() -> PreparationEffects.WARMTH.get(), 90 * SECOND, 0),
-        COOLING(() -> MobEffects.FIRE_RESISTANCE, 60 * SECOND, 0),
-        MINING(() -> MobEffects.DIG_SPEED, 90 * SECOND, 0),
-        TRAVEL(() -> MobEffects.MOVEMENT_SPEED, 90 * SECOND, 0);
+        WARMTH(() -> PreparationEffects.WARMTH.get(), 90 * TickTime.SECOND, 0),
+        COOLING(() -> MobEffects.FIRE_RESISTANCE, 60 * TickTime.SECOND, 0),
+        MINING(() -> MobEffects.DIG_SPEED, 90 * TickTime.SECOND, 0),
+        TRAVEL(() -> MobEffects.MOVEMENT_SPEED, 90 * TickTime.SECOND, 0),
+        NIGHT_VISION(() -> MobEffects.NIGHT_VISION, 120 * TickTime.SECOND, 0),
+        WATER_BREATHING(() -> MobEffects.WATER_BREATHING, 120 * TickTime.SECOND, 0),
+        RESISTANCE(() -> MobEffects.DAMAGE_RESISTANCE, 90 * TickTime.SECOND, 0),
+        HEALING(null, 0, 0);
 
-        private final Supplier<MobEffect> effect;
-        private final int duration;
-        private final int amplifier;
+        private final TimedEffect effect;
 
         Drink(Supplier<MobEffect> effect, int duration, int amplifier) {
-            this.effect = effect;
-            this.duration = duration;
-            this.amplifier = amplifier;
+            this.effect = effect == null ? null : new TimedEffect(effect, duration, amplifier);
+        }
+
+        public int duration() {
+            return effect == null ? 0 : effect.duration();
         }
 
         public MobEffectInstance effectInstance() {
-            return effect == null ? null : new MobEffectInstance(effect.get(), duration, amplifier);
+            return effect == null ? null : effect.instance();
         }
     }
 
@@ -52,7 +61,18 @@ public final class DrinkApplication {
     private DrinkApplication() {
     }
 
-    public static void apply(LivingEntity drinker, Drink drink) {
+    /** Healing needs a hurt drinker; checked at both use boundaries. */
+    public static boolean usable(LivingEntity drinker, Drink drink) {
+        return drink != Drink.HEALING || drinker.getHealth() < drinker.getMaxHealth();
+    }
+
+    public static boolean apply(LivingEntity drinker, Drink drink) {
+        if (!usable(drinker, drink)) {
+            return false;
+        }
+        if (drink == Drink.HEALING) {
+            drinker.heal(HEALING);
+        }
         MobEffectInstance effect = drink.effectInstance();
         if (effect != null) {
             drinker.addEffect(effect);
@@ -71,5 +91,6 @@ public final class DrinkApplication {
                 }
             }
         }
+        return true;
     }
 }

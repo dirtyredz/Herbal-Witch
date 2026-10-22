@@ -1,7 +1,7 @@
 package io.github.dirtyredz.herbalwitch.apothecary.brewing.projectile;
 
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.advanced.ThrowableApplications;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.advanced.ThrowableApplications.Burst;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.ThrowableApplications;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.ThrowableApplications.Burst;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;

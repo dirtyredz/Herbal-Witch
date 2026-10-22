@@ -1,15 +1,15 @@
 package io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.advanced.DrinkApplications.Draught;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.advanced.OilApplications.Oil;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.advanced.ThrowableApplications.Burst;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.DrinkApplication.Drink;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.OilApplication.Oil;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.ThrowableApplications.Burst;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.AdvancedProductCatalog;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.FamiliarPreparationCatalog;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.MixtureCatalog;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.ProductSpec;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item.AdvancedDrinkItem;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item.AdvancedOilItem;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item.HerbalDrinkItem;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item.HerbalOilItem;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item.FamiliarPreparationItem;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item.PreparedMixtureItem;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item.ThrowablePreparationItem;
@@ -54,10 +54,10 @@ public final class AdvancedPreparations {
 
     private static Supplier<Item> factory(ProductSpec spec) {
         return switch (spec.id()) {
-            case "night_vision" -> () -> new AdvancedDrinkItem(props(), Draught.NIGHT_VISION);
-            case "water_breathing" -> () -> new AdvancedDrinkItem(props(), Draught.WATER_BREATHING);
-            case "resistance" -> () -> new AdvancedDrinkItem(props(), Draught.RESISTANCE);
-            case "healing" -> () -> new AdvancedDrinkItem(props(), Draught.HEALING);
+            case "night_vision" -> () -> new HerbalDrinkItem(props(), Drink.NIGHT_VISION, true);
+            case "water_breathing" -> () -> new HerbalDrinkItem(props(), Drink.WATER_BREATHING, true);
+            case "resistance" -> () -> new HerbalDrinkItem(props(), Drink.RESISTANCE, true);
+            case "healing" -> () -> new HerbalDrinkItem(props(), Drink.HEALING, true);
             case "poison" -> throwable(Burst.POISON);
             case "concealment" -> throwable(Burst.CONCEALMENT);
             case "slowing" -> throwable(Burst.SLOWING);
@@ -65,10 +65,10 @@ public final class AdvancedPreparations {
             case "weakening" -> throwable(Burst.WEAKENING);
             case "sleep" -> throwable(Burst.SLEEP);
             case "blinding" -> throwable(Burst.BLINDING);
-            case "venom" -> () -> new AdvancedOilItem(props(), Oil.VENOM);
-            case "thorn" -> () -> new AdvancedOilItem(props(), Oil.THORN);
-            case "undead_repellent" -> () -> new AdvancedOilItem(props(), Oil.UNDEAD_REPELLENT);
-            case "arthropod_repellent" -> () -> new AdvancedOilItem(props(), Oil.ARTHROPOD_REPELLENT);
+            case "venom" -> () -> new HerbalOilItem(props(), Oil.VENOM, true);
+            case "thorn" -> () -> new HerbalOilItem(props(), Oil.THORN, true);
+            case "undead_repellent" -> () -> new HerbalOilItem(props(), Oil.UNDEAD_REPELLENT, true);
+            case "arthropod_repellent" -> () -> new HerbalOilItem(props(), Oil.ARTHROPOD_REPELLENT, true);
             case "moon" -> () -> new Item(props());
             default -> throw new IllegalStateException("no item behaviour for advanced product " + spec.id());
         };

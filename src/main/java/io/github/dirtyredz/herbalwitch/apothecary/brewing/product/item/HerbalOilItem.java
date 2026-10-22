@@ -1,5 +1,9 @@
 package io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item;
 
+import io.github.dirtyredz.herbalwitch.HerbalWitch;
+
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.metadata.PreparationMetadata;
+
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.ContainerReturns;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.OilApplication;
 import net.minecraft.network.chat.Component;
@@ -22,11 +26,19 @@ import java.util.List;
  * comes back; lantern oil is only poured into an oil lantern (the lantern handles that use).
  */
 public class HerbalOilItem extends Item {
+    public static final String NO_WEAPON = "item." + HerbalWitch.MOD_ID + ".preparations.oil.no_weapon";
+
     private final OilApplication.Oil oil;
+    private final boolean labels;
 
     public HerbalOilItem(Properties properties, OilApplication.Oil oil) {
+        this(properties, oil, false);
+    }
+
+    public HerbalOilItem(Properties properties, OilApplication.Oil oil, boolean labels) {
         super(properties);
         this.oil = oil;
+        this.labels = labels;
     }
 
     public OilApplication.Oil oil() {
@@ -38,12 +50,18 @@ public class HerbalOilItem extends Item {
         if (oil == OilApplication.Oil.LANTERN) {
             return InteractionResultHolder.pass(player.getItemInHand(hand));
         }
+        if (hand != InteractionHand.MAIN_HAND && oil == OilApplication.Oil.VENOM || !OilApplication.usable(player, oil)) {
+            if (!level.isClientSide) {
+                player.displayClientMessage(Component.translatable(NO_WEAPON), true);
+            }
+            return InteractionResultHolder.fail(player.getItemInHand(hand));
+        }
         return ItemUtils.startUsingInstantly(level, player, hand);
     }
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
-        if (!(user instanceof Player player) || oil == OilApplication.Oil.LANTERN) {
+        if (!(user instanceof Player player) || oil == OilApplication.Oil.LANTERN || !OilApplication.usable(player, oil)) {
             return stack;
         }
         if (!level.isClientSide) {
@@ -65,5 +83,6 @@ public class HerbalOilItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, Level level, List<Component> lines, TooltipFlag flag) {
         ProductTooltips.append(this, lines);
+        if (labels) PreparationMetadata.appendLabel(stack, lines);
     }
 }

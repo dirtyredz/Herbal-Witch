@@ -1,7 +1,7 @@
 package io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.advanced.ThrowableApplications.Burst;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.ThrowableApplications.Burst;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.metadata.PreparationMetadata;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.projectile.PreparationProjectile;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.projectile.ProjectileLimits;

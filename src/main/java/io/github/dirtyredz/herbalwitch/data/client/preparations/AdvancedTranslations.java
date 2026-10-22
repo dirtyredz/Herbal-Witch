@@ -1,7 +1,7 @@
 package io.github.dirtyredz.herbalwitch.data.client.preparations;
 
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.ProductSpec;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item.AdvancedOilItem;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item.HerbalOilItem;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item.FamiliarPreparationItem;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item.ProductTooltips;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item.ThrowablePreparationItem;
@@ -35,7 +35,7 @@ public final class AdvancedTranslations {
                 "dazzled", "Dazzled", "thorns", "Thorns", "undead_repellent", "Undead Repellent", "arthropod_repellent", "Arthropod Repellent");
         PreparationEffects.advanced().forEach(e -> lang.add(e.get(), effects.get(e.getId().getPath().substring("brewing/effects/".length()))));
         lang.add(PreparationMetadata.LABEL_KEY, "Labelled: %s");
-        lang.add(AdvancedOilItem.NO_WEAPON, "Hold a sword or axe in your off hand to coat it.");
+        lang.add(HerbalOilItem.NO_WEAPON, "Hold a sword or axe in your off hand to coat it.");
         lang.add(ThrowablePreparationItem.LIMIT, "Too many of your preparations are in flight.");
         lang.add(FamiliarPreparationItem.UNAVAILABLE, "Familiar application becomes available with familiar bonding");
         lang.add(AdvancedPreparationShowcaseSection.TITLE, "Witch's Preparations");
