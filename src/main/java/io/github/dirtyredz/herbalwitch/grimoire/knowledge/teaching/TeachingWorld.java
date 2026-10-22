@@ -4,7 +4,7 @@ import io.github.dirtyredz.herbalwitch.grimoire.access.menu.GrimoireMenu;
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.content.ServerGrimoireContent;
 import io.github.dirtyredz.herbalwitch.grimoire.knowledge.discovery.DiscoveryService;
-import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipe;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipe;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 

@@ -19,35 +19,36 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `src/main/java/io/github/dirtyredz/herbalwitch/client/decor/` — decor client wiring; `placement/` (the preview), `storage/` (the storage screen, the display renderer)
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/client/decor/state/` — blockstate mapping per behaviour (furniture, assemblies, lights, beds, doors)
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/server/decor/recipes/` — the family recipe contributions
-- `src/main/java/io/github/dirtyredz/herbalwitch/botany/catalog/` — plain herb descriptors: the 14 herbs, habitats (groups), traits
-- `src/main/java/io/github/dirtyredz/herbalwitch/botany/registry/` — herb plants, seeds, fresh herbs, herb bed, tags, gardening tab, bootstrap
-- `src/main/java/io/github/dirtyredz/herbalwitch/botany/crop/` — herb plant blocks, seed/fresh items, growth rules, harvest by hand, tooltips
-- `src/main/java/io/github/dirtyredz/herbalwitch/botany/garden/` — the herb bed, its farmland-style moisture and its joining to neighbouring beds
-- `src/main/java/io/github/dirtyredz/herbalwitch/botany/conditions/` — reloadable discovery/yield conditions: model, reload listener, live evaluator
-- `src/main/java/io/github/dirtyredz/herbalwitch/botany/foraging/` — additive grass foraging (global loot modifier) and its eligibility
-- `src/main/java/io/github/dirtyredz/herbalwitch/botany/worldgen/` — herb patch feature keys and bootstraps, biome modifiers
-- `src/main/java/io/github/dirtyredz/herbalwitch/botany/showcase/` — the herb and garden showcase sections
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/` — grouping parent only: botany, brewing and stations; no implementation in the parent
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/botany/catalog/` — plain herb descriptors: the 14 herbs, habitats (groups), traits
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/botany/registry/` — herb plants, seeds, fresh herbs, herb bed, tags, gardening tab, bootstrap
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/botany/crop/` — herb plant blocks, seed/fresh items, growth rules, harvest by hand, tooltips
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/botany/garden/` — the herb bed, its farmland-style moisture and its joining to neighbouring beds
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/botany/conditions/` — reloadable discovery/yield conditions: model, reload listener, live evaluator
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/botany/foraging/` — additive grass foraging (global loot modifier) and its eligibility
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/botany/worldgen/` — herb patch feature keys and bootstraps, biome modifiers
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/botany/showcase/` — the herb and garden showcase sections
 - `src/main/java/io/github/dirtyredz/herbalwitch/platform/permission/` — the shared authorization boundary for custom world changes; `entity/` (harmful entity actions, claim-mod adapters, harm attribution, the ward protection check)
 - `src/main/java/io/github/dirtyredz/herbalwitch/platform/geometry/` — shape rotation shared by furniture and stations
 - `src/main/java/io/github/dirtyredz/herbalwitch/platform/multiblock/` — multiblock cell layout and lifecycle (placement, removal, shared state) used by the rack, hearth and stove
 - `src/main/java/io/github/dirtyredz/herbalwitch/platform/compat/` — optional server adapters, loaded only when their mod is present (`thirst/`; `curios/` the compile-only Curios charm-slot adapter)
-- `src/main/java/io/github/dirtyredz/herbalwitch/stations/catalog/` — the ten station identities (six everyday, four advanced)
-- `src/main/java/io/github/dirtyredz/herbalwitch/stations/registry/` — station blocks, items, block entities, menus, recipe types, the apothecary tab, bootstrap and showcase registration
-- `src/main/java/io/github/dirtyredz/herbalwitch/stations/process/` — shared processing by composition: inventory with in-slot reservations, job (schema 2), completion arithmetic, status
-- `src/main/java/io/github/dirtyredz/herbalwitch/stations/process/recipe/` — the recipe type, its JSON and wire format, the reload-aware index and the requirements (witch flag, energy)
-- `src/main/java/io/github/dirtyredz/herbalwitch/stations/process/matching/` — recipe matching against an inventory
-- `src/main/java/io/github/dirtyredz/herbalwitch/stations/process/execution/` — the reservation and completion commit, and the ordinary/magical/either execution policy
-- `src/main/java/io/github/dirtyredz/herbalwitch/stations/process/authorization/` — who may start, resume and cancel a witch recipe: the operator, the magical policy (range 8) and the rate-limited operations
-- `src/main/java/io/github/dirtyredz/herbalwitch/stations/block/` — `StationBlock`, `StationEntity` and `ProcessStationEntity`: block behaviour shared by stations (facing, support, menu, ticker, drops; the process-station base)
-- `src/main/java/io/github/dirtyredz/herbalwitch/stations/menu/` — `StationMenu`: menu behaviour shared by stations (slots, quick-move that respects reservations)
-- `src/main/java/io/github/dirtyredz/herbalwitch/stations/heat/` — heat sources and conductors
-- `src/main/java/io/github/dirtyredz/herbalwitch/stations/showcase/` — the parameterised station showcase section
-- `src/main/java/io/github/dirtyredz/herbalwitch/stations/everyday/` — the everyday stations, one package each (`drying_rack`, `mortar`, `kettle`, `hearth`, `stove`, `infusion_pot`; `block/`, `menu/`, `recipe/`)
-- `src/main/java/io/github/dirtyredz/herbalwitch/stations/advanced/` — the four advanced stations (Milestone 7): the shared `AdvancedStationBlock` and `AdvancedStationEntity`, then one package each (`cauldron`, `still`, `bottling_bench`, `charm_workbench`; `block/`, `menu/`, `recipe/`)
-- `src/main/java/io/github/dirtyredz/herbalwitch/brewing/product/` — preparations: `catalog/`, `registry/`, `item/`, `block/` (hung bundles), `lighting/` (oil lantern), `metadata/` (water-to-drink data), `foraging/` (resin), `showcase/`; Milestone 7 adds the advanced, familiar and mixture catalogues with their items and registries
-- `src/main/java/io/github/dirtyredz/herbalwitch/brewing/application/` — what products do when used, once, server side; `advanced/` (drinks, oils, thrown preparations, the install point for familiar preparations)
-- `src/main/java/io/github/dirtyredz/herbalwitch/brewing/effect/` — the warmth and pest-repellent effects and the plain mob effect; `combat/` (weapon coating), `control/` (binding, sleep, steadfast, concealment, dazzled), `repellent/` (target profiles and filters)
-- `src/main/java/io/github/dirtyredz/herbalwitch/brewing/projectile/` — thrown preparations: the projectile entity, its impact and the in-flight limits
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/catalog/` — the ten station identities (six everyday, four advanced)
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/registry/` — station blocks, items, block entities, menus, recipe types, the apothecary tab, bootstrap and showcase registration
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/process/` — shared processing by composition: inventory with in-slot reservations, job (schema 2), completion arithmetic, status
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/process/recipe/` — the recipe type, its JSON and wire format, the reload-aware index and the requirements (witch flag, energy)
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/process/matching/` — recipe matching against an inventory
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/process/execution/` — the reservation and completion commit, and the ordinary/magical/either execution policy
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/process/authorization/` — who may start, resume and cancel a witch recipe: the operator, the magical policy (range 8) and the rate-limited operations
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/block/` — `StationBlock`, `StationEntity` and `ProcessStationEntity`: block behaviour shared by stations (facing, support, menu, ticker, drops; the process-station base)
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/menu/` — `StationMenu`: menu behaviour shared by stations (slots, quick-move that respects reservations)
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/heat/` — heat sources and conductors
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/showcase/` — the parameterised station showcase section
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/everyday/` — the everyday stations, one package each (`drying_rack`, `mortar`, `kettle`, `hearth`, `stove`, `infusion_pot`; `block/`, `menu/`, `recipe/`)
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/advanced/` — the four advanced stations (Milestone 7): the shared `AdvancedStationBlock` and `AdvancedStationEntity`, then one package each (`cauldron`, `still`, `bottling_bench`, `charm_workbench`; `block/`, `menu/`, `recipe/`)
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/brewing/product/` — preparations: `catalog/`, `registry/`, `item/`, `block/` (hung bundles), `lighting/` (oil lantern), `metadata/` (water-to-drink data), `foraging/` (resin), `showcase/`; Milestone 7 adds the advanced, familiar and mixture catalogues with their items and registries
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/brewing/application/` — what products do when used, once, server side; `advanced/` (drinks, oils, thrown preparations, the install point for familiar preparations)
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/brewing/effect/` — the warmth and pest-repellent effects and the plain mob effect; `combat/` (weapon coating), `control/` (binding, sleep, steadfast, concealment, dazzled), `repellent/` (target profiles and filters)
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/brewing/projectile/` — thrown preparations: the projectile entity, its impact and the in-flight limits
 - `src/main/java/io/github/dirtyredz/herbalwitch/grimoire/catalog/` — plain identities: the book, the two research blocks, the reader menu
 - `src/main/java/io/github/dirtyredz/herbalwitch/grimoire/registry/` — book, research blocks and reader menu registration; event wiring, the Apothecary tab contribution, the showcase section
 - `src/main/java/io/github/dirtyredz/herbalwitch/grimoire/access/` — ways to open a reader: `item/` (the grimoire), `block/` (the shared research block and its shapes), `menu/` (the zero-slot reader menu and its validated access)
@@ -57,7 +58,7 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `src/main/java/io/github/dirtyredz/herbalwitch/grimoire/network/` — the grimoire's bounded messages, their codecs and content sync
 - `src/main/java/io/github/dirtyredz/herbalwitch/grimoire/showcase/` — the grimoire showcase section
 - `src/main/java/io/github/dirtyredz/herbalwitch/platform/network/` — the mod's channel, payload bounds and chunked snapshot assembly (no gameplay policy)
-- `src/main/java/io/github/dirtyredz/herbalwitch/stations/description/` — the processing categories (recipe type to station) the grimoire, EMI and JEI share
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/description/` — the processing categories (recipe type to station) the grimoire, EMI and JEI share
 - `src/main/java/io/github/dirtyredz/herbalwitch/magic/witch/` — witch status and energy (Milestone 6): `status/` (state, codec, capability, lifecycle, the status service and private sync), `energy/` (balance, arithmetic, practice, recovery, sleep, drinks), `initiation/` (consent; `founding/` the world record), `config/` (server rules, including `WorkingRules`), `network/` (snapshot, rules), `command/`, `registry/`
 - `src/main/java/io/github/dirtyredz/herbalwitch/magic/ritual/` — the functional altar (Milestone 6): `catalog/`, `registry/`, `altar/` (block, origin entity, shapes), `menu/` (zero-slot menu, access, screen sync), `session/` (sessions, offerings, the server lifecycle), `action/` (founding, initiation, meditation, attunement, the conversion commit, request dispatch; Garden Blessing and Home Protection), `network/`, `grimoire/`, `showcase/`; Milestone 7 adds `circle/` (the ritual circle block, layout and validation)
 - `src/main/java/io/github/dirtyredz/herbalwitch/magic/charm/` — charms (Milestone 7): `catalog/`, `item/`, `equipment/` (worn rules, charge, protection events), `registry/`, `grimoire/`, `showcase/`
@@ -122,24 +123,24 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `src/main/resources/assets/herbalwitch/textures/gui/grimoire/` — the reader atlas: the open book and its page sprites (generated)
 - `src/generated/resources/` — datagen output, checked in and packaged (its `.cache/` is ignored and excluded); never hand-edited
 - `src/art/blockbench/` — Blockbench sources, never packaged (110 projects): `catalog.json` (the project list, pinned format, owned model directories) and `<stations|decor|preparations|grimoire|ritual|ward>/<piece>/` with `<piece>.bbmodel` and `piece.json`; Milestone 5 pieces at `decor/pieces/<family>/<group>/<piece>/` (docs/BLOCKBENCH.md)
-- `src/test/java/io/github/dirtyredz/herbalwitch/botany/` — pure JUnit tests for catalogues and conditions
-- `src/test/java/io/github/dirtyredz/herbalwitch/data/` — generated-resource tests: `GeneratedResourcesTest`, per-feature manifests and tests in `art/` (the Blockbench manifest), `botany/`, `decor/`, `preparations/`, `showcase/`, `stations/`, and `fixture/` helpers (model resolution, template checks, inherited item displays)
+- `src/test/java/io/github/dirtyredz/herbalwitch/apothecary/botany/` — pure JUnit tests for catalogues and conditions
+- `src/test/java/io/github/dirtyredz/herbalwitch/data/` — generated-resource tests: `GeneratedResourcesTest`, per-feature manifests and tests in `art/` (the Blockbench manifest), `apothecary/botany/`, `decor/`, `preparations/`, `showcase/`, `apothecary/stations/`, and `fixture/` helpers (model resolution, template checks, inherited item displays)
 - `src/test/java/io/github/dirtyredz/herbalwitch/platform/geometry/` — shape rotation tests
 - `src/test/java/io/github/dirtyredz/herbalwitch/platform/multiblock/` — 3D and sparse layout tests
 - `src/test/java/io/github/dirtyredz/herbalwitch/platform/placement/` — placement resolution tests
 - `src/test/java/io/github/dirtyredz/herbalwitch/decor/` — pure furniture tests: `catalog/` (the inventory), `behavior/` (seats, storage, displays, beds)
 - `src/test/java/io/github/dirtyredz/herbalwitch/data/decor/manifest/` — the independent 94-piece inventory the decor resource tests read
 - `src/test/java/io/github/dirtyredz/herbalwitch/showcase/` — showcase plan and coverage tests
-- `src/test/java/io/github/dirtyredz/herbalwitch/stations/process/` — reservation and completion arithmetic tests; `recipe/` (requirements: witch flag, energy rounding, wire and fingerprint)
-- `src/test/java/io/github/dirtyredz/herbalwitch/brewing/` — preparation catalogue tests (the advanced, familiar and mixture inventories)
+- `src/test/java/io/github/dirtyredz/herbalwitch/apothecary/stations/process/` — reservation and completion arithmetic tests; `recipe/` (requirements: witch flag, energy rounding, wire and fingerprint)
+- `src/test/java/io/github/dirtyredz/herbalwitch/apothecary/brewing/` — preparation catalogue tests (the advanced, familiar and mixture inventories)
 - `src/test/java/io/github/dirtyredz/herbalwitch/grimoire/` — pure grimoire tests: `knowledge/` (discovery state and codec, research eligibility, teaching), `reading/` (the allocator), `content/` (editorial definitions)
 - `src/test/java/io/github/dirtyredz/herbalwitch/platform/network/` — payload bounds and chunk assembly tests
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/grimoire/` — grimoire GameTests: discovery, content, ingredients, access, teaching
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/fixture/` — shared GameTest world, player, botany, station, magic (`MagicFixtures`) and showcase fixtures
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/decor/` — furniture GameTests; `placement/`, `seating/`, `storage/`, `sleeping/`, `openings/`, `lighting/` per behaviour
-- `src/gameTest/java/io/github/dirtyredz/herbalwitch/botany/` — herb, garden, foraging and worldgen GameTests
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/apothecary/botany/` — herb, garden, foraging and worldgen GameTests
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/showcase/` — showcase command, boundary and content GameTests
-- `src/gameTest/java/io/github/dirtyredz/herbalwitch/stations/` — station GameTests; `process/` the shared process behaviour tests; `advanced/` the four advanced stations and the witch-recipe flow
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/apothecary/stations/` — station GameTests; `process/` the shared process behaviour tests; `advanced/` the four advanced stations and the witch-recipe flow
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/preparations/` — product use, block and advanced-preparation GameTests
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/compat/` — optional-integration GameTests (profile dependent)
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/platform/` — cross-cutting block guards (occlusion)
@@ -150,7 +151,7 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `tools/art/` — shared pixel code (`pixels`, `motifs`), the set's texture density rule (`density`: two texels per model unit), the procedural texture manifest (`catalogue`) and ownership-checked output writing shared by the three producers (`output`); `interface/` (the house GUI kit and the decor storage atlases); `test/` (node --test: density)
 - `tools/art/botany/` — herb sprites per habitat group, the herb list, the parts atlas, garden soil
 - `tools/art/stations/` — the shared house wood and gold (`house`) and the interface atlases (`interfaces.mjs` holds the layout, the four advanced stations included)
-- `tools/models/` — the procedural model code: `geometry` (boxes, planes, position UVs, buried-face removal), `model-output` (model JSON serialisation shared with the Blockbench compiler), `textures`, `catalogue` (families and owned directories); `botany/` (bed, herbs, coplanar separation for organic models), `preparations/` (dried bundles, also the Blockbench attachments)
+- `tools/models/` — the procedural model code: `geometry` (boxes, planes, position UVs, buried-face removal), `model-output` (model JSON serialisation shared with the Blockbench compiler), `textures`, `catalogue` (families and owned directories); `apothecary/botany/` (bed, herbs, coplanar separation for organic models), `preparations/` (dried bundles, also the Blockbench attachments)
 - `tools/art/preparations/` — preparation materials and product sprites; `advanced.mjs` (advanced, familiar and mixture sprites) and `magic.mjs` (charms and the circle item)
 - `tools/art/grimoire/` — the grimoire sprite (`book`) and the reader atlas (`interface`)
 - `tools/blockbench/` — the Blockbench compiler: `project` (the pinned .bbmodel contract), `catalogue` (catalog.json, piece.json), `textures` (owned and shared slots), `assembly` (state outputs, multiblock cells and variants), `geometry/` (cell cutting and mirroring, legal item assemblies), `attachments` (generated bundles), `compile`
@@ -167,16 +168,16 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 | Design catalogue | `decor/catalog/*` (`FinishCatalog` one entry, `FurnitureSpec`, `FurnitureBehavior`, `MountSpec`, `FurnitureCatalog`), `decor/catalog/pieces/*` | The single cottage design and the 94 pieces; ids `decor/<family>/<piece>`; waves as metadata |
 | Decor registration and structure | `decor/registry/*`, `decor/structure/**`, `platform/placement/*` | Catalogue -> blocks, items, block entities, menus, the seat entity; the shared assembly block, support, shapes and checked placement |
 | Decor behaviours | `decor/behavior/{seating,storage,sleeping,openings,lighting}` | Seats, origin inventories and displays, vanilla-compatible beds and door, lights |
-| Botany | `botany/**` | Herb catalogue, plants, bed, growth, harvest, conditions reload, foraging, worldgen |
-| Station base | `stations/block/{StationBlock,StationEntity,ProcessStationEntity}`, `stations/menu/StationMenu` | Shared block and menu boilerplate (facing, support, ticker, drops, slot rules) |
-| Processing | `stations/process/**` | Composition, not a superclass: inventory with reservations, job, completion; `recipe/` format, index and requirements, `matching/`, `execution/` policy and commit, `authorization/` operator and magical policy |
-| Stations | `stations/everyday/<station>/{block,menu,recipe}`, `stations/registry/*`, `stations/heat/*` | The six everyday stations, their registration and heat rules |
-| Advanced stations | `stations/advanced/**` | Witch's Cauldron, Copper Still, Bottling Bench, Charm Workbench on one `AdvancedStationBlock`/`AdvancedStationEntity`; witch recipes start by menu button |
-| Products | `brewing/product/**`, `brewing/application/**`, `brewing/effect/**`, `brewing/projectile/*` | Bundles, powders, drinks, salve, oils, garden products, oil lantern, the 16 advanced preparations, mixtures, effects, thrown preparations |
+| Botany | `apothecary/botany/**` | Herb catalogue, plants, bed, growth, harvest, conditions reload, foraging, worldgen |
+| Station base | `apothecary/stations/block/{StationBlock,StationEntity,ProcessStationEntity}`, `apothecary/stations/menu/StationMenu` | Shared block and menu boilerplate (facing, support, ticker, drops, slot rules) |
+| Processing | `apothecary/stations/process/**` | Composition, not a superclass: inventory with reservations, job, completion; `recipe/` format, index and requirements, `matching/`, `execution/` policy and commit, `authorization/` operator and magical policy |
+| Stations | `apothecary/stations/everyday/<station>/{block,menu,recipe}`, `apothecary/stations/registry/*`, `apothecary/stations/heat/*` | The six everyday stations, their registration and heat rules |
+| Advanced stations | `apothecary/stations/advanced/**` | Witch's Cauldron, Copper Still, Bottling Bench, Charm Workbench on one `AdvancedStationBlock`/`AdvancedStationEntity`; witch recipes start by menu button |
+| Products | `apothecary/brewing/product/**`, `apothecary/brewing/application/**`, `apothecary/brewing/effect/**`, `apothecary/brewing/projectile/*` | Bundles, powders, drinks, salve, oils, garden products, oil lantern, the 16 advanced preparations, mixtures, effects, thrown preparations |
 | Charms | `magic/charm/**`, `platform/compat/curios/*` | Sachet and amulets, worn rules and charge, the Curios slot adapter |
 | Ritual circle | `magic/ritual/circle/*`, `magic/ritual/action/{Circle,GardenBlessing,HomeProtection}*` | The 5x5 ring, its validation, Garden Blessing and Home Protection |
 | Wards | `magic/ward/**` | Ward stone, persisted records and chunk index, bounded target-suppression sweeps |
-| Metadata carrier | `brewing/product/metadata/DrinkMetadata` | Water-to-drink data hand-off; the Thirst adapter installs it |
+| Metadata carrier | `apothecary/brewing/product/metadata/DrinkMetadata` | Water-to-drink data hand-off; the Thirst adapter installs it |
 | Showcase | `showcase/{layout,construction,command}`, `*/showcase/` sections | Plan (pure), preflight and builder (world writes), command |
 | Permission | `platform/permission/**` | `ActionContext` + `ActionPermissionService`; `entity/` the one boundary for harmful entity actions |
 | Compat | `platform/compat/**` (Thirst, Curios), `client/compat/**`, `data/server/compat/` | Thirst adapter; EMI/JEI plugins; Farmer's Delight tags |
@@ -185,14 +186,14 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 | Art pipeline | `tools/generate-textures.mjs`, `tools/art/**`, `tools/generate-models.mjs`, `tools/models/**`, `gradle/art.gradle` | Seeded generation of materials, sprites, GUI atlases and the procedural models (herbs, beds, hung bundles); producers own disjoint paths |
 | Blockbench pieces | `src/art/blockbench/**`, `tools/compile-blockbench.mjs`, `tools/blockbench/**` | Hand-edited one-off pieces (stations, furniture, lantern) compiled to models and owned textures; the dev-art pack |
 | Art review | `tools/preview-models.mjs`, `tools/preview/**` | Headless previews, coverage and reference comparisons |
-| Multiblocks | `platform/multiblock/*`, `stations/block/StationBlock` | Cell layout, placement and removal, the origin cell, shared lit/active state |
+| Multiblocks | `platform/multiblock/*`, `apothecary/stations/block/StationBlock` | Cell layout, placement and removal, the origin cell, shared lit/active state |
 | Grimoire catalogue and registry | `grimoire/catalog/GrimoireCatalog`, `grimoire/registry/*` | Permanent ids (`grimoire/book`, `stand`, `bookshelf`, menu `reader`), registration, creative tab, server event wiring |
 | Grimoire access | `grimoire/access/{item,block,menu}` | The book item, the one-cell research block (no block entity, no storage), the zero-slot reader menu and the access rule (book: carried; block: loaded, within 8 blocks) |
 | Grimoire content | `grimoire/content/**` | Immutable index of entries built from registered `GrimoireContentSource`s (guide, herb, station, recipe); `ServerGrimoireContent` revisions; editorial `grimoire_entries` loader |
 | Grimoire knowledge | `grimoire/knowledge/{discovery,research,teaching}` | Personal discovery capability and codec, observation policy, research eligibility and service, consenting teaching (pure rules plus a server adapter) |
 | Grimoire reading | `grimoire/reading/*`, `reading/ingredients/*` | Reader sessions and the server reader service; ingredient requirements and the missing-ingredient allocator |
 | Grimoire network | `grimoire/network/*`, `platform/network/*` | Six bounded messages and codec on the one channel `herbalwitch:main`; content sync; payload bounds and chunk assembly |
-| Station descriptions | `stations/description/ProcessingCategories` | The one recipe-type-to-station mapping shared by the grimoire, EMI and JEI |
+| Station descriptions | `apothecary/stations/description/ProcessingCategories` | The one recipe-type-to-station mapping shared by the grimoire, EMI and JEI |
 | Grimoire client | `client/grimoire/*`, `client/grimoire/widgets/*` | Two-page book screen, view model, station panel and button, client state cache, teaching panel |
 
 ## Dependency direction
@@ -215,7 +216,7 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - Java root holds bootstrap only; `client/` and `data/` roots hold wiring/registration only.
 - About 800 lines per code file at most; review for extraction around 600.
 - At most 12 direct source files per responsibility directory. Split a growing directory by
-  responsibility, never into numbered batches. Stations sit under `stations/everyday/` for this reason.
+  responsibility, never into numbered batches. Stations sit under `apothecary/stations/everyday/` for this reason.
 - Every generated directory has fewer than 12 entries (`GeneratedResourcesTest` enforces it), except the twelve enumerated
   registry-derived decor directories (blockstates, item models and loot of the seating, storage, surfaces and fixtures
   families), whose file names are permanent block ids; each must hold exactly the decor manifest's files.
@@ -233,11 +234,11 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `tools/art/` has eleven entries since `interface/` (the shared GUI kit) arrived; the next addition should
   group the per-feature art folders rather than add a sibling.
 - Stations share `StationBlock`/`StationMenu` for block and menu boilerplate only. Processing rules
-  live in `stations/process/` and are used by composition: a station owns a `ProcessStation`, and no
+  live in `apothecary/stations/process/` and are used by composition: a station owns a `ProcessStation`, and no
   station extends a processing base class.
 - Milestone 7 added no top-level Java package: charms, wards and the circle sit under `magic/`, the
-  advanced stations under `stations/advanced/`, entity permission under `platform/permission/entity/`.
-  `stations/` was at its breadth cap, so the station authorization lives inside `stations/process/`
+  advanced stations under `apothecary/stations/advanced/`, entity permission under `platform/permission/entity/`.
+  `apothecary/stations/` was at its breadth cap, so the station authorization lives inside `apothecary/stations/process/`
   (`authorization/`), beside `recipe/`, `matching/` and `execution/`; the four advanced stations share one
   `AdvancedStationBlock`/`AdvancedStationEntity` rather than one block class each (docs/DECISIONS.md).
 - `models/block/ritual/circle/` holds 32 files, an enumerated exception to the 12-file directory cap: the

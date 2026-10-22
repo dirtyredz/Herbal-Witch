@@ -16,9 +16,9 @@ docs/catalogue/stations.md, docs/catalogue/products.md.
   home costs and ticks, ward numbers, charm charge, preparation PvP) sit in `magic/witch/config/WorkingRules`,
   so one config section group, one sync and one fingerprint cover them. `WitchRulesUpdate` grew, so
   `HerbalWitchNetwork.PROTOCOL` is "4". Rejected: a second rules record and sync.
-- **Authorization under `stations/process/authorization/`; shared `ProcessStationEntity`.** `stations/`
+- **Authorization under `apothecary/stations/process/authorization/`; shared `ProcessStationEntity`.** `apothecary/stations/`
   was at its breadth cap, so the operator, the magical policy and the operations live inside
-  `stations/process/`. The block-entity base `stations/block/ProcessStationEntity` is shared and the four
+  `apothecary/stations/process/`. The block-entity base `apothecary/stations/block/ProcessStationEntity` is shared and the four
   everyday process stations moved onto it. A single `AdvancedStationBlock` and `AdvancedStationEntity`
   serve all four advanced stations (a station is a descriptor and a menu, not a block class).
 - **Inputs are reserved only after Start.** A witch recipe reserves and runs nothing until a witch presses
@@ -387,7 +387,7 @@ entities (a built showcase) rather than guess. Rejected: auto-offset to a free p
 
 ## 2026-10-21 - Apothecary creative tab is owned by stations
 
-Stations depend on preparations, never the reverse, so the tab that lists both lives in `stations/`.
+Stations depend on preparations, never the reverse, so the tab that lists both lives in `apothecary/stations/`.
 
 ## 2026-10-21 - Thirst by reflection, Farmer's Delight by tags, EMI/JEI compile-only
 
@@ -407,7 +407,7 @@ the next rewarded sleep rather than granting energy at once, see the 0.5.0 entry
 Each station has one authored look (superseded for appearance by the 0.2.0 house style above). The oil lantern (one dose,
 6,000 loaded ticks) gives lantern oil a consumer.
 
-## 2026-10-21 - Stations grouped under `stations/everyday/`
+## 2026-10-21 - Stations grouped under `apothecary/stations/everyday/`
 
 The directory breadth cap would be exceeded by five stations plus shared code. Magical stations get
 their own group later.
@@ -434,7 +434,7 @@ any world can start without a lucky find.
 
 ## 2026-10-21 - Grouped permanent herb ids; habitat preferences in data
 
-Herb ids are `botany/<group>/<herb>/...` with five permanent groups, which keeps every generated
+Herb ids are `apothecary/botany/<group>/<herb>/...` with five permanent groups, which keeps every generated
 directory under the cap. Liked conditions and discovery chances are data, retunable without renames.
 
 ## 2026-10-21 - One cottage design replaces 18 finishes

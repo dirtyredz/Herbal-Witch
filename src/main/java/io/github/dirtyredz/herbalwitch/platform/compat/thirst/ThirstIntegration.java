@@ -1,6 +1,6 @@
 package io.github.dirtyredz.herbalwitch.platform.compat.thirst;
 
-import io.github.dirtyredz.herbalwitch.brewing.product.metadata.DrinkMetadata;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.metadata.DrinkMetadata;
 
 /**
  * Thirst Was Taken 1.4.0 support (inspected artifact: ThirstWasTaken-1.20.1-1.4.0.jar). The kettle

@@ -1,12 +1,12 @@
 package io.github.dirtyredz.herbalwitch.showcase;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbCatalog;
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbSpec;
-import io.github.dirtyredz.herbalwitch.botany.crop.HerbCropBlock;
-import io.github.dirtyredz.herbalwitch.botany.registry.BotanyBlocks;
-import io.github.dirtyredz.herbalwitch.botany.registry.BotanyItems;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationBlocks;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbSpec;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.crop.HerbCropBlock;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyBlocks;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyItems;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationBlocks;
 import io.github.dirtyredz.herbalwitch.decor.structure.DecorAssemblyBlock;
 import io.github.dirtyredz.herbalwitch.decor.catalog.FurnitureBehavior;
 import io.github.dirtyredz.herbalwitch.decor.behavior.lighting.DecorLightBlock;
@@ -16,7 +16,7 @@ import io.github.dirtyredz.herbalwitch.grimoire.knowledge.discovery.DiscoveryCap
 import io.github.dirtyredz.herbalwitch.grimoire.registry.GrimoireBlocks;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcasePlan;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseRegistry;
-import io.github.dirtyredz.herbalwitch.stations.registry.StationBlocks;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;

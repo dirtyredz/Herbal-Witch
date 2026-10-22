@@ -52,7 +52,7 @@ origin), seats or slots. `FurnitureCatalog.ALL` is what is registered (every wav
 - *Grimoire:* `grimoire/content/reference/DecorEntries` contributes one public `furniture|` page per piece
   (blurb, size, mounting, use, seats or slots, crafting; lookalikes link their station).
 
-**Botany (`botany/`).**
+**Botany (`apothecary/botany/`).**
 - *State and growth:* a herb is a plant block with age 0..3 (crop or bush form). It grows by vanilla
   random ticks and needs crop light to grow, but survives without light so worldgen can place it. Seeds
   plant only on farmland or the herb bed (`garden/`, farmland-style moisture, never trampled).
@@ -60,7 +60,7 @@ origin), seats or slots. `FurnitureCatalog.ALL` is what is registered (every wav
   harvest or an enriched bed adds fresh herbs. Adventure players cannot harvest. Breaking drops through
   the loot table.
 - *Conditions:* data per herb (`data/herbalwitch/herb_conditions/<group>/<herb>.json`: habitat tag,
-  discovery chance, harvest bonus, liked conditions). `botany/conditions` owns the reload listener; it
+  discovery chance, harvest bonus, liked conditions). `apothecary/botany/conditions` owns the reload listener; it
   validates the whole set and rejects the entire reload on any error, keeping the previous set. The
   live evaluator reads rain, low sky, night and full moon.
 - *Foraging:* a global loot modifier on player-broken grass-like blocks adds starter seeds and one
@@ -68,7 +68,7 @@ origin), seats or slots. `FurnitureCatalog.ALL` is what is registered (every wav
 - *Worldgen:* per herb a configured and placed feature, added by per-group biome modifiers onto habitat
   biome tags. Existing chunks are not retrofitted.
 
-**Herb bed joining (`botany/garden/`).** `HerbBedBlock` carries boolean `north/east/south/west`
+**Herb bed joining (`apothecary/botany/garden/`).** `HerbBedBlock` carries boolean `north/east/south/west`
 properties, computed by `GardenBedConnections`: a side is joined when the same bed block stands beside
 it at the same height. They are set on placement, in `onPlace` for direct `setBlock`, in `updateShape`
 on neighbour change, and on rotate/mirror; beds saved before 0.2.0 are repaired by their random tick.
@@ -106,7 +106,7 @@ section (`magic/ritual/showcase`) builds an idle altar and a supply barrel and s
 pack into rows no wider than `ShowcasePlan.ROW_WIDTH` (126), so adding a section grows the depth first;
 the GameTest template is 128 x 10 x 64 and `ShowcasePlanTest` fails if a plan outgrows it.
 
-**Stations (`stations/`).**
+**Stations (`apothecary/stations/`).**
 - *Composition:* `StationBlock`, `StationEntity` and `StationMenu` carry block and menu boilerplate.
   Processing rules live in `process/`: `ProcessInventory` (slot roles; reserved counts stay in their
   slots), `ProcessJob` (exact shapeless matching; recipe id + content fingerprint), `ProcessCompletion`
@@ -114,7 +114,7 @@ the GameTest template is 128 x 10 x 64 and `ShowcasePlanTest` fails if a plan ou
   sorted cache). `ProcessStation` ties them to a block entity by composition. Since Milestone 7 `process/`
   has four sub-packages: `recipe/` (the recipe type, JSON and wire format, index, `ProcessRequirements`),
   `matching/` (`ProcessMatcher`), `execution/` (`ProcessCommit`, `ProcessExecutionPolicy`) and
-  `authorization/` (below), and `stations/block/ProcessStationEntity` is the shared block-entity base all
+  `authorization/` (below), and `apothecary/stations/block/ProcessStationEntity` is the shared block-entity base all
   eight process stations (four everyday, four advanced) sit on.
 - *Reservations and completion:* ingredients stay in their slots, counted as reserved, and cannot be
   extracted or swapped by menus or automation. At completion the result and all returns must fit before
@@ -125,7 +125,7 @@ the GameTest template is 128 x 10 x 64 and `ShowcasePlanTest` fails if a plan ou
   station running.
 - *Heat:* `heat/` reads tags: `herbalwitch:heat_sources` (must be LIT where the block has that
   property) directly below, or one `herbalwitch:heat_conductors` block then a source. Waterlogged gives
-  none. Heated stations show Needs heat until then. The Witch's Stove (`stations/stove/`) is a heat source
+  none. Heated stations show Needs heat until then. The Witch's Stove (`apothecary/stations/stove/`) is a heat source
   that reuses the hearth's block entity type, menu and screen.
 - *Multiblocks:* `platform/multiblock/` (`MultiblockLayout`, `MultiblockStructure`) describes a
   station's cells; layouts are named in `StationCatalog` (`StationSpec.layout`). The drying rack and
@@ -142,7 +142,7 @@ the GameTest template is 128 x 10 x 64 and `ShowcasePlanTest` fails if a plan ou
 - *Advanced stations and witch recipes (Milestone 7).* The Witch's Cauldron (one block, heat below,
   `cauldron`, 600 ticks, water base), the Copper Still (1 x 2 tall, heat, `distillation`, 800 ticks), the
   Bottling Bench (2 x 1, `bottling`, 100 ticks, no witch) and the Charm Workbench (2 x 1, `charm_work`,
-  200 ticks) live under `stations/advanced/<station>/{block,menu,recipe}` on one `AdvancedStationBlock` and
+  200 ticks) live under `apothecary/stations/advanced/<station>/{block,menu,recipe}` on one `AdvancedStationBlock` and
   `AdvancedStationEntity`; they place through `StructurePlacementItem` and show an `active` state.
   A recipe carries `requirements` (`"requirements": {"witch": true, "energy": N}`), on the wire and in the
   fingerprint; `effectiveEnergy(percent)` rounds up and `processingPercent` (WorkingRules) scales it. Each
@@ -156,10 +156,10 @@ the GameTest template is 128 x 10 x 64 and `ShowcasePlanTest` fails if a plan ou
   NEEDS_WITCH, NEEDS_OPERATOR and NEEDS_ENERGY. The mortar and infusion pot also carry witch recipes
   (blinding dust, four oils).
 
-**Products and applications (`brewing/`).** Products are items (drinks, salve, oils, powders, garden
+**Products and applications (`apothecary/brewing/`).** Products are items (drinks, salve, oils, powders, garden
 products) and two blocks (hung bundles, oil lantern). `application/` runs what a product does, once,
 server side, through the permission boundary for garden actions; failures consume nothing. Effects
-(`warmth`, pest repellent) live in `effect/`. The Apothecary creative tab belongs to `stations/`
+(`warmth`, pest repellent) live in `effect/`. The Apothecary creative tab belongs to `apothecary/stations/`
 (stations depend on preparations, never the reverse).
 - *Advanced preparations (Milestone 7).* `AdvancedProductCatalog` holds 16 (four drinks, six thrown vials,
   four oils, blinding dust, the moon essence ingredient), `FamiliarPreparationCatalog` ten familiar
@@ -171,12 +171,12 @@ server side, through the permission boundary for garden actions; failures consum
   grants 100 ticks of hard-control immunity afterwards. Entity tags decide who can be controlled:
   `undead`, `arthropods`, `hard_control_immune`, `hard_control_allowed`, `protected_entities` (villager,
   wandering trader by default); the item tag `coatable_weapons` limits the venom coating (the off-hand
-  blade, 8 hits or 60 s). Thrown vials and dust (`brewing/projectile/`) burst in radius 3, hit at most 32
+  blade, 8 hits or 60 s). Thrown vials and dust (`apothecary/brewing/projectile/`) burst in radius 3, hit at most 32
   targets with line of sight, live 100 ticks, and are limited to 4 in flight per thrower and 128 per
   dimension behind a shared 20-tick throw cooldown. Every harmful application goes through
   `platform/permission/entity/EntityActionPermission` (below).
 
-**Metadata carrier.** `brewing/product/metadata/DrinkMetadata` is a hand-off for data riding from the
+**Metadata carrier.** `apothecary/brewing/product/metadata/DrinkMetadata` is a hand-off for data riding from the
 kettle's water bottle to the drink. Empty unless an adapter installs it.
 
 **Entity permission (`platform/permission/entity/`).** One boundary for harmful entity actions:
@@ -203,7 +203,7 @@ reads it as permission, and later magic must not either.
   `GrimoireContentSource`s (`GuideEntries`, `StationEntries`, `HerbEntries`, `StationRecipeEntries`), which run
   on both sides from the same inputs, so server and client build the same index. Later milestones add a
   source for their own entries. Recipe pages come from the recipes themselves and never depend on editorial
-  data; `ProcessingCategories` (`stations/description`) is the one recipe-type-to-station mapping shared with
+  data; `ProcessingCategories` (`apothecary/stations/description`) is the one recipe-type-to-station mapping shared with
   EMI and JEI.
 - *Editorial data:* `data/<ns>/grimoire_entries/**.json` (`GrimoireDefinitionLoader`) holds prose, grouping,
   links and hints only; mechanics fields are rejected, the whole set is validated, an invalid reload keeps
@@ -361,9 +361,9 @@ showcase, platform/permission, platform/network, compat, grimoire and magic/{wit
 | `HerbalWitch.java` | Bootstrap only: registries, config, event wiring |
 | `platform/network/`, `platform/config/`, `platform/permission/`, `platform/compat/<integration>/` | Channel + payload bounds; config registration; shared authorization boundary; optional integrations (foreign imports only here) |
 | `magic/witch/{status,energy,initiation(+founding),config,network,command,registry}` (implemented, 0.5.0; the plan named top-level `witch/`) | Player capability and lifecycle; spending/recovery/progression; consent and founding; rules; wire; operator commands |
-| `botany/catalog/`, `crop/`, `foraging/`, `worldgen/` | Herb definitions, growth, gathering, placement (worldgen never owns cultivation rules) |
-| `stations/everyday/<station>/`, `stations/advanced/<station>/`, `stations/process/{recipe,matching,execution,authorization}` | One package per station (block, menu, recipe); shared processing by composition (implemented; advanced stations 0.6.0) |
-| `brewing/product/`, `effect/`, `application/`, `projectile/` | Products; effect mechanics; how an effect reaches a target; thrown preparations |
+| `apothecary/botany/catalog/`, `crop/`, `foraging/`, `worldgen/` | Herb definitions, growth, gathering, placement (worldgen never owns cultivation rules) |
+| `apothecary/stations/everyday/<station>/`, `apothecary/stations/advanced/<station>/`, `apothecary/stations/process/{recipe,matching,execution,authorization}` | One package per station (block, menu, recipe); shared processing by composition (implemented; advanced stations 0.6.0) |
+| `apothecary/brewing/product/`, `effect/`, `application/`, `projectile/` | Products; effect mechanics; how an effect reaches a target; thrown preparations |
 | `companions/animals/{trust,capture,taming}/`, `companions/familiars/{bond,command,ability,home,recovery,species}/` | Animal relationships; familiar bonds without one god manager |
 | `magic/ritual/{catalog,registry,altar,circle,menu,session,action,network,grimoire,showcase}` (implemented, 0.5.0; `circle/` 0.6.0), `magic/ward/` and `magic/charm/` (implemented, 0.6.0), `magic/broom/`, `magic/wand/` | The altar, its menu, sessions and actions; the ritual circle; home wards; charms; broom entity; one class per wand mode |
 | `shop/{catalog,trade,order,persistence,block}/` | Offers, transactions, orders, persistence, counter/register |

@@ -1,7 +1,7 @@
 package io.github.dirtyredz.herbalwitch.client.grimoire;
 
 import com.mojang.logging.LogUtils;
-import io.github.dirtyredz.herbalwitch.botany.conditions.HerbConditions;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.conditions.HerbConditions;
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContent;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reload.GrimoireDefinition;

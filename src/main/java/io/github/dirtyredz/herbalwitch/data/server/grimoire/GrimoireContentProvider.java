@@ -1,15 +1,15 @@
 package io.github.dirtyredz.herbalwitch.data.server.grimoire;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reference.GuideEntries;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reference.HerbForms;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reference.StationEntries;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reload.GrimoireDefinition;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reload.GrimoireDefinitionLoader;
-import io.github.dirtyredz.herbalwitch.stations.catalog.StationCatalog;
-import io.github.dirtyredz.herbalwitch.stations.catalog.StationSpec;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationSpec;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;

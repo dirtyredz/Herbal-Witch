@@ -1,11 +1,11 @@
 package io.github.dirtyredz.herbalwitch.grimoire;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbCatalog;
-import io.github.dirtyredz.herbalwitch.botany.conditions.HerbConditionReloadListener;
-import io.github.dirtyredz.herbalwitch.botany.conditions.HerbConditions;
-import io.github.dirtyredz.herbalwitch.botany.registry.BotanyItems;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationItems;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.conditions.HerbConditionReloadListener;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.conditions.HerbConditions;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyItems;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationItems;
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContent;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireEntry;
@@ -17,12 +17,12 @@ import io.github.dirtyredz.herbalwitch.grimoire.content.reload.GrimoireDefinitio
 import io.github.dirtyredz.herbalwitch.grimoire.knowledge.discovery.DiscoveryService;
 import io.github.dirtyredz.herbalwitch.grimoire.network.ContentUpdate;
 import io.github.dirtyredz.herbalwitch.platform.network.ChunkAssembly;
-import io.github.dirtyredz.herbalwitch.stations.description.ProcessingCategories;
-import io.github.dirtyredz.herbalwitch.stations.everyday.drying_rack.recipe.DryingRecipe;
-import io.github.dirtyredz.herbalwitch.stations.everyday.kettle.recipe.SteepingRecipe;
-import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipe;
-import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipeDescription;
-import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipeIndex;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.description.ProcessingCategories;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.drying_rack.recipe.DryingRecipe;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.kettle.recipe.SteepingRecipe;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipe;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipeDescription;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipeIndex;
 import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;

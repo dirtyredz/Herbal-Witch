@@ -1,8 +1,8 @@
 package io.github.dirtyredz.herbalwitch.data.server.botany;
 
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbCatalog;
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbSpec;
-import io.github.dirtyredz.herbalwitch.botany.registry.BotanyItems;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbSpec;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyItems;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;

@@ -1,6 +1,6 @@
 package io.github.dirtyredz.herbalwitch.magic.charm.equipment;
 
-import io.github.dirtyredz.herbalwitch.brewing.effect.repellent.RepellentProfiles;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.repellent.RepellentProfiles;
 import io.github.dirtyredz.herbalwitch.magic.charm.catalog.CharmSpec;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;

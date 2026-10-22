@@ -1,23 +1,23 @@
 package io.github.dirtyredz.herbalwitch.data.server.stations.recipes;
 
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbCatalog;
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbSpec;
-import io.github.dirtyredz.herbalwitch.brewing.product.catalog.ProductSpec;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationItems;
-import io.github.dirtyredz.herbalwitch.stations.registry.StationRecipes;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbSpec;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.ProductSpec;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationItems;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationRecipes;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 
 import java.util.function.Consumer;
 
-import static io.github.dirtyredz.herbalwitch.brewing.product.catalog.EverydayProductCatalog.COOLING_REMEDY;
-import static io.github.dirtyredz.herbalwitch.brewing.product.catalog.EverydayProductCatalog.ENERGY_TEA;
-import static io.github.dirtyredz.herbalwitch.brewing.product.catalog.EverydayProductCatalog.MINING_TONIC;
-import static io.github.dirtyredz.herbalwitch.brewing.product.catalog.EverydayProductCatalog.RECOVERY_TEA;
-import static io.github.dirtyredz.herbalwitch.brewing.product.catalog.EverydayProductCatalog.RESTFUL_INFUSION;
-import static io.github.dirtyredz.herbalwitch.brewing.product.catalog.EverydayProductCatalog.TRAVEL_TONIC;
-import static io.github.dirtyredz.herbalwitch.brewing.product.catalog.EverydayProductCatalog.WARMTH_REMEDY;
+import static io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.EverydayProductCatalog.COOLING_REMEDY;
+import static io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.EverydayProductCatalog.ENERGY_TEA;
+import static io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.EverydayProductCatalog.MINING_TONIC;
+import static io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.EverydayProductCatalog.RECOVERY_TEA;
+import static io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.EverydayProductCatalog.RESTFUL_INFUSION;
+import static io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.EverydayProductCatalog.TRAVEL_TONIC;
+import static io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.EverydayProductCatalog.WARMTH_REMEDY;
 
 /**
  * Steeping, 200 heated ticks: two ingredients and one water bottle make one bottled drink; the

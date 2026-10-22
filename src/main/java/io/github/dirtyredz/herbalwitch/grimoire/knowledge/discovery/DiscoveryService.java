@@ -8,7 +8,7 @@ import io.github.dirtyredz.herbalwitch.grimoire.content.reference.HerbForms;
 import io.github.dirtyredz.herbalwitch.grimoire.network.DiscoveryUpdate;
 import io.github.dirtyredz.herbalwitch.grimoire.network.GrimoirePackets;
 import io.github.dirtyredz.herbalwitch.grimoire.knowledge.research.Familiarity;
-import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipe;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipe;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;

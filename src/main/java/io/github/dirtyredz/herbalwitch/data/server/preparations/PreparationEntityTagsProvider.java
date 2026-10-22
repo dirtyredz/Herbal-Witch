@@ -1,10 +1,10 @@
 package io.github.dirtyredz.herbalwitch.data.server.preparations;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.brewing.effect.control.ControlEffects;
-import io.github.dirtyredz.herbalwitch.brewing.effect.repellent.RepellentProfiles;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.control.ControlEffects;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.repellent.RepellentProfiles;
 import io.github.dirtyredz.herbalwitch.platform.permission.entity.EntityActionPermission;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationTags;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;

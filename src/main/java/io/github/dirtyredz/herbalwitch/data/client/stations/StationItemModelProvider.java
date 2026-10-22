@@ -1,10 +1,10 @@
 package io.github.dirtyredz.herbalwitch.data.client.stations;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.stations.block.StationBlock;
-import io.github.dirtyredz.herbalwitch.stations.catalog.StationCatalog;
-import io.github.dirtyredz.herbalwitch.stations.catalog.StationSpec;
-import io.github.dirtyredz.herbalwitch.stations.registry.StationBlocks;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.block.StationBlock;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationSpec;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;

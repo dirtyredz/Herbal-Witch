@@ -1,10 +1,10 @@
 package io.github.dirtyredz.herbalwitch.grimoire;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbCatalog;
-import io.github.dirtyredz.herbalwitch.botany.registry.BotanyItems;
-import io.github.dirtyredz.herbalwitch.brewing.product.catalog.EverydayProductCatalog;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationItems;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyItems;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.EverydayProductCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationItems;
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reference.HerbForms;
 import io.github.dirtyredz.herbalwitch.grimoire.knowledge.discovery.DiscoveryCapability;

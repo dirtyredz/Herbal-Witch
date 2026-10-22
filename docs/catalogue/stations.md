@@ -6,22 +6,22 @@ Module paths are relative to `io.github.dirtyredz.herbalwitch`. Milestones are f
 
 | Station | Purpose (design) | Blocks it covers | Owning module | Recipe type | Witch-only? | Milestone | Evidence |
 |---|---|---|---|---|---|---|---|
-| Herb drying rack | Dry and preserve fresh herbs into bundles | drying rack | `stations/everyday/drying_rack/` | drying | no | 3 | done (0.1.0-dev.3): StationProcessingGameTests, StationResourcesTest |
-| Mortar and pestle | Grind herbs and minerals into powders, pigments, blinding dust | mortar and pestle | `stations/everyday/mortar/` | grinding | no | 3 | done (0.1.0-dev.3): StationProcessingGameTests, StationResourcesTest |
-| Tea kettle | Steep teas, tonics, simple infusions; requires heat | tea kettle | `stations/everyday/kettle/` | steeping | no | 3 | done (0.1.0-dev.3): StationProcessingGameTests, CompatibilityGameTests |
-| Fireplace / hearth | Heat for kettle, cauldron, infusion pot; home anchor and ward focus | hearth block (2x2); Witch's Stove (2 wide); decor Fireplace links here | `stations/everyday/hearth/`, `stations/stove/` (heat tags in `stations/heat/`); ward focus in `magic/ward/` | heat source (tag) | no (ward focus: witch) | 3 (heat); 7 (ward focus) | heat done (0.1.0-dev.3): StationProcessingGameTests, CompatibilityGameTests; ward focus M7 |
-| Brewing cauldron | Liquid potions, throwables, animal brews, familiar tonics | Witch's Cauldron | `stations/advanced/cauldron/` | `cauldron` | yes (magical brewing) | 7 | done (0.6.0): MagicalProcessGameTests, AdvancedStationGameTests; see "Advanced stations" below |
-| Infusion pot | Slowly prepare salves, oils, repellents, lantern oils | infusion pot | `stations/everyday/infusion_pot/` | infusion | no | 3 | done (0.1.0-dev.3): StationProcessingGameTests, PreparationUseGameTests |
-| Distillation still | Refine rare essences and advanced extracts | Copper Still | `stations/advanced/still/` | `distillation` | yes (advanced brew) | 7 | done (0.6.0): MagicalProcessGameTests, AdvancedStationGameTests |
-| Apothecary bottling bench | Bottle, portion, label, package mixtures | Bottling Bench | `stations/advanced/bottling_bench/` | `bottling` | no (packaging only; decided at M7) | 7 | done (0.6.0): AdvancedStationGameTests |
+| Herb drying rack | Dry and preserve fresh herbs into bundles | drying rack | `apothecary/stations/everyday/drying_rack/` | drying | no | 3 | done (0.1.0-dev.3): StationProcessingGameTests, StationResourcesTest |
+| Mortar and pestle | Grind herbs and minerals into powders, pigments, blinding dust | mortar and pestle | `apothecary/stations/everyday/mortar/` | grinding | no | 3 | done (0.1.0-dev.3): StationProcessingGameTests, StationResourcesTest |
+| Tea kettle | Steep teas, tonics, simple infusions; requires heat | tea kettle | `apothecary/stations/everyday/kettle/` | steeping | no | 3 | done (0.1.0-dev.3): StationProcessingGameTests, CompatibilityGameTests |
+| Fireplace / hearth | Heat for kettle, cauldron, infusion pot; home anchor and ward focus | hearth block (2x2); Witch's Stove (2 wide); decor Fireplace links here | `apothecary/stations/everyday/hearth/`, `apothecary/stations/stove/` (heat tags in `apothecary/stations/heat/`); ward focus in `magic/ward/` | heat source (tag) | no (ward focus: witch) | 3 (heat); 7 (ward focus) | heat done (0.1.0-dev.3): StationProcessingGameTests, CompatibilityGameTests; ward focus M7 |
+| Brewing cauldron | Liquid potions, throwables, animal brews, familiar tonics | Witch's Cauldron | `apothecary/stations/advanced/cauldron/` | `cauldron` | yes (magical brewing) | 7 | done (0.6.0): MagicalProcessGameTests, AdvancedStationGameTests; see "Advanced stations" below |
+| Infusion pot | Slowly prepare salves, oils, repellents, lantern oils | infusion pot | `apothecary/stations/everyday/infusion_pot/` | infusion | no | 3 | done (0.1.0-dev.3): StationProcessingGameTests, PreparationUseGameTests |
+| Distillation still | Refine rare essences and advanced extracts | Copper Still | `apothecary/stations/advanced/still/` | `distillation` | yes (advanced brew) | 7 | done (0.6.0): MagicalProcessGameTests, AdvancedStationGameTests |
+| Apothecary bottling bench | Bottle, portion, label, package mixtures | Bottling Bench | `apothecary/stations/advanced/bottling_bench/` | `bottling` | no (packaging only; decided at M7) | 7 | done (0.6.0): AdvancedStationGameTests |
 | Altar and ritual circle | Initiation, familiar binding, home blessings, revival, wards | altar (M6), ritual circle, decor Altar Table links here | `magic/ritual/` | rituals | yes (initiation: existing witch; founder ritual: survival) | 6 (altar); 7 (circle, rituals) | altar done (0.5.0): see "The ritual altar" below; circle and its two rituals done (0.6.0): see "The ritual circle" below |
-| Charm workbench | Sachets, amulets, animal capture charms, protection tokens | Charm Workbench | `stations/advanced/charm_workbench/` | `charm_work` | yes (magical; decided at M7) | 7 | done (0.6.0) for the three protective charms: AdvancedStationGameTests, CharmGameTests; capture charms wait for M8 |
+| Charm workbench | Sachets, amulets, animal capture charms, protection tokens | Charm Workbench | `apothecary/stations/advanced/charm_workbench/` | `charm_work` | yes (magical; decided at M7) | 7 | done (0.6.0) for the three protective charms: AdvancedStationGameTests, CharmGameTests; capture charms wait for M8 |
 | Grimoire stand / witch bookshelf | Research herbs, recipes, rituals | grimoire stand, witch bookshelf | `grimoire/access/block/` (with `grimoire/content/`, `grimoire/knowledge/`) | none (reads all recipes) | no | 4 | done (0.3.0): automated acceptance passed (unit tests, GameTests); owner checks pending |
 | Familiar beds, nests and perches | Assign rest locations and recovery | bed, nest, perch | `companions/familiars/home/` | none | owner must be bound witch | 9 | not started |
 | Home ward stone | Define guarded home area and targeting settings | ward stone | `magic/ward/` | none (ward activation, 20 energy default) | yes | 7 | done (0.6.0): WardGameTests, WardCodecTest, WardIndexTest; see "Ward stone" below |
 | Apothecary counter, register, shelves and jars | Stock, sell, display, track goods | counter, register, stock shelves, jars; decor Apothecary Counter links here | `shop/block/` (with `shop/catalog/`, `shop/trade/`, `shop/order/`, `shop/persistence/`) | none | witch runs shop; non-witch inspects and buys | 11 | not started |
-| Broom crafting stand | Craft and repair rideable flying brooms | broom stand | `magic/broom/` + `stations/broom_stand/` | broom work | yes (broom is witch-only) | 10 | not started |
-| Wand carving bench | Create utility wands for everyday tasks | wand bench | `magic/wand/` + `stations/wand_bench/` | wand carving | assumed yes (wand uses energy); confirm at M10 | 10 | not started |
+| Broom crafting stand | Craft and repair rideable flying brooms | broom stand | `magic/broom/` + `apothecary/stations/broom_stand/` | broom work | yes (broom is witch-only) | 10 | not started |
+| Wand carving bench | Create utility wands for everyday tasks | wand bench | `magic/wand/` + `apothecary/stations/wand_bench/` | wand carving | assumed yes (wand uses energy); confirm at M10 | 10 | not started |
 
 ## Milestone 3 stations in detail
 
@@ -64,7 +64,7 @@ Recipe types are `herbalwitch:processing/{drying,grinding,steeping,infusion}`. B
 
 Recipe types are `herbalwitch:processing/{cauldron,distillation,bottling,charm_work}`; block ids are
 `herbalwitch:stations/<station>/station`. The four share `AdvancedStationBlock` and `AdvancedStationEntity`
-(`stations/advanced/`), place through the shared previewed `StructurePlacementItem` and show an `active`
+(`apothecary/stations/advanced/`), place through the shared previewed `StructurePlacementItem` and show an `active`
 blockstate while working. `StationCatalog` lists them after the six everyday stations.
 
 | Station | Size | Recipe type | Duration | Heat | Witch | Assembly recipe (shapeless) |
@@ -185,10 +185,10 @@ grimoire page of the decor piece links the working station instead.
 
 | Decor piece (id under `decor/`) | Looks like | The working station |
 |---|---|---|
-| Decorative Drying Rack (`fixtures/drying_rack_decor`) | hanging herb frame | Herb Drying Rack (`stations/everyday/drying_rack/`): dries bundles |
-| Fireplace (`fixtures/fireplace`) and Firepit (`fixtures/firepit`) | hearth surround and fire | Hearth (`stations/everyday/hearth/`): the heat source for kettle and infusion pot. The firepit lights up and toggles like a lamp but heats nothing |
-| Kitchen Range (`fixtures/stove_oven`) | range with an oven door | Witch's Stove (`stations/stove/`): two burners, hearth fuel rules |
-| Work Table (`surfaces/work_table`) | broad worktable | Mortar and pestle (grinding); the Charm Workbench (`stations/advanced/charm_workbench/`, 0.6.0) is a separate working station |
+| Decorative Drying Rack (`fixtures/drying_rack_decor`) | hanging herb frame | Herb Drying Rack (`apothecary/stations/everyday/drying_rack/`): dries bundles |
+| Fireplace (`fixtures/fireplace`) and Firepit (`fixtures/firepit`) | hearth surround and fire | Hearth (`apothecary/stations/everyday/hearth/`): the heat source for kettle and infusion pot. The firepit lights up and toggles like a lamp but heats nothing |
+| Kitchen Range (`fixtures/stove_oven`) | range with an oven door | Witch's Stove (`apothecary/stations/stove/`): two burners, hearth fuel rules |
+| Work Table (`surfaces/work_table`) | broad worktable | Mortar and pestle (grinding); the Charm Workbench (`apothecary/stations/advanced/charm_workbench/`, 0.6.0) is a separate working station |
 | Altar Table (`fixtures/altar_table`) | dark table with moon motifs | The functional Ritual Altar (`magic/ritual/altar`, 0.5.0) for founding, initiation and meditation, and its Ritual Circle (0.6.0); the infusion pot for preparing |
 
 The recipes differ on purpose: for example the decor rack is string, sticks and slabs, and the
@@ -197,7 +197,7 @@ rack and elsewhere; the decorative rack does not change that.
 
 ## Rules
 
-- No universal machine superclass. Shared processing (`stations/process/`: reservations, job, completion) is used by composition; `StationBlock` and `StationMenu` share only block and menu boilerplate.
+- No universal machine superclass. Shared processing (`apothecary/stations/process/`: reservations, job, completion) is used by composition; `StationBlock` and `StationMenu` share only block and menu boilerplate.
 - Ordinary processing (drying, grinding, steeping, infusion, and the bottling bench) is open to non-witches and may be hopper-automated; magical jobs need an authorized witch nearby while progressing and at completion. Each recipe type has an execution policy (ordinary, magical or either) and a recipe's `requirements` (witch, energy) decide the rest.
 - A witch recipe reserves and runs nothing until a witch presses Start (a vanilla menu button); the energy is debited once, at completion, through `WitchStatusService`, and the starter is the payer.
 - Bottling is optional for teas: ordinary teas can finish in the kettle container. Bottling covers bulk portioning, packaging, labels and throwables.

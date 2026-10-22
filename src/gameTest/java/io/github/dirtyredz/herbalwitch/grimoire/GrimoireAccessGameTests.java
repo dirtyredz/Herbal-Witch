@@ -1,8 +1,8 @@
 package io.github.dirtyredz.herbalwitch.grimoire;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbCatalog;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationItems;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationItems;
 import io.github.dirtyredz.herbalwitch.grimoire.access.menu.GrimoireAccess;
 import io.github.dirtyredz.herbalwitch.grimoire.access.menu.GrimoireMenu;
 import io.github.dirtyredz.herbalwitch.grimoire.catalog.GrimoireCatalog;

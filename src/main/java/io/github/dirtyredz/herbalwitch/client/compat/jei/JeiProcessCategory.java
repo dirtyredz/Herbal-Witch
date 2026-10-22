@@ -1,9 +1,9 @@
 package io.github.dirtyredz.herbalwitch.client.compat.jei;
 
 import io.github.dirtyredz.herbalwitch.client.compat.ViewerLayout;
-import io.github.dirtyredz.herbalwitch.stations.description.ProcessingCategories;
-import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipe;
-import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipeDescription;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.description.ProcessingCategories;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipe;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipeDescription;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;

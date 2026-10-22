@@ -1,6 +1,6 @@
 package io.github.dirtyredz.herbalwitch.showcase;
 
-import io.github.dirtyredz.herbalwitch.botany.showcase.HerbShowcaseSection;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.showcase.HerbShowcaseSection;
 import io.github.dirtyredz.herbalwitch.data.botany.BotanyManifest;
 import io.github.dirtyredz.herbalwitch.data.decor.DecorManifest;
 import io.github.dirtyredz.herbalwitch.data.decor.manifest.DecorPieces;

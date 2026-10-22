@@ -1,9 +1,9 @@
 package io.github.dirtyredz.herbalwitch.fixture;
 
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbSpec;
-import io.github.dirtyredz.herbalwitch.botany.garden.GardenSoil;
-import io.github.dirtyredz.herbalwitch.botany.garden.HerbBedBlock;
-import io.github.dirtyredz.herbalwitch.botany.registry.BotanyBlocks;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbSpec;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.garden.GardenSoil;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.garden.HerbBedBlock;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.inventory.AbstractContainerMenu;

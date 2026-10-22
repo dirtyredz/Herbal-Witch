@@ -1,14 +1,14 @@
 package io.github.dirtyredz.herbalwitch.data.client.preparations;
 
-import io.github.dirtyredz.herbalwitch.brewing.product.catalog.ProductSpec;
-import io.github.dirtyredz.herbalwitch.brewing.product.item.AdvancedOilItem;
-import io.github.dirtyredz.herbalwitch.brewing.product.item.FamiliarPreparationItem;
-import io.github.dirtyredz.herbalwitch.brewing.product.item.ProductTooltips;
-import io.github.dirtyredz.herbalwitch.brewing.product.item.ThrowablePreparationItem;
-import io.github.dirtyredz.herbalwitch.brewing.product.metadata.PreparationMetadata;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.AdvancedPreparations;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationEffects;
-import io.github.dirtyredz.herbalwitch.brewing.product.showcase.AdvancedPreparationShowcaseSection;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.ProductSpec;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item.AdvancedOilItem;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item.FamiliarPreparationItem;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item.ProductTooltips;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item.ThrowablePreparationItem;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.metadata.PreparationMetadata;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.AdvancedPreparations;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationEffects;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.showcase.AdvancedPreparationShowcaseSection;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reference.AdvancedPreparationEntries;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.LanguageProvider;

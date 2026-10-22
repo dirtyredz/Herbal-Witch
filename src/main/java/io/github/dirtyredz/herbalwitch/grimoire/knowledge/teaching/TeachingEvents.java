@@ -9,7 +9,7 @@ import io.github.dirtyredz.herbalwitch.grimoire.network.ReaderUpdate;
 import io.github.dirtyredz.herbalwitch.grimoire.network.TeachingRequest;
 import io.github.dirtyredz.herbalwitch.grimoire.network.TeachingUpdate;
 import io.github.dirtyredz.herbalwitch.grimoire.reading.ReaderService;
-import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipe;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipe;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;

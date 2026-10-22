@@ -1,18 +1,18 @@
 package io.github.dirtyredz.herbalwitch.grimoire.content.recipe;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.brewing.product.catalog.EverydayProductCatalog;
-import io.github.dirtyredz.herbalwitch.brewing.product.item.ProductTooltips;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationItems;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.EverydayProductCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item.ProductTooltips;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationItems;
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContent;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContentSource;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireEntry;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reference.HerbForms;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reference.StationEntries;
-import io.github.dirtyredz.herbalwitch.stations.description.ProcessingCategories;
-import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipe;
-import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipeDescription;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.description.ProcessingCategories;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipe;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipeDescription;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;

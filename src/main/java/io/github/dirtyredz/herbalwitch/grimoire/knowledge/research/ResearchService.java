@@ -3,7 +3,7 @@ package io.github.dirtyredz.herbalwitch.grimoire.knowledge.research;
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContent;
-import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipe;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipe;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.Optional;

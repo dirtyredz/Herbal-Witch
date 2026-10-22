@@ -1,9 +1,9 @@
 package io.github.dirtyredz.herbalwitch.magic.witch;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.brewing.application.DrinkApplication;
-import io.github.dirtyredz.herbalwitch.brewing.product.catalog.EverydayProductCatalog;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationItems;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.DrinkApplication;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.EverydayProductCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationItems;
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
 import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyBalance;
 import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyEvents;

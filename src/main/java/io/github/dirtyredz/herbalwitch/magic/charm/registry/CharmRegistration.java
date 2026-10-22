@@ -5,7 +5,7 @@ import io.github.dirtyredz.herbalwitch.magic.charm.equipment.CharmEvents;
 import io.github.dirtyredz.herbalwitch.magic.charm.grimoire.CharmEntries;
 import io.github.dirtyredz.herbalwitch.magic.charm.showcase.CharmShowcaseSection;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseRegistry;
-import io.github.dirtyredz.herbalwitch.stations.registry.StationCreativeTab;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationCreativeTab;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.EventPriority;

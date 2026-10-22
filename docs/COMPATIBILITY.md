@@ -20,7 +20,7 @@ Exact versions: Farmer's Delight 1.3.4, Thirst Was Taken 1.4.0, EMI 1.1.24+1.20.
 ## Grimoire and the viewers (0.3.0, Milestone 4)
 
 - **Shared descriptions.** The grimoire, EMI and JEI all describe processing recipes through
-  `stations/description` (`ProcessingCategories` holds the one recipe-type-to-station mapping, with each
+  `apothecary/stations/description` (`ProcessingCategories` holds the one recipe-type-to-station mapping, with each
   category's heated flag), so a station's categories cannot differ between them.
 - **Viewers are not gated by discovery.** EMI and JEI still show every recipe whether or not the player has
   discovered it; nothing is hidden. There are still no transfer handlers (no transfer buttons).

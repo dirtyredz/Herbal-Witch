@@ -1,7 +1,7 @@
 package io.github.dirtyredz.herbalwitch;
 
-import io.github.dirtyredz.herbalwitch.botany.registry.BotanyRegistration;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationRegistration;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyRegistration;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationRegistration;
 import io.github.dirtyredz.herbalwitch.client.HerbalWitchClient;
 import io.github.dirtyredz.herbalwitch.data.HerbalWitchDataProviders;
 import io.github.dirtyredz.herbalwitch.decor.registry.DecorRegistration;
@@ -12,7 +12,7 @@ import io.github.dirtyredz.herbalwitch.magic.ward.registry.WardRegistration;
 import io.github.dirtyredz.herbalwitch.magic.witch.registry.WitchRegistration;
 import io.github.dirtyredz.herbalwitch.platform.compat.CompatibilityRegistration;
 import io.github.dirtyredz.herbalwitch.showcase.command.ShowcaseCommandRegistration;
-import io.github.dirtyredz.herbalwitch.stations.registry.StationRegistration;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationRegistration;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;

@@ -17,7 +17,7 @@ import io.github.dirtyredz.herbalwitch.magic.ritual.showcase.AltarShowcaseSectio
 import io.github.dirtyredz.herbalwitch.magic.ritual.showcase.CircleShowcaseSection;
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseRegistry;
-import io.github.dirtyredz.herbalwitch.stations.registry.StationCreativeTab;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationCreativeTab;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;

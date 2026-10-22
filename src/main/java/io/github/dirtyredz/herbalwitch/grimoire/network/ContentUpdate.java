@@ -1,7 +1,7 @@
 package io.github.dirtyredz.herbalwitch.grimoire.network;
 
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbHabitat;
-import io.github.dirtyredz.herbalwitch.botany.conditions.HerbConditions;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbHabitat;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.conditions.HerbConditions;
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reload.GrimoireDefinition;
 import io.github.dirtyredz.herbalwitch.platform.network.ChunkAssembly;

@@ -1,9 +1,9 @@
 package io.github.dirtyredz.herbalwitch.data.server.stations.recipes;
 
-import io.github.dirtyredz.herbalwitch.brewing.product.catalog.MixtureCatalog;
-import io.github.dirtyredz.herbalwitch.brewing.product.metadata.PreparationMetadata;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.AdvancedPreparations;
-import io.github.dirtyredz.herbalwitch.stations.registry.StationRecipes;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.MixtureCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.metadata.PreparationMetadata;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.AdvancedPreparations;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationRecipes;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;

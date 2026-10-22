@@ -1,13 +1,13 @@
 package io.github.dirtyredz.herbalwitch.data.server.stations.recipes;
 
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbCatalog;
-import io.github.dirtyredz.herbalwitch.brewing.product.catalog.AdvancedProductCatalog;
-import io.github.dirtyredz.herbalwitch.brewing.product.catalog.EverydayProductCatalog;
-import io.github.dirtyredz.herbalwitch.brewing.product.catalog.FamiliarPreparationCatalog;
-import io.github.dirtyredz.herbalwitch.brewing.product.catalog.ProductSpec;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.AdvancedPreparations;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationItems;
-import io.github.dirtyredz.herbalwitch.stations.registry.StationRecipes;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.AdvancedProductCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.EverydayProductCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.FamiliarPreparationCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.ProductSpec;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.AdvancedPreparations;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationItems;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationRecipes;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;

@@ -5,11 +5,11 @@ import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContent;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContentSource;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireEntry;
-import io.github.dirtyredz.herbalwitch.stations.catalog.StationCatalog;
-import io.github.dirtyredz.herbalwitch.stations.catalog.StationSpec;
-import io.github.dirtyredz.herbalwitch.stations.description.ProcessingCategories;
-import io.github.dirtyredz.herbalwitch.stations.registry.StationBlocks;
-import io.github.dirtyredz.herbalwitch.stations.registry.StationItems;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationSpec;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.description.ProcessingCategories;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationBlocks;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationItems;
 import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;

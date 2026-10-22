@@ -10,7 +10,7 @@ import io.github.dirtyredz.herbalwitch.decor.registry.DecorBlocks;
 import io.github.dirtyredz.herbalwitch.decor.registry.DecorItems;
 import io.github.dirtyredz.herbalwitch.decor.structure.FurnitureLayouts;
 import io.github.dirtyredz.herbalwitch.platform.multiblock.MultiblockLayout;
-import io.github.dirtyredz.herbalwitch.stations.heat.HeatSourceTags;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.heat.HeatSourceTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTest;

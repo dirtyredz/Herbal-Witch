@@ -1,13 +1,13 @@
 package io.github.dirtyredz.herbalwitch.data.client.botany;
 
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbCatalog;
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbHabitat;
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbSpec;
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbTrait;
-import io.github.dirtyredz.herbalwitch.botany.crop.HerbTooltips;
-import io.github.dirtyredz.herbalwitch.botany.registry.BotanyBlocks;
-import io.github.dirtyredz.herbalwitch.botany.registry.BotanyCreativeTab;
-import io.github.dirtyredz.herbalwitch.botany.registry.BotanyItems;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbHabitat;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbSpec;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbTrait;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.crop.HerbTooltips;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyBlocks;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyCreativeTab;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyItems;
 import net.minecraftforge.common.data.LanguageProvider;
 
 /** Herb plant, seed and fresh herb names, the herb bed, the gardening tab, traits and acquisition tooltips. */

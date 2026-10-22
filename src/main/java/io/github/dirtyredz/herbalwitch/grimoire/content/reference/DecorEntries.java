@@ -8,8 +8,8 @@ import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContent;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContentSource;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireEntry;
-import io.github.dirtyredz.herbalwitch.stations.catalog.StationCatalog;
-import io.github.dirtyredz.herbalwitch.stations.catalog.StationSpec;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationSpec;
 import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;

@@ -19,7 +19,7 @@ import io.github.dirtyredz.herbalwitch.grimoire.network.TeachingRequest;
 import io.github.dirtyredz.herbalwitch.grimoire.reading.ReaderService;
 import io.github.dirtyredz.herbalwitch.grimoire.showcase.GrimoireShowcaseSection;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseRegistry;
-import io.github.dirtyredz.herbalwitch.stations.registry.StationCreativeTab;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationCreativeTab;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraftforge.common.MinecraftForge;

@@ -1,14 +1,14 @@
 package io.github.dirtyredz.herbalwitch.data.client.preparations;
 
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbCatalog;
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbSpec;
-import io.github.dirtyredz.herbalwitch.brewing.product.catalog.EverydayProductCatalog;
-import io.github.dirtyredz.herbalwitch.brewing.product.catalog.ProductSpec;
-import io.github.dirtyredz.herbalwitch.brewing.product.item.ProductTooltips;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationBlocks;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationEffects;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationItems;
-import io.github.dirtyredz.herbalwitch.brewing.product.showcase.PreparationShowcaseSection;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbSpec;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.EverydayProductCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.ProductSpec;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item.ProductTooltips;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationBlocks;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationEffects;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationItems;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.showcase.PreparationShowcaseSection;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.LanguageProvider;
 

@@ -1,6 +1,6 @@
 package io.github.dirtyredz.herbalwitch.magic.ward.targeting;
 
-import io.github.dirtyredz.herbalwitch.brewing.effect.repellent.RepellentProfiles;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.repellent.RepellentProfiles;
 import io.github.dirtyredz.herbalwitch.magic.ward.catalog.WardCatalog;
 import io.github.dirtyredz.herbalwitch.magic.ward.service.WardIndex;
 import io.github.dirtyredz.herbalwitch.magic.ward.service.WardService;

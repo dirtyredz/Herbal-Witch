@@ -1,6 +1,6 @@
 package io.github.dirtyredz.herbalwitch.magic.ritual.action;
 
-import io.github.dirtyredz.herbalwitch.botany.garden.HerbBedBlock;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.garden.HerbBedBlock;
 import io.github.dirtyredz.herbalwitch.grimoire.knowledge.discovery.DiscoveryService;
 import io.github.dirtyredz.herbalwitch.magic.ritual.catalog.AltarActionSpec;
 import io.github.dirtyredz.herbalwitch.magic.ritual.grimoire.AltarEntries;

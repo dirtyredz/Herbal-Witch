@@ -1,9 +1,9 @@
 package io.github.dirtyredz.herbalwitch.showcase;
 
-import io.github.dirtyredz.herbalwitch.botany.showcase.GardenShowcaseSection;
-import io.github.dirtyredz.herbalwitch.botany.showcase.HerbShowcaseSection;
-import io.github.dirtyredz.herbalwitch.brewing.product.showcase.AdvancedPreparationShowcaseSection;
-import io.github.dirtyredz.herbalwitch.brewing.product.showcase.PreparationShowcaseSection;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.showcase.GardenShowcaseSection;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.showcase.HerbShowcaseSection;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.showcase.AdvancedPreparationShowcaseSection;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.showcase.PreparationShowcaseSection;
 import io.github.dirtyredz.herbalwitch.decor.showcase.DecorShowcaseSection;
 import io.github.dirtyredz.herbalwitch.grimoire.showcase.GrimoireShowcaseSection;
 import io.github.dirtyredz.herbalwitch.magic.charm.showcase.CharmShowcaseSection;
@@ -13,9 +13,9 @@ import io.github.dirtyredz.herbalwitch.magic.ward.showcase.WardShowcaseSection;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcasePlacement;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcasePlan;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseSection;
-import io.github.dirtyredz.herbalwitch.stations.catalog.StationCatalog;
-import io.github.dirtyredz.herbalwitch.stations.catalog.StationSpec;
-import io.github.dirtyredz.herbalwitch.stations.showcase.StationShowcaseSection;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationSpec;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.showcase.StationShowcaseSection;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

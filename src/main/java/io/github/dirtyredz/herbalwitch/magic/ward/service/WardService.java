@@ -14,7 +14,7 @@ import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchStatusService;
 import io.github.dirtyredz.herbalwitch.platform.permission.ActionContext;
 import io.github.dirtyredz.herbalwitch.platform.permission.ActionPermissionService;
 import io.github.dirtyredz.herbalwitch.platform.permission.entity.EntityActionPermission;
-import io.github.dirtyredz.herbalwitch.stations.registry.StationBlocks;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;

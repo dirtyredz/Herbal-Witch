@@ -1,8 +1,8 @@
 package io.github.dirtyredz.herbalwitch.client.compat;
 
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
-import io.github.dirtyredz.herbalwitch.stations.description.ProcessingCategories;
-import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipeDescription;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.description.ProcessingCategories;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipeDescription;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 

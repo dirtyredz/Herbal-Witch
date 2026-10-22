@@ -1,8 +1,8 @@
 package io.github.dirtyredz.herbalwitch.data.server.botany;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbHabitat;
-import io.github.dirtyredz.herbalwitch.botany.registry.BotanyTags;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbHabitat;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.BiomeTagsProvider;

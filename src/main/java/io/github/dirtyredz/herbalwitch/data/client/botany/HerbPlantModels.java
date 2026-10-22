@@ -1,9 +1,9 @@
 package io.github.dirtyredz.herbalwitch.data.client.botany;
 
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbCatalog;
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbSpec;
-import io.github.dirtyredz.herbalwitch.botany.crop.HerbCropBlock;
-import io.github.dirtyredz.herbalwitch.botany.registry.BotanyBlocks;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbSpec;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.crop.HerbCropBlock;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyBlocks;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;

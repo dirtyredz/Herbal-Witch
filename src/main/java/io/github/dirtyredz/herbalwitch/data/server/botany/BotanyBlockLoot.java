@@ -1,11 +1,11 @@
 package io.github.dirtyredz.herbalwitch.data.server.botany;
 
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbCatalog;
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbSpec;
-import io.github.dirtyredz.herbalwitch.botany.crop.HerbCropBlock;
-import io.github.dirtyredz.herbalwitch.botany.crop.HerbHarvest;
-import io.github.dirtyredz.herbalwitch.botany.registry.BotanyBlocks;
-import io.github.dirtyredz.herbalwitch.botany.registry.BotanyItems;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbSpec;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.crop.HerbCropBlock;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.crop.HerbHarvest;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyBlocks;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;

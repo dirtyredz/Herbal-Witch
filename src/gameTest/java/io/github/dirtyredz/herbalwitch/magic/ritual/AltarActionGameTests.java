@@ -1,8 +1,8 @@
 package io.github.dirtyredz.herbalwitch.magic.ritual;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbCatalog;
-import io.github.dirtyredz.herbalwitch.botany.registry.BotanyItems;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyItems;
 import io.github.dirtyredz.herbalwitch.grimoire.knowledge.discovery.DiscoveryService;
 import io.github.dirtyredz.herbalwitch.grimoire.registry.GrimoireItems;
 import io.github.dirtyredz.herbalwitch.magic.ritual.action.AttunementAction;

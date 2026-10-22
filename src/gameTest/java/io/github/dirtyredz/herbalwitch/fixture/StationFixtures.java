@@ -1,8 +1,8 @@
 package io.github.dirtyredz.herbalwitch.fixture;
 
-import io.github.dirtyredz.herbalwitch.stations.block.StationEntity;
-import io.github.dirtyredz.herbalwitch.stations.block.StationBlock;
-import io.github.dirtyredz.herbalwitch.stations.process.ProcessInventory;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.block.StationEntity;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.block.StationBlock;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;

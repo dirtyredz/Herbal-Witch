@@ -1,6 +1,6 @@
 package io.github.dirtyredz.herbalwitch.client.brewing;
 
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.BrewingEntities;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.BrewingEntities;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 

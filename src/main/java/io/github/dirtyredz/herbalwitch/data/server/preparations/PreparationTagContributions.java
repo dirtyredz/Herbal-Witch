@@ -1,12 +1,12 @@
 package io.github.dirtyredz.herbalwitch.data.server.preparations;
 
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbCatalog;
-import io.github.dirtyredz.herbalwitch.brewing.effect.combat.WeaponCoating;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.combat.WeaponCoating;
 import net.minecraft.tags.ItemTags;
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbSpec;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationBlocks;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationItems;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationTags;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbSpec;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationBlocks;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationItems;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationTags;
 import io.github.dirtyredz.herbalwitch.data.server.tags.HerbalWitchBlockTagsProvider;
 import io.github.dirtyredz.herbalwitch.data.server.tags.HerbalWitchItemTagsProvider;
 import net.minecraft.tags.BlockTags;

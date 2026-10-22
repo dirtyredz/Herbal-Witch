@@ -1,6 +1,6 @@
 package io.github.dirtyredz.herbalwitch.data.server.preparations;
 
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationBlocks;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationBlocks;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;

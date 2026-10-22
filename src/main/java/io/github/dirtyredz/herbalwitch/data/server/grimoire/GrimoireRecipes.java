@@ -1,7 +1,7 @@
 package io.github.dirtyredz.herbalwitch.data.server.grimoire;
 
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbCatalog;
-import io.github.dirtyredz.herbalwitch.botany.registry.BotanyItems;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyItems;
 import io.github.dirtyredz.herbalwitch.grimoire.catalog.GrimoireCatalog;
 import io.github.dirtyredz.herbalwitch.grimoire.registry.GrimoireItems;
 import net.minecraft.data.recipes.FinishedRecipe;

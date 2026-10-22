@@ -1,10 +1,10 @@
 package io.github.dirtyredz.herbalwitch.grimoire.content;
 
-import io.github.dirtyredz.herbalwitch.botany.conditions.HerbConditionReloadListener;
-import io.github.dirtyredz.herbalwitch.botany.conditions.HerbConditions;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.conditions.HerbConditionReloadListener;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.conditions.HerbConditions;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reload.GrimoireDefinition;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reload.GrimoireDefinitionLoader;
-import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipeIndex;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipeIndex;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.item.crafting.RecipeManager;
 

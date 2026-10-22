@@ -1,14 +1,14 @@
 package io.github.dirtyredz.herbalwitch.data.client.stations;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.stations.catalog.StationCatalog;
-import io.github.dirtyredz.herbalwitch.stations.catalog.StationSpec;
-import io.github.dirtyredz.herbalwitch.stations.description.ProcessingCategories;
-import io.github.dirtyredz.herbalwitch.stations.process.ProcessStatus;
-import io.github.dirtyredz.herbalwitch.stations.process.authorization.StationOperations;
-import io.github.dirtyredz.herbalwitch.stations.registry.StationBlocks;
-import io.github.dirtyredz.herbalwitch.stations.registry.StationCreativeTab;
-import io.github.dirtyredz.herbalwitch.stations.registry.StationRegistration;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationSpec;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.description.ProcessingCategories;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessStatus;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.process.authorization.StationOperations;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationBlocks;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationCreativeTab;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationRegistration;
 import net.minecraftforge.common.data.LanguageProvider;
 
 import java.util.LinkedHashMap;

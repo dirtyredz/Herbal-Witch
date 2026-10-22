@@ -1,10 +1,10 @@
 package io.github.dirtyredz.herbalwitch.data.server.botany;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbCatalog;
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbSpec;
-import io.github.dirtyredz.herbalwitch.botany.conditions.HerbConditionReloadListener;
-import io.github.dirtyredz.herbalwitch.botany.conditions.HerbConditions;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbSpec;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.conditions.HerbConditionReloadListener;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.conditions.HerbConditions;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;

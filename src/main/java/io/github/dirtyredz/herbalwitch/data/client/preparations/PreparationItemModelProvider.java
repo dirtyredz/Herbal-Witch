@@ -1,13 +1,13 @@
 package io.github.dirtyredz.herbalwitch.data.client.preparations;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbCatalog;
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbSpec;
-import io.github.dirtyredz.herbalwitch.brewing.product.catalog.EverydayProductCatalog;
-import io.github.dirtyredz.herbalwitch.brewing.product.catalog.HerbalMaterialCatalog;
-import io.github.dirtyredz.herbalwitch.brewing.product.catalog.ProductSpec;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.AdvancedPreparations;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationBlocks;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbSpec;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.EverydayProductCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.HerbalMaterialCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.ProductSpec;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.AdvancedPreparations;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;

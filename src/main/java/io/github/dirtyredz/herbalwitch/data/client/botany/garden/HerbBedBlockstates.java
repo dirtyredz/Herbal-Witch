@@ -1,8 +1,8 @@
 package io.github.dirtyredz.herbalwitch.data.client.botany.garden;
 
-import io.github.dirtyredz.herbalwitch.botany.garden.GardenBedConnections;
-import io.github.dirtyredz.herbalwitch.botany.garden.HerbBedBlock;
-import io.github.dirtyredz.herbalwitch.botany.registry.BotanyBlocks;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.garden.GardenBedConnections;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.garden.HerbBedBlock;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraftforge.client.model.generators.BlockStateProvider;

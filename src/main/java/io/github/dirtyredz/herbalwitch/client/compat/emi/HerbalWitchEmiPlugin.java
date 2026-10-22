@@ -7,9 +7,9 @@ import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiStack;
 import io.github.dirtyredz.herbalwitch.client.compat.ritual.RitualCardLayout;
 import io.github.dirtyredz.herbalwitch.magic.ritual.registry.RitualItems;
-import io.github.dirtyredz.herbalwitch.stations.description.ProcessingCategories;
-import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipe;
-import io.github.dirtyredz.herbalwitch.stations.registry.StationItems;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.description.ProcessingCategories;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipe;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationItems;
 import net.minecraft.world.item.crafting.RecipeType;
 
 /**

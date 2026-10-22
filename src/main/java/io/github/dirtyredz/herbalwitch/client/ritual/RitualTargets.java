@@ -1,6 +1,6 @@
 package io.github.dirtyredz.herbalwitch.client.ritual;
 
-import io.github.dirtyredz.herbalwitch.botany.garden.HerbBedBlock;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.garden.HerbBedBlock;
 import io.github.dirtyredz.herbalwitch.magic.ward.block.WardStoneBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;

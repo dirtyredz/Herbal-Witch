@@ -1,8 +1,8 @@
 package io.github.dirtyredz.herbalwitch.showcase;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.botany.registry.BotanyBlocks;
-import io.github.dirtyredz.herbalwitch.botany.garden.GardenBedConnections;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyBlocks;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.garden.GardenBedConnections;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;

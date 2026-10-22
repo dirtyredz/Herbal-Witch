@@ -1,21 +1,21 @@
 package io.github.dirtyredz.herbalwitch.grimoire.content.reference;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.brewing.application.advanced.DrinkApplications;
-import io.github.dirtyredz.herbalwitch.brewing.effect.control.ControlEffects;
-import io.github.dirtyredz.herbalwitch.brewing.effect.repellent.TargetFilters;
-import io.github.dirtyredz.herbalwitch.brewing.product.catalog.AdvancedProductCatalog;
-import io.github.dirtyredz.herbalwitch.brewing.product.catalog.FamiliarPreparationCatalog;
-import io.github.dirtyredz.herbalwitch.brewing.product.catalog.MixtureCatalog;
-import io.github.dirtyredz.herbalwitch.brewing.product.item.ThrowablePreparationItem;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.AdvancedPreparations;
-import io.github.dirtyredz.herbalwitch.brewing.projectile.PreparationImpact;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.advanced.DrinkApplications;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.control.ControlEffects;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.repellent.TargetFilters;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.AdvancedProductCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.FamiliarPreparationCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.MixtureCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item.ThrowablePreparationItem;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.AdvancedPreparations;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.projectile.PreparationImpact;
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContent;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContentSource;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireEntry;
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
-import io.github.dirtyredz.herbalwitch.stations.process.authorization.MagicalProcessPolicy;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.process.authorization.MagicalProcessPolicy;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 

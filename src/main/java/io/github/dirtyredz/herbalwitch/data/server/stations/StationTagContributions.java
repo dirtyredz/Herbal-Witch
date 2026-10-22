@@ -1,8 +1,8 @@
 package io.github.dirtyredz.herbalwitch.data.server.stations;
 
 import io.github.dirtyredz.herbalwitch.data.server.tags.HerbalWitchBlockTagsProvider;
-import io.github.dirtyredz.herbalwitch.stations.heat.HeatSourceTags;
-import io.github.dirtyredz.herbalwitch.stations.registry.StationBlocks;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.heat.HeatSourceTags;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationBlocks;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;

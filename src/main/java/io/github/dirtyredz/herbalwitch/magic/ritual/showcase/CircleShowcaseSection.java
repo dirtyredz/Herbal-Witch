@@ -1,10 +1,10 @@
 package io.github.dirtyredz.herbalwitch.magic.ritual.showcase;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbCatalog;
-import io.github.dirtyredz.herbalwitch.botany.registry.BotanyBlocks;
-import io.github.dirtyredz.herbalwitch.brewing.product.catalog.EverydayProductCatalog;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationItems;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyBlocks;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.EverydayProductCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationItems;
 import io.github.dirtyredz.herbalwitch.magic.ritual.altar.AltarBlock;
 import io.github.dirtyredz.herbalwitch.magic.ritual.catalog.AltarCatalog;
 import io.github.dirtyredz.herbalwitch.magic.ritual.catalog.CircleCatalog;

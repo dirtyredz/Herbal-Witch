@@ -1,12 +1,12 @@
 package io.github.dirtyredz.herbalwitch.preparations;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbCatalog;
-import io.github.dirtyredz.herbalwitch.brewing.product.catalog.EverydayProductCatalog;
-import io.github.dirtyredz.herbalwitch.brewing.product.lighting.OilLanternBlock;
-import io.github.dirtyredz.herbalwitch.brewing.product.lighting.OilLanternBlockEntity;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationBlocks;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationItems;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.EverydayProductCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.lighting.OilLanternBlock;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.lighting.OilLanternBlockEntity;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationBlocks;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTest;

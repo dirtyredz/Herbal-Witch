@@ -11,7 +11,7 @@ import io.github.dirtyredz.herbalwitch.magic.ward.service.WardService;
 import io.github.dirtyredz.herbalwitch.magic.ward.showcase.WardShowcaseSection;
 import io.github.dirtyredz.herbalwitch.magic.ward.targeting.WardProtection;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseRegistry;
-import io.github.dirtyredz.herbalwitch.stations.registry.StationCreativeTab;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationCreativeTab;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;

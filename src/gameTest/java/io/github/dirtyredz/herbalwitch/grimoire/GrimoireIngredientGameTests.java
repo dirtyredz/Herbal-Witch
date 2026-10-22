@@ -1,15 +1,15 @@
 package io.github.dirtyredz.herbalwitch.grimoire;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbCatalog;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationItems;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationItems;
 import io.github.dirtyredz.herbalwitch.grimoire.access.menu.GrimoireMenu;
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.network.ReaderRequest;
 import io.github.dirtyredz.herbalwitch.grimoire.network.ReaderUpdate;
 import io.github.dirtyredz.herbalwitch.grimoire.reading.ReaderService;
 import io.github.dirtyredz.herbalwitch.grimoire.reading.ingredients.IngredientRequirements;
-import io.github.dirtyredz.herbalwitch.stations.process.recipe.ProcessRecipeDescription;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipeDescription;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;

@@ -1,7 +1,7 @@
 # Herb catalogue
 
 Authoritative table of the 14 herbs (Milestone 2). Ids are `herbalwitch:botany/<group>/<herb>/{plant,seeds,fresh}`
-and permanent. Groups are the habitat: temperate, dry, wet, shade, woodland. Module: `botany/` (docs/ARCHITECTURE.md).
+and permanent. Groups are the habitat: temperate, dry, wet, shade, woodland. Module: `apothecary/botany/` (docs/ARCHITECTURE.md).
 
 ## Herbs
 

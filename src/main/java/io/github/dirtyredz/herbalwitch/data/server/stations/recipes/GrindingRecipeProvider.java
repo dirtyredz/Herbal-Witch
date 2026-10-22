@@ -1,9 +1,9 @@
 package io.github.dirtyredz.herbalwitch.data.server.stations.recipes;
 
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbCatalog;
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbSpec;
-import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationItems;
-import io.github.dirtyredz.herbalwitch.stations.registry.StationRecipes;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbSpec;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationItems;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationRecipes;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -11,10 +11,10 @@ import net.minecraft.world.level.ItemLike;
 
 import java.util.function.Consumer;
 
-import static io.github.dirtyredz.herbalwitch.brewing.product.catalog.EverydayProductCatalog.FERTILIZER;
-import static io.github.dirtyredz.herbalwitch.brewing.product.catalog.EverydayProductCatalog.FLOWER_DUST;
-import static io.github.dirtyredz.herbalwitch.brewing.product.catalog.EverydayProductCatalog.MUSHROOM_DUST;
-import static io.github.dirtyredz.herbalwitch.brewing.product.catalog.EverydayProductCatalog.PLANT_OIL;
+import static io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.EverydayProductCatalog.FERTILIZER;
+import static io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.EverydayProductCatalog.FLOWER_DUST;
+import static io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.EverydayProductCatalog.MUSHROOM_DUST;
+import static io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.EverydayProductCatalog.PLANT_OIL;
 
 /**
  * Grinding, 100 ticks, no heat: every bundle into its powder, seeds pressed into plant oil, garden

@@ -1,7 +1,7 @@
 package io.github.dirtyredz.herbalwitch.fixture;
 
-import io.github.dirtyredz.herbalwitch.botany.catalog.HerbCatalog;
-import io.github.dirtyredz.herbalwitch.botany.registry.BotanyItems;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyItems;
 import io.github.dirtyredz.herbalwitch.magic.ritual.altar.AltarBlock;
 import io.github.dirtyredz.herbalwitch.magic.ritual.menu.AltarMenu;
 import io.github.dirtyredz.herbalwitch.magic.ritual.registry.RitualBlocks;

@@ -1,7 +1,7 @@
 package io.github.dirtyredz.herbalwitch.data.server.compat;
 
 import io.github.dirtyredz.herbalwitch.data.server.tags.HerbalWitchBlockTagsProvider;
-import io.github.dirtyredz.herbalwitch.stations.registry.StationBlocks;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationBlocks;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 

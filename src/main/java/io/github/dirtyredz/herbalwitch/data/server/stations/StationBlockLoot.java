@@ -1,7 +1,7 @@
 package io.github.dirtyredz.herbalwitch.data.server.stations;
 
-import io.github.dirtyredz.herbalwitch.stations.block.StationBlock;
-import io.github.dirtyredz.herbalwitch.stations.registry.StationBlocks;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.block.StationBlock;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.StationBlocks;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
