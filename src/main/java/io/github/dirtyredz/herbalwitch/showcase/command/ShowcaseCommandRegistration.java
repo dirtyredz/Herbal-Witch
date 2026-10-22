@@ -3,6 +3,7 @@ package io.github.dirtyredz.herbalwitch.showcase.command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
+import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseGroup;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseRegistry;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseSection;
 import net.minecraft.commands.CommandSourceStack;
@@ -11,10 +12,12 @@ import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
 
+import java.util.Arrays;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
- * Registers {@code /herbalwitch showcase [section]}. Operators only (permission level 2); creative
+ * Registers {@code /herbalwitch showcase [furniture|witchcraft|section]}. Operators only (permission level 2); creative
  * mode alone is not enough, and the console is refused (a player origin is required).
  */
 public final class ShowcaseCommandRegistration {
@@ -38,7 +41,8 @@ public final class ShowcaseCommandRegistration {
                         .executes(context -> ShowcaseCommand.run(context.getSource(), Optional.empty()))
                         .then(Commands.argument("section", StringArgumentType.word())
                                 .suggests((context, builder) -> SharedSuggestionProvider.suggest(
-                                        ShowcaseRegistry.sections().stream().map(ShowcaseSection::id), builder))
+                                        Stream.concat(Arrays.stream(ShowcaseGroup.values()).map(ShowcaseGroup::id),
+                                                ShowcaseRegistry.sections().stream().map(ShowcaseSection::id)), builder))
                                 .executes(context -> ShowcaseCommand.run(context.getSource(),
                                         Optional.of(StringArgumentType.getString(context, "section")))))));
     }

@@ -14,14 +14,14 @@ import net.minecraft.world.level.block.Blocks;
  * tools/generate-test-structures.mjs.
  */
 public final class ShowcaseFixtures {
-    /** Fits the full showcase plus the entrance aisle. */
+    /** Fits both showcases, the separation between them and the entrance aisle. */
     public static final String FULL = "showcase";
     public static final int FULL_X = 128;
-    public static final int FULL_Z = 64;
+    public static final int FULL_Z = 80;
     /** Fits one small section. */
     public static final String SECTION = "showcase_section";
     public static final int SECTION_X = 16;
-    public static final int SECTION_Z = 12;
+    public static final int SECTION_Z = 14;
     /** Where the player stands; the box's minimum corner is two blocks east, on the floor. */
     public static final BlockPos STAND = new BlockPos(0, 1, 1);
     public static final BlockPos ORIGIN = new BlockPos(2, 0, 1);

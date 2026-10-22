@@ -30,6 +30,8 @@ public final class PreparationShowcaseSection implements ShowcaseSection {
     public static final String POWDERS = "showcase." + HerbalWitch.MOD_ID + ".label.powders";
     public static final String PRODUCTS = "showcase." + HerbalWitch.MOD_ID + ".label.products";
     public static final String LANTERN = "showcase." + HerbalWitch.MOD_ID + ".label.oil_lantern";
+    /** Columns per sample: its sign, the block and an open block, so each sign sits beside one block. */
+    private static final int STRIDE = 3;
 
     @Override
     public String id() {
@@ -46,32 +48,33 @@ public final class PreparationShowcaseSection implements ShowcaseSection {
         List<ShowcasePlacement> out = new ArrayList<>();
         for (int i = 0; i < HerbCatalog.ALL.size(); i++) {
             HerbSpec herb = HerbCatalog.ALL.get(i);
-            out.add(ShowcasePlacement.label(i, 0, Line.literal(herb.displayName()), Line.literal("Bundle")));
-            out.add(ShowcasePlacement.support(i, 1, 2, () -> Blocks.STRIPPED_DARK_OAK_WOOD.defaultBlockState()));
-            out.add(ShowcasePlacement.support(i, 2, 2, () -> Blocks.STRIPPED_DARK_OAK_WOOD.defaultBlockState()));
-            out.add(ShowcasePlacement.content(i, 2, 1, () -> PreparationBlocks.bundle(herb).defaultBlockState()
+            int x = STRIDE * i;
+            out.add(ShowcasePlacement.label(x, 1, Line.literal(herb.displayName()), Line.literal("Bundle")));
+            out.add(ShowcasePlacement.support(x + 1, 1, 2, () -> Blocks.STRIPPED_DARK_OAK_WOOD.defaultBlockState()));
+            out.add(ShowcasePlacement.support(x + 1, 2, 2, () -> Blocks.STRIPPED_DARK_OAK_WOOD.defaultBlockState()));
+            out.add(ShowcasePlacement.content(x + 1, 2, 1, () -> PreparationBlocks.bundle(herb).defaultBlockState()
                     .setValue(FaceAttachedHorizontalDirectionalBlock.FACE, AttachFace.WALL)
                     .setValue(FaceAttachedHorizontalDirectionalBlock.FACING, Direction.NORTH)));
         }
-        int x = HerbCatalog.ALL.size() + 1;
-        out.add(ShowcasePlacement.label(x, 0, Line.translated(POWDERS)));
-        out.add(ShowcasePlacement.content(x, 1, 1, () -> Blocks.BARREL.defaultBlockState(), entity -> {
+        int x = STRIDE * HerbCatalog.ALL.size();
+        out.add(ShowcasePlacement.label(x, 1, Line.translated(POWDERS)));
+        out.add(ShowcasePlacement.content(x + 1, 1, 1, () -> Blocks.BARREL.defaultBlockState(), entity -> {
             if (entity instanceof Container barrel) {
                 for (int i = 0; i < HerbCatalog.ALL.size(); i++) {
                     barrel.setItem(i, new ItemStack(PreparationItems.powder(HerbCatalog.ALL.get(i)), 8));
                 }
             }
         }));
-        out.add(ShowcasePlacement.label(x + 2, 0, Line.translated(PRODUCTS)));
-        out.add(ShowcasePlacement.content(x + 2, 1, 1, () -> Blocks.BARREL.defaultBlockState(), entity -> {
+        out.add(ShowcasePlacement.label(x + STRIDE, 1, Line.translated(PRODUCTS)));
+        out.add(ShowcasePlacement.content(x + STRIDE + 1, 1, 1, () -> Blocks.BARREL.defaultBlockState(), entity -> {
             if (entity instanceof Container barrel) {
                 for (int i = 0; i < EverydayProductCatalog.ALL.size(); i++) {
                     barrel.setItem(i, new ItemStack(PreparationItems.product(EverydayProductCatalog.ALL.get(i)), 4));
                 }
             }
         }));
-        out.add(ShowcasePlacement.label(x + 4, 0, Line.translated(LANTERN)));
-        out.add(ShowcasePlacement.content(x + 4, 1, 1,
+        out.add(ShowcasePlacement.label(x + 2 * STRIDE, 1, Line.translated(LANTERN)));
+        out.add(ShowcasePlacement.content(x + 2 * STRIDE + 1, 1, 1,
                 () -> PreparationBlocks.OIL_LANTERN.get().defaultBlockState().setValue(OilLanternBlock.LIT, true), entity -> {
                     if (entity instanceof OilLanternBlockEntity lantern) {
                         lantern.setFuel(OilLanternBlockEntity.FUEL_TICKS);

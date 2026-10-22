@@ -27,8 +27,8 @@ import static io.github.dirtyredz.herbalwitch.fixture.WorldFixtures.check;
 @GameTestHolder(HerbalWitch.MOD_ID)
 @PrefixGameTestTemplate(false)
 public final class ShowcaseCommandGameTests {
-    /** The garden section's dry bed: section (0, 1, 1), one row behind the heading. */
-    private static final BlockPos DRY_BED = ORIGIN.offset(0, 1, 2);
+    /** The garden section's dry bed: section (1, 1, 1): a sign (x 0) beside it, the heading and an open row (2) before it. */
+    private static final BlockPos DRY_BED = ORIGIN.offset(1, 1, 3);
 
     private ShowcaseCommandGameTests() {
     }
@@ -41,8 +41,8 @@ public final class ShowcaseCommandGameTests {
         check(placed > 0, "operator command placed nothing");
         check(helper.getBlockState(DRY_BED).is(BotanyBlocks.herbBed()), "garden bed missing: " + helper.getBlockState(DRY_BED));
         check(helper.getBlockState(ORIGIN.offset(0, 1, 0)).is(Blocks.OAK_SIGN), "section heading sign missing");
-        // the planted square's north-west bed (section 0, 1, 3) joined its neighbours as it was built
-        BlockState square = helper.getBlockState(ORIGIN.offset(0, 1, 4));
+        // the planted square's north-west bed (section 0, 1, 3 = box z 5) joined its neighbours as it was built
+        BlockState square = helper.getBlockState(ORIGIN.offset(0, 1, 5));
         check(square.getValue(GardenBedConnections.EAST) && square.getValue(GardenBedConnections.SOUTH)
                 && !square.getValue(GardenBedConnections.NORTH) && !square.getValue(GardenBedConnections.WEST), "showcase beds did not join: " + square);
         check(!helper.getBlockState(DRY_BED).getValue(GardenBedConnections.EAST), "the lone dry bed joined something");

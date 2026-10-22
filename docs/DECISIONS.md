@@ -2,6 +2,16 @@
 
 Newest first.
 
+## 2026-10-22 - Showcase split into furniture and witchcraft; signs beside their block
+
+- The owner found furniture among the products and abilities, and the signs hiding their blocks. The
+  showcase is now two plans (`ShowcaseGroup`: `furniture` = `decor`, `witchcraft` = everything else, the
+  default for any new section), each its own plot with its own preflight and bounds; the bare command
+  builds both, 8 blocks apart, after checking both. The section registration seam is unchanged.
+- Sign rule: one cell west of the block, in the block's front row (never north of it), with an open cell
+  between samples; notes annotating no block stand in a front row with nothing behind them; headings
+  keep an open row. Rejected: a sign on a post behind the block (the block hides it), a sign raised above
+  it (breaks for wall and ceiling pieces), a per-section arrangement (no single rule to test).
 ## 2026-10-22 - Review round 2: one-way ward package, numeric grimoire priorities
 
 - `WardService` is the top of `magic/ward/service` (server lifecycle, ticks); activation, controls,

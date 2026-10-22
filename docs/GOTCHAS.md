@@ -270,7 +270,13 @@ Discovery forms resolve lazily after registration, in seeds/fresh/bundle/powder 
   16 cells and no `assembly` (the item is a sprite, `multiblock.assembly: false`). It is the one resource
   directory allowed past 12 files; do not "tidy" it, and do not add an item assembly.
 - **The showcase packs rows to 126.** `ShowcasePlan` wraps a section onto a new row past `ROW_WIDTH`, so
-  adding a section changes the depth, not the width; the GameTest template (`showcase`) is 128 x 10 x 64
-  and `ShowcasePlanTest` fails when a plan outgrows it (regenerate with `tools/generate-test-structures.mjs`).
+  adding a section changes the depth, not the width; the GameTest template (`showcase`) is 128 x 10 x 80
+  (both showcases plus the separation) and `ShowcasePlanTest` fails when a plan outgrows it (regenerate
+  with `tools/generate-test-structures.mjs`).
+- **Showcase signs stand beside their block.** A new section places each block sign one cell west of the
+  block in the block's front row and leaves a cell between samples; `ShowcasePlanTest.noSignStandsInFrontOfABlock`
+  fails for any sign with a block or support directly north-to-south behind it. A new section belongs to the
+  witchcraft showcase unless it overrides `ShowcaseSection.group()`; `ShowcaseRegistry` refuses an id that
+  equals a group name (`furniture`, `witchcraft`).
 - **A copied ward record id is inert.** Breaking a stone retires its record in `WardSavedData`, so a
   copy of the stone's data (or an item carrying a stale id) never revives a ward.

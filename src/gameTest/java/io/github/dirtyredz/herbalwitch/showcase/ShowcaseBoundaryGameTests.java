@@ -101,14 +101,14 @@ public final class ShowcaseBoundaryGameTests {
         helper.setBlock(ORIGIN.offset(1, 1, 1), Blocks.GRASS);
         helper.setBlock(ORIGIN.offset(3, 1, 2), Blocks.OAK_LOG);
         helper.setBlock(ORIGIN.offset(3, 2, 2), Blocks.OAK_LEAVES);
-        helper.setBlock(ORIGIN.offset(5, 1, 3), Blocks.WATER);
+        helper.setBlock(ORIGIN.offset(7, 1, 2), Blocks.WATER);
         helper.setBlock(ORIGIN.offset(0, 1, 0), Blocks.STONE);
         check(run(helper, as(op, 2), "herbalwitch showcase garden") > 0, "rough terrain was refused");
         for (int x : new int[] {0, 1, 2, 4, 5}) {
             check(helper.getBlockState(ORIGIN.offset(x, 0, 2)).is(Blocks.GRASS_BLOCK), "no grass floor at x " + x);
         }
         check(helper.getBlockState(ORIGIN.offset(3, 2, 2)).isAir(), "leaves left in the box");
-        check(helper.getBlockState(ORIGIN.offset(5, 1, 3)).isAir(), "stray water left in the box");
+        check(helper.getBlockState(ORIGIN.offset(7, 1, 2)).isAir(), "stray water left in the box");
         check(helper.getBlockState(ORIGIN.offset(1, 1, 1)).isAir(), "stray plant left in the box");
         helper.succeed();
     }

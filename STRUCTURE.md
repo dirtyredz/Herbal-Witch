@@ -224,7 +224,7 @@ herbalwitch/
 
 **src/gameTest/resources**
 
-- `src/gameTest/resources/data/herbalwitch/structures/` — GameTest structure templates (`empty`, `showcase` at 128 x 10 x 64, `showcase_section`); never in the release jar
+- `src/gameTest/resources/data/herbalwitch/structures/` — GameTest structure templates (`empty`, `showcase` at 128 x 10 x 80, `showcase_section`); never in the release jar
 
 **tools**
 

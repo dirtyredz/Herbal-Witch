@@ -41,7 +41,7 @@ public final class WardShowcaseSection implements ShowcaseSection {
                 .setValue(WardStoneBlock.FACING, Direction.NORTH)));
         for (int i = 0; i < TOPICS.size(); i++) {
             String topic = TOPICS.get(i);
-            out.add(ShowcasePlacement.label(i, 0, Line.translated(label(topic)), Line.translated(label(topic) + ".detail")));
+            out.add(ShowcasePlacement.label(2 + i, 0, Line.translated(label(topic)), Line.translated(label(topic) + ".detail")));
         }
         return out;
     }

@@ -39,8 +39,8 @@ public final class CharmShowcaseSection implements ShowcaseSection {
     @Override
     public List<ShowcasePlacement> placements() {
         List<ShowcasePlacement> out = new ArrayList<>();
-        out.add(ShowcasePlacement.label(0, 0, Line.translated(label("samples"))));
-        out.add(ShowcasePlacement.content(0, 1, 1, () -> Blocks.BARREL.defaultBlockState(), entity -> {
+        out.add(ShowcasePlacement.label(0, 1, Line.translated(label("samples"))));
+        out.add(ShowcasePlacement.content(1, 1, 1, () -> Blocks.BARREL.defaultBlockState(), entity -> {
             if (entity instanceof Container barrel) {
                 for (int i = 0; i < CharmCatalog.ALL.size(); i++) {
                     barrel.setItem(i, new ItemStack(CharmItems.item(CharmCatalog.ALL.get(i))));
@@ -49,7 +49,7 @@ public final class CharmShowcaseSection implements ShowcaseSection {
         }));
         for (int i = 0; i < TOPICS.size(); i++) {
             String topic = TOPICS.get(i);
-            out.add(ShowcasePlacement.label(1 + i, 0, Line.translated(label(topic)), Line.translated(label(topic) + ".detail")));
+            out.add(ShowcasePlacement.label(3 + i, 0, Line.translated(label(topic)), Line.translated(label(topic) + ".detail")));
         }
         return out;
     }

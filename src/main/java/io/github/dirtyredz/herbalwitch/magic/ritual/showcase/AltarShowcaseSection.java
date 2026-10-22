@@ -58,18 +58,20 @@ public final class AltarShowcaseSection implements ShowcaseSection {
     @Override
     public List<ShowcasePlacement> placements() {
         List<ShowcasePlacement> out = new ArrayList<>();
-        out.add(ShowcasePlacement.label(0, 0, Line.literal(AltarCatalog.NAME)));
-        out.add(ShowcasePlacement.label(1, 0, Line.translated(USE), Line.translated(USE + ".detail")));
-        // the altar faces north; its other column is to the viewer's right (west), so the origin stands at x = 1
+        // the name sign stands beside the altar, which faces north; its other column is to the viewer's right
+        // (west), so the origin stands at x = 2 and the sign at x = 0; the notes about it stand in the front row
+        // beyond the barrel, with nothing behind them
+        out.add(ShowcasePlacement.label(0, 1, Line.literal(AltarCatalog.NAME)));
+        out.add(ShowcasePlacement.label(7, 0, Line.translated(USE), Line.translated(USE + ".detail")));
         for (int i = 0; i < AltarCatalog.LAYOUT.size(); i++) {
             int part = i;
             BlockPos at = AltarCatalog.LAYOUT.offset(Direction.NORTH, i);
-            out.add(ShowcasePlacement.content(1 + at.getX(), 1 + at.getY(), 1 + at.getZ(), () -> RitualBlocks.ALTAR.get().defaultBlockState()
+            out.add(ShowcasePlacement.content(2 + at.getX(), 1 + at.getY(), 1 + at.getZ(), () -> RitualBlocks.ALTAR.get().defaultBlockState()
                     .setValue(AltarBlock.FACING, Direction.NORTH).setValue(AltarBlock.LAYOUT.part(), part)));
         }
-        out.add(ShowcasePlacement.label(2, 0, Line.translated(label("founding")), Line.translated(label("founding") + ".detail")));
-        out.add(ShowcasePlacement.label(3, 0, Line.translated(SUPPLIES)));
-        out.add(ShowcasePlacement.content(3, 1, 1, () -> Blocks.BARREL.defaultBlockState(), entity -> {
+        out.add(ShowcasePlacement.label(8, 0, Line.translated(label("founding")), Line.translated(label("founding") + ".detail")));
+        out.add(ShowcasePlacement.label(4, 1, Line.translated(SUPPLIES)));
+        out.add(ShowcasePlacement.content(5, 1, 1, () -> Blocks.BARREL.defaultBlockState(), entity -> {
             if (entity instanceof Container barrel) {
                 List<Supplier<ItemStack>> supplies = supplies();
                 for (int i = 0; i < supplies.size(); i++) {
@@ -77,7 +79,7 @@ public final class AltarShowcaseSection implements ShowcaseSection {
                 }
             }
         }));
-        int x = 4;
+        int x = 9;
         for (String topic : TOPICS.subList(1, TOPICS.size())) {
             out.add(ShowcasePlacement.label(x++, 0, Line.translated(label(topic)), Line.translated(label(topic) + ".detail")));
         }

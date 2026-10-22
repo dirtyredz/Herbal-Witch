@@ -17,6 +17,16 @@ public interface ShowcaseSection {
     /** Translation key of the section's heading sign. */
     String titleKey();
 
-    /** The section's placements; deterministic, catalogue order. */
+    /** The showcase this section is built in; everything but furniture is witchcraft. */
+    default ShowcaseGroup group() {
+        return ShowcaseGroup.WITCHCRAFT;
+    }
+
+    /**
+     * The section's placements; deterministic, catalogue order. Sign rule: a sign for a block stands on
+     * the floor in the block's own front row, one cell west of it (the viewer's right), and the cell
+     * north of every sign and block stays open; notes that annotate no block stand in the front row
+     * with nothing behind them.
+     */
     List<ShowcasePlacement> placements();
 }

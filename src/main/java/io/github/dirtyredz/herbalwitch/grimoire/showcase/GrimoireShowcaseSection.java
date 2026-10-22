@@ -55,13 +55,13 @@ public final class GrimoireShowcaseSection implements ShowcaseSection {
         List<ShowcasePlacement> out = new ArrayList<>();
         int x = 0;
         for (ResearchPiece piece : GrimoireCatalog.RESEARCH_PIECES) {
-            out.add(ShowcasePlacement.label(x, 0, Line.literal(piece.displayName())));
-            out.add(ShowcasePlacement.content(x, 1, 1, () -> GrimoireBlocks.block(piece).defaultBlockState()
+            out.add(ShowcasePlacement.label(x, 1, Line.literal(piece.displayName())));
+            out.add(ShowcasePlacement.content(x + 1, 1, 1, () -> GrimoireBlocks.block(piece).defaultBlockState()
                     .setValue(HorizontalDirectionalBlock.FACING, Direction.NORTH)));
-            x += 2;
+            x += 3;
         }
-        out.add(ShowcasePlacement.label(x, 0, Line.translated(SUPPLIES)));
-        out.add(ShowcasePlacement.content(x, 1, 1, () -> Blocks.BARREL.defaultBlockState(), entity -> {
+        out.add(ShowcasePlacement.label(x, 1, Line.translated(SUPPLIES)));
+        out.add(ShowcasePlacement.content(x + 1, 1, 1, () -> Blocks.BARREL.defaultBlockState(), entity -> {
             if (entity instanceof Container barrel) {
                 List<Supplier<ItemStack>> supplies = supplies();
                 for (int i = 0; i < supplies.size(); i++) {
@@ -69,7 +69,7 @@ public final class GrimoireShowcaseSection implements ShowcaseSection {
                 }
             }
         }));
-        x += 2;
+        x += 3;
         for (String topic : TOPICS) {
             out.add(ShowcasePlacement.label(x++, 0, Line.translated(label(topic)), Line.translated(label(topic) + ".detail")));
         }

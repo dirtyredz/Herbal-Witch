@@ -11,7 +11,7 @@ import java.util.Set;
  * by side along +x with a {@link #GAP}-block aisle, packed into rows no wider than {@link #ROW_WIDTH}
  * (a section that would not fit starts a new row behind the deepest section of the one before, a
  * {@link #GAP}-block aisle between rows); each gets a heading sign in its first row and its own
- * placements from the row after. The plan covers the whole box: one floor layer plus
+ * placements from {@link #HEADING_ROWS} rows after (the open row keeps the heading off the first signs). The plan covers the whole box: one floor layer plus
  * {@link #HEIGHT}{@code - 1} layers cleared above it, and the placements. Bounded by
  * {@link #MAX_WIDTH} x {@link #HEIGHT} x {@link #MAX_DEPTH} and {@link #MAX_CELLS} writes; a plan
  * that would exceed them is refused before anything is written.
@@ -22,6 +22,8 @@ public final class ShowcasePlan {
     public static final int MAX_DEPTH = 128;
     public static final int MAX_CELLS = 65_536;
     public static final int GAP = 2;
+    /** Rows a section keeps for its heading sign and the open row below it, before its own row 0. */
+    public static final int HEADING_ROWS = 2;
     /** The widest a row may grow: the full width less the entrance aisle the showcase template keeps. */
     public static final int ROW_WIDTH = MAX_WIDTH - GAP;
 
@@ -62,14 +64,14 @@ public final class ShowcasePlan {
             List<ShowcasePlacement> own = new ArrayList<>();
             own.add(ShowcasePlacement.label(0, 0, ShowcasePlacement.Line.translated(section.titleKey())));
             int sectionWidth = 1;
-            int sectionDepth = 1;
+            int sectionDepth = HEADING_ROWS;
             for (ShowcasePlacement p : section.placements()) {
                 if (p.x() < 0 || p.z() < 0 || p.y() >= HEIGHT) {
                     throw new InvalidPlanException(section.id() + " places outside its area at " + p.x() + "," + p.y() + "," + p.z());
                 }
-                own.add(p.offset(0, 1));
+                own.add(p.offset(0, HEADING_ROWS));
                 sectionWidth = Math.max(sectionWidth, p.x() + 1);
-                sectionDepth = Math.max(sectionDepth, p.z() + 2);
+                sectionDepth = Math.max(sectionDepth, p.z() + HEADING_ROWS + 1);
             }
             if (x > 0 && x + sectionWidth > ROW_WIDTH) {
                 rowZ += rowDepth + GAP;
