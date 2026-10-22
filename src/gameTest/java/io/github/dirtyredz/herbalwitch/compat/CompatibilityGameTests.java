@@ -4,7 +4,13 @@ import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.brewing.product.catalog.EverydayProductCatalog;
 import io.github.dirtyredz.herbalwitch.brewing.product.catalog.ProductSpec;
 import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationItems;
+import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContent;
+import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireEntry;
+import io.github.dirtyredz.herbalwitch.grimoire.content.ServerGrimoireContent;
+import io.github.dirtyredz.herbalwitch.grimoire.content.recipe.StationRecipeEntries;
 import io.github.dirtyredz.herbalwitch.platform.compat.CompatibilityRegistration;
+import io.github.dirtyredz.herbalwitch.stations.description.ProcessingCategories;
+import io.github.dirtyredz.herbalwitch.stations.process.ProcessRecipe;
 import io.github.dirtyredz.herbalwitch.platform.compat.thirst.ThirstIntegration;
 import io.github.dirtyredz.herbalwitch.stations.heat.HeatSources;
 import io.github.dirtyredz.herbalwitch.stations.registry.StationBlocks;
@@ -59,6 +65,27 @@ public final class CompatibilityGameTests {
             check(HeatSources.isHeated(helper.getLevel(), helper.absolutePos(under.above())), "a lit stove does not heat the kettle");
             helper.setBlock(under, lit.setValue(BlockStateProperties.LIT, false));
             check(!HeatSources.isHeated(helper.getLevel(), helper.absolutePos(under.above())), "an unlit stove heats the kettle");
+        }
+        helper.succeed();
+    }
+
+    /**
+     * The grimoire and the viewers share one category mapping and the recipes' own descriptions:
+     * every recipe the viewers would list is a grimoire page in the same category, at the same
+     * station, holding the same description object. Viewer rendering itself is client-only.
+     */
+    @GameTest(template = TEMPLATE)
+    public static void grimoireAndViewersAgreeOnCategoriesAndDescriptions(GameTestHelper helper) {
+        GrimoireContent content = ServerGrimoireContent.get(helper.getLevel().getServer());
+        for (ProcessingCategories.Category category : ProcessingCategories.ALL) {
+            check(ProcessingCategories.byStation(category.station()).orElseThrow() == category, category.id() + " station mapping");
+            for (ProcessRecipe recipe : helper.getLevel().getRecipeManager().getAllRecipesFor(category.type().get())) {
+                check(ProcessingCategories.byType(recipe.getType()).orElseThrow() == category, recipe.getId() + " type mapping");
+                GrimoireEntry page = content.get(StationRecipeEntries.key(recipe.getId())).orElseThrow();
+                check(page.category().equals(category.id()), recipe.getId() + " is under " + page.category());
+                check(page.recipe().orElseThrow().description() == recipe.description(), recipe.getId() + " copied its description");
+                check(recipe.description().heated() == category.heated(), recipe.getId() + " heat disagrees with its category");
+            }
         }
         helper.succeed();
     }

@@ -20,8 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * The Blockbench sources and what they compile to, against the independent BlockbenchManifest:
- * the catalogue lists exactly the twelve projects at the pinned format, the compiler's model
- * directories hold exactly the 32 compiled models, the owned textures exist, and no source file or
+ * the catalogue lists exactly the fourteen projects at the pinned format, the compiler's model
+ * directories hold exactly the 34 compiled models, the owned textures exist, and no source file or
  * compiled path leaks into the runtime resources, the datagen tree or a procedural directory.
  */
 class BlockbenchResourcesTest {
@@ -49,7 +49,7 @@ class BlockbenchResourcesTest {
     }
 
     @Test
-    void theCatalogueListsTheTwelveProjectsAtThePinnedFormat() {
+    void theCatalogueListsTheFourteenProjectsAtThePinnedFormat() {
         JsonObject catalog = ResourceFiles.json(SOURCES.resolve("catalog.json"));
         assertEquals("5.2.2", catalog.get("blockbench").getAsString());
         assertEquals("5.0", catalog.get("format_version").getAsString());
@@ -79,7 +79,7 @@ class BlockbenchResourcesTest {
             }
         }
         assertEquals(new TreeSet<>(BlockbenchManifest.models()), actual);
-        assertEquals(32, actual.size());
+        assertEquals(34, actual.size());
         for (String model : BlockbenchManifest.models()) {
             assertFalse(Files.exists(ResourceFiles.GENERATED_ASSETS.resolve("models/" + model)), model + " also in the datagen tree");
         }

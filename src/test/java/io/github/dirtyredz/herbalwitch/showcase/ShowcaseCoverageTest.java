@@ -4,6 +4,7 @@ import io.github.dirtyredz.herbalwitch.botany.showcase.HerbShowcaseSection;
 import io.github.dirtyredz.herbalwitch.data.botany.BotanyManifest;
 import io.github.dirtyredz.herbalwitch.data.decor.DecorManifest;
 import io.github.dirtyredz.herbalwitch.decor.showcase.DecorShowcaseSection;
+import io.github.dirtyredz.herbalwitch.grimoire.showcase.GrimoireShowcaseSection;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcasePlacement;
 import org.junit.jupiter.api.Test;
 
@@ -29,6 +30,19 @@ class ShowcaseCoverageTest {
         List<String> labels = placements.stream().filter(p -> p.kind() == ShowcasePlacement.Kind.LABEL)
                 .map(p -> p.lines().get(0).text()).toList();
         assertEquals(DecorManifest.PIECES.keySet().stream().map(DecorManifest.NAMES::get).toList(), labels);
+    }
+
+    @Test
+    void theGrimoireShowsBothResearchBlocksSuppliesAndItsFourSigns() {
+        List<ShowcasePlacement> placements = new GrimoireShowcaseSection().placements();
+        assertEquals(3, placements.stream().filter(p -> p.kind() == ShowcasePlacement.Kind.CONTENT).count(),
+                "stand, bookshelf, supply barrel");
+        List<String> labels = placements.stream().filter(p -> p.kind() == ShowcasePlacement.Kind.LABEL)
+                .map(p -> p.lines().get(0).text()).toList();
+        assertEquals(List.of("Grimoire Stand", "Witch's Bookshelf", "showcase.herbalwitch.label.grimoire.supplies",
+                "showcase.herbalwitch.label.grimoire.discovery", "showcase.herbalwitch.label.grimoire.research",
+                "showcase.herbalwitch.label.grimoire.missing", "showcase.herbalwitch.label.grimoire.teaching"), labels);
+        assertEquals(7, GrimoireShowcaseSection.supplies().size(), "two grimoires and one preparation chain's supplies");
     }
 
     @Test

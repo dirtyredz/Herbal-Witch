@@ -1,6 +1,7 @@
 package io.github.dirtyredz.herbalwitch.platform;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
+import io.github.dirtyredz.herbalwitch.grimoire.registry.GrimoireBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestAssertException;
@@ -44,6 +45,12 @@ public final class BlockOcclusionGameTests {
         }
         if (checked == 0) {
             throw new GameTestAssertException("no herbalwitch block states were checked");
+        }
+        for (Block piece : GrimoireBlocks.all()) {
+            // the research pieces are not full cubes: the bookshelf's open front, the stand's pedestal
+            if (piece.defaultBlockState().canOcclude()) {
+                offenders.add(ForgeRegistries.BLOCKS.getKey(piece).getPath() + " (research block)");
+            }
         }
         if (!offenders.isEmpty()) {
             throw new GameTestAssertException("non-full-cube blocks that occlude (add noOcclusion): " + offenders);

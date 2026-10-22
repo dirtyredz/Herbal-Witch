@@ -36,12 +36,23 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `src/main/java/io/github/dirtyredz/herbalwitch/brewing/product/` — preparations: `catalog/`, `registry/`, `item/`, `block/` (hung bundles), `lighting/` (oil lantern), `metadata/` (water-to-drink data), `foraging/` (resin), `showcase/`
 - `src/main/java/io/github/dirtyredz/herbalwitch/brewing/application/` — what products do when used, once, server side
 - `src/main/java/io/github/dirtyredz/herbalwitch/brewing/effect/` — the warmth and pest-repellent effects
+- `src/main/java/io/github/dirtyredz/herbalwitch/grimoire/catalog/` — plain identities: the book, the two research blocks, the reader menu
+- `src/main/java/io/github/dirtyredz/herbalwitch/grimoire/registry/` — book, research blocks and reader menu registration; event wiring, the Apothecary tab contribution, the showcase section
+- `src/main/java/io/github/dirtyredz/herbalwitch/grimoire/access/` — ways to open a reader: `item/` (the grimoire), `block/` (the shared research block and its shapes), `menu/` (the zero-slot reader menu and its validated access)
+- `src/main/java/io/github/dirtyredz/herbalwitch/grimoire/content/` — typed entry keys, entries, the immutable content index, the source contract and the server's current content; `recipe/` (live recipe projection), `reference/` (guides, herbs, stations, herb forms), `reload/` (editorial definitions and their reload listener)
+- `src/main/java/io/github/dirtyredz/herbalwitch/grimoire/knowledge/` — how knowledge is gained: `discovery/` (capability, codec, lifecycle, acquisition), `research/` (familiarity and eligibility, research), `teaching/` (invitations and consent)
+- `src/main/java/io/github/dirtyredz/herbalwitch/grimoire/reading/` — reader sessions and server-computed counts; `ingredients/` (requirements and the pure allocator)
+- `src/main/java/io/github/dirtyredz/herbalwitch/grimoire/network/` — the grimoire's bounded messages, their codecs and content sync
+- `src/main/java/io/github/dirtyredz/herbalwitch/grimoire/showcase/` — the grimoire showcase section
+- `src/main/java/io/github/dirtyredz/herbalwitch/platform/network/` — the mod's channel, payload bounds and chunked snapshot assembly (no gameplay policy)
+- `src/main/java/io/github/dirtyredz/herbalwitch/stations/description/` — the processing categories (recipe type to station) the grimoire, EMI and JEI share
 - `src/main/java/io/github/dirtyredz/herbalwitch/showcase/command/` — `/herbalwitch showcase` registration and execution
 - `src/main/java/io/github/dirtyredz/herbalwitch/showcase/layout/` — section contract, registry, placements and the bounded plan (no world writes)
 - `src/main/java/io/github/dirtyredz/herbalwitch/showcase/construction/` — preflight checks, the builder and sign labels (the only world writes)
 - `src/main/java/io/github/dirtyredz/herbalwitch/client/` — client-only mod-bus wiring (`HerbalWitchClient`) only
 - `src/main/java/io/github/dirtyredz/herbalwitch/client/stations/` — station screens and shared widgets
 - `src/main/java/io/github/dirtyredz/herbalwitch/client/compat/` — EMI (`emi/`) and JEI (`jei/`) plugins over one shared card layout
+- `src/main/java/io/github/dirtyredz/herbalwitch/client/grimoire/` — the reader screen, the reusable book view, the station book panel, connection-local client state; `widgets/` (index, page, consent panel, buttons)
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/` — datagen provider registration only
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/client/language/` — the sole `en_us.json` writer
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/client/decor/` — furniture blockstates, item models, names
@@ -50,6 +61,8 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/client/stations/` — station blockstates, item models, names
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/client/preparations/` — bundle and lantern models, item models, names
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/client/showcase/` — showcase messages, headings and labels
+- `src/main/java/io/github/dirtyredz/herbalwitch/data/client/grimoire/` — research block states, grimoire item models, the grimoire's English
+- `src/main/java/io/github/dirtyredz/herbalwitch/data/server/grimoire/` — grimoire crafting, research block loot and tags, the editorial `grimoire_entries`
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/server/tags/` — the sole block and item tag writers
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/server/recipes/` — the sole recipe provider
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/server/loot/` — the sole global loot modifier provider
@@ -65,12 +78,15 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `src/main/resources/assets/herbalwitch/models/block/preparations/templates/` — the oil lantern templates (compiled from src/art/blockbench by tools/compile-blockbench.mjs)
 - `src/main/resources/assets/herbalwitch/models/block/preparations/bundles/` — hung bundle models `<group>/<herb>/{ceiling,wall}.json` (generated by tools/generate-models.mjs)
 - `src/main/resources/assets/herbalwitch/models/block/stations/` — station models, one directory per station (`base`, or `part_<n>`, overlays and `assembly` for multiblocks; compiled from src/art/blockbench by tools/compile-blockbench.mjs)
+- `src/main/resources/assets/herbalwitch/models/block/grimoire/` — the stand and bookshelf models, `<piece>/base.json` (compiled from src/art/blockbench by tools/compile-blockbench.mjs)
 - `src/main/resources/assets/herbalwitch/textures/block/material/` — the shared house `wood`, `wood_post`, `wood_end` and `gold` the herb bed and hung bundles use (generated)
 - `src/main/resources/assets/herbalwitch/textures/block/pieces/` — the textures each Blockbench piece owns, `<stations|decor|preparations>/<piece>/<texture>.png`, written by tools/compile-blockbench.mjs from the projects
 - `src/main/resources/assets/herbalwitch/textures/block/botany/` — the swatch atlas `parts.png` every herb and dried bundle is built from, and the bed soil (generated)
 - `src/main/resources/assets/herbalwitch/textures/gui/stations/` — station interface atlases (generated)
 - `src/main/resources/assets/herbalwitch/textures/item/botany/` — seed and fresh-herb sprites `<group>/<herb>/` (generated)
 - `src/main/resources/assets/herbalwitch/textures/item/preparations/` — bundle, powder and product sprites (generated)
+- `src/main/resources/assets/herbalwitch/textures/item/grimoire/` — the grimoire's sprite (generated)
+- `src/main/resources/assets/herbalwitch/textures/gui/grimoire/` — the reader atlas: the open book and its page sprites (generated)
 - `src/generated/resources/` — datagen output, checked in and packaged (its `.cache/` is ignored and excluded); never hand-edited
 - `src/art/blockbench/` — Blockbench sources, never packaged: `catalog.json` (the project list, pinned format, owned model directories) and `<stations|decor|preparations>/<piece>/` with `<piece>.bbmodel` and `piece.json` (docs/BLOCKBENCH.md)
 - `src/test/java/io/github/dirtyredz/herbalwitch/botany/` — pure JUnit tests for catalogues and conditions
@@ -78,6 +94,9 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `src/test/java/io/github/dirtyredz/herbalwitch/platform/geometry/` — shape rotation tests
 - `src/test/java/io/github/dirtyredz/herbalwitch/showcase/` — showcase plan and coverage tests
 - `src/test/java/io/github/dirtyredz/herbalwitch/stations/process/` — reservation and completion arithmetic tests
+- `src/test/java/io/github/dirtyredz/herbalwitch/grimoire/` — pure grimoire tests: `knowledge/` (discovery state and codec, research eligibility, teaching), `reading/` (the allocator), `content/` (editorial definitions)
+- `src/test/java/io/github/dirtyredz/herbalwitch/platform/network/` — payload bounds and chunk assembly tests
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/grimoire/` — grimoire GameTests: discovery, content, ingredients, access, teaching
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/fixture/` — shared GameTest world, player, botany, station and showcase fixtures
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/decor/` — furniture GameTests
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/botany/` — herb, garden, foraging and worldgen GameTests
@@ -95,6 +114,7 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `tools/art/stations/` — the shared house wood and gold (`house`) and the interface atlases (`interfaces.mjs` holds the layout)
 - `tools/models/` — the procedural model code: `geometry` (boxes, planes, position UVs, buried-face removal), `model-output` (model JSON serialisation shared with the Blockbench compiler), `textures`, `catalogue` (families and owned directories); `botany/` (bed, herbs, coplanar separation for organic models), `preparations/` (dried bundles, also the Blockbench attachments)
 - `tools/art/preparations/` — preparation materials and product sprites
+- `tools/art/grimoire/` — the grimoire sprite (`book`) and the reader atlas (`interface`)
 - `tools/blockbench/` — the Blockbench compiler: `project` (the pinned .bbmodel contract), `catalogue` (catalog.json, piece.json), `textures` (owned and shared slots), `assembly` (state outputs, multiblock cells), `attachments` (generated bundles), `compile`
 - `tools/blockbench/migration/` — importer from model JSON and the appearance-parity comparator
 - `tools/blockbench/dev-art/` — the live dev-art resource pack: in-memory staging, validation, publication into a trial instance, save watching
