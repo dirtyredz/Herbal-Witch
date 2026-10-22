@@ -64,6 +64,8 @@ public final class StationManifest {
         INFUSIONS.forEach(r -> recipes.add("processing/infusion/" + r));
         AdvancedManifest.processingRecipes().forEach(r -> recipes.add("processing/" + r));
         CharmManifest.processingRecipes().forEach(r -> recipes.add("processing/" + r));
+        for (String bait : List.of("grain", "root", "seed", "fish", "meat", "berry", "calming_powder")) recipes.add("processing/animals/grinding/" + bait);
+        recipes.add("processing/animals/charm_work/capture_charm");
         return recipes;
     }
 

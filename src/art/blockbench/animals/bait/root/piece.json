@@ -1,0 +1,28 @@
+{
+  "project": "root.bbmodel",
+  "textures": {
+    "sprite": "herbalwitch:block/pieces/animals/bait/root/sprite",
+    "particle": "herbalwitch:block/pieces/animals/bait/root/sprite"
+  },
+  "owned_textures": {
+    "sprite": "herbalwitch:block/pieces/animals/bait/root/sprite"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/animals/bait/root/base",
+      "item": true
+    }
+  ]
+}

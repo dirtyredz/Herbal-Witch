@@ -23,13 +23,13 @@ public final class ShowcaseBuilder {
     public static final BlockState DEFAULT_FLOOR = Blocks.SMOOTH_STONE.defaultBlockState();
 
     /** What was written. */
-    public record Result(int cleared, int placed) {
+    public record Result(int cleared, int placed, int entities, boolean complete) {
     }
 
     private ShowcaseBuilder() {
     }
 
-    public static Result build(ShowcasePlan plan, ServerLevel level, BlockPos origin) {
+    public static Result build(ShowcasePlan plan, ServerLevel level, net.minecraft.server.level.ServerPlayer player, BlockPos origin) {
         int cleared = 0;
         BlockState air = Blocks.AIR.defaultBlockState();
         for (int dx = 0; dx < plan.width(); dx++) {
@@ -81,7 +81,8 @@ public final class ShowcaseBuilder {
                 }
             }
         }
-        return new Result(cleared, placed);
+        var samples = ShowcaseEntitySpawner.spawn(plan, level, player, origin);
+        return new Result(cleared, placed, samples.spawned(), samples.complete());
     }
 
     private static long column(int x, int z) {

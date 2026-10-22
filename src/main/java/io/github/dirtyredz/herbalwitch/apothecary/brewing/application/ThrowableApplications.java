@@ -59,6 +59,10 @@ public final class ThrowableApplications {
         if (!burst.harmful()) {
             return target instanceof Player || (target instanceof OwnableEntity pet && pet.getOwnerUUID() != null);
         }
+        if (burst == Burst.SLEEP) {
+            return EntityActionPermission.check(io.github.dirtyredz.herbalwitch.platform.permission.entity.EntityActionContext.Action.ANIMAL_SEDATE,
+                    thrower, target).allowed();
+        }
         return EntityActionPermission.mayHarm(thrower, target);
     }
 

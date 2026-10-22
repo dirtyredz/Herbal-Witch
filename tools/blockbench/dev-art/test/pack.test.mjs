@@ -29,8 +29,8 @@ test('the pack carries the compiled models, owned textures, and the item models 
   assert.equal(JSON.parse(files.get('pack.mcmeta')).pack.pack_format, 15);
   for (const k of keys.filter((x) => x !== 'pack.mcmeta')) assert.match(k, /^assets\/herbalwitch\/(models|blockstates|textures)\//, k);
   assert.ok(!keys.some((k) => /\.bbmodel$|piece\.json$|^data\/|\/lang\//.test(k)));
-  assert.equal(keys.filter((k) => k.startsWith('assets/herbalwitch/models/block/')).length, 415); // with the M6 altar's 7 and the M7 pieces' 50
-  assert.equal(keys.filter((k) => k.startsWith('assets/herbalwitch/models/item/')).length, 109); // the four stations and the ward stone show a compiled model; the circle's item is a flat sprite
+  assert.equal(keys.filter((k) => k.startsWith('assets/herbalwitch/models/block/')).length, 424); // M8 adds nine authored animal sprites
+  assert.equal(keys.filter((k) => k.startsWith('assets/herbalwitch/models/item/')).length, 118); // nine M8 item wrappers; the circle remains a procedural sprite
   assert.equal(keys.filter((k) => k.startsWith('assets/herbalwitch/blockstates/')).length, 110); // and all six new blocks have a blockstate
   const textures = keys.filter((k) => k.startsWith('assets/herbalwitch/textures/'));
   assert.equal(textures.length, compiled.textures.size);

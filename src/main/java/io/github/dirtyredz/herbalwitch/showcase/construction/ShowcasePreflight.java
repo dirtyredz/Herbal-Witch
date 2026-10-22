@@ -28,6 +28,7 @@ public final class ShowcasePreflight {
 
     /** The box's minimum corner is {@code origin}: the floor layer is {@code origin.y}. */
     public static Optional<Component> check(ShowcasePlan plan, ServerLevel level, ServerPlayer player, BlockPos origin) {
+        if (!plan.entities().isEmpty() && io.github.dirtyredz.herbalwitch.platform.permission.entity.ProtectionAdapters.restricted()) return fail("denied", pos(origin));
         int top = origin.getY() + ShowcasePlan.HEIGHT - 1;
         if (origin.getY() < level.getMinBuildHeight() || top >= level.getMaxBuildHeight()) {
             return fail("outside_world", pos(origin));

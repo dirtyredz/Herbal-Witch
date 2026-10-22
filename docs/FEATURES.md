@@ -16,7 +16,16 @@ Local fast-gate evidence: 335 existing + 31 added JUnit tests; 75 existing + 4 a
 are delegated to the orchestrator after the committed handoff; no client was launched. Owner checks
 remain for all four panel hosts, changed-rule recipe text, drinks/oils, wards and two-client private
 updates. Headless preview review and all 2,693 baseline resource/art hashes are recorded locally.
-M8 animals and M9 familiars remain unimplemented. Partial P2 work is recorded in the open Docket items.
+M8 ordinary-animal implementation is now a candidate on this branch; M9 familiars remain unimplemented.
+M8 adds six baits, personal loaded-time care state, existing-salve targeting, temporary goal-based
+calming, reused M7 sleep, earned native taming/keepers, a private grimoire card, verified capture
+checkpoints/reconciliation/recovery and sixteen showcase habitats. Exact boundaries and defaults:
+[catalogue/animals.md](catalogue/animals.md). Local fast gate: 405 JUnit tests and 81 Node tests pass,
+223 GameTests compile, and two datagen runs leave all 1,051 generated files byte-identical. Baseline
+source declarations were 371 JUnit and 197 GameTests (not a separately executed baseline run).
+All three art checks pass; nine animal sprites and the full preview gallery were inspected. ANU
+GameTests, restart/fault scenarios, optional profiles and owner visuals are not claimed as passed.
+Version promotion to 0.7.0 awaits that qualification. Partial P2 work remains in its open Docket items.
 
 Version 0.6.0 (local candidate): Milestone 7, advanced brewing, charms, the ritual circle and ward stones, is implemented on top of 0.5.0; see "0.6.0: advanced brewing, charms, circle and wards" below. Automated acceptance is tracked there; owner checks are pending.
 
@@ -191,7 +200,7 @@ No new gameplay: the same blocks, items, states and textures, authored different
 
 | Milestone | Scope |
 |---|---|
-| 8 | Ordinary animals: trust, bait, calming, sleep, earned taming, healing, capture/release |
+| 8 | Ordinary-animal candidate implemented; ANU lifecycle/restart qualification and owner review pending |
 | 9 | Multiple familiars: binding, roster, seven commands, homes, equipment, abilities, familiar brews, revival; familiar powers charge the owner's energy through `WitchStatusService` |
 | 10 | Broom and wand |
 | 11 | Apothecary commerce: register, counters, stock, offers, proceeds, history, order board |

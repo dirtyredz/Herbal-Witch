@@ -97,6 +97,7 @@ class StationResourcesTest {
         if (path.startsWith("processing/charm_work/")) {
             energy = CharmManifest.ENERGY.get(path.substring("processing/charm_work/".length()));
         }
+        if (path.equals("processing/animals/charm_work/capture_charm")) energy = 10;
         if (energy == null) {
             assertFalse(recipe.has("requirements"), path + " is ordinary work");
             return;
@@ -114,7 +115,7 @@ class StationResourcesTest {
                 .forEach(f -> actual.add(f.substring("data/herbalwitch/recipes/".length(), f.length() - 5)));
         assertEquals(StationManifest.processingRecipes(), actual);
         for (String path : actual) {
-            String type = path.split("/")[1];
+            String type = path.split("/")[path.startsWith("processing/animals/") ? 2 : 1];
             JsonObject recipe = generated("data/herbalwitch/recipes/" + path + ".json");
             assertEquals("herbalwitch:processing/" + type, recipe.get("type").getAsString(), path);
             assertEquals(DURATIONS.get(type), recipe.get("duration").getAsInt(), path);
@@ -191,7 +192,7 @@ class StationResourcesTest {
             List<String> inputs = new ArrayList<>();
             recipe.getAsJsonArray("ingredients").forEach(e -> inputs.add(e.getAsJsonObject().get("ingredient").toString()));
             inputs.sort(null);
-            String key = path.split("/")[1] + inputs + recipe.get("base") + recipe.get("packaging");
+            String key = recipe.get("type") + inputs.toString() + recipe.get("base") + recipe.get("packaging");
             assertNull(seen.put(key, path), "ambiguous recipes: " + path + " and " + seen.get(key));
         }
     }

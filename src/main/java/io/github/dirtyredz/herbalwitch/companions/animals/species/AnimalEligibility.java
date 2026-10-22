@@ -20,7 +20,7 @@ public final class AnimalEligibility {
         var type = mob.getType();
         return resolve(EntityType.getKey(type).toString(), mob instanceof Animal,
                 type.is(AnimalTags.ELIGIBLE), type.is(AnimalTags.EXCLUDED) || type.is(EntityActionPermission.PROTECTED)
-                        || type.getCategory() == MobCategory.MONSTER || !mob.isAlive() || mob.isRemoved(),
+                        || type.getCategory() == MobCategory.MONSTER || mob instanceof net.minecraft.world.entity.monster.Enemy || !mob.isAlive() || mob.isRemoved(),
                 AnimalServerConfig.current().modded(), baitGroups(type));
     }
 

@@ -46,6 +46,7 @@ class ShowcasePlanTest {
         all.add(new CircleShowcaseSection());
         all.add(new WardShowcaseSection());
         all.add(new CharmShowcaseSection());
+        all.add(new io.github.dirtyredz.herbalwitch.companions.animals.showcase.AnimalShowcaseSection());
         return all;
     }
 
@@ -59,7 +60,7 @@ class ShowcasePlanTest {
         List<ShowcasePlan.SectionArea> areas = plan.areas();
         assertEquals(List.of("decor", "herbs", "garden", "drying_rack", "mortar", "kettle", "hearth", "stove", "infusion_pot", "cauldron",
                 "still", "bottling_bench", "charm_workbench", "preparations", "advanced_preparations", "grimoire", "altar", "ritual_circle",
-                "ward_stone", "charms"), areas.stream().map(ShowcasePlan.SectionArea::id).toList());
+                "ward_stone", "charms", "animals"), areas.stream().map(ShowcasePlan.SectionArea::id).toList());
         assertEquals(0, areas.get(0).x());
         assertEquals(0, areas.get(0).z());
         int rowZ = 0;
@@ -105,7 +106,7 @@ class ShowcasePlanTest {
                 "plan " + plan.width() + " x " + plan.depth() + " outgrows the 128 x 64 showcase template");
         // two rows: the first ends with the preparations at x = 121 (the herbs, 28 deep, set its depth); the second, 8 deep from z = 30
         // (the ritual circle), holds the witch sections: 30 + 8 = 38
-        assertEquals(List.of(121, 38), List.of(plan.width(), plan.depth()), "the README documents the full layout as 121 x 8 x 38");
+        assertEquals(List.of(121, 58), List.of(plan.width(), plan.depth()), "the README documents the full layout as 121 x 8 x 58");
     }
 
     @Test

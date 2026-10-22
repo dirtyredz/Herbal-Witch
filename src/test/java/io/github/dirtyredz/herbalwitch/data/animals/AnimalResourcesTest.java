@@ -8,6 +8,31 @@ import static io.github.dirtyredz.herbalwitch.data.fixture.ResourceFiles.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AnimalResourcesTest {
+    @Test void sixOrdinaryBaitsHaveExactDurationIngredientsAndYield() {
+        for (String bait : AnimalManifest.BAITS) {
+            var recipe = json(GENERATED.resolve("data/herbalwitch/recipes/processing/animals/grinding/" + bait + ".json"));
+            assertEquals(100, recipe.get("duration").getAsInt()); assertFalse(recipe.has("requirements"));
+            assertEquals(4, recipe.getAsJsonObject("result").get("count").getAsInt());
+            assertEquals("herbalwitch:animals/bait/" + bait, recipe.getAsJsonObject("result").get("item").getAsString());
+            var inputs = recipe.getAsJsonArray("ingredients"); assertEquals(2, inputs.size());
+            assertEquals(2, inputs.get(0).getAsJsonObject().get("count").getAsInt());
+            assertEquals("herbalwitch:animals/food/" + bait, inputs.get(0).getAsJsonObject().getAsJsonObject("ingredient").get("tag").getAsString());
+            assertEquals("herbalwitch:preparations/herbs/shade/valerian/powder", inputs.get(1).getAsJsonObject().getAsJsonObject("ingredient").get("item").getAsString());
+        }
+    }
+    @Test void captureCharmUsesExistingPaidWitchProcessingAndNeverCraftsFilledTokens() {
+        var recipe = json(GENERATED.resolve("data/herbalwitch/recipes/processing/animals/charm_work/capture_charm.json"));
+        assertEquals("herbalwitch:processing/charm_work", recipe.get("type").getAsString()); assertEquals(200, recipe.get("duration").getAsInt());
+        assertTrue(recipe.getAsJsonObject("requirements").get("witch").getAsBoolean()); assertEquals(10, recipe.getAsJsonObject("requirements").get("energy").getAsInt());
+        assertEquals("herbalwitch:animals/capture/charm", recipe.getAsJsonObject("result").get("item").getAsString());
+        assertFalse(AnimalManifest.files().stream().anyMatch(s -> s.contains("recipes") && s.contains("filled")));
+    }
+    @Test void allNineItemModelsOnlyReferenceTheirBlockbenchParent() {
+        for (String item : AnimalManifest.PROJECTS) {
+            var model = json(GENERATED.resolve("assets/herbalwitch/models/item/" + item + ".json"));
+            assertEquals(Set.of("parent"), model.keySet()); assertEquals("herbalwitch:block/" + item + "/base", model.get("parent").getAsString());
+        }
+    }
     private static Set<String> values(String path) {
         var tag = json(GENERATED.resolve("data/herbalwitch/tags/" + path + ".json"));
         Set<String> out = new TreeSet<>();

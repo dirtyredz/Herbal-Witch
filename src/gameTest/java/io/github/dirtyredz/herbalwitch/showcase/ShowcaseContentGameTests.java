@@ -55,6 +55,30 @@ public final class ShowcaseContentGameTests {
     private ShowcaseContentGameTests() {
     }
 
+    @GameTest(template = FULL, timeoutTicks = 400, batch = "herbalwitch_showcase_animal_spawn_failure")
+    public static void failedAnimalSpawnRemovesOnlyThisInvocationsSamplesAndKeepsBlocks(GameTestHelper helper) throws Exception {
+        stoneFloor(helper, FULL_X, FULL_Z);
+        var op = standing(helper, "m8_showcase_failure", GameType.CREATIVE);
+        var unrelated = helper.spawn(net.minecraft.world.entity.EntityType.COW, new BlockPos(0, 1, 40));
+        var section = new io.github.dirtyredz.herbalwitch.companions.animals.showcase.AnimalShowcaseSection();
+        var plan = ShowcasePlan.of(java.util.List.of(section));
+        var origin = helper.absolutePos(ORIGIN);
+        java.util.function.Consumer<net.minecraftforge.event.entity.EntityJoinLevelEvent> cancel = event -> {
+            if (event.getLevel() == helper.getLevel() && event.getEntity().getType() == net.minecraft.world.entity.EntityType.WOLF)
+                event.setCanceled(true);
+        };
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(net.minecraftforge.eventbus.api.EventPriority.LOWEST, cancel);
+        try {
+            var result = io.github.dirtyredz.herbalwitch.showcase.construction.ShowcaseBuilder.build(plan, helper.getLevel(), op, origin);
+            check(!result.complete() && result.entities() == 0 && result.placed() > 0, "partial build reported success");
+            check(!unrelated.isRemoved() && helper.getLevel().getEntity(unrelated.getUUID()) == unrelated, "cleanup removed unrelated animal");
+            var box = new net.minecraft.world.phys.AABB(origin, origin.offset(plan.width(), ShowcasePlan.HEIGHT, plan.depth()));
+            check(helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.Mob.class, box).isEmpty(), "failed invocation left samples");
+            check(helper.getLevel().getBlockState(origin).is(Blocks.SMOOTH_STONE), "partial build lost floor");
+            helper.succeed();
+        } finally { net.minecraftforge.common.MinecraftForge.EVENT_BUS.unregister(cancel); unrelated.discard(); }
+    }
+
     @GameTest(template = FULL, timeoutTicks = 400, batch = "herbalwitch_showcase_the_full_showcase_holds_every_registered_block")
     public static void theFullShowcaseHoldsEveryRegisteredBlock(GameTestHelper helper) throws Exception {
         stoneFloor(helper, FULL_X, FULL_Z);
@@ -114,7 +138,17 @@ public final class ShowcaseContentGameTests {
         }
         check(blocks.getOrDefault(BotanyBlocks.herbBed(), 0) >= 56, "herb beds " + blocks.get(BotanyBlocks.herbBed()));
         // one per herb, powders, products, grimoire and altar supplies; Milestone 7: three preparation barrels, circle supplies, charms
-        check(barrels == HerbCatalog.ALL.size() + 4 + 5, "sample barrels " + barrels);
+        check(barrels == HerbCatalog.ALL.size() + 4 + 5 + 1, "sample barrels " + barrels);
+        var animalBox = new net.minecraft.world.phys.AABB(helper.absolutePos(ORIGIN), helper.absolutePos(ORIGIN.offset(plan.width(), ShowcasePlan.HEIGHT, plan.depth())));
+        var samples = helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.Mob.class, animalBox);
+        check(samples.size() == 16, "animal sample count " + samples.size());
+        check(samples.stream().map(m -> net.minecraft.world.entity.EntityType.getKey(m.getType()).toString()).collect(java.util.stream.Collectors.toSet())
+                .equals(java.util.Set.of("minecraft:cow", "minecraft:sheep", "minecraft:goat", "minecraft:pig", "minecraft:rabbit", "minecraft:chicken",
+                        "minecraft:horse", "minecraft:donkey", "minecraft:mule", "minecraft:llama", "minecraft:cat", "minecraft:wolf", "minecraft:fox", "minecraft:parrot", "minecraft:axolotl", "minecraft:bat")), "animal species matrix differs");
+        for (var sample : samples) {
+            check(!sample.isNoAi() && sample.getActiveEffects().isEmpty(), "sample received disabled AI or effects");
+            check(io.github.dirtyredz.herbalwitch.companions.animals.trust.AnimalCapability.of(sample).orElseThrow().state().isEmpty(), "sample received care state");
+        }
         for (Block piece : GrimoireBlocks.all()) {
             check(blocks.getOrDefault(piece, 0) == 1, piece + " shown " + blocks.getOrDefault(piece, 0) + " times");
         }

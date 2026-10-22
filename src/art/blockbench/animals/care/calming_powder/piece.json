@@ -1,0 +1,28 @@
+{
+  "project": "calming_powder.bbmodel",
+  "textures": {
+    "sprite": "herbalwitch:block/pieces/animals/care/calming_powder/sprite",
+    "particle": "herbalwitch:block/pieces/animals/care/calming_powder/sprite"
+  },
+  "owned_textures": {
+    "sprite": "herbalwitch:block/pieces/animals/care/calming_powder/sprite"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/animals/care/calming_powder/base",
+      "item": true
+    }
+  ]
+}

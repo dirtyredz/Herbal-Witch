@@ -19,4 +19,5 @@ public interface ShowcaseSection {
 
     /** The section's placements; deterministic, catalogue order. */
     List<ShowcasePlacement> placements();
+    default List<ShowcaseEntitySample> entities() { return List.of(); }
 }

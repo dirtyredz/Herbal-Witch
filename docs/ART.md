@@ -206,7 +206,7 @@ glow texture and may want a violet one), item transforms and shaders. Previews a
 Six Blockbench projects, **authored by an agent as first drafts for the owner to refine**, in the dark-wood
 cottage palette (plum, gold, charcoal iron, copper, ivy, pink flowers). Each owns its own textures
 (`textures/block/pieces/<group>/<piece>/`), so painting one never changes another. The project count is
-now 110 and the compiled block models 415.
+110 after M7, with 415 compiled block models.
 
 | Piece | Project | Owned textures |
 |---|---|---|
@@ -332,6 +332,18 @@ plot, then walk it.
    preview against the result, and its runes while a circle ritual runs; the ward stone idle and active; item
    sprites for the 16 preparations, mixtures, familiar preparations and charms; the four station screens
    (Start, Resume, Cancel and energy panel) and the ward screen; shaders off and on.
+
+8. **Milestone 8 animal items (candidate first drafts):** nine Blockbench projects at
+   `src/art/blockbench/animals/` own individual 32×32 binary-alpha textures and item transforms.
+   Six leather/green bait pouches have distinct food symbols; the plum calming powder and gold-ring
+   charms share the cottage palette. The filled charm has a green paw and stars; its appearance
+   carries no authority. Totals: 119 projects, 424 compiled block models, 802 owned textures.
+   Headless previews at
+   `C:/Users/dirty/projects/artifacts/minecraft-mods/jobs/2026-10-22-herbal-witch-m8/previews/`
+   include `animal-items-gui.png` and the full `animals/` gallery. All nine were inspected: distinct
+   silhouettes/symbols and charm states, no missing textures or clipping; the root symbol has lower
+   contrast and needs owner review. Check in-hand/ground/frame transforms, shaders, animal-card
+   text at GUI scales and two-client privacy in the dedicated mod test instance.
 
 Feedback wanted: per piece keep / change (what); whether "more blocks" means new furniture pieces
 (such as the 2-wide dresser) as well as richer models.

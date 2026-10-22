@@ -29,6 +29,17 @@ Exact versions: Farmer's Delight 1.3.4, Thirst Was Taken 1.4.0, EMI 1.1.24+1.20.
 - **Profile evidence:** the viewer profiles (`emi`, `jei`, `viewers`) and `all` were **not run for 0.3.0**;
   the table below still records the 0.1.0-dev.4 / 0.2.0 evidence. They are pending.
 
+## Ordinary animals (M8 candidate)
+
+Exact vanilla profiles cover sixteen species, with fifteen capture adapters (bat excluded). Goats
+and axolotls retain Brain behavior; no generic attraction/calming. Modded participation defaults off;
+live tags alone never enable native taming, AI replacement or serialization. Unknown ownership,
+Forge capabilities and persistent mod data fail closed. Doggy Talents namespaces remain excluded;
+there is no tested Doggy Talents adapter or version claim. Existing M7 entity protection also guards
+keeper care, sedation and transport; recognized unsupported claim mods refuse affected actions.
+No new optional-mod profile has been run locally for M8. EMI/JEI project the eight new live processing
+recipes through existing contracts; their UI and reload behavior still require owner/profile checks.
+
 ## Integrations
 
 Milestones are derived from plan section 3; exact dependency versions are pinned from the trial instance when each integration is implemented.

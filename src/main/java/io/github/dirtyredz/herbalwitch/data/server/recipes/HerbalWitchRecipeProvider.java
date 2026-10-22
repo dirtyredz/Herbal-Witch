@@ -62,5 +62,6 @@ public class HerbalWitchRecipeProvider extends RecipeProvider {
         GrimoireRecipes.addTo(writer);
         AltarRecipes.addTo(writer);
         WardRecipes.addTo(writer);
+        io.github.dirtyredz.herbalwitch.data.server.animals.AnimalRecipes.addTo(writer);
     }
 }

@@ -21,7 +21,8 @@
     "block/stations/bottling_bench",
     "block/stations/charm_workbench",
     "block/ritual/circle",
-    "block/ward/ward_stone"
+    "block/ward/ward_stone",
+    "block/animals"
   ],
   "projects": [
     "stations/kettle",
@@ -133,6 +134,15 @@
     "stations/bottling_bench",
     "stations/charm_workbench",
     "ritual/circle",
-    "ward/ward_stone"
+    "ward/ward_stone",
+    "animals/bait/grain",
+    "animals/bait/root",
+    "animals/bait/seed",
+    "animals/bait/fish",
+    "animals/bait/meat",
+    "animals/bait/berry",
+    "animals/care/calming_powder",
+    "animals/capture/charm",
+    "animals/capture/filled_charm"
   ]
 }

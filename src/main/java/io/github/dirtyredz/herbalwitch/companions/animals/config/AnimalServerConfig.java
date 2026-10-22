@@ -17,6 +17,7 @@ public final class AnimalServerConfig {
             PAYLOAD, DEPTH, CAPTOR, STORED, LIFETIME, SNAPSHOT, INTERVAL;
     private static volatile AnimalRules current = AnimalRules.DEFAULTS;
     private static long generation;
+    private static final java.util.List<Runnable> LISTENERS = new java.util.concurrent.CopyOnWriteArrayList<>();
 
     static {
         var b = new ForgeConfigSpec.Builder();
@@ -38,6 +39,7 @@ public final class AnimalServerConfig {
     private AnimalServerConfig() {}
     public static AnimalRules current() { return current; }
     public static long generation() { return generation; }
+    public static void listen(Runnable listener) { LISTENERS.add(listener); }
     public static void tagsUpdated(TagsUpdatedEvent event) { if (event.getUpdateCause() == TagsUpdatedEvent.UpdateCause.SERVER_DATA_LOAD) generation++; }
     public static void reset() { current = AnimalRules.DEFAULTS; generation++; }
 
@@ -52,7 +54,11 @@ public final class AnimalServerConfig {
             var candidate = new AnimalRules(RELATIONSHIPS.get(), ATTRACTION.get(), CALMING.get(), ADOPTION.get(), CAPTURES.get(), MODDED.get(),
                     RELATIONS.get(), RADIUS.get(), CANDIDATES.get(), ATTRACTED.get(), GOALS.get(), CHECKS.get(), PATHS.get(),
                     PAYLOAD.get(), DEPTH.get(), CAPTOR.get(), STORED.get(), LIFETIME.get(), SNAPSHOT.get(), INTERVAL.get());
-            Runnable install = () -> { current = candidate; generation++; };
+            Runnable install = () -> {
+                current = candidate; generation++;
+                io.github.dirtyredz.herbalwitch.grimoire.content.ServerGrimoireContent.invalidate();
+                LISTENERS.forEach(Runnable::run);
+            };
             var server = ServerLifecycleHooks.getCurrentServer();
             if (server == null || server.isSameThread()) install.run(); else server.execute(install);
         } catch (RuntimeException ex) {

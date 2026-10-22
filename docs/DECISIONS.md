@@ -2,6 +2,32 @@
 
 Newest first.
 
+## 2026-10-22 - M8 care and verified transport candidate
+
+- Keep all section 7 defaults except the already documented goat Brain correction. Damage blocks
+  feeding/adoption/capture for 600 loaded ticks; powder uses the explicit 100-tick reapplication gate,
+  and healing uses its independent 200-tick target gate. This follows the action-specific care rules.
+- Capture uses one versioned checksummed SavedData file and one serialized writer. No secondary
+  journal or mutable item payload. Missing adapters, corrupt snapshots and ambiguous insertion fail
+  closed. Whole-world external rollback is explicitly outside the guarantee.
+- The RELEASED checkpoint retains its payload until verification succeeds; then ordinary save
+  compacts it. A restart before compaction conservatively quarantines the retained payload. This can
+  require operator recovery after an otherwise completed release, preserving recovery evidence and
+  avoiding automatic replay after a failed final verification.
+- Exact vanilla adapters preserve full native serialization and refuse unknown capabilities/mod
+  data. No speculative modded capture, familiar ownership or claimed compatibility profiles.
+- `AnimalEntries` owns priority 1100. Rule reload invalidates content and private cards. Protocol 5
+  adds two bounded animal messages; existing M7 effects/production and the shared permission seam remain.
+- Nine Blockbench-owned sprite drafts use the cottage palette; sixteen isolated live showcase
+  specimens add a bounded entity construction phase. Owner visuals and ANU/restart qualification are pending.
+- Filled charms have a separate server-issued item identity, with no recipe or creative-tab entry,
+  instead of the early plan's model-property override. Both states are non-stackable; only the ledger
+  token authorizes release. This keeps authored item parents and transforms in their Blockbench projects.
+- `gradle.properties` remains 0.6.1 until the spec's complete automated acceptance permits 0.7.0.
+- New recipe IDs group under `processing/animals/{grinding,charm_work}/` to keep the already crowded
+  grinding directory below its entry ceiling. Existing recipe IDs are unchanged. Resource guards
+  count directories containing generated files; datagen's empty, untracked remnants are irrelevant.
+
 ## 2026-10-22 - M8 foundation: exact species and lazy care state
 
 `companions/` uses the remaining root grouping slot and will also hold M9 familiars. Ordinary

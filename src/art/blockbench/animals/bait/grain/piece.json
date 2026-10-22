@@ -1,0 +1,28 @@
+{
+  "project": "grain.bbmodel",
+  "textures": {
+    "sprite": "herbalwitch:block/pieces/animals/bait/grain/sprite",
+    "particle": "herbalwitch:block/pieces/animals/bait/grain/sprite"
+  },
+  "owned_textures": {
+    "sprite": "herbalwitch:block/pieces/animals/bait/grain/sprite"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/animals/bait/grain/base",
+      "item": true
+    }
+  ]
+}

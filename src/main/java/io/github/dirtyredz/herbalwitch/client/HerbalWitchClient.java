@@ -41,6 +41,7 @@ public final class HerbalWitchClient {
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(StationScreens::register);
         event.enqueueWork(GrimoireScreens::register);
+        event.enqueueWork(io.github.dirtyredz.herbalwitch.client.animals.AnimalClientState::setup);
         event.enqueueWork(DecorClientRegistration::screens);
         event.enqueueWork(AltarScreens::register);
         event.enqueueWork(WitchClientEvents::setup);

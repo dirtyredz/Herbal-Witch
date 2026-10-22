@@ -21,6 +21,7 @@ public final class ShowcasePlan {
     public static final int MAX_WIDTH = 128;
     public static final int MAX_DEPTH = 128;
     public static final int MAX_CELLS = 65_536;
+    public static final int MAX_ENTITIES = 32;
     public static final int GAP = 2;
     /** The widest a row may grow: the full width less the entrance aisle the showcase template keeps. */
     public static final int ROW_WIDTH = MAX_WIDTH - GAP;
@@ -37,12 +38,14 @@ public final class ShowcasePlan {
     }
 
     private final List<ShowcasePlacement> placements;
+    private final List<ShowcaseEntitySample> entities;
     private final List<SectionArea> areas;
     private final int width;
     private final int depth;
 
-    private ShowcasePlan(List<ShowcasePlacement> placements, List<SectionArea> areas, int width, int depth) {
+    private ShowcasePlan(List<ShowcasePlacement> placements, List<ShowcaseEntitySample> entities, List<SectionArea> areas, int width, int depth) {
         this.placements = List.copyOf(placements);
+        this.entities = List.copyOf(entities);
         this.areas = List.copyOf(areas);
         this.width = width;
         this.depth = depth;
@@ -53,6 +56,7 @@ public final class ShowcasePlan {
             throw new InvalidPlanException("no sections");
         }
         List<ShowcasePlacement> all = new ArrayList<>();
+        List<ShowcaseEntitySample> entities = new ArrayList<>();
         List<SectionArea> areas = new ArrayList<>();
         int x = 0;
         int rowZ = 0;
@@ -71,6 +75,12 @@ public final class ShowcasePlan {
                 sectionWidth = Math.max(sectionWidth, p.x() + 1);
                 sectionDepth = Math.max(sectionDepth, p.z() + 2);
             }
+            var samples = section.entities();
+            if (entities.size() + samples.size() > MAX_ENTITIES) throw new InvalidPlanException("more than 32 entity samples");
+            for (var sample : samples) {
+                if (sample.x() < 0 || sample.z() < 0 || sample.y() < 1 || sample.y() >= HEIGHT
+                        || sample.x() >= sectionWidth || sample.z() + 1 >= sectionDepth) throw new InvalidPlanException("entity sample outside section");
+            }
             if (x > 0 && x + sectionWidth > ROW_WIDTH) {
                 rowZ += rowDepth + GAP;
                 rowDepth = 1;
@@ -79,12 +89,13 @@ public final class ShowcasePlan {
             for (ShowcasePlacement p : own) {
                 all.add(p.offset(x, rowZ));
             }
+            for (var sample : samples) entities.add(sample.offset(x, rowZ + 1));
             areas.add(new SectionArea(section.id(), x, rowZ, sectionWidth, sectionDepth, own.size()));
             rowDepth = Math.max(rowDepth, sectionDepth);
             width = Math.max(width, x + sectionWidth);
             x += sectionWidth + GAP;
         }
-        ShowcasePlan plan = new ShowcasePlan(sort(all), areas, width, rowZ + rowDepth);
+        ShowcasePlan plan = new ShowcasePlan(sort(all), entities, areas, width, rowZ + rowDepth);
         plan.validate();
         return plan;
     }
@@ -120,6 +131,7 @@ public final class ShowcasePlan {
     public List<SectionArea> areas() {
         return areas;
     }
+    public List<ShowcaseEntitySample> entities() { return entities; }
 
     public int width() {
         return width;

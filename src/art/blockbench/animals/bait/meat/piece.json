@@ -1,0 +1,28 @@
+{
+  "project": "meat.bbmodel",
+  "textures": {
+    "sprite": "herbalwitch:block/pieces/animals/bait/meat/sprite",
+    "particle": "herbalwitch:block/pieces/animals/bait/meat/sprite"
+  },
+  "owned_textures": {
+    "sprite": "herbalwitch:block/pieces/animals/bait/meat/sprite"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/animals/bait/meat/base",
+      "item": true
+    }
+  ]
+}

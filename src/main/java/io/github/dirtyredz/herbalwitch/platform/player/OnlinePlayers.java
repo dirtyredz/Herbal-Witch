@@ -75,7 +75,11 @@ public final class OnlinePlayers {
         }
 
         Optional<ServerPlayer> find(UUID id) {
-            return all().stream().filter(p -> p.getUUID().equals(id)).findFirst();
+            if (online == null) return Optional.empty();
+            for (ServerPlayer player : online.get()) if (player.getUUID().equals(id)) return Optional.of(player);
+            for (Registration registration : registrations) for (ServerPlayer player : registration.players)
+                if (!player.isRemoved() && player.getUUID().equals(id)) return Optional.of(player);
+            return Optional.empty();
         }
 
         List<ServerPlayer> all() {

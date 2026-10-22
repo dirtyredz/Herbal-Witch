@@ -20,7 +20,7 @@ existing effect listeners in their original order and priorities.
 Feature registrations contribute their own grimoire sources. each source's numeric `PRIORITY`
 (a constant on its `*Entries` class, registered through the thread-safe `Contributions` holder) fixes
 reading order independently of registry/showcase/packet bootstrap: Guide 0, Witch 100, Brewing 200,
-Preparations 300, Station 400, Decor 500, Herb 600, StationRecipe 700, Altar 800, Ward 900, Charm 1000
+Preparations 300, Station 400, Decor 500, Herb 600, StationRecipe 700, Altar 800, Ward 900, Charm 1000, Animal 1100
 (`ContributionsTest` pins it; a new feature picks a number between). Equal priorities keep insertion order;
 duplicate keys still keep the first source. Core content, knowledge, reading and network packages
 consume `HerbSummary`, `DiscoveryForms`, `RecipeReferences` and live `RecipeView` contracts.
@@ -36,14 +36,38 @@ provider (`herbalwitch:animals/care`); only initialized state advances its persi
 Schema 1 preserves unsupported/malformed payloads unchanged and refuses mutation. Personal trust
 views are immutable, capacity refuses a new player without eviction, and native ownership wins
 over the keeper unless representations conflict (then ownership-sensitive actions fail closed).
-This foundation does not yet expose care items or transport and does not close M8.
+The care service owns bait, existing-salve targeting and calming; the adoption service calls native
+taming APIs or records an exclusive keeper. One Forge entity-interaction path prevents double-hand
+consumption. The private zero-slot card revalidates book access, target, range, sight, permission,
+nonce and revision. The animal root remains a grouping parent; M9 will consume immutable trust views.
+
+Added AI retains native selectors: a low-priority bait goal uses a spatial holder index, fair bucket
+cursors, a bounded query queue and dimension-wide check/path/active budgets. Calming is a removable
+priority-zero MOVE goal, not a panic-goal replacement. Goats/axolotls retain their Brain and bats their
+flight. Source loss, danger, damage and reload stop the temporary behavior. Existing M7 sleep is reused.
+
+`capture/data/CaptureSavedData` is the sole Overworld authority. UUID/generation records survive
+release permanently. Item NBT contains only an opaque token and bounded presentation. The checked
+writer owns explicit checkpoints and overridden ordinary file saves: bounded NBT envelope, SHA-256,
+temp file, force, atomic replace, verified read-back. Failure keeps dirty state and locks transport;
+unsupported/corrupt files are never replaced by empty data. Capture PREPARED precedes exact source
+removal; STORED precedes item issuance. Release PREPARED precedes an exact-object admission permit;
+RELEASED precedes item replacement. Payload compaction occurs only after verified release. Startup
+quarantines incomplete or un-compacted final records; recovery advances generation and never spawns.
+The loaded cross-dimension index rejects stale/duplicate incarnations without inferring death from
+unload. Exact vanilla serialization adapters reject unknown capability/persistent data before capture.
+
+Showcase plans include at most 32 pure entity descriptors. Habitat blocks are constructed first;
+the entity phase validates insertion and removes only its own samples if one fails. The full M8
+layout is 121 x 8 x 58, with sixteen adult animals and the original 65,536-write ceiling unchanged.
+Dedicated-server/restart qualification remains outside the local fast gate; see catalogue/animals.md.
 
 Everything below is server-authoritative; clients get vanilla block updates, menu slots and menu data.
-The one custom channel, `herbalwitch:main` (protocol "4", `platform/network/HerbalWitchNetwork`), carries
+The one custom channel, `herbalwitch:main` (protocol "5", `platform/network/HerbalWitchNetwork`), carries
 the grimoire's six bounded messages, the witch's two (`WitchSnapshot`, `WitchRulesUpdate`) and the
-altar's two (`AltarRequest`, `AltarUpdate`), registered in that order; any wire change bumps the protocol
+altar's two (`AltarRequest`, `AltarUpdate`), then animal request/snapshot messages, registered in that order; any wire change bumps the protocol
 (protocol 2 let entry keys name furniture pages; protocol 3 added the witch and altar messages; protocol 4
-grew `WitchRulesUpdate` with the working rules, no new message). Paths
+grew `WitchRulesUpdate` with the working rules; protocol 5 adds the private animal card). Paths
 are under `src/main/java/io/github/dirtyredz/herbalwitch/`.
 
 **Shared read contracts.** `platform/recipe/RecipeView` exposes a live recipe's identity,

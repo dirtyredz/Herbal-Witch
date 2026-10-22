@@ -1,0 +1,192 @@
+{
+  "meta": {
+    "format_version": "5.0",
+    "model_format": "java_block",
+    "box_uv": false
+  },
+  "name": "berry",
+  "parent": "",
+  "ambientocclusion": false,
+  "front_gui_light": true,
+  "java_block_version": "1.9.0",
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "painted sachet",
+      "uuid": "f24dcdc6-c6b8-485d-a18a-1428446e7115",
+      "from": [
+        0,
+        0,
+        8
+      ],
+      "to": [
+        16,
+        16,
+        8
+      ],
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            16,
+            0,
+            0,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        }
+      }
+    }
+  ],
+  "outliner": [
+    "f24dcdc6-c6b8-485d-a18a-1428446e7115"
+  ],
+  "textures": [
+    {
+      "id": "sprite",
+      "name": "sprite.png",
+      "uuid": "4db011be-723d-4e90-a46e-3cb0df2fb37d",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABG0lEQVR42mNgGAWjYKgARWmV/156ITjxEYMGMIbxQepp4gB0i0YdQBcHgAyD4U8nowhiZPVUsfzKAiuyMUWOAGm2VhGjyAEaXkbkOQJmOQyDDCIFwyyHYaIdgW4xuQ6AOYJkh5DqAJB6UkKDKg5ATuXY+NgwKHeQ7IA8TwOwRpgDYJagO6xigQcYg/jYHEJ2CIAcAGOjWw6zFGQoemghOwLmc6o4AMYGlXjIIYAuBlOPK82QFQUw8afX1sGLXZg6bGLIDqA4CmBiMEsIYXyhQHEUoFtEiuVUiQLk+EYOenxpgCa5gFDQUy0EkFM7Pkfgs5ymJSHIcnwlIVmVErIj0KtWUuoCsmtEXNUxtrqeJpZja4pRikc7NoMWAAA5CJPr97OOxwAAAABJRU5ErkJggg==",
+      "namespace": "herbalwitch",
+      "folder": "block/pieces/animals/bait/berry",
+      "particle": true
+    }
+  ],
+  "display": {
+    "gui": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "ground": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        2,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0,
+        180,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        3,
+        1
+      ],
+      "scale": [
+        0.55,
+        0.55,
+        0.55
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        3,
+        1
+      ],
+      "scale": [
+        0.55,
+        0.55,
+        0.55
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        -90,
+        25
+      ],
+      "translation": [
+        1.13,
+        3.2,
+        1.13
+      ],
+      "scale": [
+        0.68,
+        0.68,
+        0.68
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        90,
+        -25
+      ],
+      "translation": [
+        1.13,
+        3.2,
+        1.13
+      ],
+      "scale": [
+        0.68,
+        0.68,
+        0.68
+      ]
+    }
+  }
+}

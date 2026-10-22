@@ -56,17 +56,30 @@ herbalwitch/
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/registry/` — station registers, `ProcessingRecipeBindings` type lookup, the apothecary tab, bootstrap and showcase registration
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/showcase/` — the parameterised station showcase section
 
-**src/main/java: companions (M8 in progress)**
+**src/main/java: companions**
 
 - `src/main/java/io/github/dirtyredz/herbalwitch/companions/` and `companions/animals/` — grouping parents only.
 - `companions/animals/catalog/`, `species/`, `config/`, `registry/` — bait identities, exact species profiles and live eligibility, validated server limits, bootstrap and tags.
 - `companions/animals/trust/` — lazy Mob capability, immutable personal views, schema codec and loaded-clock lifecycle.
 - `companions/animals/care/taming/` — authoritative native-owner/keeper resolution; care responsibilities group beneath `care/` to keep the animal root narrow.
-- `src/main/java/io/github/dirtyredz/herbalwitch/data/server/animals/` — contributions to the sole tag writers.
+- `companions/animals/care/interaction/` — one server interaction path, targeted existing salve, bait and powder; shared entity-policy contribution.
+- `companions/animals/care/ai/` — removable goal instances, bounded dimension budgets, fair query queue and spatial bait-holder index.
+- `companions/animals/inspection/{menu,network}/` — continuously validated zero-slot card, private bounded snapshot and adoption request.
+- `companions/animals/capture/` — item token, capture/release policy and transactions; `data/` owns the sole ledger, checkpoint writer and load reconciliation; `payload/` owns exact vanilla adapters and NBT validation; `command/` owns operator recovery.
+- `companions/animals/{grimoire,showcase}/` — feature-owned guidance at priority 1100 and sixteen live animal habitats.
+- `src/main/java/io/github/dirtyredz/herbalwitch/client/animals/` — card presentation through the shared grimoire panel host; no server authority.
+- `src/main/java/io/github/dirtyredz/herbalwitch/data/client/animals/` — language contribution and parent-only item model provider.
+- `src/main/java/io/github/dirtyredz/herbalwitch/data/server/animals/` — contributions to the sole tag and processing-recipe writers.
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/server/tags/HerbalWitchEntityTagsProvider.java` — sole entity-tag writer; preparations and animals contribute independently.
 - `src/test/java/io/github/dirtyredz/herbalwitch/companions/animals/{trust,species}/` — pure relationship, codec, eligibility and bounds tests.
+- `src/test/java/io/github/dirtyredz/herbalwitch/companions/animals/{care,inspection,capture}/` — AI counters, wire bounds, ledger transitions, payload validation and persistence fault tests.
 - `src/test/java/io/github/dirtyredz/herbalwitch/data/animals/` — independent animal resource manifest and exact tag matrix.
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/companions/animals/` — real-entity capability and ownership tests, compiled locally and run by the orchestrator.
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/companions/animals/fixture/` — test-only unique players and real animal setup.
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/companions/animals/care/ai/` — real bait movement and fair spatial-index tests.
+- `src/art/blockbench/animals/{bait,care,capture}/<piece>/` — nine independent projects with embedded 32px textures and sidecars.
+- `src/main/resources/assets/herbalwitch/{models/block/animals,textures/block/pieces/animals}/` — compiler-owned art; generated item wrappers live under `models/item/animals/`.
+- `showcase/layout/ShowcaseEntitySample.java` — pure bounded entity descriptors; `showcase/construction/ShowcaseEntitySpawner.java` runs after habitats and cleans up only its own failed invocation.
 
 **src/main/java: client**
 
@@ -191,7 +204,7 @@ herbalwitch/
 
 **src/art**
 
-- `src/art/blockbench/` — Blockbench sources, never packaged (110 projects): `catalog.json` (the project list, pinned format, owned model directories) and `<stations|decor|preparations|grimoire|ritual|ward>/<piece>/` with `<piece>.bbmodel` and `piece.json`; Milestone 5 pieces at `decor/pieces/<family>/<group>/<piece>/` (docs/BLOCKBENCH.md)
+- `src/art/blockbench/` — Blockbench sources, never packaged (119 projects): `catalog.json` (the project list, pinned format, owned model directories) and `<stations|decor|preparations|grimoire|ritual|ward>/<piece>/` with `<piece>.bbmodel` and `piece.json`; Milestone 5 pieces at `decor/pieces/<family>/<group>/<piece>/`, M8 at `animals/<group>/<piece>/` (docs/BLOCKBENCH.md)
 
 **src/test/java**
 

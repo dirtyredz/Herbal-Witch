@@ -45,7 +45,9 @@ public final class EntityActionPermission {
         PVP_OFF,
         TEAM,
         SPAWN_PROTECTION,
-        CLAIMS;
+        CLAIMS,
+        UNSUPPORTED,
+        OWNER_CONFLICT;
 
         public boolean allowed() {
             return this == NONE;
@@ -53,6 +55,29 @@ public final class EntityActionPermission {
     }
 
     private static volatile BooleanSupplier preparationPvp = () -> false;
+    private static final java.util.List<Policy> POLICIES = new java.util.concurrent.CopyOnWriteArrayList<>();
+
+    @FunctionalInterface
+    public interface Policy {
+        Denial check(EntityActionContext.Action action, UUID actor, LivingEntity target);
+    }
+
+    /** Feature-owned restrictions are additive: no contributor can waive a baseline denial. */
+    public static void register(Policy policy) { POLICIES.add(policy); }
+
+    public static Denial check(EntityActionContext.Action action, Entity actor, LivingEntity target) {
+        Denial baseline = checkHarm(actor, target);
+        if (!baseline.allowed()) return baseline;
+        return policies(action, actor == null ? null : actor.getUUID(), target);
+    }
+
+    private static Denial policies(EntityActionContext.Action action, UUID actor, LivingEntity target) {
+        for (Policy policy : POLICIES) {
+            Denial result = policy.check(action, actor, target);
+            if (!result.allowed()) return result;
+        }
+        return Denial.NONE;
+    }
 
     private EntityActionPermission() {
     }
@@ -150,7 +175,7 @@ public final class EntityActionPermission {
         if (target instanceof OwnableEntity pet && pet.getOwnerUUID() != null && !pet.getOwnerUUID().equals(actorId)) {
             return Denial.FOREIGN_PET;
         }
-        return Denial.NONE;
+        return policies(EntityActionContext.Action.HARM, actorId, target);
     }
 
     private static boolean mayInteract(Level level, Player player, BlockPos pos) {

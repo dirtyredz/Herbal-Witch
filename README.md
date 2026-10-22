@@ -4,7 +4,7 @@ Forge 1.20.1 mod: woodland herbal witchcraft (herbs, stations, brewing, familiar
 an apothecary trade) together with a cottage furniture catalogue. Install on **both** the server and
 every client.
 
-**Status: private development, `0.6.1` local candidate (structural refactor of Milestone 7; gameplay and protocol 4 preserved).**
+**Status: private development, M8 candidate on `0.6.1`; promotion to `0.7.0` awaits dedicated-server and restart qualification. Protocol 5.**
 Contains Milestone 1 (cottage decor in a single design), Milestone 2 (herbs and garden), Milestone 3
 (everyday preparation stations and products), Milestone 4 (the grimoire: discovery, recipe lookup,
 missing ingredients, research blocks and teaching), Milestone 5 (94 furniture pieces), Milestone 6
@@ -15,6 +15,15 @@ and M7 acceptance is tracked in docs/FEATURES.md. Owner review of the art (the 8
 altar and the six M7 pieces are agent first drafts), the station UIs, the grimoire, the furniture and
 the witch behaviour in game, with two clients, is pending.
 Later systems are listed in docs/FEATURES.md. Not published; not in any pack.
+
+Ordinary animal care is implemented in this candidate: grind species-specific herbal bait, feed at
+loaded-time intervals to earn personal trust, and use a grimoire on the animal to inspect/adopt it.
+Existing healing salve targets injured animals; powder briefly settles supported AI and the existing
+sleep vial handles goats/axolotls. A witch can make capture charms; anyone authorized can use them.
+Transport preserves the animal in a server ledger and releases one claim at an aimed safe block face.
+Operator inspection, token reissue and interrupted-payload recovery are under `/herbalwitch capture`.
+The exact species, defaults, recipes and recovery procedure are in [Ordinary animals](docs/catalogue/animals.md).
+The nine new sprites are first drafts; owner art and two-client review remain pending.
 
 ## Supported versions
 
@@ -256,7 +265,7 @@ hanging pieces under ceilings, lights lit, storage stocked and the door in its f
 
 - **Where:** the box starts 2 blocks east of you on your row and extends east and south. The floor is
   the block you stand on. Height 8 (floor layer plus 7 cleared). Sections pack into rows no wider than 126, so the full
-  layout is 121 x 8 x 38 in two rows (it was 126 x 8 x 28 in 0.5.0, 117 before and 86 before 0.4.0);
+  layout is 121 x 8 x 58 in two rows, including sixteen live animal habitats (it was 121 x 8 x 38 in M7);
   hard caps are 128 x 8 x 128 and 65,536 writes.
 - **Destructive:** the whole box is replaced: terrain (grass, dirt, stone, plants, leaves, logs, water) is cleared (no drops) and the floor laid (grass blocks under the garden and herbs, smooth stone elsewhere), then the floor,
   supports, samples and signs are placed. There is no undo.

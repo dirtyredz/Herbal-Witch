@@ -1,0 +1,28 @@
+{
+  "project": "seed.bbmodel",
+  "textures": {
+    "sprite": "herbalwitch:block/pieces/animals/bait/seed/sprite",
+    "particle": "herbalwitch:block/pieces/animals/bait/seed/sprite"
+  },
+  "owned_textures": {
+    "sprite": "herbalwitch:block/pieces/animals/bait/seed/sprite"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/animals/bait/seed/base",
+      "item": true
+    }
+  ]
+}

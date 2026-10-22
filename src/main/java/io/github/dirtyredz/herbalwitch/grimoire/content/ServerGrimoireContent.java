@@ -44,6 +44,8 @@ public final class ServerGrimoireContent {
     public static void listen(Consumer<GrimoireContent> listener) {
         LISTENERS.add(listener);
     }
+    /** Feature rules changed without replacing recipes; the next read emits a new ordinary revision. */
+    public static synchronized void invalidate() { recipes = null; }
 
     /** The current content, rebuilt first if any input changed since it was built. */
     public static GrimoireContent get(MinecraftServer server) {

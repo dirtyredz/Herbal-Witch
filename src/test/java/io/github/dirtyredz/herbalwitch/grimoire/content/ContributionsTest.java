@@ -57,8 +57,9 @@ class ContributionsTest {
     void sourcePrioritiesKeepTheOriginalReadingOrder() {
         List<Integer> priorities = new ArrayList<>(List.of(GuideEntries.PRIORITY, WitchEntries.PRIORITY, BrewingEntries.PRIORITY,
                 AdvancedPreparationEntries.PRIORITY, StationEntries.PRIORITY, DecorEntries.PRIORITY, HerbEntries.PRIORITY,
-                StationRecipeEntries.PRIORITY, AltarEntries.PRIORITY, WardEntries.PRIORITY, CharmEntries.PRIORITY));
-        assertEquals(List.of(0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000), priorities);
+                StationRecipeEntries.PRIORITY, AltarEntries.PRIORITY, WardEntries.PRIORITY, CharmEntries.PRIORITY,
+                io.github.dirtyredz.herbalwitch.companions.animals.grimoire.AnimalEntries.PRIORITY));
+        assertEquals(List.of(0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100), priorities);
         assertEquals(priorities.stream().sorted().distinct().toList(), priorities, "strictly increasing and distinct");
     }
 }

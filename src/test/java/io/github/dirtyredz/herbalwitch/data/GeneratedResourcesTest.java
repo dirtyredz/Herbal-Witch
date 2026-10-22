@@ -54,7 +54,8 @@ class GeneratedResourcesTest {
         Map<String, String> lang = new LinkedHashMap<>();
         for (Map<String, String> part : List.of(DecorManifest.lang(), BotanyManifest.lang(), StationManifest.lang(),
                 PreparationManifest.lang(), ShowcaseManifest.lang(), GrimoireManifest.lang(), WitchManifest.lang(), AltarManifest.lang(),
-                AdvancedManifest.lang(), CharmManifest.lang(), CircleManifest.lang(), WardManifest.lang())) {
+                AdvancedManifest.lang(), CharmManifest.lang(), CircleManifest.lang(), WardManifest.lang(),
+                io.github.dirtyredz.herbalwitch.data.animals.AnimalManifest.lang())) {
             part.forEach((key, value) -> {
                 assertFalse(lang.containsKey(key), "two features claim " + key);
                 lang.put(key, value);
@@ -91,9 +92,14 @@ class GeneratedResourcesTest {
     void everyGeneratedDirectoryHasFewerThanTwelveEntries() throws IOException {
         Map<String, Set<String>> entries = new HashMap<>();
         try (Stream<Path> walk = Files.walk(GENERATED)) {
-            walk.filter(p -> !p.equals(GENERATED) && !GENERATED.relativize(p).toString().startsWith(".cache"))
-                    .forEach(p -> entries.computeIfAbsent(GENERATED.relativize(p.getParent()).toString().replace('\\', '/'), k -> new TreeSet<>())
-                            .add(p.getFileName().toString()));
+            // Datagen removes stale files but can leave empty directories, which Git never records.
+            // Count every ancestor of an actual generated file, so local empty remnants are irrelevant.
+            walk.filter(Files::isRegularFile).filter(p -> !GENERATED.relativize(p).toString().startsWith(".cache"))
+                    .forEach(file -> {
+                        for (Path p = file; !p.equals(GENERATED); p = p.getParent())
+                            entries.computeIfAbsent(GENERATED.relativize(p.getParent()).toString().replace('\\', '/'), k -> new TreeSet<>())
+                                    .add(p.getFileName().toString());
+                    });
         }
         entries.forEach((dir, names) -> {
             if (DecorManifest.REGISTRY_DIRECTORIES.contains(dir)) {

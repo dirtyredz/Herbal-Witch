@@ -1,0 +1,28 @@
+{
+  "project": "berry.bbmodel",
+  "textures": {
+    "sprite": "herbalwitch:block/pieces/animals/bait/berry/sprite",
+    "particle": "herbalwitch:block/pieces/animals/bait/berry/sprite"
+  },
+  "owned_textures": {
+    "sprite": "herbalwitch:block/pieces/animals/bait/berry/sprite"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/animals/bait/berry/base",
+      "item": true
+    }
+  ]
+}

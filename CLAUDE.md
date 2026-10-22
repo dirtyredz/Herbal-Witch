@@ -40,7 +40,7 @@ docs/ARCHITECTURE.md and docs/catalogue/).
   mutate a player's energy or practice only through `WitchStatusService`; paid changes use its
   `WitchStatusService.spend` transaction (M7 production included, and M9 familiars will). Shared online lookup/enumeration
   belongs to `platform/player/OnlinePlayers`; features retain their own eligibility rules.
-  Bump `HerbalWitchNetwork.PROTOCOL` (now "4") on any wire change and register new messages
+  Bump `HerbalWitchNetwork.PROTOCOL` (now "5") on any wire change and register new messages
   after the grimoire's. The founding record is world-global: GameTests that convert anyone close it, so
   they reset it (`FoundingService.resetForTest`) and run their rituals synchronously. Grimoire prose
   never hard-codes a witch number (the rules are quoted from the synced rules; a test enforces it).
@@ -53,6 +53,12 @@ docs/ARCHITECTURE.md and docs/catalogue/).
   `AdvancedStationBlock`/`AdvancedStationEntity`; never add a block class per station. Curios stays
   compile-only behind `platform/compat/curios/`. A GameTest that charges a ward joins a
   `herbalwitch_ward_*` batch (docs/GOTCHAS.md).
+- **Animals and transport (M8 candidate):** care state lives under `companions/animals`; future
+  familiars consume its immutable trust views and must provide their own lifecycle authority.
+  Capture records have one verified writer; ordinary dirty marking is never a durability checkpoint.
+  Before 0.7.0 promotion, ANU must qualify real-entity GameTests and restart/fault cases at each
+  capture/release checkpoint, stale source chunks/items, token rotation, corrupt files and failed
+  insertion. Never run those servers or a client locally in an implementation handoff.
 - **Generated resources are source.** Change a provider, run `runData`, commit the regenerated
   `src/generated/resources/` with the code. Never hand-edit generated JSON. `GeneratedResourcesTest`
   holds the exact manifest; when a file is renamed or removed, delete `src/generated` and regenerate.

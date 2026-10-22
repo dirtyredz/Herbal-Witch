@@ -1,0 +1,192 @@
+{
+  "meta": {
+    "format_version": "5.0",
+    "model_format": "java_block",
+    "box_uv": false
+  },
+  "name": "filled_charm",
+  "parent": "",
+  "ambientocclusion": false,
+  "front_gui_light": true,
+  "java_block_version": "1.9.0",
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "painted sachet",
+      "uuid": "e8bbb2c5-75c7-4a76-afda-aa386930e2e4",
+      "from": [
+        0,
+        0,
+        8
+      ],
+      "to": [
+        16,
+        16,
+        8
+      ],
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            16,
+            0,
+            0,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        }
+      }
+    }
+  ],
+  "outliner": [
+    "e8bbb2c5-75c7-4a76-afda-aa386930e2e4"
+  ],
+  "textures": [
+    {
+      "id": "sprite",
+      "name": "sprite.png",
+      "uuid": "fa5a725b-2bdf-47c9-a96b-74b37c6d3510",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABFUlEQVR42u2XzQkCMRCFrcKLJ2EPHsWjVqAlWIQ1WYF9eBc7sAEbiDxhYBhfftxMjIKBx4Y1+n2ZTXbXyeTfKtt8NoQu0MtxHXA8bJfPo6Q5HGAEYBuRagq3UJwvkbhdT6G67BZsmwjIZWkmkBpnq3A/74NNcwH3CpTCUxLFArGBtRUobt0Ecosltgs0SH/uXgGB2ciKtxm94FKXQIC5uN6Wc+DNMG0nwuAA6ix2q5dzbhIMDqAEC5X1mUQTOIubhAjgRzU8NmvWx/fQrxLQs2cztdFjdBXeEmBwNlME25ZJsEvhJiFgGztmNDwnwOBMwk2gVCIGd9mKdjek1oBe/VUvqt3vhN2fBV/xNPz4+8BP/Df0bA9hckmE6R8SxAAAAABJRU5ErkJggg==",
+      "namespace": "herbalwitch",
+      "folder": "block/pieces/animals/capture/filled_charm",
+      "particle": true
+    }
+  ],
+  "display": {
+    "gui": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "ground": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        2,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0,
+        180,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        3,
+        1
+      ],
+      "scale": [
+        0.55,
+        0.55,
+        0.55
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        3,
+        1
+      ],
+      "scale": [
+        0.55,
+        0.55,
+        0.55
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        -90,
+        25
+      ],
+      "translation": [
+        1.13,
+        3.2,
+        1.13
+      ],
+      "scale": [
+        0.68,
+        0.68,
+        0.68
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        90,
+        -25
+      ],
+      "translation": [
+        1.13,
+        3.2,
+        1.13
+      ],
+      "scale": [
+        0.68,
+        0.68,
+        0.68
+      ]
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "project": "filled_charm.bbmodel",
+  "textures": {
+    "sprite": "herbalwitch:block/pieces/animals/capture/filled_charm/sprite",
+    "particle": "herbalwitch:block/pieces/animals/capture/filled_charm/sprite"
+  },
+  "owned_textures": {
+    "sprite": "herbalwitch:block/pieces/animals/capture/filled_charm/sprite"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/animals/capture/filled_charm/base",
+      "item": true
+    }
+  ]
+}

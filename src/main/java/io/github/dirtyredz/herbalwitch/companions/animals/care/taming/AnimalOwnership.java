@@ -21,7 +21,9 @@ public final class AnimalOwnership {
         UUID nativeId = mob instanceof OwnableEntity pet ? pet.getOwnerUUID()
                 : mob instanceof AbstractHorse horse ? horse.getOwnerUUID() : null;
         UUID keeper = AnimalCapability.of(mob).flatMap(AnimalCapability::state).flatMap(AnimalState::keeper).orElse(null);
-        boolean conflict = nativeId != null && keeper != null && !nativeId.equals(keeper);
+        boolean tamed = mob instanceof net.minecraft.world.entity.TamableAnimal pet && pet.isTame()
+                || mob instanceof AbstractHorse horse && horse.isTamed();
+        boolean conflict = nativeId != null && keeper != null && !nativeId.equals(keeper) || tamed && nativeId == null;
         return new View(nativeId == null ? keeper : nativeId, conflict,
                 profile.ownership() != AnimalProfile.Ownership.UNKNOWN, nativeId != null);
     }

@@ -1,6 +1,6 @@
 # Product catalogue
 
-Traces every product category in the design (everyday, combat, familiar preparations) and the 14 named herbs to station, delivery, witch requirement, effect and milestone. Milestone 3 and 7 rows are done and carry the exact effect (the recipes are the generated JSON under `data/herbalwitch/recipes/processing/`, listed by the grimoire); other rows are planned. "Planned effect" is the design intent plus plan section 7 duration defaults.
+Traces every product category in the design (everyday, combat, animal care, familiar preparations) and the 14 named herbs to station, delivery, witch requirement, effect and milestone. Milestone 3 and 7 rows are done and carry the exact effect (the recipes are the generated JSON under `data/herbalwitch/recipes/processing/`, listed by the grimoire); M8 animal products are a qualification candidate below. Other rows are planned. "Planned effect" is the design intent plus plan section 7 duration defaults.
 
 Duration defaults: utility 60-120 s, combat control 5-10 s, familiar buffs 180 s. Same effects refresh, not stack. Sleep wakes on damage; bosses and protected targets are immune to hard control by default. Harmful player targeting is off by default (PvP). Stations: see stations.md. Non-witches can buy and use finished products; "Witch-only?" refers to making them.
 
@@ -56,6 +56,21 @@ The cauldron makes each drink and vial as a four-dose Mixture; the Bottling Benc
 four bottles (adding gunpowder and paper makes a labelled vial). `AdvancedProductCatalog` holds the 16
 advanced preparations (the four drinks, six vials, four oils, Blinding Dust and Moon Essence),
 `MixtureCatalog` the 17 mixtures (4 drinks, 6 vials, 7 familiar tonics).
+
+## Ordinary animal products (M8 candidate)
+
+Finished products work for non-witches. All care is server-authoritative and successful handling costs
+no energy. The [animal catalogue](animals.md) records species support, trust, ownership and transport
+rules; the live grimoire lists the current recipes. Version promotion awaits ANU runtime/restart qualification.
+
+| Product | Station and recipe | Use |
+|---|---|---|
+| Grain, root, seed, fish, meat and berry bait | Mortar: two matching food-tag ingredients + valerian powder → four bait, 100 ticks | Matching species only; a rewarded feed grants 20 personal trust, once per 1,200 loaded ticks. Holding bait attracts supported goal-AI animals without granting trust. |
+| Calming powder | Mortar: lavender powder + chamomile powder → four, 100 ticks | Settles supported goal-AI animals for 200 loaded ticks; no trust, healing, anger removal or active refresh. |
+| Animal capture charm | Charm workbench: two string + leather + amethyst shard → one, 200 ticks; witch production, 10 energy | Non-stackable empty charm becomes a server-issued filled charm only after durable capture. Safe release consumes that claim and returns the empty charm. |
+| Filled animal capture charm | Successful capture only; no recipe or creative-tab entry | Separate non-stackable presentation of the same transport claim; copied items cannot duplicate animals. |
+| Existing healing salve | Existing infusion-pot recipe remains unchanged | Targeted use on an injured wild/own supported animal restores up to 4 health, returns a bowl, and starts a 200-loaded-tick target cooldown; no trust gain. Player self-use is unchanged. |
+| Existing Sleep Vial | Existing witch-cauldron/bottling recipe remains unchanged | M7 sleep also settles eligible own/wild ordinary animals for capture. Damage wakes them and ordinary hard-control immunity still applies. |
 
 ## Familiar preparations
 

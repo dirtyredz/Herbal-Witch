@@ -59,10 +59,14 @@ public final class ShowcaseCommand {
             source.sendFailure(problem.get());
             return 0;
         }
-        ShowcaseBuilder.Result result = ShowcaseBuilder.build(plan, level, origin);
+        ShowcaseBuilder.Result result = ShowcaseBuilder.build(plan, level, player, origin);
+        if (!result.complete()) {
+            source.sendFailure(Component.translatable(ShowcasePreflight.KEY + "samples_failed", result.placed())); return 0;
+        }
         BlockPos max = origin.offset(plan.width() - 1, ShowcasePlan.HEIGHT - 1, plan.depth() - 1);
         source.sendSuccess(() -> Component.translatable(ShowcasePreflight.KEY + "success", sections.size(),
                 result.placed(), result.cleared(), pos(origin), pos(max)), true);
+        if (result.entities() > 0) source.sendSuccess(() -> Component.translatable(ShowcasePreflight.KEY + "samples", result.entities()), true);
         return result.placed();
     }
 

@@ -1,5 +1,27 @@
 # Gotchas - The Herbal Witch
 
+- **Capture dirty is not durable.** Never call vanilla `SavedData.save(File)` as a checkpoint. The
+  capture subclass overrides that path; all writes use the serialized, forced, atomic, verified
+  writer. Failure retains dirty state and blocks transport. Preserve corrupt files; deleting one
+  removes replay protection. The `.dat` is a checksummed envelope, not compressed vanilla NBT.
+- **Final verification can fail after replacement.** Keep the recovery payload in the RELEASED
+  checkpoint until success is observed. Only then compact. Startup quarantines any retained final
+  payload and prepared record. Never automatically spawn because an entity UUID is unloaded.
+- **Entity admission is object-specific.** A release permit belongs to one candidate, transaction,
+  UUID and generation. Copied charms, stale source chunks, duplicate joins and old tokens must not
+  authorize a second entity. Canceled/partial insertion is quarantine; failed candidates drop nothing.
+- **Transport is conservative.** Unknown Forge capabilities, persistent mod data, nested entities,
+  malformed inventory/attributes and unsupported schemas are preserved/refused. Tags cannot add an
+  adapter. Disabling new capture must still allow supported stored release and operator recovery.
+- **Calm must not delete panic.** Retain every native goal and attacker memory. Temporary MOVE
+  control ends on damage/danger/source or permission loss. The global bait budgets include all query
+  and path requests; idle mobs do no neighborhood scans. A NoAI mob cannot receive a working calm goal.
+- **One animal click path.** Handle EntityInteract, not both interaction events. Denials consume the
+  click to stop offhand/self-use fallthrough; successful care mutates only on the server. Card requests
+  share the per-player rate gate and revalidate nonce/revision/target and all current requirements.
+- **Showcase partial failures are visible.** Enclosures precede samples. Clean up only exact objects
+  created by that invocation and report the constructed blocks that remain; never sweep nearby mobs.
+
 - **Goats use a Brain too.** Generic goal-selector calming/attraction cannot safely govern goat
   navigation. Keep goats and axolotls out of those AI tags; bats retain native flight. A tag cannot
   supply a missing behavior or serialization adapter.
