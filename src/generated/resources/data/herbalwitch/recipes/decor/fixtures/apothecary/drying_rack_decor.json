@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "item": "minecraft:string"
+    },
+    "S": {
+      "item": "minecraft:dark_oak_slab"
+    },
+    "T": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "TRT",
+    "TRT",
+    "S S"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/fixtures/drying_rack_decor"
+  },
+  "show_notification": true
+}

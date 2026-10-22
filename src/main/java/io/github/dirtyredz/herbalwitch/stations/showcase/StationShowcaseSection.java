@@ -9,6 +9,7 @@ import io.github.dirtyredz.herbalwitch.stations.registry.StationBlocks;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcasePlacement;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcasePlacement.Line;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseSection;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -91,8 +92,8 @@ public final class StationShowcaseSection implements ShowcaseSection {
         }
         for (int i = 0; i < layout.size(); i++) {
             int part = i;
-            MultiblockLayout.Cell cell = layout.cell(i);
-            out.add(ShowcasePlacement.content(width - 1 - cell.right(), y + cell.up(), 1,
+            BlockPos at = layout.offset(Direction.NORTH, i);
+            out.add(ShowcasePlacement.content(width - 1 + at.getX(), y + at.getY(), 1 + at.getZ(),
                     () -> facingNorth(block.get()).setValue(layout.part(), part), i == 0 ? init : null));
         }
     }

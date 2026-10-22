@@ -60,13 +60,13 @@ class ShowcasePlanTest {
         }
     }
 
-    /** The GameTest template (tools/generate-test-structures.mjs) is 100 x 10 x 36 and the box starts at (2, 0, 1). */
+    /** The GameTest template (tools/generate-test-structures.mjs) is 120 x 10 x 40 and the box starts at (2, 0, 1). */
     @Test
     void theFullLayoutFitsTheGameTestTemplate() throws Exception {
         ShowcasePlan plan = ShowcasePlan.of(sections());
-        assertTrue(plan.width() + 2 <= 100 && plan.depth() + 1 <= 36,
-                "plan " + plan.width() + " x " + plan.depth() + " outgrows the 100 x 36 showcase template");
-        assertEquals(List.of(86, 28), List.of(plan.width(), plan.depth()), "the README documents the full layout as 86 x 8 x 28");
+        assertTrue(plan.width() + 2 <= 120 && plan.depth() + 1 <= 40,
+                "plan " + plan.width() + " x " + plan.depth() + " outgrows the 120 x 40 showcase template");
+        assertEquals(List.of(117, 28), List.of(plan.width(), plan.depth()), "the README documents the full layout as 117 x 8 x 28");
     }
 
     @Test

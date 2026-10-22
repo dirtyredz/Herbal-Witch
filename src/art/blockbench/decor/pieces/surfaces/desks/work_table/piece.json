@@ -1,0 +1,68 @@
+{
+  "project": "work_table.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/work_table/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/work_table/wood_v",
+    "gold": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/work_table/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/work_table/plum",
+    "iron": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/work_table/iron",
+    "pale_stone": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/work_table/pale_stone",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/work_table/ivy",
+    "parts": "herbalwitch:block/botany/parts",
+    "bundle_lavender": "herbalwitch:item/preparations/herbs/temperate/lavender/bundle",
+    "bundle_sage": "herbalwitch:item/preparations/herbs/temperate/sage/bundle",
+    "particle": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/work_table/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/work_table/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/work_table/wood_v",
+    "gold": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/work_table/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/work_table/plum",
+    "iron": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/work_table/iron",
+    "pale_stone": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/work_table/pale_stone",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/surfaces/desks/work_table/ivy"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "attachments": {
+    "bundle_0": {
+      "kind": "bundle",
+      "herb": "lavender",
+      "width": 4.5,
+      "height": 8,
+      "across": "z"
+    },
+    "bundle_1": {
+      "kind": "bundle",
+      "herb": "sage",
+      "width": 4.5,
+      "height": 8,
+      "across": "z"
+    }
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/surfaces/desks/work_table",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ]
+    ]
+  }
+}

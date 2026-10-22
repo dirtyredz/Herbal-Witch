@@ -9,8 +9,8 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 /**
- * Inventory models: every item is its piece's template (the unlit lamp, the north-facing piece), so
- * item, placed block and dropped item look alike. The item model only names its parent: display
+ * Inventory models: every item is its piece's whole compiled model (the unlit lamp, the north-facing piece,
+ * a multiblock's assembly), so item, placed block and dropped item look alike. The item model only names its parent: display
  * transforms belong to the piece's Blockbench project and are compiled into the template
  * (src/art/blockbench/decor/), so a Display edit in Blockbench needs no datagen.
  */
@@ -28,7 +28,7 @@ public class DecorItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         for (DecorBlocks.Entry entry : DecorBlocks.entries()) {
             FurnitureSpec spec = entry.spec();
-            getBuilder("item/" + spec.path()).parent(new ModelFile.UncheckedModelFile(modLoc(DecorModelProvider.itemTemplate(spec))));
+            getBuilder("item/" + spec.path()).parent(new ModelFile.UncheckedModelFile(modLoc(DecorModelProvider.itemModel(spec))));
         }
     }
 }

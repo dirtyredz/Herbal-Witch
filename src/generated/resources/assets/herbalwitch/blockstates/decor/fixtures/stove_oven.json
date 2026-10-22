@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/kitchen/stove_oven/base",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/kitchen/stove_oven/base"
+    },
+    "facing=south": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/kitchen/stove_oven/base",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "herbalwitch:block/decor/pieces/fixtures/kitchen/stove_oven/base",
+      "y": 270
+    }
+  }
+}

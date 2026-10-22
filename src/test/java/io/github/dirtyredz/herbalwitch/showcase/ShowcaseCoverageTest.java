@@ -3,12 +3,15 @@ package io.github.dirtyredz.herbalwitch.showcase;
 import io.github.dirtyredz.herbalwitch.botany.showcase.HerbShowcaseSection;
 import io.github.dirtyredz.herbalwitch.data.botany.BotanyManifest;
 import io.github.dirtyredz.herbalwitch.data.decor.DecorManifest;
+import io.github.dirtyredz.herbalwitch.data.decor.manifest.DecorPieces;
 import io.github.dirtyredz.herbalwitch.decor.showcase.DecorShowcaseSection;
 import io.github.dirtyredz.herbalwitch.grimoire.showcase.GrimoireShowcaseSection;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcasePlacement;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -21,15 +24,36 @@ class ShowcaseCoverageTest {
         return placements.stream().filter(p -> p.kind() == kind && p.y() == y).count();
     }
 
+    /** Pieces with an inventory (cabinets and display shelves), independently of the catalogue. */
+    private static final Set<String> STORAGE = Set.of("small_wall_shelf", "lower_cabinet", "upper_cabinet", "pantry", "sideboard",
+            "china_cabinet", "wine_rack", "ingredient_cabinet", "open_shelves", "potion_shelf", "nightstand", "dresser", "wardrobe",
+            "trunk", "rolltop_desk", "filing_cabinet", "shoe_cabinet", "bookshelf", "linen_cabinet", "storage_cabinet",
+            "wall_shelf_medium", "wall_shelf_large", "corner_shelf", "free_standing_shelf_short", "free_standing_shelf_medium",
+            "free_standing_shelf_large", "ladder_shelf");
+
+    /**
+     * One canonical labelled sample per piece (the door also shows its three other states), exactly
+     * its declared cells, and exactly one stocked inventory per storage or display sample.
+     */
     @Test
-    void decorShowsEveryPieceOnceWithItsSign() {
+    void decorShowsEveryPieceWithItsSignAndExactlyItsCells() {
         List<ShowcasePlacement> placements = new DecorShowcaseSection().placements();
-        int cells = DecorManifest.ids().size();
-        assertEquals(cells, count(placements, ShowcasePlacement.Kind.LABEL, 1));
+        List<String> names = new ArrayList<>();
+        int cells = 0;
+        int stores = 0;
+        for (DecorPieces.Piece piece : DecorManifest.pieces()) {
+            int samples = piece.id().equals("door") ? 4 : 1;
+            for (int i = 0; i < samples; i++) {
+                names.add(piece.name());
+            }
+            cells += piece.cells() * samples;
+            stores += STORAGE.contains(piece.id()) ? 1 : 0;
+        }
+        List<ShowcasePlacement> labels = placements.stream().filter(p -> p.kind() == ShowcasePlacement.Kind.LABEL).toList();
+        assertEquals(names, labels.stream().map(p -> String.join(" ", p.lines().stream().filter(ShowcasePlacement.Line::literal)
+                .map(ShowcasePlacement.Line::text).toList())).toList());
         assertEquals(cells, placements.stream().filter(p -> p.kind() == ShowcasePlacement.Kind.CONTENT).count());
-        List<String> labels = placements.stream().filter(p -> p.kind() == ShowcasePlacement.Kind.LABEL)
-                .map(p -> p.lines().get(0).text()).toList();
-        assertEquals(DecorManifest.PIECES.keySet().stream().map(DecorManifest.NAMES::get).toList(), labels);
+        assertEquals(stores, placements.stream().filter(p -> p.kind() == ShowcasePlacement.Kind.CONTENT && p.init() != null).count());
     }
 
     @Test

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "S": {
+      "item": "minecraft:dark_oak_slab"
+    },
+    "X": {
+      "item": "minecraft:smooth_stone_slab"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "PPS",
+    "PPP"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/surfaces/corner_counter"
+  },
+  "show_notification": true
+}

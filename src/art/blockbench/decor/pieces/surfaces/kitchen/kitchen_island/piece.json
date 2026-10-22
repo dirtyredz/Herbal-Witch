@@ -1,0 +1,51 @@
+{
+  "project": "kitchen_island.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_island/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_island/wood_v",
+    "gold": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_island/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_island/plum",
+    "paint": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_island/paint",
+    "iron": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_island/iron",
+    "copper": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_island/copper",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_island/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_island/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_island/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_island/wood_v",
+    "gold": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_island/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_island/plum",
+    "paint": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_island/paint",
+    "iron": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_island/iron",
+    "copper": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_island/copper",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_island/ivy"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/surfaces/kitchen/kitchen_island",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ]
+    ]
+  }
+}

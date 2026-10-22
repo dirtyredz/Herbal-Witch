@@ -16,8 +16,8 @@ import net.minecraft.world.level.block.Blocks;
 public final class ShowcaseFixtures {
     /** Fits the full showcase plus the entrance aisle. */
     public static final String FULL = "showcase";
-    public static final int FULL_X = 100;
-    public static final int FULL_Z = 36;
+    public static final int FULL_X = 120;
+    public static final int FULL_Z = 40;
     /** Fits one small section. */
     public static final String SECTION = "showcase_section";
     public static final int SECTION_X = 16;

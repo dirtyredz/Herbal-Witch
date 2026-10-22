@@ -1,5 +1,8 @@
 package io.github.dirtyredz.herbalwitch.data.decor;
 
+import io.github.dirtyredz.herbalwitch.data.decor.manifest.DecorPieces;
+import io.github.dirtyredz.herbalwitch.data.decor.manifest.DecorPieces.Piece;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,33 +10,58 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
- * The decor feature's expected generated files and English names, written out independently of the
- * mod's catalogue: five pieces, one design, ids {@code decor/<family>/<piece>}.
+ * The decor feature's expected generated files and English, written out independently of the mod's
+ * catalogue: the pieces of every delivered wave ({@link DecorPieces}), one design, ids
+ * {@code decor/<family>/<piece>}.
  */
 public final class DecorManifest {
-    /** piece -> family directory, in tab order. */
-    public static final Map<String, String> PIECES = linked("armchair", "seating", "apothecary_counter", "surfaces",
-            "small_wall_shelf", "storage", "table_lamp", "lighting", "small_rug", "textiles");
-    public static final Map<String, String> NAMES = Map.of("armchair", "Armchair", "apothecary_counter", "Apothecary Counter",
-            "small_wall_shelf", "Small Wall Shelf", "table_lamp", "Table Lamp", "small_rug", "Small Rug");
-    /** piece -> authored template (lamps add _off / _on). */
+    /** Delivery order of the waves. */
+    public static final List<String> WAVES = List.of("M1", "A", "B", "C");
+    /** The last delivered wave (FurnitureCatalog.DELIVERED). */
+    public static final String DELIVERED = "A";
+    /** The five 0.1.0 pieces' authored templates (lamps add _off / _on). */
     public static final Map<String, String> TEMPLATES = Map.of("armchair", "armchair", "apothecary_counter", "apothecary_counter",
             "small_wall_shelf", "wall_shelf", "table_lamp", "table_lamp", "small_rug", "rug");
+    /** Placement refusals (platform/placement/PlacementChecks). */
+    public static final List<String> REFUSALS = List.of("unloaded", "outside_world", "occupied", "obstructed", "unsupported", "denied");
+
+    /**
+     * The only generated directories allowed twelve entries or more (docs/DECISIONS.md, 0.4.0): the
+     * blockstates, item models and block loot of the four furniture families with more than eleven
+     * pieces, whose file names are permanent block ids. Recipes and advancements are grouped instead.
+     */
+    public static final Set<String> REGISTRY_DIRECTORIES = registryDirectories();
 
     private DecorManifest() {
     }
 
-    private static Map<String, String> linked(String... pairs) {
-        Map<String, String> map = new LinkedHashMap<>();
-        for (int i = 0; i < pairs.length; i += 2) {
-            map.put(pairs[i], pairs[i + 1]);
+    private static Set<String> registryDirectories() {
+        Set<String> dirs = new TreeSet<>();
+        for (String family : List.of("seating", "storage", "surfaces", "fixtures")) {
+            dirs.add("assets/herbalwitch/blockstates/decor/" + family);
+            dirs.add("assets/herbalwitch/models/item/decor/" + family);
+            dirs.add("data/herbalwitch/loot_tables/blocks/decor/" + family);
         }
-        return map;
+        return dirs;
     }
 
-    /** {@code decor/<family>/<piece>} for the five pieces. */
+    /** The file names a registry directory must hold: one per registered piece of its family. */
+    public static Set<String> entries(String directory) {
+        String family = directory.substring(directory.lastIndexOf('/') + 1);
+        Set<String> names = new TreeSet<>();
+        pieces().stream().filter(p -> p.family().equals(family)).forEach(p -> names.add(p.id() + ".json"));
+        return names;
+    }
+
+    /** The registered pieces, in tab order. */
+    public static List<Piece> pieces() {
+        int delivered = WAVES.indexOf(DELIVERED);
+        return DecorPieces.ALL.stream().filter(p -> WAVES.indexOf(p.wave()) <= delivered).toList();
+    }
+
+    /** {@code decor/<family>/<piece>} for the registered pieces. */
     public static List<String> ids() {
-        return PIECES.entrySet().stream().map(e -> "decor/" + e.getValue() + "/" + e.getKey()).toList();
+        return pieces().stream().map(Piece::path).toList();
     }
 
     public static String pieceOf(String id) {
@@ -42,12 +70,13 @@ public final class DecorManifest {
 
     public static Set<String> files() {
         Set<String> expected = new TreeSet<>();
-        for (String id : ids()) {
+        for (Piece piece : pieces()) {
+            String id = piece.path();
             expected.add("assets/herbalwitch/blockstates/" + id + ".json");
             expected.add("assets/herbalwitch/models/item/" + id + ".json");
             expected.add("data/herbalwitch/loot_tables/blocks/" + id + ".json");
-            expected.add("data/herbalwitch/recipes/" + id + ".json");
-            expected.add("data/herbalwitch/advancements/recipes/decorations/" + id + ".json");
+            expected.add("data/herbalwitch/recipes/" + piece.recipePath() + ".json");
+            expected.add("data/herbalwitch/advancements/recipes/decorations/" + piece.recipePath() + ".json");
         }
         expected.add("assets/herbalwitch/lang/en_us.json");
         expected.add("data/herbalwitch/tags/blocks/furniture.json");
@@ -56,12 +85,28 @@ public final class DecorManifest {
         return expected;
     }
 
-    /** Every decor language key and its English text. */
+    /** Every decor language key and its English text (null: any non-empty text). */
     public static Map<String, String> lang() {
         Map<String, String> lang = new LinkedHashMap<>();
         lang.put("itemGroup.herbalwitch.decor", "The Herbal Witch: Cottage Decor");
-        for (String id : ids()) {
-            lang.put("block.herbalwitch." + id.replace('/', '.'), NAMES.get(pieceOf(id)));
+        for (Piece piece : pieces()) {
+            lang.put("block.herbalwitch." + piece.path().replace('/', '.'), piece.name());
+        }
+        REFUSALS.forEach(r -> lang.put("message.herbalwitch.placement." + r, null));
+        lang.put("message.herbalwitch.seat.occupied", null);
+        lang.put("message.herbalwitch.seat.no_room", null);
+        // the furniture reference pages: one line per piece and the shared facts
+        for (Piece piece : pieces()) {
+            lang.put("grimoire.herbalwitch.decor." + piece.family() + "." + piece.id(), null);
+        }
+        for (String fact : List.of("size", "crafted", "lookalike")) {
+            lang.put("grimoire.herbalwitch.decor." + fact, null);
+        }
+        for (String mount : List.of("free", "floor", "wall", "ceiling", "corner", "carpet")) {
+            lang.put("grimoire.herbalwitch.decor.mount." + mount, null);
+        }
+        for (String use : List.of("static", "seating", "storage", "display", "light", "bed", "door", "rug")) {
+            lang.put("grimoire.herbalwitch.decor.use." + use, null);
         }
         return lang;
     }

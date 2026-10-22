@@ -13,6 +13,7 @@ import { loadCatalogue, loadPieces } from './catalogue.mjs';
 import { resolveTextures, hasTransparency, texturePath } from './textures.mjs';
 import { expandAttachment } from './attachments.mjs';
 import { singleOutputs, multiblockOutputs } from './assembly.mjs';
+import { compensateDisplay } from './geometry/item-assembly.mjs';
 
 export const TEXTURE_ROOT = 'src/main/resources/assets/herbalwitch/textures';
 
@@ -104,7 +105,7 @@ export function compileProject({ dir, piece }, text, canonical) {
       const img = image(id) ?? (() => { throw new Error(`${where} ${o.path}: texture ${id} does not exist`); })();
       cutout ||= hasTransparency(img);
     }
-    const display = o.item && Object.keys(project.display).length ? project.display : null;
+    const display = o.item && Object.keys(project.display).length ? compensateDisplay(project.display, o.shift ?? [0, 0, 0]) : null;
     const json = modelJson({ textures: piece.textures, elements: o.elements, cutout, display, ao: project.ao });
     const path = `${o.path}.json`;
     if (models.has(path)) throw new Error(`${where}: ${o.path} is written twice`);

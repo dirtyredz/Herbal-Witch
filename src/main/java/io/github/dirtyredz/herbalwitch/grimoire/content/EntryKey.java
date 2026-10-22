@@ -23,7 +23,9 @@ public record EntryKey(Kind kind, String id) implements Comparable<EntryKey> {
         GUIDE,
         HERB,
         STATION,
-        RECIPE;
+        RECIPE,
+        /** A furniture piece's public reference page (decor, 0.4.0). */
+        FURNITURE;
 
         public String serialized() {
             return name().toLowerCase(Locale.ROOT);

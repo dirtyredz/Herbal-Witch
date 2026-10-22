@@ -3,6 +3,7 @@ package io.github.dirtyredz.herbalwitch.data.art;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import io.github.dirtyredz.herbalwitch.data.fixture.ResourceFiles;
+import io.github.dirtyredz.herbalwitch.decor.catalog.FurnitureCatalog;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -20,8 +21,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * The Blockbench sources and what they compile to, against the independent BlockbenchManifest:
- * the catalogue lists exactly the fourteen projects at the pinned format, the compiler's model
- * directories hold exactly the 34 compiled models, the owned textures exist, and no source file or
+ * the catalogue lists exactly the expected projects at the pinned format, the compiler's model
+ * directories hold exactly the compiled models (34 before Milestone 5, plus each decor piece's cells
+ * and states), the owned textures exist, sidecar cells agree with the catalogue, and no source file or
  * compiled path leaks into the runtime resources, the datagen tree or a procedural directory.
  */
 class BlockbenchResourcesTest {
@@ -59,7 +61,7 @@ class BlockbenchResourcesTest {
         for (String dir : BlockbenchManifest.PROJECTS) {
             JsonObject piece = ResourceFiles.json(SOURCES.resolve(dir).resolve("piece.json"));
             String project = piece.get("project").getAsString();
-            assertEquals(dir.substring(dir.indexOf('/') + 1) + ".bbmodel", project, dir);
+            assertEquals(dir.substring(dir.lastIndexOf('/') + 1) + ".bbmodel", project, dir);
             JsonObject bbmodel = ResourceFiles.json(SOURCES.resolve(dir).resolve(project));
             JsonObject meta = bbmodel.getAsJsonObject("meta");
             assertEquals("5.0", meta.get("format_version").getAsString(), dir);
@@ -79,16 +81,53 @@ class BlockbenchResourcesTest {
             }
         }
         assertEquals(new TreeSet<>(BlockbenchManifest.models()), actual);
-        assertEquals(34, actual.size());
+        assertEquals(34 + BlockbenchManifest.pieces().stream().mapToInt(p -> BlockbenchManifest.models(p).size()).sum(), actual.size());
+        assertEquals(34, BlockbenchManifest.models().size() - BlockbenchManifest.pieces().stream().mapToInt(p -> BlockbenchManifest.models(p).size()).sum());
         for (String model : BlockbenchManifest.models()) {
             assertFalse(Files.exists(ResourceFiles.GENERATED_ASSETS.resolve("models/" + model)), model + " also in the datagen tree");
+        }
+    }
+
+    /** Each Milestone 5 piece owns at least its wood and every texture it declares, all under its own directory, 32 x 32. */
+    @Test
+    void everyNewPieceOwnsItsTexturesUnderItsOwnDirectory() {
+        for (var piece : BlockbenchManifest.pieces()) {
+            String dir = BlockbenchManifest.project(piece);
+            JsonObject json = ResourceFiles.json(SOURCES.resolve(dir).resolve("piece.json"));
+            var owned = json.getAsJsonObject("owned_textures").entrySet();
+            assertFalse(owned.isEmpty(), dir + " owns no textures");
+            for (var e : owned) {
+                String texture = e.getValue().getAsString();
+                assertEquals("herbalwitch:block/pieces/" + dir + "/" + e.getKey(), texture, dir);
+                Path png = ResourceFiles.MAIN_ASSETS.resolve("textures/block/pieces/" + dir + "/" + e.getKey() + ".png");
+                assertTrue(Files.isRegularFile(png), png.toString());
+            }
+        }
+    }
+
+    /** The art sidecar cuts a multiblock into exactly the catalogue's cells, in the same canonical order. */
+    @Test
+    void sidecarCellsMatchTheCatalogueInOrder() {
+        for (var piece : BlockbenchManifest.pieces()) {
+            JsonObject json = ResourceFiles.json(SOURCES.resolve(BlockbenchManifest.project(piece)).resolve("piece.json"));
+            var spec = FurnitureCatalog.DESCRIBED.stream().filter(s -> s.id().equals(piece.id())).findFirst().orElseThrow();
+            List<List<Integer>> catalogue = spec.mount().cells().stream().map(c -> List.of(c.right(), c.up(), c.depth())).toList();
+            if (piece.cells() == 1) {
+                assertFalse(json.has("multiblock"), piece.id() + " is one cell");
+                continue;
+            }
+            List<List<Integer>> sidecar = new java.util.ArrayList<>();
+            json.getAsJsonObject("multiblock").getAsJsonArray("cells").forEach(c -> sidecar.add(List.of(
+                    c.getAsJsonArray().get(0).getAsInt(), c.getAsJsonArray().get(1).getAsInt(), c.getAsJsonArray().get(2).getAsInt())));
+            assertEquals(catalogue, sidecar, piece.id() + " cells");
+            assertEquals(piece.cells(), sidecar.size(), piece.id());
         }
     }
 
     @Test
     void ownedTexturesExistAndAreDeclaredByTheirProjects() {
         Set<String> declared = new TreeSet<>();
-        for (String dir : BlockbenchManifest.PROJECTS) {
+        for (String dir : BlockbenchManifest.LEGACY_PROJECTS) {
             JsonObject piece = ResourceFiles.json(SOURCES.resolve(dir).resolve("piece.json"));
             if (piece.has("owned_textures")) {
                 piece.getAsJsonObject("owned_textures").entrySet()

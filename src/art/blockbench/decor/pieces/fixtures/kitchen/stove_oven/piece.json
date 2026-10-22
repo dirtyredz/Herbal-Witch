@@ -1,0 +1,40 @@
+{
+  "project": "stove_oven.bbmodel",
+  "textures": {
+    "iron": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/stove_oven/iron",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/stove_oven/wood_v",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/stove_oven/gold",
+    "glass": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/stove_oven/glass",
+    "coals": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/stove_oven/coals",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/stove_oven/plum",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/stove_oven/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/stove_oven/iron"
+  },
+  "owned_textures": {
+    "iron": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/stove_oven/iron",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/stove_oven/wood_v",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/stove_oven/gold",
+    "glass": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/stove_oven/glass",
+    "coals": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/stove_oven/coals",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/stove_oven/plum",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/stove_oven/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/decor/pieces/fixtures/kitchen/stove_oven/base",
+      "item": true
+    }
+  ]
+}

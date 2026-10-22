@@ -3,7 +3,7 @@ package io.github.dirtyredz.herbalwitch;
 import io.github.dirtyredz.herbalwitch.botany.registry.BotanyRegistration;
 import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationRegistration;
 import io.github.dirtyredz.herbalwitch.data.HerbalWitchDataProviders;
-import io.github.dirtyredz.herbalwitch.decor.registry.ArtSpikeRegistration;
+import io.github.dirtyredz.herbalwitch.decor.registry.DecorRegistration;
 import io.github.dirtyredz.herbalwitch.grimoire.registry.GrimoireRegistration;
 import io.github.dirtyredz.herbalwitch.platform.compat.CompatibilityRegistration;
 import io.github.dirtyredz.herbalwitch.showcase.command.ShowcaseCommandRegistration;
@@ -24,7 +24,7 @@ public final class HerbalWitch {
 
     public HerbalWitch() {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
-        ArtSpikeRegistration.register(modBus);
+        DecorRegistration.register(modBus);
         BotanyRegistration.register(modBus);
         StationRegistration.register(modBus);
         PreparationRegistration.register(modBus);

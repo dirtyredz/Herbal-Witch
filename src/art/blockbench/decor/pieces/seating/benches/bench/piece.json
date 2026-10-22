@@ -1,0 +1,49 @@
+{
+  "project": "bench.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/seating/benches/bench/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/seating/benches/bench/wood_v",
+    "velvet": "herbalwitch:block/pieces/decor/pieces/seating/benches/bench/velvet",
+    "pink": "herbalwitch:block/pieces/decor/pieces/seating/benches/bench/pink",
+    "plum": "herbalwitch:block/pieces/decor/pieces/seating/benches/bench/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/seating/benches/bench/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/seating/benches/bench/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/seating/benches/bench/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/seating/benches/bench/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/seating/benches/bench/wood_v",
+    "velvet": "herbalwitch:block/pieces/decor/pieces/seating/benches/bench/velvet",
+    "pink": "herbalwitch:block/pieces/decor/pieces/seating/benches/bench/pink",
+    "plum": "herbalwitch:block/pieces/decor/pieces/seating/benches/bench/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/seating/benches/bench/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/seating/benches/bench/ivy"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/seating/benches/bench",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ]
+    ]
+  }
+}

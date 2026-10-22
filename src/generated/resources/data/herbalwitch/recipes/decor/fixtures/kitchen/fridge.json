@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "K": {
+      "item": "minecraft:packed_ice"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    }
+  },
+  "pattern": [
+    "PIP",
+    "PKP",
+    "PIP"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/fixtures/fridge"
+  },
+  "show_notification": true
+}

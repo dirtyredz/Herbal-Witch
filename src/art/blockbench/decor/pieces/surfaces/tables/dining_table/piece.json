@@ -1,0 +1,75 @@
+{
+  "project": "dining_table.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/dining_table/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/dining_table/wood_v",
+    "gold": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/dining_table/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/dining_table/plum",
+    "runner_magenta": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/dining_table/runner_magenta",
+    "runner": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/dining_table/runner",
+    "brass": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/dining_table/brass",
+    "linen": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/dining_table/linen",
+    "glaze": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/dining_table/glaze",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/dining_table/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/dining_table/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/dining_table/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/dining_table/wood_v",
+    "gold": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/dining_table/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/dining_table/plum",
+    "runner_magenta": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/dining_table/runner_magenta",
+    "runner": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/dining_table/runner",
+    "brass": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/dining_table/brass",
+    "linen": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/dining_table/linen",
+    "glaze": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/dining_table/glaze",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/surfaces/tables/dining_table/ivy"
+  },
+  "bounds": {
+    "min": [
+      -32,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      32
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/surfaces/tables/dining_table",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        1
+      ],
+      [
+        2,
+        0,
+        1
+      ]
+    ]
+  }
+}

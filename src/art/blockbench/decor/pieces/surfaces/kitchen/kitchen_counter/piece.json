@@ -1,0 +1,42 @@
+{
+  "project": "kitchen_counter.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_counter/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_counter/wood_v",
+    "stone": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_counter/stone",
+    "paint": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_counter/paint",
+    "gold": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_counter/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_counter/plum",
+    "pale_stone": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_counter/pale_stone",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_counter/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_counter/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_counter/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_counter/wood_v",
+    "stone": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_counter/stone",
+    "paint": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_counter/paint",
+    "gold": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_counter/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_counter/plum",
+    "pale_stone": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_counter/pale_stone",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/kitchen_counter/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/decor/pieces/surfaces/kitchen/kitchen_counter/base",
+      "item": true
+    }
+  ]
+}

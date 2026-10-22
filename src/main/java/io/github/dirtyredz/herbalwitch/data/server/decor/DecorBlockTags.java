@@ -1,7 +1,7 @@
 package io.github.dirtyredz.herbalwitch.data.server.decor;
 
 import io.github.dirtyredz.herbalwitch.data.server.tags.HerbalWitchBlockTagsProvider;
-import io.github.dirtyredz.herbalwitch.decor.catalog.FurnitureSpec;
+import io.github.dirtyredz.herbalwitch.decor.catalog.FurnitureBehavior;
 import io.github.dirtyredz.herbalwitch.decor.registry.DecorBlocks;
 import io.github.dirtyredz.herbalwitch.decor.registry.DecorTags;
 import net.minecraft.tags.BlockTags;
@@ -17,7 +17,7 @@ public final class DecorBlockTags {
     public static void addTo(HerbalWitchBlockTagsProvider.Sink tags) {
         for (DecorBlocks.Entry entry : DecorBlocks.entries()) {
             tags.tag(DecorTags.FURNITURE).add(entry.block().get());
-            if (entry.spec().behavior() != FurnitureSpec.Behavior.RUG) {
+            if (entry.spec().behavior() != FurnitureBehavior.RUG) {
                 tags.tag(BlockTags.MINEABLE_WITH_AXE).add(entry.block().get());
             }
         }

@@ -29,12 +29,20 @@ test('a Blockbench-shaped save: nested groups, texture indices, rotations, omitt
 
 test('every committed project parses under the pinned contract', () => {
   const root = join(here, '../../../src/art/blockbench');
-  for (const area of readdirSync(root, { withFileTypes: true }).filter((d) => d.isDirectory())) {
-    for (const piece of readdirSync(join(root, area.name))) {
-      const p = parseProject(readFileSync(join(root, area.name, piece, `${piece}.bbmodel`), 'utf8'), `${area.name}/${piece}`);
-      assert.ok(p.elements.length > 0, piece);
-      assert.ok(Object.keys(p.display).length >= 6, `${piece} carries its item display`);
-    }
+  // a project is any directory holding a piece.json (decor pieces nest by family and group)
+  const projects = [];
+  const walk = (dir, rel) => {
+    const names = readdirSync(dir);
+    if (names.includes('piece.json')) projects.push([dir, rel]);
+    for (const d of readdirSync(dir, { withFileTypes: true }).filter((e) => e.isDirectory())) walk(join(dir, d.name), rel ? `${rel}/${d.name}` : d.name);
+  };
+  walk(root, '');
+  assert.ok(projects.length >= 14);
+  for (const [dir, rel] of projects) {
+    const piece = rel.split('/').pop();
+    const p = parseProject(readFileSync(join(dir, `${piece}.bbmodel`), 'utf8'), rel);
+    assert.ok(p.elements.length > 0, rel);
+    assert.ok(Object.keys(p.display).length >= 6, `${rel} carries its item display`);
   }
 });
 

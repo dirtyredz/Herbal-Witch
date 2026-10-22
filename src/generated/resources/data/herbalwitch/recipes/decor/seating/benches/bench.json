@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "T": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    "P P",
+    "WWW",
+    "T T"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/seating/bench"
+  },
+  "show_notification": true
+}

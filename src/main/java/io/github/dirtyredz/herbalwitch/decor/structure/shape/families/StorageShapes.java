@@ -1,0 +1,56 @@
+package io.github.dirtyredz.herbalwitch.decor.structure.shape.families;
+
+import java.util.Map;
+
+/**
+ * Storage and display collision boxes. Cabinets are solid carcasses; display shelves keep their boards and frames so stored items stand on what the player sees.
+ * Boxes are {@code minX, minY, minZ, maxX, maxY, maxZ} in the structure's north-facing pixels (see
+ * FurnitureShapes). The Milestone 5 pieces' boxes were derived once from their first-draft Blockbench
+ * projects (solid parts merged at a one-pixel grid, ivy and trims left out) and are now edited by hand
+ * when a piece's silhouette changes.
+ */
+public final class StorageShapes {
+    public static final Map<String, double[][]> BOXES = Map.ofEntries(
+            // the board (with its cloth) and its brackets; the wall behind at z = 16. Stored items stand on the board.
+            Map.entry("small_wall_shelf", new double[][] {{0, 7, 9, 16, 9.5, 16}, {2, 3, 11, 3, 7, 16}, {13, 3, 11, 14, 7, 16}}),
+            Map.entry("lower_cabinet", new double[][] {
+                    {1, 0, 2, 15, 16, 15}, {1, 2, 1, 15, 16, 2}, {0, 15, 0, 16, 16, 1}, {0, 15, 1, 1, 16, 16},
+                    {15, 15, 1, 16, 16, 16}, {1, 15, 15, 15, 16, 16}}),
+            Map.entry("upper_cabinet", new double[][] {
+                    {3, 1, 8, 5, 15, 16}, {11, 1, 8, 13, 15, 16}, {1, 3, 7, 15, 15, 8}, {1, 3, 8, 3, 15, 16},
+                    {5, 3, 8, 11, 15, 16}, {13, 3, 8, 15, 15, 16}}),
+            Map.entry("pantry", new double[][] {
+                    {1, 0, 2, 15, 32, 15}, {1, 3, 1, 15, 32, 2}, {0, 30, 1, 1, 32, 16}, {15, 30, 1, 16, 32, 16},
+                    {1, 30, 15, 15, 32, 16}, {0, 31, 0, 16, 32, 1}}),
+            Map.entry("sideboard", new double[][] {
+                    {-16, 0, 1, -13, 1, 5}, {-2, 0, 1, 2, 1, 5}, {13, 0, 1, 16, 1, 5}, {-16, 0, 12, -13, 4, 15},
+                    {-2, 0, 12, 2, 15, 15}, {13, 0, 12, 16, 4, 15}, {-16, 1, 2, -13, 4, 5}, {-2, 1, 2, 2, 15, 5},
+                    {13, 1, 2, 16, 4, 5}, {-16, 3, 1, -13, 4, 2}, {-2, 3, 1, 2, 15, 2}, {13, 3, 1, 16, 4, 2},
+                    {-15, 4, 1, -2, 15, 15}, {2, 4, 1, 15, 15, 15}, {-2, 4, 5, 2, 15, 12}}),
+            Map.entry("china_cabinet", new double[][] {
+                    {-15, 0, 2, 15, 16, 15}, {-15, 2, 1, 15, 16, 2}, {-16, 14, 0, 16, 16, 1}, {-16, 14, 1, -15, 16, 16},
+                    {15, 14, 1, 16, 16, 16}, {-15, 14, 15, 15, 16, 16}, {-15, 16, 3, -14, 31, 15}, {14, 16, 3, 15, 31, 15},
+                    {-14, 16, 14, 14, 31, 15}, {-14, 29, 3, 14, 31, 14}}),
+            Map.entry("wine_rack", new double[][] {
+                    {1, 0, 2, 15, 6, 15}, {1, 2, 1, 15, 6, 2}, {1, 6, 1, 3, 32, 15}, {13, 6, 1, 15, 32, 15},
+                    {3, 6, 3, 13, 32, 15}, {3, 28, 1, 13, 32, 3}, {0, 30, 0, 16, 32, 1}, {0, 30, 1, 1, 32, 16},
+                    {15, 30, 1, 16, 32, 16}, {1, 30, 15, 15, 32, 16}}),
+            Map.entry("ingredient_cabinet", new double[][] {
+                    {1, 0, 1, 4, 1, 5}, {12, 0, 1, 15, 1, 5}, {1, 0, 11, 4, 1, 15}, {12, 0, 11, 15, 1, 15},
+                    {1, 1, 2, 4, 32, 4}, {12, 1, 2, 15, 32, 4}, {1, 1, 12, 4, 32, 14}, {12, 1, 12, 15, 32, 14},
+                    {1, 3, 1, 4, 32, 2}, {12, 3, 1, 15, 32, 2}, {1, 3, 4, 4, 32, 5}, {12, 3, 4, 15, 32, 5},
+                    {1, 3, 11, 4, 32, 12}, {12, 3, 11, 15, 32, 12}, {1, 3, 14, 4, 32, 15}, {12, 3, 14, 15, 32, 15},
+                    {4, 4, 1, 12, 32, 15}, {1, 4, 5, 4, 32, 11}, {12, 4, 5, 15, 32, 11}, {0, 30, 1, 1, 32, 16},
+                    {15, 30, 1, 16, 32, 16}, {1, 30, 15, 15, 32, 16}, {0, 31, 0, 16, 32, 1}}),
+            Map.entry("open_shelves", new double[][] {
+                    {0, 0, 1, 16, 2, 16}, {0, 2, 1, 2, 32, 15}, {14, 2, 1, 16, 32, 15}, {2, 2, 2, 14, 3, 15},
+                    {2, 12, 2, 14, 13, 15}, {2, 22, 2, 14, 23, 15}, {2, 30, 1, 14, 32, 16}, {0, 30, 15, 2, 32, 16},
+                    {14, 30, 15, 16, 32, 16}}),
+            Map.entry("potion_shelf", new double[][] {
+                    {0, 0, 1, 16, 2, 15}, {0, 2, 1, 2, 30, 15}, {14, 2, 1, 16, 30, 15}, {2, 2, 2, 14, 3, 15},
+                    {2, 11, 2, 14, 13, 15}, {2, 21, 2, 14, 22, 15}, {2, 29, 1, 14, 30, 16}, {0, 29, 15, 2, 30, 16},
+                    {14, 29, 15, 16, 30, 16}, {3, 30, 12, 13, 31, 15}, {5, 31, 12, 11, 32, 15}}));
+
+    private StorageShapes() {
+    }
+}

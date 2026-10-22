@@ -1,0 +1,42 @@
+{
+  "project": "serving_cart.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/serving_cart/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/serving_cart/wood_v",
+    "gold": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/serving_cart/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/serving_cart/plum",
+    "iron": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/serving_cart/iron",
+    "glaze": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/serving_cart/glaze",
+    "enamel": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/serving_cart/enamel",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/serving_cart/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/serving_cart/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/serving_cart/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/serving_cart/wood_v",
+    "gold": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/serving_cart/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/serving_cart/plum",
+    "iron": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/serving_cart/iron",
+    "glaze": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/serving_cart/glaze",
+    "enamel": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/serving_cart/enamel",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/serving_cart/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/decor/pieces/surfaces/kitchen/serving_cart/base",
+      "item": true
+    }
+  ]
+}

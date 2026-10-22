@@ -1,28 +1,37 @@
 package io.github.dirtyredz.herbalwitch.decor.showcase;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.decor.block.TableLampBlock;
-import io.github.dirtyredz.herbalwitch.decor.catalog.ArtSpikeCatalog;
-import io.github.dirtyredz.herbalwitch.decor.catalog.FurnitureSpec;
-import io.github.dirtyredz.herbalwitch.decor.registry.DecorBlocks;
+import io.github.dirtyredz.herbalwitch.decor.showcase.DecorShowcaseLayout.Slot;
+import io.github.dirtyredz.herbalwitch.decor.showcase.DecorShowcaseSamples.Sample;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcasePlacement;
-import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcasePlacement.Line;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseSection;
-import net.minecraft.core.Direction;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
- * Every furniture piece, once, in catalogue order along one row: a sign in front, the piece facing
- * the entrance (north), a wall behind the shelf, and the lamp lit.
+ * Every delivered furniture piece in a footprint-aware grid ({@link DecorShowcaseLayout}): a sign in
+ * front of each, the piece facing the entrance (north) with the walls and ceilings it hangs from,
+ * lights lit, storage stocked from {@link #stock}, and the door's alternate states beside it
+ * ({@link DecorShowcaseSamples}).
  */
 public final class DecorShowcaseSection implements ShowcaseSection {
     public static final String TITLE = "showcase." + HerbalWitch.MOD_ID + ".section.decor";
-    public static final int COLUMN = 2;
+
+    private final Consumer<BlockEntity> stock;
+
+    /** The section with its storage samples stocked by {@code stock} (run once per storage origin after placement). */
+    public DecorShowcaseSection(Consumer<BlockEntity> stock) {
+        this.stock = stock;
+    }
+
+    /** The section without stock (planning tests). */
+    public DecorShowcaseSection() {
+        this(entity -> {
+        });
+    }
 
     @Override
     public String id() {
@@ -36,28 +45,12 @@ public final class DecorShowcaseSection implements ShowcaseSection {
 
     @Override
     public List<ShowcasePlacement> placements() {
+        List<Sample> samples = DecorShowcaseSamples.samples();
+        List<Slot> slots = DecorShowcaseLayout.pack(samples.stream().map(Sample::footprint).toList());
         List<ShowcasePlacement> out = new ArrayList<>();
-        List<FurnitureSpec> pieces = ArtSpikeCatalog.ALL;
-        for (int i = 0; i < pieces.size(); i++) {
-            FurnitureSpec spec = pieces.get(i);
-            int x = i * COLUMN;
-            out.add(ShowcasePlacement.label(x, 0, Line.literal(spec.displayName())));
-            switch (spec.behavior()) {
-                case WALL_MOUNTED -> {
-                    out.add(ShowcasePlacement.support(x, 1, 2, () -> Blocks.STRIPPED_DARK_OAK_WOOD.defaultBlockState()));
-                    out.add(ShowcasePlacement.support(x, 2, 2, () -> Blocks.STRIPPED_DARK_OAK_WOOD.defaultBlockState()));
-                    out.add(ShowcasePlacement.content(x, 2, 1, () -> facingNorth(spec)));
-                }
-                case TABLE_LAMP -> out.add(ShowcasePlacement.content(x, 1, 1,
-                        () -> DecorBlocks.block(spec).defaultBlockState().setValue(TableLampBlock.LIT, true)));
-                case RUG -> out.add(ShowcasePlacement.content(x, 1, 1, () -> DecorBlocks.block(spec).defaultBlockState()));
-                case FREESTANDING -> out.add(ShowcasePlacement.content(x, 1, 1, () -> facingNorth(spec)));
-            }
+        for (int i = 0; i < samples.size(); i++) {
+            out.addAll(DecorShowcaseSamples.place(samples.get(i), slots.get(i), stock));
         }
         return out;
-    }
-
-    private static BlockState facingNorth(FurnitureSpec spec) {
-        return DecorBlocks.block(spec).defaultBlockState().setValue(HorizontalDirectionalBlock.FACING, Direction.NORTH);
     }
 }

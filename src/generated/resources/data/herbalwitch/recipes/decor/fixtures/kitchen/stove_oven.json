@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": {
+      "item": "minecraft:furnace"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "N": {
+      "item": "minecraft:gold_nugget"
+    }
+  },
+  "pattern": [
+    "NIN",
+    "IFI",
+    "III"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/fixtures/stove_oven"
+  },
+  "show_notification": true
+}

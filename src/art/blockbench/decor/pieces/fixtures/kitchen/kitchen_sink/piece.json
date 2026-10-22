@@ -1,0 +1,44 @@
+{
+  "project": "kitchen_sink.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/kitchen_sink/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/kitchen_sink/wood_v",
+    "enamel": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/kitchen_sink/enamel",
+    "paint": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/kitchen_sink/paint",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/kitchen_sink/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/kitchen_sink/gold",
+    "brass": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/kitchen_sink/brass",
+    "copper": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/kitchen_sink/copper",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/kitchen_sink/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/kitchen_sink/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/kitchen_sink/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/kitchen_sink/wood_v",
+    "enamel": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/kitchen_sink/enamel",
+    "paint": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/kitchen_sink/paint",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/kitchen_sink/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/kitchen_sink/gold",
+    "brass": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/kitchen_sink/brass",
+    "copper": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/kitchen_sink/copper",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/kitchen_sink/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/decor/pieces/fixtures/kitchen/kitchen_sink/base",
+      "item": true
+    }
+  ]
+}

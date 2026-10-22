@@ -1,8 +1,8 @@
 package io.github.dirtyredz.herbalwitch.decor;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.decor.block.TableLampBlock;
-import io.github.dirtyredz.herbalwitch.decor.catalog.ArtSpikeCatalog;
+import io.github.dirtyredz.herbalwitch.decor.behavior.lighting.DecorLightBlock;
+import io.github.dirtyredz.herbalwitch.decor.catalog.pieces.LightingCatalog;
 import io.github.dirtyredz.herbalwitch.decor.registry.DecorBlocks;
 import io.github.dirtyredz.herbalwitch.decor.registry.DecorItems;
 import net.minecraft.core.BlockPos;
@@ -45,20 +45,20 @@ public final class DecorInteractionGameTests {
         BlockPos lamp = new BlockPos(4, 1, 4);
         BlockPos abs = helper.absolutePos(lamp);
         ServerPlayer player = player(helper, "switch", GameType.SURVIVAL, Direction.NORTH);
-        check(placeOnFloor(helper, player, DecorItems.item(ArtSpikeCatalog.TABLE_LAMP), lamp).consumesAction(), "lamp not placed");
+        check(placeOnFloor(helper, player, DecorItems.item(LightingCatalog.TABLE_LAMP), lamp).consumesAction(), "lamp not placed");
         enclose(helper, lamp);
         helper.startSequence()
                 .thenExecute(() -> {
                     check(click(helper, player, lamp).consumesAction(), "click not handled");
                     BlockState on = helper.getBlockState(lamp);
-                    check(on.getValue(TableLampBlock.LIT) && on.getLightEmission() == TableLampBlock.LIGHT, "lamp not lit: " + on);
+                    check(on.getValue(DecorLightBlock.LIT) && on.getLightEmission() == DecorLightBlock.LIGHT, "lamp not lit: " + on);
                 })
-                .thenWaitUntil(() -> check(helper.getLevel().getBrightness(LightLayer.BLOCK, abs) == TableLampBlock.LIGHT,
+                .thenWaitUntil(() -> check(helper.getLevel().getBrightness(LightLayer.BLOCK, abs) == DecorLightBlock.LIGHT,
                         "block light " + helper.getLevel().getBrightness(LightLayer.BLOCK, abs)))
                 .thenExecute(() -> {
                     check(click(helper, player, lamp).consumesAction(), "second click not handled");
                     BlockState off = helper.getBlockState(lamp);
-                    check(!off.getValue(TableLampBlock.LIT) && off.getLightEmission() == 0, "lamp still lit: " + off);
+                    check(!off.getValue(DecorLightBlock.LIT) && off.getLightEmission() == 0, "lamp still lit: " + off);
                 })
                 .thenWaitUntil(() -> check(helper.getLevel().getBrightness(LightLayer.BLOCK, abs) == 0,
                         "block light stays " + helper.getLevel().getBrightness(LightLayer.BLOCK, abs)))
@@ -86,7 +86,7 @@ public final class DecorInteractionGameTests {
     public static void lampStateSurvivesSaveAndLoad(GameTestHelper helper) {
         ServerLevel level = helper.getLevel();
         for (boolean lit : List.of(false, true)) {
-            BlockState state = DecorBlocks.block(ArtSpikeCatalog.TABLE_LAMP).defaultBlockState().setValue(TableLampBlock.LIT, lit);
+            BlockState state = DecorBlocks.block(LightingCatalog.TABLE_LAMP).defaultBlockState().setValue(DecorLightBlock.LIT, lit);
             CompoundTag saved = NbtUtils.writeBlockState(state);
             BlockState loaded = NbtUtils.readBlockState(level.holderLookup(Registries.BLOCK), saved);
             check(loaded == state, "lit=" + lit + " reloads as " + loaded);

@@ -1,0 +1,106 @@
+{
+  "project": "drying_rack_decor.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/drying_rack_decor/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/drying_rack_decor/wood_v",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/drying_rack_decor/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/drying_rack_decor/plum",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/drying_rack_decor/ivy",
+    "parts": "herbalwitch:block/botany/parts",
+    "bundle_lavender": "herbalwitch:item/preparations/herbs/temperate/lavender/bundle",
+    "bundle_sage": "herbalwitch:item/preparations/herbs/temperate/sage/bundle",
+    "bundle_yarrow": "herbalwitch:item/preparations/herbs/temperate/yarrow/bundle",
+    "bundle_rosemary": "herbalwitch:item/preparations/herbs/dry/rosemary/bundle",
+    "bundle_mint": "herbalwitch:item/preparations/herbs/wet/mint/bundle",
+    "bundle_chamomile": "herbalwitch:item/preparations/herbs/temperate/chamomile/bundle",
+    "particle": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/drying_rack_decor/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/drying_rack_decor/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/drying_rack_decor/wood_v",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/drying_rack_decor/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/drying_rack_decor/plum",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/drying_rack_decor/ivy"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      32,
+      16
+    ]
+  },
+  "attachments": {
+    "bundle_0": {
+      "kind": "bundle",
+      "herb": "lavender",
+      "width": 5,
+      "height": 9,
+      "across": "z"
+    },
+    "bundle_1": {
+      "kind": "bundle",
+      "herb": "sage",
+      "width": 5,
+      "height": 9,
+      "across": "z"
+    },
+    "bundle_2": {
+      "kind": "bundle",
+      "herb": "yarrow",
+      "width": 5,
+      "height": 9,
+      "across": "z"
+    },
+    "bundle_3": {
+      "kind": "bundle",
+      "herb": "rosemary",
+      "width": 5,
+      "height": 9,
+      "across": "z"
+    },
+    "bundle_4": {
+      "kind": "bundle",
+      "herb": "mint",
+      "width": 5,
+      "height": 9,
+      "across": "z"
+    },
+    "bundle_5": {
+      "kind": "bundle",
+      "herb": "chamomile",
+      "width": 5,
+      "height": 9,
+      "across": "z"
+    }
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/fixtures/apothecary/drying_rack_decor",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        0
+      ]
+    ]
+  }
+}

@@ -2,6 +2,7 @@ package io.github.dirtyredz.herbalwitch.data.client.language;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.data.client.botany.BotanyTranslations;
+import io.github.dirtyredz.herbalwitch.data.client.decor.DecorReferenceTranslations;
 import io.github.dirtyredz.herbalwitch.data.client.decor.DecorTranslations;
 import io.github.dirtyredz.herbalwitch.data.client.grimoire.GrimoireTranslations;
 import io.github.dirtyredz.herbalwitch.data.client.preparations.PreparationTranslations;
@@ -22,6 +23,7 @@ public class HerbalWitchLanguageProvider extends LanguageProvider {
     @Override
     protected void addTranslations() {
         DecorTranslations.addTo(this);
+        DecorReferenceTranslations.addTo(this);
         BotanyTranslations.addTo(this);
         StationTranslations.addTo(this);
         PreparationTranslations.addTo(this);

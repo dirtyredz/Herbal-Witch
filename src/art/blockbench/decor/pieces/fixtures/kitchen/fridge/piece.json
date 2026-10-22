@@ -1,0 +1,47 @@
+{
+  "project": "fridge.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/fridge/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/fridge/wood_v",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/fridge/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/fridge/gold",
+    "brass": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/fridge/brass",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/fridge/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/fridge/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/fridge/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/fridge/wood_v",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/fridge/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/fridge/gold",
+    "brass": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/fridge/brass",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/kitchen/fridge/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      32,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/fixtures/kitchen/fridge",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ]
+    ]
+  }
+}

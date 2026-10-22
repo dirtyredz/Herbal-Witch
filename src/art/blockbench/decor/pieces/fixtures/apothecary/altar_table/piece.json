@@ -1,0 +1,59 @@
+{
+  "project": "altar_table.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/altar_table/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/altar_table/wood_v",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/altar_table/plum",
+    "pink": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/altar_table/pink",
+    "plaque": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/altar_table/plaque",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/altar_table/gold",
+    "brass": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/altar_table/brass",
+    "linen": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/altar_table/linen",
+    "flame": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/altar_table/flame",
+    "tincture": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/altar_table/tincture",
+    "glass": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/altar_table/glass",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/altar_table/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/altar_table/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/altar_table/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/altar_table/wood_v",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/altar_table/plum",
+    "pink": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/altar_table/pink",
+    "plaque": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/altar_table/plaque",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/altar_table/gold",
+    "brass": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/altar_table/brass",
+    "linen": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/altar_table/linen",
+    "flame": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/altar_table/flame",
+    "tincture": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/altar_table/tincture",
+    "glass": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/altar_table/glass",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/apothecary/altar_table/ivy"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/fixtures/apothecary/altar_table",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ]
+    ]
+  }
+}

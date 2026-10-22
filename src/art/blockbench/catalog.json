@@ -13,7 +13,8 @@
     "block/decor/templates",
     "block/preparations/templates",
     "block/grimoire/stand",
-    "block/grimoire/bookshelf"
+    "block/grimoire/bookshelf",
+    "block/decor/pieces"
   ],
   "projects": [
     "stations/kettle",
@@ -29,6 +30,28 @@
     "decor/rug",
     "preparations/oil_lantern",
     "grimoire/stand",
-    "grimoire/bookshelf"
+    "grimoire/bookshelf",
+    "decor/pieces/seating/chairs/dining_chair",
+    "decor/pieces/seating/benches/bench",
+    "decor/pieces/surfaces/kitchen/kitchen_counter",
+    "decor/pieces/surfaces/kitchen/corner_counter",
+    "decor/pieces/surfaces/kitchen/kitchen_island",
+    "decor/pieces/surfaces/tables/dining_table",
+    "decor/pieces/surfaces/kitchen/serving_cart",
+    "decor/pieces/surfaces/desks/work_table",
+    "decor/pieces/storage/cabinets/lower_cabinet",
+    "decor/pieces/storage/cabinets/upper_cabinet",
+    "decor/pieces/storage/cabinets/pantry",
+    "decor/pieces/storage/cabinets/sideboard",
+    "decor/pieces/storage/cabinets/china_cabinet",
+    "decor/pieces/storage/cabinets/wine_rack",
+    "decor/pieces/storage/cabinets/ingredient_cabinet",
+    "decor/pieces/storage/shelves/open_shelves",
+    "decor/pieces/storage/shelves/potion_shelf",
+    "decor/pieces/fixtures/kitchen/kitchen_sink",
+    "decor/pieces/fixtures/kitchen/stove_oven",
+    "decor/pieces/fixtures/kitchen/fridge",
+    "decor/pieces/fixtures/apothecary/drying_rack_decor",
+    "decor/pieces/fixtures/apothecary/altar_table"
   ]
 }

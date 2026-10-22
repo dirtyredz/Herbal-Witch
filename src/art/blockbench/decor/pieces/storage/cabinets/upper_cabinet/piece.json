@@ -1,0 +1,40 @@
+{
+  "project": "upper_cabinet.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/upper_cabinet/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/upper_cabinet/wood_v",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/upper_cabinet/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/upper_cabinet/gold",
+    "iron": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/upper_cabinet/iron",
+    "glass": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/upper_cabinet/glass",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/upper_cabinet/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/upper_cabinet/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/upper_cabinet/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/upper_cabinet/wood_v",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/upper_cabinet/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/upper_cabinet/gold",
+    "iron": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/upper_cabinet/iron",
+    "glass": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/upper_cabinet/glass",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/upper_cabinet/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/decor/pieces/storage/cabinets/upper_cabinet/base",
+      "item": true
+    }
+  ]
+}

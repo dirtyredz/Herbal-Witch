@@ -7,8 +7,10 @@ import io.github.dirtyredz.herbalwitch.botany.crop.HerbCropBlock;
 import io.github.dirtyredz.herbalwitch.botany.registry.BotanyBlocks;
 import io.github.dirtyredz.herbalwitch.botany.registry.BotanyItems;
 import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationBlocks;
-import io.github.dirtyredz.herbalwitch.decor.block.TableLampBlock;
-import io.github.dirtyredz.herbalwitch.decor.block.WallShelfBlock;
+import io.github.dirtyredz.herbalwitch.decor.structure.DecorAssemblyBlock;
+import io.github.dirtyredz.herbalwitch.decor.catalog.FurnitureBehavior;
+import io.github.dirtyredz.herbalwitch.decor.behavior.lighting.DecorLightBlock;
+import io.github.dirtyredz.herbalwitch.decor.showcase.DecorShowcaseSamples;
 import io.github.dirtyredz.herbalwitch.decor.registry.DecorBlocks;
 import io.github.dirtyredz.herbalwitch.grimoire.knowledge.discovery.DiscoveryCapability;
 import io.github.dirtyredz.herbalwitch.grimoire.registry.GrimoireBlocks;
@@ -70,11 +72,11 @@ public final class ShowcaseContentGameTests {
                     BlockPos pos = ORIGIN.offset(x, y, z);
                     BlockState state = helper.getBlockState(pos);
                     blocks.merge(state.getBlock(), 1, Integer::sum);
-                    if (state.getBlock() instanceof TableLampBlock) {
-                        check(state.getValue(TableLampBlock.LIT), "unlit lamp at " + pos);
+                    if (state.getBlock() instanceof DecorLightBlock) {
+                        check(state.getValue(DecorLightBlock.LIT), "unlit light at " + pos);
                     }
-                    if (state.getBlock() instanceof WallShelfBlock) {
-                        check(state.canSurvive(helper.getLevel(), helper.absolutePos(pos)), "unsupported shelf at " + pos);
+                    if (state.getBlock() instanceof DecorAssemblyBlock) {
+                        check(state.canSurvive(helper.getLevel(), helper.absolutePos(pos)), "unsupported furniture at " + pos);
                     }
                     if (state.getBlock() instanceof HerbCropBlock crop) {
                         herbAges.add(crop.herb().id() + "@" + state.getValue(HerbCropBlock.AGE));
@@ -91,8 +93,11 @@ public final class ShowcaseContentGameTests {
             }
         }
         for (DecorBlocks.Entry entry : DecorBlocks.entries()) {
-            check(blocks.getOrDefault(entry.block().get(), 0) == 1, entry.block().getId() + " shown "
-                    + blocks.getOrDefault(entry.block().get(), 0) + " times");
+            // every cell of each sample: the door also shows its three alternate states
+            int samples = entry.spec().behavior() == FurnitureBehavior.DOOR ? 1 + DecorShowcaseSamples.DOOR_STATES.size() : 1;
+            int cells = entry.spec().mount().cells().size() * samples;
+            check(blocks.getOrDefault(entry.block().get(), 0) == cells, entry.block().getId() + " shown in "
+                    + blocks.getOrDefault(entry.block().get(), 0) + " cells, expected " + cells);
         }
         for (HerbSpec herb : HerbCatalog.ALL) {
             for (int age = 0; age <= HerbSpec.MAX_AGE; age++) {

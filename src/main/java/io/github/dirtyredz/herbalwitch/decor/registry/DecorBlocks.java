@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 
 /**
  * The deferred block register for furniture and the lookup of a piece's block. What gets registered
- * is decided by the catalogue-driven registration ({@link ArtSpikeRegistration}).
+ * is decided by the catalogue-driven registration ({@link DecorRegistration}).
  */
 public final class DecorBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, HerbalWitch.MOD_ID);

@@ -1,7 +1,7 @@
 package io.github.dirtyredz.herbalwitch.decor.registry;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.decor.catalog.ArtSpikeCatalog;
+import io.github.dirtyredz.herbalwitch.decor.catalog.pieces.SeatingCatalog;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -17,7 +17,7 @@ public final class DecorCreativeTab {
 
     public static final RegistryObject<CreativeModeTab> DECOR = TABS.register("decor", () -> CreativeModeTab.builder()
             .title(Component.translatable(TITLE_KEY))
-            .icon(() -> new ItemStack(DecorItems.item(ArtSpikeCatalog.ARMCHAIR)))
+            .icon(() -> new ItemStack(DecorItems.item(SeatingCatalog.ARMCHAIR)))
             .displayItems((parameters, output) -> DecorItems.all().forEach(output::accept))
             .build());
 

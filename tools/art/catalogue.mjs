@@ -17,6 +17,7 @@ import { plantParts } from './botany/parts.mjs';
 import { HERB_LIST } from './botany/herbs.mjs';
 import * as house from './stations/house.mjs';
 import * as interfaces from './stations/interfaces.mjs';
+import * as decorInterfaces from './interface/decor.mjs';
 import { PREPARATION_HERBS, bundleSprite, powderSprite } from './preparations/materials.mjs';
 import { PRODUCTS } from './preparations/products.mjs';
 import { book } from './grimoire/book.mjs';
@@ -59,6 +60,7 @@ function drawnManifest() {
   out.push(['block/botany/garden/soil_dry.png', soilDry], ['block/botany/garden/soil_moist.png', soilMoist]);
   out.push(['block/botany/parts.png', plantParts]); // swatches the 3D herbs and bundle ties are built from
   for (const [name, make] of Object.entries(interfaces)) out.push([`gui/stations/${name}.png`, drawnAt1x(make)]);
+  for (const [name, make] of Object.entries(decorInterfaces)) out.push([`gui/decor/${name}.png`, drawnAt1x(make)]);
   for (const [group, herb] of PREPARATION_HERBS) {
     out.push([`item/preparations/herbs/${group}/${herb}/bundle.png`, drawnAt1x(bundleSprite(herb))]);
     out.push([`item/preparations/herbs/${group}/${herb}/powder.png`, drawnAt1x(powderSprite(group, herb))]);

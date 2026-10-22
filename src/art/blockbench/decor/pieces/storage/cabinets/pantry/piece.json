@@ -1,0 +1,47 @@
+{
+  "project": "pantry.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/pantry/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/pantry/wood_v",
+    "paint": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/pantry/paint",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/pantry/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/pantry/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/pantry/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/pantry/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/pantry/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/pantry/wood_v",
+    "paint": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/pantry/paint",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/pantry/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/pantry/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/pantry/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      32,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/storage/cabinets/pantry",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ]
+    ]
+  }
+}

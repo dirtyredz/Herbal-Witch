@@ -1,0 +1,47 @@
+{
+  "project": "ingredient_cabinet.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/ingredient_cabinet/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/ingredient_cabinet/wood_v",
+    "paint": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/ingredient_cabinet/paint",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/ingredient_cabinet/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/ingredient_cabinet/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/ingredient_cabinet/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/ingredient_cabinet/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/ingredient_cabinet/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/ingredient_cabinet/wood_v",
+    "paint": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/ingredient_cabinet/paint",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/ingredient_cabinet/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/ingredient_cabinet/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/cabinets/ingredient_cabinet/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      32,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/storage/cabinets/ingredient_cabinet",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ]
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "item": "minecraft:dark_oak_slab"
+    },
+    "T": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "TST",
+    "TST",
+    "TST"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/storage/open_shelves"
+  },
+  "show_notification": true
+}

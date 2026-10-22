@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:gold_nugget"
+    },
+    "H": {
+      "item": "minecraft:chest"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    }
+  },
+  "pattern": [
+    "GPG",
+    "PHP",
+    "GPG"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/storage/ingredient_cabinet"
+  },
+  "show_notification": true
+}

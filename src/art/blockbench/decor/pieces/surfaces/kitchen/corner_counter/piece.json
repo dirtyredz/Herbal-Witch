@@ -1,0 +1,44 @@
+{
+  "project": "corner_counter.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/corner_counter/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/corner_counter/wood_v",
+    "stone": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/corner_counter/stone",
+    "paint": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/corner_counter/paint",
+    "gold": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/corner_counter/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/corner_counter/plum",
+    "copper": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/corner_counter/copper",
+    "brass": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/corner_counter/brass",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/corner_counter/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/corner_counter/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/corner_counter/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/corner_counter/wood_v",
+    "stone": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/corner_counter/stone",
+    "paint": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/corner_counter/paint",
+    "gold": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/corner_counter/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/corner_counter/plum",
+    "copper": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/corner_counter/copper",
+    "brass": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/corner_counter/brass",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/surfaces/kitchen/corner_counter/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/decor/pieces/surfaces/kitchen/corner_counter/base",
+      "item": true
+    }
+  ]
+}

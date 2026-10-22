@@ -7,10 +7,13 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { FORMAT_VERSION, JAVA_BLOCK_VERSION } from './project.mjs';
+import { declaredCells, cellProblems } from './geometry/cells.mjs';
 
 export const SOURCE_DIR = 'src/art/blockbench';
 const KEYS = new Set(['project', 'textures', 'owned_textures', 'bounds', 'outputs', 'multiblock', 'attachments']);
 const OUTPUT_KEYS = new Set(['model', 'item', 'exclude', 'emissive']);
+const MULTIBLOCK_KEYS = new Set(['dir', 'cells', 'overflow', 'overlays', 'variants']);
+const VARIANT_KEYS = new Set(['name', 'emissive', 'exclude', 'mirror']);
 const ATTACHMENT_KINDS = { bundle: ['herb', 'width', 'height', 'across'] };
 
 /** Textures a piece may bind without owning: the procedural herbs' art that generated bundle attachments draw from. */
@@ -81,9 +84,27 @@ export function validatePiece(json, dir, catalogue) {
   if (json.multiblock) {
     if (json.outputs) fail(where, 'a multiblock derives its outputs; remove outputs');
     const m = json.multiblock;
-    if (!Array.isArray(m.cells) || m.cells.length !== 2 || !m.cells.every((n) => Number.isInteger(n) && n > 0)) fail(where, 'multiblock.cells is [width, height]');
+    for (const k of Object.keys(m)) if (!MULTIBLOCK_KEYS.has(k)) fail(where, `multiblock: unknown key ${k}`);
+    const legacy = Array.isArray(m.cells) && m.cells.length === 2 && m.cells.every((n) => Number.isInteger(n) && n > 0);
+    const explicit = Array.isArray(m.cells) && m.cells.length > 0 && m.cells.every((c) => Array.isArray(c) && c.length === 3);
+    if (!legacy && !explicit) fail(where, 'multiblock.cells is [width, height] or a list of [right, up, depth] cells');
+    if (explicit) {
+      const problems = cellProblems(declaredCells(m.cells));
+      if (problems.length) fail(where, `multiblock.cells: ${problems.join('; ')}`);
+    }
     if (!owns(`${m.dir}/x`)) fail(where, `multiblock.dir ${m.dir} is outside the compiler's model_dirs`);
-    for (const o of m.overlays ?? []) if (!o.name || !o.group) fail(where, 'each overlay needs name and group');
+    const names = new Set(['part', 'assembly']);
+    for (const o of m.overlays ?? []) {
+      if (!o.name || !o.group) fail(where, 'each overlay needs name and group');
+      if (names.has(o.name)) fail(where, `output name ${o.name} is used twice`);
+      names.add(o.name);
+    }
+    for (const v of m.variants ?? []) {
+      for (const k of Object.keys(v)) if (!VARIANT_KEYS.has(k)) fail(where, `variant ${v.name}: unknown key ${k}`);
+      if (!/^[a-z0-9_]+$/.test(v.name ?? '')) fail(where, 'each variant needs a lower-case name');
+      if (names.has(v.name)) fail(where, `output name ${v.name} is used twice`);
+      names.add(v.name);
+    }
     outputs = null;
   } else {
     outputs = json.outputs ?? fail(where, 'no outputs');

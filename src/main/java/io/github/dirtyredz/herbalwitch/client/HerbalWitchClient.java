@@ -1,6 +1,8 @@
 package io.github.dirtyredz.herbalwitch.client;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
+import io.github.dirtyredz.herbalwitch.client.decor.DecorClientRegistration;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import io.github.dirtyredz.herbalwitch.client.grimoire.GrimoireScreens;
 import io.github.dirtyredz.herbalwitch.client.stations.StationScreens;
 import net.minecraftforge.api.distmarker.Dist;
@@ -22,5 +24,11 @@ public final class HerbalWitchClient {
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(StationScreens::register);
         event.enqueueWork(GrimoireScreens::register);
+        event.enqueueWork(DecorClientRegistration::screens);
+    }
+
+    @SubscribeEvent
+    public static void renderers(EntityRenderersEvent.RegisterRenderers event) {
+        DecorClientRegistration.renderers(event);
     }
 }

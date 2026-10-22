@@ -67,14 +67,27 @@ class GeneratedResourcesTest {
         assertEquals(expected, generatedFiles());
     }
 
+    /**
+     * Every generated directory has fewer than twelve entries, except the enumerated registry-derived
+     * decor directories (blockstates, item models and loot of a furniture family: their paths are
+     * permanent block ids, decor/&lt;family&gt;/&lt;piece&gt;, so they cannot be grouped), and those
+     * hold exactly the decor manifest's files: an unexpected file there still fails.
+     */
     @Test
     void everyGeneratedDirectoryHasFewerThanTwelveEntries() throws IOException {
-        Map<String, Integer> entries = new HashMap<>();
+        Map<String, Set<String>> entries = new HashMap<>();
         try (Stream<Path> walk = Files.walk(GENERATED)) {
             walk.filter(p -> !p.equals(GENERATED) && !GENERATED.relativize(p).toString().startsWith(".cache"))
-                    .forEach(p -> entries.merge(p.getParent().toString(), 1, Integer::sum));
+                    .forEach(p -> entries.computeIfAbsent(GENERATED.relativize(p.getParent()).toString().replace('\\', '/'), k -> new TreeSet<>())
+                            .add(p.getFileName().toString()));
         }
-        entries.forEach((dir, count) -> assertTrue(count < 12, dir + " has " + count + " entries"));
+        entries.forEach((dir, names) -> {
+            if (DecorManifest.REGISTRY_DIRECTORIES.contains(dir)) {
+                assertEquals(DecorManifest.entries(dir), names, dir + " holds exactly its registered pieces");
+            } else {
+                assertTrue(names.size() < 12, dir + " has " + names.size() + " entries");
+            }
+        });
     }
 
     @Test

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:glass_bottle"
+    },
+    "H": {
+      "item": "minecraft:chest"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    }
+  },
+  "pattern": [
+    "PBP",
+    "BHB",
+    "PBP"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/storage/wine_rack"
+  },
+  "show_notification": true
+}

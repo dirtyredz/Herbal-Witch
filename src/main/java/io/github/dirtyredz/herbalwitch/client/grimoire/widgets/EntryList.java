@@ -87,7 +87,7 @@ public final class EntryList {
             return view.text("category.all");
         }
         return switch (id.get()) {
-            case GrimoireContent.GUIDE, GrimoireContent.STATIONS, GrimoireContent.HERBS -> view.text("category." + id.get());
+            case GrimoireContent.GUIDE, GrimoireContent.STATIONS, GrimoireContent.HERBS, GrimoireContent.FURNITURE -> view.text("category." + id.get());
             default -> Component.translatable("category." + HerbalWitch.MOD_ID + ".processing." + id.get());
         };
     }
