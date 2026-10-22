@@ -2,6 +2,52 @@
 
 Newest first.
 
+## 2026-10-22 - 0.4.0: the full furniture catalogue (Milestone 5, waves A, B, C)
+
+Grouped because the choices lean on one another; each is short. Implemented overnight by agents from the
+M5 plan's defaults; the owner's visual review of the 89 agent-drafted pieces is still pending.
+
+- **94 canonical pieces, permanent ids.** The five 0.1.0 pieces plus 89 additions (A 22, B 30, C 37) in seven
+  families, ids `decor/<family>/<piece>`. Repeated labels (benches, mirrors, consoles, shelves, rugs, small
+  tables, archways) stay aliases; no finish variants, appearance NBT or extra door/arch finishes. Waves are
+  catalogue metadata (`FurnitureCatalog.DELIVERED`), so each checkpoint registered only completed waves.
+- **Composition, not a furniture machine.** A piece is a behaviour (static, seating, storage, display, light,
+  bed, door, rug) composed with a mount (support and cells). One block class per behaviour; the shared
+  structure lifecycle lives in `DecorAssemblyBlock`, the placement in `platform/placement`. Beds and the door
+  extend vanilla's `BedBlock` and `DoorBlock` so sleeping, spawn and door rules stay vanilla's.
+- **Placement is checked and transactional.** One pure resolver serves the client preview and the server; the
+  whole piece is placed or nothing, never somewhere else; Forge's snapshot capture defers neighbour updates,
+  fires one multi-place event and restores everything (the item included) on cancellation. No placement packet.
+  Rejected: sneak-click modes and automatic relocation (owner rule: Hammer-style targeting, preview = result).
+- **Fixed-id resource exception.** Blockstates, item models and loot of the seating, storage, surfaces and
+  fixtures families exceed the twelve-entry rule because their file names are block ids; only those twelve
+  directories are exempt, each checked against the exact manifest (`DecorManifest.REGISTRY_DIRECTORIES`).
+  Recipes, advancements, models and Blockbench projects are grouped (`<family>/<group>/`) instead. Rejected:
+  renaming ids or raising the cap.
+- **Capacity defaults.** Cabinets 27 slots; sideboard, china cabinet, dresser, wardrobe, trunk, rolltop desk
+  and storage cabinet 54. Displays one item per slot: small wall shelf 3; medium wall shelf, short standing
+  shelf and corner shelf 6; the rest 9. Cabinets take hoppers through any cell; displays stay manual. Drawers
+  modelled on decorative pieces (desks, vanity, curio cabinet) hold nothing.
+- **One sleeper per bed, the canopy included.** Its frame cells route to the sleeping pair; paired sleepers
+  would need their own occupancy design. Tradeoff: a two-wide canopy sleeps its owner off-centre.
+- **Stationary seats.** The swing and desk chair do not move or turn; seats are invisible, never-saved
+  entities, so no world can keep an orphan seat.
+- **Lookalikes stay decorative.** The work table, altar table, decorative drying rack, kitchen range,
+  fireplace and firepit are furniture; their grimoire pages link the working station. Lights need no fuel and
+  heat nothing; plumbing, the planter and the well simulate nothing.
+- **The bookshelf stays two pieces.** `decor/storage/bookshelf` stores and shows items; the grimoire's
+  `grimoire/bookshelf` remains a storage-free research block.
+- **The small shelf lost its bottles.** As a display, modelled bottles would pass for stored items; old shelves
+  upgrade to an empty inventory (never free bottles).
+- **Agent-drafted art.** Every new piece is a Blockbench project drafted by agents with a shared kit (owned
+  copies of the armchair's materials, the dark wood palette); collision boxes were derived once from the
+  drafts and are now hand-edited Java. Owner refinement is a later art activity.
+- **Structure.** `decor/` groups into `structure/` (block, layout, support, access, placement item, shapes)
+  and `behavior/` (seating, storage, sleeping, openings, lighting) to keep every level under ten entries;
+  the plan's flatter `decor/{block,layout,support,...}` siblings were a deliberate deviation. The grimoire
+  source is `grimoire/content/reference/DecorEntries` (grimoire -> decor), not `decor/grimoire/`, which
+  would have made decor import grimoire against the dependency rule.
+
 ## 2026-10-22 - 0.3.0: the grimoire is advisory, shallow and recipe-backed (Milestone 4)
 
 Grouped because the choices lean on one another; each is short.

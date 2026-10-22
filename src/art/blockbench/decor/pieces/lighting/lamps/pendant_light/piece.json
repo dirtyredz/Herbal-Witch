@@ -1,0 +1,55 @@
+{
+  "project": "pendant_light.bbmodel",
+  "textures": {
+    "iron": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/pendant_light/iron",
+    "brass": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/pendant_light/brass",
+    "gold": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/pendant_light/gold",
+    "lantern_glass": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/pendant_light/lantern_glass",
+    "flame": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/pendant_light/flame",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/pendant_light/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/pendant_light/iron"
+  },
+  "owned_textures": {
+    "iron": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/pendant_light/iron",
+    "brass": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/pendant_light/brass",
+    "gold": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/pendant_light/gold",
+    "lantern_glass": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/pendant_light/lantern_glass",
+    "flame": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/pendant_light/flame",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/pendant_light/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      32,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/lighting/lamps/pendant_light",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ]
+    ],
+    "variants": [
+      {
+        "name": "lit",
+        "emissive": [
+          "glow"
+        ]
+      }
+    ]
+  }
+}

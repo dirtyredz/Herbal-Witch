@@ -4,11 +4,13 @@ Forge 1.20.1 mod: woodland herbal witchcraft (herbs, stations, brewing, familiar
 an apothecary trade) together with a cottage furniture catalogue. Install on **both** the server and
 every client.
 
-**Status: private development, `0.3.0` local candidate (Milestone 4, the Grimoire).** Contains Milestone 1
-(cottage decor in a single design), Milestone 2 (herbs and garden), Milestone 3 (everyday preparation
-stations and products) and Milestone 4 (the grimoire: discovery, recipe lookup, missing ingredients,
-research blocks and teaching). Automated acceptance passed (unit tests and GameTests); owner review of
-the art, the station UIs and the grimoire is pending. Later systems are listed in docs/FEATURES.md.
+**Status: private development, `0.4.0` local candidate (Milestone 5, the full furniture catalogue).**
+Contains Milestone 1 (cottage decor in a single design), Milestone 2 (herbs and garden), Milestone 3
+(everyday preparation stations and products), Milestone 4 (the grimoire: discovery, recipe lookup,
+missing ingredients, research blocks and teaching) and Milestone 5 (94 furniture pieces). Automated
+acceptance passed headless (unit tests and GameTests on the ANU CI runner); owner review of the art
+(the 89 new pieces are agent first drafts), the station UIs, the grimoire and the furniture behaviour in
+game, with two clients, is pending. Later systems are listed in docs/FEATURES.md.
 Not published; not in any pack.
 
 ## Supported versions
@@ -22,9 +24,22 @@ Not published; not in any pack.
 
 ## Content
 
-- **Cottage decor** (tab "Cottage Decor"): five pieces in one dark-wood design, with forest green,
-  magenta and plum accents, gold trim and ivy. Armchair, Apothecary Counter, Small Wall Shelf, Table Lamp
-  (use to switch on, light 14), Small Rug. Craft them from dark oak (docs/catalogue/decor.md).
+- **Cottage decor** (tab "Cottage Decor"): a 94-piece furniture catalogue in one dark-wood design, with
+  forest green, magenta and plum accents, gold trim and ivy. Seven families: seating 13, storage 27,
+  surfaces 15, lighting 8, textiles 6, fixtures 22 and openings 3. Every piece is crafted from dark oak
+  and common vanilla items; the exact list, sizes, grids and mounting are in docs/catalogue/decor.md.
+  The five 0.1.0 pieces (Armchair, Apothecary Counter, Small Wall Shelf, Table Lamp, Small Rug) are part of it.
+  - *Placement:* hold the item and aim. A see-through preview of the whole piece with a green or red
+    outline shows exactly where it will go; the whole piece is placed or nothing is. Wall pieces face away
+    from the wall you aim at, and hanging pieces hang from the ceiling you aim at.
+  - *Seating:* use a seat to sit on the seat you aim at; one sitter per seat.
+  - *Storage:* cabinets hold 27 or 54 slots and are one shared inventory across all their cells; hoppers
+    and other item handlers reach cabinets. Display shelves show one item per slot, drawn where it stands.
+  - *Beds:* vanilla sleeping and respawn rules, one sleeper per bed (the canopy bed included).
+  - *The door:* behaves like a vanilla door (open, close, redstone).
+  - *Lights:* use to toggle; lit lights give light 14 and need no fuel.
+  - Some pieces look like stations (work table, altar table, decorative drying rack, kitchen range,
+    fireplace, firepit) but are decoration only (docs/catalogue/stations.md).
 - **Herbs and garden** (tab "Gardening"): 14 herbs in five habitat groups, seeds, fresh herbs and the
   herb bed (docs/catalogue/herbs.md). Herbs stand rooted in the soil with a 3D mature form, and
   adjacent herb beds join into one planter.
@@ -128,9 +143,11 @@ and testing. It needs permission level 2 (operators; a non-op, in survival or cr
 are refused). Sections: `decor`, `herbs`, `garden`, `drying_rack`, `mortar`, `kettle`, `hearth`,
 `stove`, `infusion_pot`, `preparations`, `grimoire`; with no section it builds all of them. The grimoire
   section (both research blocks, a barrel with two grimoires and supplies, signs) grants no knowledge.
+The `decor` section is a footprint-aware grid of all 94 pieces with signs, with wall pieces on walls and
+hanging pieces under ceilings, lights lit, storage stocked and the door in its four states.
 
 - **Where:** the box starts 2 blocks east of you on your row and extends east and south. The floor is
-  the block you stand on. Height 8 (floor layer plus 7 cleared). The full layout is 86 x 8 x 28;
+  the block you stand on. Height 8 (floor layer plus 7 cleared). The full layout is 117 x 8 x 28 (it was 86 x 8 x 28 before 0.4.0);
   hard caps are 128 x 8 x 128 and 65,536 writes.
 - **Destructive:** the whole box is replaced: terrain (grass, dirt, stone, plants, leaves, logs, water) is cleared (no drops) and the floor laid (grass blocks under the garden and herbs, smooth stone elsewhere), then the floor,
   supports, samples and signs are placed. There is no undo.

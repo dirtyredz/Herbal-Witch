@@ -166,6 +166,18 @@ Review expectations: run the three producers and the previewer, read the grimoir
 targeting, support, neighbour occlusion and shaders in game. Expect repainting and reshaping; the drafts
 are a starting point, not a final look.
 
+## Furniture catalogue (0.4.0, agent first drafts)
+
+The 89 pieces added in 0.4.0 (docs/catalogue/decor.md) are first drafts made by agents for the owner to
+refine; owner art review is pending for all of them. They were built with one shared kit from owned copies
+of the armchair's materials: the single dark wood palette, forest green, plum, gold and ivy. Every piece owns
+its textures (the kit copies them; nothing is shared between pieces), so painting one never changes another.
+Dried bundles stay flat 2D sprites; the decorative drying rack does not turn them into cubes. The small
+wall shelf's modelled bottles were removed because it now displays real items and modelled bottles would pass
+for stored ones. Collision boxes were derived once from the drafts and are hand-edited Java afterwards, so a
+reshaped model needs an agent to update them. Wave previews (drafts per piece, montages per wave) are in
+`C:/Users/dirty/projects/artifacts/minecraft-mods/jobs/2026-10-22-herbal-witch-m5/previews/`.
+
 ## How the art is made
 
 - **Textures** come from `node tools/generate-textures.mjs` (seeded code in `tools/art/`) for the
@@ -179,7 +191,7 @@ are a starting point, not a final look.
   natively at 32 and drop the enlargement for it. Alpha is 0 or 255. Untinted: no tint index, no
   colour handler.
 - **One-off pieces are hand-editable** (owner direction: subtle adjustments in Blockbench). The six
-  stations, five furniture pieces, the oil lantern and the two grimoire blocks are Blockbench projects
+  stations, the furniture (five pieces, and 89 more since 0.4.0), the oil lantern and the two grimoire blocks are Blockbench projects
   (`src/art/blockbench/`, workflow in docs/BLOCKBENCH.md) compiled by
   `node tools/compile-blockbench.mjs`: authored per-face UVs (stretched, flipped or rotated as
   drawn), embedded textures, the item Display, named groups, multiblocks drawn whole and cut into

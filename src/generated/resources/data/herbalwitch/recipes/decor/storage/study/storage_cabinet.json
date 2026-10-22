@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "H": {
+      "item": "minecraft:chest"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    }
+  },
+  "pattern": [
+    "PHP",
+    "PPP",
+    "PHP"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/storage/storage_cabinet"
+  },
+  "show_notification": true
+}

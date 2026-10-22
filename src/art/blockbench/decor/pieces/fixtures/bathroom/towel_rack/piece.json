@@ -1,0 +1,38 @@
+{
+  "project": "towel_rack.bbmodel",
+  "textures": {
+    "brass": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/towel_rack/brass",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/towel_rack/gold",
+    "linen": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/towel_rack/linen",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/towel_rack/plum",
+    "pink": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/towel_rack/pink",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/towel_rack/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/towel_rack/brass"
+  },
+  "owned_textures": {
+    "brass": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/towel_rack/brass",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/towel_rack/gold",
+    "linen": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/towel_rack/linen",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/towel_rack/plum",
+    "pink": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/towel_rack/pink",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/towel_rack/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/decor/pieces/fixtures/bathroom/towel_rack/base",
+      "item": true
+    }
+  ]
+}

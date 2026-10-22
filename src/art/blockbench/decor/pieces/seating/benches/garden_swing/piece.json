@@ -1,0 +1,131 @@
+{
+  "project": "garden_swing.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_swing/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_swing/wood_v",
+    "iron": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_swing/iron",
+    "gold": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_swing/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_swing/plum",
+    "velvet": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_swing/velvet",
+    "pink": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_swing/pink",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_swing/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_swing/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_swing/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_swing/wood_v",
+    "iron": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_swing/iron",
+    "gold": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_swing/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_swing/plum",
+    "velvet": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_swing/velvet",
+    "pink": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_swing/pink",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_swing/ivy"
+  },
+  "bounds": {
+    "min": [
+      -32,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      48,
+      32
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/seating/benches/garden_swing",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        1
+      ],
+      [
+        2,
+        0,
+        1
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        0
+      ],
+      [
+        2,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1
+      ],
+      [
+        2,
+        1,
+        1
+      ],
+      [
+        0,
+        2,
+        0
+      ],
+      [
+        1,
+        2,
+        0
+      ],
+      [
+        2,
+        2,
+        0
+      ],
+      [
+        0,
+        2,
+        1
+      ],
+      [
+        1,
+        2,
+        1
+      ],
+      [
+        2,
+        2,
+        1
+      ]
+    ]
+  }
+}

@@ -16,7 +16,7 @@ import java.util.Set;
  */
 public final class BlockbenchManifest {
     /** The Milestone 5 waves whose pieces have Blockbench projects. */
-    public static final List<String> ART_WAVES = List.of("A", "B");
+    public static final List<String> ART_WAVES = List.of("A", "B", "C");
     /** Lights (an off/on pair, or lit cells) and the door (mirrored cells), independently of the catalogue. */
     public static final Set<String> LIGHTS = Set.of("table_lamp", "wall_sconce", "hanging_lantern", "chandelier", "ceiling_light",
             "floor_lamp", "post_lantern", "pendant_light", "firepit");

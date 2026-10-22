@@ -1,0 +1,49 @@
+{
+  "project": "clawfoot_tub.bbmodel",
+  "textures": {
+    "enamel": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/clawfoot_tub/enamel",
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/clawfoot_tub/wood",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/clawfoot_tub/gold",
+    "brass": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/clawfoot_tub/brass",
+    "copper": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/clawfoot_tub/copper",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/clawfoot_tub/plum",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/clawfoot_tub/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/clawfoot_tub/enamel"
+  },
+  "owned_textures": {
+    "enamel": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/clawfoot_tub/enamel",
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/clawfoot_tub/wood",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/clawfoot_tub/gold",
+    "brass": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/clawfoot_tub/brass",
+    "copper": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/clawfoot_tub/copper",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/clawfoot_tub/plum",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/clawfoot_tub/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      32
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/fixtures/bathroom/clawfoot_tub",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ]
+  }
+}

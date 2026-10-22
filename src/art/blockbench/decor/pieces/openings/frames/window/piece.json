@@ -1,0 +1,55 @@
+{
+  "project": "window.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/openings/frames/window/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/openings/frames/window/wood_v",
+    "glass": "herbalwitch:block/pieces/decor/pieces/openings/frames/window/glass",
+    "paint": "herbalwitch:block/pieces/decor/pieces/openings/frames/window/paint",
+    "iron": "herbalwitch:block/pieces/decor/pieces/openings/frames/window/iron",
+    "gold": "herbalwitch:block/pieces/decor/pieces/openings/frames/window/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/openings/frames/window/plum",
+    "soil": "herbalwitch:block/pieces/decor/pieces/openings/frames/window/soil",
+    "pink": "herbalwitch:block/pieces/decor/pieces/openings/frames/window/pink",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/openings/frames/window/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/openings/frames/window/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/openings/frames/window/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/openings/frames/window/wood_v",
+    "glass": "herbalwitch:block/pieces/decor/pieces/openings/frames/window/glass",
+    "paint": "herbalwitch:block/pieces/decor/pieces/openings/frames/window/paint",
+    "iron": "herbalwitch:block/pieces/decor/pieces/openings/frames/window/iron",
+    "gold": "herbalwitch:block/pieces/decor/pieces/openings/frames/window/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/openings/frames/window/plum",
+    "soil": "herbalwitch:block/pieces/decor/pieces/openings/frames/window/soil",
+    "pink": "herbalwitch:block/pieces/decor/pieces/openings/frames/window/pink",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/openings/frames/window/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      32,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/openings/frames/window",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ]
+    ]
+  }
+}

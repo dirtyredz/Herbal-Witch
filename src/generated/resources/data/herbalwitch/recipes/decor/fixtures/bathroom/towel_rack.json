@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "N": {
+      "item": "minecraft:iron_nugget"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    "NWN"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/fixtures/towel_rack"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,59 @@
+{
+  "project": "wall_shelf_large.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/shelves/wall_shelf_large/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/shelves/wall_shelf_large/wood_v",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/shelves/wall_shelf_large/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/shelves/wall_shelf_large/gold",
+    "pink": "herbalwitch:block/pieces/decor/pieces/storage/shelves/wall_shelf_large/pink",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/shelves/wall_shelf_large/ivy",
+    "iron": "herbalwitch:block/pieces/decor/pieces/storage/shelves/wall_shelf_large/iron",
+    "particle": "herbalwitch:block/pieces/decor/pieces/storage/shelves/wall_shelf_large/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/shelves/wall_shelf_large/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/shelves/wall_shelf_large/wood_v",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/shelves/wall_shelf_large/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/shelves/wall_shelf_large/gold",
+    "pink": "herbalwitch:block/pieces/decor/pieces/storage/shelves/wall_shelf_large/pink",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/shelves/wall_shelf_large/ivy",
+    "iron": "herbalwitch:block/pieces/decor/pieces/storage/shelves/wall_shelf_large/iron"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      32,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/storage/shelves/wall_shelf_large",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        0
+      ]
+    ]
+  }
+}

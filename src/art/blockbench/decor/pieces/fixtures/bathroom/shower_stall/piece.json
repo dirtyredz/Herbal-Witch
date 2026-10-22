@@ -1,0 +1,55 @@
+{
+  "project": "shower_stall.bbmodel",
+  "textures": {
+    "enamel": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/shower_stall/enamel",
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/shower_stall/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/shower_stall/wood_v",
+    "brass": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/shower_stall/brass",
+    "copper": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/shower_stall/copper",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/shower_stall/gold",
+    "glass": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/shower_stall/glass",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/shower_stall/plum",
+    "pink": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/shower_stall/pink",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/shower_stall/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/shower_stall/enamel"
+  },
+  "owned_textures": {
+    "enamel": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/shower_stall/enamel",
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/shower_stall/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/shower_stall/wood_v",
+    "brass": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/shower_stall/brass",
+    "copper": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/shower_stall/copper",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/shower_stall/gold",
+    "glass": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/shower_stall/glass",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/shower_stall/plum",
+    "pink": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/shower_stall/pink",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/shower_stall/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      32,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/fixtures/bathroom/shower_stall",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ]
+    ]
+  }
+}

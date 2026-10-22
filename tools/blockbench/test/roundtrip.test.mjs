@@ -36,7 +36,7 @@ test('an imported model compiles back to the same model (geometry, UVs, rotation
 test('the committed projects recompile byte-identically and match the committed resources', () => {
   const a = compileAll(root);
   const b = compileAll(root);
-  assert.equal(a.models.size, 185); // 34 before Milestone 5, 58 for wave A's 22 decor pieces, 93 for wave B's 30
+  assert.equal(a.models.size, 358); // 34 before Milestone 5, then waves A (58), B (93) and C (173)
   for (const [p, text] of a.models) {
     assert.equal(b.models.get(p), text, p);
     assert.equal(readFileSync(join(models, p), 'utf8'), text, `${p} is stale: run node tools/compile-blockbench.mjs`);

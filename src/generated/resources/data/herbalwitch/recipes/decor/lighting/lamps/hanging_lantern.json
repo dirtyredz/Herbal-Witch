@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:chain"
+    },
+    "G": {
+      "item": "minecraft:gold_nugget"
+    },
+    "L": {
+      "item": "minecraft:lantern"
+    }
+  },
+  "pattern": [
+    "GCG",
+    " L "
+  ],
+  "result": {
+    "item": "herbalwitch:decor/lighting/hanging_lantern"
+  },
+  "show_notification": true
+}

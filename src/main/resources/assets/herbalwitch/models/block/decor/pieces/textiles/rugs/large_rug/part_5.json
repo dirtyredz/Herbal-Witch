@@ -1,0 +1,64 @@
+{
+  "textures": {
+    "rug": "herbalwitch:block/pieces/decor/pieces/textiles/rugs/large_rug/rug",
+    "particle": "herbalwitch:block/pieces/decor/pieces/textiles/rugs/large_rug/rug"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        2,
+        1,
+        16
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            0,
+            5.6585,
+            2,
+            10.3415
+          ],
+          "texture": "#rug"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            8,
+            1
+          ],
+          "texture": "#rug",
+          "cullface": "west"
+        }
+      }
+    },
+    {
+      "from": [
+        2,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        1,
+        16
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            2,
+            5.6585,
+            5.8182,
+            10.3415
+          ],
+          "texture": "#rug"
+        }
+      }
+    }
+  ]
+}

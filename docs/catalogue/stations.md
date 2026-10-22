@@ -95,6 +95,24 @@ cells. Breaking any cell removes all of them. Only the origin cell (part 0) hold
 and drops the item (once, never in creative); any cell opens the origin's menu; lit/active is shared
 by every cell. The item shows `models/block/stations/<station>/assembly`.
 
+## Decor lookalikes (0.4.0)
+
+Some furniture in the decor catalogue (docs/catalogue/decor.md) resembles a station. Each is a plain
+decorative piece with its own id, no block entity, no recipe type and no heat or processing; the
+grimoire page of the decor piece links the working station instead.
+
+| Decor piece (id under `decor/`) | Looks like | The working station |
+|---|---|---|
+| Decorative Drying Rack (`fixtures/drying_rack_decor`) | hanging herb frame | Herb Drying Rack (`stations/everyday/drying_rack/`): dries bundles |
+| Fireplace (`fixtures/fireplace`) and Firepit (`fixtures/firepit`) | hearth surround and fire | Hearth (`stations/everyday/hearth/`): the heat source for kettle and infusion pot. The firepit lights up and toggles like a lamp but heats nothing |
+| Kitchen Range (`fixtures/stove_oven`) | range with an oven door | Witch's Stove (`stations/stove/`): two burners, hearth fuel rules |
+| Work Table (`surfaces/work_table`) | broad worktable | Mortar and pestle (grinding); the charm workbench candidate is still planned (M7) |
+| Altar Table (`fixtures/altar_table`) | dark table with moon motifs | Infusion pot for preparing (altar and ritual circle are still planned, M6/M7) |
+
+The recipes differ on purpose: for example the decor rack is string, sticks and slabs, and the
+Kitchen Range takes a furnace but never smelts. Dried bundles remain flat 2D sprites on the working
+rack and elsewhere; the decorative rack does not change that.
+
 ## Rules
 
 - No universal machine superclass. Shared processing (`stations/process/`: reservations, job, completion) is used by composition; `StationBlock` and `StationMenu` share only block and menu boilerplate.

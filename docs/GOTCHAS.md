@@ -1,7 +1,7 @@
 # Gotchas - The Herbal Witch
 
 - **Never run `runClient` from an agent.** GameTests are the headless check; the owner verifies
-  visuals, item transforms, shaders and two-client sync in the trial instance.
+  visuals, item transforms, shaders and two-client sync in the mod's test instance.
 - **Client classes stay in `client/`.** `HerbalWitchClient` is a `Dist.CLIENT` subscriber; feature and
   `data/` code never reference it, so a dedicated server never loads client classes. The GameTest
   server is a dedicated server and would fail on a leak.
@@ -156,3 +156,31 @@
 - **Fake players never join the player list.** Range and teaching checks go through `TeachingWorld`, the test
   seam, so GameTests can drive them. `FakePlayerFactory` caches by name, so `GrimoireFixtures` gives each test a
   unique fake-player name; reuse leaks one test's inventory and discoveries into the next.
+- **Cell order is a contract.** A furniture piece's cells are numbered by height, then depth, then to the
+  right (`MultiblockLayout.boxCells`); the Blockbench sidecar (`piece.json` `multiblock.cells`) must list the
+  same cells in the same order, or `part_<n>` models land on the wrong blocks. `BlockbenchResourcesTest`
+  compares them. Legacy `[width, height]` station cells keep their old numbering.
+- **Beds own `part`.** Vanilla's `BedBlock.PART` (head/foot) is a property named `part`, so a bed's cell
+  index is `cell` (`FurnitureLayouts.BED_PROPERTY`). Loot conditions and blockstates read `cell` for beds and
+  `part` for every other multi-cell piece.
+- **One drop per piece.** Only cell 0 (a door's lower half) has loot; the other cells vanish through
+  neighbour updates. Storage contents drop from the origin's `onRemove` and the inventory is emptied as it
+  drops, so a cascade cannot drop them twice. A new multi-cell behaviour must keep both rules.
+- **Cross-chunk teardown stops at unloaded chunks.** Removal travels by neighbour updates, which never load
+  a chunk; a piece straddling an unloaded chunk loses only its loaded cells until the rest loads and is next
+  updated. Support checks treat an unloaded neighbour as no support (placement is refused).
+- **Old small shelves have no block entity.** Before 0.4.0 the shelf was entity-less; its entity is created
+  on first access with an empty inventory. Never seed it with items.
+- **Display contents travel only in the update tag**, sent when the contents change, never per tick. A
+  display slot holds one item; vanilla quick-move fills one empty slot per call, and the screen repeats it.
+- **Item models must stay inside -16..32.** A three-wide or three-high assembly is moved back inside by the
+  compiler, which corrects each display slot's translation for the move (`geometry/item-assembly.mjs`); a
+  piece spanning more than 48 pixels on an axis cannot be one item model.
+- **Fake players do not tick.** A GameTest sleeper never wakes by itself after its bed breaks; tests check
+  what the living tick checks (the sleeping position is no longer a bed). Grass placed in a test needs soil
+  below it or it pops off on the next neighbour update.
+- **Tabletops are drawn below the cell top, collide at it.** Drafted tops sit at y 14.5-15 so props fit
+  inside the cell; their collision reaches y 16 so a lamp's centre support holds, and a lamp stands a pixel
+  above the drawn top.
+- **ANU tasks are space separated.** `tools/anu-test.ps1 -Tasks "test runGameTestServer"`; a comma list is
+  one unknown task name.

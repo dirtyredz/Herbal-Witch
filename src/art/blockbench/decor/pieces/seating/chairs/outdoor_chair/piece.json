@@ -1,0 +1,38 @@
+{
+  "project": "outdoor_chair.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/seating/chairs/outdoor_chair/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/seating/chairs/outdoor_chair/wood_v",
+    "iron": "herbalwitch:block/pieces/decor/pieces/seating/chairs/outdoor_chair/iron",
+    "gold": "herbalwitch:block/pieces/decor/pieces/seating/chairs/outdoor_chair/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/seating/chairs/outdoor_chair/plum",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/seating/chairs/outdoor_chair/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/seating/chairs/outdoor_chair/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/seating/chairs/outdoor_chair/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/seating/chairs/outdoor_chair/wood_v",
+    "iron": "herbalwitch:block/pieces/decor/pieces/seating/chairs/outdoor_chair/iron",
+    "gold": "herbalwitch:block/pieces/decor/pieces/seating/chairs/outdoor_chair/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/seating/chairs/outdoor_chair/plum",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/seating/chairs/outdoor_chair/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/decor/pieces/seating/chairs/outdoor_chair/base",
+      "item": true
+    }
+  ]
+}

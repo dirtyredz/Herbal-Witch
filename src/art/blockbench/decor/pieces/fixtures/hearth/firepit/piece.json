@@ -1,0 +1,69 @@
+{
+  "project": "firepit.bbmodel",
+  "textures": {
+    "stone": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/firepit/stone",
+    "pale_stone": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/firepit/pale_stone",
+    "log": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/firepit/log",
+    "coals": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/firepit/coals",
+    "flame": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/firepit/flame",
+    "glow": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/firepit/glow",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/firepit/wood_v",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/firepit/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/firepit/stone"
+  },
+  "owned_textures": {
+    "stone": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/firepit/stone",
+    "pale_stone": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/firepit/pale_stone",
+    "log": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/firepit/log",
+    "coals": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/firepit/coals",
+    "flame": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/firepit/flame",
+    "glow": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/firepit/glow",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/firepit/wood_v",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/hearth/firepit/ivy"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      32
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/fixtures/hearth/firepit",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        1
+      ]
+    ],
+    "variants": [
+      {
+        "name": "lit",
+        "emissive": [
+          "glow"
+        ]
+      }
+    ]
+  }
+}

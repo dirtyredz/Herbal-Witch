@@ -1,0 +1,51 @@
+{
+  "project": "medium_rug.bbmodel",
+  "textures": {
+    "rug": "herbalwitch:block/pieces/decor/pieces/textiles/rugs/medium_rug/rug",
+    "linen": "herbalwitch:block/pieces/decor/pieces/textiles/rugs/medium_rug/linen",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/textiles/rugs/medium_rug/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/textiles/rugs/medium_rug/rug"
+  },
+  "owned_textures": {
+    "rug": "herbalwitch:block/pieces/decor/pieces/textiles/rugs/medium_rug/rug",
+    "linen": "herbalwitch:block/pieces/decor/pieces/textiles/rugs/medium_rug/linen",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/textiles/rugs/medium_rug/ivy"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      32
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/textiles/rugs/medium_rug",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        1
+      ]
+    ]
+  }
+}

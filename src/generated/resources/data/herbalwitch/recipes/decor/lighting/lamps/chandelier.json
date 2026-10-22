@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:chain"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "K": {
+      "item": "minecraft:candle"
+    }
+  },
+  "pattern": [
+    "GCG",
+    "KKK"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/lighting/chandelier"
+  },
+  "show_notification": true
+}

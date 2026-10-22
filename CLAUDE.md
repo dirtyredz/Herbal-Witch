@@ -21,15 +21,27 @@ docs/ARCHITECTURE.md and docs/catalogue/).
      (the folder supplies the Farmer's Delight and Thirst jars; see docs/COMPATIBILITY.md)
   Art changes also: `node --test "tools/art/test/*.test.mjs" "tools/blockbench/test/*.test.mjs" "tools/blockbench/dev-art/test/*.test.mjs" "tools/preview/test/*.test.mjs"` and
   `node tools/preview-models.mjs --output <job folder>/previews/<name> --references <job folder>`,
-  then review the sheets before any jar goes to a trial instance (docs/ART.md "Review").
-  The owner checks visuals, transforms, shaders and two-client behaviour in the trial instance.
+  then review the sheets before any jar goes to the mod's test instance (docs/ART.md "Review").
+  The owner checks visuals, transforms, shaders and two-client behaviour in the mod's test instance.
+- **Fast gate** (every change; under a few minutes): the art producers when their inputs changed, `runData`
+  (twice, byte-identical, when generation changed), `.\gradlew.bat test build`, the Node art suites when
+  art or tools changed, `git diff --check`, `sync-mod-files.ps1 -Check`. GameTests run on ANU, not locally:
+  commit, then from the workspace root `tools/anu-test.ps1 -Mod HerbalWitch -Ref <branch> -Path <worktree>
+  -Tasks "test runGameTestServer" -Wait` (space-separated tasks; tools/anu/README.md). A milestone wave
+  closes only on the full gate plus a green ANU run and reviewed preview sheets.
+- **Furniture** (docs/ARCHITECTURE.md "Decor"): every piece is one `FurnitureSpec` in its family catalogue
+  (`decor/catalog/pieces/`) with its behaviour and mount; never add a block class per piece. Every piece
+  places through `FurniturePlacementItem` (the checked, previewed structure placement); new pieces need a
+  Blockbench project whose sidecar cells match the catalogue, collision boxes in their family's Shapes
+  class, a recipe in their family's recipe contributor, a grimoire line (`DecorReferenceTranslations`),
+  display anchors (`DisplaySpec`) for displays, and the independent manifests (`data/decor/manifest/`).
 - **Generated resources are source.** Change a provider, run `runData`, commit the regenerated
   `src/generated/resources/` with the code. Never hand-edit generated JSON. `GeneratedResourcesTest`
   holds the exact manifest; when a file is renamed or removed, delete `src/generated` and regenerate.
 - **Art has three producers with disjoint paths** (`tools/art/output.mjs`; each also has `--check`):
   `tools/generate-textures.mjs` (every texture in `tools/art/catalogue.mjs`), `tools/generate-models.mjs`
   (herbs, herb beds, hung bundles; edit `tools/models/`) and `tools/compile-blockbench.mjs` (the
-  stations, furniture and oil lantern, plus the rug and lamp-shade textures; edit the `.bbmodel` in
+  stations, furniture and oil lantern and every texture they own; edit the `.bbmodel` in
   `src/art/blockbench/`, owner workflow docs/BLOCKBENCH.md). Never edit model JSON. One-off pieces
   belong in Blockbench, not generator code; item display transforms live in the projects, so item
   model providers only name a parent. Never launch Blockbench or a client; the owner edits and

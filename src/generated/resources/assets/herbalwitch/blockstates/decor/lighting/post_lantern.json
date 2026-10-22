@@ -1,0 +1,94 @@
+{
+  "variants": {
+    "facing=east,lit=false,part=0": {
+      "model": "herbalwitch:block/decor/pieces/lighting/lamps/post_lantern/part_0",
+      "y": 90
+    },
+    "facing=east,lit=false,part=1": {
+      "model": "herbalwitch:block/decor/pieces/lighting/lamps/post_lantern/part_1",
+      "y": 90
+    },
+    "facing=east,lit=false,part=2": {
+      "model": "herbalwitch:block/decor/pieces/lighting/lamps/post_lantern/part_2",
+      "y": 90
+    },
+    "facing=east,lit=true,part=0": {
+      "model": "herbalwitch:block/decor/pieces/lighting/lamps/post_lantern/lit_0",
+      "y": 90
+    },
+    "facing=east,lit=true,part=1": {
+      "model": "herbalwitch:block/decor/pieces/lighting/lamps/post_lantern/lit_1",
+      "y": 90
+    },
+    "facing=east,lit=true,part=2": {
+      "model": "herbalwitch:block/decor/pieces/lighting/lamps/post_lantern/lit_2",
+      "y": 90
+    },
+    "facing=north,lit=false,part=0": {
+      "model": "herbalwitch:block/decor/pieces/lighting/lamps/post_lantern/part_0"
+    },
+    "facing=north,lit=false,part=1": {
+      "model": "herbalwitch:block/decor/pieces/lighting/lamps/post_lantern/part_1"
+    },
+    "facing=north,lit=false,part=2": {
+      "model": "herbalwitch:block/decor/pieces/lighting/lamps/post_lantern/part_2"
+    },
+    "facing=north,lit=true,part=0": {
+      "model": "herbalwitch:block/decor/pieces/lighting/lamps/post_lantern/lit_0"
+    },
+    "facing=north,lit=true,part=1": {
+      "model": "herbalwitch:block/decor/pieces/lighting/lamps/post_lantern/lit_1"
+    },
+    "facing=north,lit=true,part=2": {
+      "model": "herbalwitch:block/decor/pieces/lighting/lamps/post_lantern/lit_2"
+    },
+    "facing=south,lit=false,part=0": {
+      "model": "herbalwitch:block/decor/pieces/lighting/lamps/post_lantern/part_0",
+      "y": 180
+    },
+    "facing=south,lit=false,part=1": {
+      "model": "herbalwitch:block/decor/pieces/lighting/lamps/post_lantern/part_1",
+      "y": 180
+    },
+    "facing=south,lit=false,part=2": {
+      "model": "herbalwitch:block/decor/pieces/lighting/lamps/post_lantern/part_2",
+      "y": 180
+    },
+    "facing=south,lit=true,part=0": {
+      "model": "herbalwitch:block/decor/pieces/lighting/lamps/post_lantern/lit_0",
+      "y": 180
+    },
+    "facing=south,lit=true,part=1": {
+      "model": "herbalwitch:block/decor/pieces/lighting/lamps/post_lantern/lit_1",
+      "y": 180
+    },
+    "facing=south,lit=true,part=2": {
+      "model": "herbalwitch:block/decor/pieces/lighting/lamps/post_lantern/lit_2",
+      "y": 180
+    },
+    "facing=west,lit=false,part=0": {
+      "model": "herbalwitch:block/decor/pieces/lighting/lamps/post_lantern/part_0",
+      "y": 270
+    },
+    "facing=west,lit=false,part=1": {
+      "model": "herbalwitch:block/decor/pieces/lighting/lamps/post_lantern/part_1",
+      "y": 270
+    },
+    "facing=west,lit=false,part=2": {
+      "model": "herbalwitch:block/decor/pieces/lighting/lamps/post_lantern/part_2",
+      "y": 270
+    },
+    "facing=west,lit=true,part=0": {
+      "model": "herbalwitch:block/decor/pieces/lighting/lamps/post_lantern/lit_0",
+      "y": 270
+    },
+    "facing=west,lit=true,part=1": {
+      "model": "herbalwitch:block/decor/pieces/lighting/lamps/post_lantern/lit_1",
+      "y": 270
+    },
+    "facing=west,lit=true,part=2": {
+      "model": "herbalwitch:block/decor/pieces/lighting/lamps/post_lantern/lit_2",
+      "y": 270
+    }
+  }
+}

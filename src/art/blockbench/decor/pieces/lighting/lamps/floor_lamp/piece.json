@@ -1,0 +1,59 @@
+{
+  "project": "floor_lamp.bbmodel",
+  "textures": {
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/floor_lamp/wood_v",
+    "wood": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/floor_lamp/wood",
+    "brass": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/floor_lamp/brass",
+    "gold": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/floor_lamp/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/floor_lamp/plum",
+    "lamp_shade": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/floor_lamp/lamp_shade",
+    "iron": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/floor_lamp/iron",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/floor_lamp/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/floor_lamp/wood_v"
+  },
+  "owned_textures": {
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/floor_lamp/wood_v",
+    "wood": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/floor_lamp/wood",
+    "brass": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/floor_lamp/brass",
+    "gold": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/floor_lamp/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/floor_lamp/plum",
+    "lamp_shade": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/floor_lamp/lamp_shade",
+    "iron": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/floor_lamp/iron",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/floor_lamp/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      32,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/lighting/lamps/floor_lamp",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ]
+    ],
+    "variants": [
+      {
+        "name": "lit",
+        "emissive": [
+          "glow"
+        ]
+      }
+    ]
+  }
+}

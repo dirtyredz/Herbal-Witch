@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "T": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    "TTT",
+    "W W",
+    "W W"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/textiles/curtain"
+  },
+  "show_notification": true
+}

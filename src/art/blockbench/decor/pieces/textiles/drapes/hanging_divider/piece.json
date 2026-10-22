@@ -1,0 +1,65 @@
+{
+  "project": "hanging_divider.bbmodel",
+  "textures": {
+    "plum": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/hanging_divider/plum",
+    "pink": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/hanging_divider/pink",
+    "gold": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/hanging_divider/gold",
+    "wood": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/hanging_divider/wood",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/hanging_divider/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/hanging_divider/plum"
+  },
+  "owned_textures": {
+    "plum": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/hanging_divider/plum",
+    "pink": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/hanging_divider/pink",
+    "gold": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/hanging_divider/gold",
+    "wood": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/hanging_divider/wood",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/hanging_divider/ivy"
+  },
+  "bounds": {
+    "min": [
+      -32,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      32,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/textiles/drapes/hanging_divider",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        0
+      ],
+      [
+        2,
+        1,
+        0
+      ]
+    ]
+  }
+}

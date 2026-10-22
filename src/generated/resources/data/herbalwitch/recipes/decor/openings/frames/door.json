@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "minecraft:dark_oak_door"
+    },
+    "G": {
+      "item": "minecraft:gold_nugget"
+    }
+  },
+  "pattern": [
+    "D",
+    "G"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/openings/door"
+  },
+  "show_notification": true
+}

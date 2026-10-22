@@ -1,0 +1,53 @@
+{
+  "project": "door.bbmodel",
+  "textures": {
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/openings/frames/door/wood_v",
+    "wood": "herbalwitch:block/pieces/decor/pieces/openings/frames/door/wood",
+    "iron": "herbalwitch:block/pieces/decor/pieces/openings/frames/door/iron",
+    "gold": "herbalwitch:block/pieces/decor/pieces/openings/frames/door/gold",
+    "glass": "herbalwitch:block/pieces/decor/pieces/openings/frames/door/glass",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/openings/frames/door/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/openings/frames/door/wood_v"
+  },
+  "owned_textures": {
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/openings/frames/door/wood_v",
+    "wood": "herbalwitch:block/pieces/decor/pieces/openings/frames/door/wood",
+    "iron": "herbalwitch:block/pieces/decor/pieces/openings/frames/door/iron",
+    "gold": "herbalwitch:block/pieces/decor/pieces/openings/frames/door/gold",
+    "glass": "herbalwitch:block/pieces/decor/pieces/openings/frames/door/glass",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/openings/frames/door/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      32,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/openings/frames/door",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ]
+    ],
+    "variants": [
+      {
+        "name": "mirrored",
+        "mirror": true
+      }
+    ]
+  }
+}

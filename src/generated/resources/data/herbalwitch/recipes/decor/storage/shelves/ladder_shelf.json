@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "item": "minecraft:dark_oak_slab"
+    },
+    "T": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "TS ",
+    "TS ",
+    "TSS"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/storage/ladder_shelf"
+  },
+  "show_notification": true
+}

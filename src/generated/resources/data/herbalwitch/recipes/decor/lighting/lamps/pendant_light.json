@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:chain"
+    },
+    "L": {
+      "item": "minecraft:lantern"
+    }
+  },
+  "pattern": [
+    " C ",
+    " C ",
+    " L "
+  ],
+  "result": {
+    "item": "herbalwitch:decor/lighting/pendant_light"
+  },
+  "show_notification": true
+}

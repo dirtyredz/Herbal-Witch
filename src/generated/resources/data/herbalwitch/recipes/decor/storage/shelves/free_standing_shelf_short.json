@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "item": "minecraft:dark_oak_slab"
+    },
+    "T": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "T T",
+    "SSS",
+    "T T"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/storage/free_standing_shelf_short"
+  },
+  "show_notification": true
+}

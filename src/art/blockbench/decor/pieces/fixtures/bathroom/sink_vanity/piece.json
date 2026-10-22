@@ -1,0 +1,44 @@
+{
+  "project": "sink_vanity.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/sink_vanity/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/sink_vanity/wood_v",
+    "enamel": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/sink_vanity/enamel",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/sink_vanity/gold",
+    "brass": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/sink_vanity/brass",
+    "linen": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/sink_vanity/linen",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/sink_vanity/plum",
+    "paint": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/sink_vanity/paint",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/sink_vanity/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/sink_vanity/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/sink_vanity/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/sink_vanity/wood_v",
+    "enamel": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/sink_vanity/enamel",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/sink_vanity/gold",
+    "brass": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/sink_vanity/brass",
+    "linen": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/sink_vanity/linen",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/sink_vanity/plum",
+    "paint": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/sink_vanity/paint",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/sink_vanity/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/decor/pieces/fixtures/bathroom/sink_vanity/base",
+      "item": true
+    }
+  ]
+}

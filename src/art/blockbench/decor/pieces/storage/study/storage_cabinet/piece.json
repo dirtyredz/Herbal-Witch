@@ -1,0 +1,59 @@
+{
+  "project": "storage_cabinet.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/study/storage_cabinet/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/study/storage_cabinet/wood_v",
+    "paint": "herbalwitch:block/pieces/decor/pieces/storage/study/storage_cabinet/paint",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/study/storage_cabinet/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/study/storage_cabinet/gold",
+    "iron": "herbalwitch:block/pieces/decor/pieces/storage/study/storage_cabinet/iron",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/study/storage_cabinet/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/storage/study/storage_cabinet/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/study/storage_cabinet/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/study/storage_cabinet/wood_v",
+    "paint": "herbalwitch:block/pieces/decor/pieces/storage/study/storage_cabinet/paint",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/study/storage_cabinet/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/study/storage_cabinet/gold",
+    "iron": "herbalwitch:block/pieces/decor/pieces/storage/study/storage_cabinet/iron",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/study/storage_cabinet/ivy"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      32,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/storage/study/storage_cabinet",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        0
+      ]
+    ]
+  }
+}

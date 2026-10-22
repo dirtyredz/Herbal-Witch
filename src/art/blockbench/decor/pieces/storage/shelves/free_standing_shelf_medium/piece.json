@@ -1,0 +1,47 @@
+{
+  "project": "free_standing_shelf_medium.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/shelves/free_standing_shelf_medium/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/shelves/free_standing_shelf_medium/wood_v",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/shelves/free_standing_shelf_medium/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/shelves/free_standing_shelf_medium/gold",
+    "pink": "herbalwitch:block/pieces/decor/pieces/storage/shelves/free_standing_shelf_medium/pink",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/shelves/free_standing_shelf_medium/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/storage/shelves/free_standing_shelf_medium/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/shelves/free_standing_shelf_medium/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/shelves/free_standing_shelf_medium/wood_v",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/shelves/free_standing_shelf_medium/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/shelves/free_standing_shelf_medium/gold",
+    "pink": "herbalwitch:block/pieces/decor/pieces/storage/shelves/free_standing_shelf_medium/pink",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/shelves/free_standing_shelf_medium/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      32,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/storage/shelves/free_standing_shelf_medium",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ]
+    ]
+  }
+}

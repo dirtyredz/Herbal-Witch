@@ -18,7 +18,7 @@ public final class DecorManifest {
     /** Delivery order of the waves. */
     public static final List<String> WAVES = List.of("M1", "A", "B", "C");
     /** The last delivered wave (FurnitureCatalog.DELIVERED). */
-    public static final String DELIVERED = "B";
+    public static final String DELIVERED = "C";
     /** The five 0.1.0 pieces' authored templates (lamps add _off / _on). */
     public static final Map<String, String> TEMPLATES = Map.of("armchair", "armchair", "apothecary_counter", "apothecary_counter",
             "small_wall_shelf", "wall_shelf", "table_lamp", "table_lamp", "small_rug", "rug");

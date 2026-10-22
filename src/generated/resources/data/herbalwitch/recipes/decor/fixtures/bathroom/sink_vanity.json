@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:bucket"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "Q": {
+      "item": "minecraft:quartz"
+    }
+  },
+  "pattern": [
+    "QBQ",
+    "PPP",
+    "P P"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/fixtures/sink_vanity"
+  },
+  "show_notification": true
+}

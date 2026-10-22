@@ -1,0 +1,47 @@
+{
+  "project": "trellis.bbmodel",
+  "textures": {
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/trellis/wood_v",
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/trellis/wood",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/trellis/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/trellis/plum",
+    "pink": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/trellis/pink",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/trellis/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/trellis/wood_v"
+  },
+  "owned_textures": {
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/trellis/wood_v",
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/trellis/wood",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/trellis/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/trellis/plum",
+    "pink": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/trellis/pink",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/trellis/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      32,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/fixtures/garden/trellis",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ]
+    ]
+  }
+}

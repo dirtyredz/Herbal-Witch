@@ -1,0 +1,74 @@
+{
+  "project": "archway.bbmodel",
+  "textures": {
+    "stone": "herbalwitch:block/pieces/decor/pieces/openings/frames/archway/stone",
+    "pale_stone": "herbalwitch:block/pieces/decor/pieces/openings/frames/archway/pale_stone",
+    "wood": "herbalwitch:block/pieces/decor/pieces/openings/frames/archway/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/openings/frames/archway/wood_v",
+    "gold": "herbalwitch:block/pieces/decor/pieces/openings/frames/archway/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/openings/frames/archway/plum",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/openings/frames/archway/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/openings/frames/archway/stone"
+  },
+  "owned_textures": {
+    "stone": "herbalwitch:block/pieces/decor/pieces/openings/frames/archway/stone",
+    "pale_stone": "herbalwitch:block/pieces/decor/pieces/openings/frames/archway/pale_stone",
+    "wood": "herbalwitch:block/pieces/decor/pieces/openings/frames/archway/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/openings/frames/archway/wood_v",
+    "gold": "herbalwitch:block/pieces/decor/pieces/openings/frames/archway/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/openings/frames/archway/plum",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/openings/frames/archway/ivy"
+  },
+  "bounds": {
+    "min": [
+      -32,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      48,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/openings/frames/archway",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        2,
+        1,
+        0
+      ],
+      [
+        0,
+        2,
+        0
+      ],
+      [
+        1,
+        2,
+        0
+      ],
+      [
+        2,
+        2,
+        0
+      ]
+    ]
+  }
+}

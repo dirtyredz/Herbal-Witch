@@ -1,0 +1,76 @@
+{
+  "project": "large_rug.bbmodel",
+  "textures": {
+    "rug": "herbalwitch:block/pieces/decor/pieces/textiles/rugs/large_rug/rug",
+    "linen": "herbalwitch:block/pieces/decor/pieces/textiles/rugs/large_rug/linen",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/textiles/rugs/large_rug/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/textiles/rugs/large_rug/rug"
+  },
+  "owned_textures": {
+    "rug": "herbalwitch:block/pieces/decor/pieces/textiles/rugs/large_rug/rug",
+    "linen": "herbalwitch:block/pieces/decor/pieces/textiles/rugs/large_rug/linen",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/textiles/rugs/large_rug/ivy"
+  },
+  "bounds": {
+    "min": [
+      -32,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      48
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/textiles/rugs/large_rug",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        1
+      ],
+      [
+        2,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        2
+      ],
+      [
+        1,
+        0,
+        2
+      ],
+      [
+        2,
+        0,
+        2
+      ]
+    ]
+  }
+}

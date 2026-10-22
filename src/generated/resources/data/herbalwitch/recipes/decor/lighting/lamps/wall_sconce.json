@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "N": {
+      "item": "minecraft:gold_nugget"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "R": {
+      "item": "minecraft:torch"
+    }
+  },
+  "pattern": [
+    " R ",
+    "NPN"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/lighting/wall_sconce"
+  },
+  "show_notification": true
+}

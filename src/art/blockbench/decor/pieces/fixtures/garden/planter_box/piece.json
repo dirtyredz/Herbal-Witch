@@ -1,0 +1,51 @@
+{
+  "project": "planter_box.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/planter_box/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/planter_box/wood_v",
+    "iron": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/planter_box/iron",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/planter_box/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/planter_box/plum",
+    "pink": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/planter_box/pink",
+    "soil": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/planter_box/soil",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/planter_box/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/planter_box/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/planter_box/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/planter_box/wood_v",
+    "iron": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/planter_box/iron",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/planter_box/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/planter_box/plum",
+    "pink": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/planter_box/pink",
+    "soil": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/planter_box/soil",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/planter_box/ivy"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/fixtures/garden/planter_box",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ]
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "project": "ceiling_light.bbmodel",
+  "textures": {
+    "brass": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/ceiling_light/brass",
+    "lamp_shade": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/ceiling_light/lamp_shade",
+    "gold": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/ceiling_light/gold",
+    "iron": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/ceiling_light/iron",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/ceiling_light/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/ceiling_light/brass"
+  },
+  "owned_textures": {
+    "brass": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/ceiling_light/brass",
+    "lamp_shade": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/ceiling_light/lamp_shade",
+    "gold": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/ceiling_light/gold",
+    "iron": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/ceiling_light/iron",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/ceiling_light/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/decor/pieces/lighting/lamps/ceiling_light/off",
+      "item": true
+    },
+    {
+      "model": "block/decor/pieces/lighting/lamps/ceiling_light/on",
+      "emissive": [
+        "glow"
+      ]
+    }
+  ]
+}

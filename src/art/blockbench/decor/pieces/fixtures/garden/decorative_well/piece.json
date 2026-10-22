@@ -1,0 +1,105 @@
+{
+  "project": "decorative_well.bbmodel",
+  "textures": {
+    "stone": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/decorative_well/stone",
+    "pale_stone": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/decorative_well/pale_stone",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/decorative_well/wood_v",
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/decorative_well/wood",
+    "slate": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/decorative_well/slate",
+    "iron": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/decorative_well/iron",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/decorative_well/gold",
+    "cloth": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/decorative_well/cloth",
+    "pink": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/decorative_well/pink",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/decorative_well/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/decorative_well/stone"
+  },
+  "owned_textures": {
+    "stone": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/decorative_well/stone",
+    "pale_stone": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/decorative_well/pale_stone",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/decorative_well/wood_v",
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/decorative_well/wood",
+    "slate": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/decorative_well/slate",
+    "iron": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/decorative_well/iron",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/decorative_well/gold",
+    "cloth": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/decorative_well/cloth",
+    "pink": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/decorative_well/pink",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/garden/decorative_well/ivy"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      48,
+      32
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/fixtures/garden/decorative_well",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        1
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1
+      ],
+      [
+        0,
+        2,
+        0
+      ],
+      [
+        1,
+        2,
+        0
+      ],
+      [
+        0,
+        2,
+        1
+      ],
+      [
+        1,
+        2,
+        1
+      ]
+    ]
+  }
+}

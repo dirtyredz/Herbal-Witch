@@ -1,0 +1,194 @@
+{
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_swing/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_swing/wood_v",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_swing/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_swing/wood"
+  },
+  "elements": [
+    {
+      "from": [
+        12.4,
+        0,
+        11.5
+      ],
+      "to": [
+        15.6,
+        16,
+        14.5
+      ],
+      "rotation": {
+        "angle": -22.5,
+        "axis": "x",
+        "origin": [
+          14,
+          -15.4,
+          13
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            0.4,
+            0.7758,
+            3.6,
+            8.5333
+          ],
+          "texture": "#wood_v"
+        },
+        "south": {
+          "uv": [
+            12.4,
+            0.7758,
+            15.6,
+            8.5333
+          ],
+          "texture": "#wood_v"
+        },
+        "west": {
+          "uv": [
+            11.5,
+            0.7758,
+            14.5,
+            8.5333
+          ],
+          "texture": "#wood_v"
+        },
+        "east": {
+          "uv": [
+            1.5,
+            0.7758,
+            4.5,
+            8.5333
+          ],
+          "texture": "#wood_v"
+        }
+      }
+    },
+    {
+      "from": [
+        12.5,
+        12,
+        0
+      ],
+      "to": [
+        15.5,
+        16,
+        1.5
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            12.5,
+            0,
+            15.5,
+            4
+          ],
+          "texture": "#wood_v"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            1.5,
+            4
+          ],
+          "texture": "#wood_v"
+        },
+        "east": {
+          "uv": [
+            14.5,
+            0,
+            16,
+            4
+          ],
+          "texture": "#wood_v"
+        }
+      }
+    },
+    {
+      "from": [
+        12,
+        12,
+        0
+      ],
+      "to": [
+        16,
+        14,
+        2.5
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            12,
+            0,
+            16,
+            2.5
+          ],
+          "texture": "#wood"
+        },
+        "south": {
+          "uv": [
+            12,
+            2,
+            16,
+            4
+          ],
+          "texture": "#wood"
+        },
+        "west": {
+          "uv": [
+            0,
+            2,
+            2.5,
+            4
+          ],
+          "texture": "#wood"
+        },
+        "east": {
+          "uv": [
+            13.5,
+            2,
+            16,
+            4
+          ],
+          "texture": "#wood",
+          "cullface": "east"
+        }
+      }
+    },
+    {
+      "from": [
+        14.8,
+        14,
+        0
+      ],
+      "to": [
+        14.8,
+        16,
+        1.6
+      ],
+      "faces": {
+        "west": {
+          "uv": [
+            8,
+            2.5714,
+            11,
+            3
+          ],
+          "texture": "#ivy"
+        },
+        "east": {
+          "uv": [
+            5,
+            2.5714,
+            8,
+            3
+          ],
+          "texture": "#ivy"
+        }
+      }
+    }
+  ]
+}

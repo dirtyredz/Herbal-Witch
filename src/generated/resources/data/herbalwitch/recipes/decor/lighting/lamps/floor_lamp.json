@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "item": "minecraft:torch"
+    },
+    "S": {
+      "item": "minecraft:dark_oak_slab"
+    },
+    "T": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    "WRW",
+    " T ",
+    " S "
+  ],
+  "result": {
+    "item": "herbalwitch:decor/lighting/floor_lamp"
+  },
+  "show_notification": true
+}

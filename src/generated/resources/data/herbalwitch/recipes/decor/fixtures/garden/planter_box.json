@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "minecraft:dirt"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    }
+  },
+  "pattern": [
+    "PDP",
+    "PPP"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/fixtures/planter_box"
+  },
+  "show_notification": true
+}

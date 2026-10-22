@@ -1,0 +1,52 @@
+{
+  "project": "wall_sconce.bbmodel",
+  "textures": {
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/wall_sconce/wood_v",
+    "wood": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/wall_sconce/wood",
+    "iron": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/wall_sconce/iron",
+    "brass": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/wall_sconce/brass",
+    "gold": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/wall_sconce/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/wall_sconce/plum",
+    "lantern_glass": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/wall_sconce/lantern_glass",
+    "flame": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/wall_sconce/flame",
+    "linen": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/wall_sconce/linen",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/wall_sconce/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/wall_sconce/wood_v"
+  },
+  "owned_textures": {
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/wall_sconce/wood_v",
+    "wood": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/wall_sconce/wood",
+    "iron": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/wall_sconce/iron",
+    "brass": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/wall_sconce/brass",
+    "gold": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/wall_sconce/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/wall_sconce/plum",
+    "lantern_glass": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/wall_sconce/lantern_glass",
+    "flame": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/wall_sconce/flame",
+    "linen": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/wall_sconce/linen",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/wall_sconce/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/decor/pieces/lighting/lamps/wall_sconce/off",
+      "item": true
+    },
+    {
+      "model": "block/decor/pieces/lighting/lamps/wall_sconce/on",
+      "emissive": [
+        "glow"
+      ]
+    }
+  ]
+}

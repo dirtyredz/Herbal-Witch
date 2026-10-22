@@ -1,0 +1,55 @@
+{
+  "project": "curtain.bbmodel",
+  "textures": {
+    "plum": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/curtain/plum",
+    "pink": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/curtain/pink",
+    "gold": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/curtain/gold",
+    "wood": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/curtain/wood",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/curtain/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/curtain/plum"
+  },
+  "owned_textures": {
+    "plum": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/curtain/plum",
+    "pink": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/curtain/pink",
+    "gold": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/curtain/gold",
+    "wood": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/curtain/wood",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/curtain/ivy"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      32,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/textiles/drapes/curtain",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        0
+      ]
+    ]
+  }
+}

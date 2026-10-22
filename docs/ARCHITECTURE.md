@@ -3,18 +3,48 @@
 How the mod is put together. Code map: [STRUCTURE.md](../STRUCTURE.md).
 Plan of record: milestones 1-12 (docs/FEATURES.md); traceability: docs/catalogue/.
 
-## Current system (0.3.0: Milestones 1-4 plus the art pass; the grimoire is Milestone 4)
+## Current system (0.4.0: Milestones 1-5 plus the art pass; furniture is Milestone 5)
 
 Everything below is server-authoritative; clients get vanilla block updates, menu slots and menu data.
-The one custom channel, `herbalwitch:main` (protocol "1", `platform/network/HerbalWitchNetwork`), carries
-only the grimoire's six bounded messages. Paths are under `src/main/java/io/github/dirtyredz/herbalwitch/`.
+The one custom channel, `herbalwitch:main` (protocol "2", `platform/network/HerbalWitchNetwork`), carries
+only the grimoire's six bounded messages (protocol 2: entry keys may name furniture pages). Paths are
+under `src/main/java/io/github/dirtyredz/herbalwitch/`.
 
-**Decor (`decor/`).** One cottage design: `FinishCatalog` holds a single entry and the five pieces
-(`ArtSpikeCatalog`) register as `decor/<family>/<piece>`, one block and item each. No appearance NBT,
-no block entities, no tints: materials are untinted textures bound directly by authored templates, and
-blockstates use the templates directly. State lives in block properties (`facing`, `lit`). The shelf
-(wall face) and lamp (sturdy centre below) check support on placement and in `updateShape`; the rug is
-vanilla carpet. Only the server toggles the lamp. The 0.2.0 restyle changed models and textures only.
+**Decor (`decor/`).** One cottage design (`FinishCatalog`, a single entry) and 94 pieces described in
+seven family catalogues (`decor/catalog/pieces/`), each a `FurnitureSpec`: id, family, art group, wave,
+behaviour (`FurnitureBehavior`), mount (`MountSpec`: support and cells, `(right, up, depth)` from the
+origin), seats or slots. `FurnitureCatalog.ALL` is what is registered (every wave up to `DELIVERED`).
+- *Composition:* `registry/DecorBlockFactory` builds one class per behaviour: `structure/DecorAssemblyBlock`
+  (static pieces and multi-cell rugs: facing, cell index, shape, support, teardown),
+  `behavior/seating/SeatingBlock`, `behavior/storage/StorageFurnitureBlock`,
+  `behavior/lighting/DecorLightBlock` (lit, light 14 on every cell), `behavior/sleeping/DecorBedBlock`
+  (vanilla `BedBlock` with a `cell` property) and `behavior/openings/DecorDoorBlock` (vanilla `DoorBlock`);
+  the 0.1.0 small rug stays vanilla carpet. Support (`structure/FurnitureSupport`): floor, wall, ceiling,
+  corner or carpet, checked per supported cell and never through an unloaded chunk.
+- *Placement:* `structure/FurniturePlacementItem` asks the block for its origin state (facing, a door's
+  hinge, a bed's direction), resolves the plan (`platform/placement/PlacementResolver`: the anchor cell on
+  the aimed cell; a hanging piece anchors its top cell), checks every cell (`PlacementChecks`: loaded,
+  border, height, replaceable, entities, support, then the build permission) and commits it
+  (`PlacementCommit`, inside Forge's snapshot capture: one multi-place event, deferred neighbour updates,
+  a full restore including the item on cancellation). The client preview (`client/decor/placement/`)
+  draws the same plan as see-through models with a green or red outline.
+- *Teardown:* breaking any cell removes the piece through neighbour updates; only cell 0 has loot (a
+  door's lower half, a bed's foot), so one item drops; creative removes the origin quietly; losing support
+  and explosions take the same path; multi-cell pieces refuse pistons.
+- *Seating:* `behavior/seating`: seats per piece (`SeatLayout`), the aimed seat only, refused when taken
+  or without headroom, an invisible never-saved `SeatEntity` per sitter that removes itself when empty or
+  when its furniture goes; logout and death stand the sitter up (`SeatEvents`).
+- *Storage:* `behavior/storage`: the origin cell's `FurnitureStorageEntity` holds one schema-versioned
+  `FurnitureInventory` (27 or 54 for cabinets, 3/6/9 single-item slots for displays) behind one
+  `FurnitureStorageMenu`; a cabinet's other cells carry an empty entity that hands the item-handler
+  capability to the origin; displays have no automation and sync what they show in their update tag
+  (`display/DisplaySnapshot`, on change only), drawn at authored anchors (`display/DisplaySpec`) by
+  `client/decor/storage/FurnitureDisplayRenderer`. Contents drop once, from the origin. A shelf placed
+  before 0.4.0 creates an empty inventory the first time it is used.
+- *Access:* `structure/FurnitureAccess` lets any non-spectator within reach use furniture (adventure mode
+  included); building permission applies to placement only.
+- *Grimoire:* `grimoire/content/reference/DecorEntries` contributes one public `furniture|` page per piece
+  (blurb, size, mounting, use, seats or slots, crafting; lookalikes link their station).
 
 **Botany (`botany/`).**
 - *State and growth:* a herb is a plant block with age 0..3 (crop or bush form). It grows by vanilla
@@ -179,7 +209,7 @@ showcase, platform/permission, platform/network, compat and grimoire. Later mile
 | `magic/ritual/`, `magic/ward/`, `magic/broom/`, `magic/wand/` | Rituals and altar adapters; home wards; broom entity; one class per wand mode |
 | `shop/{catalog,trade,order,persistence,block}/` | Offers, transactions, orders, persistence, counter/register |
 | `grimoire/{catalog,registry,access,content,knowledge,reading,network}/`, `grimoire/showcase/` (implemented) | Ids and registration; book, research blocks and reader menu (`access/{item,block,menu}`); recipe-backed entries and editorial reload; personal knowledge (`knowledge/{discovery,research,teaching}`); reader sessions and the missing-ingredient allocator (`reading/`); the six messages |
-| `decor/{catalog,registry,block,shape}/`, `decor/<behavior>/` | Furniture: the design and pieces; behaviour families (seating, storage, surfaces, lighting, textiles, fixtures, openings) |
+| `decor/{catalog,registry,showcase}/`, `decor/structure/`, `decor/behavior/{seating,storage,sleeping,openings,lighting}/` | Furniture (implemented, 0.4.0): the design and 94 pieces; shared structure (block, placement, support, shapes); one implementation per behaviour |
 | `client/<feature>/`, `client/compat/<viewer>/` | Screens, HUD, renderers, particles; optional EMI/JEI plugins |
 | `data/client/<feature>/`, `data/server/<feature>/` | Datagen per feature, consuming feature catalogues |
 
@@ -196,7 +226,7 @@ showcase, platform/permission, platform/network, compat and grimoire. Later mile
 | Capture payloads | Overworld `CaptureSavedData` | Opaque token + display summary on the item |
 | Wards | Overworld `WardSavedData` (dimension-qualified) | Owner views; indicators |
 | Shop stock, proceeds, history | `ShopSavedData`; register stores shop id | Public offers; owner-only management |
-| Furniture | Block properties (now); storage furniture's block entity (later) | Vanilla updates; open menus |
+| Furniture | Block properties (facing, cell, lit, bed and door states); the origin cell's storage entity; seat entities (never saved) | Vanilla updates; display contents in the block-entity update tag on change; open menus |
 
 Rules: clients send intent and ids, never inventories, costs or results; servers revalidate sender,
 menu/session, revision, distance, dimension, loaded chunk, ownership, permission, cooldown,

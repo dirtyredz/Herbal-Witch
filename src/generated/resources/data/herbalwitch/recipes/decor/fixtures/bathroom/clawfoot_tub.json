@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:gold_nugget"
+    },
+    "Q": {
+      "item": "minecraft:quartz"
+    }
+  },
+  "pattern": [
+    "Q Q",
+    "QQQ",
+    "G G"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/fixtures/clawfoot_tub"
+  },
+  "show_notification": true
+}

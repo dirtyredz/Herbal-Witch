@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:campfire"
+    },
+    "X": {
+      "item": "minecraft:cobblestone"
+    }
+  },
+  "pattern": [
+    " C ",
+    "XXX"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/fixtures/firepit"
+  },
+  "show_notification": true
+}

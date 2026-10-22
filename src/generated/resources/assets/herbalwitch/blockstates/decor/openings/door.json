@@ -1,0 +1,124 @@
+{
+  "variants": {
+    "facing=east,half=lower,hinge=left,open=false": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/part_0",
+      "y": 90
+    },
+    "facing=east,half=lower,hinge=left,open=true": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/mirrored_0",
+      "y": 180
+    },
+    "facing=east,half=lower,hinge=right,open=false": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/mirrored_0",
+      "y": 90
+    },
+    "facing=east,half=lower,hinge=right,open=true": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/part_0"
+    },
+    "facing=east,half=upper,hinge=left,open=false": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/part_1",
+      "y": 90
+    },
+    "facing=east,half=upper,hinge=left,open=true": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/mirrored_1",
+      "y": 180
+    },
+    "facing=east,half=upper,hinge=right,open=false": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/mirrored_1",
+      "y": 90
+    },
+    "facing=east,half=upper,hinge=right,open=true": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/part_1"
+    },
+    "facing=north,half=lower,hinge=left,open=false": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/part_0"
+    },
+    "facing=north,half=lower,hinge=left,open=true": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/mirrored_0",
+      "y": 90
+    },
+    "facing=north,half=lower,hinge=right,open=false": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/mirrored_0"
+    },
+    "facing=north,half=lower,hinge=right,open=true": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/part_0",
+      "y": 270
+    },
+    "facing=north,half=upper,hinge=left,open=false": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/part_1"
+    },
+    "facing=north,half=upper,hinge=left,open=true": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/mirrored_1",
+      "y": 90
+    },
+    "facing=north,half=upper,hinge=right,open=false": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/mirrored_1"
+    },
+    "facing=north,half=upper,hinge=right,open=true": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/part_1",
+      "y": 270
+    },
+    "facing=south,half=lower,hinge=left,open=false": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/part_0",
+      "y": 180
+    },
+    "facing=south,half=lower,hinge=left,open=true": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/mirrored_0",
+      "y": 270
+    },
+    "facing=south,half=lower,hinge=right,open=false": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/mirrored_0",
+      "y": 180
+    },
+    "facing=south,half=lower,hinge=right,open=true": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/part_0",
+      "y": 90
+    },
+    "facing=south,half=upper,hinge=left,open=false": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/part_1",
+      "y": 180
+    },
+    "facing=south,half=upper,hinge=left,open=true": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/mirrored_1",
+      "y": 270
+    },
+    "facing=south,half=upper,hinge=right,open=false": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/mirrored_1",
+      "y": 180
+    },
+    "facing=south,half=upper,hinge=right,open=true": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/part_1",
+      "y": 90
+    },
+    "facing=west,half=lower,hinge=left,open=false": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/part_0",
+      "y": 270
+    },
+    "facing=west,half=lower,hinge=left,open=true": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/mirrored_0"
+    },
+    "facing=west,half=lower,hinge=right,open=false": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/mirrored_0",
+      "y": 270
+    },
+    "facing=west,half=lower,hinge=right,open=true": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/part_0",
+      "y": 180
+    },
+    "facing=west,half=upper,hinge=left,open=false": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/part_1",
+      "y": 270
+    },
+    "facing=west,half=upper,hinge=left,open=true": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/mirrored_1"
+    },
+    "facing=west,half=upper,hinge=right,open=false": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/mirrored_1",
+      "y": 270
+    },
+    "facing=west,half=upper,hinge=right,open=true": {
+      "model": "herbalwitch:block/decor/pieces/openings/frames/door/part_1",
+      "y": 180
+    }
+  }
+}

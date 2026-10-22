@@ -1,0 +1,402 @@
+{
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "stone": "herbalwitch:block/pieces/decor/pieces/openings/frames/archway/stone",
+    "pale_stone": "herbalwitch:block/pieces/decor/pieces/openings/frames/archway/pale_stone",
+    "gold": "herbalwitch:block/pieces/decor/pieces/openings/frames/archway/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/openings/frames/archway/plum",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/openings/frames/archway/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/openings/frames/archway/stone"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        2
+      ],
+      "to": [
+        14,
+        3,
+        14
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            0,
+            2,
+            14,
+            14
+          ],
+          "texture": "#pale_stone",
+          "cullface": "down"
+        },
+        "up": {
+          "uv": [
+            0,
+            2,
+            14,
+            14
+          ],
+          "texture": "#pale_stone"
+        },
+        "north": {
+          "uv": [
+            2,
+            13,
+            16,
+            16
+          ],
+          "texture": "#pale_stone"
+        },
+        "south": {
+          "uv": [
+            0,
+            13,
+            14,
+            16
+          ],
+          "texture": "#pale_stone"
+        },
+        "west": {
+          "uv": [
+            2,
+            13,
+            14,
+            16
+          ],
+          "texture": "#pale_stone",
+          "cullface": "west"
+        },
+        "east": {
+          "uv": [
+            2,
+            13,
+            14,
+            16
+          ],
+          "texture": "#pale_stone"
+        }
+      }
+    },
+    {
+      "from": [
+        0.3,
+        3,
+        3.5
+      ],
+      "to": [
+        12.7,
+        16,
+        12.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            3.3,
+            0,
+            15.7,
+            13
+          ],
+          "texture": "#stone"
+        },
+        "south": {
+          "uv": [
+            0.3,
+            0,
+            12.7,
+            13
+          ],
+          "texture": "#stone"
+        },
+        "west": {
+          "uv": [
+            3.5,
+            0,
+            12.5,
+            13
+          ],
+          "texture": "#stone"
+        },
+        "east": {
+          "uv": [
+            3.5,
+            0,
+            12.5,
+            13
+          ],
+          "texture": "#stone"
+        }
+      }
+    },
+    {
+      "from": [
+        0.15,
+        4,
+        3.35
+      ],
+      "to": [
+        12.85,
+        4.8,
+        12.65
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            0.15,
+            3.35,
+            12.85,
+            12.65
+          ],
+          "texture": "#gold"
+        },
+        "north": {
+          "uv": [
+            3.15,
+            11.2,
+            15.85,
+            12
+          ],
+          "texture": "#gold"
+        },
+        "south": {
+          "uv": [
+            0.15,
+            11.2,
+            12.85,
+            12
+          ],
+          "texture": "#gold"
+        },
+        "west": {
+          "uv": [
+            3.35,
+            11.2,
+            12.65,
+            12
+          ],
+          "texture": "#gold"
+        },
+        "east": {
+          "uv": [
+            3.35,
+            11.2,
+            12.65,
+            12
+          ],
+          "texture": "#gold"
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        15.4,
+        3.2
+      ],
+      "to": [
+        13,
+        16,
+        12.8
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            0,
+            3.2,
+            13,
+            12.8
+          ],
+          "texture": "#pale_stone"
+        },
+        "north": {
+          "uv": [
+            3,
+            0,
+            16,
+            0.6
+          ],
+          "texture": "#pale_stone"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            13,
+            0.6
+          ],
+          "texture": "#pale_stone"
+        },
+        "west": {
+          "uv": [
+            3.2,
+            0,
+            12.8,
+            0.6
+          ],
+          "texture": "#pale_stone",
+          "cullface": "west"
+        },
+        "east": {
+          "uv": [
+            3.2,
+            0,
+            12.8,
+            0.6
+          ],
+          "texture": "#pale_stone"
+        }
+      }
+    },
+    {
+      "from": [
+        4,
+        9,
+        3.3
+      ],
+      "to": [
+        9,
+        16,
+        3.5
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            4,
+            12.5,
+            9,
+            12.7
+          ],
+          "texture": "#plum"
+        },
+        "north": {
+          "uv": [
+            7,
+            0,
+            12,
+            7
+          ],
+          "texture": "#plum"
+        },
+        "west": {
+          "uv": [
+            3.3,
+            0,
+            3.5,
+            7
+          ],
+          "texture": "#plum"
+        },
+        "east": {
+          "uv": [
+            12.5,
+            0,
+            12.7,
+            7
+          ],
+          "texture": "#plum"
+        }
+      }
+    },
+    {
+      "from": [
+        9.5,
+        5,
+        3
+      ],
+      "to": [
+        12.5,
+        16,
+        3
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            4.48,
+            4,
+            8
+          ],
+          "texture": "#ivy"
+        },
+        "south": {
+          "uv": [
+            0,
+            4.48,
+            4,
+            8
+          ],
+          "texture": "#ivy"
+        }
+      }
+    },
+    {
+      "from": [
+        9.6,
+        4.6,
+        2.6
+      ],
+      "to": [
+        12,
+        6.4,
+        3.4
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            2,
+            2,
+            6,
+            6
+          ],
+          "texture": "#ivy"
+        },
+        "up": {
+          "uv": [
+            2,
+            2,
+            6,
+            6
+          ],
+          "texture": "#ivy"
+        },
+        "north": {
+          "uv": [
+            2,
+            2,
+            6,
+            6
+          ],
+          "texture": "#ivy"
+        },
+        "south": {
+          "uv": [
+            2,
+            2,
+            6,
+            6
+          ],
+          "texture": "#ivy"
+        },
+        "west": {
+          "uv": [
+            2,
+            2,
+            6,
+            6
+          ],
+          "texture": "#ivy"
+        },
+        "east": {
+          "uv": [
+            2,
+            2,
+            6,
+            6
+          ],
+          "texture": "#ivy"
+        }
+      }
+    }
+  ]
+}

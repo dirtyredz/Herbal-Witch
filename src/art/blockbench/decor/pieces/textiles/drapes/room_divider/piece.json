@@ -1,0 +1,67 @@
+{
+  "project": "room_divider.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/room_divider/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/room_divider/wood_v",
+    "plum": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/room_divider/plum",
+    "pink": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/room_divider/pink",
+    "gold": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/room_divider/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/room_divider/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/room_divider/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/room_divider/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/room_divider/wood_v",
+    "plum": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/room_divider/plum",
+    "pink": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/room_divider/pink",
+    "gold": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/room_divider/gold",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/textiles/drapes/room_divider/ivy"
+  },
+  "bounds": {
+    "min": [
+      -32,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      32,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/textiles/drapes/room_divider",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        0
+      ],
+      [
+        2,
+        1,
+        0
+      ]
+    ]
+  }
+}

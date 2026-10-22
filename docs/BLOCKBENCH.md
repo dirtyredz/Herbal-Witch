@@ -8,9 +8,35 @@ docs/DECISIONS.md (0.2.0-dev.6); traps: docs/GOTCHAS.md.
 |---|---|
 | Tea kettle, infusion pot, mortar and pestle | `src/art/blockbench/stations/{kettle,infusion_pot,mortar}/` |
 | Drying rack, hearth, Witch's Stove (multiblocks) | `src/art/blockbench/stations/{drying_rack,hearth,stove}/` |
-| Armchair, apothecary chest (`apothecary_counter`), wall shelf, table lamp, small rug | `src/art/blockbench/decor/<piece>/` |
+| Armchair, apothecary chest (`apothecary_counter`), wall shelf, table lamp, small rug (the 0.1.0 pieces) | `src/art/blockbench/decor/<piece>/` |
+| The 89 pieces added in 0.4.0 (first drafts) | `src/art/blockbench/decor/pieces/<family>/<group>/<piece>/` (see below) |
 | Oil lantern | `src/art/blockbench/preparations/oil_lantern/` |
 | Grimoire Stand, Witch's Bookshelf (first drafts by an agent, for you to refine) | `src/art/blockbench/grimoire/{stand,bookshelf}/` |
+
+### The 0.4.0 furniture projects
+
+The 89 pieces added in 0.4.0 are agent first drafts for you to refine. Each is a project at
+`src/art/blockbench/decor/pieces/<family>/<group>/<piece>/` (for example
+`decor/pieces/seating/chairs/dining_chair/`); the family, group and piece come from the catalogue
+(docs/catalogue/decor.md lists every path). Those with several cells are authored whole and cut by the
+compiler, like the station multiblocks, using a 3D cell convention:
+
+- **Cell 0** is x 0..16, y 0..16, z 0..16. The next cell to the viewer's **right** is at **x - 16**, **up**
+  is **y + 16**, and **back** is **z + 16**. The piece faces north as drawn.
+- `piece.json` `multiblock.cells` lists the cells as `[right, up, depth]` in the catalogue's order, the
+  same order the Java mount uses.
+- **Variants:** a light with a `glow` group has a `lit_<n>` model per cell (the glow group shows only
+  while lit); the door has `mirrored_<n>`. Author the door **closed and left-hinged**, its leaf at z 13..16;
+  the compiler writes the `mirrored_<n>` variant for the other hinge.
+- **Item normalisation:** an assembly reaching beyond -16..32 in any direction is moved inside the item
+  frame and its display translations corrected, so large pieces fit the hand, GUI and ground.
+- **Display shelves keep empty boards.** Where each item stands is in the Java `DisplaySpec` (anchors per
+  slot on a board), not in the model, so moving or resizing a board needs an agent to move its anchors.
+  Do not add modelled items to a shelf; the game draws the real ones.
+- **Collision lives in Java** (the `Shapes` classes) and does not follow the model; a reshaped piece needs
+  an agent to update it.
+- Seats follow the same convention: the sitter's position per seat is in Java `SeatLayout`, in the same
+  north-facing pixels.
 
 Each folder holds `<piece>.bbmodel` (what you edit) and `piece.json` (the Minecraft side: output
 files, texture bindings, which groups glow; edited by agents, not in Blockbench). Herbs, herb beds

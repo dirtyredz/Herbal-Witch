@@ -1,0 +1,47 @@
+{
+  "project": "ladder_shelf.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/shelves/ladder_shelf/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/shelves/ladder_shelf/wood_v",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/shelves/ladder_shelf/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/shelves/ladder_shelf/gold",
+    "pink": "herbalwitch:block/pieces/decor/pieces/storage/shelves/ladder_shelf/pink",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/shelves/ladder_shelf/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/storage/shelves/ladder_shelf/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/storage/shelves/ladder_shelf/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/storage/shelves/ladder_shelf/wood_v",
+    "plum": "herbalwitch:block/pieces/decor/pieces/storage/shelves/ladder_shelf/plum",
+    "gold": "herbalwitch:block/pieces/decor/pieces/storage/shelves/ladder_shelf/gold",
+    "pink": "herbalwitch:block/pieces/decor/pieces/storage/shelves/ladder_shelf/pink",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/storage/shelves/ladder_shelf/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      32,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/storage/shelves/ladder_shelf",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ]
+    ]
+  }
+}

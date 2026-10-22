@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "minecraft:wool_carpets"
+    },
+    "S": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "CSC"
+  ],
+  "result": {
+    "item": "herbalwitch:decor/textiles/medium_rug"
+  },
+  "show_notification": true
+}

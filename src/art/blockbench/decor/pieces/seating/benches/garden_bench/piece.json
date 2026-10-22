@@ -1,0 +1,47 @@
+{
+  "project": "garden_bench.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_bench/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_bench/wood_v",
+    "iron": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_bench/iron",
+    "gold": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_bench/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_bench/plum",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_bench/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_bench/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_bench/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_bench/wood_v",
+    "iron": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_bench/iron",
+    "gold": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_bench/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_bench/plum",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/seating/benches/garden_bench/ivy"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/seating/benches/garden_bench",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ]
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "project": "hanging_lantern.bbmodel",
+  "textures": {
+    "iron": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/hanging_lantern/iron",
+    "brass": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/hanging_lantern/brass",
+    "gold": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/hanging_lantern/gold",
+    "lantern_glass": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/hanging_lantern/lantern_glass",
+    "flame": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/hanging_lantern/flame",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/hanging_lantern/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/hanging_lantern/iron"
+  },
+  "owned_textures": {
+    "iron": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/hanging_lantern/iron",
+    "brass": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/hanging_lantern/brass",
+    "gold": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/hanging_lantern/gold",
+    "lantern_glass": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/hanging_lantern/lantern_glass",
+    "flame": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/hanging_lantern/flame",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/hanging_lantern/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/decor/pieces/lighting/lamps/hanging_lantern/off",
+      "item": true
+    },
+    {
+      "model": "block/decor/pieces/lighting/lamps/hanging_lantern/on",
+      "emissive": [
+        "glow"
+      ]
+    }
+  ]
+}

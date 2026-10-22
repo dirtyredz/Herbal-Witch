@@ -1,0 +1,42 @@
+{
+  "project": "toilet.bbmodel",
+  "textures": {
+    "enamel": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/toilet/enamel",
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/toilet/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/toilet/wood_v",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/toilet/gold",
+    "brass": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/toilet/brass",
+    "iron": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/toilet/iron",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/toilet/plum",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/toilet/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/toilet/enamel"
+  },
+  "owned_textures": {
+    "enamel": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/toilet/enamel",
+    "wood": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/toilet/wood",
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/toilet/wood_v",
+    "gold": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/toilet/gold",
+    "brass": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/toilet/brass",
+    "iron": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/toilet/iron",
+    "plum": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/toilet/plum",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/fixtures/bathroom/toilet/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/decor/pieces/fixtures/bathroom/toilet/base",
+      "item": true
+    }
+  ]
+}

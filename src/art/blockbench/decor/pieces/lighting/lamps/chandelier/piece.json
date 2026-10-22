@@ -1,0 +1,65 @@
+{
+  "project": "chandelier.bbmodel",
+  "textures": {
+    "iron": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/chandelier/iron",
+    "brass": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/chandelier/brass",
+    "gold": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/chandelier/gold",
+    "flame": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/chandelier/flame",
+    "linen": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/chandelier/linen",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/chandelier/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/chandelier/iron"
+  },
+  "owned_textures": {
+    "iron": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/chandelier/iron",
+    "brass": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/chandelier/brass",
+    "gold": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/chandelier/gold",
+    "flame": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/chandelier/flame",
+    "linen": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/chandelier/linen",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/chandelier/ivy"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      32
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/lighting/lamps/chandelier",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        1
+      ]
+    ],
+    "variants": [
+      {
+        "name": "lit",
+        "emissive": [
+          "glow"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "project": "post_lantern.bbmodel",
+  "textures": {
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/post_lantern/wood_v",
+    "stone": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/post_lantern/stone",
+    "pale_stone": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/post_lantern/pale_stone",
+    "iron": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/post_lantern/iron",
+    "brass": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/post_lantern/brass",
+    "gold": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/post_lantern/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/post_lantern/plum",
+    "lantern_glass": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/post_lantern/lantern_glass",
+    "flame": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/post_lantern/flame",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/post_lantern/ivy",
+    "particle": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/post_lantern/wood_v"
+  },
+  "owned_textures": {
+    "wood_v": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/post_lantern/wood_v",
+    "stone": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/post_lantern/stone",
+    "pale_stone": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/post_lantern/pale_stone",
+    "iron": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/post_lantern/iron",
+    "brass": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/post_lantern/brass",
+    "gold": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/post_lantern/gold",
+    "plum": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/post_lantern/plum",
+    "lantern_glass": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/post_lantern/lantern_glass",
+    "flame": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/post_lantern/flame",
+    "ivy": "herbalwitch:block/pieces/decor/pieces/lighting/lamps/post_lantern/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      48,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/decor/pieces/lighting/lamps/post_lantern",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        2,
+        0
+      ]
+    ],
+    "variants": [
+      {
+        "name": "lit",
+        "emissive": [
+          "glow"
+        ]
+      }
+    ]
+  }
+}
