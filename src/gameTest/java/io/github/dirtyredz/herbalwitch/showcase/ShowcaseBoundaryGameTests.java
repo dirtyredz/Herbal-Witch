@@ -42,7 +42,7 @@ public final class ShowcaseBoundaryGameTests {
         return ShowcasePlan.of(List.of(ShowcaseRegistry.byId("garden").orElseThrow()));
     }
 
-    @GameTest(template = SECTION)
+    @GameTest(template = SECTION, batch = "herbalwitch_showcase_writes_stay_inside_the_planned_box")
     public static void writesStayInsideThePlannedBox(GameTestHelper helper) throws Exception {
         stoneFloor(helper, SECTION_X, SECTION_Z);
         ShowcasePlan plan = garden();
@@ -57,7 +57,7 @@ public final class ShowcaseBoundaryGameTests {
         helper.succeed();
     }
 
-    @GameTest(template = SECTION)
+    @GameTest(template = SECTION, batch = "herbalwitch_showcase_an_occupied_plot_is_refused_without_changes")
     public static void anOccupiedPlotIsRefusedWithoutChanges(GameTestHelper helper) throws Exception {
         stoneFloor(helper, SECTION_X, SECTION_Z);
         ServerPlayer op = standing(helper, "op_twice", GameType.SURVIVAL);
@@ -78,7 +78,7 @@ public final class ShowcaseBoundaryGameTests {
         helper.succeed();
     }
 
-    @GameTest(template = SECTION)
+    @GameTest(template = SECTION, batch = "herbalwitch_showcase_a_chest_refuses_before_any_write")
     public static void aChestRefusesBeforeAnyWrite(GameTestHelper helper) {
         stoneFloor(helper, SECTION_X, SECTION_Z);
         ServerPlayer op = standing(helper, "op_chest", GameType.SURVIVAL);
@@ -91,7 +91,7 @@ public final class ShowcaseBoundaryGameTests {
     }
 
     /** Natural terrain: no flat floor, holes, water, plants, leaves and logs in the box. */
-    @GameTest(template = SECTION)
+    @GameTest(template = SECTION, batch = "herbalwitch_showcase_uneven_natural_terrain_is_replaced_by_the_showcase_floor")
     public static void unevenNaturalTerrainIsReplacedByTheShowcaseFloor(GameTestHelper helper) {
         stoneFloor(helper, SECTION_X, SECTION_Z);
         ServerPlayer op = standing(helper, "op_rough", GameType.SURVIVAL);
@@ -113,7 +113,7 @@ public final class ShowcaseBoundaryGameTests {
         helper.succeed();
     }
 
-    @GameTest(template = SECTION)
+    @GameTest(template = SECTION, batch = "herbalwitch_showcase_outside_the_world_or_unloaded_is_refused")
     public static void outsideTheWorldOrUnloadedIsRefused(GameTestHelper helper) throws Exception {
         ServerLevel level = helper.getLevel();
         ServerPlayer op = standing(helper, "op_far", GameType.SURVIVAL);

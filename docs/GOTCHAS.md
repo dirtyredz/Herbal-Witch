@@ -241,6 +241,10 @@ Discovery forms resolve lazily after registration, in seeds/fresh/bundle/powder 
   hearth) is wider than the gap between GameTest plots, so a charged ward in one test would reach the
   neighbouring plots. Those tests declare `batch = "herbalwitch_ward_*"`; a new test that charges a ward
   joins one of those batches instead of the default one.
+- **Showcase GameTests each run in their own batch.** The command builds a whole plot (the full showcase a
+  very large one) in a single tick, which starves the shared default batch ("Can't keep up") and lets
+  falling blocks and drifting items from neighbouring plots reach it. Every showcase test declares
+  `batch = "herbalwitch_showcase_<test>"`; a new one does the same instead of joining the default batch.
 - **Witch recipes reserve nothing until Start.** A magical process never reserves or runs on insert; the
   inputs stay free to move until a witch presses Start, and only then are they reserved for the batch. A
   test that expects a running job presses Start through the menu button first, and a non-witch's Start

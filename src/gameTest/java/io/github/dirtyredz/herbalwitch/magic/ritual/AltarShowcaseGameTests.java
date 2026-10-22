@@ -40,7 +40,7 @@ public final class AltarShowcaseGameTests {
     private AltarShowcaseGameTests() {
     }
 
-    @GameTest(template = SECTION)
+    @GameTest(template = SECTION, batch = "herbalwitch_showcase_the_altar_section_builds_a_working_idle_altar_and_supplies")
     public static void theAltarSectionBuildsAWorkingIdleAltarAndSupplies(GameTestHelper helper) {
         stoneFloor(helper, SECTION_X, SECTION_Z);
         helper.getLevel().getEntitiesOfClass(ItemEntity.class, new AABB(helper.absolutePos(BlockPos.ZERO),

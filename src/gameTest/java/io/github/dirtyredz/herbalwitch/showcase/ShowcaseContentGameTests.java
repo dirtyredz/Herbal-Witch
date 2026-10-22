@@ -55,7 +55,7 @@ public final class ShowcaseContentGameTests {
     private ShowcaseContentGameTests() {
     }
 
-    @GameTest(template = FULL, timeoutTicks = 400)
+    @GameTest(template = FULL, timeoutTicks = 400, batch = "herbalwitch_showcase_the_full_showcase_holds_every_registered_block")
     public static void theFullShowcaseHoldsEveryRegisteredBlock(GameTestHelper helper) throws Exception {
         stoneFloor(helper, FULL_X, FULL_Z);
         var op = standing(helper, "op_full", GameType.CREATIVE);

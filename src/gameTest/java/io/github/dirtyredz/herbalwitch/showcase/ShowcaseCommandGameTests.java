@@ -33,7 +33,7 @@ public final class ShowcaseCommandGameTests {
     private ShowcaseCommandGameTests() {
     }
 
-    @GameTest(template = SECTION)
+    @GameTest(template = SECTION, batch = "herbalwitch_showcase_an_operator_builds_a_section")
     public static void anOperatorBuildsASection(GameTestHelper helper) {
         stoneFloor(helper, SECTION_X, SECTION_Z);
         ServerPlayer op = standing(helper, "op", GameType.SURVIVAL);
@@ -49,7 +49,7 @@ public final class ShowcaseCommandGameTests {
         helper.succeed();
     }
 
-    @GameTest(template = SECTION)
+    @GameTest(template = SECTION, batch = "herbalwitch_showcase_non_operators_are_refused_in_survival_and_creative")
     public static void nonOperatorsAreRefusedInSurvivalAndCreative(GameTestHelper helper) {
         stoneFloor(helper, SECTION_X, SECTION_Z);
         for (GameType mode : new GameType[] {GameType.SURVIVAL, GameType.CREATIVE}) {
@@ -61,7 +61,7 @@ public final class ShowcaseCommandGameTests {
         helper.succeed();
     }
 
-    @GameTest(template = SECTION)
+    @GameTest(template = SECTION, batch = "herbalwitch_showcase_the_console_is_refused")
     public static void theConsoleIsRefused(GameTestHelper helper) {
         stoneFloor(helper, SECTION_X, SECTION_Z);
         int result = run(helper, helper.getLevel().getServer().createCommandSourceStack(), "herbalwitch showcase garden");
@@ -70,7 +70,7 @@ public final class ShowcaseCommandGameTests {
         helper.succeed();
     }
 
-    @GameTest(template = SECTION)
+    @GameTest(template = SECTION, batch = "herbalwitch_showcase_an_unknown_section_is_refused")
     public static void anUnknownSectionIsRefused(GameTestHelper helper) {
         stoneFloor(helper, SECTION_X, SECTION_Z);
         ServerPlayer op = standing(helper, "op_unknown", GameType.SURVIVAL);
