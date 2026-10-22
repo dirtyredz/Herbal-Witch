@@ -3,10 +3,11 @@
 How the mod is put together. Code map: [STRUCTURE.md](../STRUCTURE.md).
 Plan of record: milestones 1-12 (docs/FEATURES.md); traceability: docs/catalogue/.
 
-## Current system (0.2.0-dev.6: Milestones 1-3 plus the art pass and its review rounds through dev.6)
+## Current system (0.3.0: Milestones 1-4 plus the art pass; the grimoire is Milestone 4)
 
 Everything below is server-authoritative; clients get vanilla block updates, menu slots and menu data.
-No custom network channel exists. Paths are under `src/main/java/io/github/dirtyredz/herbalwitch/`.
+The one custom channel, `herbalwitch:main` (protocol "1", `platform/network/HerbalWitchNetwork`), carries
+only the grimoire's six bounded messages. Paths are under `src/main/java/io/github/dirtyredz/herbalwitch/`.
 
 **Decor (`decor/`).** One cottage design: `FinishCatalog` holds a single entry and the five pieces
 (`ArtSpikeCatalog`) register as `decor/<family>/<piece>`, one block and item each. No appearance NBT,
@@ -42,8 +43,9 @@ Connection is visual only; moisture and enrichment are unchanged. The blockstate
 `models/block/botany/garden/parts/{wood,soil,moist}`.
 
 **Art pipeline.** Sources: procedural textures (`tools/art/`), procedural models (`tools/models/`:
-herbs, herb beds, hung bundles) and Blockbench projects (`src/art/blockbench/`: stations, furniture,
-oil lantern; a `.bbmodel` plus a `piece.json` each). Three producers (`generate-textures.mjs`,
+herbs, herb beds, hung bundles; the grimoire's book sprite and reader atlas in `tools/art/grimoire/`) and
+Blockbench projects (`src/art/blockbench/`: stations, furniture, oil lantern, the grimoire stand and
+bookshelf; a `.bbmodel` plus a `piece.json` each). Three producers (`generate-textures.mjs`,
 `generate-models.mjs`, `compile-blockbench.mjs`) each own disjoint paths, enforced by
 `tools/art/output.mjs` (write only declared paths, clean only own directories) and each has `--check`.
 They write the Minecraft assets under `src/main/resources`; Java datagen then adds blockstates and item
@@ -108,10 +110,62 @@ compile dependency) and installs the purity carrier; Farmer's Delight is tags on
 (`data/server/compat`); EMI and JEI plugins (`client/compat`) are compile-only against their APIs and
 describe recipes from the same `ProcessRecipeDescription`. Adapters load only when their mod is present.
 
+**Grimoire (`grimoire/`, Milestone 4).** A recipe-backed book of herbs, stations and processing recipes,
+with each player's own discoveries marked. Advisory only: no crafting, processing, automation or viewer
+reads it as permission, and later magic must not either.
+- *Content:* `GrimoireContent` is an immutable index of `GrimoireEntry` values keyed by `EntryKey` (kind
+  GUIDE/HERB/STATION/RECIPE plus a resource id, serialised `kind|ns:path`). Entries come from registered
+  `GrimoireContentSource`s (`GuideEntries`, `StationEntries`, `HerbEntries`, `StationRecipeEntries`), which run
+  on both sides from the same inputs, so server and client build the same index. Later milestones add a
+  source for their own entries. Recipe pages come from the recipes themselves and never depend on editorial
+  data; `ProcessingCategories` (`stations/description`) is the one recipe-type-to-station mapping shared with
+  EMI and JEI.
+- *Editorial data:* `data/<ns>/grimoire_entries/**.json` (`GrimoireDefinitionLoader`) holds prose, grouping,
+  links and hints only; mechanics fields are rejected, the whole set is validated, an invalid reload keeps
+  the previous set, and guide links are checked within the set.
+- *Build and reload ordering:* `ServerGrimoireContent` rebuilds with a new revision whenever the recipe
+  manager, the tag generation, the editorial set or the herb conditions are a different instance than at the
+  last build, checked on access. Listeners hear each revision: `ContentSync` (on datapack sync it sends the
+  editorial definitions and the server's herb conditions; recipe bodies come from vanilla recipe sync) and
+  teaching, which cancels invitations whose recipe vanished or changed. Herb conditions are server-only, so clients use the synced summaries.
+- *Discoveries:* a personal capability (`herbalwitch:grimoire/discoveries`, server players only), stored by
+  `DiscoveryCodec` (schema 1 `{schema, keys}`; empty legacy data migrates; unknown kinds are kept; an
+  unsupported schema, malformed data or more than 4096 keys is preserved untouched and read-only).
+  `DiscoveryEvents` copies it on clone (death, End return) and sends private snapshots on login, respawn and
+  dimension change; observation runs at login, on opening a reader and every 20 ticks, skipped when
+  inventory and content are unchanged. `DiscoveryService` holds the policy: any herb form carried discovers
+  the herb; a carried result discovers the recipe; so do all primary ingredients being familiar (a carried stack
+  passes the ingredient, or a known herb's registered form does). Main inventory and offhand only. The
+  service is the seam later features use to grant discoveries; the grimoire capability stays authoritative
+  even when witch status (Milestone 6) arrives.
+- *Research and teaching:* `ResearchService` (`ResearchEligibility`, `Familiarity`) at a stand or bookshelf:
+  one familiar primary ingredient, instant, free, nothing consumed (no-primary recipes use base or package).
+  `TeachingService` is pure rules with an injected clock and world (`TeachingWorld` is the server adapter and
+  the GameTest seam): 8 blocks, same dimension, alive, not spectating; 600-tick expiry; one outgoing per
+  teacher and one incoming per recipient; 100-tick cooldown; duplicates never refresh. Acceptance names the
+  teacher and recipe and revalidates reader, range, teacher session and knowledge and the recipe
+  fingerprint, then grants that one recipe. `TeachingEvents` holds one transient service per server and
+  cancels on logout, death, dimension change, expiry, a closed teacher reader and content reload.
+  Invitations start only from a research block reader.
+- *Access and sessions:* the book is a stack of one with no knowledge NBT. `ResearchAccessBlock` is one cell with
+  horizontal facing, needs support below, has no block entity and no storage. `GrimoireMenu` has zero slots
+  and a server-issued session nonce; `GrimoireAccess` decides validity (book: a grimoire in inventory or
+  offhand; block: still there, loaded, within 8 blocks, `mayInteract`) and vanilla closes the menu when it
+  fails. `ReaderService` validates menu id, nonce, content revision and access before any change, computes
+  missing counts against main inventory and offhand at most every 5 ticks and sends only changes
+  (`IngredientRequirements` uses Forge `Ingredient.test`; `MissingIngredients` is a pure, deterministic allocator).
+- *Network:* six bounded messages through `GrimoirePackets` (`ReaderRequest`, `TeachingRequest` to the server;
+  `ReaderUpdate`, `DiscoveryUpdate`, `ContentUpdate`, `TeachingUpdate` to the client) with fixed directions;
+  handlers are injected, and the client handler is installed by client code. `PayloadBounds` caps chunks at
+  64 records and 24 KiB and the total at 4096; `ChunkAssembly` applies a snapshot atomically.
+- *Client:* `client/grimoire` is the two-page `GrimoireScreen`, `GrimoireView`, widgets, and the
+  `StationGrimoirePanel` button on station and hearth screens (station menus are untouched). Client state
+  is cleared on disconnect and rebuilt on recipe and tag updates.
+
 ## Whole-mod module map (plan section 2)
 
 Paths under `src/main/java/io/github/dirtyredz/herbalwitch/`. Implemented so far: decor, botany, stations, brewing,
-showcase, platform/permission and compat. Later milestones create the rest when needed.
+showcase, platform/permission, platform/network, compat and grimoire. Later milestones create the rest when needed.
 
 | Home | Responsibility |
 |---|---|
@@ -124,7 +178,7 @@ showcase, platform/permission and compat. Later milestones create the rest when 
 | `companions/animals/{trust,capture,taming}/`, `companions/familiars/{bond,command,ability,home,recovery,species}/` | Animal relationships; familiar bonds without one god manager |
 | `magic/ritual/`, `magic/ward/`, `magic/broom/`, `magic/wand/` | Rituals and altar adapters; home wards; broom entity; one class per wand mode |
 | `shop/{catalog,trade,order,persistence,block}/` | Offers, transactions, orders, persistence, counter/register |
-| `grimoire/{discovery,content,teaching}/` | Discoveries, recipe-backed entries, consenting teaching |
+| `grimoire/{catalog,registry,access,content,knowledge,reading,network}/`, `grimoire/showcase/` (implemented) | Ids and registration; book, research blocks and reader menu (`access/{item,block,menu}`); recipe-backed entries and editorial reload; personal knowledge (`knowledge/{discovery,research,teaching}`); reader sessions and the missing-ingredient allocator (`reading/`); the six messages |
 | `decor/{catalog,registry,block,shape}/`, `decor/<behavior>/` | Furniture: the design and pieces; behaviour families (seating, storage, surfaces, lighting, textiles, fixtures, openings) |
 | `client/<feature>/`, `client/compat/<viewer>/` | Screens, HUD, renderers, particles; optional EMI/JEI plugins |
 | `data/client/<feature>/`, `data/server/<feature>/` | Datagen per feature, consuming feature catalogues |
@@ -133,7 +187,8 @@ showcase, platform/permission and compat. Later milestones create the rest when 
 
 | State | Authoritative home | Client sees |
 |---|---|---|
-| Witch status, energy, practice, discoveries | Versioned player capability | Private snapshot on login/respawn/dimension change; bounded deltas |
+| Discoveries (implemented, Milestone 4: `herbalwitch:grimoire/discoveries`, schema 1) | Versioned player capability, server players only | Private snapshot on login/respawn/dimension change; bounded deltas |
+| Witch status, energy, practice | Versioned player capability (Milestone 6) | Private snapshot on login/respawn/dimension change; bounded deltas |
 | Station inventories and progress (implemented) | Station block entity | Vanilla menu slots/data |
 | Founding eligibility | Overworld `FoundingSavedData` | Eligibility/result only |
 | Animal trust/ownership | Entity capability (vanilla ownership kept) | Interacting player, trackers |

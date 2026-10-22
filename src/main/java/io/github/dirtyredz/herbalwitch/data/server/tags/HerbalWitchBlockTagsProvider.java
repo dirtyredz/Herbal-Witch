@@ -4,6 +4,7 @@ import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.data.server.botany.BotanyTagContributions;
 import io.github.dirtyredz.herbalwitch.data.server.compat.CompatibilityTagContributions;
 import io.github.dirtyredz.herbalwitch.data.server.decor.DecorBlockTags;
+import io.github.dirtyredz.herbalwitch.data.server.grimoire.GrimoireTagContributions;
 import io.github.dirtyredz.herbalwitch.data.server.preparations.PreparationTagContributions;
 import io.github.dirtyredz.herbalwitch.data.server.stations.StationTagContributions;
 import net.minecraft.core.HolderLookup;
@@ -45,5 +46,6 @@ public class HerbalWitchBlockTagsProvider extends BlockTagsProvider {
         StationTagContributions.blocks(sink);
         PreparationTagContributions.blocks(sink);
         CompatibilityTagContributions.blocks(sink);
+        GrimoireTagContributions.blocks(sink);
     }
 }

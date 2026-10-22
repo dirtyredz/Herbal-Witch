@@ -3,6 +3,7 @@ package io.github.dirtyredz.herbalwitch.data;
 import com.google.gson.JsonObject;
 import io.github.dirtyredz.herbalwitch.data.botany.BotanyManifest;
 import io.github.dirtyredz.herbalwitch.data.decor.DecorManifest;
+import io.github.dirtyredz.herbalwitch.data.grimoire.GrimoireManifest;
 import io.github.dirtyredz.herbalwitch.data.preparations.PreparationManifest;
 import io.github.dirtyredz.herbalwitch.data.showcase.ShowcaseManifest;
 import io.github.dirtyredz.herbalwitch.data.stations.StationManifest;
@@ -46,7 +47,7 @@ class GeneratedResourcesTest {
     static Map<String, String> expectedLang() {
         Map<String, String> lang = new LinkedHashMap<>();
         for (Map<String, String> part : List.of(DecorManifest.lang(), BotanyManifest.lang(), StationManifest.lang(),
-                PreparationManifest.lang(), ShowcaseManifest.lang())) {
+                PreparationManifest.lang(), ShowcaseManifest.lang(), GrimoireManifest.lang())) {
             part.forEach((key, value) -> {
                 assertFalse(lang.containsKey(key), "two features claim " + key);
                 lang.put(key, value);
@@ -62,6 +63,7 @@ class GeneratedResourcesTest {
         expected.addAll(BotanyManifest.files());
         expected.addAll(StationManifest.files());
         expected.addAll(PreparationManifest.files());
+        expected.addAll(GrimoireManifest.files());
         assertEquals(expected, generatedFiles());
     }
 

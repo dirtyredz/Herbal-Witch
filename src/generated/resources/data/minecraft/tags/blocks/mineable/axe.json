@@ -5,6 +5,8 @@
     "herbalwitch:decor/storage/small_wall_shelf",
     "herbalwitch:decor/lighting/table_lamp",
     "herbalwitch:botany/garden/herb_bed",
-    "herbalwitch:stations/drying_rack/station"
+    "herbalwitch:stations/drying_rack/station",
+    "herbalwitch:grimoire/stand",
+    "herbalwitch:grimoire/bookshelf"
   ]
 }

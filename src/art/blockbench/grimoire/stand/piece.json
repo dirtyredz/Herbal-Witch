@@ -1,0 +1,40 @@
+{
+  "project": "stand.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/grimoire/stand/wood",
+    "wood_v": "herbalwitch:block/pieces/grimoire/stand/wood_v",
+    "gold": "herbalwitch:block/pieces/grimoire/stand/gold",
+    "plum": "herbalwitch:block/pieces/grimoire/stand/plum",
+    "pages": "herbalwitch:block/pieces/grimoire/stand/pages",
+    "pink": "herbalwitch:block/pieces/grimoire/stand/pink",
+    "ivy": "herbalwitch:block/pieces/grimoire/stand/ivy",
+    "particle": "herbalwitch:block/pieces/grimoire/stand/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/grimoire/stand/wood",
+    "wood_v": "herbalwitch:block/pieces/grimoire/stand/wood_v",
+    "gold": "herbalwitch:block/pieces/grimoire/stand/gold",
+    "plum": "herbalwitch:block/pieces/grimoire/stand/plum",
+    "pages": "herbalwitch:block/pieces/grimoire/stand/pages",
+    "pink": "herbalwitch:block/pieces/grimoire/stand/pink",
+    "ivy": "herbalwitch:block/pieces/grimoire/stand/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/grimoire/stand/base",
+      "item": true
+    }
+  ]
+}

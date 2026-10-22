@@ -83,6 +83,13 @@ Biome tags `herbalwitch:botany/habitat/<group>` drive both foraging and worldgen
 - **Discovery:** breaking grass, tall grass, fern or large fern by a player (no shears, no silk touch)
   also picks one herb whose habitat tag contains the biome, at its discovery chance, doubled per liked
   condition met, capped at 1/8. Values live in `data/herbalwitch/herb_conditions/<group>/<herb>.json`.
+- **Two different "discoveries".** The foraging *discovery chance* above is world-side: whether breaking
+  grass drops a herb. Grimoire *discovery* (0.3.0) is personal knowledge: a `herb|<plant id>` key in the
+  player's discovery capability (the herb's plant block id), set when any form of the herb (seeds, fresh
+  herb, dried bundle, powder) is carried in the main inventory or offhand. It never changes drops, growth or cultivation: a herb
+  found by either route stays plantable and craftable, and an undiscovered herb is still usable. The grimoire's
+  herb pages show traits, growth form, habitat, discovery chance and liked conditions, the last from the
+  server's conditions as synced to the client.
 - **Worldgen:** a random patch (8 tries, spread 4) of mature plants on air above `minecraft:dirt`-tag
   blocks, at the group's rarity, via per-group biome modifiers. No retrogen.
 - **Progression:** every herb stays cultivable once acquired; conditions only improve discovery or yield.

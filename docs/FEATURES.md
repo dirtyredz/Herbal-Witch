@@ -5,6 +5,8 @@ Detail per entry: docs/catalogue/{decor,stations,products}.md.
 
 ## Implemented
 
+Version 0.3.0 (local candidate): Milestone 4, the grimoire, is implemented on top of the 0.2.0-dev.10 content below. Automated acceptance passed (118 unit tests, 97 GameTests); owner playtesting and the EMI/JEI profiles are pending.
+
 Version 0.2.0-dev.10 (local candidate; builds on the 0.1.0 content; dev.2 answered the ten dev.1 art findings, dev.3 the dev.2 bundle and rack findings; dev.4 stopped the herb bed and rugs occluding neighbours, with an occlusion GameTest; dev.5 brought back 2D dried bundles and the kettle-sized mortar; dev.6 moves the one-off pieces to Blockbench authoring with no gameplay change; dev.7 adds the herb bed inner corner; dev.8 makes every texture of every Blockbench piece the piece's own, paintable without touching another piece; dev.9 puts the whole set at 32 x 32, two texels per model pixel, with no visible change; dev.10 brings in the owner's hand-reworked tea kettle from Blockbench, with a thin arched bail handle). Owner review of art, station UIs and viewers is pending.
 
 | Feature | Milestone | Status | Evidence |
@@ -20,6 +22,32 @@ Version 0.2.0-dev.10 (local candidate; builds on the 0.1.0 content; dev.2 answer
 | Five stations (drying rack, mortar, tea kettle, hearth, infusion pot) with menus, in-slot reservations, heat, automation sides, no catch-up | 3 | done; owner UI/art review pending | StationProcessingGameTests, ProcessBehaviourGameTests, ProcessReservationTest, ProcessCompletionTest, StationResourcesTest |
 | Bundles, powders, 7 drinks, salve, oils, garden products, oil lantern, warmth and pest-repellent effects, resin | 3 | done | PreparationUseGameTests, PreparationBlockGameTests, PreparationResourcesTest |
 | EMI and JEI categories; Farmer's Delight heat both ways; Thirst Was Taken hydration and purity | 3 | done; viewers are owner checks | CompatibilityGameTests (`-PcompatProfile=all`) |
+
+### 0.3.0: the Grimoire (Milestone 4)
+
+Status: implemented; automated acceptance passed (unit tests and GameTests). Owner checks pending. Detail:
+README "The Grimoire", docs/ARCHITECTURE.md, docs/catalogue/stations.md.
+
+| Feature | Status |
+|---|---|
+| Grimoire book, Grimoire Stand and Witch's Bookshelf (permanent ids `grimoire/book`, `stand`, `bookshelf`), shapeless crafting, "Apothecary" tab | implemented |
+| Recipe-backed reader: herbs, stations, processing recipes, guide pages; editorial prose from data packs (`grimoire_entries`) | implemented |
+| Personal discoveries (capability, schema 1, private sync, survives death) with an observation policy | implemented |
+| Free, instant, shallow research at the research blocks | implemented |
+| Missing ingredients against main inventory and offhand (water bottles, returns) | implemented |
+| Consenting teaching of one recipe, with expiry, cooldown and revalidation | implemented |
+| "Grimoire" button and book panel on station and hearth screens | implemented |
+| Six bounded network messages on channel `herbalwitch:main` | implemented |
+| Showcase section `grimoire`; showcase now 86 x 8 x 28 | implemented |
+| Stand and bookshelf Blockbench projects, book sprite and reader atlas | agent-authored first drafts; owner refines |
+| Discovery gating of crafting, processing, automation or EMI/JEI | not planned (advisory by design) |
+| Viewer transfer handlers, hiding undiscovered recipes in EMI/JEI | not implemented |
+
+Owner checks pending: follow acquisition, drying, grinding and brewing using only the book; compare
+missing counts with the inventory (water and returned bottles included); station links and a reload with
+neither, either and both viewers; consent, privacy, reconnect and death with two real clients; model
+transforms, readable UI, targeting, support, neighbour occlusion and shaders. EMI/JEI runtime profiles
+(`emi`, `jei`, `viewers`) were not run for 0.3.0.
 
 ### 0.2.0-dev.1: art pass
 
@@ -49,7 +77,6 @@ No new gameplay: the same blocks, items, states and textures, authored different
 
 | Milestone | Scope |
 |---|---|
-| 4 | Grimoire: discovery, station recipes, missing ingredients, research stand/bookshelf, teaching |
 | 5 | Decor waves A/B/C: the rest of the catalogue by behaviour family; seating, storage, beds, doors, multiblocks |
 | 6 | Initiation and energy: witch capability, consent, founding ritual, altar, energy HUD and recovery |
 | 7 | Advanced brewing, charms, rituals, wards: cauldron, still, bottling bench, charm bench, ritual circle, ward stone |

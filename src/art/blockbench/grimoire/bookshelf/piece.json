@@ -1,0 +1,40 @@
+{
+  "project": "bookshelf.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/grimoire/bookshelf/wood",
+    "wood_v": "herbalwitch:block/pieces/grimoire/bookshelf/wood_v",
+    "gold": "herbalwitch:block/pieces/grimoire/bookshelf/gold",
+    "plum": "herbalwitch:block/pieces/grimoire/bookshelf/plum",
+    "books": "herbalwitch:block/pieces/grimoire/bookshelf/books",
+    "pages": "herbalwitch:block/pieces/grimoire/bookshelf/pages",
+    "ivy": "herbalwitch:block/pieces/grimoire/bookshelf/ivy",
+    "particle": "herbalwitch:block/pieces/grimoire/bookshelf/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/grimoire/bookshelf/wood",
+    "wood_v": "herbalwitch:block/pieces/grimoire/bookshelf/wood_v",
+    "gold": "herbalwitch:block/pieces/grimoire/bookshelf/gold",
+    "plum": "herbalwitch:block/pieces/grimoire/bookshelf/plum",
+    "books": "herbalwitch:block/pieces/grimoire/bookshelf/books",
+    "pages": "herbalwitch:block/pieces/grimoire/bookshelf/pages",
+    "ivy": "herbalwitch:block/pieces/grimoire/bookshelf/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/grimoire/bookshelf/base",
+      "item": true
+    }
+  ]
+}

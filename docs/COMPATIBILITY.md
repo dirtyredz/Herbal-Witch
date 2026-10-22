@@ -14,8 +14,20 @@ Exact versions: Farmer's Delight 1.3.4, Thirst Was Taken 1.4.0, EMI 1.1.24+1.20.
   mods loaded through `-PcompatProfile=all` and `-PcompatModsDir=<mods folder>`.
 - **Compile and load only:** the EMI and JEI plugins compile against their APIs and load with the
   profiles `emi`, `jei`, `viewers`. Viewers are client-only, so categories, workstations and layout
-  are **owner-checked** in the trial instance (no transfer buttons yet).
+  are **owner-checked** in the mod-test instance (no transfer buttons yet).
 - No adapters for Curios, Supplementaries or AppleSkin (AppleSkin reads the energy tea's ordinary food data).
+
+## Grimoire and the viewers (0.3.0, Milestone 4)
+
+- **Shared descriptions.** The grimoire, EMI and JEI all describe processing recipes through
+  `stations/description` (`ProcessingCategories` holds the one recipe-type-to-station mapping, with each
+  category's heated flag), so a station's categories cannot differ between them.
+- **Viewers are not gated by discovery.** EMI and JEI still show every recipe whether or not the player has
+  discovered it; nothing is hidden. There are still no transfer handlers (no transfer buttons).
+- **No hard dependency.** The grimoire needs neither viewer; the "Grimoire" button on station screens works
+  with neither, either or both installed (an owner check).
+- **Profile evidence:** the viewer profiles (`emi`, `jei`, `viewers`) and `all` were **not run for 0.3.0**;
+  the table below still records the 0.1.0-dev.4 / 0.2.0 evidence. They are pending.
 
 ## Integrations
 

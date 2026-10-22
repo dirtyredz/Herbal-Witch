@@ -82,7 +82,7 @@ Conventions: an alias row reuses the canonical piece id and inherits its milesto
 | Writing Desk | writing_desk | surfaces | open desk with drawers | decorative | 5B | planned |
 | Rolltop Desk | rolltop_desk | storage | desk with slatted hood | storage | 5B | planned |
 | Desk Chair | desk_chair | seating | swivel chair with arms | seating | 5B | planned |
-| Bookshelf | bookshelf | storage | tall multi-shelf | display | 5B | planned |
+| Bookshelf | bookshelf | storage | tall multi-shelf | display | 5B | planned (the research bookshelf below is a different piece) |
 | Filing Cabinet | filing_cabinet | storage | drawer stack | storage | 5B | planned |
 | Globe Stand | globe_stand | fixtures | globe on pedestal | decorative | 5B | planned |
 | Map Table | map_table | surfaces | wide low table, map top | decorative | 5B | planned |
@@ -213,6 +213,10 @@ Same five ids; no new furniture ids in this release.
   Fireplace and Drying Rack rows above are future pieces that will link to them.
 - **Herb beds** (botany) and the **oil lantern** (preparations) are not furniture and are not planned
   in these families.
+- **Witch's Bookshelf (grimoire, Milestone 4, 0.3.0)** is a research block, not furniture: id
+  `herbalwitch:grimoire/bookshelf`, no block entity and no storage, opens the grimoire index and researches
+  recipes (docs/catalogue/stations.md). The Milestone 5 `decor/storage/bookshelf` above is a separate
+  storage/display piece with its own id; the two never share an id, a block or a model.
 
 ## Counting
 

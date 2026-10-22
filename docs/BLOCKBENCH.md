@@ -10,10 +10,18 @@ docs/DECISIONS.md (0.2.0-dev.6); traps: docs/GOTCHAS.md.
 | Drying rack, hearth, Witch's Stove (multiblocks) | `src/art/blockbench/stations/{drying_rack,hearth,stove}/` |
 | Armchair, apothecary chest (`apothecary_counter`), wall shelf, table lamp, small rug | `src/art/blockbench/decor/<piece>/` |
 | Oil lantern | `src/art/blockbench/preparations/oil_lantern/` |
+| Grimoire Stand, Witch's Bookshelf (first drafts by an agent, for you to refine) | `src/art/blockbench/grimoire/{stand,bookshelf}/` |
 
 Each folder holds `<piece>.bbmodel` (what you edit) and `piece.json` (the Minecraft side: output
 files, texture bindings, which groups glow; edited by agents, not in Blockbench). Herbs, herb beds
 and the hung bundle blocks stay generated (`tools/models/`).
+
+The two grimoire pieces own their textures like the rest: the stand has `wood`, `wood_v`, `gold`, `plum`,
+`pages`, `ivy` and `pink`; the bookshelf `wood`, `wood_v`, `gold`, `plum`, `pages`, `ivy` and `books`, each at
+`textures/block/pieces/grimoire/<piece>/<name>.png`. Stand: crossed foot, pedestal with gold collars, tilted
+board holding an open book, ribbon and ivy. Bookshelf: framed carcass, three shelves of volumes, crescent
+bookend, side moon, ivy. They have no groups the game treats specially. The grimoire's book sprite and reader
+atlas are procedural (`tools/art/grimoire/`), not painted in Blockbench.
 
 ## Once: install and set up
 
@@ -31,10 +39,12 @@ and the hung bundle blocks stay generated (`tools/models/`).
 4. **Start the watcher** and leave it running while you edit:
 
    ```
-   node tools/compile-blockbench.mjs --dev-pack "C:/Users/dirty/MultiMC/instances/Evil Eye Trial Cozy/.minecraft" --watch
+   node tools/compile-blockbench.mjs --dev-pack "<mod-test instance>/.minecraft" --watch
    ```
 
-   It publishes `resourcepacks/HerbalWitch-dev-art/` in that instance (and touches nothing else
+   Use the dedicated mod-test instance (a copy of the Evil Eye pack plus the build under test, owner ruling
+   2026-10-22; the workspace session owns it), never an `Evil Eye Trial *` instance. It publishes
+   `resourcepacks/HerbalWitch-dev-art/` in that instance (and touches nothing else
    there), then prints `ready for F3+T`. Without `--watch` it publishes once and exits.
 5. **In game, once:** Options > Resource Packs, move **HerbalWitch-dev-art** to Selected and put it
    at the **top** of the list, then Done. The game remembers the choice.

@@ -10,6 +10,8 @@ import io.github.dirtyredz.herbalwitch.brewing.product.registry.PreparationBlock
 import io.github.dirtyredz.herbalwitch.decor.block.TableLampBlock;
 import io.github.dirtyredz.herbalwitch.decor.block.WallShelfBlock;
 import io.github.dirtyredz.herbalwitch.decor.registry.DecorBlocks;
+import io.github.dirtyredz.herbalwitch.grimoire.knowledge.discovery.DiscoveryCapability;
+import io.github.dirtyredz.herbalwitch.grimoire.registry.GrimoireBlocks;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcasePlan;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseRegistry;
 import io.github.dirtyredz.herbalwitch.stations.registry.StationBlocks;
@@ -54,7 +56,9 @@ public final class ShowcaseContentGameTests {
     @GameTest(template = FULL, timeoutTicks = 400)
     public static void theFullShowcaseHoldsEveryRegisteredBlock(GameTestHelper helper) throws Exception {
         stoneFloor(helper, FULL_X, FULL_Z);
-        check(run(helper, as(standing(helper, "op_full", GameType.CREATIVE), 2), "herbalwitch showcase") > 0, "showcase failed");
+        var op = standing(helper, "op_full", GameType.CREATIVE);
+        check(run(helper, as(op, 2), "herbalwitch showcase") > 0, "showcase failed");
+        check(DiscoveryCapability.of(op).map(c -> c.state().size()).orElse(0) == 0, "building the showcase granted discoveries");
         ShowcasePlan plan = ShowcasePlan.of(ShowcaseRegistry.sections());
         Map<Block, Integer> blocks = new HashMap<>();
         Set<String> herbAges = new HashSet<>();
@@ -96,7 +100,10 @@ public final class ShowcaseContentGameTests {
             }
         }
         check(blocks.getOrDefault(BotanyBlocks.herbBed(), 0) >= 56, "herb beds " + blocks.get(BotanyBlocks.herbBed()));
-        check(barrels == HerbCatalog.ALL.size() + 2, "sample barrels " + barrels); // one per herb, powders, products
+        check(barrels == HerbCatalog.ALL.size() + 3, "sample barrels " + barrels); // one per herb, powders, products, grimoire supplies
+        for (Block piece : GrimoireBlocks.all()) {
+            check(blocks.getOrDefault(piece, 0) == 1, piece + " shown " + blocks.getOrDefault(piece, 0) + " times");
+        }
         for (Block station : StationBlocks.all()) {
             check(blocks.getOrDefault(station, 0) >= 1, station + " missing from the showcase");
         }

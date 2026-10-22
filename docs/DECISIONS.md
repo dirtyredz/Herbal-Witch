@@ -2,6 +2,47 @@
 
 Newest first.
 
+## 2026-10-22 - 0.3.0: the grimoire is advisory, shallow and recipe-backed (Milestone 4)
+
+Grouped because the choices lean on one another; each is short.
+
+- **Discovery is advisory.** Discovered or not, nothing is gated: crafting, processing, automation and the
+  EMI/JEI viewers behave exactly as before, and later magic must not read grimoire knowledge as permission.
+  The grimoire is a guide that remembers what the player has met, not a progression lock.
+- **Research is shallow.** At a stand or bookshelf, one familiar primary ingredient is enough to research a
+  recipe; it is instant, free and consumes nothing (recipes with no primary ingredient use base or package).
+- **Observation policy.** Any herb form carried discovers the herb; a carried result discovers the recipe; all
+  primary ingredients familiar discovers the recipe. Only the main inventory and offhand count, the same scope
+  the missing counts use.
+- **Teaching asks for consent.** One recipe per invitation, from a research block reader only, to a player
+  within 8 blocks in the same dimension. The recipient gets a passive chat notice and accepts or declines from
+  a book or a research reader; invitations expire after 600 ticks, one outgoing per teacher and one incoming
+  per recipient, 100-tick cooldown, duplicates never refresh. Acceptance revalidates reader, range, teacher
+  session and knowledge and the recipe fingerprint. Nothing is taught by proximity, and a stale invitation
+  cannot teach a changed recipe.
+- **Pages are recipe-backed.** Recipe pages come from the registered recipes; editorial data
+  (`grimoire_entries`) supplies prose, grouping, links and hints only, mechanics fields are rejected, and a
+  recipe page never depends on editorial data, so a pack that removes a recipe removes its page and cannot
+  invent one.
+- **Discovery ownership is independent.** The grimoire capability (`herbalwitch:grimoire/discoveries`) stays
+  the authority when witch status arrives in Milestone 6; initiation will contribute through
+  `DiscoveryService` and `GrimoireContentSource`, not by moving the data. Unknown kinds and unreadable data are
+  preserved rather than dropped.
+- **The research blocks hold nothing.** The stand and the Witch's Bookshelf are single cells with no block
+  entity and no storage. The Milestone 5 storage/display
+  bookshelf is a separate piece with its own id (docs/catalogue/decor.md); the two never merge.
+- **The station panel shows no counts.** The "Grimoire" button on station and hearth screens opens a one-column
+  panel beside the station and leaves the station menu untouched; the panel tells the player to open the
+  grimoire for missing counts.
+- **Package grouping deviates from the plan.** The plan listed `grimoire/{block,item,menu,discovery,research,
+  teaching,ingredients}`; with the content, network, registry and showcase packages that is more than the
+  10-entry level cap, so `access/{item,block,menu}`, `knowledge/{discovery,research,teaching}` and
+  `reading/ingredients` group them. Ids are unaffected. Extra files beyond the plan: `ChunkAssembly`,
+  `GrimoireCodec`, `ContentSync`, `ServerGrimoireContent`, `reference/{GuideEntries,HerbForms}`, `Familiarity`,
+  `TeachingWorld` and `widgets/TextButton`.
+- **Viewers unchanged.** EMI and JEI still show every recipe regardless of discovery, with no transfer handlers
+  and no hiding; they share `ProcessingCategories` with the grimoire so the station mapping exists once.
+
 ## 2026-10-21 - 0.2.0-dev.9: the whole set paints at 32 x 32 (two texels per model unit)
 
 Owner ruling: every Herbal Witch texture is 32 x 32, twice vanilla's pixel density, so finer detail can

@@ -2,6 +2,7 @@ package io.github.dirtyredz.herbalwitch.data.server.recipes;
 
 import io.github.dirtyredz.herbalwitch.data.server.botany.BotanyRecipes;
 import io.github.dirtyredz.herbalwitch.data.server.decor.DecorRecipes;
+import io.github.dirtyredz.herbalwitch.data.server.grimoire.GrimoireRecipes;
 import io.github.dirtyredz.herbalwitch.data.server.preparations.PreparationCraftingProvider;
 import io.github.dirtyredz.herbalwitch.data.server.stations.StationCraftingProvider;
 import io.github.dirtyredz.herbalwitch.data.server.stations.recipes.DryingRecipeProvider;
@@ -46,5 +47,6 @@ public class HerbalWitchRecipeProvider extends RecipeProvider {
         GrindingRecipeProvider.addTo(writer);
         SteepingRecipeProvider.addTo(writer);
         InfusionRecipeProvider.addTo(writer);
+        GrimoireRecipes.addTo(writer);
     }
 }

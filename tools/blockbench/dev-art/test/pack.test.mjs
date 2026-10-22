@@ -29,9 +29,9 @@ test('the pack carries the compiled models, owned textures, and the item models 
   assert.equal(JSON.parse(files.get('pack.mcmeta')).pack.pack_format, 15);
   for (const k of keys.filter((x) => x !== 'pack.mcmeta')) assert.match(k, /^assets\/herbalwitch\/(models|blockstates|textures)\//, k);
   assert.ok(!keys.some((k) => /\.bbmodel$|piece\.json$|^data\/|\/lang\//.test(k)));
-  assert.equal(keys.filter((k) => k.startsWith('assets/herbalwitch/models/block/')).length, 32);
-  assert.equal(keys.filter((k) => k.startsWith('assets/herbalwitch/models/item/')).length, 12);
-  assert.equal(keys.filter((k) => k.startsWith('assets/herbalwitch/blockstates/')).length, 12);
+  assert.equal(keys.filter((k) => k.startsWith('assets/herbalwitch/models/block/')).length, 34);
+  assert.equal(keys.filter((k) => k.startsWith('assets/herbalwitch/models/item/')).length, 14);
+  assert.equal(keys.filter((k) => k.startsWith('assets/herbalwitch/blockstates/')).length, 14);
   const textures = keys.filter((k) => k.startsWith('assets/herbalwitch/textures/'));
   assert.equal(textures.length, compiled.textures.size);
   for (const k of textures) assert.ok(k.startsWith("assets/herbalwitch/textures/block/pieces/"), k);

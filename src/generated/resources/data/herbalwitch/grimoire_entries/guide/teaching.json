@@ -1,0 +1,12 @@
+{
+  "entry": "guide|herbalwitch:teaching",
+  "links": [
+    "guide|herbalwitch:research"
+  ],
+  "pages": [
+    "grimoire.herbalwitch.guide.teaching.0",
+    "grimoire.herbalwitch.guide.teaching.1",
+    "grimoire.herbalwitch.guide.teaching.2"
+  ],
+  "title": "grimoire.herbalwitch.guide.teaching.title"
+}

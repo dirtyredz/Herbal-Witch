@@ -4,6 +4,7 @@ import io.github.dirtyredz.herbalwitch.botany.showcase.GardenShowcaseSection;
 import io.github.dirtyredz.herbalwitch.botany.showcase.HerbShowcaseSection;
 import io.github.dirtyredz.herbalwitch.brewing.product.showcase.PreparationShowcaseSection;
 import io.github.dirtyredz.herbalwitch.decor.showcase.DecorShowcaseSection;
+import io.github.dirtyredz.herbalwitch.grimoire.showcase.GrimoireShowcaseSection;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcasePlacement;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcasePlan;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseSection;
@@ -33,6 +34,7 @@ class ShowcasePlanTest {
             all.add(new StationShowcaseSection(station, heated, "recipe", Map::of));
         }
         all.add(new PreparationShowcaseSection());
+        all.add(new GrimoireShowcaseSection());
         return all;
     }
 
@@ -40,7 +42,7 @@ class ShowcasePlanTest {
     void sectionsStandSideBySideInRegistrationOrder() throws Exception {
         ShowcasePlan plan = ShowcasePlan.of(sections());
         List<ShowcasePlan.SectionArea> areas = plan.areas();
-        assertEquals(List.of("decor", "herbs", "garden", "drying_rack", "mortar", "kettle", "hearth", "stove", "infusion_pot", "preparations"), areas.stream().map(ShowcasePlan.SectionArea::id).toList());
+        assertEquals(List.of("decor", "herbs", "garden", "drying_rack", "mortar", "kettle", "hearth", "stove", "infusion_pot", "preparations", "grimoire"), areas.stream().map(ShowcasePlan.SectionArea::id).toList());
         for (int i = 1; i < areas.size(); i++) {
             ShowcasePlan.SectionArea previous = areas.get(i - 1);
             assertEquals(previous.x() + previous.width() + ShowcasePlan.GAP, areas.get(i).x());
@@ -56,6 +58,15 @@ class ShowcasePlanTest {
             assertTrue(p.x() >= 0 && p.x() < plan.width() && p.z() >= 0 && p.z() < plan.depth()
                     && p.y() >= 0 && p.y() < ShowcasePlan.HEIGHT, "outside the box: " + p);
         }
+    }
+
+    /** The GameTest template (tools/generate-test-structures.mjs) is 100 x 10 x 36 and the box starts at (2, 0, 1). */
+    @Test
+    void theFullLayoutFitsTheGameTestTemplate() throws Exception {
+        ShowcasePlan plan = ShowcasePlan.of(sections());
+        assertTrue(plan.width() + 2 <= 100 && plan.depth() + 1 <= 36,
+                "plan " + plan.width() + " x " + plan.depth() + " outgrows the 100 x 36 showcase template");
+        assertEquals(List.of(86, 28), List.of(plan.width(), plan.depth()), "the README documents the full layout as 86 x 8 x 28");
     }
 
     @Test

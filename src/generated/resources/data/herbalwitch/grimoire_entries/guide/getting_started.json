@@ -1,0 +1,15 @@
+{
+  "entry": "guide|herbalwitch:getting_started",
+  "links": [
+    "guide|herbalwitch:acquisition",
+    "guide|herbalwitch:preparation",
+    "herb|herbalwitch:botany/temperate/lavender/plant",
+    "herb|herbalwitch:botany/temperate/chamomile/plant"
+  ],
+  "pages": [
+    "grimoire.herbalwitch.guide.getting_started.0",
+    "grimoire.herbalwitch.guide.getting_started.1",
+    "grimoire.herbalwitch.guide.getting_started.2"
+  ],
+  "title": "grimoire.herbalwitch.guide.getting_started.title"
+}

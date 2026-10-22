@@ -6,18 +6,19 @@ import java.util.Map;
 
 /**
  * What the Blockbench pipeline must produce, written out independently of
- * src/art/blockbench/catalog.json and the compiler: twelve projects, the 32 model files they compile
+ * src/art/blockbench/catalog.json and the compiler: fourteen projects, the 34 model files they compile
  * to, and the textures they own.
  */
 public final class BlockbenchManifest {
     /** Project directories under src/art/blockbench, in catalogue order. */
     public static final List<String> PROJECTS = List.of("stations/kettle", "stations/infusion_pot", "stations/mortar",
             "stations/drying_rack", "stations/hearth", "stations/stove", "decor/armchair", "decor/apothecary_counter",
-            "decor/wall_shelf", "decor/table_lamp", "decor/rug", "preparations/oil_lantern");
+            "decor/wall_shelf", "decor/table_lamp", "decor/rug", "preparations/oil_lantern", "grimoire/stand",
+            "grimoire/bookshelf");
     /** Model directories (under models/) the compiler owns outright. */
     public static final List<String> MODEL_DIRS = List.of("block/stations/kettle", "block/stations/infusion_pot",
             "block/stations/mortar", "block/stations/drying_rack", "block/stations/hearth", "block/stations/stove",
-            "block/decor/templates", "block/preparations/templates");
+            "block/decor/templates", "block/preparations/templates", "block/grimoire/stand", "block/grimoire/bookshelf");
     /** Textures (under textures/) every piece owns, painted in its project: block/pieces/<project>/<texture>.png. */
     public static final List<String> TEXTURES = List.of(
             "block/pieces/decor/apothecary_counter/gold.png",
@@ -50,6 +51,20 @@ public final class BlockbenchManifest {
             "block/pieces/decor/wall_shelf/plum.png",
             "block/pieces/decor/wall_shelf/tincture.png",
             "block/pieces/decor/wall_shelf/wood.png",
+            "block/pieces/grimoire/bookshelf/books.png",
+            "block/pieces/grimoire/bookshelf/gold.png",
+            "block/pieces/grimoire/bookshelf/ivy.png",
+            "block/pieces/grimoire/bookshelf/pages.png",
+            "block/pieces/grimoire/bookshelf/plum.png",
+            "block/pieces/grimoire/bookshelf/wood.png",
+            "block/pieces/grimoire/bookshelf/wood_v.png",
+            "block/pieces/grimoire/stand/gold.png",
+            "block/pieces/grimoire/stand/ivy.png",
+            "block/pieces/grimoire/stand/pages.png",
+            "block/pieces/grimoire/stand/pink.png",
+            "block/pieces/grimoire/stand/plum.png",
+            "block/pieces/grimoire/stand/wood.png",
+            "block/pieces/grimoire/stand/wood_v.png",
             "block/pieces/preparations/oil_lantern/brass.png",
             "block/pieces/preparations/oil_lantern/ember.png",
             "block/pieces/preparations/oil_lantern/flame.png",
@@ -119,6 +134,8 @@ public final class BlockbenchManifest {
         }
         out.add("block/preparations/templates/oil_lantern_off.json");
         out.add("block/preparations/templates/oil_lantern_on.json");
+        out.add("block/grimoire/stand/base.json");
+        out.add("block/grimoire/bookshelf/base.json");
         out.sort(null);
         return out;
     }

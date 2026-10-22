@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "herbalwitch:block/grimoire/bookshelf/base",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "herbalwitch:block/grimoire/bookshelf/base"
+    },
+    "facing=south": {
+      "model": "herbalwitch:block/grimoire/bookshelf/base",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "herbalwitch:block/grimoire/bookshelf/base",
+      "y": 270
+    }
+  }
+}

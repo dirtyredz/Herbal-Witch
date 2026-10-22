@@ -4,10 +4,12 @@ Forge 1.20.1 mod: woodland herbal witchcraft (herbs, stations, brewing, familiar
 an apothecary trade) together with a cottage furniture catalogue. Install on **both** the server and
 every client.
 
-**Status: private development, `0.2.0-dev.6` local candidate (the art pass).** Contains Milestone 1 (cottage decor
-in a single design), Milestone 2 (herbs and garden) and Milestone 3 (everyday preparation stations and
-products), all redrawn in 0.2.0-dev.1. Owner review of the art and station UIs is pending. Later systems are listed in
-docs/FEATURES.md. Not published; not in any pack.
+**Status: private development, `0.3.0` local candidate (Milestone 4, the Grimoire).** Contains Milestone 1
+(cottage decor in a single design), Milestone 2 (herbs and garden), Milestone 3 (everyday preparation
+stations and products) and Milestone 4 (the grimoire: discovery, recipe lookup, missing ingredients,
+research blocks and teaching). Automated acceptance passed (unit tests and GameTests); owner review of
+the art, the station UIs and the grimoire is pending. Later systems are listed in docs/FEATURES.md.
+Not published; not in any pack.
 
 ## Supported versions
 
@@ -29,6 +31,8 @@ docs/FEATURES.md. Not published; not in any pack.
 - **Apothecary** (tab "Apothecary"): six stations (the drying rack and hearth are 2x2 multiblocks; the new Witch's Stove is a two-wide
   range), dried bundles, powders, seven drinks, a salve,
   oils, garden products and a finite oil lantern (docs/catalogue/stations.md, products.md).
+- **Grimoire** (tab "Apothecary"): a portable book, a Grimoire Stand and a Witch's Bookshelf. They open the
+  same recipe-backed reader (see "The Grimoire" below).
 
 ## Getting started in survival
 
@@ -90,15 +94,43 @@ below (one hopper may sit between).
 Plant oil comes from the mortar (4 wheat seeds + glass bottle). Resin drops from player-broken spruce
 leaves (about 1 in 8, not shears, not silk touch). Details and effects: docs/catalogue/products.md.
 
+## The Grimoire
+
+A book of every herb, station and processing recipe in the mod, with your own discoveries marked. It is
+advisory: nothing in the game is locked behind it, and the recipe viewers (EMI, JEI) still show everything.
+
+- **Crafting (shapeless):** book + ink sac + any starter fresh herb = Grimoire. 3 dark oak slabs + 2 sticks +
+  a Grimoire = Grimoire Stand. 6 dark oak planks + 2 books + a Grimoire = Witch's Bookshelf. The Grimoire item is
+  used up in the block recipes; your knowledge never is.
+- **Opening it:** use the Grimoire (stack of one, no stored knowledge: it opens the holder's own). The stand opens on
+  the research filter; the bookshelf and the book open on the index. A block reader closes if you move more than 8
+  blocks away or the block goes.
+- **Discovery:** carrying a herb (any form) discovers that herb. Carrying a recipe's result, or being familiar
+  with all its primary ingredients, discovers the recipe. Only the main inventory and offhand count. Knowledge is
+  personal to each player, kept through death and relogging, and others never see it.
+- **Research:** at a stand or bookshelf, one familiar primary ingredient is enough to research a recipe. It is
+  instant, free and consumes nothing.
+- **Missing ingredients:** each recipe page shows what you carry against what it needs (water bottles and returned
+  containers included).
+- **Teaching:** from a research block reader, invite a player within 8 blocks to learn one recipe you know. They
+  get a chat notice and accept or decline from their book or a research reader; invitations expire after 30
+  seconds and nobody is taught without accepting.
+- **At a station:** processing stations, the hearth and the Witch's Stove show a "Grimoire" button while you carry a
+  Grimoire. It opens a book panel beside the station on that station's recipes (or heat); it shows no missing counts,
+  so open the grimoire for those.
+- **Editorial pages:** guide text lives in data packs (`data/<ns>/grimoire_entries/`), prose only; recipe pages always
+  come from the actual recipes.
+
 ## Showcase command
 
 `/herbalwitch showcase [section]` builds a labelled sample of every registered block, for owner review
 and testing. It needs permission level 2 (operators; a non-op, in survival or creative, and the console
 are refused). Sections: `decor`, `herbs`, `garden`, `drying_rack`, `mortar`, `kettle`, `hearth`,
-`stove`, `infusion_pot`, `preparations`; with no section it builds all of them.
+`stove`, `infusion_pot`, `preparations`, `grimoire`; with no section it builds all of them. The grimoire
+  section (both research blocks, a barrel with two grimoires and supplies, signs) grants no knowledge.
 
 - **Where:** the box starts 2 blocks east of you on your row and extends east and south. The floor is
-  the block you stand on. Height 8 (floor layer plus 7 cleared). The full layout is about 78 x 8 x 28;
+  the block you stand on. Height 8 (floor layer plus 7 cleared). The full layout is 86 x 8 x 28;
   hard caps are 128 x 8 x 128 and 65,536 writes.
 - **Destructive:** the whole box is replaced: terrain (grass, dirt, stone, plants, leaves, logs, water) is cleared (no drops) and the floor laid (grass blocks under the garden and herbs, smooth stone elsewhere), then the floor,
   supports, samples and signs are placed. There is no undo.
@@ -114,7 +146,8 @@ None are required, and no foreign mod classes are in the jar.
 - **Farmer's Delight** (tested 1.3.4): the hearth heats FD cooking blocks; a lit FD stove heats our
   kettle and infusion pot.
 - **Thirst Was Taken** (1.4.0): the seven drinks hydrate; water purity carries into the tea.
-- **EMI** (1.1.24+1.20.1) and **JEI** (15.62.0.219): four recipe categories each.
+- **EMI** (1.1.24+1.20.1) and **JEI** (15.62.0.219): four recipe categories each, from the same
+  descriptions the grimoire uses; they show every recipe regardless of discovery.
 
 Details: docs/COMPATIBILITY.md.
 
@@ -135,15 +168,14 @@ node tools/generate-test-structures.mjs
 Gradle runs the three art producers before resources and datagen (`generateArt`) and their checks in
 `check` (`checkArt`); this needs Node 22+ on PATH (or `-PnodeExecutable=<path>`).
 
-`-PcompatProfile` is one of `base`, `emi`, `jei`, `viewers`, `farmersdelight`, `thirst`, `all`. The owner
-trial mods folder is `C:/Users/dirty/MultiMC/instances/Evil Eye Trial Cozy/.minecraft/mods`. The jar is
+`-PcompatProfile` is one of `base`, `emi`, `jei`, `viewers`, `farmersdelight`, `thirst`, `all`. The jar is
 `build/libs/herbalwitch-1.20.1-<version>.jar` (reobfuscated). CLAUDE.md has the full headless list.
 
 ### Model tools
 
 - `node tools/generate-models.mjs` writes the procedural families: herbs, herb beds and hung bundles.
 - `node tools/compile-blockbench.mjs` compiles the Blockbench projects under `src/art/blockbench/`
-  (stations, furniture, oil lantern) into models and the two textures they own. `--check` fails when
+  (stations, furniture, oil lantern, the grimoire stand and bookshelf) into models and the textures each piece owns. `--check` fails when
   committed output is stale.
 - `node tools/preview-models.mjs --output <dir outside the repo> [--references <dir>]` renders headless
   previews (contact sheets, herbs on beds, item sheet, review scenes, reference comparisons, manifest).
@@ -154,13 +186,16 @@ trial mods folder is `C:/Users/dirty/MultiMC/instances/Evil Eye Trial Cozy/.mine
 
 The one-off pieces are Blockbench projects (desktop Blockbench 5.2.2). The workflow is in
 [docs/BLOCKBENCH.md](docs/BLOCKBENCH.md). To see edits in game without a new jar, run
-`node tools/compile-blockbench.mjs --dev-pack "C:/Users/dirty/MultiMC/instances/Evil Eye Trial Cozy/.minecraft" --watch`
-and press F3+T in the trial instance.
+`node tools/compile-blockbench.mjs --dev-pack "<mod-test instance>/.minecraft" --watch`
+and press F3+T in that instance.
 
 ## Owner trial
 
-Copy the jar into the trial instance's `mods/` folder (MultiMC: Evil Eye Trial Cozy) with the game
-closed, then follow the review checklist in [docs/ART.md](docs/ART.md).
+Mod testing happens on a dedicated mod-test instance holding a copy of the Evil Eye pack plus the build
+under test (owner ruling 2026-10-22; the workspace session owns it, see the workspace CLAUDE.md). Never
+install into an `Evil Eye Trial *` instance. Copy the jar into the mod-test instance's `mods/` folder
+with the game closed, then follow the review checklist in [docs/ART.md](docs/ART.md) and the Grimoire
+checks in docs/FEATURES.md.
 
 ## License
 

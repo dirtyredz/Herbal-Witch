@@ -3,6 +3,7 @@ package io.github.dirtyredz.herbalwitch.data.client.language;
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.data.client.botany.BotanyTranslations;
 import io.github.dirtyredz.herbalwitch.data.client.decor.DecorTranslations;
+import io.github.dirtyredz.herbalwitch.data.client.grimoire.GrimoireTranslations;
 import io.github.dirtyredz.herbalwitch.data.client.preparations.PreparationTranslations;
 import io.github.dirtyredz.herbalwitch.data.client.showcase.ShowcaseTranslations;
 import io.github.dirtyredz.herbalwitch.data.client.stations.StationTranslations;
@@ -24,6 +25,7 @@ public class HerbalWitchLanguageProvider extends LanguageProvider {
         BotanyTranslations.addTo(this);
         StationTranslations.addTo(this);
         PreparationTranslations.addTo(this);
+        GrimoireTranslations.addTo(this);
         ShowcaseTranslations.addTo(this);
     }
 }

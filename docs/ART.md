@@ -142,6 +142,30 @@ stone, plum glaze, gold and fire.
   the plant in the soil. Joined beds are one planter: rails and posts only on the outside. Mature
   herbs are bushy 3D cube plants filling most of the cell, each in its own silhouette and colour.
 
+## Grimoire pieces (0.3.0, first drafts)
+
+The Grimoire Stand and the Witch's Bookshelf are Blockbench projects, **authored by an agent as first
+drafts for the owner to refine** in Blockbench, like the other one-offs. They follow the house style
+(dark wood, gold, plum, ivy) and the standing rules above (one dark wood, no coplanar overlaps, rotations on
+one axis at 0, +-22.5 or +-45).
+
+| Piece | Project | Silhouette | Owned textures (`textures/block/pieces/grimoire/<piece>/`) |
+|---|---|---|---|
+| Grimoire Stand | `src/art/blockbench/grimoire/stand/` | Crossed foot, a pedestal with gold collars, a tilted board holding an open book, a ribbon and ivy | `wood`, `wood_v`, `gold`, `plum`, `pages`, `ivy`, `pink` |
+| Witch's Bookshelf | `src/art/blockbench/grimoire/bookshelf/` | Framed carcass, three shelves of volumes, a crescent bookend, a moon on the side, ivy | `wood`, `wood_v`, `gold`, `plum`, `pages`, `ivy`, `books` |
+
+Each piece owns every texture (no shared house materials), so painting one never changes the other or any
+station; models compile to `models/block/grimoire/<piece>/base.json`. The book item sprite
+(`item/grimoire/book.png`, 32 x 32) and the reader atlas (`gui/grimoire/reader.png`, 512 x 512) are
+procedural, in `tools/art/grimoire/{book,interface}.mjs`, drawn on the old grid and enlarged like the other
+sprites. Preview scenes `grimoire-study`, `grimoire-stand` and `grimoire-bookshelf-back` are in
+`tools/preview/scenes/catalogue.mjs`.
+
+Review expectations: run the three producers and the previewer, read the grimoire scenes against this guide
+(silhouette, one dark wood, nothing flat or kid-like), then the owner checks model transforms, readable UI,
+targeting, support, neighbour occlusion and shaders in game. Expect repainting and reshaping; the drafts
+are a starting point, not a final look.
+
 ## How the art is made
 
 - **Textures** come from `node tools/generate-textures.mjs` (seeded code in `tools/art/`) for the
@@ -155,7 +179,7 @@ stone, plum glaze, gold and fire.
   natively at 32 and drop the enlargement for it. Alpha is 0 or 255. Untinted: no tint index, no
   colour handler.
 - **One-off pieces are hand-editable** (owner direction: subtle adjustments in Blockbench). The six
-  stations, five furniture pieces and the oil lantern are Blockbench projects
+  stations, five furniture pieces, the oil lantern and the two grimoire blocks are Blockbench projects
   (`src/art/blockbench/`, workflow in docs/BLOCKBENCH.md) compiled by
   `node tools/compile-blockbench.mjs`: authored per-face UVs (stretched, flipped or rotated as
   drawn), embedded textures, the item Display, named groups, multiblocks drawn whole and cut into
@@ -197,7 +221,7 @@ orientation follows the transform maths (not checked against a client).
 ## Owner review checklist (0.2.0-dev.6)
 
 **dev.6 (Blockbench authoring):** no visual change intended; the pieces now come from Blockbench
-projects and compare identical to dev.5 headlessly. Check once in the trial instance: open a piece
+projects and compare identical to dev.5 headlessly. Check once in the mod-test instance (workspace CLAUDE.md: never an `Evil Eye Trial *` instance): open a piece
 in Blockbench 5.2.2, save it unchanged and reopen it; make a small reversible geometry edit, a rug or
 lamp-shade texel edit and a Display edit, and see each after F3+T without restarting or a new jar
 (docs/BLOCKBENCH.md); all facings, lit/active states, multiblock seams, the kettle and pot on the
@@ -205,7 +229,7 @@ stove, neighbour occlusion, held/frame/GUI views and shaders; two clients reload
 
 Status: **awaiting owner review.** Since dev.4: dried bundles are 2D inset sprites again (dev.5), the mortar is the kettle's size. Since dev.2: slim stemmed hung bundles, rack legs meeting at an apex under small caps. Since dev.1: 3D growth stages, one dark wood, rack legs on their
 feet, smaller kettle and pot, stovepipe out of the stove's back, solid hearth back, no flickering
-tops, wet-looking watered beds (joined too), 3D hung bundles (no leaking onto the host block). Trial instance, creative; `/herbalwitch showcase` on a clear
+tops, wet-looking watered beds (joined too), 3D hung bundles (no leaking onto the host block). Mod-test instance, creative; `/herbalwitch showcase` on a clear
 plot, then walk it.
 
 1. **Garden:** every herb age stands in the soil (bed and farmland); mature herbs bushy, vibrant,
@@ -219,6 +243,11 @@ plot, then walk it.
    ivy dense enough; all four facings.
 4. **Context:** items in hand, GUI, frames; shaders off and on; F3+T; an existing dev.5 world's beds
    joining after a little while (random ticks repair them).
+
+5. **Grimoire (0.3.0 first drafts):** the stand and bookshelf in all four facings, on a floor and refused
+   without support, beside walls and full blocks (no x-ray strips), held and GUI views of the book, the
+   reader at normal GUI scales (readable text, recipe pages), the station "Grimoire" button; shaders
+   off and on.
 
 Feedback wanted: per piece keep / change (what); whether "more blocks" means new furniture pieces
 (such as the 2-wide dresser) as well as richer models.

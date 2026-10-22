@@ -11,7 +11,9 @@
     "block/stations/hearth",
     "block/stations/stove",
     "block/decor/templates",
-    "block/preparations/templates"
+    "block/preparations/templates",
+    "block/grimoire/stand",
+    "block/grimoire/bookshelf"
   ],
   "projects": [
     "stations/kettle",
@@ -25,6 +27,8 @@
     "decor/wall_shelf",
     "decor/table_lamp",
     "decor/rug",
-    "preparations/oil_lantern"
+    "preparations/oil_lantern",
+    "grimoire/stand",
+    "grimoire/bookshelf"
   ]
 }
