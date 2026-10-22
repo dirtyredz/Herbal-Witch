@@ -177,18 +177,18 @@ export const SCENES = [
     ],
   },
   {
-    // the grimoire's research pieces in a little study: the witch's bookshelf beside the armchair,
-    // the grimoire stand facing the reader, a lit lamp on the counter
+    // the grimoire's research pieces in a little study, against one wall: two witch's bookshelves,
+    // the grimoire stand pulled forward, the armchair, and a lit lamp on the counter
     name: 'grimoire-study',
     view: 'iso',
     scale: 12,
     entries: [
       { at: [0, 0, 1], block: `${HW}grimoire/bookshelf`, props: { facing: 'north' } },
       { at: [1, 0, 1], block: `${HW}grimoire/bookshelf`, props: { facing: 'north' } },
-      { at: [2, 0, 0], block: `${HW}decor/seating/armchair`, props: { facing: 'west' } },
-      { at: [0, 0, -1], block: `${HW}grimoire/stand`, props: { facing: 'north' } },
-      { at: [3, 0, 1], block: `${HW}decor/surfaces/apothecary_counter`, props: { facing: 'north' } },
-      { at: [3, 1, 1], block: `${HW}decor/lighting/table_lamp`, props: { lit: true } },
+      { at: [2, 0, 0], block: `${HW}grimoire/stand`, props: { facing: 'north' } },
+      { at: [3, 0, 1], block: `${HW}decor/seating/armchair`, props: { facing: 'north' } },
+      { at: [4, 0, 1], block: `${HW}decor/surfaces/apothecary_counter`, props: { facing: 'north' } },
+      { at: [4, 1, 1], block: `${HW}decor/lighting/table_lamp`, props: { lit: true } },
     ],
   },
   {
