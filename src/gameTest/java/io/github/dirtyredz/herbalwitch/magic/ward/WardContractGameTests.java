@@ -47,6 +47,8 @@ public final class WardContractGameTests {
         helper.setBlock(STONE, WardRegistration.STONE.get());
         var owner = witch(helper, "ward_focus_contract", STONE.north());
         var rules = WitchRules.server().workings();
+        // Foreign wards left in the shared index by other tests would make the wider focused box overlap.
+        for (var stale : WardService.index().all()) WardService.index().remove(stale.id());
         check(!WardFocus.focused(level, pos), "unexpected initial focus");
         check(WardFocus.maxRadius(level, pos) == rules.wardRadius(), "base maximum changed");
         for (var focus : new net.minecraft.world.level.block.Block[]{StationBlocks.HEARTH.get(), StationBlocks.STOVE.get()}) {
@@ -56,8 +58,9 @@ public final class WardContractGameTests {
         }
         check(WardActivation.activate(owner, level, pos).equals("activated"), "activation");
         var record = WardService.record(level, pos).orElseThrow();
-        WardControls.radius(owner, level, pos, 1000);
-        check(record.radius() == rules.wardFocusRadius(), "chosen focused radius");
+        String chosen = WardControls.radius(owner, level, pos, 1000);
+        check(record.radius() == rules.wardFocusRadius(), "chosen focused radius: " + chosen + " radius=" + record.radius()
+                + " index=" + WardService.index().all());
         helper.setBlock(STONE.east(), Blocks.AIR);
         WardLifecycle.loaded(level, pos, (WardStoneBlockEntity) level.getBlockEntity(pos));
         helper.runAfterDelay(1, () -> {
