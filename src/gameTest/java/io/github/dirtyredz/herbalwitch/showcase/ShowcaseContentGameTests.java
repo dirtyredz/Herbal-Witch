@@ -113,10 +113,12 @@ public final class ShowcaseContentGameTests {
             }
         }
         check(blocks.getOrDefault(BotanyBlocks.herbBed(), 0) >= 56, "herb beds " + blocks.get(BotanyBlocks.herbBed()));
-        check(barrels == HerbCatalog.ALL.size() + 3, "sample barrels " + barrels); // one per herb, powders, products, grimoire supplies
+        check(barrels == HerbCatalog.ALL.size() + 4, "sample barrels " + barrels); // one per herb, powders, products, grimoire and altar supplies
         for (Block piece : GrimoireBlocks.all()) {
             check(blocks.getOrDefault(piece, 0) == 1, piece + " shown " + blocks.getOrDefault(piece, 0) + " times");
         }
+        Block altar = io.github.dirtyredz.herbalwitch.magic.ritual.registry.RitualBlocks.ALTAR.get();
+        check(blocks.getOrDefault(altar, 0) == 4, "the altar shown in " + blocks.getOrDefault(altar, 0) + " cells, expected 4");
         for (Block station : StationBlocks.all()) {
             check(blocks.getOrDefault(station, 0) >= 1, station + " missing from the showcase");
         }
