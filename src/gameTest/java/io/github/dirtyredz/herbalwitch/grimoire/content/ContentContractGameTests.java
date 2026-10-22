@@ -43,7 +43,9 @@ public final class ContentContractGameTests {
     @GameTest(template = TEMPLATE)
     public static void theCompleteOrderedIndexMatchesTheOriginalCatalogues(GameTestHelper helper) {
         var actual = content(helper).entries().stream().map(e -> e.key().serialized()).toList();
-        check(actual.equals(ContentOrderBaseline.KEYS), "complete ordered content differs from 4f2d2de: " + actual);
+        check(actual.stream().filter(key -> !ContentOrderAnimals.ADDITIONS.contains(key)).toList().equals(ContentOrderBaseline.KEYS),
+                "pre-M8 ordered content differs from 4f2d2de: " + actual);
+        check(actual.equals(ContentOrderAnimals.expected()), "complete ordered content differs from the M8 priority contract: " + actual);
         helper.succeed();
     }
 

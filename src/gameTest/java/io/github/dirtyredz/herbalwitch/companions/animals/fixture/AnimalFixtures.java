@@ -16,6 +16,10 @@ import java.util.UUID;
 
 public final class AnimalFixtures {
     private AnimalFixtures() {}
+    /** Batches share the world's transport gate. Let its configured interval elapse without resetting authority. */
+    public static void afterTransportInterval(GameTestHelper helper, Runnable action) {
+        helper.runAfterDelay(io.github.dirtyredz.herbalwitch.companions.animals.config.AnimalServerConfig.current().transactionInterval(), action);
+    }
     public static ServerPlayer player(GameTestHelper helper, String name) {
         ServerPlayer player = PlayerFixtures.player(helper, name, GameType.SURVIVAL, Direction.SOUTH);
         var pos = helper.absolutePos(new BlockPos(4, 1, 3)); player.moveTo(pos.getX() + .5, pos.getY(), pos.getZ() + .5, 0, 0);

@@ -16,17 +16,21 @@ public final class AnimalBaitGameTests {
     @GameTest(template = "empty", batch = "herbalwitch_animal_bait_navigation")
     public static void baitRequestsRealNavigationWithoutTrustAndStopsWhenHolderLosesBait(GameTestHelper h) {
         floor(h); var player = AnimalFixtures.player(h, "m8_bait_nav"); var cow = AnimalFixtures.animal(h, EntityType.COW);
-        player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(AnimalItems.bait(Bait.GRAIN))); BaitInterestIndex.update(player);
-        AnimalGoalInstaller.reconcile(cow);
-        var goal = (HerbalBaitGoal) cow.goalSelector.getAvailableGoals().stream().filter(g -> g.getGoal() instanceof HerbalBaitGoal).findFirst().orElseThrow().getGoal();
-        try {
-            goal.query(); check(goal.canUse(), "indexed bait not selected"); goal.start(); goal.tick();
-            check(!cow.getNavigation().isDone(), "real native navigation received no path");
-            check(AnimalCapability.of(cow).orElseThrow().state().isEmpty(), "attraction granted trust/state");
-            player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY); BaitInterestIndex.update(player);
-            check(!goal.canContinueToUse(), "lost bait kept attraction"); goal.stop(); check(cow.getNavigation().isDone(), "stopped bait kept path");
-        } finally { player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY); BaitInterestIndex.update(player); goal.stop(); }
-        h.succeed();
+        // Ground navigation needs real physics to settle the newly spawned cow first.
+        h.runAfterDelay(3, () -> {
+            check(cow.onGround(), "navigation fixture has not landed");
+            player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(AnimalItems.bait(Bait.GRAIN))); BaitInterestIndex.update(player);
+            AnimalGoalInstaller.reconcile(cow);
+            var goal = (HerbalBaitGoal) cow.goalSelector.getAvailableGoals().stream().filter(g -> g.getGoal() instanceof HerbalBaitGoal).findFirst().orElseThrow().getGoal();
+            try {
+                goal.query(); check(goal.canUse(), "indexed bait not selected"); goal.start(); goal.tick();
+                check(!cow.getNavigation().isDone(), "real native navigation received no path");
+                check(AnimalCapability.of(cow).orElseThrow().state().isEmpty(), "attraction granted trust/state");
+                player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY); BaitInterestIndex.update(player);
+                check(!goal.canContinueToUse(), "lost bait kept attraction"); goal.stop(); check(cow.getNavigation().isDone(), "stopped bait kept path");
+            } finally { player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY); BaitInterestIndex.update(player); goal.stop(); }
+            h.succeed();
+        });
     }
     @GameTest(template = "empty", batch = "herbalwitch_animal_bait_fairness")
     public static void holderCursorReachesNinthCandidateWithoutExaminingMoreThanEightPerQuery(GameTestHelper h) {

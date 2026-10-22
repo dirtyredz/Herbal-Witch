@@ -10,6 +10,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CaptureCheckpointTest {
     @TempDir Path directory;
+    @Test void endingATransactionRetainsTheWorldCooldownAndTheBoundaryReopensIt() {
+        var data = new CaptureSavedData(directory.resolve("interval.dat"), new CaptureCheckpoint());
+        int interval = io.github.dirtyredz.herbalwitch.companions.animals.config.AnimalServerConfig.current().transactionInterval();
+        assertTrue(data.begin(100));
+        assertFalse(data.begin(100 + interval)); // Still active, even after the time gate.
+        data.end();
+        assertFalse(data.begin(100 + interval - 1)); // Finishing does not reset the world-wide interval.
+        assertTrue(data.begin(100 + interval));
+        data.end();
+    }
     @Test void checksummedAtomicReplacementAndCorruptionDetection() throws Exception {
         var path = directory.resolve("ledger.dat"); var writer = new CaptureCheckpoint();
         assertTrue(writer.write(path, new byte[] {1, 2}, 1024)); assertTrue(writer.write(path, new byte[] {3, 4, 5}, 1024));

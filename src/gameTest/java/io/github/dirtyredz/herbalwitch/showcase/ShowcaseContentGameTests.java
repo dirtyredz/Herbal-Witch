@@ -87,13 +87,13 @@ public final class ShowcaseContentGameTests {
         helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class, new net.minecraft.world.phys.AABB(
                 helper.absolutePos(BlockPos.ZERO), helper.absolutePos(new BlockPos(FULL_X, 10, FULL_Z))).inflate(1))
                 .forEach(net.minecraft.world.entity.Entity::discard);
-        if (run(helper, as(op, 2), "herbalwitch showcase") == 0) {
-            var why = io.github.dirtyredz.herbalwitch.showcase.construction.ShowcasePreflight.check(ShowcasePlan.of(ShowcaseRegistry.sections()),
-                    helper.getLevel(), op, helper.absolutePos(io.github.dirtyredz.herbalwitch.fixture.ShowcaseFixtures.ORIGIN));
-            check(false, "showcase failed: " + why.map(c -> c.getString()).orElse("preflight passed"));
-        }
-        check(DiscoveryCapability.of(op).map(c -> c.state().size()).orElse(0) == 0, "building the showcase granted discoveries");
         ShowcasePlan plan = ShowcasePlan.of(ShowcaseRegistry.sections());
+        var why = io.github.dirtyredz.herbalwitch.showcase.construction.ShowcasePreflight.check(plan,
+                helper.getLevel(), op, helper.absolutePos(ORIGIN));
+        check(why.isEmpty(), "showcase preflight failed: " + why.map(c -> c.getString()).orElse(""));
+        // A construction failure may leave blocks. Rechecking preflight then hides the original exception.
+        check(run(helper, as(op, 2), "herbalwitch showcase") > 0, "showcase construction failed after successful preflight; see command error");
+        check(DiscoveryCapability.of(op).map(c -> c.state().size()).orElse(0) == 0, "building the showcase granted discoveries");
         Map<Block, Integer> blocks = new HashMap<>();
         Set<String> herbAges = new HashSet<>();
         int signs = 0;
@@ -139,6 +139,10 @@ public final class ShowcaseContentGameTests {
         check(blocks.getOrDefault(BotanyBlocks.herbBed(), 0) >= 56, "herb beds " + blocks.get(BotanyBlocks.herbBed()));
         // one per herb, powders, products, grimoire and altar supplies; Milestone 7: three preparation barrels, circle supplies, charms
         check(barrels == HerbCatalog.ALL.size() + 4 + 5 + 1, "sample barrels " + barrels);
+        var animalArea = plan.areas().stream().filter(a -> a.id().equals("animals")).findFirst().orElseThrow();
+        var supplies = (Container) helper.getLevel().getBlockEntity(helper.absolutePos(ORIGIN.offset(animalArea.x() + 24, 1, animalArea.z() + 1)));
+        check(supplies != null && supplies.countItem(io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.AdvancedPreparations.item(
+                io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.AdvancedProductCatalog.SLEEP)) == 16, "animal-care sleep supplies missing");
         var animalBox = new net.minecraft.world.phys.AABB(helper.absolutePos(ORIGIN), helper.absolutePos(ORIGIN.offset(plan.width(), ShowcasePlan.HEIGHT, plan.depth())));
         var samples = helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.Mob.class, animalBox);
         check(samples.size() == 16, "animal sample count " + samples.size());

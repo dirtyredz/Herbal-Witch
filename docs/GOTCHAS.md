@@ -1,5 +1,16 @@
 # Gotchas - The Herbal Witch
 
+- **Transport batches share the world cooldown.** A separate GameTest batch does not reset the
+  capture ledger's transaction interval. Wait the configured interval before the first transaction
+  and between transactions; do not reset authority or relax the production gate. Assert service
+  refusal codes separately from token/record outcomes so a busy fixture cannot look like a replay bug.
+- **Ground navigation needs a grounded entity.** Newly spawned animals have not completed a physics
+  tick. Bait navigation tests let the real cow land before requesting and asserting a native path.
+- **Sleep vials belong to `AdvancedPreparations`.** `PreparationItems.product` indexes everyday
+  products only. Showcase supply initializers execute during construction, so validate preflight
+  before running the command: a second preflight after a construction exception reports the newly
+  placed blocks as occupied and hides the original failure.
+
 - **Capture dirty is not durable.** Never call vanilla `SavedData.save(File)` as a checkpoint. The
   capture subclass overrides that path; all writes use the serialized, forced, atomic, verified
   writer. Failure retains dirty state and blocks transport. Preserve corrupt files; deleting one

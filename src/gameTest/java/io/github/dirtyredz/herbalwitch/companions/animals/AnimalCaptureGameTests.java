@@ -56,24 +56,28 @@ public final class AnimalCaptureGameTests {
     }
     @GameTest(template = "empty", batch = "herbalwitch_animal_capture_cycle", timeoutTicks = 100)
     public static void realActorCaptureReleaseAndCopiedTokenHaveOneAnimalEvenWithFullInventory(GameTestHelper h) {
-        floor(h); var player = AnimalFixtures.realPlayer(h, "transport"); var cow = AnimalFixtures.animal(h, EntityType.COW);
-        AnimalFixtures.relationship(cow, player.getUUID(), 80, 4); cow.addEffect(new MobEffectInstance(PreparationEffects.SLEEP.get(), 100));
-        for (int i = 0; i < player.getInventory().items.size(); i++) player.getInventory().setItem(i, new ItemStack(Items.STONE, 64));
-        player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(AnimalItems.CHARM.get()));
-        check(CaptureService.capture(player, cow, InteractionHand.MAIN_HAND) == null, "capture failed");
-        UUID animal = cow.getUUID(); ItemStack copy = player.getMainHandItem().copy(); var data = CaptureSavedData.get(player.server);
-        check(cow.isRemoved() && data.record(animal).orElseThrow().phase() == Phase.STORED, "source/ledger not stored");
-        check(copy.is(AnimalItems.FILLED_CHARM.get()) && copy.getTag().getCompound("Capture").getAllKeys().equals(java.util.Set.of("version", "token", "summary")), "payload leaked to item");
-        h.runAfterDelay(22, () -> {
-            BlockPos clicked = h.absolutePos(new BlockPos(5, 0, 5));
-            check(CaptureService.release(player, InteractionHand.MAIN_HAND, clicked, Direction.UP) == null, "release failed");
-            check(player.getMainHandItem().is(AnimalItems.CHARM.get()), "held filled charm was retained");
-            Mob released = (Mob) h.getLevel().getEntity(animal);
-            check(released != null && released != cow && CaptureReconciliation.generation(released) == 1, "wrong released incarnation");
-            check(AnimalTrustService.relationship(released, player.getUUID()).trust() == 80, "transport lost trust");
-            player.setItemInHand(InteractionHand.MAIN_HAND, copy);
-            check("token".equals(CaptureService.release(player, InteractionHand.MAIN_HAND, clicked, Direction.UP)), "copied token replayed");
-            check(h.getLevel().getEntity(animal) == released, "replay replaced animal"); h.succeed();
+        AnimalFixtures.afterTransportInterval(h, () -> {
+            floor(h); var player = AnimalFixtures.realPlayer(h, "transport"); var cow = AnimalFixtures.animal(h, EntityType.COW);
+            AnimalFixtures.relationship(cow, player.getUUID(), 80, 4); cow.addEffect(new MobEffectInstance(PreparationEffects.SLEEP.get(), 100));
+            for (int i = 0; i < player.getInventory().items.size(); i++) player.getInventory().setItem(i, new ItemStack(Items.STONE, 64));
+            player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(AnimalItems.CHARM.get()));
+            String denial = CaptureService.capture(player, cow, InteractionHand.MAIN_HAND);
+            check(denial == null, "capture failed: " + denial);
+            UUID animal = cow.getUUID(); ItemStack copy = player.getMainHandItem().copy(); var data = CaptureSavedData.get(player.server);
+            check(cow.isRemoved() && data.record(animal).orElseThrow().phase() == Phase.STORED, "source/ledger not stored");
+            check(copy.is(AnimalItems.FILLED_CHARM.get()) && copy.getTag().getCompound("Capture").getAllKeys().equals(java.util.Set.of("version", "token", "summary")), "payload leaked to item");
+            AnimalFixtures.afterTransportInterval(h, () -> {
+                BlockPos clicked = h.absolutePos(new BlockPos(5, 0, 5));
+                String releaseDenial = CaptureService.release(player, InteractionHand.MAIN_HAND, clicked, Direction.UP);
+                check(releaseDenial == null, "release failed: " + releaseDenial);
+                check(player.getMainHandItem().is(AnimalItems.CHARM.get()), "held filled charm was retained");
+                Mob released = (Mob) h.getLevel().getEntity(animal);
+                check(released != null && released != cow && CaptureReconciliation.generation(released) == 1, "wrong released incarnation");
+                check(AnimalTrustService.relationship(released, player.getUUID()).trust() == 80, "transport lost trust");
+                player.setItemInHand(InteractionHand.MAIN_HAND, copy);
+                check("token".equals(CaptureService.release(player, InteractionHand.MAIN_HAND, clicked, Direction.UP)), "copied token replayed");
+                check(h.getLevel().getEntity(animal) == released, "replay replaced animal"); h.succeed();
+            });
         });
     }
     @GameTest(template = "empty", batch = "herbalwitch_animal_capture_denial")
@@ -112,25 +116,28 @@ public final class AnimalCaptureGameTests {
     }
     @GameTest(template = "empty", batch = "herbalwitch_animal_canceled_release", timeoutTicks = 100)
     public static void canceledReleaseRetainsPayloadAndItemWithoutAutomaticSecondSpawn(GameTestHelper h) {
-        floor(h); var player = AnimalFixtures.realPlayer(h, "cancel_release"); var cow = AnimalFixtures.animal(h, EntityType.COW);
-        AnimalFixtures.relationship(cow, player.getUUID(), 80, 4); cow.addEffect(new MobEffectInstance(PreparationEffects.SLEEP.get(), 100));
-        player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(AnimalItems.CHARM.get()));
-        check(CaptureService.capture(player, cow, InteractionHand.MAIN_HAND) == null, "capture fixture failed");
-        UUID animal = cow.getUUID(); ItemStack before = player.getMainHandItem().copy();
-        h.runAfterDelay(22, () -> {
-            java.util.function.Consumer<net.minecraftforge.event.entity.EntityJoinLevelEvent> cancel = event -> {
-                if (event.getEntity().getUUID().equals(animal)) event.setCanceled(true);
-            };
-            net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(net.minecraftforge.eventbus.api.EventPriority.LOWEST, cancel);
-            try {
-                var clicked = h.absolutePos(new BlockPos(5, 0, 5));
-                check("quarantine".equals(CaptureService.release(player, InteractionHand.MAIN_HAND, clicked, Direction.UP)), "canceled spawn not quarantined");
-                var record = CaptureSavedData.get(player.server).record(animal).orElseThrow();
-                check(record.phase() == Phase.QUARANTINED && record.storedPayload(), "failed insertion lost recovery payload");
-                check(ItemStack.matches(before, player.getMainHandItem()) && h.getLevel().getEntity(animal) == null, "failed insertion changed item or left animal");
-                check("token".equals(CaptureService.release(player, InteractionHand.MAIN_HAND, clicked, Direction.UP)), "failed insertion automatically replayed");
-                check(CaptureSavedData.get(player.server).record(animal).orElseThrow() == record, "denied replay changed ledger"); h.succeed();
-            } finally { net.minecraftforge.common.MinecraftForge.EVENT_BUS.unregister(cancel); }
+        AnimalFixtures.afterTransportInterval(h, () -> {
+            floor(h); var player = AnimalFixtures.realPlayer(h, "cancel_release"); var cow = AnimalFixtures.animal(h, EntityType.COW);
+            AnimalFixtures.relationship(cow, player.getUUID(), 80, 4); cow.addEffect(new MobEffectInstance(PreparationEffects.SLEEP.get(), 100));
+            player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(AnimalItems.CHARM.get()));
+            String denial = CaptureService.capture(player, cow, InteractionHand.MAIN_HAND);
+            check(denial == null, "capture fixture failed: " + denial);
+            UUID animal = cow.getUUID(); ItemStack before = player.getMainHandItem().copy();
+            AnimalFixtures.afterTransportInterval(h, () -> {
+                java.util.function.Consumer<net.minecraftforge.event.entity.EntityJoinLevelEvent> cancel = event -> {
+                    if (event.getEntity().getUUID().equals(animal)) event.setCanceled(true);
+                };
+                net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(net.minecraftforge.eventbus.api.EventPriority.LOWEST, cancel);
+                try {
+                    var clicked = h.absolutePos(new BlockPos(5, 0, 5));
+                    check("quarantine".equals(CaptureService.release(player, InteractionHand.MAIN_HAND, clicked, Direction.UP)), "canceled spawn not quarantined");
+                    var record = CaptureSavedData.get(player.server).record(animal).orElseThrow();
+                    check(record.phase() == Phase.QUARANTINED && record.storedPayload(), "failed insertion lost recovery payload");
+                    check(ItemStack.matches(before, player.getMainHandItem()) && h.getLevel().getEntity(animal) == null, "failed insertion changed item or left animal");
+                    check("token".equals(CaptureService.release(player, InteractionHand.MAIN_HAND, clicked, Direction.UP)), "failed insertion automatically replayed");
+                    check(CaptureSavedData.get(player.server).record(animal).orElseThrow() == record, "denied replay changed ledger"); h.succeed();
+                } finally { net.minecraftforge.common.MinecraftForge.EVENT_BUS.unregister(cancel); }
+            });
         });
     }
     @GameTest(template = "empty", batch = "herbalwitch_animal_release_placement")

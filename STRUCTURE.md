@@ -240,7 +240,7 @@ herbalwitch/
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/decor/` — furniture GameTests; `placement/`, `seating/`, `storage/`, `sleeping/`, `openings/`, `lighting/` per behaviour (test names, not main packages)
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/fixture/` — shared GameTest world, player, botany, station, magic (`MagicFixtures`) and showcase fixtures
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/grimoire/` — grimoire GameTests: discovery, ingredients, access, teaching; `content/` covers entry factories, ordered source contracts and reloads
-- `src/gameTest/java/io/github/dirtyredz/herbalwitch/grimoire/content/` — entry flags, defensive copies and link order
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/grimoire/content/` — entry flags, defensive copies, link order and the frozen pre-M8 order pin with explicit M8 additions at their declared priorities
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/magic/` — witch (`witch/`), altar and circle (`ritual/`), `ward/` and `charm/` GameTests
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/magic/witch/status/` — test-only durable-state setup helpers
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/platform/` — cross-cutting block guards (occlusion); `recipe/` covers counted ingredient order and matching

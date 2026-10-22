@@ -3,6 +3,7 @@ package io.github.dirtyredz.herbalwitch.companions.animals.showcase;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.AdvancedProductCatalog;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.EverydayProductCatalog;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationItems;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.AdvancedPreparations;
 import io.github.dirtyredz.herbalwitch.companions.animals.registry.AnimalItems;
 import io.github.dirtyredz.herbalwitch.companions.animals.species.AnimalProfiles;
 import io.github.dirtyredz.herbalwitch.grimoire.registry.GrimoireItems;
@@ -55,7 +56,7 @@ public final class AnimalShowcaseSection implements ShowcaseSection {
                 int slot = 0;
                 for (var item : AnimalItems.all()) barrel.setItem(slot++, new ItemStack(item, item == AnimalItems.CHARM.get() ? 1 : 16));
                 barrel.setItem(slot++, new ItemStack(PreparationItems.product(EverydayProductCatalog.HEALING_SALVE), 16));
-                barrel.setItem(slot++, new ItemStack(PreparationItems.product(AdvancedProductCatalog.SLEEP), 16));
+                barrel.setItem(slot++, new ItemStack(AdvancedPreparations.item(AdvancedProductCatalog.SLEEP), 16));
                 barrel.setItem(slot, new ItemStack(GrimoireItems.BOOK.get()));
             }
         }));

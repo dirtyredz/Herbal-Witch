@@ -7,7 +7,7 @@ import io.github.dirtyredz.herbalwitch.companions.animals.registry.AnimalItems;
 import io.github.dirtyredz.herbalwitch.companions.animals.trust.AnimalCapability;
 import io.github.dirtyredz.herbalwitch.platform.player.OnlinePlayers;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationEffects;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationItems;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.AdvancedPreparations;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.AdvancedProductCatalog;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.projectile.PreparationProjectile;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.ThrowableApplications.Burst;
@@ -58,7 +58,7 @@ public final class AnimalAiGameTests {
     public static void realSleepProjectileUsesM7WakeAndImmunity(GameTestHelper h) {
         floor(h); var player = AnimalFixtures.player(h, "m8_sleep"); var cow = AnimalFixtures.animal(h, EntityType.COW);
         class Impact extends PreparationProjectile {
-            Impact() { super(h.getLevel(), player, Burst.SLEEP); setItem(new ItemStack(PreparationItems.product(AdvancedProductCatalog.SLEEP))); }
+            Impact() { super(h.getLevel(), player, Burst.SLEEP); setItem(new ItemStack(AdvancedPreparations.item(AdvancedProductCatalog.SLEEP))); }
             void hit() { onHit(new net.minecraft.world.phys.EntityHitResult(cow)); }
         }
         var projectile = new Impact(); projectile.setPos(cow.position()); h.getLevel().addFreshEntity(projectile); projectile.hit();
