@@ -42,7 +42,7 @@ public final class PreparationRegistration {
 
     /** Called once from the mod constructor. */
     public static void register(IEventBus modBus) {
-        GrimoireContent.register(GrimoireContent.Order.PREPARATIONS, new AdvancedPreparationEntries());
+        GrimoireContent.register(AdvancedPreparationEntries.PRIORITY, new AdvancedPreparationEntries());
         HerbCatalog.ALL.forEach(h -> DiscoveryForms.register(HerbEntries.key(h), DiscoveryForms.Order.PREPARED,
                 () -> java.util.List.of(PreparationItems.bundle(h), PreparationItems.powder(h))));
         PreparationBlocks.BLOCKS.register(modBus);

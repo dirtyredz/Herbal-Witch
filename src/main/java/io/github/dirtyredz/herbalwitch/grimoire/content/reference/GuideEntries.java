@@ -20,6 +20,9 @@ import java.util.function.Consumer;
  * follow by id.
  */
 public final class GuideEntries implements GrimoireContentSource {
+    /** Where this source reads in the index (lower first); spaced so a later feature slots between. */
+    public static final int PRIORITY = 0;
+
     /** The mod's guides, in reading order. */
     public static final List<String> ORDER = List.of("getting_started", "acquisition", "preparation", "stations", "heat",
             "products", "missing_ingredients", "research", "teaching");

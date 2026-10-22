@@ -34,6 +34,9 @@ import java.util.function.Consumer;
  * a non-witch needs to found the first lineage is here, readable before any discovery.
  */
 public final class AltarEntries implements GrimoireContentSource {
+    /** Where this source reads in the index (lower first); spaced so a later feature slots between. */
+    public static final int PRIORITY = 800;
+
     public static final String PREFIX = "grimoire." + HerbalWitch.MOD_ID + ".ritual.";
     public static final EntryKey ALTAR = EntryKey.of(EntryKey.Kind.STATION, AltarCatalog.id());
     public static final EntryKey CIRCLE = EntryKey.of(EntryKey.Kind.STATION, CircleCatalog.id());

@@ -55,11 +55,11 @@ public final class StationRegistration {
 
     /** Called once from the mod constructor. */
     public static void register(IEventBus modBus) {
-        GrimoireContent.register(GrimoireContent.Order.BREWING, new BrewingEntries());
-        GrimoireContent.register(GrimoireContent.Order.STATION_RECIPE, new StationRecipeEntries());
-        GrimoireContent.register(GrimoireContent.Order.STATION, new StationEntries());
+        GrimoireContent.register(BrewingEntries.PRIORITY, new BrewingEntries());
+        GrimoireContent.register(StationRecipeEntries.PRIORITY, new StationRecipeEntries());
+        GrimoireContent.register(StationEntries.PRIORITY, new StationEntries());
         ServerGrimoireContent.recipeGeneration(ProcessRecipeIndex::generation);
-        RecipeReferences.register(StationRecipeEntries::recipes);
+        RecipeReferences.register(StationRecipeEntries.PRIORITY, StationRecipeEntries::recipes);
         StationBlocks.BLOCKS.register(modBus);
         StationItems.ITEMS.register(modBus);
         StationBlockEntities.TYPES.register(modBus);

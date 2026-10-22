@@ -39,7 +39,7 @@ public final class GrimoireRegistration {
         modBus.addListener(DiscoveryEvents::registerCapabilities);
         modBus.addListener(GrimoireRegistration::creativeTab);
 
-        GrimoireContent.register(GrimoireContent.Order.GUIDE, new GuideEntries());
+        GrimoireContent.register(GuideEntries.PRIORITY, new GuideEntries());
         ServerGrimoireContent.listen(TeachingEvents::contentChanged);
 
         GrimoirePackets.register(new GrimoirePackets.ServerHandlers() {

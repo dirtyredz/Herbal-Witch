@@ -27,6 +27,9 @@ import java.util.function.Consumer;
  * say so and link the real station. Readable before any discovery; grants nothing.
  */
 public final class DecorEntries implements GrimoireContentSource {
+    /** Where this source reads in the index (lower first); spaced so a later feature slots between. */
+    public static final int PRIORITY = 500;
+
     private static final String PREFIX = "grimoire." + HerbalWitch.MOD_ID + ".decor.";
     public static final String SIZE = PREFIX + "size";
     public static final String CRAFTED = PREFIX + "crafted";

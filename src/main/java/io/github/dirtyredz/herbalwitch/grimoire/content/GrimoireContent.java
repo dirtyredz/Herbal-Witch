@@ -13,7 +13,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * The immutable grimoire index of one content revision: every entry the registered sources produce
@@ -29,10 +28,8 @@ public final class GrimoireContent {
     public static final String FURNITURE = "furniture";
     public static final String WITCHCRAFT = "witchcraft";
     private static final Logger LOGGER = LogUtils.getLogger();
-    /** Reading order is independent of registry/showcase/network bootstrap order. */
-    public enum Order { GUIDE, WITCH, BREWING, PREPARATIONS, STATION, DECOR, HERB, STATION_RECIPE, ALTAR, WARD, CHARM }
-    private record Source(Order order, GrimoireContentSource source) { }
-    private static final List<Source> SOURCES = new CopyOnWriteArrayList<>();
+    /** Reading order is each source's numeric priority, independent of registry/showcase/network bootstrap order. */
+    private static final Contributions<GrimoireContentSource> SOURCES = new Contributions<>();
 
     /**
      * What every source reads.
@@ -57,9 +54,14 @@ public final class GrimoireContent {
         this.entries = Collections.unmodifiableMap(entries);
     }
 
-    /** Registers a feature source; equal-order sources retain insertion order and first-key wins. */
-    public static void register(Order order, GrimoireContentSource source) {
-        SOURCES.add(new Source(order, source));
+    /** Registers a feature source at its own priority (lower first); equal priorities retain insertion order and first-key wins. */
+    public static void register(int priority, GrimoireContentSource source) {
+        SOURCES.add(priority, source);
+    }
+
+    /** The registered sources in index order. */
+    public static List<GrimoireContentSource> sources() {
+        return SOURCES.ordered();
     }
 
     public static GrimoireContent empty() {
@@ -67,8 +69,7 @@ public final class GrimoireContent {
     }
 
     public static GrimoireContent build(int revision, Inputs inputs) {
-        return build(revision, inputs, SOURCES.stream().sorted(java.util.Comparator.comparing(Source::order))
-                .map(Source::source).toList());
+        return build(revision, inputs, SOURCES.ordered());
     }
 
     static GrimoireContent build(int revision, Inputs inputs, List<GrimoireContentSource> sources) {

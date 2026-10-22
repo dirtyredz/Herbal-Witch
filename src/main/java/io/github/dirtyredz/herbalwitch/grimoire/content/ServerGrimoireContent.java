@@ -24,8 +24,8 @@ public final class ServerGrimoireContent {
     private static long tagGeneration = -1;
     private static Map<EntryKey, GrimoireDefinition> definitions;
     private static Map<String, HerbSummary> herbs;
-    private static java.util.function.Supplier<Map<String, HerbSummary>> herbSource = Map::of;
-    private static java.util.function.LongSupplier recipeGeneration = () -> 0;
+    private static volatile java.util.function.Supplier<Map<String, HerbSummary>> herbSource = Map::of;
+    private static volatile java.util.function.LongSupplier recipeGeneration = () -> 0;
     private static int revision;
 
     private ServerGrimoireContent() {

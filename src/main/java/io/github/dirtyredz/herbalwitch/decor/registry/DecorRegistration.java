@@ -25,7 +25,7 @@ public final class DecorRegistration {
 
     /** Called once from the mod constructor. */
     public static void register(IEventBus modBus) {
-        GrimoireContent.register(GrimoireContent.Order.DECOR, new DecorEntries());
+        GrimoireContent.register(DecorEntries.PRIORITY, new DecorEntries());
         for (FurnitureSpec spec : FurnitureCatalog.ALL) {
             DecorBlocks.register(spec, () -> DecorBlockFactory.create(spec));
         }

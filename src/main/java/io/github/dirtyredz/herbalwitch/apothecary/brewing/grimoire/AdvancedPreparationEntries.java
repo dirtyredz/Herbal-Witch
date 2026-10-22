@@ -24,6 +24,9 @@ import java.util.function.Consumer;
 
 /** Public guidance for finished preparations and the deferred familiar preparations. */
 public final class AdvancedPreparationEntries implements GrimoireContentSource {
+    /** Where this source reads in the index (lower first); spaced so a later feature slots between. */
+    public static final int PRIORITY = 300;
+
     public static final String PREFIX = WitchcraftKeys.PREFIX;
     /** The pages, in reading order. */
     public static final List<String> PAGES = List.of("preparations", "familiar");

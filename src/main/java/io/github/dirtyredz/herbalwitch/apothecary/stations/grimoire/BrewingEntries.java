@@ -14,6 +14,9 @@ import java.util.function.Consumer;
 
 /** Station-owned guidance for magical processing; finished preparation guidance belongs to brewing. */
 public final class BrewingEntries implements GrimoireContentSource {
+    /** Where this source reads in the index (lower first); spaced so a later feature slots between. */
+    public static final int PRIORITY = 200;
+
     @Override
     public void contribute(GrimoireContent.Inputs inputs, Consumer<GrimoireEntry> out) {
         String prefix = WitchcraftKeys.PREFIX;

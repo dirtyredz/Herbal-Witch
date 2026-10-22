@@ -33,7 +33,7 @@ public final class WitchRegistration {
 
     /** Called once from the mod constructor, after the grimoire (message ids follow registration order). */
     public static void register(IEventBus modBus) {
-        GrimoireContent.register(GrimoireContent.Order.WITCH, new WitchEntries());
+        GrimoireContent.register(WitchEntries.PRIORITY, new WitchEntries());
         WitchServerConfig.register(modBus);
         modBus.addListener(WitchLifecycleEvents::registerCapabilities);
         WitchPackets.register();

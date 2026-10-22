@@ -24,6 +24,9 @@ import java.util.function.Consumer;
  * needs heat, or, for the hearth and stove, how they heat the vessel above them.
  */
 public final class StationEntries implements GrimoireContentSource {
+    /** Where this source reads in the index (lower first); spaced so a later feature slots between. */
+    public static final int PRIORITY = 400;
+
     private static final String PREFIX = "grimoire." + HerbalWitch.MOD_ID + ".station.";
     public static final String RUNS = PREFIX + "runs";
     public static final String NEEDS_HEAT = PREFIX + "needs_heat";

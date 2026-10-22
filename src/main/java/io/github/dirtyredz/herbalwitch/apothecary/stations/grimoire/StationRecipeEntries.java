@@ -40,6 +40,9 @@ import java.util.stream.Collectors;
  * ingredients and the recipes that make each ingredient.
  */
 public final class StationRecipeEntries implements GrimoireContentSource {
+    /** Where this source reads in the index (lower first); spaced so a later feature slots between. */
+    public static final int PRIORITY = 700;
+
     public static final String HINT = "grimoire." + HerbalWitch.MOD_ID + ".hint.recipe";
     private static volatile Set<Item> products;
 

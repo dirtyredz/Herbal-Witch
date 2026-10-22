@@ -25,6 +25,9 @@ import java.util.function.Consumer;
  * Activation and settings are explained here, never shown as a fictitious crafting recipe.
  */
 public final class WardEntries implements GrimoireContentSource {
+    /** Where this source reads in the index (lower first); spaced so a later feature slots between. */
+    public static final int PRIORITY = 900;
+
     public static final String PREFIX = WitchcraftKeys.PREFIX + "wards.";
     public static final EntryKey KEY = EntryKey.of(EntryKey.Kind.GUIDE, HerbalWitch.MOD_ID + ":witchcraft/wards");
 

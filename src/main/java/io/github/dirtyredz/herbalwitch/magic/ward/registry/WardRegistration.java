@@ -62,7 +62,7 @@ public final class WardRegistration {
         forge.addListener(WardService::serverStarted);
         forge.addListener(WardService::serverStopped);
         forge.addListener(WardProtection::onChangeTarget);
-        GrimoireContent.register(GrimoireContent.Order.WARD, new WardEntries());
+        GrimoireContent.register(WardEntries.PRIORITY, new WardEntries());
         ShowcaseRegistry.register(new WardShowcaseSection());
     }
 

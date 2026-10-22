@@ -1,6 +1,7 @@
 package io.github.dirtyredz.herbalwitch.grimoire.content.recipe;
 
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
+import io.github.dirtyredz.herbalwitch.grimoire.content.Contributions;
 import io.github.dirtyredz.herbalwitch.platform.recipe.RecipeIngredients;
 import io.github.dirtyredz.herbalwitch.platform.recipe.RecipeView;
 import net.minecraft.resources.ResourceLocation;
@@ -15,12 +16,12 @@ import java.util.function.Function;
 
 /** Ordered read-only queries; feature adapters supply their live recipe views. */
 public final class RecipeReferences {
-    private static final List<Function<RecipeManager, ? extends List<? extends RecipeView>>> PROVIDERS = new ArrayList<>();
+    private static final Contributions<Function<RecipeManager, ? extends List<? extends RecipeView>>> PROVIDERS = new Contributions<>();
 
     private RecipeReferences() { }
 
-    public static void register(Function<RecipeManager, ? extends List<? extends RecipeView>> provider) {
-        PROVIDERS.add(provider);
+    public static void register(int priority, Function<RecipeManager, ? extends List<? extends RecipeView>> provider) {
+        PROVIDERS.add(priority, provider);
     }
 
     public static EntryKey key(ResourceLocation recipe) {
@@ -29,7 +30,7 @@ public final class RecipeReferences {
 
     private static List<RecipeView> recipes(RecipeManager manager) {
         List<RecipeView> out = new ArrayList<>();
-        PROVIDERS.forEach(provider -> out.addAll(provider.apply(manager)));
+        PROVIDERS.ordered().forEach(provider -> out.addAll(provider.apply(manager)));
         return out;
     }
 

@@ -27,7 +27,7 @@ public final class BotanyRegistration {
 
     /** Called once from the mod constructor. */
     public static void register(IEventBus modBus) {
-        GrimoireContent.register(GrimoireContent.Order.HERB, new HerbEntries());
+        GrimoireContent.register(HerbEntries.PRIORITY, new HerbEntries());
         ServerGrimoireContent.herbSource(HerbContentFacts::summaries);
         HerbCatalog.ALL.forEach(h -> DiscoveryForms.register(HerbEntries.key(h), DiscoveryForms.Order.RAW,
                 () -> java.util.List.of(BotanyItems.seeds(h), BotanyItems.fresh(h))));

@@ -33,6 +33,9 @@ import java.util.function.Consumer;
  * bonus), never a client's local defaults. An unknown herb still shows how to find it.
  */
 public final class HerbEntries implements GrimoireContentSource {
+    /** Where this source reads in the index (lower first); spaced so a later feature slots between. */
+    public static final int PRIORITY = 600;
+
     private static final String PREFIX = "grimoire." + HerbalWitch.MOD_ID + ".herb.";
     public static final String FORM_CROP = PREFIX + "form.crop";
     public static final String FORM_BUSH = PREFIX + "form.bush";

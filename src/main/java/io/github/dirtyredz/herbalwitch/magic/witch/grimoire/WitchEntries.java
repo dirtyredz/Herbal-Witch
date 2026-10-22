@@ -26,6 +26,9 @@ import java.util.stream.Collectors;
  * discovery; it grants and authorises nothing.
  */
 public final class WitchEntries implements GrimoireContentSource {
+    /** Where this source reads in the index (lower first); spaced so a later feature slots between. */
+    public static final int PRIORITY = 100;
+
     public static final String PREFIX = WitchcraftKeys.PREFIX;
     /** The pages, in reading order. */
     public static final List<String> PAGES = WitchcraftKeys.CONVERSION_PAGES;

@@ -23,6 +23,9 @@ import java.util.function.Consumer;
  * active rules, the strengths from the catalogue); the prose holds none.
  */
 public final class CharmEntries implements GrimoireContentSource {
+    /** Where this source reads in the index (lower first); spaced so a later feature slots between. */
+    public static final int PRIORITY = 1000;
+
     public static final String PREFIX = WitchcraftKeys.PREFIX + "charms.";
     public static final EntryKey KEY = EntryKey.of(EntryKey.Kind.GUIDE, HerbalWitch.MOD_ID + ":witchcraft/charms");
 
