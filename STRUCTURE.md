@@ -7,6 +7,11 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 
 ## Layout
 
+- `src/main/java/io/github/dirtyredz/herbalwitch/client/recipe/` — recipe text and counted stack presentation shared by reader and viewers
+- `src/test/java/io/github/dirtyredz/herbalwitch/client/recipe/` — translation keys, argument types and explicit rule multipliers
+- `src/test/java/io/github/dirtyredz/herbalwitch/client/grimoire/` — headless panel routing across the four screen hosts
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/client/recipe/` — counted-stack NBT/copy and duration characterization
+
 - `src/main/java/io/github/dirtyredz/herbalwitch/grimoire/content/input/` — neutral herb summaries with fixed protocol-4 preference codes
 - `src/main/java/io/github/dirtyredz/herbalwitch/grimoire/content/recipe/` — ordered queries over feature-registered live recipe views
 - `src/test/java/io/github/dirtyredz/herbalwitch/structure/` — dependency direction and durable-mutation boundary guards

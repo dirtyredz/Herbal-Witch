@@ -18,7 +18,7 @@ import java.util.Optional;
  * content and discoveries; the station's menu, slots and processing are untouched and stay the
  * server's. A processing station opens on its category; the hearth and stove on heat.
  */
-public final class StationGrimoirePanel {
+public final class StationGrimoirePanel implements GrimoirePanelHost.Panel {
     private static final int WIDTH = 124;
     private final GrimoireView view;
     private final Optional<EntryKey> start;
@@ -79,6 +79,14 @@ public final class StationGrimoirePanel {
         graphics.fill(x, y, x + WIDTH, y + height, 0xFF4A2A55);
         graphics.fill(x + 2, y + 2, x + WIDTH - 2, y + height - 2, 0xFFD9C7A0);
         view.render(graphics, mouseX, mouseY, partialTick);
+    }
+
+    @Override
+    public boolean tooltip(GuiGraphics graphics, Font font, int mouseX, int mouseY) {
+        ItemStack stack = hovered();
+        if (stack.isEmpty()) return false;
+        graphics.renderTooltip(font, stack, mouseX, mouseY);
+        return true;
     }
 
     /** The page item under the mouse, for the screen's tooltip. */

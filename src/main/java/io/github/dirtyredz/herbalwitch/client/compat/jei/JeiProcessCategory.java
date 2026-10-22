@@ -1,5 +1,9 @@
 package io.github.dirtyredz.herbalwitch.client.compat.jei;
 
+import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
+
+import io.github.dirtyredz.herbalwitch.client.recipe.RecipeText;
+
 import io.github.dirtyredz.herbalwitch.client.compat.ViewerLayout;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.ProcessingCategories;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipe;
@@ -62,12 +66,12 @@ public class JeiProcessCategory implements IRecipeCategory<ProcessRecipe> {
         List<ProcessRecipeDescription.Counted> ingredients = d.ingredients();
         for (int i = 0; i < ingredients.size(); i++) {
             builder.addSlot(RecipeIngredientRole.INPUT, ViewerLayout.ingredientX(i) + 1, ViewerLayout.INGREDIENT_Y + 1)
-                    .addItemStacks(ViewerLayout.stacks(ingredients.get(i)));
+                    .addItemStacks(RecipeText.stacks(ingredients.get(i)));
         }
         d.base().ifPresent(c -> builder.addSlot(RecipeIngredientRole.INPUT, ViewerLayout.BASE_X + 1, ViewerLayout.LOWER_Y + 1)
-                .addItemStacks(ViewerLayout.stacks(c)));
+                .addItemStacks(RecipeText.stacks(c)));
         d.packaging().ifPresent(c -> builder.addSlot(RecipeIngredientRole.INPUT, ViewerLayout.PACKAGING_X + 1, ViewerLayout.LOWER_Y + 1)
-                .addItemStacks(ViewerLayout.stacks(c)));
+                .addItemStacks(RecipeText.stacks(c)));
         builder.addSlot(RecipeIngredientRole.OUTPUT, ViewerLayout.RESULT_X + 1, ViewerLayout.RESULT_Y + 1).addItemStack(d.result());
         List<ItemStack> returns = d.returns();
         for (int i = 0; i < returns.size(); i++) {
@@ -78,8 +82,8 @@ public class JeiProcessCategory implements IRecipeCategory<ProcessRecipe> {
     @Override
     public void draw(ProcessRecipe recipe, IRecipeSlotsView slots, GuiGraphics graphics, double mouseX, double mouseY) {
         graphics.drawString(Minecraft.getInstance().font, "->", ViewerLayout.ARROW_X + 6, ViewerLayout.ARROW_Y + 4, 0x404040, false);
-        graphics.drawString(Minecraft.getInstance().font, ViewerLayout.footer(recipe.description()), 0, ViewerLayout.TEXT_Y, 0x404040, false);
-        ViewerLayout.requirements(recipe.description()).ifPresent(r -> graphics.drawString(Minecraft.getInstance().font, r, 0,
+        graphics.drawString(Minecraft.getInstance().font, RecipeText.footer(recipe.description().duration(), recipe.description().heated()), 0, ViewerLayout.TEXT_Y, 0x404040, false);
+        RecipeText.requirements(recipe.description().requirements(), WitchRules.current().workings().processingPercent()).ifPresent(r -> graphics.drawString(Minecraft.getInstance().font, r, 0,
                 ViewerLayout.REQUIREMENTS_Y, 0x6A2A5A, false));
     }
 }

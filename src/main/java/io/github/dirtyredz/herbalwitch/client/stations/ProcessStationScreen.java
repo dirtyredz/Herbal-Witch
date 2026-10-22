@@ -1,19 +1,15 @@
 package io.github.dirtyredz.herbalwitch.client.stations;
 
-import io.github.dirtyredz.herbalwitch.client.grimoire.StationGrimoirePanel;
+import io.github.dirtyredz.herbalwitch.client.grimoire.GrimoirePanelHost;
 import io.github.dirtyredz.herbalwitch.client.stations.widgets.MagicalProcessPanel;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.block.StationMenu;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessStation;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.ProcessStatus;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.item.ItemStack;
 
-import org.lwjgl.glfw.GLFW;
 
 import java.util.Optional;
 
@@ -26,7 +22,7 @@ import java.util.Optional;
  *
  * @param <M> the station's menu
  */
-public class ProcessStationScreen<M extends StationMenu> extends AbstractContainerScreen<M> {
+public class ProcessStationScreen<M extends StationMenu> extends GrimoirePanelHost<M> {
     /**
      * Where a station's widgets sit on its atlas. {@code flameX < 0}: no heat indicator.
      * {@code category}: the processing category its grimoire panel lists.
@@ -35,20 +31,18 @@ public class ProcessStationScreen<M extends StationMenu> extends AbstractContain
     }
 
     private final Layout layout;
-    private final StationGrimoirePanel grimoire;
     private final MagicalProcessPanel magic;
 
     public ProcessStationScreen(M menu, Inventory inventory, Component title, Layout layout) {
-        super(menu, inventory, title);
+        super(menu, inventory, title, Optional.of(layout.category()), Optional.empty(), true);
         this.layout = layout;
-        this.grimoire = new StationGrimoirePanel(Minecraft.getInstance().font, Optional.of(layout.category()), Optional.empty());
         this.magic = new MagicalProcessPanel(menu);
     }
 
     @Override
     protected void init() {
         super.init();
-        addRenderableWidget(grimoire.init(leftPos, topPos, imageWidth, imageHeight));
+        initGrimoire();
         magic.init(leftPos, topPos, imageWidth, this::addRenderableWidget);
     }
 
@@ -57,13 +51,7 @@ public class ProcessStationScreen<M extends StationMenu> extends AbstractContain
         renderBackground(graphics);
         magic.render(graphics, font);
         super.render(graphics, mouseX, mouseY, partialTick);
-        grimoire.render(graphics, mouseX, mouseY, partialTick);
-        ItemStack page = grimoire.hovered();
-        if (!page.isEmpty()) {
-            graphics.renderTooltip(font, page, mouseX, mouseY);
-        } else {
-            renderTooltip(graphics, mouseX, mouseY);
-        }
+        renderGrimoire(graphics, mouseX, mouseY, partialTick);
     }
 
     @Override
@@ -91,28 +79,8 @@ public class ProcessStationScreen<M extends StationMenu> extends AbstractContain
     @Override
     protected void containerTick() {
         super.containerTick();
-        grimoire.tick();
         magic.update();
     }
 
-    @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        return grimoire.mouseClicked(mouseX, mouseY, button) || super.mouseClicked(mouseX, mouseY, button);
-    }
 
-    @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
-        return grimoire.mouseScrolled(mouseX, mouseY, delta) || super.mouseScrolled(mouseX, mouseY, delta);
-    }
-
-    @Override
-    public boolean keyPressed(int key, int scanCode, int modifiers) {
-        return (key != GLFW.GLFW_KEY_ESCAPE && grimoire.keyPressed(key, scanCode, modifiers))
-                || super.keyPressed(key, scanCode, modifiers);
-    }
-
-    @Override
-    public boolean charTyped(char c, int modifiers) {
-        return grimoire.charTyped(c, modifiers) || super.charTyped(c, modifiers);
-    }
 }

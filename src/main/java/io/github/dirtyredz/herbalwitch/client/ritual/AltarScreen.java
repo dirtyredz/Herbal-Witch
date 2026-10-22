@@ -1,7 +1,7 @@
 package io.github.dirtyredz.herbalwitch.client.ritual;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.client.grimoire.StationGrimoirePanel;
+import io.github.dirtyredz.herbalwitch.client.grimoire.GrimoirePanelHost;
 import io.github.dirtyredz.herbalwitch.client.ritual.widgets.AltarActionPanel;
 import io.github.dirtyredz.herbalwitch.client.ritual.widgets.CirclePanel;
 import io.github.dirtyredz.herbalwitch.client.ritual.widgets.InitiationPanel;
@@ -17,12 +17,10 @@ import io.github.dirtyredz.herbalwitch.magic.witch.network.WitchSnapshot;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.BlockPos;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +35,7 @@ import java.util.UUID;
  * or interruption. Everything shown comes from the server's private updates and snapshot; buttons
  * send intent only. The grimoire opens beside it on the altar's page.
  */
-public class AltarScreen extends AbstractContainerScreen<AltarMenu> implements CirclePanel.CircleUi {
+public class AltarScreen extends GrimoirePanelHost<AltarMenu> implements CirclePanel.CircleUi {
     public static final ResourceLocation ATLAS = ResourceLocation.fromNamespaceAndPath(HerbalWitch.MOD_ID, "textures/gui/witch/altar.png");
     private static final String UI = "ritual.herbalwitch.ui.";
     private static final int INK = 0xFF3B2416;
@@ -51,12 +49,11 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> implements C
     private final InitiationPanel initiation = new InitiationPanel();
     private final CirclePanel circle = new CirclePanel();
     private boolean circleView;
-    private StationGrimoirePanel grimoire;
     private int built = -1;
     private Optional<AltarUpdate.Activity> activity = Optional.empty();
 
     public AltarScreen(AltarMenu menu, Inventory inventory, Component title) {
-        super(menu, inventory, title);
+        super(menu, inventory, title, Optional.empty(), Optional.of(AltarEntries.ALTAR), false);
         imageWidth = 252;
         imageHeight = 200;
     }
@@ -64,9 +61,6 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> implements C
     @Override
     protected void init() {
         super.init();
-        if (grimoire == null) {
-            grimoire = new StationGrimoirePanel(font, Optional.empty(), Optional.of(AltarEntries.ALTAR));
-        }
         built = -1;
     }
 
@@ -78,7 +72,7 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> implements C
     private void rebuild() {
         clearWidgets();
         lines.clear();
-        addRenderableWidget(grimoire.init(leftPos, topPos, imageWidth, imageHeight));
+        initGrimoire();
         int left = leftPos + 8;
         int right = leftPos + 130;
         int top = topPos + 18;
@@ -161,7 +155,7 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> implements C
 
     @Override
     protected void containerTick() {
-        grimoire.tick();
+        super.containerTick();
         if (built != signature()) {
             built = signature();
             rebuild();
@@ -179,11 +173,7 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> implements C
         for (Line line : lines) {
             graphics.drawString(font, line.text(), line.x(), line.y(), line.color(), false);
         }
-        grimoire.render(graphics, mouseX, mouseY, partialTick);
-        ItemStack hovered = grimoire.hovered();
-        if (!hovered.isEmpty()) {
-            graphics.renderTooltip(font, hovered, mouseX, mouseY);
-        }
+        renderGrimoire(graphics, mouseX, mouseY, partialTick);
     }
 
     @Override
@@ -203,23 +193,5 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> implements C
         graphics.drawString(font, title, 8, 6, INK, false);
     }
 
-    @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        return grimoire.mouseClicked(mouseX, mouseY, button) || super.mouseClicked(mouseX, mouseY, button);
-    }
 
-    @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
-        return grimoire.mouseScrolled(mouseX, mouseY, delta) || super.mouseScrolled(mouseX, mouseY, delta);
-    }
-
-    @Override
-    public boolean keyPressed(int key, int scanCode, int modifiers) {
-        return grimoire.keyPressed(key, scanCode, modifiers) || super.keyPressed(key, scanCode, modifiers);
-    }
-
-    @Override
-    public boolean charTyped(char c, int modifiers) {
-        return grimoire.charTyped(c, modifiers) || super.charTyped(c, modifiers);
-    }
 }

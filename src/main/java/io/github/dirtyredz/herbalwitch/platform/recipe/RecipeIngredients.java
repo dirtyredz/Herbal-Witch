@@ -1,9 +1,7 @@
 package io.github.dirtyredz.herbalwitch.platform.recipe;
 
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /** Ordered ingredient roles shared by projection, discovery and research. */
@@ -30,8 +28,4 @@ public final class RecipeIngredients {
         return out;
     }
 
-    /** Display stacks of an ingredient, for pages and search. */
-    public static List<ItemStack> stacks(Ingredient ingredient) {
-        return Arrays.asList(ingredient.getItems());
-    }
 }

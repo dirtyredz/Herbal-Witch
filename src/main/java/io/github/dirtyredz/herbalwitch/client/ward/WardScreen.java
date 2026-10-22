@@ -1,7 +1,7 @@
 package io.github.dirtyredz.herbalwitch.client.ward;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
-import io.github.dirtyredz.herbalwitch.client.grimoire.StationGrimoirePanel;
+import io.github.dirtyredz.herbalwitch.client.grimoire.GrimoirePanelHost;
 import io.github.dirtyredz.herbalwitch.magic.ward.catalog.WardCatalog;
 import io.github.dirtyredz.herbalwitch.magic.ward.grimoire.WardEntries;
 import io.github.dirtyredz.herbalwitch.magic.ward.menu.WardMenu;
@@ -10,12 +10,10 @@ import io.github.dirtyredz.herbalwitch.magic.witch.config.WorkingRules;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,13 +25,12 @@ import java.util.Optional;
  * are vanilla menu-button clicks and the server decides. Closing it shows the boundary briefly
  * ({@link WardBoundaryPreview}).
  */
-public class WardScreen extends AbstractContainerScreen<WardMenu> {
+public class WardScreen extends GrimoirePanelHost<WardMenu> {
     public static final ResourceLocation ATLAS = ResourceLocation.fromNamespaceAndPath(HerbalWitch.MOD_ID, "textures/gui/witch/ward.png");
     private static final String UI = "ward.herbalwitch.ui.";
     private static final int INK = 0xFF3B2416;
     private static final int ALERT = 0xFFB0305A;
 
-    private StationGrimoirePanel grimoire;
     private Button activate;
     private Button deactivate;
     private Button release;
@@ -42,7 +39,7 @@ public class WardScreen extends AbstractContainerScreen<WardMenu> {
     private Button profile;
 
     public WardScreen(WardMenu menu, Inventory inventory, Component title) {
-        super(menu, inventory, title);
+        super(menu, inventory, title, Optional.empty(), Optional.of(WardEntries.KEY), false);
         imageWidth = 200;
         imageHeight = 150;
     }
@@ -50,10 +47,7 @@ public class WardScreen extends AbstractContainerScreen<WardMenu> {
     @Override
     protected void init() {
         super.init();
-        if (grimoire == null) {
-            grimoire = new StationGrimoirePanel(font, Optional.empty(), Optional.of(WardEntries.KEY));
-        }
-        addRenderableWidget(grimoire.init(leftPos, topPos, imageWidth, imageHeight));
+        initGrimoire();
         int x = leftPos + 8;
         int y = topPos + 82;
         down = button("radius_down", x + 110, y, 18, WardMenu.Button.RADIUS_DOWN);
@@ -92,7 +86,6 @@ public class WardScreen extends AbstractContainerScreen<WardMenu> {
     @Override
     protected void containerTick() {
         super.containerTick();
-        grimoire.tick();
         updateButtons();
     }
 
@@ -100,11 +93,7 @@ public class WardScreen extends AbstractContainerScreen<WardMenu> {
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         renderBackground(graphics);
         super.render(graphics, mouseX, mouseY, partialTick);
-        grimoire.render(graphics, mouseX, mouseY, partialTick);
-        ItemStack hovered = grimoire.hovered();
-        if (!hovered.isEmpty()) {
-            graphics.renderTooltip(font, hovered, mouseX, mouseY);
-        }
+        renderGrimoire(graphics, mouseX, mouseY, partialTick);
     }
 
     @Override
@@ -149,23 +138,5 @@ public class WardScreen extends AbstractContainerScreen<WardMenu> {
                 WitchRules.current().workings().wardHeight());
     }
 
-    @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        return grimoire.mouseClicked(mouseX, mouseY, button) || super.mouseClicked(mouseX, mouseY, button);
-    }
 
-    @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
-        return grimoire.mouseScrolled(mouseX, mouseY, delta) || super.mouseScrolled(mouseX, mouseY, delta);
-    }
-
-    @Override
-    public boolean keyPressed(int key, int scanCode, int modifiers) {
-        return grimoire.keyPressed(key, scanCode, modifiers) || super.keyPressed(key, scanCode, modifiers);
-    }
-
-    @Override
-    public boolean charTyped(char c, int modifiers) {
-        return grimoire.charTyped(c, modifiers) || super.charTyped(c, modifiers);
-    }
 }

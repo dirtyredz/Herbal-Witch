@@ -1,5 +1,9 @@
 package io.github.dirtyredz.herbalwitch.client.compat.emi;
 
+import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
+
+import io.github.dirtyredz.herbalwitch.client.recipe.RecipeText;
+
 import dev.emi.emi.api.recipe.BasicEmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.render.EmiTexture;
@@ -48,7 +52,7 @@ public class EmiProcessRecipe extends BasicEmiRecipe {
         for (int i = 0; i < returns.size(); i++) {
             widgets.addSlot(EmiStack.of(returns.get(i)), ViewerLayout.returnX(i), ViewerLayout.RESULT_Y).recipeContext(this);
         }
-        widgets.addText(ViewerLayout.footer(description), 0, ViewerLayout.TEXT_Y, 0x404040, false);
-        ViewerLayout.requirements(description).ifPresent(r -> widgets.addText(r, 0, ViewerLayout.REQUIREMENTS_Y, 0x6A2A5A, false));
+        widgets.addText(RecipeText.footer(description.duration(), description.heated()), 0, ViewerLayout.TEXT_Y, 0x404040, false);
+        RecipeText.requirements(description.requirements(), WitchRules.current().workings().processingPercent()).ifPresent(r -> widgets.addText(r, 0, ViewerLayout.REQUIREMENTS_Y, 0x6A2A5A, false));
     }
 }
