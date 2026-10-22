@@ -2,7 +2,7 @@
 // (stems, leaf greens, petals, berries), each with a lighter top-left and soft speckle so a small
 // cube reads as a living surface. tools/models/botany/plants.mjs names swatches by SWATCHES index.
 import { image, rng, clamp } from '../../pixels.mjs';
-import { hex } from './sprites.mjs';
+import { hex } from '../../drawing/sprites.mjs';
 
 /** Swatch names in atlas order (row by row, 8 per row). */
 export const SWATCHES = [

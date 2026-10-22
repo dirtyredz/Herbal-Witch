@@ -5,7 +5,7 @@
 // pass made both dark and the watered state vanished. Seamless, so joined beds read as one.
 import { image, rng, clamp } from '../../pixels.mjs';
 import { smoothNoise } from '../../motifs.mjs';
-import { hex } from './sprites.mjs';
+import { hex } from '../../drawing/sprites.mjs';
 
 const SIZE = 32;
 

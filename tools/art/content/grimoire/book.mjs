@@ -2,8 +2,8 @@
 // outlined by the shared item kit. Thick dark plum leather cover, forest green spine band on the
 // left, a gold clasp tab on the right edge, a gold crescent-and-leaf emblem, cream page edges along
 // the bottom. Drawn from a character grid so the shape is readable in the source.
-import { hex, set } from '../botany/sprites.mjs';
-import { item } from '../preparations/materials.mjs';
+import { hex, set } from '../../drawing/sprites.mjs';
+import { item } from '../../drawing/items.mjs';
 
 const KEY = {
   P: hex('#4a2a55'), // plum leather

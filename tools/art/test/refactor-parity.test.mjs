@@ -4,8 +4,8 @@ import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { textureManifest } from '../catalogue.mjs';
 import { png } from '../../image/png-encode.mjs';
-import { canvas, set, finish } from '../content/botany/sprites.mjs';
-import { finishOutlined } from '../content/preparations/materials.mjs';
+import { canvas, set, finish } from '../drawing/sprites.mjs';
+import { finishOutlined } from '../drawing/items.mjs';
 import { reader } from '../interface/grimoire.mjs';
 import { Sheet, slot } from '../interface/kit.mjs';
 

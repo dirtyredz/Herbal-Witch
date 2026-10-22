@@ -1,6 +1,6 @@
 // Advanced preparation sprites (Milestone 7): the player drinks, throwing vials, oil phials, the blinding
 // dust and moon essence, the familiar tonics / essences / oil, and the four-dose cauldron mixtures.
-// 16 x 16, alpha 0/255, outlined, drawn with the kit in preparations/materials.mjs. Each family has its
+// 16 x 16, alpha 0/255, outlined, drawn with the kit in drawing/items.mjs. Each family has its
 // own silhouette so a stack reads at a glance before its colour does:
 //   potion  round-bellied corked bottle, cream label with an ink glyph   (player drinks)
 //   vial    small glass globe, short neck wrapped in twine, a fuse tail  (throwables)
@@ -9,8 +9,8 @@
 //   gourd   two-lobed stoppered gourd with a paw print                   (familiar tonics)
 //   crock   big round flask, wide cork, four tally marks on its label    (cauldron mixtures)
 // Exports ADVANCED as [[path relative to textures/item/preparations/, maker]].
-import { hex, set } from '../botany/sprites.mjs';
-import { P, rect, spans, item } from './materials.mjs';
+import { hex, set } from '../../drawing/sprites.mjs';
+import { P, rect, spans, item } from '../../drawing/items.mjs';
 
 const ramp = (a, b, c) => [hex(a), hex(b), hex(c)];
 const INK = hex('#3a2a20');

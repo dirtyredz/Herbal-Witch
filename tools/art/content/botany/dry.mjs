@@ -1,5 +1,7 @@
 // Dry-ground herbs: rosemary, thyme.
-import { R, set, line, sprite, seeds } from './sprites.mjs';
+import { R } from '../../drawing/plant-motifs.mjs';
+import { set, line, sprite } from '../../drawing/sprites.mjs';
+import { seeds } from './seeds.mjs';
 
 export default {
   rosemary: {

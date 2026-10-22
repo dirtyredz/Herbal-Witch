@@ -7,6 +7,10 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 
 ## Layout
 
+- `tools/art/drawing/` — neutral sprite canvas/outline primitives, reusable plant motifs and item drawing
+- `tools/art/content/botany/seeds.mjs` — botanical seed layouts over the shared drawing primitives
+- `tools/art/test/fixtures/` — frozen pre-refactor procedural manifest order and PNG hashes
+
 - `src/main/java/io/github/dirtyredz/herbalwitch/client/recipe/` — recipe text and counted stack presentation shared by reader and viewers
 - `src/test/java/io/github/dirtyredz/herbalwitch/client/recipe/` — translation keys, argument types and explicit rule multipliers
 - `src/test/java/io/github/dirtyredz/herbalwitch/client/grimoire/` — headless panel routing across the four screen hosts

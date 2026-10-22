@@ -15,48 +15,22 @@
 //   ( 60, 184)   9 x 9    "missing" marker: hot pink cross
 //   ( 72, 184)  22 x 15   filled right-pointing arrow, green edge, pink fill
 import { rng } from '../pixels.mjs';
+import { Sheet, slot, hex, C as GUI } from './kit.mjs';
 
-const W = 256;
-const hex = (s) => [1, 3, 5].map((i) => parseInt(s.slice(i, i + 2), 16));
 const C = {
+  ...GUI,
   edge: hex('#1c0f24'),
   plum: hex('#4a2a55'),
   plumHi: hex('#5c3668'),
   plumLo: hex('#3a1f44'),
-  parch: hex('#d9c7a0'),
-  parchHi: hex('#e8dab8'),
-  parchLo: hex('#b8a47c'),
   parchDeep: hex('#a08c66'),
-  slot: hex('#a8946f'),
-  slotLo: hex('#4a3622'),
-  slotHi: hex('#f2e8cf'),
   gold: hex('#e0b040'),
   goldHi: hex('#f6d86a'),
   goldLo: hex('#8a5e18'),
-  pink: hex('#d8407a'),
   pinkHi: hex('#ee7aa4'),
   pinkLo: hex('#a82a5c'),
-  green: hex('#2f5a2c'),
-  greenHi: hex('#4a8040'),
   greenLo: hex('#1f3f1e'),
-  purple: hex('#4a2a55'),
 };
-
-class Sheet {
-  constructor() {
-    this.px = Array.from({ length: W * W }, () => [0, 0, 0, 0]);
-  }
-  set(x, y, c) {
-    if (x < 0 || y < 0 || x >= W || y >= W) return;
-    this.px[y * W + x] = [c[0], c[1], c[2], 255];
-  }
-  rect(x0, y0, w, h, c) {
-    for (let y = y0; y < y0 + h; y++) for (let x = x0; x < x0 + w; x++) this.set(x, y, c);
-  }
-  image() {
-    return { size: W, px: this.px };
-  }
-}
 
 const SPREAD_W = 252;
 const SPREAD_H = 180;
@@ -145,21 +119,6 @@ function spread(s) {
   ivy(s, 243, -1, 56);
 }
 
-/** An 18 x 18 slot frame at (x0, y0): dark top/left, light bottom/right (the station slot style). */
-function slot(s, x0, y0) {
-  s.rect(x0, y0, 18, 18, C.slot);
-  for (let i = 0; i < 18; i++) {
-    s.set(x0 + i, y0, C.slotLo);
-    s.set(x0, y0 + i, C.slotLo);
-  }
-  for (let i = 1; i < 18; i++) {
-    s.set(x0 + i, y0 + 17, C.slotHi);
-    s.set(x0 + 17, y0 + i, C.slotHi);
-  }
-  s.set(x0 + 17, y0, C.parch);
-  s.set(x0, y0 + 17, C.parch);
-}
-
 /** Blits a character pattern; characters missing from the key are transparent. */
 function stamp(s, x0, y0, rows, key) {
   rows.forEach((row, y) => [...row].forEach((ch, x) => key[ch] && s.set(x0 + x, y0 + y, key[ch])));
@@ -241,7 +200,7 @@ function arrow(s) {
 export const reader = () => {
   const s = new Sheet();
   spread(s);
-  slot(s, 0, 184);
+  slot(s, 1, 185);
   markers(s);
   arrow(s);
   return s.image();

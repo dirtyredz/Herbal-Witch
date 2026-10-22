@@ -1,5 +1,7 @@
 // Temperate-meadow herbs: lavender, sage, chamomile, yarrow.
-import { R, set, line, leaf, blob, bloom, sprite, seeds } from './sprites.mjs';
+import { R, leaf, blob, bloom } from '../../drawing/plant-motifs.mjs';
+import { set, line, sprite } from '../../drawing/sprites.mjs';
+import { seeds } from './seeds.mjs';
 
 export default {
   lavender: {

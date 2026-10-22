@@ -1,5 +1,7 @@
 // Shade herbs: valerian, mugwort.
-import { R, set, line, leaf, blob, sprite, seeds } from './sprites.mjs';
+import { R, leaf, blob } from '../../drawing/plant-motifs.mjs';
+import { set, line, sprite } from '../../drawing/sprites.mjs';
+import { seeds } from './seeds.mjs';
 
 const head = (cv, x, y) => {
   blob(cv, x, y, 2.2, 1.7, R.pink);

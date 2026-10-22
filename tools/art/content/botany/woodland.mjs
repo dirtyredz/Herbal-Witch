@@ -1,5 +1,7 @@
 // Woodland (toxic) herbs: belladonna, nightshade, wolfsbane, mandrake. Darker and moodier.
-import { R, set, line, leaf, blob, bell, berry, sprite, seeds } from './sprites.mjs';
+import { R, leaf, blob, bell, berry } from '../../drawing/plant-motifs.mjs';
+import { set, line, sprite } from '../../drawing/sprites.mjs';
+import { seeds } from './seeds.mjs';
 
 export default {
   belladonna: {

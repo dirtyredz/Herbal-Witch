@@ -1,5 +1,7 @@
 // Wet-ground herbs: mint, nettle.
-import { R, set, line, leaf, sprite, seeds } from './sprites.mjs';
+import { R, leaf } from '../../drawing/plant-motifs.mjs';
+import { set, line, sprite } from '../../drawing/sprites.mjs';
+import { seeds } from './seeds.mjs';
 
 const pair = (cv, x, y, len, w, r, jag, lift = 20) => {
   leaf(cv, x, y, 180 - lift, len, w, r, jag);

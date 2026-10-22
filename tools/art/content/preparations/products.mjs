@@ -1,9 +1,10 @@
 // Preparation product sprites: 7 drinks, the salve, 2 oils, 6 garden preparations and 2 ingredients.
-// 16 x 16, alpha 0/255, outlined, drawn with the kit in preparations/materials.mjs. Bottles vary by
+// 16 x 16, alpha 0/255, outlined, drawn with the kit in drawing/items.mjs. Bottles vary by
 // silhouette (flask / tall / squat / conical) and carry a small hot pink or deep green label, so no
 // two products differ by hue alone.
-import { hex, set, line, blob } from '../botany/sprites.mjs';
-import { P, rect, spans, item } from './materials.mjs';
+import { hex, set, line } from '../../drawing/sprites.mjs';
+import { blob } from '../../drawing/plant-motifs.mjs';
+import { P, rect, spans, item } from '../../drawing/items.mjs';
 
 const ramp = (a, b, c) => [hex(a), hex(b), hex(c)];
 
