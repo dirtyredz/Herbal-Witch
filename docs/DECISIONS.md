@@ -2,6 +2,17 @@
 
 Newest first.
 
+## 2026-10-22 - Review round 2: one-way ward package, numeric grimoire priorities
+
+- `WardService` is the top of `magic/ward/service` (server lifecycle, ticks); activation, controls,
+  focus and lifecycle depend on `WardIndex.loaded()` and `WardContext` only (guarded in
+  `DependencyDirectionTest`). Stone lookup and the charged look live on the stone side
+  (`WardStoneBlockEntity.at`, `WardStoneBlock.show`); indexing lives in `WardLifecycle`.
+- The feature-naming `GrimoireContent.Order` enum is replaced by a thread-safe `Contributions` holder:
+  each feature owns a numeric `PRIORITY` (spaced by 100, same order as before), so M8/M9 add a
+  constant instead of editing core. Recipe providers and discovery forms use the same holder.
+- Rejected: one central priority table (it would again name every feature in core).
+
 ## 2026-10-22 - 0.6.1: stable extension contracts before M8/M9
 
 - Group cultivation, preparations and processing under `apothecary/`; flatten station leaves.
@@ -62,7 +73,7 @@ docs/catalogue/stations.md, docs/catalogue/products.md.
 - **Historical, superseded by 0.6.1: preparation pages lived in `grimoire/content/reference/`.** `AdvancedPreparationEntries` is
   grimoire code reading the brewing catalogues, because brewing must not import the grimoire.
 - **The witch picks the ritual target by looking at it, then opens the altar.** Garden Blessing targets a
-  herb bed and Home Protection a ward stone; `client/ritual/RitualTargets` reads the aimed block before the
+  herb bed and Home Protection a ward stone; `client/magic/ritual/RitualTargets` reads the aimed block before the
   altar opens, so there is no target-picking screen. Rejected: a selection mode inside the altar menu.
 - **Wards.** Release unbinds the stone (it can be bound again). The area is a box (radius by height 4), not a
   sphere. The focus is any functional hearth or stove within 4 blocks, rechecked every sweep (ownership of

@@ -7,7 +7,7 @@
   so the enclosing screen closes; focused search consumes other typing keys, including inventory.
   Retain the panel/view across resize and altar widget rebuilds. Page tooltips precede host tooltips.
 
-Feature bootstrap order is not grimoire reading order: register sources with `GrimoireContent.Order`.
+Feature bootstrap order is not grimoire reading order: register sources with their own `PRIORITY` (see ARCHITECTURE).
 Keep herb summary maps stable until the condition-set identity changes, and retain their iteration
 order for content chunks. Protocol 4 preference codes remain rain=0, low sky=1, night=2, full moon=3.
 Discovery forms resolve lazily after registration, in seeds/fresh/bundle/powder order.

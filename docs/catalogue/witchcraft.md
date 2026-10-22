@@ -192,7 +192,7 @@ The altar gains two actions that need a complete ritual circle (a 5x5 ring of 16
 recipe in docs/catalogue/stations.md). The circle is validated every 20 ticks; a broken circle cancels the
 ritual and consumes nothing, and unloaded cells pause it. Access, concurrency, request and cancellation
 rules are those of the altar actions above. Before opening the altar the witch looks at the target;
-`client/ritual/RitualTargets` reads it.
+`client/magic/ritual/RitualTargets` reads it.
 
 | Action | Who | Offering (consumed) | Energy | Duration | Result |
 |---|---|---|---|---|---|
@@ -256,13 +256,13 @@ x 8 x 28 in 0.5.0; from 0.6.0 sections pack into rows no wider than 126 and the 
 121 x 8 x 38. The 0.6.0 sections are `cauldron`, `still`, `bottling_bench`, `charm_workbench`,
 `advanced_preparations`, `ritual_circle`, `ward_stone` and `charms`.
 
-Tests: pure unit tests under `src/test/.../magic/` and `client/witch/hud/` (0.6.0: `ritual/CircleLayoutTest`,
+Tests: pure unit tests under `src/test/.../magic/` and `client/magic/witch/hud/` (0.6.0: `ritual/CircleLayoutTest`,
 `ritual/GardenBlessingPlanTest`, `ward/WardCodecTest`, `ward/WardIndexTest`,
 `platform/recipe/ProcessRequirementsTest`, `apothecary/brewing/PreparationCatalogTest`); resource tests
 `data/magic/{ritual,witch,ward,charm}` and `data/preparations/Advanced*`; GameTests under
 `src/gameTest/.../magic/{witch,ritual,ward,charm}` (WitchLifecycle, EnergyRecovery, AltarPlacement,
 AltarAction, AltarShowcase; 0.6.0: CircleGameTests, WardGameTests, CharmGameTests) with the fixture
 `fixture/MagicFixtures`, and `apothecary/stations/advanced/{MagicalProcessGameTests,AdvancedStationGameTests}`,
-`preparations/AdvancedPreparationGameTests`. Ward-charging tests run in `herbalwitch_ward_*` batches
+`apothecary/brewing/AdvancedPreparationGameTests`. Ward-charging tests run in `herbalwitch_ward_*` batches
 (docs/GOTCHAS.md). Not covered: a true out-of-process server restart; the vanilla sleep path (tested
 through `EnergyEvents.sleptThrough`).

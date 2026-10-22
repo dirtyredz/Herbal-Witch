@@ -5,8 +5,10 @@ Plan of record: milestones 1-12 (docs/FEATURES.md); traceability: docs/catalogue
 
 Ward responsibilities are explicit in `magic/ward/service`: `WardActivation` owns refusal order and
 direct/already-paid ritual charging, `WardControls` owns owner settings/release, and `WardFocus`
-scans loaded cells for a functional hearth or stove (unlit blocks count). `WardService` owns the
-loaded index and bounded ticks/sweeps; `WardLifecycle` alone reconciles stones with saved records.
+scans loaded cells for a functional hearth or stove (unlit blocks count). Dependencies run one way:
+those three and `WardLifecycle` use `WardIndex.loaded()` (the loaded index) and `WardContext` (the rules)
+and never `WardService`, which sits on top with the server lifecycle and bounded ticks/sweeps;
+`WardLifecycle` alone reconciles stones with saved records and indexes them.
 Unloaded wards neither protect nor consume charge, and loading never catches up elapsed time.
 
 Preparations use one `DrinkApplication` and one `OilApplication`, with shared lazy `TimedEffect`
@@ -15,9 +17,11 @@ facts. Tea, restful infusion, healing, coating and target clearing remain explic
 retains the former advanced preparations' label presentation. `EffectRegistration` installs the
 existing effect listeners in their original order and priorities.
 
-Feature registrations contribute their own grimoire sources. `GrimoireContent.Order` fixes reading
-order independently of registry/showcase/packet bootstrap: Guide, Witch, Brewing, Preparations,
-Station, Decor, Herb, StationRecipe, Altar, Ward, Charm. Equal-order sources keep insertion order;
+Feature registrations contribute their own grimoire sources. each source's numeric `PRIORITY`
+(a constant on its `*Entries` class, registered through the thread-safe `Contributions` holder) fixes
+reading order independently of registry/showcase/packet bootstrap: Guide 0, Witch 100, Brewing 200,
+Preparations 300, Station 400, Decor 500, Herb 600, StationRecipe 700, Altar 800, Ward 900, Charm 1000
+(`ContributionsTest` pins it; a new feature picks a number between). Equal priorities keep insertion order;
 duplicate keys still keep the first source. Core content, knowledge, reading and network packages
 consume `HerbSummary`, `DiscoveryForms`, `RecipeReferences` and live `RecipeView` contracts.
 Botany supplies cached summaries keyed by condition-set identity; stations supply recipe/tag
@@ -47,6 +51,8 @@ fractional recipe duration text.
 wired once by `HerbalWitch`. Real players take precedence over independently scoped fake registrations;
 removed fakes and registrations from a stopped server are excluded. Initiation owns consent only.
 Teaching keeps its own range, dimension, eligibility and name-order rules over the shared roster.
+`OnlinePlayers.register` is fake-player API for GameTests only (`DependencyDirectionTest` rejects it in
+main); `EntityActionPermission` resolves principals through `OnlinePlayers.find` like everyone else.
 
 **Witch mutation boundary.** Durable `WitchState` setters and the mutating energy/sleep arithmetic
 are package-private in `magic/witch/status`. Drink recovery, online countdowns and completed sleep
@@ -69,8 +75,8 @@ origin), seats or slots. `FurnitureCatalog.ALL` is what is registered (every wav
 - *Composition:* `registry/DecorBlockFactory` builds one class per behaviour: `structure/DecorAssemblyBlock`
   (static pieces and multi-cell rugs: facing, cell index, shape, support, teardown),
   `behavior/seating/SeatingBlock`, `behavior/storage/StorageFurnitureBlock`,
-  `behavior/lighting/DecorLightBlock` (lit, light 14 on every cell), `behavior/sleeping/DecorBedBlock`
-  (vanilla `BedBlock` with a `cell` property) and `behavior/openings/DecorDoorBlock` (vanilla `DoorBlock`);
+  `behavior/DecorLightBlock` (lit, light 14 on every cell), `behavior/sleeping/DecorBedBlock`
+  (vanilla `BedBlock` with a `cell` property) and `behavior/DecorDoorBlock` (vanilla `DoorBlock`);
   the 0.1.0 small rug stays vanilla carpet. Support (`structure/FurnitureSupport`): floor, wall, ceiling,
   corner or carpet, checked per supported cell and never through an unloaded chunk.
 - *Placement:* `structure/FurniturePlacementItem` extends the shared `platform/placement/StructurePlacementItem`
@@ -162,7 +168,7 @@ the GameTest template is 128 x 10 x 64 and `ShowcasePlanTest` fails if a plan ou
   (pure capacity arithmetic), `ProcessRecipeJson`/`ProcessRecipeIndex` (one bounded format; per-type
   sorted cache). `ProcessStation` ties them to a block entity by composition. Since Milestone 7 `process/`
   has four sub-packages: `recipe/` (the recipe type, JSON and wire format, index; shared facts in `platform/recipe/`),
-  `matching/` (`ProcessMatcher`), `execution/` (`ProcessCommit`, `ProcessExecutionPolicy`) and
+  `ProcessMatcher`, `execution/` (`ProcessCommit`, `ProcessExecutionPolicy`) and
   `authorization/` (below), and `apothecary/stations/block/ProcessStationEntity` is the shared block-entity base all
   eight process stations (four everyday, four advanced) sit on.
 - *Reservations and completion:* ingredients stay in their slots, counted as reserved, and cannot be
@@ -351,8 +357,8 @@ holds, and the altar where rituals happen. `witch` and `ritual` sit under a `mag
   conversion or ritual result. The client ignores an older epoch or revision and clears on disconnect and
   on local player replacement. The witch and grimoire client caches are separate: the rules packet
   invalidates the grimoire content so pages requote the numbers.
-- *Client:* `client/witch` holds `WitchClientState`, `WitchClientConfig` (`herbalwitch-client.toml`
-  `[hud]`) and `hud/` (`EnergyOverlay`, `EnergyHudLayout`); `client/ritual` is `AltarScreen` and its
+- *Client:* `client/magic/witch` holds `WitchClientState`, `WitchClientConfig` (`herbalwitch-client.toml`
+  `[hud]`) and `hud/` (`EnergyOverlay`, `EnergyHudLayout`); `client/magic/ritual` is `AltarScreen` and its
   widgets.
 - *Grimoire:* the category "Witchcraft": `witchcraft/status`, `witchcraft/energy` and
   `witchcraft/recovery` (guide kind, `magic/witch/grimoire/WitchEntries`), the altar station page
@@ -379,7 +385,7 @@ one fingerprint. Defaults are `processingPercent` 100, `gardenBlessingCost` 15, 
   square around a chosen bed within 8 blocks and returns the bottle (`GardenBlessingPlan` is the pure
   plan); Home Protection (sage powder, amethyst shard; 20 energy, 200 ticks) charges a ward stone the
   witch may bind. The witch picks the bed or stone by looking at it before opening the altar
-  (`client/ritual/RitualTargets`).
+  (`client/magic/ritual/RitualTargets`).
 - *Wards (`magic/ward`):* a ward stone is bound to its owner and activated by a witch within 8 blocks for
   20 energy (practice awarded); its charge lasts 600 loaded seconds and cannot be topped up while charged.
   Only the owner can deactivate, release (which unbinds), set the radius (1 to the maximum) and cycle the
@@ -391,7 +397,7 @@ one fingerprint. Defaults are `processingPercent` 100, `gardenBlessingCost` 15, 
   the in-memory chunk index. `targeting/WardProtection` suppresses targeting through
   `LivingChangeTargetEvent` and bounded sweeps (4-block slices, 32 mobs per sweep, 256 per dimension tick,
   every 20 ticks). Breaking a stone retires its record; a copied record id is inert.
-- *Client:* `client/ward/{WardScreen, WardBoundaryPreview}`, `client/ritual/widgets/CirclePanel`,
+- *Client:* `client/magic/ward/{WardScreen, WardBoundaryPreview}`, `client/magic/ritual/widgets/CirclePanel`,
   `client/brewing/PreparationRenderers`, and ritual categories for JEI and EMI over
   `client/compat/ritual/RitualCardLayout`.
 - *Grimoire:* station pages for the four new stations; the witchcraft pages for brewing, preparations and
@@ -421,7 +427,7 @@ showcase, platform/permission, platform/network, compat, grimoire and magic/{wit
 | `HerbalWitch.java` | Bootstrap only: registries, config, event wiring |
 | `platform/network/`, `platform/config/`, `platform/permission/`, `platform/compat/<integration>/` | Channel + payload bounds; config registration; shared authorization boundary; optional integrations (foreign imports only here) |
 | `magic/witch/{status,energy,initiation(+founding),config,network,command,registry}` (implemented, 0.5.0; the plan named top-level `witch/`) | Player capability and lifecycle; spending/recovery/progression; consent and founding; rules; wire; operator commands |
-| `apothecary/botany/catalog/`, `crop/`, `foraging/`, `worldgen/` | Herb definitions, growth, gathering, placement (worldgen never owns cultivation rules) |
+| `apothecary/botany/catalog/`, `crop/`, `foraging/`, `HerbWorldgen` | Herb definitions, growth, gathering, placement (worldgen never owns cultivation rules) |
 | `apothecary/stations/everyday/<station>/`, `apothecary/stations/advanced/<station>/`, `apothecary/stations/process/{recipe,matching,execution,authorization}` | One package per station (block, menu, recipe); shared processing by composition (implemented; advanced stations 0.6.0) |
 | `apothecary/brewing/product/`, `effect/`, `application/`, `projectile/` | Products; effect mechanics; how an effect reaches a target; thrown preparations |
 | `companions/animals/{trust,capture,taming}/`, `companions/familiars/{bond,command,ability,home,recovery,species}/` | Animal relationships; familiar bonds without one god manager |
@@ -429,7 +435,7 @@ showcase, platform/permission, platform/network, compat, grimoire and magic/{wit
 | `shop/{catalog,trade,order,persistence,block}/` | Offers, transactions, orders, persistence, counter/register |
 | `grimoire/{catalog,registry,access,content,knowledge,reading,network}/`, `grimoire/showcase/` (implemented) | Ids and registration; book, research blocks and reader menu (`access/{item,block,menu}`); recipe-backed entries and editorial reload; personal knowledge (`knowledge/{discovery,research,teaching}`); reader sessions and ingredient requirements (`reading/`, using `platform/inventory`); the six messages |
 | `decor/{catalog,registry,showcase}/`, `decor/structure/`, `decor/behavior/{seating,storage,sleeping,openings,lighting}/` | Furniture (implemented, 0.4.0): the design and 94 pieces; shared structure (block, placement, support, shapes); one implementation per behaviour |
-| `client/<feature>/`, `client/compat/<viewer>/` | Screens, HUD, renderers, particles; optional EMI/JEI plugins (`client/placement/` is the shared structure preview; `client/witch/{hud}`, `client/ritual/{widgets}` are M6) |
+| `client/<feature>/`, `client/compat/<viewer>/` | Screens, HUD, renderers, particles; optional EMI/JEI plugins (`client/placement/` is the shared structure preview; `client/magic/witch/{hud}`, `client/magic/ritual/{widgets}` are M6) |
 | `data/client/<feature>/`, `data/server/<feature>/` | Datagen per feature, consuming feature catalogues |
 
 ## Authority and synchronisation (rows not marked implemented are planned)

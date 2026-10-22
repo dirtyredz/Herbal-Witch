@@ -88,7 +88,7 @@ wood and gold the procedural models still use.
 | Magenta / hot pink, plum | #C43080, #D8407A; #4A2452 | `fabric_pink`, `trim_purple`, `runner` |
 | Ivy, olive vines | #22421E .. #78A048; olive #546022 .. #96A042 | `material/ivy` (cutout) |
 
-**Motifs** (`tools/art/motifs.mjs`): gold crescent moons, gold four-point stars, small pink or
+**Motifs** (`tools/art/drawing/`, `tools/art/content/`): gold crescent moons, gold four-point stars, small pink or
 magenta four- or five-petal flowers on olive vine sprigs. They belong on vessels, plaques, runners,
 the rug and the stove's cloth. Cushion fabric stays plain (tufting studs and piping only).
 

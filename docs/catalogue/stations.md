@@ -136,7 +136,7 @@ the station screens show a "Grimoire" button while it is carried. Models are fir
 | Ritual Circle | `herbalwitch:magic/ritual/circle` | a 5 x 5 square ring of 16 cells around the altar | shapeless: 4 smooth stone slabs, 2 calcite, amethyst shard, gold nugget | none; used through the altar |
 
 - **Placement:** one item places the whole ring through the shared checked placement with the shared
-  preview (`client/ritual/CirclePlacementPreview`). The item is a flat sprite; the 32 compiled models
+  preview (`client/magic/ritual/CirclePlacementPreview`). The item is a flat sprite; the 32 compiled models
   (`part_<n>`, `active_<n>`) are an enumerated exception to the 12-file cap (STRUCTURE.md).
 - **Teardown:** breaking any cell, losing support or an explosion removes the whole circle with one
   drop; `active` (every cell) glows while a circle ritual runs.
@@ -144,7 +144,7 @@ the station screens show a "Grimoire" button while it is carried. Models are fir
   cancels the ritual and consumes nothing, and unloaded cells pause it.
 - **Rituals** (altar actions; numbers in docs/catalogue/witchcraft.md): Garden Blessing and Home
   Protection. The witch looks at the herb bed or the ward stone, then opens the altar
-  (`client/ritual/RitualTargets`).
+  (`client/magic/ritual/RitualTargets`).
 
 ## Ward stone (Milestone 7, 0.6.0)
 
