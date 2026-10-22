@@ -1,5 +1,10 @@
 # Gotchas - The Herbal Witch
 
+Feature bootstrap order is not grimoire reading order: register sources with `GrimoireContent.Order`.
+Keep herb summary maps stable until the condition-set identity changes, and retain their iteration
+order for content chunks. Protocol 4 preference codes remain rain=0, low sky=1, night=2, full moon=3.
+Discovery forms resolve lazily after registration, in seeds/fresh/bundle/powder order.
+
 - **Paid operations use `WitchStatusService.spend`, in hundredths.** Put inventory consumption in
   `Change.prepare`, the paid change in `apply`, and participant-owned restoration in `rollback`.
   `afterPractice` preserves success side effects that precede the private update. No participant runs

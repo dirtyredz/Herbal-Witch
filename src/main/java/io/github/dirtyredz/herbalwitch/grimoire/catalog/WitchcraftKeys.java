@@ -9,6 +9,8 @@ public final class WitchcraftKeys {
     public static final String PREFIX = "grimoire." + HerbalWitch.MOD_ID + ".witchcraft.";
     public static final List<String> CONVERSION_PAGES = List.of("status", "energy", "recovery");
 
+    public static final List<String> PREPARATION_PAGES = List.of("brewing", "preparations", "familiar");
+
     private WitchcraftKeys() { }
 
     public static EntryKey key(String page) {

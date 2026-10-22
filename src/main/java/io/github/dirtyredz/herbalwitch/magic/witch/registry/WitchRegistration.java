@@ -1,5 +1,9 @@
 package io.github.dirtyredz.herbalwitch.magic.witch.registry;
 
+import io.github.dirtyredz.herbalwitch.magic.witch.grimoire.WitchEntries;
+
+import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContent;
+
 import io.github.dirtyredz.herbalwitch.magic.witch.command.WitchCommandRegistration;
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchRules;
 import io.github.dirtyredz.herbalwitch.magic.witch.config.WitchServerConfig;
@@ -29,6 +33,7 @@ public final class WitchRegistration {
 
     /** Called once from the mod constructor, after the grimoire (message ids follow registration order). */
     public static void register(IEventBus modBus) {
+        GrimoireContent.register(GrimoireContent.Order.WITCH, new WitchEntries());
         WitchServerConfig.register(modBus);
         modBus.addListener(WitchLifecycleEvents::registerCapabilities);
         WitchPackets.register();

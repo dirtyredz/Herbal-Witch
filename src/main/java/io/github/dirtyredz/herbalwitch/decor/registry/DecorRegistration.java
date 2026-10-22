@@ -1,5 +1,9 @@
 package io.github.dirtyredz.herbalwitch.decor.registry;
 
+import io.github.dirtyredz.herbalwitch.decor.grimoire.DecorEntries;
+
+import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContent;
+
 import io.github.dirtyredz.herbalwitch.decor.behavior.seating.SeatEvents;
 import io.github.dirtyredz.herbalwitch.decor.catalog.FurnitureCatalog;
 import io.github.dirtyredz.herbalwitch.decor.catalog.FurnitureSpec;
@@ -21,6 +25,7 @@ public final class DecorRegistration {
 
     /** Called once from the mod constructor. */
     public static void register(IEventBus modBus) {
+        GrimoireContent.register(GrimoireContent.Order.DECOR, new DecorEntries());
         for (FurnitureSpec spec : FurnitureCatalog.ALL) {
             DecorBlocks.register(spec, () -> DecorBlockFactory.create(spec));
         }

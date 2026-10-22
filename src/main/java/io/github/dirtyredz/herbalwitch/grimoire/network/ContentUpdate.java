@@ -1,7 +1,7 @@
 package io.github.dirtyredz.herbalwitch.grimoire.network;
 
-import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbHabitat;
-import io.github.dirtyredz.herbalwitch.apothecary.botany.conditions.HerbConditions;
+import io.github.dirtyredz.herbalwitch.grimoire.content.input.HerbSummary;
+
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reload.GrimoireDefinition;
 import io.github.dirtyredz.herbalwitch.platform.network.ChunkAssembly;
@@ -31,7 +31,7 @@ public record ContentUpdate(ChunkAssembly.Header header, List<Record> records) {
     public record Definition(GrimoireDefinition definition) implements Record {
     }
 
-    public record Herb(HerbConditions.Condition condition) implements Record {
+    public record Herb(HerbSummary condition) implements Record {
     }
 
     public ContentUpdate {
@@ -40,7 +40,7 @@ public record ContentUpdate(ChunkAssembly.Header header, List<Record> records) {
 
     /** The complete content inputs of one revision, in chunks. */
     public static List<ContentUpdate> of(int revision, Map<EntryKey, GrimoireDefinition> definitions,
-                                         Map<String, HerbConditions.Condition> herbs) {
+                                         Map<String, HerbSummary> herbs) {
         List<Record> all = new ArrayList<>();
         definitions.values().stream().sorted((a, b) -> a.key().compareTo(b.key())).forEach(d -> all.add(new Definition(d)));
         herbs.values().forEach(c -> all.add(new Herb(c)));
@@ -90,14 +90,14 @@ public record ContentUpdate(ChunkAssembly.Header header, List<Record> records) {
             d.links().forEach(l -> GrimoireCodec.writeKey(buf, l));
             GrimoireCodec.writeOptionalText(buf, d.hint());
         } else if (record instanceof Herb herb) {
-            HerbConditions.Condition c = herb.condition();
+            HerbSummary c = herb.condition();
             buf.writeByte(1);
             buf.writeUtf(c.herb(), PayloadBounds.MAX_ID);
             buf.writeUtf(c.habitat(), PayloadBounds.MAX_ID);
             buf.writeDouble(c.discoveryChance());
             buf.writeDouble(c.harvestBonusChance());
             buf.writeVarInt(c.preferences().size());
-            c.preferences().forEach(p -> PayloadBounds.writeEnum(buf, p));
+            c.preferences().forEach(buf::writeVarInt);
         }
     }
 
@@ -124,12 +124,16 @@ public record ContentUpdate(ChunkAssembly.Header header, List<Record> records) {
                 if (!(discovery >= 0 && discovery <= 1 && bonus >= 0 && bonus <= 1)) {
                     throw new DecoderException("herb chance out of range");
                 }
-                int n = PayloadBounds.readCount(buf, HerbHabitat.Preference.values().length);
-                List<HerbHabitat.Preference> preferences = new ArrayList<>(n);
+                int n = PayloadBounds.readCount(buf, HerbSummary.PREFERENCE_COUNT);
+                List<Integer> preferences = new ArrayList<>(n);
                 for (int i = 0; i < n; i++) {
-                    preferences.add(PayloadBounds.readEnum(buf, HerbHabitat.Preference.class));
+                    int code = buf.readVarInt();
+                    if (code < 0 || code >= HerbSummary.PREFERENCE_COUNT) {
+                        throw new DecoderException("unknown herb preference " + code);
+                    }
+                    preferences.add(code);
                 }
-                return new Herb(new HerbConditions.Condition(herb, habitat, discovery, bonus, preferences));
+                return new Herb(new HerbSummary(herb, habitat, discovery, bonus, preferences));
             }
             default -> throw new DecoderException("unknown content record " + kind);
         }

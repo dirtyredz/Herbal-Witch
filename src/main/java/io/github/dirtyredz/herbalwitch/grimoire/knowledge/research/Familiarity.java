@@ -2,11 +2,8 @@ package io.github.dirtyredz.herbalwitch.grimoire.knowledge.research;
 
 import io.github.dirtyredz.herbalwitch.platform.recipe.RecipeIngredients;
 
-import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
-import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbSpec;
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.grimoire.StationRecipeEntries;
-import io.github.dirtyredz.herbalwitch.grimoire.content.reference.HerbForms;
+import io.github.dirtyredz.herbalwitch.grimoire.content.reference.DiscoveryForms;
 import io.github.dirtyredz.herbalwitch.platform.recipe.ProcessRecipeDescription;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -30,9 +27,9 @@ public final class Familiarity implements Predicate<Ingredient> {
     public Familiarity(List<ItemStack> carried, Predicate<EntryKey> knows) {
         this.carried = List.copyOf(carried);
         List<ItemStack> forms = new ArrayList<>();
-        for (HerbSpec herb : HerbCatalog.ALL) {
-            if (knows.test(HerbForms.key(herb))) {
-                forms.addAll(HerbForms.formStacks(herb));
+        for (EntryKey key : DiscoveryForms.keys()) {
+            if (knows.test(key)) {
+                forms.addAll(DiscoveryForms.formStacks(key));
             }
         }
         this.knownForms = List.copyOf(forms);

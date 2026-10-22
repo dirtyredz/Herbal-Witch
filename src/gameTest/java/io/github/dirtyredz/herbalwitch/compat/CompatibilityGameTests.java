@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.compat;
 
+import io.github.dirtyredz.herbalwitch.grimoire.content.recipe.RecipeReferences;
+
 import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.ProcessingRecipeBindings;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
@@ -83,7 +85,7 @@ public final class CompatibilityGameTests {
             check(ProcessingCategories.byStation(category.station()).orElseThrow() == category, category.id() + " station mapping");
             for (ProcessRecipe recipe : helper.getLevel().getRecipeManager().getAllRecipesFor(ProcessingRecipeBindings.type(category))) {
                 check(ProcessingRecipeBindings.byType(recipe.getType()).orElseThrow() == category, recipe.getId() + " type mapping");
-                GrimoireEntry page = content.get(StationRecipeEntries.key(recipe.getId())).orElseThrow();
+                GrimoireEntry page = content.get(RecipeReferences.key(recipe.getId())).orElseThrow();
                 check(page.category().equals(category.id()), recipe.getId() + " is under " + page.category());
                 check(page.recipe().orElseThrow().description() == recipe.description(), recipe.getId() + " copied its description");
                 check(recipe.description().heated() == category.heated(), recipe.getId() + " heat disagrees with its category");

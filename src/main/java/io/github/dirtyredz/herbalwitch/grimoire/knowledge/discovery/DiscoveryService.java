@@ -4,7 +4,7 @@ import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContent;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireEntry;
 import io.github.dirtyredz.herbalwitch.grimoire.content.ServerGrimoireContent;
-import io.github.dirtyredz.herbalwitch.grimoire.content.reference.HerbForms;
+import io.github.dirtyredz.herbalwitch.grimoire.content.reference.DiscoveryForms;
 import io.github.dirtyredz.herbalwitch.grimoire.network.DiscoveryUpdate;
 import io.github.dirtyredz.herbalwitch.grimoire.network.GrimoirePackets;
 import io.github.dirtyredz.herbalwitch.grimoire.knowledge.research.Familiarity;
@@ -112,7 +112,7 @@ public final class DiscoveryService {
     private static List<EntryKey> herbsIn(List<ItemStack> carried) {
         Set<EntryKey> herbs = new LinkedHashSet<>();
         for (ItemStack stack : carried) {
-            HerbForms.herbOf(stack.getItem()).ifPresent(h -> herbs.add(HerbForms.key(h)));
+            DiscoveryForms.keyOf(stack.getItem()).ifPresent(herbs::add);
         }
         return List.copyOf(herbs);
     }

@@ -1,5 +1,17 @@
 package io.github.dirtyredz.herbalwitch.apothecary.stations.registry;
 
+import io.github.dirtyredz.herbalwitch.grimoire.content.recipe.RecipeReferences;
+
+import io.github.dirtyredz.herbalwitch.grimoire.content.ServerGrimoireContent;
+
+import io.github.dirtyredz.herbalwitch.apothecary.stations.grimoire.BrewingEntries;
+
+import io.github.dirtyredz.herbalwitch.apothecary.stations.grimoire.StationRecipeEntries;
+
+import io.github.dirtyredz.herbalwitch.apothecary.stations.grimoire.StationEntries;
+
+import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContent;
+
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
 import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyItems;
@@ -43,6 +55,11 @@ public final class StationRegistration {
 
     /** Called once from the mod constructor. */
     public static void register(IEventBus modBus) {
+        GrimoireContent.register(GrimoireContent.Order.BREWING, new BrewingEntries());
+        GrimoireContent.register(GrimoireContent.Order.STATION_RECIPE, new StationRecipeEntries());
+        GrimoireContent.register(GrimoireContent.Order.STATION, new StationEntries());
+        ServerGrimoireContent.recipeGeneration(ProcessRecipeIndex::generation);
+        RecipeReferences.register(StationRecipeEntries::recipes);
         StationBlocks.BLOCKS.register(modBus);
         StationItems.ITEMS.register(modBus);
         StationBlockEntities.TYPES.register(modBus);

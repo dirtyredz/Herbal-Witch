@@ -1,7 +1,7 @@
 package io.github.dirtyredz.herbalwitch.grimoire.network;
 
-import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbHabitat.Preference;
-import io.github.dirtyredz.herbalwitch.apothecary.botany.conditions.HerbConditions;
+import io.github.dirtyredz.herbalwitch.grimoire.content.input.HerbSummary;
+
 import io.github.dirtyredz.herbalwitch.platform.network.ChunkAssembly;
 import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.DecoderException;
@@ -20,8 +20,8 @@ class ContentUpdateTest {
 
     private static ContentUpdate sample() {
         return new ContentUpdate(new ChunkAssembly.Header(7, 0, 1, 1), List.of(new ContentUpdate.Herb(
-                new HerbConditions.Condition("x:herb", "x:habitat", 0.5, 0.25,
-                        List.of(Preference.RAIN, Preference.LOW_SKY, Preference.NIGHT, Preference.FULL_MOON)))));
+                new HerbSummary("x:herb", "x:habitat", 0.5, 0.25,
+                        List.of(0, 1, 2, 3)))));
     }
 
     @Test

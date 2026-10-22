@@ -41,7 +41,7 @@ public final class RitualRegistration {
         modBus.addListener(RitualRegistration::creativeTab);
 
         AltarPackets.register((sender, request) -> AltarActions.handle(sender, request));
-        GrimoireContent.register(new AltarEntries());
+        GrimoireContent.register(GrimoireContent.Order.ALTAR, new AltarEntries());
         AltarSessionService.handle(AltarActionSpec.FOUNDING, new FoundingAction());
         AltarSessionService.handle(AltarActionSpec.INITIATION, new InitiationAction());
         AltarSessionService.handle(AltarActionSpec.MEDITATION, new MeditationAction());

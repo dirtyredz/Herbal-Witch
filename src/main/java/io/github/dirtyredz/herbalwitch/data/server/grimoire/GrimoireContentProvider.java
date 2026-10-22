@@ -4,7 +4,7 @@ import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reference.GuideEntries;
-import io.github.dirtyredz.herbalwitch.grimoire.content.reference.HerbForms;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.grimoire.HerbEntries;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.grimoire.StationEntries;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reload.GrimoireDefinition;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reload.GrimoireDefinitionLoader;
@@ -87,7 +87,7 @@ public class GrimoireContentProvider implements DataProvider {
     public static List<Page> pages() {
         List<Page> pages = new ArrayList<>();
         pages.add(guide("getting_started", "Getting Started", List.of(GuideEntries.key("acquisition"), GuideEntries.key("preparation"),
-                        HerbForms.key(HerbCatalog.LAVENDER), HerbForms.key(HerbCatalog.CHAMOMILE)),
+                        HerbEntries.key(HerbCatalog.LAVENDER), HerbEntries.key(HerbCatalog.CHAMOMILE)),
                 "This grimoire records what you have learned. Any grimoire opens your own knowledge, so giving one away or crafting with it shares or loses nothing.",
                 "Guides like this one are open to everyone. Herb and recipe pages fill in as you discover them, and nothing here stops you crafting, brewing or automating anything.",
                 "Begin with a starter herb: lavender, sage, mint and chamomile turn up when you break tall grass anywhere."));

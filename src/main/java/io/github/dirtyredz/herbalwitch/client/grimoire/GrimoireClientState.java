@@ -1,7 +1,7 @@
 package io.github.dirtyredz.herbalwitch.client.grimoire;
 
 import com.mojang.logging.LogUtils;
-import io.github.dirtyredz.herbalwitch.apothecary.botany.conditions.HerbConditions;
+import io.github.dirtyredz.herbalwitch.grimoire.content.input.HerbSummary;
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContent;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reload.GrimoireDefinition;
@@ -39,7 +39,7 @@ public final class GrimoireClientState implements GrimoirePackets.ClientHandlers
     private final ChunkAssembly<ContentUpdate.Record> contentChunks = new ChunkAssembly<>();
     private final ChunkAssembly<EntryKey> discoveryChunks = new ChunkAssembly<>();
     private Map<EntryKey, GrimoireDefinition> definitions = Map.of();
-    private Map<String, HerbConditions.Condition> herbs = Map.of();
+    private Map<String, HerbSummary> herbs = Map.of();
     private int revision;
     private final Set<EntryKey> discoveries = new HashSet<>();
     private GrimoireContent content;
@@ -128,7 +128,7 @@ public final class GrimoireClientState implements GrimoirePackets.ClientHandlers
         try {
             contentChunks.offer(update.header(), update.records()).ifPresent(all -> {
                 Map<EntryKey, GrimoireDefinition> defs = new LinkedHashMap<>();
-                Map<String, HerbConditions.Condition> conditions = new LinkedHashMap<>();
+                Map<String, HerbSummary> conditions = new LinkedHashMap<>();
                 for (ContentUpdate.Record record : all) {
                     if (record instanceof ContentUpdate.Definition d) {
                         defs.put(d.definition().key(), d.definition());

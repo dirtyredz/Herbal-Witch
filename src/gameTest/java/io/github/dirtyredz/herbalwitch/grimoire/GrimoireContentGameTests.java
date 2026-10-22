@@ -1,5 +1,9 @@
 package io.github.dirtyredz.herbalwitch.grimoire;
 
+import io.github.dirtyredz.herbalwitch.apothecary.botany.grimoire.HerbContentFacts;
+
+import io.github.dirtyredz.herbalwitch.grimoire.content.recipe.RecipeReferences;
+
 import io.github.dirtyredz.herbalwitch.platform.recipe.RecipeView;
 
 import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.ProcessingRecipeBindings;
@@ -16,7 +20,7 @@ import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireEntry;
 import io.github.dirtyredz.herbalwitch.grimoire.content.ServerGrimoireContent;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.grimoire.StationRecipeEntries;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reference.GuideEntries;
-import io.github.dirtyredz.herbalwitch.grimoire.content.reference.HerbForms;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.grimoire.HerbEntries;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reload.GrimoireDefinitionLoader;
 import io.github.dirtyredz.herbalwitch.grimoire.knowledge.discovery.DiscoveryService;
 import io.github.dirtyredz.herbalwitch.grimoire.network.ContentUpdate;
@@ -86,7 +90,7 @@ public final class GrimoireContentGameTests {
         int recipes = 0;
         for (ProcessingCategories.Category category : ProcessingCategories.ALL) {
             for (ProcessRecipe r : helper.getLevel().getRecipeManager().getAllRecipesFor(ProcessingRecipeBindings.type(category))) {
-                GrimoireEntry entry = content.get(StationRecipeEntries.key(r.getId())).orElse(null);
+                GrimoireEntry entry = content.get(RecipeReferences.key(r.getId())).orElse(null);
                 check(entry != null, r.getId() + " has no page");
                 check(entry.recipe().orElseThrow() == r, r.getId() + " page does not hold the live recipe");
                 check(entry.category().equals(category.id()), r.getId() + " filed under " + entry.category());
@@ -113,10 +117,10 @@ public final class GrimoireContentGameTests {
         recipes.add(new DryingRecipe(id, new ProcessRecipeDescription(List.of(new ProcessRecipeDescription.Counted(
                 Ingredient.of(BotanyItems.fresh(HerbCatalog.MINT)), 2)), Optional.empty(), Optional.empty(),
                 new ItemStack(PreparationItems.bundle(HerbCatalog.MINT), 2), List.of(), 600, false)));
-        GrimoireEntry entry = build(helper, recipes).get(StationRecipeEntries.key(id)).orElse(null);
+        GrimoireEntry entry = build(helper, recipes).get(RecipeReferences.key(id)).orElse(null);
         check(entry != null, "the external recipe has no page");
         check(entry.category().equals("drying") && entry.hint().isPresent(), "fallback page " + entry);
-        check(entry.links().contains(HerbForms.key(HerbCatalog.MINT)), "its herb is linked");
+        check(entry.links().contains(HerbEntries.key(HerbCatalog.MINT)), "its herb is linked");
         helper.succeed();
     }
 
@@ -156,7 +160,7 @@ public final class GrimoireContentGameTests {
     public static void herbPagesUseTheServersConditionsAndSyncIntact(GameTestHelper helper) {
         GrimoireContent content = content(helper);
         HerbConditions.Condition lavender = HerbConditionReloadListener.current().get(HerbCatalog.LAVENDER);
-        GrimoireEntry page = content.get(HerbForms.key(HerbCatalog.LAVENDER)).orElseThrow();
+        GrimoireEntry page = content.get(HerbEntries.key(HerbCatalog.LAVENDER)).orElseThrow();
         String expected = String.valueOf(Math.round(1 / lavender.discoveryChance()));
         boolean found = page.body().stream().map(Component::getContents).anyMatch(c -> c instanceof TranslatableContents t
                 && Arrays.asList(t.getArgs()).contains(expected));
@@ -174,7 +178,7 @@ public final class GrimoireContentGameTests {
         }
         check(received != null && received.size() == GrimoireDefinitionLoader.current().size() + HerbCatalog.ALL.size(),
                 "content sync lost records");
-        check(received.contains(new ContentUpdate.Herb(lavender)), "lavender's conditions did not survive the wire");
+        check(received.contains(new ContentUpdate.Herb(HerbContentFacts.summary(lavender))), "lavender's conditions did not survive the wire");
         helper.succeed();
     }
 

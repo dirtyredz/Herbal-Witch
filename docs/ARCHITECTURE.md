@@ -15,6 +15,15 @@ facts. Tea, restful infusion, healing, coating and target clearing remain explic
 retains the former advanced preparations' label presentation. `EffectRegistration` installs the
 existing effect listeners in their original order and priorities.
 
+Feature registrations contribute their own grimoire sources. `GrimoireContent.Order` fixes reading
+order independently of registry/showcase/packet bootstrap: Guide, Witch, Brewing, Preparations,
+Station, Decor, Herb, StationRecipe, Altar, Ward, Charm. Equal-order sources keep insertion order;
+duplicate keys still keep the first source. Core content, knowledge, reading and network packages
+consume `HerbSummary`, `DiscoveryForms`, `RecipeReferences` and live `RecipeView` contracts.
+Botany supplies cached summaries keyed by condition-set identity; stations supply recipe/tag
+generation. Recipe-manager, tag, definition and herb changes still invalidate server content, and
+client disconnect still clears all connection data. The herb wire record remains protocol 4.
+
 ## Current system (0.6.0: Milestones 1-7 plus the art pass; furniture is Milestone 5, initiation and energy Milestone 6, advanced brewing, charms, circle and wards Milestone 7)
 
 Everything below is server-authoritative; clients get vanilla block updates, menu slots and menu data.

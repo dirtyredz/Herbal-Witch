@@ -7,6 +7,10 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 
 ## Layout
 
+- `src/main/java/io/github/dirtyredz/herbalwitch/grimoire/content/input/` — neutral herb summaries with fixed protocol-4 preference codes
+- `src/main/java/io/github/dirtyredz/herbalwitch/grimoire/content/recipe/` — ordered queries over feature-registered live recipe views
+- `src/test/java/io/github/dirtyredz/herbalwitch/structure/` — dependency direction and durable-mutation boundary guards
+
 - `src/main/java/io/github/dirtyredz/herbalwitch/platform/time/` — tick constants and explicit ceiling/fractional duration formatting
 - `src/main/java/io/github/dirtyredz/herbalwitch/platform/player/` — server-lifecycle online roster and independently scoped fake registrations
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/platform/player/` — roster precedence, removal and lifecycle contracts

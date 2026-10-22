@@ -26,7 +26,7 @@ import java.util.UUID;
  * ({@link #start}); that binds the batch to the payer, the recipe's identity and fingerprint and its
  * effective cost ({@link StationOperator}), never to whoever is nearest or merely watching. It then
  * progresses only while that payer is online, alive, in the station's dimension, within
- * {@link #RANGE} blocks of the origin, allowed to use the station and able to afford the whole cost;
+ * {@link ProcessingRules#RANGE} blocks of the origin, allowed to use the station and able to afford the whole cost;
  * otherwise it pauses, spending nothing. Completion revalidates all of that, applies the inventory
  * commit, debits the energy through {@link WitchStatusService} and awards practice only after both
  * succeeded, restoring the inventory and the witch's state on a synchronous failure. Every batch
@@ -37,9 +37,6 @@ import java.util.UUID;
  * {@link #resume} explicitly. Others may cancel only a batch whose lease has ended.
  */
 public final class MagicalProcessPolicy implements ProcessExecutionPolicy {
-    /** Blocks from the station origin the payer must stay within. */
-    public static final double RANGE = 8.0;
-
     private StationOperator operator;
     private boolean leased;
 
@@ -207,7 +204,7 @@ public final class MagicalProcessPolicy implements ProcessExecutionPolicy {
             return false;
         }
         BlockPos pos = site.pos();
-        if (player.position().distanceTo(Vec3.atCenterOf(pos)) > RANGE) {
+        if (player.position().distanceTo(Vec3.atCenterOf(pos)) > ProcessingRules.RANGE) {
             return false;
         }
         return ActionPermissionService.mayUse(ActionContext.of(player, site.level(), pos));

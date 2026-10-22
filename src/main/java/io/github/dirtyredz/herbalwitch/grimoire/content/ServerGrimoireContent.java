@@ -1,10 +1,9 @@
 package io.github.dirtyredz.herbalwitch.grimoire.content;
 
-import io.github.dirtyredz.herbalwitch.apothecary.botany.conditions.HerbConditionReloadListener;
-import io.github.dirtyredz.herbalwitch.apothecary.botany.conditions.HerbConditions;
+import io.github.dirtyredz.herbalwitch.grimoire.content.input.HerbSummary;
+
 import io.github.dirtyredz.herbalwitch.grimoire.content.reload.GrimoireDefinition;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reload.GrimoireDefinitionLoader;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipeIndex;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.item.crafting.RecipeManager;
 
@@ -25,10 +24,21 @@ public final class ServerGrimoireContent {
     private static RecipeManager recipes;
     private static long tagGeneration = -1;
     private static Map<EntryKey, GrimoireDefinition> definitions;
-    private static HerbConditions herbs;
+    private static Map<String, HerbSummary> herbs;
+    private static java.util.function.Supplier<Map<String, HerbSummary>> herbSource = Map::of;
+    private static java.util.function.LongSupplier recipeGeneration = () -> 0;
     private static int revision;
 
     private ServerGrimoireContent() {
+    }
+
+    /** Bootstrap adapters supply neutral facts; stable supplier identity results drive invalidation. */
+    public static void herbSource(java.util.function.Supplier<Map<String, HerbSummary>> source) {
+        herbSource = source;
+    }
+
+    public static void recipeGeneration(java.util.function.LongSupplier source) {
+        recipeGeneration = source;
     }
 
     /** Called with each newly built revision, on the server thread. */
@@ -44,9 +54,9 @@ public final class ServerGrimoireContent {
                 return current;
             }
             recipes = server.getRecipeManager();
-            tagGeneration = ProcessRecipeIndex.generation();
+            tagGeneration = recipeGeneration.getAsLong();
             definitions = GrimoireDefinitionLoader.current();
-            herbs = HerbConditionReloadListener.current();
+            herbs = herbSource.get();
             current = built = GrimoireContent.build(++revision, new GrimoireContent.Inputs(recipes, herbSummaries(), definitions));
         }
         LISTENERS.forEach(l -> l.accept(built));
@@ -54,15 +64,13 @@ public final class ServerGrimoireContent {
     }
 
     private static boolean fresh(MinecraftServer server) {
-        return current.revision() != 0 && recipes == server.getRecipeManager() && tagGeneration == ProcessRecipeIndex.generation()
-                && definitions == GrimoireDefinitionLoader.current() && herbs == HerbConditionReloadListener.current();
+        return current.revision() != 0 && recipes == server.getRecipeManager() && tagGeneration == recipeGeneration.getAsLong()
+                && definitions == GrimoireDefinitionLoader.current() && herbs == herbSource.get();
     }
 
     /** The server's herb conditions by plant id: what clients receive instead of their local defaults. */
-    public static Map<String, HerbConditions.Condition> herbSummaries() {
-        Map<String, HerbConditions.Condition> map = new LinkedHashMap<>();
-        HerbConditionReloadListener.current().all().forEach(c -> map.put(c.herb(), c));
-        return map;
+    public static Map<String, HerbSummary> herbSummaries() {
+        return herbSource.get();
     }
 
     /** Forgets everything when the server stops, so the next world starts from revision 1. */

@@ -1,7 +1,7 @@
 package io.github.dirtyredz.herbalwitch.grimoire.content;
 
 import com.mojang.logging.LogUtils;
-import io.github.dirtyredz.herbalwitch.apothecary.botany.conditions.HerbConditions;
+import io.github.dirtyredz.herbalwitch.grimoire.content.input.HerbSummary;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reload.GrimoireDefinition;
 import io.github.dirtyredz.herbalwitch.platform.recipe.RecipeView;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -29,7 +29,10 @@ public final class GrimoireContent {
     public static final String FURNITURE = "furniture";
     public static final String WITCHCRAFT = "witchcraft";
     private static final Logger LOGGER = LogUtils.getLogger();
-    private static final List<GrimoireContentSource> SOURCES = new CopyOnWriteArrayList<>();
+    /** Reading order is independent of registry/showcase/network bootstrap order. */
+    public enum Order { GUIDE, WITCH, BREWING, PREPARATIONS, STATION, DECOR, HERB, STATION_RECIPE, ALTAR, WARD, CHARM }
+    private record Source(Order order, GrimoireContentSource source) { }
+    private static final List<Source> SOURCES = new CopyOnWriteArrayList<>();
 
     /**
      * What every source reads.
@@ -38,7 +41,7 @@ public final class GrimoireContent {
      * @param herbs       herb conditions by plant id (the server's, never a client's local defaults)
      * @param definitions editorial definitions by entry key
      */
-    public record Inputs(RecipeManager recipes, Map<String, HerbConditions.Condition> herbs,
+    public record Inputs(RecipeManager recipes, Map<String, HerbSummary> herbs,
                          Map<EntryKey, GrimoireDefinition> definitions) {
         public Inputs {
             herbs = Map.copyOf(herbs);
@@ -54,9 +57,9 @@ public final class GrimoireContent {
         this.entries = Collections.unmodifiableMap(entries);
     }
 
-    /** Registers a source during bootstrap; registration order is the index order. */
-    public static void register(GrimoireContentSource source) {
-        SOURCES.add(source);
+    /** Registers a feature source; equal-order sources retain insertion order and first-key wins. */
+    public static void register(Order order, GrimoireContentSource source) {
+        SOURCES.add(new Source(order, source));
     }
 
     public static GrimoireContent empty() {
@@ -64,8 +67,13 @@ public final class GrimoireContent {
     }
 
     public static GrimoireContent build(int revision, Inputs inputs) {
+        return build(revision, inputs, SOURCES.stream().sorted(java.util.Comparator.comparing(Source::order))
+                .map(Source::source).toList());
+    }
+
+    static GrimoireContent build(int revision, Inputs inputs, List<GrimoireContentSource> sources) {
         Map<EntryKey, GrimoireEntry> built = new LinkedHashMap<>();
-        for (GrimoireContentSource source : SOURCES) {
+        for (GrimoireContentSource source : sources) {
             source.contribute(inputs, entry -> {
                 if (built.putIfAbsent(entry.key(), entry) != null) {
                     LOGGER.warn("Two grimoire sources produce {}; keeping the first", entry.key());

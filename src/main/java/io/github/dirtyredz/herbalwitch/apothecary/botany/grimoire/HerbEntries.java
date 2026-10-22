@@ -1,6 +1,10 @@
 package io.github.dirtyredz.herbalwitch.apothecary.botany.grimoire;
 
-import io.github.dirtyredz.herbalwitch.grimoire.content.reference.HerbForms;
+import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
+
+import io.github.dirtyredz.herbalwitch.grimoire.content.input.HerbSummary;
+
+import io.github.dirtyredz.herbalwitch.grimoire.content.reference.DiscoveryForms;
 
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
@@ -13,7 +17,7 @@ import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyItems;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContent;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContentSource;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireEntry;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.grimoire.StationRecipeEntries;
+import io.github.dirtyredz.herbalwitch.grimoire.content.recipe.RecipeReferences;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
@@ -38,6 +42,10 @@ public final class HerbEntries implements GrimoireContentSource {
     public static final String BONUS = PREFIX + "bonus";
     public static final String NO_CONDITIONS = PREFIX + "no_conditions";
 
+    public static EntryKey key(HerbSpec herb) {
+        return EntryKey.of(EntryKey.Kind.HERB, HerbConditions.plantId(herb));
+    }
+
     public static String titleKey(HerbSpec herb) {
         return PREFIX + herb.id();
     }
@@ -49,7 +57,7 @@ public final class HerbEntries implements GrimoireContentSource {
     @Override
     public void contribute(GrimoireContent.Inputs inputs, Consumer<GrimoireEntry> out) {
         for (HerbSpec herb : HerbCatalog.ALL) {
-            Optional<HerbConditions.Condition> condition = Optional.ofNullable(inputs.herbs().get(HerbConditions.plantId(herb)));
+            Optional<HerbSummary> condition = Optional.ofNullable(inputs.herbs().get(HerbConditions.plantId(herb)));
             Component acquisition = Component.translatable(herb.starter() ? HerbTooltips.STARTER : HerbTooltips.WILD,
                     habitat(herb, condition));
             List<Component> body = new ArrayList<>();
@@ -57,9 +65,9 @@ public final class HerbEntries implements GrimoireContentSource {
             body.add(Component.translatable(herb.form() == HerbSpec.Form.CROP ? FORM_CROP : FORM_BUSH));
             body.add(acquisition);
             condition.ifPresentOrElse(c -> conditionLines(c, body), () -> body.add(Component.translatable(NO_CONDITIONS)));
-            out.accept(new GrimoireEntry(HerbForms.key(herb), GrimoireContent.HERBS, Component.translatable(titleKey(herb)),
+            out.accept(new GrimoireEntry(key(herb), GrimoireContent.HERBS, Component.translatable(titleKey(herb)),
                     BotanyItems.fresh(herb).getDefaultInstance(), body,
-                    StationRecipeEntries.usingAny(inputs.recipes(), HerbForms.formStacks(herb)),
+                    RecipeReferences.usingAny(inputs.recipes(), DiscoveryForms.formStacks(key(herb))),
                     Optional.of(acquisition), false, Optional.empty()));
         }
     }
@@ -77,13 +85,13 @@ public final class HerbEntries implements GrimoireContentSource {
     }
 
     /** The habitat's name when the server keeps the default tag, else the tag id it uses instead. */
-    private static Component habitat(HerbSpec herb, Optional<HerbConditions.Condition> condition) {
-        String tag = condition.map(HerbConditions.Condition::habitat).orElse(HerbConditions.habitatTagId(herb));
+    private static Component habitat(HerbSpec herb, Optional<HerbSummary> condition) {
+        String tag = condition.map(HerbSummary::habitat).orElse(HerbConditions.habitatTagId(herb));
         return tag.equals(HerbConditions.habitatTagId(herb))
                 ? Component.translatable(HerbTooltips.habitatKey(herb.habitat())) : Component.literal("#" + tag);
     }
 
-    private static void conditionLines(HerbConditions.Condition c, List<Component> body) {
+    private static void conditionLines(HerbSummary c, List<Component> body) {
         body.add(c.discoveryChance() <= 0 ? Component.translatable(DISCOVERY_NONE)
                 : Component.translatable(DISCOVERY, oneIn(c.discoveryChance())));
         if (!c.preferences().isEmpty()) {
@@ -92,7 +100,7 @@ public final class HerbEntries implements GrimoireContentSource {
                 if (i > 0) {
                     likes.append(", ");
                 }
-                likes.append(Component.translatable(preferenceKey(c.preferences().get(i))));
+                likes.append(Component.translatable(preferenceKey(HerbHabitat.Preference.values()[c.preferences().get(i)])));
             }
             body.add(Component.translatable(LIKES, likes));
         }

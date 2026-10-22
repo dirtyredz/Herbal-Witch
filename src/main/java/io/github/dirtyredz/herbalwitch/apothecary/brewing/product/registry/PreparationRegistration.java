@@ -1,5 +1,15 @@
 package io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry;
 
+import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
+
+import io.github.dirtyredz.herbalwitch.apothecary.botany.grimoire.HerbEntries;
+
+import io.github.dirtyredz.herbalwitch.grimoire.content.reference.DiscoveryForms;
+
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.grimoire.AdvancedPreparationEntries;
+
+import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContent;
+
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.EffectRegistration;
 
 import com.mojang.serialization.Codec;
@@ -32,6 +42,9 @@ public final class PreparationRegistration {
 
     /** Called once from the mod constructor. */
     public static void register(IEventBus modBus) {
+        GrimoireContent.register(GrimoireContent.Order.PREPARATIONS, new AdvancedPreparationEntries());
+        HerbCatalog.ALL.forEach(h -> DiscoveryForms.register(HerbEntries.key(h), DiscoveryForms.Order.PREPARED,
+                () -> java.util.List.of(PreparationItems.bundle(h), PreparationItems.powder(h))));
         PreparationBlocks.BLOCKS.register(modBus);
         PreparationItems.ITEMS.register(modBus);
         AdvancedPreparations.ITEMS.register(modBus);

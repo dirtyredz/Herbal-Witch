@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.apothecary.stations.grimoire;
 
+import io.github.dirtyredz.herbalwitch.grimoire.content.recipe.RecipeReferences;
+
 import io.github.dirtyredz.herbalwitch.apothecary.stations.registry.ProcessingRecipeBindings;
 
 import io.github.dirtyredz.herbalwitch.platform.recipe.RecipeIngredients;
@@ -12,7 +14,7 @@ import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContent;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContentSource;
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireEntry;
-import io.github.dirtyredz.herbalwitch.grimoire.content.reference.HerbForms;
+import io.github.dirtyredz.herbalwitch.grimoire.content.reference.DiscoveryForms;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.grimoire.StationEntries;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.ProcessingCategories;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.process.recipe.ProcessRecipe;
@@ -44,10 +46,6 @@ public final class StationRecipeEntries implements GrimoireContentSource {
     public static final String HINT = "grimoire." + HerbalWitch.MOD_ID + ".hint.recipe";
     private static volatile Set<Item> products;
 
-    public static EntryKey key(ResourceLocation recipe) {
-        return EntryKey.of(EntryKey.Kind.RECIPE, recipe.toString());
-    }
-
     /** Every supported recipe: category by category in station order, each by id. */
     public static List<ProcessRecipe> recipes(RecipeManager manager) {
         List<ProcessRecipe> out = new ArrayList<>();
@@ -74,30 +72,13 @@ public final class StationRecipeEntries implements GrimoireContentSource {
             links.add(StationEntries.key(category.station()));
             for (Ingredient ingredient : RecipeIngredients.allIngredients(d)) {
                 for (ItemStack stack : ingredient.getItems()) {
-                    HerbForms.herbOf(stack.getItem()).ifPresent(h -> links.add(HerbForms.key(h)));
+                    DiscoveryForms.keyOf(stack.getItem()).ifPresent(links::add);
                 }
-                producing(manager, ingredient).stream().filter(k -> !k.equals(key(recipe.getId()))).forEach(links::add);
+                RecipeReferences.producing(manager, ingredient).stream().filter(k -> !k.equals(RecipeReferences.key(recipe.getId()))).forEach(links::add);
             }
-            out.accept(new GrimoireEntry(key(recipe.getId()), category.id(), result.getHoverName(), result, body, links,
+            out.accept(new GrimoireEntry(RecipeReferences.key(recipe.getId()), category.id(), result.getHoverName(), result, body, links,
                     Optional.of(Component.translatable(HINT)), false, Optional.of(recipe)));
         }
-    }
-
-    /** Keys of the recipes whose result the ingredient accepts. */
-    public static List<EntryKey> producing(RecipeManager manager, Ingredient ingredient) {
-        return recipes(manager).stream().filter(r -> ingredient.test(r.description().result()))
-                .map(r -> key(r.getId())).toList();
-    }
-
-    /** Keys of the recipes that take any of the stacks as an ingredient, base or package. */
-    public static List<EntryKey> usingAny(RecipeManager manager, List<ItemStack> stacks) {
-        Set<EntryKey> keys = new LinkedHashSet<>();
-        for (ProcessRecipe recipe : recipes(manager)) {
-            if (RecipeIngredients.allIngredients(recipe.description()).stream().anyMatch(i -> stacks.stream().anyMatch(i))) {
-                keys.add(key(recipe.getId()));
-            }
-        }
-        return List.copyOf(keys);
     }
 
     private static boolean isProduct(Item item) {

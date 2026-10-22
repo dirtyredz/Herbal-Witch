@@ -25,7 +25,7 @@ public final class CharmRegistration {
         modBus.addListener(CharmRegistration::creativeTab);
         MinecraftForge.EVENT_BUS.addListener(CharmEvents::playerTick);
         MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, CharmEvents::onDamage);
-        GrimoireContent.register(new CharmEntries());
+        GrimoireContent.register(GrimoireContent.Order.CHARM, new CharmEntries());
         ShowcaseRegistry.register(new CharmShowcaseSection());
     }
 

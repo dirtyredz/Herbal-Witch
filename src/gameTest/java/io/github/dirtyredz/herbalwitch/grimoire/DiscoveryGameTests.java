@@ -6,7 +6,7 @@ import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyItems;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.EverydayProductCatalog;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationItems;
 import io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey;
-import io.github.dirtyredz.herbalwitch.grimoire.content.reference.HerbForms;
+import io.github.dirtyredz.herbalwitch.apothecary.botany.grimoire.HerbEntries;
 import io.github.dirtyredz.herbalwitch.grimoire.knowledge.discovery.DiscoveryCapability;
 import io.github.dirtyredz.herbalwitch.grimoire.knowledge.discovery.DiscoveryCodec;
 import io.github.dirtyredz.herbalwitch.grimoire.knowledge.discovery.DiscoveryService;
@@ -55,23 +55,23 @@ public final class DiscoveryGameTests {
     @GameTest(template = TEMPLATE)
     public static void carryingAnyFormOfAHerbRecordsTheHerbAndItsDrying(GameTestHelper helper) {
         ServerPlayer player = standing(helper, "disc_forms", new BlockPos(1, 1, 1));
-        check(!knows(player, HerbForms.key(HerbCatalog.LAVENDER)), "a fresh player knows nothing");
+        check(!knows(player, HerbEntries.key(HerbCatalog.LAVENDER)), "a fresh player knows nothing");
         carry(player, new ItemStack(BotanyItems.fresh(HerbCatalog.LAVENDER)));
         player.getInventory().offhand.set(0, new ItemStack(PreparationItems.bundle(HerbCatalog.SAGE)));
         carry(player, new ItemStack(PreparationItems.powder(HerbCatalog.MINT)), new ItemStack(BotanyItems.seeds(HerbCatalog.YARROW)));
         DiscoveryService.observe(player);
         for (var herb : List.of(HerbCatalog.LAVENDER, HerbCatalog.SAGE, HerbCatalog.MINT, HerbCatalog.YARROW)) {
-            check(knows(player, HerbForms.key(herb)), herb.id() + " not recorded");
+            check(knows(player, HerbEntries.key(herb)), herb.id() + " not recorded");
         }
         check(knows(player, DRY_LAVENDER), "carrying fresh lavender makes its drying familiar");
-        check(!knows(player, HerbForms.key(HerbCatalog.CHAMOMILE)), "an uncarried herb was recorded");
+        check(!knows(player, HerbEntries.key(HerbCatalog.CHAMOMILE)), "an uncarried herb was recorded");
         helper.succeed();
     }
 
     @GameTest(template = TEMPLATE)
     public static void aKnownHerbsFormsMakeItsChainFamiliar(GameTestHelper helper) {
         ServerPlayer player = standing(helper, "disc_known", new BlockPos(1, 1, 1));
-        DiscoveryService.grant(player, HerbForms.key(HerbCatalog.LAVENDER));
+        DiscoveryService.grant(player, HerbEntries.key(HerbCatalog.LAVENDER));
         DiscoveryService.observe(player); // carrying nothing at all
         check(knows(player, DRY_LAVENDER), "known lavender makes fresh lavender familiar");
         check(knows(player, GRIND_LAVENDER), "known lavender makes its bundle familiar");
@@ -93,7 +93,7 @@ public final class DiscoveryGameTests {
         carry(other, new ItemStack(PreparationItems.product(EverydayProductCatalog.RECOVERY_TEA)));
         DiscoveryService.observe(other);
         check(knows(other, RECOVERY_TEA), "carrying the result records its recipe");
-        check(!knows(other, HerbForms.key(HerbCatalog.CHAMOMILE)), "a result teaches no herb");
+        check(!knows(other, HerbEntries.key(HerbCatalog.CHAMOMILE)), "a result teaches no herb");
         helper.succeed();
     }
 
@@ -103,8 +103,8 @@ public final class DiscoveryGameTests {
         player.getInventory().armor.set(3, new ItemStack(BotanyItems.fresh(HerbCatalog.MINT)));
         player.containerMenu.setCarried(new ItemStack(BotanyItems.fresh(HerbCatalog.SAGE)));
         DiscoveryService.observe(player);
-        check(!knows(player, HerbForms.key(HerbCatalog.MINT)), "armour slots counted");
-        check(!knows(player, HerbForms.key(HerbCatalog.SAGE)), "the cursor stack counted");
+        check(!knows(player, HerbEntries.key(HerbCatalog.MINT)), "armour slots counted");
+        check(!knows(player, HerbEntries.key(HerbCatalog.SAGE)), "the cursor stack counted");
         player.containerMenu.setCarried(ItemStack.EMPTY);
         helper.succeed();
     }
@@ -113,13 +113,13 @@ public final class DiscoveryGameTests {
     public static void theRealCapabilitySavesWithThePlayer(GameTestHelper helper) {
         ServerPlayer player = standing(helper, "disc_save", new BlockPos(1, 1, 1));
         DiscoveryService.grant(player, RECOVERY_TEA);
-        DiscoveryService.grant(player, HerbForms.key(HerbCatalog.MINT));
+        DiscoveryService.grant(player, HerbEntries.key(HerbCatalog.MINT));
         CompoundTag saved = player.saveWithoutId(new CompoundTag());
         CompoundTag caps = saved.getCompound("ForgeCaps").getCompound(DiscoveryCapability.ID.toString());
         check(caps.getInt(DiscoveryCodec.SCHEMA_KEY) == DiscoveryCodec.SCHEMA, "no schema in " + caps);
         DiscoveryCapability restored = new DiscoveryCapability();
         restored.load(caps);
-        check(restored.state().known().equals(Set.of(RECOVERY_TEA, HerbForms.key(HerbCatalog.MINT))), "round trip " + restored.state().known());
+        check(restored.state().known().equals(Set.of(RECOVERY_TEA, HerbEntries.key(HerbCatalog.MINT))), "round trip " + restored.state().known());
         helper.succeed();
     }
 
