@@ -1,0 +1,15 @@
+{
+  "entry": "guide|herbalwitch:preparation",
+  "links": [
+    "station|herbalwitch:stations/drying_rack/station",
+    "station|herbalwitch:stations/mortar/station",
+    "station|herbalwitch:stations/kettle/station",
+    "station|herbalwitch:stations/infusion_pot/station"
+  ],
+  "pages": [
+    "grimoire.herbalwitch.guide.preparation.0",
+    "grimoire.herbalwitch.guide.preparation.1",
+    "grimoire.herbalwitch.guide.preparation.2"
+  ],
+  "title": "grimoire.herbalwitch.guide.preparation.title"
+}

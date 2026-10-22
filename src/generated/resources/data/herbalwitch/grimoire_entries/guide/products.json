@@ -1,0 +1,11 @@
+{
+  "entry": "guide|herbalwitch:products",
+  "links": [
+    "guide|herbalwitch:preparation"
+  ],
+  "pages": [
+    "grimoire.herbalwitch.guide.products.0",
+    "grimoire.herbalwitch.guide.products.1"
+  ],
+  "title": "grimoire.herbalwitch.guide.products.title"
+}

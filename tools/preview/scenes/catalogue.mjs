@@ -176,6 +176,33 @@ export const SCENES = [
       { at: [3, 1, 1], block: `${HW}decor/storage/small_wall_shelf`, props: { facing: 'north' } },
     ],
   },
+  {
+    // the grimoire's research pieces in a little study: the witch's bookshelf beside the armchair,
+    // the grimoire stand facing the reader, a lit lamp on the counter
+    name: 'grimoire-study',
+    view: 'iso',
+    scale: 12,
+    entries: [
+      { at: [0, 0, 1], block: `${HW}grimoire/bookshelf`, props: { facing: 'north' } },
+      { at: [1, 0, 1], block: `${HW}grimoire/bookshelf`, props: { facing: 'north' } },
+      { at: [2, 0, 0], block: `${HW}decor/seating/armchair`, props: { facing: 'west' } },
+      { at: [0, 0, -1], block: `${HW}grimoire/stand`, props: { facing: 'north' } },
+      { at: [3, 0, 1], block: `${HW}decor/surfaces/apothecary_counter`, props: { facing: 'north' } },
+      { at: [3, 1, 1], block: `${HW}decor/lighting/table_lamp`, props: { lit: true } },
+    ],
+  },
+  {
+    name: 'grimoire-stand',
+    view: 'iso',
+    scale: 18,
+    entries: [{ at: [0, 0, 0], block: `${HW}grimoire/stand`, props: { facing: 'north' } }],
+  },
+  {
+    name: 'grimoire-bookshelf-back',
+    view: 'back',
+    scale: 14,
+    entries: [{ at: [0, 0, 0], block: `${HW}grimoire/bookshelf`, props: { facing: 'north' } }],
+  },
 ];
 
 /** Hung bundles under a ceiling and on a wall, against proxy stone, to show nothing leaks onto the host. */

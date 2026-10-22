@@ -30,7 +30,6 @@ public final class HerbEntries implements GrimoireContentSource {
     private static final String PREFIX = "grimoire." + HerbalWitch.MOD_ID + ".herb.";
     public static final String FORM_CROP = PREFIX + "form.crop";
     public static final String FORM_BUSH = PREFIX + "form.bush";
-    public static final String HABITAT = PREFIX + "habitat";
     public static final String DISCOVERY = PREFIX + "discovery";
     public static final String DISCOVERY_NONE = PREFIX + "discovery.none";
     public static final String LIKES = PREFIX + "likes";

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_fresh_herb": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "herbalwitch:botany/temperate/lavender/fresh"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "herbalwitch:grimoire/book"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_fresh_herb",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "herbalwitch:grimoire/book"
+    ]
+  },
+  "sends_telemetry_event": false
+}

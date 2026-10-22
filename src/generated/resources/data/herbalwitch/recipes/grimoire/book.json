@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "minecraft:ink_sac"
+    },
+    [
+      {
+        "item": "herbalwitch:botany/temperate/lavender/fresh"
+      },
+      {
+        "item": "herbalwitch:botany/temperate/sage/fresh"
+      },
+      {
+        "item": "herbalwitch:botany/wet/mint/fresh"
+      },
+      {
+        "item": "herbalwitch:botany/temperate/chamomile/fresh"
+      }
+    ]
+  ],
+  "result": {
+    "item": "herbalwitch:grimoire/book"
+  }
+}

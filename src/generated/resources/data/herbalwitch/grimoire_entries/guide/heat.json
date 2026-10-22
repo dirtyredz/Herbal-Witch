@@ -1,0 +1,12 @@
+{
+  "entry": "guide|herbalwitch:heat",
+  "links": [
+    "station|herbalwitch:stations/hearth/station",
+    "station|herbalwitch:stations/stove/station"
+  ],
+  "pages": [
+    "grimoire.herbalwitch.guide.heat.0",
+    "grimoire.herbalwitch.guide.heat.1"
+  ],
+  "title": "grimoire.herbalwitch.guide.heat.title"
+}

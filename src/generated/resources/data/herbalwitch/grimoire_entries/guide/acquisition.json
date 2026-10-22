@@ -1,0 +1,12 @@
+{
+  "entry": "guide|herbalwitch:acquisition",
+  "links": [
+    "guide|herbalwitch:preparation"
+  ],
+  "pages": [
+    "grimoire.herbalwitch.guide.acquisition.0",
+    "grimoire.herbalwitch.guide.acquisition.1",
+    "grimoire.herbalwitch.guide.acquisition.2"
+  ],
+  "title": "grimoire.herbalwitch.guide.acquisition.title"
+}
