@@ -1,0 +1,590 @@
+[
+  {
+    "path": "block/material/wood.png",
+    "sha256": "8b5a437cad3541bc9288aab3a45265ea83a34d84ac40199f6337212fb8471c8e"
+  },
+  {
+    "path": "block/material/wood_post.png",
+    "sha256": "872542bb05a5c36fabe7267c3bc0ed6b698524aba44600cf639b2d2215e5340e"
+  },
+  {
+    "path": "block/material/wood_end.png",
+    "sha256": "25e0ce6628b6d38c0bf50b84c9565dcc29feebd5db63ea1f1d8105eb6c722628"
+  },
+  {
+    "path": "block/material/gold.png",
+    "sha256": "8ed94c130c91413cdaa963cba535005a487dd812c3138389676036a00a069151"
+  },
+  {
+    "path": "item/botany/temperate/lavender/seeds.png",
+    "sha256": "7615ced218cd4508908b8cca4753ad024865e6ed769fc7537a4f84f6c9c35571"
+  },
+  {
+    "path": "item/botany/temperate/lavender/fresh.png",
+    "sha256": "4de14d20d44d55b72395ac8412dae90ea94a5eb56a887722a17d69605bed69f2"
+  },
+  {
+    "path": "item/botany/temperate/sage/seeds.png",
+    "sha256": "bebd87392ab9f15500d1b0bbba806c2b69349ce2ee5432cdf35e6cf6b6f13578"
+  },
+  {
+    "path": "item/botany/temperate/sage/fresh.png",
+    "sha256": "c34bea0b475f7ff2e599967193c6cd91d9babd5b6e40b144a76a28adece524c8"
+  },
+  {
+    "path": "item/botany/temperate/chamomile/seeds.png",
+    "sha256": "c72b15c348280a260e3b1907153eacd3f158de2b129e7e2cc4d3a101b286119a"
+  },
+  {
+    "path": "item/botany/temperate/chamomile/fresh.png",
+    "sha256": "6fb8e2ef276ccf2f798ac70e000daf5b106566539de83478d598eb462386d4a9"
+  },
+  {
+    "path": "item/botany/temperate/yarrow/seeds.png",
+    "sha256": "9acb68b23c711a8079d1ec2226f7dd2f79f1f172b4ca5a1d54281d01ddd8e8d7"
+  },
+  {
+    "path": "item/botany/temperate/yarrow/fresh.png",
+    "sha256": "8269b174766d1c24312f7dd405fa08538bf23dd453ea0091613197783e7728db"
+  },
+  {
+    "path": "item/botany/dry/rosemary/seeds.png",
+    "sha256": "3c8b1440527fa7f4381861f58c6d43c90d8a2049934ed6494b8a00513fbf5b42"
+  },
+  {
+    "path": "item/botany/dry/rosemary/fresh.png",
+    "sha256": "5c98ce5dc594eaad6e1ed167ff41991abce94c857d88f31ee9114c7f861098d9"
+  },
+  {
+    "path": "item/botany/dry/thyme/seeds.png",
+    "sha256": "baa185d993a30b6eef41658321fdf820dc61f7e160d9aff3df375a354cc997eb"
+  },
+  {
+    "path": "item/botany/dry/thyme/fresh.png",
+    "sha256": "fca0583ee9bff4e896fe3dfe7da52b9f6a50932b74ebd4ac5d8f6708805cd450"
+  },
+  {
+    "path": "item/botany/wet/mint/seeds.png",
+    "sha256": "7299c09c7cee202182ef0b0026a01b06482a1033ba2edf9498636f8c3c15140c"
+  },
+  {
+    "path": "item/botany/wet/mint/fresh.png",
+    "sha256": "b808ac42566d7251d0ef5b91f841380be9707f118f0e2439f883e3b0a2ed6a5f"
+  },
+  {
+    "path": "item/botany/wet/nettle/seeds.png",
+    "sha256": "a947618a7df6de2ffdbbe9a6e842e4facf6321ebfc15f466d11f2a6458668b58"
+  },
+  {
+    "path": "item/botany/wet/nettle/fresh.png",
+    "sha256": "905d98ba5c74591290809e939b952bf9a89df4d0974c3a29ee126a5c5b60dc5b"
+  },
+  {
+    "path": "item/botany/shade/valerian/seeds.png",
+    "sha256": "88bcab7bc7ecd2b1808b4128482bdb19754f5ab8a6d9f19636f3c1d6a4765649"
+  },
+  {
+    "path": "item/botany/shade/valerian/fresh.png",
+    "sha256": "de71f98705bd3a111a3a7c4af7cb0db0be3dd3b7c6530624b65e2a7be0d3a00d"
+  },
+  {
+    "path": "item/botany/shade/mugwort/seeds.png",
+    "sha256": "78a03a3258a5e708bb00f8924a35ac68c4ff25d380ccd4afafc6f95419764de4"
+  },
+  {
+    "path": "item/botany/shade/mugwort/fresh.png",
+    "sha256": "6ed12026730ca5e2eb0bc028c2f90e6393432aa9ada8082d63172be238c836bb"
+  },
+  {
+    "path": "item/botany/woodland/belladonna/seeds.png",
+    "sha256": "c5598fba478f4fba5bf8707012622e6cd899d274744b74d8787454113c42be8e"
+  },
+  {
+    "path": "item/botany/woodland/belladonna/fresh.png",
+    "sha256": "efe83cc4bc9fb2d01641700af0b906661c46cdad9634e0eec6dca5e33601902b"
+  },
+  {
+    "path": "item/botany/woodland/nightshade/seeds.png",
+    "sha256": "69be0ef03139ae74e4a1434b1e89d9239e3a630da0f831d069bce017d236bd14"
+  },
+  {
+    "path": "item/botany/woodland/nightshade/fresh.png",
+    "sha256": "a732ffb28ced8eb80520b059dfc0beb2d5a8a61a5f183b191921edc7b6fcec04"
+  },
+  {
+    "path": "item/botany/woodland/wolfsbane/seeds.png",
+    "sha256": "0c27c0e2dd6a70b5752f048441e2b28e55524a6f6af8b00a564d16d237a61ba5"
+  },
+  {
+    "path": "item/botany/woodland/wolfsbane/fresh.png",
+    "sha256": "21fe4185bfbfaf812893a3ae1b1e0c6fea8183d648abf2bf2dcee968eca19b90"
+  },
+  {
+    "path": "item/botany/woodland/mandrake/seeds.png",
+    "sha256": "59b99dc49489bc765a863db0c1a47f5b10556f14d7b56eaf57465bd32f3a07e2"
+  },
+  {
+    "path": "item/botany/woodland/mandrake/fresh.png",
+    "sha256": "1041ca4662a03f3d087184e656ee93687db268422b25a41465296a34b5122223"
+  },
+  {
+    "path": "block/botany/garden/soil_dry.png",
+    "sha256": "77648870b6f783a7ecc74008fad2b377da997fd4e47457f911252ab670e7ffc1"
+  },
+  {
+    "path": "block/botany/garden/soil_moist.png",
+    "sha256": "eef3984414d0100956b30295e2b5822e0742eceea822d73122af085ab6ec812f"
+  },
+  {
+    "path": "block/botany/parts.png",
+    "sha256": "9e4ae973b3363c81b96e753aaa3489bd2aaafec0eebfac79cddade08d226dc7f"
+  },
+  {
+    "path": "gui/stations/bottling_bench.png",
+    "sha256": "582d0f1d529fcf9f5edfa93ae6bb807c5fe050c3501f9925eee74eec22cc2629"
+  },
+  {
+    "path": "gui/stations/cauldron.png",
+    "sha256": "8d665cb6109c14ede62d6551fd2fa391fbb601a2a299b9b8f3d378b43436f921"
+  },
+  {
+    "path": "gui/stations/charm_workbench.png",
+    "sha256": "67138428e1546ad8559b6c4cb030bc51e6b704334e1da6ab366ead03b3de50bf"
+  },
+  {
+    "path": "gui/stations/drying_rack.png",
+    "sha256": "f8d7698e914061e5cd691ceaebd821265aa24efb31911337c23a02e79186629f"
+  },
+  {
+    "path": "gui/stations/hearth.png",
+    "sha256": "68d766f0147310e7eeb79506a527f690c78389131a5ac5aaca955512cfb333f8"
+  },
+  {
+    "path": "gui/stations/infusion_pot.png",
+    "sha256": "643526d4938478ad5572d026aef9a78c532de90ca02ce9613c0dbe67859fa0cd"
+  },
+  {
+    "path": "gui/stations/kettle.png",
+    "sha256": "27ac34295dac2c74af9215ffe81c7df6035eb125855f95a465bfd3590229ae1a"
+  },
+  {
+    "path": "gui/stations/mortar.png",
+    "sha256": "08f79a8e864f8717eedbde5822d02cc3726b136ef3487fcb829700d5e71bf916"
+  },
+  {
+    "path": "gui/stations/still.png",
+    "sha256": "c92d8b5803015c2139a245be8b9480853b8daa29e174cad2d2bf2237564a46b2"
+  },
+  {
+    "path": "gui/decor/cabinet_27.png",
+    "sha256": "c2fbc2c6d8a9cdff7900361477fdee26af57ab70b0f13b4a2352bb35a20282ca"
+  },
+  {
+    "path": "gui/decor/cabinet_54.png",
+    "sha256": "8029e932084e4c917c6489efcdac50a6cffef302418bb6d7ef2fb847a5de18a1"
+  },
+  {
+    "path": "gui/decor/display_3.png",
+    "sha256": "ed46af7c1d2a3a665172d7b12e2747afae62b1de2ee3b7fc53666de3de572f4f"
+  },
+  {
+    "path": "gui/decor/display_6.png",
+    "sha256": "58c4ef43a85e0ef5498b3968a4d166733a9c485710f83a68c05af73acb86cbd4"
+  },
+  {
+    "path": "gui/decor/display_9.png",
+    "sha256": "f6f251bc017a9d005db8f6e7b978908ad16b42e0b25f9f72aadef16589b80888"
+  },
+  {
+    "path": "gui/witch/altar.png",
+    "sha256": "ca82b884daf0aafc6b337f2212831d0e0d30b9a00095d0e2357aada2cc097151"
+  },
+  {
+    "path": "gui/witch/energy.png",
+    "sha256": "086855213f6183860790e20d7a4e7c4731d6bd524f7d6769ef76845a53f28735"
+  },
+  {
+    "path": "gui/witch/ward.png",
+    "sha256": "1f5fa9dcf0b0dcebf085b686219ee82d5a784d6f674b4f067d087fa673928f4c"
+  },
+  {
+    "path": "item/preparations/herbs/temperate/lavender/bundle.png",
+    "sha256": "330ab5149d0b63c24732cf661ce22f1a713b4a2181c5ebba20b15841f983b59a"
+  },
+  {
+    "path": "item/preparations/herbs/temperate/lavender/powder.png",
+    "sha256": "d4095b499780b1858e539dc493a3fc62511a39f07a9df0fee13bfa2f55a29840"
+  },
+  {
+    "path": "item/preparations/herbs/temperate/sage/bundle.png",
+    "sha256": "a16e55e10bfd527e1c58adef5a96114ed3e62a7c5eb34692f53b16ec29677d3f"
+  },
+  {
+    "path": "item/preparations/herbs/temperate/sage/powder.png",
+    "sha256": "2936ee10332a72d8669c34118d85761d65ec9a09349eb8776d9ca51118d873e8"
+  },
+  {
+    "path": "item/preparations/herbs/temperate/chamomile/bundle.png",
+    "sha256": "8222e18db2380a2d475c3e47f2e01d6fd791bc614aec7800c961e772a9a874c4"
+  },
+  {
+    "path": "item/preparations/herbs/temperate/chamomile/powder.png",
+    "sha256": "9c828616a4451f45263b2a50e6930294d7767184ec1cf258d5e3779b392f0ae1"
+  },
+  {
+    "path": "item/preparations/herbs/temperate/yarrow/bundle.png",
+    "sha256": "53dfbdf5f4e55b53f6342a789acbf7dfb998e9377de843405a330469e199f71a"
+  },
+  {
+    "path": "item/preparations/herbs/temperate/yarrow/powder.png",
+    "sha256": "75fe15708286b2b16b39fffebbfacedd815679770d149ff0d683980c86e185a4"
+  },
+  {
+    "path": "item/preparations/herbs/dry/rosemary/bundle.png",
+    "sha256": "758cf10c83dc21a8daeeea773d15ec09e7aa6d35a73e1c1e71cf015b6795972c"
+  },
+  {
+    "path": "item/preparations/herbs/dry/rosemary/powder.png",
+    "sha256": "2c720b1a2cf30e73c7290efa67a9fbaa77d9cc80d7bde5ca29a59b45d7d198b5"
+  },
+  {
+    "path": "item/preparations/herbs/dry/thyme/bundle.png",
+    "sha256": "acaebdafed74af7b3689881b1df8547efbc1473e4c4a5254b1aa2a1f6633c45f"
+  },
+  {
+    "path": "item/preparations/herbs/dry/thyme/powder.png",
+    "sha256": "3accf502d189e7078b5c3d743b6e3e470270732ba9d3571c2bbdf62801b417fd"
+  },
+  {
+    "path": "item/preparations/herbs/wet/mint/bundle.png",
+    "sha256": "f42b45708b937e0ffdcc07af6bea308dd7a2e0a23e9da79a1edf0b428a05ff13"
+  },
+  {
+    "path": "item/preparations/herbs/wet/mint/powder.png",
+    "sha256": "8397b61eed2e717d489501fd34d78f2230c0c517593b24a37a997bf4e63af784"
+  },
+  {
+    "path": "item/preparations/herbs/wet/nettle/bundle.png",
+    "sha256": "0f69706b639c512e8f443582492ceadd8a33b74ecadcf30d993b974d07fd8eb2"
+  },
+  {
+    "path": "item/preparations/herbs/wet/nettle/powder.png",
+    "sha256": "739a2e7cd28441fd27c86c8c533badced503e09139e3b83489830cbecf2141ce"
+  },
+  {
+    "path": "item/preparations/herbs/shade/valerian/bundle.png",
+    "sha256": "61589863da519de0090011bfac8e8ebe4344abd4543e46864ff5cb9da742243a"
+  },
+  {
+    "path": "item/preparations/herbs/shade/valerian/powder.png",
+    "sha256": "cf06bf01e1da6391897800ce080d1c78b222cdb8db998a8ae9e6c0b462438135"
+  },
+  {
+    "path": "item/preparations/herbs/shade/mugwort/bundle.png",
+    "sha256": "86a22fe3e8d42a789156fb0ae27e1e215b01101ab13b1520afc52b4307268ab2"
+  },
+  {
+    "path": "item/preparations/herbs/shade/mugwort/powder.png",
+    "sha256": "310051fcda950a8d70b2f670d3563cb635b192cd10b8114f0676e85372c6913b"
+  },
+  {
+    "path": "item/preparations/herbs/woodland/belladonna/bundle.png",
+    "sha256": "0be5dbe94daf1aee1d1c725b5eeee049f322fdea91bf0c4371549747b36d0eaa"
+  },
+  {
+    "path": "item/preparations/herbs/woodland/belladonna/powder.png",
+    "sha256": "e0ac4f0a5ba502ce955d8a0388a33dc05a7b196c89e2f224d7da2ddc0aa5452b"
+  },
+  {
+    "path": "item/preparations/herbs/woodland/nightshade/bundle.png",
+    "sha256": "6b0d77ee50624fafaf553aa940537cd779eb7129283fd937f75e185b03fbcc42"
+  },
+  {
+    "path": "item/preparations/herbs/woodland/nightshade/powder.png",
+    "sha256": "89e8a6c48960cf9237af0746e4fc29744088fc1bcfeb6abcd8a4debaea4e2548"
+  },
+  {
+    "path": "item/preparations/herbs/woodland/wolfsbane/bundle.png",
+    "sha256": "396dc574b9a028b15f1c1b8a5863bf421b023871eaf84f6ea31fe68b323dbf7f"
+  },
+  {
+    "path": "item/preparations/herbs/woodland/wolfsbane/powder.png",
+    "sha256": "eb4435c01e4e0f4af4ad56ceecfe45677b488e11f45f38224e6d26fa84f86233"
+  },
+  {
+    "path": "item/preparations/herbs/woodland/mandrake/bundle.png",
+    "sha256": "f7d31f33f3871a2f9cf673ac834b62fe4d698ebaaecc059c67baf914f5eef907"
+  },
+  {
+    "path": "item/preparations/herbs/woodland/mandrake/powder.png",
+    "sha256": "bf911906b11a3819f3252619d587d1f3a362e51fd1630f1ef98d08ab60bbc8e1"
+  },
+  {
+    "path": "item/preparations/drinks/recovery_tea.png",
+    "sha256": "434a4889579d3c51b80dfa7a752ece8331f3c2e94aaddebf09b7fb1b6c2fe25f"
+  },
+  {
+    "path": "item/preparations/drinks/energy_tea.png",
+    "sha256": "8f255f0d6ddc0eb5c936dd90cd326220ec09fc10fa8fda1d7b1a1480c84967ac"
+  },
+  {
+    "path": "item/preparations/drinks/restful_infusion.png",
+    "sha256": "2770635067b0e4414aee2e1405a9b7c795bb07a7b34b6564fe15b09679715c08"
+  },
+  {
+    "path": "item/preparations/drinks/warmth_remedy.png",
+    "sha256": "e7bfdac9af5a64d13cd1a88c4a10c28792725461f4f7149d02cb1a4614847a46"
+  },
+  {
+    "path": "item/preparations/drinks/cooling_remedy.png",
+    "sha256": "5e578581b586060f13c7ce2632cad49084355ac07b0939a62bfb64125dc245c8"
+  },
+  {
+    "path": "item/preparations/drinks/mining_tonic.png",
+    "sha256": "6ac829364d7446086eccc446bdc2571d75ded8d57cad679427c0a7cb867c949c"
+  },
+  {
+    "path": "item/preparations/drinks/travel_tonic.png",
+    "sha256": "cd3b32e7e976cd30d6da7546fefd80a104b3d326d9d366fa85c1fcf81cc135f4"
+  },
+  {
+    "path": "item/preparations/salves/healing_salve.png",
+    "sha256": "a77e547e055be012772fe7885d3dfd64dacc1b39e06001c082783475688d30f8"
+  },
+  {
+    "path": "item/preparations/oils/lantern_oil.png",
+    "sha256": "1815e6e6d07e8509f8d8db38b45a68fd0284a47e7ed815c7f33fd17b8f5d3e92"
+  },
+  {
+    "path": "item/preparations/oils/fishing_blend.png",
+    "sha256": "afffe9cff7365e694c508aeb955f4f20c33ed2158e2ef14dfb4a59401b2055e8"
+  },
+  {
+    "path": "item/preparations/garden/fertilizer.png",
+    "sha256": "bf7fe34c099b1754c1cd304c4f12775beda28b2948b20ba4d17e86a781d250b7"
+  },
+  {
+    "path": "item/preparations/garden/flower_dust.png",
+    "sha256": "1f3424a205ca31c4990b00b33e62527c4afacd20bedc6e383ac43c26296fb0a8"
+  },
+  {
+    "path": "item/preparations/garden/mushroom_dust.png",
+    "sha256": "47cf04cbf7aa842dafb3adfb142037495a9ddf5a5914957566b85f0372c307cc"
+  },
+  {
+    "path": "item/preparations/garden/growth_infusion.png",
+    "sha256": "02d2cd144da9e103a26df5a1cc5d5e27766ee8c80c7652834e35e6cadf21d361"
+  },
+  {
+    "path": "item/preparations/garden/pest_repellent.png",
+    "sha256": "7e8b047233c35698ee2b4561de40da42c6f661cc570306a013c7c0a97ded3b8d"
+  },
+  {
+    "path": "item/preparations/garden/soil_tonic.png",
+    "sha256": "bdf767e82e27fb183b0e5888e05c96fc5f822e1bc7b8a6434b85eeca7c2167e4"
+  },
+  {
+    "path": "item/preparations/ingredients/plant_oil.png",
+    "sha256": "6b3e1bd78a35867147d55698bd65698a0c6ce9dcd35d3076cf55de22bfbcddbe"
+  },
+  {
+    "path": "item/preparations/ingredients/resin.png",
+    "sha256": "28fab001841e9ab829aaa44ded8b7aa9cb18b7cbcb381007e7cca422432bef95"
+  },
+  {
+    "path": "item/preparations/advanced/drinks/night_vision.png",
+    "sha256": "947e4ffddeb83ff765527402b14e930f25588e824e279cfa0e82785ced761fb1"
+  },
+  {
+    "path": "item/preparations/advanced/drinks/water_breathing.png",
+    "sha256": "5d66c21a13524ea63df69d4b6e7dbce2c0dfa2647901e5e4612ac72cb223439e"
+  },
+  {
+    "path": "item/preparations/advanced/drinks/resistance.png",
+    "sha256": "898bb2b6d1e970f394fd96ba15cb8b1c11a05259ae7d39ba31094fab482b7aa5"
+  },
+  {
+    "path": "item/preparations/advanced/drinks/healing.png",
+    "sha256": "a5faf97036daa83856a764f77fb14dac553d7469bae5496d9a69d4612d4487e2"
+  },
+  {
+    "path": "item/preparations/advanced/throwables/poison.png",
+    "sha256": "8fd8949bee00df6d4a2c56dcccc560c57c952e1286454b1fe9dfb3cc1b853807"
+  },
+  {
+    "path": "item/preparations/advanced/throwables/concealment.png",
+    "sha256": "ca227b5a8212146e4c1b22037e7be1c0db68b8b4a3dfc6dce0e41049dc5a38fa"
+  },
+  {
+    "path": "item/preparations/advanced/throwables/slowing.png",
+    "sha256": "5a20440008591f449a75fea80995f1885e33a8a251589b8863ff1cc5cc8bd563"
+  },
+  {
+    "path": "item/preparations/advanced/throwables/binding.png",
+    "sha256": "769b0f2957999f28837c30d2521ed6a83f320902cccb3299bd46ae9a6dcea20f"
+  },
+  {
+    "path": "item/preparations/advanced/throwables/weakening.png",
+    "sha256": "744d9f1696c260508adf949d8dc98f94690b931e32d66b8396b2bedac7167422"
+  },
+  {
+    "path": "item/preparations/advanced/throwables/sleep.png",
+    "sha256": "e48669ca227d79a3b11874815e50bd523dbb34d5fd97e55a7675a90e2e56ccde"
+  },
+  {
+    "path": "item/preparations/advanced/oils/venom.png",
+    "sha256": "9e34785675f4c5b3ac84416fb2e657bec59935dbe23500c515d484d504fe2146"
+  },
+  {
+    "path": "item/preparations/advanced/oils/thorn.png",
+    "sha256": "6499ed737d8ad57dd23dd7a8453e27d65b6df6f6b780ae5069a7af1f00495af1"
+  },
+  {
+    "path": "item/preparations/advanced/oils/undead_repellent.png",
+    "sha256": "992f6414feb836ae3adc16eb47bee0d62c4ee1c45871a46ec00e0eedaead9ecd"
+  },
+  {
+    "path": "item/preparations/advanced/oils/arthropod_repellent.png",
+    "sha256": "97a939d2a11c25779c477aaad62b9d032571affa4e3895d7906003525518f6b6"
+  },
+  {
+    "path": "item/preparations/advanced/dusts/blinding.png",
+    "sha256": "08d1f7101bf5b89ec1664e9ffb8713248458809a697fda9e1cd16d9463ea7f22"
+  },
+  {
+    "path": "item/preparations/advanced/essences/moon.png",
+    "sha256": "522960a08b13f8eb5085576a653f4c47945e9f05dad39ae406b5f0c1944e22c8"
+  },
+  {
+    "path": "item/preparations/familiar/tonics/guardian.png",
+    "sha256": "1de83d7d66f3621e3e1ca79c74dbabcaaa3bae9a344806384b5bd63d62f131c5"
+  },
+  {
+    "path": "item/preparations/familiar/tonics/swiftpaw.png",
+    "sha256": "4d3e1db12ea7cc232b6b3c38a3784211024c92ea33264ebc478d1e0ee0ca5a17"
+  },
+  {
+    "path": "item/preparations/familiar/tonics/nightwatch.png",
+    "sha256": "49488097acfeb4c8caaf95c34e31af118ad2681df8728243d7de8e95f8b50481"
+  },
+  {
+    "path": "item/preparations/familiar/tonics/moonveil.png",
+    "sha256": "54fa57a916c59f0a5deb8bb874590f1a693b3067a56707dd8d6876b72c7b679f"
+  },
+  {
+    "path": "item/preparations/familiar/tonics/spiritbond.png",
+    "sha256": "9feb17b2d9c9c003ff7b0228d15692809a31367653e8848cb7457b8b572e5017"
+  },
+  {
+    "path": "item/preparations/familiar/tonics/hearthkeeper.png",
+    "sha256": "8d68516fb24cab35388b9ef53be6f751ca4e61b821b59d801e20fac503fcad4e"
+  },
+  {
+    "path": "item/preparations/familiar/tonics/shadowstep.png",
+    "sha256": "2b2522b2f805e66ed29aa60a86a00c6c3e163a7184cb37125ce0e9c7d0b904fd"
+  },
+  {
+    "path": "item/preparations/familiar/essences/warding.png",
+    "sha256": "c17fd2ee3e06f4d65d2c5d4f70f01b5a70e0b97421e26593c15606b760e1b0c7"
+  },
+  {
+    "path": "item/preparations/familiar/essences/venomleaf.png",
+    "sha256": "51b38cbfe8f0b1b4a36630b7b6adc2be95218a8f08c07d496b8ad2482edc373d"
+  },
+  {
+    "path": "item/preparations/familiar/oils/emberguard.png",
+    "sha256": "f32a20dbec20843c2a07810ba87c98233f2bc79ff868f389d6e3f930db3540aa"
+  },
+  {
+    "path": "item/preparations/mixtures/utility/night_vision.png",
+    "sha256": "10d9ac3b339e435f21c17e49b00719fb082db58a1a8fc36b82c27bfe9083aa18"
+  },
+  {
+    "path": "item/preparations/mixtures/utility/water_breathing.png",
+    "sha256": "c4eaa2c6423090674e7590a4910bab52b04d747bd686bd3f0cc64272679ffc64"
+  },
+  {
+    "path": "item/preparations/mixtures/utility/resistance.png",
+    "sha256": "b05da5910a35dbb6c4bc1d12753c37c93654e2fc7d5d981e0e126fc12fa72a86"
+  },
+  {
+    "path": "item/preparations/mixtures/utility/healing.png",
+    "sha256": "ab75c9d61beb0784c6d88f500fb9b932e6580999f875334b4c5c59765074ccb4"
+  },
+  {
+    "path": "item/preparations/mixtures/combat/poison.png",
+    "sha256": "e1a4c4735c0fb9d0e984de86e1def9e5f6a0702c439231fb72e098b21bf0628a"
+  },
+  {
+    "path": "item/preparations/mixtures/combat/concealment.png",
+    "sha256": "73e4910a7cd3e7be572e0ad765111c9968d843ef3c2453c580b8c46b6ee19a04"
+  },
+  {
+    "path": "item/preparations/mixtures/combat/slowing.png",
+    "sha256": "65f08671a6fac02ae2d2487061b32c650f1bca4a70a6d45c76f8210d0beaf0fb"
+  },
+  {
+    "path": "item/preparations/mixtures/combat/binding.png",
+    "sha256": "e831ed366918ed2328d7dbdfc1a5b12a68a49e5211e6be18a405c95752c9d161"
+  },
+  {
+    "path": "item/preparations/mixtures/combat/weakening.png",
+    "sha256": "4cee2af6e865bb5d2730728c9d4d6ef7f2f27e015ae6a6a0890f287b3927e5d8"
+  },
+  {
+    "path": "item/preparations/mixtures/combat/sleep.png",
+    "sha256": "cee4b9089db684fa398639fc02f44aab01fb37cefc510d23c0b162e177dc0aa3"
+  },
+  {
+    "path": "item/preparations/mixtures/familiar/guardian.png",
+    "sha256": "d817c487506ad1e7e7a2297fc6961130e8c40ce96dad832864dd39aa940150a9"
+  },
+  {
+    "path": "item/preparations/mixtures/familiar/swiftpaw.png",
+    "sha256": "7dd3c416a93cde35b8ce121bb5c751c0f597d1502d5673fd4331ac8988c51a1e"
+  },
+  {
+    "path": "item/preparations/mixtures/familiar/nightwatch.png",
+    "sha256": "c323366453a47489624dc06ef8dd13c2d66628d1ba34749e3693529a90a65327"
+  },
+  {
+    "path": "item/preparations/mixtures/familiar/moonveil.png",
+    "sha256": "34e8b6ea295695887f8b5bdd215c9d5bbe68c070e10e036163c51f3bbe171181"
+  },
+  {
+    "path": "item/preparations/mixtures/familiar/spiritbond.png",
+    "sha256": "9a906dee8651788906920e5d303fad545cd7059ddb22863544cf5e5c0d9a92e6"
+  },
+  {
+    "path": "item/preparations/mixtures/familiar/hearthkeeper.png",
+    "sha256": "d290d9fddeba33c7160d5303a19ecbf1075fbcbc6ba28b1a3ceef3d1b7cce5b3"
+  },
+  {
+    "path": "item/preparations/mixtures/familiar/shadowstep.png",
+    "sha256": "e9be2ff270952f6dab364d0bbd450150a6ddb087447cb0a089f98699f0773225"
+  },
+  {
+    "path": "item/magic/charms/protective_sachet.png",
+    "sha256": "932b578f2ab099cb95e22baadd0b7a8cbd78244bcb87a6798f24ca4664d02e17"
+  },
+  {
+    "path": "item/magic/charms/undead_amulet.png",
+    "sha256": "2f04b3c122fbc25dca9554bd7d8eeb7eda6665b96e2f3bb2651eb3eb7022bc76"
+  },
+  {
+    "path": "item/magic/charms/arthropod_amulet.png",
+    "sha256": "b64ed6fe254b8abd672479e43996dfd8a90ea1619d09e476272febf8bfd40930"
+  },
+  {
+    "path": "item/magic/ritual/circle.png",
+    "sha256": "fb954d3f37d519be8b0f645c0be6933161fe93a888428d45681d69f852d15279"
+  },
+  {
+    "path": "item/grimoire/book.png",
+    "sha256": "4790bba4c2e9d9018e34e2aa7535070cdb29148656e4ed9f71f69fdd233ea3b3"
+  },
+  {
+    "path": "gui/grimoire/reader.png",
+    "sha256": "d121226b7bcb927d57f5288fe924407f246acfbbdf13daf33db5d0facf1d42a8"
+  }
+]
