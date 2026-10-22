@@ -13,6 +13,9 @@ docs/DECISIONS.md (0.2.0-dev.6); traps: docs/GOTCHAS.md.
 | Oil lantern | `src/art/blockbench/preparations/oil_lantern/` |
 | Grimoire Stand, Witch's Bookshelf (first drafts by an agent, for you to refine) | `src/art/blockbench/grimoire/{stand,bookshelf}/` |
 | Ritual altar (0.5.0, first draft by an agent, 2 x 1 x 2 multiblock) | `src/art/blockbench/ritual/altar/` |
+| Witch's Cauldron, Copper Still, Bottling Bench, Charm Workbench (0.6.0, first drafts by an agent) | `src/art/blockbench/stations/{cauldron,still,bottling_bench,charm_workbench}/` |
+| Ritual circle (0.6.0, first draft by an agent, a 5 x 5 ring of 16 cells) | `src/art/blockbench/ritual/circle/` |
+| Ward stone (0.6.0, first draft by an agent) | `src/art/blockbench/ward/ward_stone/` |
 
 ### The 0.4.0 furniture projects
 
@@ -59,6 +62,25 @@ Collision lives in Java (`AltarShapes`, from the assembly boxes) and does not fo
 altar needs an agent to update it. The glow is currently orange (the hearth's glow texture); repaint the
 `glow` texture if you want violet. Preview evidence:
 `C:/Users/dirty/projects/artifacts/minecraft-mods/jobs/2026-10-22-herbal-witch-m6/previews/`.
+
+### The 0.6.0 pieces
+
+The four advanced stations, the ritual circle and the ward stone are agent first drafts, authored whole and
+compiled like the other pieces; each owns its textures at
+`textures/block/pieces/<stations|ritual|ward>/<piece>/` (lists in docs/ART.md). Notes for editing them:
+
+- The still, the bottling bench and the charm workbench are multiblocks (1 x 2 tall, 2 x 1 and 2 x 1);
+  keep the cells in the order `piece.json` `multiblock.cells` lists, as for every multiblock. The cauldron
+  and the ward stone are single blocks with a `base` and an `active` model.
+- **The ritual circle sets `multiblock.assembly: false` in `piece.json`.** The ring is 16 cells around the
+  altar and the item is a flat sprite, so the compiler writes the `part_<n>` and `active_<n>` models for
+  the cells (32 files) and no `assembly` model. Do not add one: a 5 x 5 ring is too large for one item
+  model. The sprite is made by `tools/art/preparations/magic.mjs`, not in Blockbench.
+- The `active` groups are emissive overlays that show only while the piece is working (the ward stone
+  while its ward is active), as for the altar.
+- Collision lives in Java (`CauldronShapes`, `StillShapes`, `BottlingBenchShapes`, `CharmWorkbenchShapes`,
+  `RitualCircleShapes`, `WardStoneShapes`) and does not follow the model; a reshaped piece needs an agent to
+  update it.
 
 ## Once: install and set up
 

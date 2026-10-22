@@ -1,15 +1,21 @@
-# Witchcraft catalogue (Milestone 6, 0.5.0)
+# Witchcraft catalogue (Milestones 6 and 7, 0.5.0 and 0.6.0)
 
-Exact ids, offerings, actions, rules and the operator procedure for initiation and energy. The
-source of truth is the code (`magic/witch/`, `magic/ritual/`); if they disagree the code wins. How it
-works: docs/ARCHITECTURE.md ("Witchcraft"); why: docs/DECISIONS.md ("0.5.0"); the player's view: README
-"Witchcraft". Paths are under `io.github.dirtyredz.herbalwitch`.
+Exact ids, offerings, actions, rules and the operator procedure for initiation and energy (0.5.0), and
+the circle rituals, ward stones and charms that spend it (0.6.0, from "Advanced witchcraft" below). The
+source of truth is the code (`magic/witch/`, `magic/ritual/`, `magic/ward/`, `magic/charm/`); if they
+disagree the code wins. How it works: docs/ARCHITECTURE.md ("Witchcraft", "Advanced witchcraft"); why:
+docs/DECISIONS.md ("0.5.0", "0.6.0"); the player's view: README "Witchcraft". Paths are under
+`io.github.dirtyredz.herbalwitch`.
 
 ## Ids
 
 | Thing | Id | Notes |
 |---|---|---|
 | Ritual Altar | `herbalwitch:magic/ritual/altar` | block, item, block entity and menu share the id; permanent |
+| Ritual Circle | `herbalwitch:magic/ritual/circle` | block and item share the id; 0.6.0; permanent |
+| Ward Stone | `herbalwitch:magic/ward/stone` | block, item, block entity and menu; 0.6.0; permanent |
+| Charms | `herbalwitch:magic/charms/{protective_sachet,undead_amulet,arthropod_amulet}` | items; 0.6.0 (the sprites sit at `textures/item/magic/charms/`) |
+| Ward records | `data/herbalwitch_wards.dat` | `WardSavedData`, schema 1, world-wide |
 | Witch capability | `herbalwitch:witch/status` | server players only, schema 1 |
 | Energy nature biomes | `herbalwitch:witch/energy/nature` | biome tag: the union of the temperate, wet, shade and woodland habitat tags |
 | Founding record | `data/herbalwitch_founding.dat` | Overworld `FoundingSavedData`, schema 1 |
@@ -174,15 +180,89 @@ Recovering from NEEDS_REVIEW (a crash between the durable founding claim and the
 
 An unreadable record cannot be resolved by command; it stays preserved for manual repair.
 
+## Advanced witchcraft (Milestone 7, 0.6.0)
+
+All energy below is spent through `WitchStatusService` (practice awarded), scaled where noted by
+`processingPercent`. Numbers are `WorkingRules` defaults of `herbalwitch-server.toml`; the grimoire quotes
+the live values.
+
+### Circle rituals
+
+The altar gains two actions that need a complete ritual circle (a 5x5 ring of 16 cells around the altar;
+recipe in docs/catalogue/stations.md). The circle is validated every 20 ticks; a broken circle cancels the
+ritual and consumes nothing, and unloaded cells pause it. Access, concurrency, request and cancellation
+rules are those of the altar actions above. Before opening the altar the witch looks at the target;
+`client/ritual/RitualTargets` reads it.
+
+| Action | Who | Offering (consumed) | Energy | Duration | Result |
+|---|---|---|---|---|---|
+| Garden Blessing | a witch | nettle powder, bone meal, soil tonic | 15 (`gardenBlessingCost`) | 200 ticks (`gardenBlessingTicks`) | enriches the herb beds of the 5x5 square around the chosen bed (within 8 blocks); the bottle is returned |
+| Home Protection | a witch | sage powder, amethyst shard | 20 (`homeProtectionCost`) | 200 ticks (`homeProtectionTicks`) | charges a ward stone the witch may bind |
+
+### Wards
+
+| Rule | Value |
+|---|---|
+| Activation | directly, by a witch within 8 blocks: 20 energy (`activationCost`), practice awarded; or by Home Protection |
+| Charge | 600 loaded seconds (`chargeSeconds`); no top-up while charged |
+| Controls | owner only: deactivate, release (unbinds the stone), radius 1 to the maximum, profile cycle undead, arthropods or both (default both); menu buttons, no packets |
+| Area | a box, horizontal radius by height 4 (`height`); radius 8 (`radius`), or 12 (`focusRadius`) with a functional hearth or Witch's Stove within 4 blocks, rechecked every sweep (the hearth's ownership is not modelled) |
+| Limits | 4 per owner (`perOwner`), 256 active per dimension (`perDimension`), 8 centres per chunk, 4096 records; active wards may not overlap |
+| Persistence | `WardSavedData` `herbalwitch_wards`, schema 1, world-wide, plus an in-memory chunk index |
+| Targeting | suppression through `LivingChangeTargetEvent` plus bounded sweeps (4-block slices, 32 mobs per sweep, 256 per dimension tick, every 20 ticks) |
+| Retiring | breaking a stone retires its record; a copied record id is inert |
+
+Entity actions of a ward go through `EntityActionPermission` (`checkProtect`): protected entities
+(villager, wandering trader by default), another player's pets, players unless `preparationPvp` and server
+PvP and teams allow it, and recognised claim mods restrict them.
+
+### Charms
+
+| Charm | Protects against | Reduction | Cap per blow | Id |
+|---|---|---|---|---|
+| Protective Sachet | every mob | 15% | 1 heart (2) | `protective_sachet` |
+| Undead Amulet | the undead (`undead` tag) | 30% | 1.5 hearts (3) | `undead_amulet` |
+| Arthropod Amulet | spiders and pests (`arthropods` tag) | 30% | 1.5 hearts (3) | `arthropod_amulet` |
+
+Worn in the off hand or a Curios `charm` slot (docs/COMPATIBILITY.md). A charm's charge is
+`charmChargeSeconds` (300) seconds of wearing, counted by a per-player tick counter and stored as used
+seconds in the stack's NBT; it breaks when spent. Made at the Charm Workbench (witch recipes).
+
+### Configuration
+
+| Section | Key | Default |
+|---|---|---|
+| `workings` | `processingPercent` | 100 (scales every witch recipe's energy, rounded up) |
+| `workings` | `gardenBlessingCost` / `gardenBlessingTicks` | 15 / 200 |
+| `workings` | `homeProtectionCost` / `homeProtectionTicks` | 20 / 200 |
+| `workings` | `preparationPvp` | false |
+| `wards` | `activationCost` | 20 |
+| `wards` | `chargeSeconds` | 600 |
+| `wards` | `radius` / `focusRadius` / `height` | 8 / 12 / 4 |
+| `wards` | `perOwner` / `perDimension` | 4 / 256 |
+| `charms` | `chargeSeconds` | 300 |
+
+These ride in `WitchRules` (the same validation, sync and fingerprint as the 0.5.0 rules); the wire is
+protocol "4". Per-recipe energy costs are in the recipe JSON (`requirements.energy`), for example the
+moon essence 10 and the Venomleaf Extract and Warding Essence 15.
+
 ## Showcase and tests
 
 Showcase section `altar` (7 wide): the idle altar facing the entrance, a supply barrel (2 lavender, 4
 sage, mint, chamomile, 2 amethyst, a valid signed book, a grimoire, 2 energy tea, 2 restful infusions)
 and signs (Witch's Altar, Use the altar, Founding, Supplies, Initiation, Recovery, Practice). Building
 it initiates nobody, touches no founding record, grants no energy and starts no ritual. Full layout 126
-x 8 x 28.
+x 8 x 28 in 0.5.0; from 0.6.0 sections pack into rows no wider than 126 and the plan bounds are
+121 x 8 x 38. The 0.6.0 sections are `cauldron`, `still`, `bottling_bench`, `charm_workbench`,
+`advanced_preparations`, `ritual_circle`, `ward_stone` and `charms`.
 
-Tests: pure unit tests under `src/test/.../magic/` and `client/witch/hud/`; resource tests
-`data/magic/{ritual,witch}`; GameTests under `src/gameTest/.../magic/{witch,ritual}` (WitchLifecycle,
-EnergyRecovery, AltarPlacement, AltarAction, AltarShowcase). Not covered: a true out-of-process server
-restart; the vanilla sleep path (tested through `EnergyEvents.sleptThrough`).
+Tests: pure unit tests under `src/test/.../magic/` and `client/witch/hud/` (0.6.0: `ritual/CircleLayoutTest`,
+`ritual/GardenBlessingPlanTest`, `ward/WardCodecTest`, `ward/WardIndexTest`,
+`stations/process/recipe/ProcessRequirementsTest`, `brewing/PreparationCatalogTest`); resource tests
+`data/magic/{ritual,witch,ward,charm}` and `data/preparations/Advanced*`; GameTests under
+`src/gameTest/.../magic/{witch,ritual,ward,charm}` (WitchLifecycle, EnergyRecovery, AltarPlacement,
+AltarAction, AltarShowcase; 0.6.0: CircleGameTests, WardGameTests, CharmGameTests) with the fixture
+`fixture/MagicFixtures`, and `stations/advanced/{MagicalProcessGameTests,AdvancedStationGameTests}`,
+`preparations/AdvancedPreparationGameTests`. Ward-charging tests run in `herbalwitch_ward_*` batches
+(docs/GOTCHAS.md). Not covered: a true out-of-process server restart; the vanilla sleep path (tested
+through `EnergyEvents.sleptThrough`).

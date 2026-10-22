@@ -213,3 +213,36 @@
   GameTests invite by UUID.
 - **ANU tasks are space separated.** `tools/anu-test.ps1 -Tasks "test runGameTestServer"`; a comma list is
   one unknown task name.
+- **Ward-charging GameTests run in their own batches.** A ward's box (radius 8 by height 4, or 12 near a
+  hearth) is wider than the gap between GameTest plots, so a charged ward in one test would reach the
+  neighbouring plots. Those tests declare `batch = "herbalwitch_ward_*"`; a new test that charges a ward
+  joins one of those batches instead of the default one.
+- **Witch recipes reserve nothing until Start.** A magical process never reserves or runs on insert; the
+  inputs stay free to move until a witch presses Start, and only then are they reserved for the batch. A
+  test that expects a running job presses Start through the menu button first, and a non-witch's Start
+  must leave the station idle.
+- **An unknown job schema is preserved, not repaired.** `ProcessJob` loads schema 1 and 2; anything newer
+  is kept byte for byte and the station idles until its inventory changes. Never "fix" it by dropping the
+  job on load.
+- **Start, Resume, Cancel and the ward settings are menu buttons**, not packets. Anything new on those
+  screens adds a button id and a server check in the menu, not a message; `StationOperations` rate-limits
+  to 5 per 20 ticks.
+- **Recognised claim mods restrict entity actions.** With FTB Chunks, Open Parties and Claims, Cadmus, Flan,
+  GriefDefender or MineColonies loaded, `EntityActionPermission` restricts harmful actions, because the
+  mod cannot be asked. Fake players count as players, and `protected_entities` (villager, wandering
+  trader) stays protected.
+- **Hard control has limits.** Binding and sleep honour the `hard_control_immune` and
+  `hard_control_allowed` entity tags, and a creature that was just controlled gets `steadfast` (100 ticks of
+  immunity). A test of a vial on a boss or a villager expects no effect, and a second vial inside the
+  steadfast window expects none either.
+- **Curios is compile-only.** The jar carries no Curios classes; `CuriosCharmAdapter` is registered only
+  when Curios is loaded, and `data/herbalwitch/curios/` is inert without it. Keep every Curios import
+  inside `platform/compat/curios/`.
+- **The ring has 32 model files.** `models/block/ritual/circle/` holds `part_<n>` and `active_<n>` for the
+  16 cells and no `assembly` (the item is a sprite, `multiblock.assembly: false`). It is the one resource
+  directory allowed past 12 files; do not "tidy" it, and do not add an item assembly.
+- **The showcase packs rows to 126.** `ShowcasePlan` wraps a section onto a new row past `ROW_WIDTH`, so
+  adding a section changes the depth, not the width; the GameTest template (`showcase`) is 128 x 10 x 64
+  and `ShowcasePlanTest` fails when a plan outgrows it (regenerate with `tools/generate-test-structures.mjs`).
+- **A copied ward record id is inert.** Breaking a stone retires its record in `WardSavedData`, so a
+  copy of the stone's data (or an item carrying a stale id) never revives a ward.

@@ -201,6 +201,36 @@ Owner checks pending: the active and idle art, the orange glow at the moon (it c
 glow texture and may want a violet one), item transforms and shaders. Previews are in
 `C:/Users/dirty/projects/artifacts/minecraft-mods/jobs/2026-10-22-herbal-witch-m6/previews/`.
 
+## The Milestone 7 pieces (0.6.0, agent first drafts)
+
+Six Blockbench projects, **authored by an agent as first drafts for the owner to refine**, in the dark-wood
+cottage palette (plum, gold, charcoal iron, copper, ivy, pink flowers). Each owns its own textures
+(`textures/block/pieces/<group>/<piece>/`), so painting one never changes another. The project count is
+now 110 and the compiled block models 415.
+
+| Piece | Project | Owned textures |
+|---|---|---|
+| Witch's Cauldron (1 block, `active`) | `src/art/blockbench/stations/cauldron/` | `copper`, `glow`, `gold`, `iron`, `pink`, `plum` |
+| Copper Still (1 x 2 tall, `active`) | `src/art/blockbench/stations/still/` | `brass`, `copper`, `glass`, `glow`, `gold`, `iron`, `lantern_glass`, `pages`, `pink`, `plum` |
+| Bottling Bench (2 x 1, `active`) | `src/art/blockbench/stations/bottling_bench/` | `copper`, `glass`, `glow`, `gold`, `iron`, `linen`, `pages`, `paint`, `pink`, `plum`, `wood`, `wood_v` |
+| Charm Workbench (2 x 1, `active`) | `src/art/blockbench/stations/charm_workbench/` | `brass`, `flame`, `glass`, `glow`, `gold`, `iron`, `ivy`, `linen`, `paint`, `pink`, `plum`, `stone`, `wood`, `wood_v` |
+| Ritual circle (5 x 5 ring of 16 cells) | `src/art/blockbench/ritual/circle/` | `flame`, `glow`, `gold`, `iron`, `linen`, `pale_stone`, `runes`, `stone` |
+| Ward stone (1 block, `active`) | `src/art/blockbench/ward/ward_stone/` | `glow`, `gold`, `iron`, `ivy`, `pink`, `plum`, `stone` |
+
+The circle's item is a flat sprite (`tools/art/preparations/magic.mjs`) and its 32 compiled models
+(`part_<n>` and `active_<n>` per cell) have no `assembly`, because the compiler gained
+`multiblock.assembly: false`. The 16 advanced preparations, the mixtures, the familiar preparations,
+the charms and the circle item are procedural sprites (`tools/art/preparations/{advanced,magic}.mjs`); the
+four station interface atlases are in `tools/art/stations/interfaces.mjs` and the ward screen atlas in
+`tools/art/interface/witch.mjs`. Preview sheets for the wave belong in
+`C:/Users/dirty/projects/artifacts/minecraft-mods/jobs/2026-10-22-herbal-witch-m7/previews/`.
+
+Owner checks pending: every state of every new piece (idle and `active`, all four facings), the circle
+on flat ground and beside walls, the ward stone's glow, item sprites in the hand, GUI and ground, the
+four station screens and the ward screen at several GUI scales, shaders off and on. Collision lives in Java
+(`CauldronShapes`, `StillShapes`, `BottlingBenchShapes`, `CharmWorkbenchShapes`, `RitualCircleShapes`,
+`WardStoneShapes`) and does not follow the model; a reshaped piece needs an agent to update it.
+
 ## How the art is made
 
 - **Textures** come from `node tools/generate-textures.mjs` (seeded code in `tools/art/`) for the
@@ -214,7 +244,7 @@ glow texture and may want a violet one), item transforms and shaders. Previews a
   natively at 32 and drop the enlargement for it. Alpha is 0 or 255. Untinted: no tint index, no
   colour handler.
 - **One-off pieces are hand-editable** (owner direction: subtle adjustments in Blockbench). The six
-  stations, the furniture (five pieces, and 89 more since 0.4.0), the oil lantern, the two grimoire blocks and the ritual altar (0.5.0) are Blockbench projects
+  stations (ten since 0.6.0), the furniture (five pieces, and 89 more since 0.4.0), the oil lantern, the two grimoire blocks, the ritual altar (0.5.0), the ritual circle and the ward stone (0.6.0) are Blockbench projects
   (`src/art/blockbench/`, workflow in docs/BLOCKBENCH.md) compiled by
   `node tools/compile-blockbench.mjs`: authored per-face UVs (stretched, flipped or rotated as
   drawn), embedded textures, the item Display, named groups, multiblocks drawn whole and cut into
@@ -286,6 +316,12 @@ plot, then walk it.
 6. **Altar (0.5.0 first draft):** idle and active (ritual running) in all four facings; the moon glow
    colour; item in hand, GUI and ground; the placement preview against the result; the altar screen and
    the energy HUD at several GUI scales; shaders off and on.
+
+7. **Milestone 7 pieces (0.6.0 first drafts):** the four advanced stations idle and `active` in all four
+   facings (the still is two high, the bench and workbench two wide); the circle placed whole, its
+   preview against the result, and its runes while a circle ritual runs; the ward stone idle and active; item
+   sprites for the 16 preparations, mixtures, familiar preparations and charms; the four station screens
+   (Start, Resume, Cancel and energy panel) and the ward screen; shaders off and on.
 
 Feedback wanted: per piece keep / change (what); whether "more blocks" means new furniture pieces
 (such as the 2-wide dresser) as well as richer models.

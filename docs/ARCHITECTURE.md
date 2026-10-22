@@ -3,13 +3,14 @@
 How the mod is put together. Code map: [STRUCTURE.md](../STRUCTURE.md).
 Plan of record: milestones 1-12 (docs/FEATURES.md); traceability: docs/catalogue/.
 
-## Current system (0.5.0: Milestones 1-6 plus the art pass; furniture is Milestone 5, initiation and energy Milestone 6)
+## Current system (0.6.0: Milestones 1-7 plus the art pass; furniture is Milestone 5, initiation and energy Milestone 6, advanced brewing, charms, circle and wards Milestone 7)
 
 Everything below is server-authoritative; clients get vanilla block updates, menu slots and menu data.
-The one custom channel, `herbalwitch:main` (protocol "3", `platform/network/HerbalWitchNetwork`), carries
+The one custom channel, `herbalwitch:main` (protocol "4", `platform/network/HerbalWitchNetwork`), carries
 the grimoire's six bounded messages, the witch's two (`WitchSnapshot`, `WitchRulesUpdate`) and the
 altar's two (`AltarRequest`, `AltarUpdate`), registered in that order; any wire change bumps the protocol
-(protocol 2 let entry keys name furniture pages; protocol 3 added the witch and altar messages). Paths
+(protocol 2 let entry keys name furniture pages; protocol 3 added the witch and altar messages; protocol 4
+grew `WitchRulesUpdate` with the working rules, no new message). Paths
 are under `src/main/java/io/github/dirtyredz/herbalwitch/`.
 
 **Decor (`decor/`).** One cottage design (`FinishCatalog`, a single entry) and 94 pieces described in
@@ -101,14 +102,20 @@ sections with no world access (lazy state suppliers keep it unit-testable). `con
 preflight (loaded, border, build height, permission, solid floor, no block entities, no entities) and
 only then the builder, the sole world writer. `command/` registers `/herbalwitch showcase` (level 2).
 Each feature registers its own section; coverage tests require every block to appear. The altar's
-section (`magic/ritual/showcase`) builds an idle altar and a supply barrel and starts nothing.
+section (`magic/ritual/showcase`) builds an idle altar and a supply barrel and starts nothing. Sections
+pack into rows no wider than `ShowcasePlan.ROW_WIDTH` (126), so adding a section grows the depth first;
+the GameTest template is 128 x 10 x 64 and `ShowcasePlanTest` fails if a plan outgrows it.
 
 **Stations (`stations/`).**
 - *Composition:* `StationBlock`, `StationEntity` and `StationMenu` carry block and menu boilerplate.
   Processing rules live in `process/`: `ProcessInventory` (slot roles; reserved counts stay in their
   slots), `ProcessJob` (exact shapeless matching; recipe id + content fingerprint), `ProcessCompletion`
   (pure capacity arithmetic), `ProcessRecipeJson`/`ProcessRecipeIndex` (one bounded format; per-type
-  sorted cache). `ProcessStation` ties them to a block entity by composition.
+  sorted cache). `ProcessStation` ties them to a block entity by composition. Since Milestone 7 `process/`
+  has four sub-packages: `recipe/` (the recipe type, JSON and wire format, index, `ProcessRequirements`),
+  `matching/` (`ProcessMatcher`), `execution/` (`ProcessCommit`, `ProcessExecutionPolicy`) and
+  `authorization/` (below), and `stations/block/ProcessStationEntity` is the shared block-entity base all
+  eight process stations (four everyday, four advanced) sit on.
 - *Reservations and completion:* ingredients stay in their slots, counted as reserved, and cannot be
   extracted or swapped by menus or automation. At completion the result and all returns must fit before
   anything is consumed; then one commit.
@@ -129,22 +136,64 @@ section (`magic/ritual/showcase`) builds an idle altar and a supply barrel and s
   while lit/active. The item uses `models/block/stations/<station>/assembly`.
 - *Reload and persistence:* the recipe index bumps a generation on server data reload; a job re-matches
   only on inventory revision or reload generation, and a changed or removed recipe cancels it (items
-  stay, progress resets). Jobs save with schema version 1. There is no catch-up simulation: unloaded
-  stations do not progress.
+  stay, progress resets). Jobs save with schema version 2 (schema 1 loads; a newer, unknown schema is
+  preserved byte for byte and the station idles until its inventory changes). There is no catch-up
+  simulation: unloaded stations do not progress.
+- *Advanced stations and witch recipes (Milestone 7).* The Witch's Cauldron (one block, heat below,
+  `cauldron`, 600 ticks, water base), the Copper Still (1 x 2 tall, heat, `distillation`, 800 ticks), the
+  Bottling Bench (2 x 1, `bottling`, 100 ticks, no witch) and the Charm Workbench (2 x 1, `charm_work`,
+  200 ticks) live under `stations/advanced/<station>/{block,menu,recipe}` on one `AdvancedStationBlock` and
+  `AdvancedStationEntity`; they place through `StructurePlacementItem` and show an `active` state.
+  A recipe carries `requirements` (`"requirements": {"witch": true, "energy": N}`), on the wire and in the
+  fingerprint; `effectiveEnergy(percent)` rounds up and `processingPercent` (WorkingRules) scales it. Each
+  recipe type has a policy, ORDINARY, MAGICAL or EITHER (`ProcessExecutionPolicy`). A MAGICAL recipe
+  reserves and runs nothing until a witch presses Start: one batch per Start, the starter is the payer
+  (`StationOperator`). Progress runs only while the payer is online, alive, in the dimension and within 8
+  blocks (`MagicalProcessPolicy`); energy is debited once at completion through `WitchStatusService`, with
+  practice awarded. Cancel consumes nothing. Others cannot take over; they can cancel only a batch whose
+  lease ended. Start, Resume and Cancel are vanilla `clickMenuButton` messages (`StationOperations`, rate
+  limit 5 per 20 ticks; no new packets) and the client shows `MagicalProcessPanel`. New statuses are
+  NEEDS_WITCH, NEEDS_OPERATOR and NEEDS_ENERGY. The mortar and infusion pot also carry witch recipes
+  (blinding dust, four oils).
 
 **Products and applications (`brewing/`).** Products are items (drinks, salve, oils, powders, garden
 products) and two blocks (hung bundles, oil lantern). `application/` runs what a product does, once,
 server side, through the permission boundary for garden actions; failures consume nothing. Effects
 (`warmth`, pest repellent) live in `effect/`. The Apothecary creative tab belongs to `stations/`
 (stations depend on preparations, never the reverse).
+- *Advanced preparations (Milestone 7).* `AdvancedProductCatalog` holds 16 (four drinks, six thrown vials,
+  four oils, blinding dust, the moon essence ingredient), `FamiliarPreparationCatalog` ten familiar
+  preparations (they refuse with "available with familiar bonding" until M9 installs
+  `application/advanced/FamiliarPreparationApplications`) and `MixtureCatalog` 17 four-dose mixtures that
+  the bottling bench portions into four bottles (gunpowder and paper variants give labelled vials, a flag
+  in the item NBT). Effects are `MobEffect`s with ids `brewing/effects/<x>` (binding, sleep, steadfast,
+  concealment, dazzled, thorns, undead and arthropod repellent), so persistence is vanilla's; steadfast
+  grants 100 ticks of hard-control immunity afterwards. Entity tags decide who can be controlled:
+  `undead`, `arthropods`, `hard_control_immune`, `hard_control_allowed`, `protected_entities` (villager,
+  wandering trader by default); the item tag `coatable_weapons` limits the venom coating (the off-hand
+  blade, 8 hits or 60 s). Thrown vials and dust (`brewing/projectile/`) burst in radius 3, hit at most 32
+  targets with line of sight, live 100 ticks, and are limited to 4 in flight per thrower and 128 per
+  dimension behind a shared 20-tick throw cooldown. Every harmful application goes through
+  `platform/permission/entity/EntityActionPermission` (below).
 
 **Metadata carrier.** `brewing/product/metadata/DrinkMetadata` is a hand-off for data riding from the
 kettle's water bottle to the drink. Empty unless an adapter installs it.
+
+**Entity permission (`platform/permission/entity/`).** One boundary for harmful entity actions:
+`EntityActionPermission` refuses the user themselves, a gone target, anything in `protected_entities`,
+another player's pet, a player target unless `preparationPvp` is on, the server allows PvP and teams
+allow it, and anything inside spawn protection; when a recognised claim mod is loaded
+(`ProtectionAdapters`) entity actions are restricted, because the mod cannot ask the claim mod.
+`HarmAttribution` attributes the harm to a responsible player, and `checkProtect` is the narrower check wards use. Fake
+players are treated as players.
 
 **Compat adapters.** `platform/compat/thirst` registers the drinks with Thirst Was Taken by name (no
 compile dependency) and installs the purity carrier; Farmer's Delight is tags only
 (`data/server/compat`); EMI and JEI plugins (`client/compat`) are compile-only against their APIs and
 describe recipes from the same `ProcessRecipeDescription`. Adapters load only when their mod is present.
+`platform/compat/curios/CuriosCharmAdapter` (compile-only Curios API 5.14.1) is registered only when
+Curios is loaded; `data/herbalwitch/curios/entities/charms.json` and the item tag `curios:charm` give
+players a `charm` slot.
 
 **Grimoire (`grimoire/`, Milestone 4).** A recipe-backed book of herbs, stations and processing recipes,
 with each player's own discoveries marked. Advisory only: no crafting, processing, automation or viewer
@@ -214,7 +263,7 @@ holds, and the altar where rituals happen. `witch` and `ritual` sit under a `mag
   The clone copy runs once on death and End return regardless of keepInventory (the same
   revive/invalidate pattern as discoveries). Activities (rest, meditation) clear on death, logout and
   dimension change. `WitchStatusService` is the only mutation API (check, debit, recover, award
-  practice, convert, snapshot, restore); M7 production and M9 familiars must use it.
+  practice, convert, snapshot, restore); M7 production uses it and M9 familiars must.
 - *Rules (`witch/config`):* `WitchServerConfig` (`herbalwitch-server.toml`, per world) is validated as a
   whole into an immutable `WitchRules`. An invalid edit keeps the previous rules and logs. A valid
   change cancels pending invitations and running rituals, clamps energy without refilling and resends
@@ -261,10 +310,51 @@ holds, and the altar where rituals happen. `witch` and `ritual` sit under a `mag
   `witchcraft/recovery` (guide kind, `grimoire/content/reference/WitchEntries`), the altar station page
   and `ritual/{founding,initiation,meditation,attunement}` (`magic/ritual/grimoire/AltarEntries`).
 
+**Advanced witchcraft (`magic/charm/`, `magic/ritual/circle/`, `magic/ward/`, Milestone 7).** Numbers and
+procedures: docs/catalogue/witchcraft.md. All numbers below are `WorkingRules` inside `WitchRules`
+(`magic/witch/config/WorkingRules`): one config section group (`workings`, `wards`, `charms`), one sync and
+one fingerprint. Defaults are `processingPercent` 100, `gardenBlessingCost` 15, `gardenBlessingTicks`
+200, `homeProtectionCost` 20, `homeProtectionTicks` 200, `wardActivationCost` 20, `wardChargeSeconds`
+600, `wardRadius` 8, `wardFocusRadius` 12, `wardHeight` 4, `wardsPerOwner` 4, `wardsPerDimension` 256,
+`charmChargeSeconds` 300 and `preparationPvp` false.
+- *Charms (`magic/charm`):* `CharmCatalog` names the Protective Sachet (every mob, 15% softer, at most 1
+  heart), the Undead Amulet and the Arthropod Amulet (30%, at most 1.5 hearts). `CharmEquipment` finds a
+  worn charm in the off hand or a Curios `charm` slot; `CharmEvents` counts wearing time with a
+  per-player tick counter, adds used seconds to the stack's NBT and breaks the charm when
+  `charmChargeSeconds` is spent; `CharmProtection` reduces the damage. The workbench makes them.
+- *Ritual circle (`magic/ritual/circle`, `catalog/CircleCatalog`):* a 5x5 ring of 16 cells around the
+  altar, placed whole through the item with the shared preview (`CirclePlacementPreview`); the item model is
+  a flat sprite because the Blockbench compiler supports `multiblock.assembly: false`. `CircleValidation`
+  checks the ring every 20 ticks: a broken circle cancels the ritual and consumes nothing, unloaded cells
+  pause it. Circle rituals are altar actions that need a complete circle (`action/CircleRituals`): Garden
+  Blessing (nettle powder, bone meal, soil tonic; 15 energy, 200 ticks) enriches the herb beds of the 5x5
+  square around a chosen bed within 8 blocks and returns the bottle (`GardenBlessingPlan` is the pure
+  plan); Home Protection (sage powder, amethyst shard; 20 energy, 200 ticks) charges a ward stone the
+  witch may bind. The witch picks the bed or stone by looking at it before opening the altar
+  (`client/ritual/RitualTargets`).
+- *Wards (`magic/ward`):* a ward stone is bound to its owner and activated by a witch within 8 blocks for
+  20 energy (practice awarded); its charge lasts 600 loaded seconds and cannot be topped up while charged.
+  Only the owner can deactivate, release (which unbinds), set the radius (1 to the maximum) and cycle the
+  profile (undead, arthropods or both, default both); the controls are menu buttons (`WardMenu`,
+  `WardAccess`), no packets. The radius is 8, or 12 with a functional hearth or stove within 4 blocks
+  (rechecked on every sweep); the area is a box of radius by `wardHeight` 4. Limits: 4 per owner, 256
+  active per dimension, 8 centres per chunk, 4096 records; active wards may not overlap. `WardSavedData`
+  (`herbalwitch_wards`, schema 1) is world-wide, with `WardRecord` and `WardCodec`; `service/WardIndex` is
+  the in-memory chunk index. `targeting/WardProtection` suppresses targeting through
+  `LivingChangeTargetEvent` and bounded sweeps (4-block slices, 32 mobs per sweep, 256 per dimension tick,
+  every 20 ticks). Breaking a stone retires its record; a copied record id is inert.
+- *Client:* `client/ward/{WardScreen, WardBoundaryPreview}`, `client/ritual/widgets/CirclePanel`,
+  `client/brewing/PreparationRenderers`, and ritual categories for JEI and EMI over
+  `client/compat/ritual/RitualCardLayout`.
+- *Grimoire:* station pages for the four new stations; the witchcraft pages for brewing, preparations and
+  familiar preparations (`grimoire/content/reference/AdvancedPreparationEntries`, in `grimoire` because
+  `brewing` must not import it), wards, charms, the circle and the two circle rituals; 113 processing
+  recipe pages.
+
 ## Whole-mod module map (plan section 2)
 
 Paths under `src/main/java/io/github/dirtyredz/herbalwitch/`. Implemented so far: decor, botany, stations, brewing,
-showcase, platform/permission, platform/network, compat, grimoire and magic/{witch,ritual}. Later milestones create the rest when needed.
+showcase, platform/permission, platform/network, compat, grimoire and magic/{witch,ritual,charm,ward}. Later milestones create the rest when needed.
 
 | Home | Responsibility |
 |---|---|
@@ -272,10 +362,10 @@ showcase, platform/permission, platform/network, compat, grimoire and magic/{wit
 | `platform/network/`, `platform/config/`, `platform/permission/`, `platform/compat/<integration>/` | Channel + payload bounds; config registration; shared authorization boundary; optional integrations (foreign imports only here) |
 | `magic/witch/{status,energy,initiation(+founding),config,network,command,registry}` (implemented, 0.5.0; the plan named top-level `witch/`) | Player capability and lifecycle; spending/recovery/progression; consent and founding; rules; wire; operator commands |
 | `botany/catalog/`, `crop/`, `foraging/`, `worldgen/` | Herb definitions, growth, gathering, placement (worldgen never owns cultivation rules) |
-| `stations/everyday/<station>/`, `stations/process/` | One package per station (block, menu, recipe); shared processing by composition (implemented) |
-| `brewing/product/`, `effect/`, `application/` | Products; effect mechanics; how an effect reaches a target |
+| `stations/everyday/<station>/`, `stations/advanced/<station>/`, `stations/process/{recipe,matching,execution,authorization}` | One package per station (block, menu, recipe); shared processing by composition (implemented; advanced stations 0.6.0) |
+| `brewing/product/`, `effect/`, `application/`, `projectile/` | Products; effect mechanics; how an effect reaches a target; thrown preparations |
 | `companions/animals/{trust,capture,taming}/`, `companions/familiars/{bond,command,ability,home,recovery,species}/` | Animal relationships; familiar bonds without one god manager |
-| `magic/ritual/{catalog,registry,altar,menu,session,action,network,grimoire,showcase}` (implemented, 0.5.0), `magic/ward/`, `magic/broom/`, `magic/wand/` | The altar, its menu, sessions and actions; home wards; broom entity; one class per wand mode |
+| `magic/ritual/{catalog,registry,altar,circle,menu,session,action,network,grimoire,showcase}` (implemented, 0.5.0; `circle/` 0.6.0), `magic/ward/` and `magic/charm/` (implemented, 0.6.0), `magic/broom/`, `magic/wand/` | The altar, its menu, sessions and actions; the ritual circle; home wards; charms; broom entity; one class per wand mode |
 | `shop/{catalog,trade,order,persistence,block}/` | Offers, transactions, orders, persistence, counter/register |
 | `grimoire/{catalog,registry,access,content,knowledge,reading,network}/`, `grimoire/showcase/` (implemented) | Ids and registration; book, research blocks and reader menu (`access/{item,block,menu}`); recipe-backed entries and editorial reload; personal knowledge (`knowledge/{discovery,research,teaching}`); reader sessions and the missing-ingredient allocator (`reading/`); the six messages |
 | `decor/{catalog,registry,showcase}/`, `decor/structure/`, `decor/behavior/{seating,storage,sleeping,openings,lighting}/` | Furniture (implemented, 0.4.0): the design and 94 pieces; shared structure (block, placement, support, shapes); one implementation per behaviour |
@@ -288,12 +378,12 @@ showcase, platform/permission, platform/network, compat, grimoire and magic/{wit
 |---|---|---|
 | Discoveries (implemented, Milestone 4: `herbalwitch:grimoire/discoveries`, schema 1) | Versioned player capability, server players only | Private snapshot on login/respawn/dimension change; bounded deltas |
 | Witch status, energy, practice (implemented, Milestone 6: `herbalwitch:witch/status`, schema 1) | Versioned player capability, server players only | Private snapshot (epoch + revision) on login/respawn/dimension change and after conversions and ritual results; rules for the grimoire |
-| Station inventories and progress (implemented) | Station block entity | Vanilla menu slots/data |
+| Station inventories and progress (implemented; job schema 2) | Station block entity | Vanilla menu slots/data; Start, Resume and Cancel are menu buttons |
 | Founding eligibility (implemented, Milestone 6) | Overworld `FoundingSavedData`, schema 1 | Eligibility/result only, through the altar's `AltarUpdate` |
 | Animal trust/ownership | Entity capability (vanilla ownership kept) | Interacting player, trackers |
 | Familiar bonds, commands, homes, recovery | Overworld `FamiliarSavedData` by bond id | Owner's roster; visual state nearby |
 | Capture payloads | Overworld `CaptureSavedData` | Opaque token + display summary on the item |
-| Wards | Overworld `WardSavedData` (dimension-qualified) | Owner views; indicators |
+| Wards (implemented, Milestone 7: `herbalwitch_wards`, schema 1) | World-wide `WardSavedData` (dimension-qualified records) plus an in-memory chunk index | The owner's ward screen (menu data); the boundary preview |
 | Shop stock, proceeds, history | `ShopSavedData`; register stores shop id | Public offers; owner-only management |
 | Furniture | Block properties (facing, cell, lit, bed and door states); the origin cell's storage entity; seat entities (never saved) | Vanilla updates; display contents in the block-entity update tag on change; open menus |
 
@@ -307,6 +397,6 @@ authoritative owner; persistent formats carry schema versions with migration tes
 
 Recipe data, serialization and mutation are separate; matching never consumes inputs. A station
 reserves inputs in their slots, advances progress in its block entity, revalidates inputs and output
-capacity at completion, then commits once. Magical jobs (later milestones) also need an authorised
-witch nearby while progressing and at completion. Unloaded stations simply stop; there is no catch-up
-simulation.
+capacity at completion, then commits once. Magical jobs (Milestone 7, see "Advanced stations and witch
+recipes" above) also need an authorised witch nearby while progressing and at completion. Unloaded
+stations simply stop; there is no catch-up simulation.

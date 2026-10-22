@@ -10,15 +10,15 @@ Module paths are relative to `io.github.dirtyredz.herbalwitch`. Milestones are f
 | Mortar and pestle | Grind herbs and minerals into powders, pigments, blinding dust | mortar and pestle | `stations/everyday/mortar/` | grinding | no | 3 | done (0.1.0-dev.3): StationProcessingGameTests, StationResourcesTest |
 | Tea kettle | Steep teas, tonics, simple infusions; requires heat | tea kettle | `stations/everyday/kettle/` | steeping | no | 3 | done (0.1.0-dev.3): StationProcessingGameTests, CompatibilityGameTests |
 | Fireplace / hearth | Heat for kettle, cauldron, infusion pot; home anchor and ward focus | hearth block (2x2); Witch's Stove (2 wide); decor Fireplace links here | `stations/everyday/hearth/`, `stations/stove/` (heat tags in `stations/heat/`); ward focus in `magic/ward/` | heat source (tag) | no (ward focus: witch) | 3 (heat); 7 (ward focus) | heat done (0.1.0-dev.3): StationProcessingGameTests, CompatibilityGameTests; ward focus M7 |
-| Brewing cauldron | Liquid potions, throwables, animal brews, familiar tonics | cauldron | `stations/cauldron/` | cauldron brewing | yes (magical brewing) | 7 | not started |
+| Brewing cauldron | Liquid potions, throwables, animal brews, familiar tonics | Witch's Cauldron | `stations/advanced/cauldron/` | `cauldron` | yes (magical brewing) | 7 | done (0.6.0): MagicalProcessGameTests, AdvancedStationGameTests; see "Advanced stations" below |
 | Infusion pot | Slowly prepare salves, oils, repellents, lantern oils | infusion pot | `stations/everyday/infusion_pot/` | infusion | no | 3 | done (0.1.0-dev.3): StationProcessingGameTests, PreparationUseGameTests |
-| Distillation still | Refine rare essences and advanced extracts | still | `stations/still/` | distillation | yes (advanced brew) | 7 | not started |
-| Apothecary bottling bench | Bottle, portion, label, package mixtures | bottling bench | `stations/bottling_bench/` | bottling | no (plan silent; assumed packaging only) | 7 | not started |
-| Altar and ritual circle | Initiation, familiar binding, home blessings, revival, wards | altar (M6), ritual circle, decor Altar Table links here | `magic/ritual/` | rituals | yes (initiation: existing witch; founder ritual: survival) | 6 (altar); 7 (circle, rituals) | altar done (0.5.0): see "The ritual altar" below; circle not started |
-| Charm workbench | Sachets, amulets, animal capture charms, protection tokens | charm workbench, decor Work Table candidate | `stations/charm_workbench/` | charm work | assumed yes (magical); confirm at M7 | 7 | not started |
+| Distillation still | Refine rare essences and advanced extracts | Copper Still | `stations/advanced/still/` | `distillation` | yes (advanced brew) | 7 | done (0.6.0): MagicalProcessGameTests, AdvancedStationGameTests |
+| Apothecary bottling bench | Bottle, portion, label, package mixtures | Bottling Bench | `stations/advanced/bottling_bench/` | `bottling` | no (packaging only; decided at M7) | 7 | done (0.6.0): AdvancedStationGameTests |
+| Altar and ritual circle | Initiation, familiar binding, home blessings, revival, wards | altar (M6), ritual circle, decor Altar Table links here | `magic/ritual/` | rituals | yes (initiation: existing witch; founder ritual: survival) | 6 (altar); 7 (circle, rituals) | altar done (0.5.0): see "The ritual altar" below; circle and its two rituals done (0.6.0): see "The ritual circle" below |
+| Charm workbench | Sachets, amulets, animal capture charms, protection tokens | Charm Workbench | `stations/advanced/charm_workbench/` | `charm_work` | yes (magical; decided at M7) | 7 | done (0.6.0) for the three protective charms: AdvancedStationGameTests, CharmGameTests; capture charms wait for M8 |
 | Grimoire stand / witch bookshelf | Research herbs, recipes, rituals | grimoire stand, witch bookshelf | `grimoire/access/block/` (with `grimoire/content/`, `grimoire/knowledge/`) | none (reads all recipes) | no | 4 | done (0.3.0): automated acceptance passed (unit tests, GameTests); owner checks pending |
 | Familiar beds, nests and perches | Assign rest locations and recovery | bed, nest, perch | `companions/familiars/home/` | none | owner must be bound witch | 9 | not started |
-| Home ward stone | Define guarded home area and targeting settings | ward stone | `magic/ward/` | none (ward activation, 20 energy default) | yes | 7 | not started |
+| Home ward stone | Define guarded home area and targeting settings | ward stone | `magic/ward/` | none (ward activation, 20 energy default) | yes | 7 | done (0.6.0): WardGameTests, WardCodecTest, WardIndexTest; see "Ward stone" below |
 | Apothecary counter, register, shelves and jars | Stock, sell, display, track goods | counter, register, stock shelves, jars; decor Apothecary Counter links here | `shop/block/` (with `shop/catalog/`, `shop/trade/`, `shop/order/`, `shop/persistence/`) | none | witch runs shop; non-witch inspects and buys | 11 | not started |
 | Broom crafting stand | Craft and repair rideable flying brooms | broom stand | `magic/broom/` + `stations/broom_stand/` | broom work | yes (broom is witch-only) | 10 | not started |
 | Wand carving bench | Create utility wands for everyday tasks | wand bench | `magic/wand/` + `stations/wand_bench/` | wand carving | assumed yes (wand uses energy); confirm at M10 | 10 | not started |
@@ -51,11 +51,46 @@ Recipe types are `herbalwitch:processing/{drying,grinding,steeping,infusion}`. B
   (`herbalwitch:heat_conductors`: hopper, optional FD conductors) then a source. LIT must be true
   where the block has it; waterlogged gives none.
 - **UI status lines:** Waiting, Needs heat, Working, Output full.
-- **Recipes (50 processing):** drying 14 (one per herb); grinding 23 (14 bundles to powders, plant oil,
-  fertilizer, flower dust, mushroom dust, four dyes, bone to 3 bone meal); steeping 7; infusion 6.
-  Each is listed in docs/catalogue/products.md.
+- **Recipes (50 processing in 0.3.0; 113 since 0.6.0):** drying 14 (one per herb); grinding 24 (14 bundles
+  to powders, plant oil, fertilizer, flower dust, mushroom dust, four dyes, bone to 3 bone meal, and the
+  witch recipe for blinding dust); steeping 7; infusion 11 (the six everyday recipes and five witch oils:
+  venom, thorn, the two repellents and the familiar Emberguard Oil); cauldron 17; distillation 3; bottling 34; charm work 3. Each is listed in
+  docs/catalogue/products.md.
 - **Reloads and saves:** a changed or removed recipe cancels the job and resets progress (items stay);
-  saved jobs use schema 1; unloaded stations do not progress.
+  saved jobs use schema 2 (schema 1 loads; a newer schema is preserved and the station idles until its
+  inventory changes); unloaded stations do not progress.
+
+## Advanced stations (Milestone 7, 0.6.0)
+
+Recipe types are `herbalwitch:processing/{cauldron,distillation,bottling,charm_work}`; block ids are
+`herbalwitch:stations/<station>/station`. The four share `AdvancedStationBlock` and `AdvancedStationEntity`
+(`stations/advanced/`), place through the shared previewed `StructurePlacementItem` and show an `active`
+blockstate while working. `StationCatalog` lists them after the six everyday stations.
+
+| Station | Size | Recipe type | Duration | Heat | Witch | Assembly recipe (shapeless) |
+|---|---|---|---|---|---|---|
+| Witch's Cauldron | 1 block | cauldron | 600 ticks | required, below | yes (Start) | cauldron, copper ingot, amethyst shard |
+| Copper Still | 1 wide, 2 tall | distillation | 800 ticks | required, below | yes (Start) | 4 copper ingots, 2 glass, iron ingot, amethyst shard |
+| Bottling Bench | 2 wide, 1 deep | bottling | 100 ticks | none | no | crafting table, 2 dark oak planks, 2 glass bottles, iron nugget |
+| Charm Workbench | 2 wide, 1 deep | charm_work | 200 ticks | none | yes (Start) | crafting table, 2 dark oak planks, 2 string, gold ingot, amethyst shard |
+
+- **Cauldron:** a water base makes a four-dose mixture of a utility, combat or familiar preparation
+  (17 mixtures). **Still:** a base plus a glass bottle; three recipes: moon essence, Venomleaf Extract
+  and Warding Essence. **Bottling Bench:** portions one whole mixture into four bottles; adding gunpowder and paper makes
+  the thrown variant a labelled vial (the label is an NBT flag on the result). **Charm Workbench:** the
+  Protective Sachet and the two amulets.
+- **Witch recipes:** a recipe with `"requirements": {"witch": true, "energy": N}` is MAGICAL (see
+  "Rules"). The panel on the screen shows Start, Resume, Cancel and the energy cost; the status line adds
+  Needs witch, Needs operator and Needs energy to Waiting, Needs heat, Working and Output full. The mortar
+  (blinding dust) and the infusion pot (venom, thorn, undead repellent and arthropod repellent oils, and
+  the familiar Emberguard Oil) also carry witch recipes.
+- **Placement, teardown and heat** follow the everyday multiblocks: every cell replaceable, a sturdy floor
+  under grounded cells, one item dropped from the origin, any cell opens the origin's menu, `active`
+  shared by every cell. The cauldron and still need a heat source directly below (the rules above).
+- **Ownership and range:** the player who pressed Start is the payer. Progress runs only while they are
+  online, alive, in the dimension and within 8 blocks; otherwise the batch pauses (Resume continues it).
+  Others cannot take it over and can cancel it only after the payer's lease has ended. Start, Resume and
+  Cancel are rate-limited to 5 per 20 ticks.
 
 ## Research blocks (Milestone 4, 0.3.0)
 
@@ -91,7 +126,34 @@ the station screens show a "Grimoire" button while it is carried. Models are fir
   explicit start and is cancelled by closing the menu, leaving range or being hurt.
 - **Screen:** 252 x 200, two columns (status and actions on the left, consent on the right), a progress
   bar, the last notice, and a Grimoire button that opens the book beside it on the altar page.
-- **Ritual circle:** still planned for Milestone 7; the altar does not use one.
+- **Ritual circle:** since 0.6.0 the altar has an optional circle; see "The ritual circle" below. The
+  altar's own four actions need no circle.
+
+## The ritual circle (Milestone 7, 0.6.0)
+
+| Block | Id | Footprint | Recipe | Interface |
+|---|---|---|---|---|
+| Ritual Circle | `herbalwitch:magic/ritual/circle` | a 5 x 5 square ring of 16 cells around the altar | shapeless: 4 smooth stone slabs, 2 calcite, amethyst shard, gold nugget | none; used through the altar |
+
+- **Placement:** one item places the whole ring through the shared checked placement with the shared
+  preview (`client/ritual/CirclePlacementPreview`). The item is a flat sprite; the 32 compiled models
+  (`part_<n>`, `active_<n>`) are an enumerated exception to the 12-file cap (STRUCTURE.md).
+- **Teardown:** breaking any cell, losing support or an explosion removes the whole circle with one
+  drop; `active` (every cell) glows while a circle ritual runs.
+- **Validation:** circle rituals need a complete circle. It is validated every 20 ticks; a broken circle
+  cancels the ritual and consumes nothing, and unloaded cells pause it.
+- **Rituals** (altar actions; numbers in docs/catalogue/witchcraft.md): Garden Blessing and Home
+  Protection. The witch looks at the herb bed or the ward stone, then opens the altar
+  (`client/ritual/RitualTargets`).
+
+## Ward stone (Milestone 7, 0.6.0)
+
+| Block | Id | Footprint | Recipe | Interface |
+|---|---|---|---|---|
+| Ward Stone | `herbalwitch:magic/ward/stone` | 1 block, `active` while the ward is active | shapeless: 4 stone bricks, amethyst shard, gold ingot | menu with owner controls (deactivate, release, radius, profile) |
+
+Rules and numbers: docs/catalogue/witchcraft.md ("Wards"). The ward record lives in the world-wide
+`WardSavedData`, not in the block.
 
 ## Look and size (0.2.0-dev.2)
 
@@ -126,8 +188,8 @@ grimoire page of the decor piece links the working station instead.
 | Decorative Drying Rack (`fixtures/drying_rack_decor`) | hanging herb frame | Herb Drying Rack (`stations/everyday/drying_rack/`): dries bundles |
 | Fireplace (`fixtures/fireplace`) and Firepit (`fixtures/firepit`) | hearth surround and fire | Hearth (`stations/everyday/hearth/`): the heat source for kettle and infusion pot. The firepit lights up and toggles like a lamp but heats nothing |
 | Kitchen Range (`fixtures/stove_oven`) | range with an oven door | Witch's Stove (`stations/stove/`): two burners, hearth fuel rules |
-| Work Table (`surfaces/work_table`) | broad worktable | Mortar and pestle (grinding); the charm workbench candidate is still planned (M7) |
-| Altar Table (`fixtures/altar_table`) | dark table with moon motifs | The functional Ritual Altar (`magic/ritual/altar`, 0.5.0) for founding, initiation and meditation; the infusion pot for preparing. The ritual circle is still planned (M7) |
+| Work Table (`surfaces/work_table`) | broad worktable | Mortar and pestle (grinding); the Charm Workbench (`stations/advanced/charm_workbench/`, 0.6.0) is a separate working station |
+| Altar Table (`fixtures/altar_table`) | dark table with moon motifs | The functional Ritual Altar (`magic/ritual/altar`, 0.5.0) for founding, initiation and meditation, and its Ritual Circle (0.6.0); the infusion pot for preparing |
 
 The recipes differ on purpose: for example the decor rack is string, sticks and slabs, and the
 Kitchen Range takes a furnace but never smelts. Dried bundles remain flat 2D sprites on the working
@@ -136,9 +198,10 @@ rack and elsewhere; the decorative rack does not change that.
 ## Rules
 
 - No universal machine superclass. Shared processing (`stations/process/`: reservations, job, completion) is used by composition; `StationBlock` and `StationMenu` share only block and menu boilerplate.
-- Ordinary processing (drying, grinding, steeping, infusion) is open to non-witches and may be hopper-automated; magical jobs need an authorized witch nearby while progressing and at completion.
+- Ordinary processing (drying, grinding, steeping, infusion, and the bottling bench) is open to non-witches and may be hopper-automated; magical jobs need an authorized witch nearby while progressing and at completion. Each recipe type has an execution policy (ordinary, magical or either) and a recipe's `requirements` (witch, energy) decide the rest.
+- A witch recipe reserves and runs nothing until a witch presses Start (a vanilla menu button); the energy is debited once, at completion, through `WitchStatusService`, and the starter is the payer.
 - Bottling is optional for teas: ordinary teas can finish in the kettle container. Bottling covers bulk portioning, packaging, labels and throwables.
 - Prepared mixtures are bounded item data; there is no fluid system and no Create plumbing dependency.
-- Recipe matching never consumes inputs; mutation happens separately, revalidated at completion (inputs, output capacity, witch, energy).
+- Recipe matching never consumes inputs; mutation happens separately, revalidated at completion (inputs, output capacity, witch, energy). `ProcessMatcher` matches, `ProcessCommit` mutates.
 - Station inventories and progress live in the block entity; at most 12 source files per station directory, split into `block/`, `menu/`, `recipe/` when needed.
 - Each station row closes only with implementation and acceptance evidence (milestone 12 qualification).

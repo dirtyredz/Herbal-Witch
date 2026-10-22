@@ -2,6 +2,52 @@
 
 Newest first.
 
+## 2026-10-22 - 0.6.0: advanced brewing, charms, ritual circle and ward stones (Milestone 7)
+
+Grouped because the choices lean on one another; each is short. These are the points where the
+implementation departs from the M7 plan, or where the plan was silent. Numbers: docs/catalogue/witchcraft.md,
+docs/catalogue/stations.md, docs/catalogue/products.md.
+
+- **Menu-button clicks, not new packets.** Station Start/Resume/Cancel and the ward settings (deactivate,
+  release, radius, profile) use vanilla `clickMenuButton`; the plan's `StationPackets` and `WardPackets`
+  were not written. One validated server path (menu id, access range, rate limit of 5 per 20 ticks) and
+  no wire change for them. Rejected: new messages, which would need their own bounds and checks.
+- **One config: `WorkingRules` inside `WitchRules`.** The M7 numbers (processing percent, garden and
+  home costs and ticks, ward numbers, charm charge, preparation PvP) sit in `magic/witch/config/WorkingRules`,
+  so one config section group, one sync and one fingerprint cover them. `WitchRulesUpdate` grew, so
+  `HerbalWitchNetwork.PROTOCOL` is "4". Rejected: a second rules record and sync.
+- **Authorization under `stations/process/authorization/`; shared `ProcessStationEntity`.** `stations/`
+  was at its breadth cap, so the operator, the magical policy and the operations live inside
+  `stations/process/`. The block-entity base `stations/block/ProcessStationEntity` is shared and the four
+  everyday process stations moved onto it. A single `AdvancedStationBlock` and `AdvancedStationEntity`
+  serve all four advanced stations (a station is a descriptor and a menu, not a block class).
+- **Inputs are reserved only after Start.** A witch recipe reserves and runs nothing until a witch presses
+  Start; one batch per Start and the starter is the payer. Others may cancel only a batch whose lease
+  ended (the payer offline, dead, away or in another dimension). Cancel consumes nothing; energy is debited
+  once, at completion. Rejected: reserving on insert, which would let a non-witch lock a station.
+- **Timed effect state uses `MobEffects`.** Binding, sleep, steadfast, concealment, dazzled, thorns and the
+  repellents are vanilla effects, so persistence, expiry and milk-clearing are vanilla's. Rejected: a custom
+  codec and capability for effect timers.
+- **The circle item is a flat sprite; the compiler gained `multiblock.assembly: false`.** The 5x5 ring is
+  placed whole through the item (with preview), but the item model is a sprite, so no 5x5 item assembly is
+  compiled. The 32 compiled cell models are a documented exception to the 12-file directory cap.
+- **An unknown job schema is preserved byte for byte.** `ProcessJob` is SCHEMA 2 (schema 1 loads). A newer
+  schema is never rewritten: the station idles until its inventory changes. Rejected: dropping the job.
+- **Preparation grimoire pages live in `grimoire/content/reference/`.** `AdvancedPreparationEntries` is
+  grimoire code reading the brewing catalogues, because brewing must not import the grimoire.
+- **The witch picks the ritual target by looking at it, then opens the altar.** Garden Blessing targets a
+  herb bed and Home Protection a ward stone; `client/ritual/RitualTargets` reads the aimed block before the
+  altar opens, so there is no target-picking screen. Rejected: a selection mode inside the altar menu.
+- **Wards.** Release unbinds the stone (it can be bound again). The area is a box (radius by height 4), not a
+  sphere. The focus is any functional hearth or stove within 4 blocks, rechecked every sweep (ownership of
+  the hearth is not modelled). Recognised claim mods loaded means entity actions are restricted, because
+  the mod cannot ask them; `protected_entities` defaults to villager and wandering trader; fake players are
+  treated as players. A copied record id is inert, and breaking a stone retires its record.
+- **Smaller calls.** The charm wear counter is per player (a per-player tick counter, charge as seconds of
+  wearing); showcase sections pack into rows no wider than 126 (`ShowcasePlan.ROW_WIDTH`) and the GameTest
+  template is 128 x 10 x 64; the cauldron and still need a heat source below; labelled vials are an NBT
+  flag on recipe variants (gunpowder and paper variants), not separate items.
+
 ## 2026-10-22 - 0.5.0: initiation and energy (Milestone 6)
 
 Grouped because the choices lean on one another; each is short. Procedures and numbers:

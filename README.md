@@ -4,14 +4,16 @@ Forge 1.20.1 mod: woodland herbal witchcraft (herbs, stations, brewing, familiar
 an apothecary trade) together with a cottage furniture catalogue. Install on **both** the server and
 every client.
 
-**Status: private development, `0.5.0` local candidate (Milestone 6, initiation and energy).**
+**Status: private development, `0.6.0` local candidate (Milestone 7, advanced brewing, charms, the ritual circle and ward stones).**
 Contains Milestone 1 (cottage decor in a single design), Milestone 2 (herbs and garden), Milestone 3
 (everyday preparation stations and products), Milestone 4 (the grimoire: discovery, recipe lookup,
-missing ingredients, research blocks and teaching), Milestone 5 (94 furniture pieces) and Milestone 6
-(the ritual altar, becoming a witch, and the energy later witchcraft will spend). Automated acceptance
-for M1 to M5 passed headless (unit tests and GameTests on the ANU CI runner); M6 acceptance is tracked in
-docs/FEATURES.md. Owner review of the art (the 89 M5 pieces and the altar are agent first drafts), the
-station UIs, the grimoire, the furniture and the witch behaviour in game, with two clients, is pending.
+missing ingredients, research blocks and teaching), Milestone 5 (94 furniture pieces), Milestone 6
+(the ritual altar, becoming a witch, and the energy witchcraft spends) and Milestone 7 (four advanced
+stations, 16 advanced preparations, charms, the ritual circle with two rituals, and ward stones).
+Automated acceptance for M1 to M5 passed headless (unit tests and GameTests on the ANU CI runner); M6
+and M7 acceptance is tracked in docs/FEATURES.md. Owner review of the art (the 89 M5 pieces, the
+altar and the six M7 pieces are agent first drafts), the station UIs, the grimoire, the furniture and
+the witch behaviour in game, with two clients, is pending.
 Later systems are listed in docs/FEATURES.md. Not published; not in any pack.
 
 ## Supported versions
@@ -44,12 +46,19 @@ Later systems are listed in docs/FEATURES.md. Not published; not in any pack.
 - **Herbs and garden** (tab "Gardening"): 14 herbs in five habitat groups, seeds, fresh herbs and the
   herb bed (docs/catalogue/herbs.md). Herbs stand rooted in the soil with a 3D mature form, and
   adjacent herb beds join into one planter.
-- **Apothecary** (tab "Apothecary"): six stations (the drying rack and hearth are 2x2 multiblocks; the new Witch's Stove is a two-wide
-  range), dried bundles, powders, seven drinks, a salve,
+- **Apothecary** (tab "Apothecary"): six everyday stations (the drying rack and hearth are 2x2 multiblocks; the new Witch's Stove is a two-wide
+  range; the four advanced stations are below), dried bundles, powders, seven drinks, a salve,
   oils, garden products and a finite oil lantern (docs/catalogue/stations.md, products.md).
 - **Witchcraft** (tab "Apothecary"): the ritual altar, the founding of the first lineage, initiation of
   consenting players, and the energy a witch recovers by resting, meditating, sleeping and drinking
   energy tea (see "Witchcraft" below; docs/catalogue/witchcraft.md).
+- **Advanced brewing** (tab "Apothecary"): four witch stations (Witch's Cauldron, Copper Still, Bottling
+  Bench, Charm Workbench), 16 advanced preparations (night vision, water breathing, resistance and healing
+  draughts; poison, concealment, slowing, binding, weakening and sleep vials; venom, thorn and two
+  repellent oils; blinding dust; moon essence), four-dose mixtures, and ten preparations for familiars that
+  wait for Milestone 9 (see "Advanced brewing" below; docs/catalogue/products.md).
+- **Charms, the ritual circle and wards** (tab "Apothecary"): protective charms, a ring that unlocks the
+  Garden Blessing and Home Protection rituals, and the ward stone (see "Charms, circle and wards" below).
 - **Grimoire** (tab "Apothecary"): a portable book, a Grimoire Stand and a Witch's Bookshelf. They open the
   same recipe-backed reader (see "The Grimoire" below).
 
@@ -113,6 +122,61 @@ below (one hopper may sit between).
 Plant oil comes from the mortar (4 wheat seeds + glass bottle). Resin drops from player-broken spruce
 leaves (about 1 in 8, not shears, not silk touch). Details and effects: docs/catalogue/products.md.
 
+## Advanced brewing
+
+The Witch's Cauldron, Copper Still, Bottling Bench and Charm Workbench are placed like the altar (one
+item, previewed, checked) and show an `active` state while working. They share the processing rules of the
+everyday stations (docs/catalogue/stations.md), with one difference: a recipe that needs a witch.
+
+- **Witch recipes:** nothing is reserved or runs until a witch presses **Start** on the station's screen.
+  The player who pressed it pays; progress continues only while they are online, alive, in the dimension
+  and within 8 blocks, and **Resume** continues a paused batch. The energy is spent once, when the batch
+  completes, and earns practice. **Cancel** consumes nothing. Others cannot take a batch over and can
+  cancel it only once the payer's lease has ended. The recipe viewers and the grimoire show the witch
+  requirement.
+- **Heat:** the cauldron (600 ticks, a water base) and the still (800 ticks) need a heat source directly
+  below, like the kettle. The bench (100 ticks) needs neither a witch nor heat; the workbench (200 ticks)
+  needs a witch.
+- **Mixtures:** the cauldron makes a four-dose mixture of a draught, a vial or a familiar tonic; the bench
+  portions a whole mixture into four bottles. With gunpowder and paper the bench makes labelled vials,
+  which are the thrown form.
+- **Draughts:** Night Vision and Water Breathing (2:00), Resistance I (1:30) and Healing (3 hearts when
+  hurt, one every 10 seconds).
+- **Vials and dust (thrown):** Poison, Concealment, Slowing, Binding, Weakening, Sleep and Blinding Dust. A
+  throw bursts in radius 3, reaches at most 32 targets with line of sight, and shares a 20-tick throw
+  cooldown. Binding and Sleep hold a creature for 5 seconds and are refused by bosses and other
+  hard-control-immune creatures; a creature just held gets Steadfast (100 ticks). Players are never
+  affected unless `preparationPvp` and the server allow it; villagers and wandering traders are protected.
+- **Oils:** Venom coats the blade in your off hand (8 poisoning hits or 1:00), Thorn pricks whoever strikes
+  you (1:30), Undead Repellent and Arthropod Repellent make those creatures stop seeking you (1:30). Witch
+  recipes at the infusion pot; Blinding Dust is a witch recipe at the mortar.
+- **For familiars:** ten more preparations (Guardian's Brew, Swiftpaw Tonic, Nightwatch Infusion, Moonveil
+  Elixir, Spiritbond Potion, Hearthkeeper's Brew, Shadowstep Draught, Warding Essence, Venomleaf Extract,
+  Emberguard Oil) can be made now but refuse to be used ("available with familiar bonding") until
+  familiars arrive in a later milestone.
+
+## Charms, circle and wards
+
+- **Charms (Charm Workbench):** the Protective Sachet (every mob, 15% softer, at most 1 heart), the Undead
+  Amulet and the Arthropod Amulet (30%, at most 1.5 hearts). Worn in the off hand, or in a Curios `charm`
+  slot when Curios is installed. A charm lasts 300 seconds of wearing, then breaks.
+- **Ritual circle:** shapeless, 4 smooth stone slabs, 2 calcite, an amethyst shard and a gold nugget. One
+  item places a 5x5 ring of 16 cells around the altar, with the same preview and checks as the altar. Its
+  rituals need the ring complete; if it breaks, the ritual stops and nothing is consumed.
+- **Garden Blessing:** nettle powder, bone meal and soil tonic; 15 energy, 200 ticks. Look at a herb bed,
+  then open the altar: the herb beds in the 5x5 square around it (within 8 blocks) are enriched and the
+  bottle comes back.
+- **Home Protection:** sage powder and an amethyst shard; 20 energy, 200 ticks. Look at a ward stone, then
+  open the altar: the stone is charged and the witch may bind it.
+- **Ward stone:** shapeless, 4 stone bricks, an amethyst shard and a gold ingot. A witch within 8 blocks
+  can activate it directly for 20 energy; it stays charged for 600 seconds of loaded time and cannot be
+  topped up while charged. It keeps the undead, arthropods or both (the owner chooses) from targeting
+  anyone inside a box: radius 8 (12 with a working hearth or Witch's Stove within 4 blocks) by height 4.
+  Only the owner can deactivate it, release it (unbind) or change radius and profile. A witch may hold 4;
+  active wards cannot overlap.
+- **Rules:** the numbers above are defaults of `herbalwitch-server.toml` (sections `workings`, `wards`,
+  `charms`); the grimoire quotes the live values.
+
 ## The Grimoire
 
 A book of every herb, station and processing recipe in the mod, with your own discoveries marked. It is
@@ -142,9 +206,9 @@ advisory: nothing in the game is locked behind it, and the recipe viewers (EMI, 
 
 ## Witchcraft
 
-Energy is the budget later witchcraft will spend. A witch has a capacity (100 to start, growing with
-practice) and an energy level; non-witches have neither. In this milestone only the altar's own rituals
-spend energy; the later production and familiar systems will.
+Energy is the budget witchcraft spends. A witch has a capacity (100 to start, growing with
+practice) and an energy level; non-witches have neither. The altar's rituals, witch recipes at the
+advanced stations, the circle rituals and ward activation spend energy; the later familiar systems will.
 
 - **The altar:** `SAS` / `LGL` / `L L`: 2 smooth stone slabs (S), an amethyst shard (A), 4 dark oak
   logs (L), a gold ingot (G); Apothecary tab, broken fastest with an axe. One item places the whole
@@ -182,7 +246,8 @@ spend energy; the later production and familiar systems will.
 `/herbalwitch showcase [section]` builds a labelled sample of every registered block, for owner review
 and testing. It needs permission level 2 (operators; a non-op, in survival or creative, and the console
 are refused). Sections: `decor`, `herbs`, `garden`, `drying_rack`, `mortar`, `kettle`, `hearth`,
-`stove`, `infusion_pot`, `preparations`, `grimoire`, `altar`; with no section it builds all of them. The grimoire
+`stove`, `infusion_pot`, `preparations`, `grimoire`, `altar`, `cauldron`, `still`, `bottling_bench`,
+`charm_workbench`, `advanced_preparations`, `ritual_circle`, `ward_stone`, `charms`; with no section it builds all of them. The grimoire
   section (both research blocks, a barrel with two grimoires and supplies, signs) grants no knowledge.
 The `altar` section (an idle altar, a supply barrel and signs) initiates nobody, touches no founding
 record, grants no energy and starts no ritual.
@@ -190,7 +255,8 @@ The `decor` section is a footprint-aware grid of all 94 pieces with signs, with 
 hanging pieces under ceilings, lights lit, storage stocked and the door in its four states.
 
 - **Where:** the box starts 2 blocks east of you on your row and extends east and south. The floor is
-  the block you stand on. Height 8 (floor layer plus 7 cleared). The full layout is 126 x 8 x 28 (it was 117 before 0.5.0 and 86 before 0.4.0);
+  the block you stand on. Height 8 (floor layer plus 7 cleared). Sections pack into rows no wider than 126, so the full
+  layout is 121 x 8 x 38 in two rows (it was 126 x 8 x 28 in 0.5.0, 117 before and 86 before 0.4.0);
   hard caps are 128 x 8 x 128 and 65,536 writes.
 - **Destructive:** the whole box is replaced: terrain (grass, dirt, stone, plants, leaves, logs, water) is cleared (no drops) and the floor laid (grass blocks under the garden and herbs, smooth stone elsewhere), then the floor,
   supports, samples and signs are placed. There is no undo.
@@ -206,8 +272,13 @@ None are required, and no foreign mod classes are in the jar.
 - **Farmer's Delight** (tested 1.3.4): the hearth heats FD cooking blocks; a lit FD stove heats our
   kettle and infusion pot.
 - **Thirst Was Taken** (1.4.0): the seven drinks hydrate; water purity carries into the tea.
-- **EMI** (1.1.24+1.20.1) and **JEI** (15.62.0.219): four recipe categories each, from the same
-  descriptions the grimoire uses; they show every recipe regardless of discovery.
+- **EMI** (1.1.24+1.20.1) and **JEI** (15.62.0.219): the processing categories plus the ritual
+  categories, from the same descriptions the grimoire uses; they show every recipe regardless of
+  discovery, and mark the ones that need a witch.
+- **Curios** (compile-only API 5.14.1): charms also fit a `charm` slot when it is installed. Without it
+  they work from the off hand.
+- **Claim mods:** FTB Chunks, Open Parties and Claims, Cadmus, Flan, GriefDefender and MineColonies are
+  recognised; while one is loaded, harmful preparations and wards on entities are restricted.
 
 Details: docs/COMPATIBILITY.md.
 
@@ -235,7 +306,7 @@ Gradle runs the three art producers before resources and datagen (`generateArt`)
 
 - `node tools/generate-models.mjs` writes the procedural families: herbs, herb beds and hung bundles.
 - `node tools/compile-blockbench.mjs` compiles the Blockbench projects under `src/art/blockbench/`
-  (stations, furniture, oil lantern, the grimoire stand and bookshelf, the altar) into models and the textures each piece owns. `--check` fails when
+  (stations, furniture, oil lantern, the grimoire stand and bookshelf, the altar, the ritual circle and the ward stone) into models and the textures each piece owns. `--check` fails when
   committed output is stale.
 - `node tools/preview-models.mjs --output <dir outside the repo> [--references <dir>]` renders headless
   previews (contact sheets, herbs on beds, item sheet, review scenes, reference comparisons, manifest).

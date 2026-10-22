@@ -37,12 +37,20 @@ docs/ARCHITECTURE.md and docs/catalogue/).
   class, a recipe in their family's recipe contributor, a grimoire line (`DecorReferenceTranslations`),
   display anchors (`DisplaySpec`) for displays, and the independent manifests (`data/decor/manifest/`).
 - **Witch state, energy and the altar** (`magic/witch`, `magic/ritual`; docs/ARCHITECTURE.md "Witchcraft"):
-  mutate a player's energy or practice only through `WitchStatusService` (M7 production and M9
-  familiars included). Bump `HerbalWitchNetwork.PROTOCOL` on any wire change and register new messages
+  mutate a player's energy or practice only through `WitchStatusService` (M7 production included, and M9
+  familiars will). Bump `HerbalWitchNetwork.PROTOCOL` (now "4") on any wire change and register new messages
   after the grimoire's. The founding record is world-global: GameTests that convert anyone close it, so
   they reset it (`FoundingService.resetForTest`) and run their rituals synchronously. Grimoire prose
   never hard-codes a witch number (the rules are quoted from the synced rules; a test enforces it).
   Mod builds are tried only in the dedicated mod test instance, never an `Evil Eye Trial *` instance.
+- **Advanced brewing, charms, circle and wards** (Milestone 7; docs/ARCHITECTURE.md "Advanced witchcraft"):
+  witch recipes carry `requirements` and reserve nothing until a witch presses Start; Start, Resume,
+  Cancel and the ward settings are vanilla menu buttons, never new packets. New M7-style numbers go in
+  `WorkingRules` inside `WitchRules` (one config, one sync, one fingerprint). Every harmful action on an
+  entity goes through `platform/permission/entity/EntityActionPermission`. The four advanced stations share
+  `AdvancedStationBlock`/`AdvancedStationEntity`; never add a block class per station. Curios stays
+  compile-only behind `platform/compat/curios/`. A GameTest that charges a ward joins a
+  `herbalwitch_ward_*` batch (docs/GOTCHAS.md).
 - **Generated resources are source.** Change a provider, run `runData`, commit the regenerated
   `src/generated/resources/` with the code. Never hand-edit generated JSON. `GeneratedResourcesTest`
   holds the exact manifest; when a file is renamed or removed, delete `src/generated` and regenerate.
