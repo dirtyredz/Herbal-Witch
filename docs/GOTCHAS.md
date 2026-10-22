@@ -137,3 +137,22 @@
   say `noOcclusion()` in its properties (beds, rugs, stations, furniture, bundles all do; `noCollission()` already implies it);
   `BlockOcclusionGameTests` fails for any herbalwitch block that occludes without a full-cube
   occlusion shape.
+- **Capabilities are invalidated on the old player at clone.** `DiscoveryEvents.clone` calls
+  `reviveCaps()`, copies, then `invalidateCaps()` in a `finally`, because the original's capabilities are
+  already invalidated when `PlayerEvent.Clone` fires. Without it a death or End return empties the grimoire.
+- **Grimoire client state is a cache, not a store.** `GrimoireClientState` is cleared on disconnect (a stale
+  index or discovery set must not carry into the next world) and rebuilt on recipe and tag updates; recipe
+  bodies come from vanilla recipe sync, not our channel.
+- **Herb conditions are server-only.** Clients never read `HerbConditionReloadListener.current()`; they use the
+  herb summaries `ContentSync` sends with the editorial definitions.
+- **Missing counts allocate over the main inventory and offhand only**, one variant per requirement, shared
+  stacks counted once, returned containers never counted. Open containers and the ender chest do not count,
+  and the same scope drives discovery observation.
+- **Stale teaching invitations fail closed.** Acceptance names the teacher and recipe and checks the recipe
+  fingerprint and the teacher's session, so a changed recipe, a relog or a closed teacher reader makes an old
+  invitation do nothing; a content reload cancels the open invitations whose recipe vanished or changed.
+- **A removed recipe loses its page, not the player's discovery key.** The key stays in the capability and the
+  page returns if the recipe does.
+- **Fake players never join the player list.** Range and teaching checks go through `TeachingWorld`, the test
+  seam, so GameTests can drive them. `FakePlayerFactory` caches by name, so `GrimoireFixtures` gives each test a
+  unique fake-player name; reuse leaks one test's inventory and discoveries into the next.

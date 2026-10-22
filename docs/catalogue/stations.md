@@ -16,7 +16,7 @@ Module paths are relative to `io.github.dirtyredz.herbalwitch`. Milestones are f
 | Apothecary bottling bench | Bottle, portion, label, package mixtures | bottling bench | `stations/bottling_bench/` | bottling | no (plan silent; assumed packaging only) | 7 | not started |
 | Altar and ritual circle | Initiation, familiar binding, home blessings, revival, wards | altar (basic M6), ritual circle, decor Altar Table links here | `magic/ritual/` | rituals | yes (initiation: existing witch; founder ritual: survival) | 6 (altar); 7 (circle, rituals) | not started |
 | Charm workbench | Sachets, amulets, animal capture charms, protection tokens | charm workbench, decor Work Table candidate | `stations/charm_workbench/` | charm work | assumed yes (magical); confirm at M7 | 7 | not started |
-| Grimoire stand / witch bookshelf | Research herbs, recipes, rituals | grimoire stand, witch bookshelf | `grimoire/content/`, `grimoire/discovery/`, `grimoire/teaching/` | none (reads all recipes) | no | 4 | not started |
+| Grimoire stand / witch bookshelf | Research herbs, recipes, rituals | grimoire stand, witch bookshelf | `grimoire/access/block/` (with `grimoire/content/`, `grimoire/knowledge/`) | none (reads all recipes) | no | 4 | done (0.3.0): automated acceptance passed (unit tests, GameTests); owner checks pending |
 | Familiar beds, nests and perches | Assign rest locations and recovery | bed, nest, perch | `companions/familiars/home/` | none | owner must be bound witch | 9 | not started |
 | Home ward stone | Define guarded home area and targeting settings | ward stone | `magic/ward/` | none (ward activation, 20 energy default) | yes | 7 | not started |
 | Apothecary counter, register, shelves and jars | Stock, sell, display, track goods | counter, register, stock shelves, jars; decor Apothecary Counter links here | `shop/block/` (with `shop/catalog/`, `shop/trade/`, `shop/order/`, `shop/persistence/`) | none | witch runs shop; non-witch inspects and buys | 11 | not started |
@@ -57,6 +57,22 @@ Recipe types are `herbalwitch:processing/{drying,grinding,steeping,infusion}`. B
 - **Reloads and saves:** a changed or removed recipe cancels the job and resets progress (items stay);
   saved jobs use schema 1; unloaded stations do not progress.
 
+## Research blocks (Milestone 4, 0.3.0)
+
+| Block | Id | Opens on | Recipe | Look |
+|---|---|---|---|---|
+| Grimoire Stand | `herbalwitch:grimoire/stand` | the research filter | 3 dark oak slabs + 2 sticks + a Grimoire (shapeless) | Crossed foot, pedestal with gold collars, tilted board holding an open book, ribbon and ivy |
+| Witch's Bookshelf | `herbalwitch:grimoire/bookshelf` | the index | 6 dark oak planks + 2 books + a Grimoire (shapeless) | Framed carcass, three shelves of volumes, crescent bookend, side moon, ivy |
+
+Ids are permanent. Both are open to ordinary players (no witch requirement) and share one behaviour
+(`ResearchAccessBlock`): one cell, horizontal facing, sturdy centre support below, drops itself once, no block
+entity, no inventory, no automation sides, `noOcclusion()`. They have no processing recipe type (they read
+all recipes and run no job) and no storage; the Milestone 5 storage/display bookshelf is a different piece
+(docs/catalogue/decor.md). The reader closes when the block is gone, unloaded, more than 8 blocks away or
+`mayInteract` fails. Research there is free and instant, and teaching invitations start only from these
+readers. The portable Grimoire (`herbalwitch:grimoire/book`, stack of one) opens the index anywhere and
+the station screens show a "Grimoire" button while it is carried. Models are first drafts, see docs/ART.md.
+
 ## Look and size (0.2.0-dev.2)
 
 House style: the armchair's dark brown wood, charcoal iron, gold rivets, bands and studs, gold crescent moons
@@ -68,7 +84,7 @@ from stacked layers. Previews and recipes are unchanged by the art pass; owner r
 | Mortar and pestle | 1 block | Mottled grey-taupe stone bowl, octagonal with chamfered corners, tapering to a narrow foot on a stepped square plinth; stepped rim, moss and small pink flowers, bright ground herbs inside, a knob-headed stone pestle leaning out |
 | Tea kettle | 1 block (a modest 9 px vessel, about 11 tall) | Bulbous plum body painted with gold moons, stars and pink flowers on olive vines; beaded copper-and-gold rim, stepped lid with gold studs and knob, arched copper handle with gold bands, angled spout with a gold nozzle. Stands on heat |
 | Infusion pot | 1 block (a modest 10.5 px pot, 11 tall) | The kettle's sister: squat round plum pot, banded copper-and-gold rims, gold clasps, domed lid painted with a moon, gold knob on a post, copper loop handles with gold caps, short gold feet, small gold plaque. Stands on heat |
-| Drying rack | 2 wide x 2 tall | Wooden A-frames at each end whose legs stand on iron feet and lean in to cross under an iron cap, iron bands and gold rivets; a top beam with gold strap clips and hooks. While it holds anything (input or output) four 3D dried bundles hang from the beam (green leafy, lavender, white-flowered, yellow-flowered); they show occupancy, not which herb |
+| Drying rack | 2 wide x 2 tall | Wooden A-frames at each end whose legs stand on iron feet and lean in to meet at an apex under a small iron cap (never crossing), iron bands and gold rivets; a top beam with gold strap clips and hooks. While it holds anything (input or output) four flat 2D dried-bundle sprites hang from the beam (green leafy, lavender, white-flowered, yellow-flowered); they show occupancy, not which herb |
 | Hearth | 2 wide x 2 tall | Gothic fireplace: charcoal stone-brick firebox under a stepped arch, iron grate, wooden mantel posts and shelf with gold bands and caps, ivy over the mantel corners, solid brick behind, dark chimney breast with a gold moon-and-stars plaque, floor slabs, fire tools, a log crate. Lit on every cell (light 13) |
 | Witch's Stove | 2 wide x 1 | Charcoal iron cooking range with wooden corner posts and gold caps; two burners on top, gold-framed firebox door, two drawers with gold stars, a towel rail with a red cloth bearing a gold crescent, a rail with a hanging pan, spoon and herb bundle, a stovepipe rising out of the back of the body between the burners |
 

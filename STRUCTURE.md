@@ -143,6 +143,14 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 | Blockbench pieces | `src/art/blockbench/**`, `tools/compile-blockbench.mjs`, `tools/blockbench/**` | Hand-edited one-off pieces (stations, furniture, lantern) compiled to models and owned textures; the dev-art pack |
 | Art review | `tools/preview-models.mjs`, `tools/preview/**` | Headless previews, coverage and reference comparisons |
 | Multiblocks | `platform/multiblock/*`, `stations/block/StationBlock` | Cell layout, placement and removal, the origin cell, shared lit/active state |
+| Grimoire catalogue and registry | `grimoire/catalog/GrimoireCatalog`, `grimoire/registry/*` | Permanent ids (`grimoire/book`, `stand`, `bookshelf`, menu `reader`), registration, creative tab, server event wiring |
+| Grimoire access | `grimoire/access/{item,block,menu}` | The book item, the one-cell research block (no block entity, no storage), the zero-slot reader menu and the access rule (book: carried; block: loaded, within 8 blocks) |
+| Grimoire content | `grimoire/content/**` | Immutable index of entries built from registered `GrimoireContentSource`s (guide, herb, station, recipe); `ServerGrimoireContent` revisions; editorial `grimoire_entries` loader |
+| Grimoire knowledge | `grimoire/knowledge/{discovery,research,teaching}` | Personal discovery capability and codec, observation policy, research eligibility and service, consenting teaching (pure rules plus a server adapter) |
+| Grimoire reading | `grimoire/reading/*`, `reading/ingredients/*` | Reader sessions and the server reader service; ingredient requirements and the missing-ingredient allocator |
+| Grimoire network | `grimoire/network/*`, `platform/network/*` | Six bounded messages and codec on the one channel `herbalwitch:main`; content sync; payload bounds and chunk assembly |
+| Station descriptions | `stations/description/ProcessingCategories` | The one recipe-type-to-station mapping shared by the grimoire, EMI and JEI |
+| Grimoire client | `client/grimoire/*`, `client/grimoire/widgets/*` | Two-page book screen, view model, station panel and button, client state cache, teaching panel |
 
 ## Dependency direction
 
@@ -150,6 +158,10 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
   client and datagen import features.
 - `stations` -> `brewing` (preparations, metadata) and `botany`; `brewing` -> `botany`. Nothing imports
   `stations` except `data/`, `client/` and the showcase wiring. `platform/compat` -> `brewing`.
+- `grimoire` -> `stations`, `botany`, `brewing` and `platform/network`. The feature packages
+  (`stations`, `botany`, `brewing`, `platform`, `decor`) never import `grimoire`; the station screens in
+  `client/stations` reach it through `client/grimoire` (the station panel). `client/` and `data/` import
+  `grimoire`.
 - `decor` registry -> block, shape, catalog; blocks take their shapes as constructor arguments.
 - `catalog` packages import only plain Minecraft value types (e.g. `MapColor`), so the pure unit tests
   load them without a Minecraft bootstrap.
@@ -174,3 +186,8 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
   station extends a processing base class.
 - `GeneratedResourcesTest` and the per-feature manifests keep their own independent lists on purpose,
   so a catalogue slip shows up as a diff.
+- The grimoire is grouped by concern to keep every level under about ten entries: `access/` (item,
+  block, menu), `knowledge/` (discovery, research, teaching: what a player knows and may learn) and
+  `reading/` (sessions, the ingredient allocator). The plan named `grimoire/{block,item,menu,discovery,
+  research,teaching,ingredients}` as siblings; the grouping is a deliberate deviation (docs/DECISIONS.md).
+  Teaching keeps pure rules (`TeachingService`) apart from the server adapter (`TeachingWorld`).

@@ -70,6 +70,15 @@ Recipes land in milestone 7; effects on familiars land in milestone 9. Temporary
 | Healing Salve | familiar brew | Infusion pot | salve | no | restore health (animal variant of everyday salve) | 7 / 9 | planned |
 | Shadowstep Draught | familiar brew | Brewing cauldron | drink | yes | brief repositioning | 7 / 9 | planned |
 
+## Grimoire lookup (0.3.0)
+
+Every processing recipe above has a recipe-backed page in the grimoire (drying, grinding, steeping and
+infusion), built from the registered recipes themselves (`StationRecipeEntries`); there are no hand-written
+product pages. A product is discovered when it is carried, or when
+all of a recipe's primary ingredients are familiar. Discovery is advisory only: product effects, cooldowns
+and delivery are exactly as in the tables above, and nothing is gated by knowledge. Witch energy effects
+stay deferred to Milestone 6.
+
 ## Herbs
 
 The 14 herbs (Milestone 2, done) are tabulated in [herbs.md](herbs.md): ids, groups, forms, traits,
