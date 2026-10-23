@@ -106,7 +106,7 @@ final class PerformanceRun {
             online = OnlinePlayers.register(List.copyOf(both));
         }, WINDOWS));
         phases.add(new Phase("settle_after_saturation", () -> {
-            online.close();
+            if (online != null) { online.close(); online = null; }
             workloads.release();
         }, 0));
         phases.add(new Phase("churn", this::churn, 0));

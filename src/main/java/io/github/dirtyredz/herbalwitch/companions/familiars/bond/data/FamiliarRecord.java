@@ -25,6 +25,27 @@ public record FamiliarRecord(UUID bond, UUID owner, UUID creature, String specie
     }
     @Override public CompoundTag state() { return state.copy(); }
     @Override public CompoundTag payload() { return payload.copy(); }
+    // Hot-path reads (every loaded familiar, every tick) without copying the whole state (M12 performance).
+    /** Whether the state holds {@code key}. */
+    public boolean has(String key) { return state.contains(key); }
+    /** One top-level compound of the state, copied on its own. */
+    public CompoundTag compound(String key) { return state.getCompound(key).copy(); }
+    public int intValue(String key) { return state.getInt(key); }
+    public long longValue(String key) { return state.getLong(key); }
+    public String stringValue(String key) { return state.getString(key); }
+    /** Loaded-time counters that change every tick and never make an owner's open view stale. */
+    private static final java.util.Set<String> COUNTERS = java.util.Set.of("homeRest", "charmTicks", "progress", "homeProgress",
+            "preparationGates", "poisonAt", "poisonCoating");
+    /** Whether the owner-visible intent is equal: everything but loaded-time counters; buffs by name only. */
+    public boolean sameIntent(FamiliarRecord other) {
+        var keys = new java.util.HashSet<>(state.getAllKeys()); keys.addAll(other.state.getAllKeys());
+        for (String key : keys) {
+            if (COUNTERS.contains(key)) continue;
+            if (key.equals("buffs")) { if (!state.getCompound(key).getAllKeys().equals(other.state.getCompound(key).getAllKeys())) return false; }
+            else if (!Objects.equals(state.get(key), other.state.get(key))) return false;
+        }
+        return true;
+    }
     public FamiliarCommand command() { return FamiliarCommand.parse(state.getString("command")); }
     public FamiliarRecord change(Consumer<CompoundTag> change) {
         CompoundTag next = state.copy(); change.accept(next);

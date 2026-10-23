@@ -14,6 +14,7 @@ public final class FamiliarCatalog {
             new FamiliarSpeciesSpec("rabbit", "minecraft:rabbit", "root", 80, 4, false, 1, 0, "rabbit_sachet", false),
             new FamiliarSpeciesSpec("bat", "minecraft:bat", "berry", 60, 3, true, 1, 0, "bat_chime", false));
     private FamiliarCatalog() {}
-    public static Optional<FamiliarSpeciesSpec> find(String key) { return ALL.stream().filter(s -> s.key().equals(key)).findFirst(); }
+    private static final java.util.Map<String, FamiliarSpeciesSpec> BY_KEY = ALL.stream().collect(java.util.stream.Collectors.toUnmodifiableMap(FamiliarSpeciesSpec::key, s -> s));
+    public static Optional<FamiliarSpeciesSpec> find(String key) { return Optional.ofNullable(key == null ? null : BY_KEY.get(key)); }
     public static Optional<FamiliarSpeciesSpec> type(String id) { return ALL.stream().filter(s -> s.originalType().equals(id) || s.entityId().equals(id)).findFirst(); }
 }

@@ -17,7 +17,7 @@ public final class FamiliarBondProgress {
     public static int level(int xp) { return xp >= 350 ? 5 : xp >= 200 ? 4 : xp >= 100 ? 3 : xp >= 40 ? 2 : 1; }
     public static FamiliarRecord award(FamiliarRecord record, int amount, boolean ritual) {
         if (amount <= 0) return record;
-        var progress = record.state().getCompound("progress"); long clock = progress.getLong("clock");
+        var progress = record.compound("progress"); long clock = progress.getLong("clock");
         if (clock - progress.getLong("window") >= 24000) { progress.putLong("window", clock); progress.putInt("earned", 0); }
         int bonus = !ritual && record.state().getCompound("buffs").getInt("spiritbond") > 0 ? 1 : 0;
         int gain = Math.min(350 - record.state().getInt("xp"), ritual ? amount : Math.min(amount + bonus, Math.max(0, 10 - progress.getInt("earned"))));

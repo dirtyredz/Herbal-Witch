@@ -27,7 +27,7 @@ public final class FamiliarReconciliation {
         var store = FamiliarStore.get(level.getServer());
         if (!store.ready() || HELD.contains(mob)) return Optional.empty();
         return store.creature(mob.getUUID()).filter(r -> store.writable(r.bond()) && r.phase() == FamiliarRecord.Phase.ACTIVE
-                && !r.state().contains("receipt") && matches(mob, r));
+                && !r.has("receipt") && matches(mob, r));
     }
     public static Mob loaded(MinecraftServer server, FamiliarRecord record) {
         for (var level : server.getAllLevels()) {
@@ -50,7 +50,7 @@ public final class FamiliarReconciliation {
         if (!(mob.level() instanceof ServerLevel level)) return false;
         var store = FamiliarStore.get(level.getServer());
         return store.creature(mob.getUUID()).map(r -> !store.writable(r.bond())
-                || r.phase() != FamiliarRecord.Phase.ACTIVE || r.state().contains("receipt")).orElse(false);
+                || r.phase() != FamiliarRecord.Phase.ACTIVE || r.has("receipt")).orElse(false);
     }
     /** A failed critical snapshot keeps the live object inert until explicit administrative recovery. */
     public static void hold(Mob mob) { mob.getNavigation().stop(); mob.setTarget(null); HELD.add(mob); }

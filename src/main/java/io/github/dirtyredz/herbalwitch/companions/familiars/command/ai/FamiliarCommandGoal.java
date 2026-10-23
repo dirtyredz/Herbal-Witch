@@ -39,9 +39,8 @@ public final class FamiliarCommandGoal extends Goal {
     @Override public void start() { command = null; motion.reset(); }
     @Override public void tick() {
         var record = FamiliarReconciliation.record(mob).orElse(null); if (record == null) { stop(); return; }
-        var state = record.state();
-        if (command != record.command() || anchorKey != state.getLong("anchor")) {
-            motion.reset(); guard.clear(); scout.clear(); command = record.command(); anchorKey = state.getLong("anchor"); waypoint = 0; following = false; idleDestination = null;
+        if (command != record.command() || anchorKey != record.longValue("anchor")) {
+            motion.reset(); guard.clear(); scout.clear(); command = record.command(); anchorKey = record.longValue("anchor"); waypoint = 0; following = false; idleDestination = null;
         }
         // Control, hazards and retreat always precede command decisions. Never sets NoAI.
         if (ControlEffects.held(mob)) { motion.stop(); guard.clear(); mob.setTarget(null); return; }
@@ -72,13 +71,13 @@ public final class FamiliarCommandGoal extends Goal {
         if (command != FamiliarCommand.GUARD_WITCH && command != FamiliarCommand.PROTECT_HOME) guard.clear();
         switch (command) {
             case FOLLOW -> follow(owner, speed);
-            case STAY -> { if (!sameAnchor(state.getString("anchorDimension"))) break; hold(anchor, speed); }
-            case PASSIVE -> { mob.setTarget(null); if (sameAnchor(state.getString("anchorDimension"))) wander(anchor, 4, speed, owner); }
+            case STAY -> { if (!sameAnchor(record.stringValue("anchorDimension"))) break; hold(anchor, speed); }
+            case PASSIVE -> { mob.setTarget(null); if (sameAnchor(record.stringValue("anchorDimension"))) wander(anchor, 4, speed, owner); }
             case SCOUT -> {
                 mob.setTarget(null);
                 if (owner.level() != mob.level()) { motion.stop(); motion.status("other_dimension"); break; }
                 scout.tick();
-                if (sameAnchor(state.getString("anchorDimension"))) wander(anchor, Math.min(24, FamiliarServerConfig.current().senseRadius()), speed, owner);
+                if (sameAnchor(record.stringValue("anchorDimension"))) wander(anchor, Math.min(24, FamiliarServerConfig.current().senseRadius()), speed, owner);
             }
             case GUARD_WITCH -> {
                 if (owner.level() != mob.level()) { motion.stop(); guard.clear(); motion.status("other_dimension"); break; }

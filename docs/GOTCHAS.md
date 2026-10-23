@@ -468,3 +468,7 @@ Full M10 profile runs exposed M9 fixture assumptions: the retreat owner was outs
   entities; it takes a cheap type predicate (`HOSTILE`, items, mobs) that the engine applies before
   counting. Counting everything let a herd or dropped items hide a hostile from guards, scouts and
   senses (M12, `aScoutSeesAHostileBeyondAHerd`).
+- **`FamiliarRecord.state()` deep-copies the whole state.** Every loaded familiar runs about a dozen
+  tick handlers; a copy per lookup was the largest Herbal Witch cost in the M12 flight recording. Hot paths
+  use `has`, `compound`, `intValue`, `longValue`, `stringValue` and `sameIntent`; keep `state()` for code
+  that needs the whole tag.

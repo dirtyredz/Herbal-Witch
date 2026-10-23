@@ -11,8 +11,8 @@ public record FamiliarHomeTarget(Vec3 position, String reason) {
     }
     public static FamiliarHomeTarget inspect(Mob mob, FamiliarRecord record) { return read(mob, record, false); }
     private static FamiliarHomeTarget read(Mob mob, FamiliarRecord record, boolean invalidate) {
-        var state = record.state(); if (!state.contains("home")) return new FamiliarHomeTarget(null, "no_home");
-        var home = state.getCompound("home");
+        if (!record.has("home")) return new FamiliarHomeTarget(null, "no_home");
+        var home = record.compound("home");
         if (!home.getString("dimension").equals(mob.level().dimension().location().toString())) return new FamiliarHomeTarget(null, "other_dimension");
         var position = BlockPos.of(home.getLong("position"));
         if (!mob.level().hasChunkAt(position)) return new FamiliarHomeTarget(null, "home_unloaded");

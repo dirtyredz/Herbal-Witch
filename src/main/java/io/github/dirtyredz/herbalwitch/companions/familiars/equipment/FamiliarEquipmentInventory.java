@@ -10,8 +10,8 @@ public final class FamiliarEquipmentInventory {
     private static String key(int slot) {
         return switch (slot) { case FamiliarEquipmentRules.CHARM -> "charm"; case FamiliarEquipmentRules.SPECIES -> "gear"; default -> throw new IllegalArgumentException("Not an equipment slot"); };
     }
-    public static ItemStack item(FamiliarRecord record, int slot) { return ItemStack.of(record.state().getCompound("equipment").getCompound(key(slot))); }
-    public static ItemStack cargo(FamiliarRecord record) { return ItemStack.of(record.state().getCompound("cargo")); }
+    public static ItemStack item(FamiliarRecord record, int slot) { return ItemStack.of(record.compound("equipment").getCompound(key(slot))); }
+    public static ItemStack cargo(FamiliarRecord record) { return ItemStack.of(record.compound("cargo")); }
     public static FamiliarRecord equipment(FamiliarRecord record, ItemStack charm, ItemStack gear) {
         if (!FamiliarEquipmentRules.accepts(record.species(), 0, charm) || !FamiliarEquipmentRules.accepts(record.species(), 1, gear))
             throw new IllegalArgumentException("Incompatible familiar equipment");

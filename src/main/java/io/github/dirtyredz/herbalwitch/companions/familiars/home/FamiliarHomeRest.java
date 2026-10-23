@@ -11,16 +11,18 @@ public final class FamiliarHomeRest {
     private FamiliarHomeRest() {}
     public static void tick(LivingEvent.LivingTickEvent event) {
         if (!(event.getEntity() instanceof Mob mob) || mob.level().isClientSide) return;
-        var r = FamiliarReconciliation.record(mob).orElse(null); if (r == null || !r.state().contains("home")) return;
+        var r = FamiliarReconciliation.record(mob).orElse(null); if (r == null || !r.has("home")) return;
         var target = FamiliarHomeTarget.resolve(mob, r); if (target.position() == null) return;
         boolean safe = mob.position().distanceToSqr(target.position()) <= 4 && mob.getTarget() == null && !mob.isOnFire()
                 && !mob.isInLava() && !mob.isInWater() && !mob.isFreezing() && !ControlEffects.held(mob)
                 && (mob.getLastHurtByMob() == null || mob.tickCount - mob.getLastHurtByMobTimestamp() >= 100);
-        int ticks = safe ? r.state().getInt("homeRest") + 1 : 0;
+        int ticks = safe ? r.intValue("homeRest") + 1 : 0;
         if (ticks >= 100) { mob.heal(1); ticks = 0; }
         final int next = ticks;
-        int progress = safe ? r.state().getInt("homeProgress") + 1 : 0;
+        int progress = safe ? r.intValue("homeProgress") + 1 : 0;
         final int rest = progress >= 600 ? 0 : progress;
+        // Nothing to record while away from home (the counters are already zero).
+        if (next == r.intValue("homeRest") && rest == r.intValue("homeProgress") && progress < 600) return;
         var updated = r.change(s -> { s.putInt("homeRest", next); s.putInt("homeProgress", rest); });
         if (progress >= 600) updated = io.github.dirtyredz.herbalwitch.companions.familiars.bond.FamiliarBondProgress.award(updated, 1, false);
         FamiliarStore.get(mob.getServer()).update(updated, false);

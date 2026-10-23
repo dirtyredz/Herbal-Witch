@@ -17,8 +17,7 @@ public final class FamiliarBuffEvents {
         var record = FamiliarReconciliation.record(mob).orElse(null); if (record == null) return;
         FamiliarBuffEffects.project(mob, record);
         record = FamiliarReconciliation.record(mob).orElse(null); if (record == null) return;
-        var state = record.state();
-        if (state.getCompound("buffs").isEmpty() && !state.contains("poisonCoating")) return;
+        if (!record.has("buffs") || record.compound("buffs").isEmpty()) { if (!record.has("poisonCoating")) return; }
         var next = record.change(s -> {
             s.put("buffs", FamiliarBuffRules.advance(s.getCompound("buffs")));
             if (s.contains("poisonCoating")) {

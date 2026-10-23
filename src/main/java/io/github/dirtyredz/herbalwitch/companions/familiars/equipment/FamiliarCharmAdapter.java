@@ -21,7 +21,7 @@ public final class FamiliarCharmAdapter {
         if (!(event.getEntity() instanceof Mob mob) || mob.level().isClientSide) return;
         var record = FamiliarReconciliation.record(mob).orElse(null); if (record == null) return;
         var charm = FamiliarEquipmentInventory.item(record, FamiliarEquipmentRules.CHARM); if (charm.isEmpty()) return;
-        var result = CharmCharge.wear(charm, record.state().getInt("charmTicks"), 1);
+        var result = CharmCharge.wear(charm, record.intValue("charmTicks"), 1);
         var next = FamiliarEquipmentInventory.equipment(record, charm, FamiliarEquipmentInventory.item(record, FamiliarEquipmentRules.SPECIES))
                 .change(state -> state.putInt("charmTicks", result.partialTicks()));
         if (FamiliarStore.get(mob.getServer()).update(next, false) && result.broke())
