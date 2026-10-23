@@ -121,4 +121,4 @@ that proves the untouched before-state, and otherwise stays quarantined.
 /herbalwitch shop transaction discard <shop> <transaction>     # loses the reservation; grants nothing
 ```
 
-Restart qualification: [tools/commerce/restart/README.md](../../tools/commerce/restart/README.md).
+Restart qualification: [tools/qualification/restart/commerce/README.md](../../tools/qualification/restart/commerce/README.md).

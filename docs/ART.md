@@ -388,3 +388,27 @@ an empty interior for the merchandise) and `shop/order_board` (framed request bo
 `tools/preview/scenes/shop/commerce.mjs` (every facing, on actual counters or proxy walls). Display
 merchandise is a block-entity projection drawn in game only. The commerce screen atlas is
 `tools/art/interface/shop.mjs` (252 x 200 panel). Owner refinement and in-game review are pending.
+
+## Release art sweep (M12, 1.0.0-rc.1 candidate)
+
+Previews of every piece and item: `node tools/preview-models.mjs --output <job>/previews/rc1` rendered
+106 images, 3,905 states, 265 items and 872/872 models with no missing texture, unbound variable or
+z-fighting pair (`C:/Users/dirty/projects/artifacts/minecraft-mods/jobs/2026-10-23-herbal-witch-m12/previews/rc1/`,
+full-resolution review tiles under `tiles/`). Reviewed: every family sheet, herbs on beds (all fourteen
+herbs, all four ages, cube-built), the item GUI sheet, the GUI atlases (one parchment and dark-wood
+house kit), the station, furniture, garden, grimoire, shop and familiar scenes, native familiar poses and
+the broom rider views.
+
+Holding up: one dark wood with plum, forest green, gold and ivy across furniture, stations, altar,
+homes and shop pieces; hung bundles stay flat inset sprites; growth stages keep the mature plant's detail.
+
+For the owner (docs/qualification/release-readiness.md, R-ART):
+- **Umbrella stand** (`decor/fixtures/umbrella_stand`) is a barrel of orange, lighter wood: the one
+  piece off the set's single dark wood.
+- The Witch's Cauldron rim and the Copper Still read orange; copper is their material, but the cauldron
+  rim may want the dark-iron and gold of the hearth instead.
+- The M10/M11 first drafts (broom stand, wand bench, register, stock shelf and jar, order board) carry
+  less ivy and gold than the showcase pieces.
+- The raven, owl and snake rigs are simple block forms beside the vanilla-derived familiars.
+- Headless previews have no ambient occlusion, light, shaders or animation; owner cases M5-1, M9-1 and
+  M12-4 decide.

@@ -4,37 +4,56 @@ Forge 1.20.1 mod: woodland herbal witchcraft (herbs, stations, brewing, familiar
 an apothecary trade) together with a cottage furniture catalogue. Install on **both** the server and
 every client.
 
-**Status: private `0.10.0`, Milestone 11 headless acceptance passed. Protocol 14. Owner visual and two-client review remains pending; no publication or pack installation.**
-Contains Milestone 1 (cottage decor in a single design), Milestone 2 (herbs and garden), Milestone 3
-(everyday preparation stations and products), Milestone 4 (the grimoire: discovery, recipe lookup,
-missing ingredients, research blocks and teaching), Milestone 5 (94 furniture pieces), Milestone 6
-(the ritual altar, becoming a witch, and the energy witchcraft spends) and Milestone 7 (four advanced
-stations, 16 advanced preparations, charms, the ritual circle with two rituals, and ward stones).
-Automated acceptance for M1 to M5 passed headless (unit tests and GameTests on the ANU CI runner); M6
-and M7 acceptance is tracked in docs/FEATURES.md. Owner review of the art (the 89 M5 pieces, the
-altar and the six M7 pieces are agent first drafts), the station UIs, the grimoire, the furniture and
-the witch behaviour in game, with two clients, is pending.
-M10 adds craftable tools: a broom stand crafts and repairs physical flying brooms, and a wand bench carves a wand with seven utility selectors. Broom controls are movement keys, Jump, Left Control (descend), R (land) and Sneak (dismount); the V wand selector and broom actions are remappable. Both tool stations require an attending witch to press Start. See [the tool catalogue](docs/catalogue/tools.md) for utility boundaries and [restart qualification](tools/test/README.md) for the dedicated-server check.
+**Status: STATUS_LINE**
 
-M11 adds apothecary commerce. Set a **shop register** on an apothecary counter and, as an initiated
-witch, name the shop from it (it starts closed). In the register's Stock tab move goods between your
-inventory and the shop's 27 stock slots, add up to twelve offers (one lot for 1-64 emeralds) in Offers,
-and open the shop in Shop. Customers buy one lot at a time at the register, a linked counter, or a linked
-**stock shelf**/**stock jar**; requests go on an **order board**. Owners may let nearby villagers buy four
-everyday preparations (one item for one emerald, capped per window). Interrupted transfers are held for
-proof, never replayed; operators use `/herbalwitch shop inspect|transaction inspect|reconcile|discard`.
-See [commerce](docs/catalogue/commerce.md) and [restart qualification](tools/commerce/restart/README.md).
+## The loop
 
-Later systems are listed in docs/FEATURES.md. Not published; not in any pack.
+Forage or grow fourteen herbs (seeds from grass, wild patches by habitat, herb beds with moisture and
+soil tonic), dry them on the drying rack, grind them in the mortar, steep teas in the kettle over a
+hearth, stove or campfire, and prepare salves and oils in the infusion pot. Read the grimoire for every
+recipe, its station and what you are missing. Anyone can do all of that and buy a witch's goods.
 
-Ordinary animal care is implemented in this candidate: grind species-specific herbal bait, feed at
-loaded-time intervals to earn personal trust, and use a grimoire on the animal to inspect/adopt it.
-Existing healing salve targets injured animals; powder briefly settles supported AI and the existing
-sleep vial handles goats/axolotls. A witch can make capture charms; anyone authorized can use them.
-Transport preserves the animal in a server ledger and releases one claim at an aimed safe block face.
-Operator inspection, token reissue and interrupted-payload recovery are under `/herbalwitch capture`.
-The exact species, defaults, recipes and recovery procedure are in [Ordinary animals](docs/catalogue/animals.md).
-The nine new sprites are first drafts; owner art and two-client review remain pending.
+Becoming a witch: the first player founds the world's lineage at the ritual altar; afterwards a witch
+initiates a consenting player (operators can designate). Witches have an energy bar that grows with
+practice and recovers by resting, meditating, sleeping and herbal tea (more in nature and under a full
+moon). Energy powers the advanced stations (cauldron, copper still, bottling bench, charm workbench),
+the ritual circle (Garden Blessing, Home Protection), ward stones, charms, familiar powers, the wand and,
+if configured, broom flight.
+
+Animals: herbal baits, calming powder, earned taming, healing salve and capture charms for safe
+transport. Familiars: bind up to any number of trusted cats, ravens (and crows), owls, foxes, wolves,
+snakes, rabbits and bats at the altar; give them homes (bed, nest, perch), seven commands (Follow,
+Stay, Guard Witch, Protect Home, Scout, Passive, Return Home), equipment and eleven preparations; a
+fallen familiar is revived at the altar. Tools: a broom stand crafts and repairs flying brooms; a wand
+bench carves a wand with seven selectors. Commerce: a register on an apothecary counter, stock shelves
+and jars, an order board, and villager customers.
+
+**Controls:** broom: movement keys, Jump (up), Left Control (down), R (land), Sneak (dismount); wand: V
+selects the mode. All are remappable. Commands (operators): `/herbalwitch showcase [group|section]`,
+`/herbalwitch witch designate|inspect|founding ...`, `/herbalwitch capture ...`, `/herbalwitch shop ...`.
+
+Reference: [features](docs/FEATURES.md), catalogues for [herbs](docs/catalogue/herbs.md),
+[stations](docs/catalogue/stations.md), [products](docs/catalogue/products.md),
+[witchcraft](docs/catalogue/witchcraft.md), [animals](docs/catalogue/animals.md),
+[familiars](docs/catalogue/familiars.md), [tools](docs/catalogue/tools.md),
+[commerce](docs/catalogue/commerce.md), [decor](docs/catalogue/decor.md);
+[compatibility](docs/COMPATIBILITY.md).
+
+## Installing and upgrading
+
+Drop the jar into `mods/` on the server and every client (Minecraft 1.20.1, Forge 47.x, Java 17). Worlds
+saved by any earlier private build open as they are: the release qualification opened the owner's real
+0.2.0-dev.9 and 0.6.1 worlds and checked every block, block entity and player capability
+([save compatibility](docs/qualification/save-compatibility.md)). There is no downgrade. Keep the
+world's `data/` folder (capture ledger, familiar and shop shards) with its region and player files in
+backups; restoring some files without the others is outside the guarantee.
+
+## Qualification
+
+[Release qualification](docs/qualification/README.md): design audit, save upgrades, restart and crash
+boundaries, production dedicated server with optional mods and KubeJS, performance, localisation, art,
+the [owner acceptance checklist](docs/qualification/owner-acceptance.md) and what is
+[not release-ready](docs/qualification/release-readiness.md).
 
 ## Supported versions
 
@@ -330,7 +349,7 @@ node tools/generate-test-structures.mjs
 Gradle runs the three art producers before resources and datagen (`generateArt`) and their checks in
 `check` (`checkArt`); this needs Node 22+ on PATH (or `-PnodeExecutable=<path>`).
 
-`-PcompatProfile` is one of `base`, `emi`, `jei`, `viewers`, `farmersdelight`, `thirst`, `all`. The jar is
+`-PcompatProfile` is one of `base`, `emi`, `jei`, `viewers`, `farmersdelight`, `thirst`, `curios`, `doggy`, `all`. The jar is
 `build/libs/herbalwitch-1.20.1-<version>.jar` (reobfuscated). CLAUDE.md has the full headless list.
 
 ### Model tools
@@ -356,7 +375,7 @@ and press F3+T in that instance.
 Mod testing happens on a dedicated mod-test instance holding a copy of the Evil Eye pack plus the build
 under test (owner ruling 2026-10-22; the workspace session owns it, see the workspace CLAUDE.md). Never
 install into an `Evil Eye Trial *` instance. Copy the jar into the mod-test instance's `mods/` folder
-with the game closed, then follow the review checklist in [docs/ART.md](docs/ART.md) and the Grimoire
+with the game closed, then follow [the owner acceptance checklist](docs/qualification/owner-acceptance.md), the art review in [docs/ART.md](docs/ART.md) and the Grimoire
 checks in docs/FEATURES.md.
 
 ## License

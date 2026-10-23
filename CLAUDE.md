@@ -104,12 +104,12 @@ Before your first item write in a session, run `docket guide` and follow it.
 <!-- docket:agent-snippet end -->
 
 - **M9 restart qualification:** the ANU-only named heavier task is familiarRestartTest. It starts two
-  sequential dedicated-server JVMs; tools/familiars/restart/README.md explains checkpoint evidence.
+  sequential dedicated-server JVMs; tools/qualification/restart/familiars/README.md explains checkpoint evidence.
   It is excluded from build/check and must not be run locally. Version promotion requires its green result.
 
 - Native familiar attachment changes also require test (exports the vanilla geometry) followed by node tools/preview-native-familiars.mjs --output <job>/previews/native-poses and sheet inspection.
 
-- M10 restart qualification: ANU-only `magicToolsRestartTest` starts two sequential dedicated JVMs against one disposable world. See `tools/test/README.md`; never run it locally.
+- M10 restart qualification: ANU-only `magicToolsRestartTest` starts two sequential dedicated JVMs against one disposable world. See `tools/qualification/restart/magic-tools/README.md`; never run it locally.
 
 - For reproducible milestone/profile qualification, add `-PgameTestRunId=<unique-lowercase-id>` to the ANU task string. It selects a new `run/gametest-<id>/` world without deleting the default retained test world. The restart task always supplies its own isolated shared world.
 
@@ -120,7 +120,7 @@ Before your first item write in a session, run `docket guide` and follow it.
   player inventory for commerce anywhere else, and never treat a vanilla save as a checkpoint. Shop
   fixtures hold claims, not authority. GameTests use `ShopFixtures` (fresh identities; the ANU world keeps
   old shops). Restart qualification: ANU-only `commerceRestartTest` (two dedicated JVMs; see
-  `tools/commerce/restart/README.md`); never run it locally. Version promotion requires its green result.
+  `tools/qualification/restart/commerce/README.md`); never run it locally. Version promotion requires its green result.
 
 - **Release qualification (M12; docs/qualification/README.md):** every harness is ANU-only and outside
   `build`/`check`, registered in `gradle/qualification.gradle`: `captureRestartTest`,

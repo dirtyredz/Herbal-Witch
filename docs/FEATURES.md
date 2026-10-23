@@ -230,7 +230,7 @@ owner visual, shader, reload and two-client checks remain pending independently.
 
 Base and optional-profile results passed (evidence below). The restart runner is isolated from
 normal build/check and uses checkpoint replay rather than random process termination. See
-[restart procedure](../tools/familiars/restart/README.md) and [familiar reference](catalogue/familiars.md).
+[restart procedure](../tools/qualification/restart/familiars/README.md) and [familiar reference](catalogue/familiars.md).
 Phase commits, failed runs and corrections are recorded in Docket `dk-5b3234c4`.
 M9 acceptance runs (ANU logs live under G:/mods-ci/logs/<job>.log):
 
@@ -263,7 +263,7 @@ Both checked-placement crafting stations and screens, owner-bound broom flight/l
 
 Local offline runData twice matched all 1,117 generated files. The local test/build/compileGameTestJava gate passed: 479 Java tests and 87 Node tests. All 17 tool/station poses and three native-player riding views were inspected in the M10 job previews directory. Jar inspection found no test classes, fixtures, structures, tooling or foreign dependencies; diff, workspace-sync and Docket guards passed. ANU profiles use existing cached inputs with offline dependency resolution.
 
-The restart harness saves actual deployed/packed tools and an interrupted repair in one JVM, then recovers them in another without reconstructing world objects. It proves one world broom, no restored lease, packed metadata, seven mode preferences, paused repair, cancellation conservation, no offline spending and stale-nonce refusal. It does not promise power-loss atomicity across Minecraft player/chunk files. See [tool reference](catalogue/tools.md) and [restart procedure](../tools/test/README.md).
+The restart harness saves actual deployed/packed tools and an interrupted repair in one JVM, then recovers them in another without reconstructing world objects. It proves one world broom, no restored lease, packed metadata, seven mode preferences, paused repair, cancellation conservation, no offline spending and stale-nonce refusal. It does not promise power-loss atomicity across Minecraft player/chunk files. See [tool reference](catalogue/tools.md) and [restart procedure](../tools/qualification/restart/magic-tools/README.md).
 
 Acceptance found and corrected vanilla mounted-vehicle save ownership, crop-fixture lighting, and existing familiar fixture assumptions about bounds, random position, bounded-query contamination and binding readiness. Familiar gameplay remained unchanged. Phase commits and failed/canceled runs remain in Docket dk-2d540cf6; successful reruns do not erase that history. M11 commerce remains independent and unimplemented here.
 
