@@ -135,3 +135,20 @@ tasks.register('qualifyPerformance', Exec) {
     dependsOn 'runPerformanceRestart'
     commandLine nodeCommand(), 'tools/qualification/performance/report.mjs', performanceEvidence.absolutePath
 }
+
+// Production dedicated server (Milestone 12): the installed Forge server with the reobfuscated release
+// jar, alone and beside the supported optional mods and KubeJS. Inputs are provisioned on ANU under
+// build/qualification-inputs/ (forge-server/ from the 47.4.10 installer, mods/ release jars).
+def qualificationInputs = file(project.findProperty('qualificationInputs') ?: 'build/qualification-inputs')
+tasks.register('qualifyDedicatedServer', Exec) {
+    group = 'verification'
+    description = 'ANU only: boots the installed Forge server with the release jar (alone, optional mods, Doggy Talents, KubeJS).'
+    dependsOn 'reobfJar'
+    def out = file("run/production-server/${UUID.randomUUID()}")
+    commandLine nodeCommand(), 'tools/qualification/server/qualify-server.mjs',
+            '--server', new File(qualificationInputs, 'forge-server').absolutePath,
+            '--inputs', new File(qualificationInputs, 'mods').absolutePath,
+            '--jar', tasks.named('jar').get().archiveFile.get().asFile.absolutePath,
+            '--out', out.absolutePath,
+            '--profiles', (project.findProperty('serverProfiles') ?: 'base,optional,doggy,kubejs').toString()
+}

@@ -359,6 +359,8 @@ herbalwitch/
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/qualification/upgrade/` — save-upgrade phases: open a historical world's chunks and players, touch, re-save, first job tick
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/qualification/integration/` — cross-milestone loops through production entry points (forage to shop to non-witch use; witch-only brewing charged once)
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/qualification/performance/` — the frozen performance workloads, tick sampling from vanilla's tick ring, population census and the restart indexing probe (run by `qualifyPerformance` only)
+- `tools/qualification/server/` — production dedicated-server qualification: the installed Forge server with the release jar, console-driven profiles (base, optional, doggy, kubejs) and the KubeJS example script
+- `tools/qualification/server/kubejs/server_scripts/` — the KubeJS recipe add/remove example the kubejs profile installs
 - `tools/qualification/performance/` — the performance gate judge (`report.mjs`, gates frozen before measurement)
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/qualification/localization/` — every registered block, item, entity, effect and tab has an English name
 - `tools/qualification/` — grouping parent: release qualification tooling (Node and PowerShell)
