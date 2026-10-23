@@ -13,7 +13,7 @@ public final class WandFixtures {
  private WandFixtures(){}
  public static ItemStack wand(WandMode mode){var stack=new ItemStack(WandItems.WAND.get());WandItemData.write(stack,mode);return stack;}
  public static void cast(GameTestHelper h,ServerPlayer actor,WandMode mode,InteractionHand hand,BlockPos target){
-  var stack=wand(mode);actor.setItemInHand(hand,stack);var at=h.absolutePos(target);actor.lookAt(net.minecraft.commands.arguments.EntityAnchorArgument.Anchor.EYES,Vec3.atCenterOf(at));
+  var stack=wand(mode);actor.setItemInHand(hand,stack);var at=h.absolutePos(target);var shape=h.getLevel().getBlockState(at).getShape(h.getLevel(),at);var aim=Vec3.atCenterOf(at).add(0,shape.isEmpty()?0:shape.bounds().maxY-.51,0);actor.lookAt(net.minecraft.commands.arguments.EntityAnchorArgument.Anchor.EYES,aim);
   actor.gameMode.useItemOn(actor,h.getLevel(),stack,hand,new BlockHitResult(Vec3.atCenterOf(at),Direction.UP,at,false));
  }
 }

@@ -56,7 +56,8 @@ class ShowcasePlanTest {
         all.add(new io.github.dirtyredz.herbalwitch.companions.animals.showcase.AnimalShowcaseSection());
         all.add(new io.github.dirtyredz.herbalwitch.companions.familiars.showcase.FamiliarHomeShowcaseSection());
         all.add(new io.github.dirtyredz.herbalwitch.companions.familiars.showcase.FamiliarShowcaseSection());
-        for (StationSpec station : List.of(StationCatalog.BROOM_STAND, StationCatalog.WAND_BENCH)) all.add(new StationShowcaseSection(station, false, "recipe", Map::of));
+        all.add(new io.github.dirtyredz.herbalwitch.magic.broom.showcase.BroomShowcaseSection());
+        all.add(new io.github.dirtyredz.herbalwitch.magic.wand.showcase.WandShowcaseSection());
         return all;
     }
 

@@ -132,7 +132,13 @@ public final class ShowcaseContentGameTests {
         }
         check(scan.blocks.getOrDefault(BotanyBlocks.herbBed(), 0) >= 56, "herb beds " + scan.blocks.get(BotanyBlocks.herbBed()));
         // one per herb, powders, products, grimoire and altar supplies; Milestone 7: three preparation barrels, circle supplies, charms
-        check(scan.barrels == HerbCatalog.ALL.size() + 4 + 5 + 1 + 3, "sample barrels " + scan.barrels);
+        check(scan.barrels == HerbCatalog.ALL.size() + 4 + 5 + 1 + 3 + 2, "sample barrels " + scan.barrels);
+        for (String tool : java.util.List.of("broom_stand", "wand_bench")) {
+            var area = plan.areas().stream().filter(a -> a.id().equals(tool)).findFirst().orElseThrow();
+            var barrel = (Container) helper.getLevel().getBlockEntity(helper.absolutePos(ORIGIN.offset(area.x()+1,1,area.z()+ShowcasePlan.HEADING_ROWS+4)));
+            check(barrel != null, "tool supply barrel absent");
+            check(barrel.countItem(tool.equals("broom_stand") ? io.github.dirtyredz.herbalwitch.magic.broom.registry.BroomItems.BROOM.get() : io.github.dirtyredz.herbalwitch.magic.wand.registry.WandItems.WAND.get()) == (tool.equals("broom_stand") ? 2 : 1), "tool supplies incomplete");
+        }
         var animalArea = plan.areas().stream().filter(a -> a.id().equals("animals")).findFirst().orElseThrow();
         var supplies = (Container) helper.getLevel().getBlockEntity(helper.absolutePos(ORIGIN.offset(animalArea.x() + 24, 1, animalArea.z() + ShowcasePlan.HEADING_ROWS)));
         check(supplies != null && supplies.countItem(io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.AdvancedPreparations.item(

@@ -473,3 +473,5 @@ Optional native-payload compatibility lives in platform/compat/curios/CuriosNati
 - `client/wand/`: remappable selector and mode HUD; no casting authority.
 - `apothecary/botany/harvest/`: shared reversible hand/wand herb harvest plan and commit.
 - `src/gameTest/.../magic/wand/fixture/`: actual held-item utility fixtures; sibling GameTests cover gardening, collection, lighting and selection.
+
+- `magic/{broom,wand}/{grimoire,showcase}/`: tool-owned live-rule guides and narrow station/practice plots, registered at bootstrap after the established witchcraft sections.

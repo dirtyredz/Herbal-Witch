@@ -52,5 +52,24 @@ public final class ToolTranslations {
   lang.add("wand.herbalwitch.result.cooldown","The wand is recovering.");
   lang.add("wand.herbalwitch.result.energy","Not enough energy for this utility.");
   lang.add("wand.herbalwitch.result.changed","The target or supplies changed; nothing was spent.");
+  lang.add("guide.herbalwitch.broom.title","Broom flight and care");
+  lang.add("guide.herbalwitch.broom.obtain","Craft a broom stand, then use its recipe pages to bind a broom or repair a worn one. A witch must press Start and attend the work. Repair preserves the broom?s name and accumulated flight fractions.");
+  lang.add("guide.herbalwitch.broom.controls","Place your broom in clear space, then use it to mount. Move with your movement keys, rise with Jump, descend with the remappable Broom Descend key, and request landing with Broom Land. Sneak dismounts. Only the owner may ride or sneak-use a grounded broom to pack it; packing needs an empty inventory slot.");
+  lang.add("guide.herbalwitch.broom.rules","Current rules: horizontal speed %s blocks/s, vertical speed %s blocks/s, upkeep %s energy/s, one wear per %s flying ticks, %s total condition. Hovering wears the broom. Passive upkeep grants no practice.");
+  lang.add("guide.herbalwitch.broom.lifecycle","Exhaustion, disallowed flight or worn-out condition forces a free descent. Unloaded terrain stops movement. Logout and dimension travel leave the broom behind; restart never resumes controls. A real airborne dismount grants up to %s seconds of protection against one ordinary fall, not fire or the void.");
+  lang.add("guide.herbalwitch.broom.enabled","Flight enabled: %s. Allowed dimensions: %s.");
+  lang.add("guide.herbalwitch.wand.title","Wand utilities");
+  lang.add("guide.herbalwitch.wand.obtain","Carve a wand at the wand bench. Hold it and open the remappable Wand Choose Utility control (V by default); selecting does not cast. Use the selected utility with either hand. Casting while mounted on a broom is refused.");
+  lang.add("guide.herbalwitch.wand.rules","Current limits: reach %s blocks (also limited by your interaction reach), %s ticks between successful local actions, at most %s dropped items inspected and %s stacks accepted within radius %s. Both hands and all wand copies share the cooldown.");
+  lang.add("guide.herbalwitch.wand.row","%s: %s");
+  lang.add("guide.herbalwitch.wand.cost","Current successful-action price: %s energy. Refused or unchanged targets cost nothing.");
+  lang.add("guide.herbalwitch.wand.delegation","Focus opens existing ritual or ward controls; offerings, consent, ownership, duration and costs still apply. Familiar mode opens your existing roster or a nearby owned familiar?s card. Ordinary commands are free; Recall retains its existing energy cost, cooldown and safe-location rules. No mode grants access to foreign inventories or unloaded terrain.");
+  lang.add("showcase.herbalwitch.broom.supplies","Brooms and repairs");
+  lang.add("showcase.herbalwitch.broom.pad","Flight practice pad");
+  lang.add("showcase.herbalwitch.wand.supplies","Wand and seeds");
+  lang.add("showcase.herbalwitch.wand.harvest","Harvest / replant");
+  lang.add("showcase.herbalwitch.wand.herbs","Mature herb");
+  lang.add("showcase.herbalwitch.wand.water","Water / plant bed");
+  lang.add("showcase.herbalwitch.wand.light","Light this candle");
  }
 }

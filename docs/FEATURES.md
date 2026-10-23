@@ -248,3 +248,9 @@ M9 acceptance runs (ANU logs live under G:/mods-ci/logs/<job>.log):
 Local offline runData/test/build/compileGameTestJava passed; 460 Java tests and 86 Node tests, datagen wrote zero of 1,100 existing generated files. Workspace sync passed four mods; release-jar exclusions and Docket checks passed. The last fixture correction removes neighboring dropped items before showcase setup: the diagnostic had reported 'operator fixture preflight: Oak Sign is in the way at 500 -59 5'. Runtime showcase occupancy checks were correct and remain unchanged. Earlier failures and fixes remain in the Docket phase history.
 
 Owner checks still pending: species silhouettes and animation, equipped/rest poses, UI and private synchronization with two clients, shaders and F3+T. No client, Blockbench, pack installation or public release was performed. There is no available protection-mod adapter; unsupported-claim refusal and UUID-aware permission seams are tested instead.
+
+## M10: broom and wand (qualification in progress)
+
+Both checked-placement tool stations, physical broom lifecycle and client controls, seven wand selectors, shared harvesting/fuel transactions, owned Blockbench drafts and live-rule grimoire pages are implemented. The witchcraft showcase keeps its existing station plots and adds practice supplies with adjacent signs. Version remains 0.8.0 while restart and complete server acceptance are pending.
+
+Phase evidence: ac7104d passed 475 unit tests and 300 ANU GameTests. 85f4473 passed 478 local unit tests and 87 Node tests; its ANU run exposed short-block targeting fixtures and shared-batch drop contamination, under correction. Headless model previews cover both station states and every authored held-tool transform. Owner checks remain in-game pose, shaders, remapped controls and two-client presentation; no client was launched.

@@ -97,14 +97,6 @@ public final class StationRegistration {
         registerAdvancedShowcases();
     }
 
-    /** Tool stations follow the established witchcraft sections to preserve compact row packing. */
-    public static void registerToolShowcases() {
-        ShowcaseRegistry.register(new StationShowcaseSection(StationCatalog.BROOM_STAND, false, recipeKey("tools/broom_stand"),
-                () -> Map.of(0,new ItemStack(Items.STICK,2),1,new ItemStack(Items.WHEAT,3),2,new ItemStack(Items.STRING,2))));
-        ShowcaseRegistry.register(new StationShowcaseSection(StationCatalog.WAND_BENCH, false, recipeKey("tools/wand_bench"),
-                () -> Map.of(0,new ItemStack(Items.STICK,2),1,new ItemStack(Items.AMETHYST_SHARD),2,new ItemStack(Items.GOLD_NUGGET))));
-    }
-
     /** The production stations (Milestone 7), stocked but never started: a witch must start each batch herself. */
     private static void registerAdvancedShowcases() {
         ShowcaseRegistry.register(new StationShowcaseSection(StationCatalog.CAULDRON, true, recipeKey("cauldron"),

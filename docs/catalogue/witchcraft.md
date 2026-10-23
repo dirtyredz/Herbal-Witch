@@ -266,3 +266,13 @@ AltarAction, AltarShowcase; 0.6.0: CircleGameTests, WardGameTests, CharmGameTest
 `apothecary/brewing/AdvancedPreparationGameTests`. Ward-charging tests run in `herbalwitch_ward_*` batches
 (docs/GOTCHAS.md). Not covered: a true out-of-process server restart; the vanilla sleep path (tested
 through `EnergyEvents.sleptThrough`).
+
+## M10 tools (acceptance in progress)
+
+The flying broom is a physical, owner-bound vehicle. Place, mount, fly with movement keys and Jump; descend with Left Control and request landing with R (both remappable). Sneak dismounts; owner sneak-use packs a grounded broom into an empty inventory slot. Default horizontal/vertical speed is 8/4 blocks per second, acceleration 8, turn rate 120 degrees per second, landing speed 2. Upkeep defaults to zero, configurable through 20 energy per second. Hovering accrues one wear per 200 ticks; 600 wear requires repair. Repair restores up to 200 condition while preserving names and accrued fractions. Passive upkeep never awards practice.
+
+The wand's V selector chooses Harvest, Plant, Water, Collect, Light, Ritual/Ward Focus, or Familiar Commands. The five local utilities default to one energy per successful action and a shared ten-tick actor cooldown. Reach defaults to five blocks, bounded by the appropriate player interaction reach. Collection examines at most sixteen item entities and accepts at most eight stacks within two blocks of the aim point; partial stacks retain their remainder. Plant uses native offhand seed placement. Harvest supports the herb catalogue and wheat, carrots, potatoes and beetroot; Water changes only moisture. Light supports vanilla candles/candle cakes/campfires and real fueled hearths/stoves, never arbitrary fire.
+
+Focus opens the existing M7 menus: no free ritual, bypassed consent or ward ownership. Familiar mode opens M9 roster/detail controls and retains command, mobile-cap, home, recall-cost and recall-cooldown rules. Utilities require witch status, reject casting while riding a broom, and charge nothing on refusal. Selector preference persists in item NBT; unknown schemas remain unusable and unchanged.
+
+The grimoire quotes synchronized tool limits and links live crafting/repair recipes. Witchcraft showcase plots include stocked but unstarted stations, fresh/worn brooms, a marked practice strip, wand/seeds, mature crops and herbs, a dry bed and an unlit candle. Signs stand beside their samples. Showcase construction grants no witch status, energy or ownership.

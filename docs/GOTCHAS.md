@@ -404,3 +404,5 @@ Player clone subscribers run at LOWEST priority: Curios revives the old player d
 The first familiar power fixture can also be the server's first batch. It waits for the retained
 CI world's bounded shard index; its 600-tick timeout includes that startup work. Increasing this
 fixture timeout does not change production indexing budgets or power cooldowns.
+
+M10 tool selection is a preference request, never a cast. Compare the observed hand, selected slot and full held stack before writing it. Both hands and wand copies share actor cooldowns. Collection must preserve partial remainders even in creative inventories. Broom maintenance uses `Change.awardsPractice() == false`; paid station and wand operations retain successful practice.
