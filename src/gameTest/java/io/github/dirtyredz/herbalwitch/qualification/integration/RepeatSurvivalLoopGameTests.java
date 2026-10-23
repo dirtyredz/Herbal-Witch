@@ -16,6 +16,10 @@ public final class RepeatSurvivalLoopGameTests {
         List<TestFunction> out = new ArrayList<>();
         for (int i = 0; i < 24; i++) out.add(new TestFunction("herbalwitch_debug_loop_" + i, "debugloop" + i, "herbalwitch:empty", 400, 0, true,
                 SurvivalLoopGameTests::forageToShopToNonWitchUse));
+        for (int i = 0; i < 24; i++) out.add(new TestFunction("herbalwitch_debug_card_" + i, "debugcard" + i, "herbalwitch:empty", 100, 0, true,
+                io.github.dirtyredz.herbalwitch.companions.animals.AnimalInspectionGameTests::privateCardAndSessionValidationPreventReplayAndCloseWhenBookIsLost));
+        for (int i = 0; i < 24; i++) out.add(new TestFunction("herbalwitch_debug_release_" + i, "debugrelease" + i, "herbalwitch:empty", 100, 0, true,
+                io.github.dirtyredz.herbalwitch.companions.animals.AnimalCaptureGameTests::realActorCaptureReleaseAndCopiedTokenHaveOneAnimalEvenWithFullInventory));
         return out;
     }
 }

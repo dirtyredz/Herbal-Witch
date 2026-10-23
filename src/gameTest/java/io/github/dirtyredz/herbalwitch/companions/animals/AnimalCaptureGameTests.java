@@ -69,7 +69,8 @@ public final class AnimalCaptureGameTests {
             AnimalFixtures.afterTransportInterval(h, () -> {
                 BlockPos clicked = h.absolutePos(new BlockPos(5, 0, 5));
                 String releaseDenial = CaptureService.release(player, InteractionHand.MAIN_HAND, clicked, Direction.UP);
-                check(releaseDenial == null, "release failed: " + releaseDenial);
+                check(releaseDenial == null, "release failed: " + releaseDenial + " player " + AnimalInspectionGameTests.diag(player, cow) + " clicked " + clicked
+                        + " canReachBlock " + player.canReach(clicked, 0) + " blocks " + h.getLevel().getBlockState(clicked) + "/" + h.getLevel().getBlockState(clicked.above()) + "/" + h.getLevel().getBlockState(clicked.above(2)));
                 check(player.getMainHandItem().is(AnimalItems.CHARM.get()), "held filled charm was retained");
                 Mob released = (Mob) h.getLevel().getEntity(animal);
                 check(released != null && released != cow && CaptureReconciliation.generation(released) == 1, "wrong released incarnation");

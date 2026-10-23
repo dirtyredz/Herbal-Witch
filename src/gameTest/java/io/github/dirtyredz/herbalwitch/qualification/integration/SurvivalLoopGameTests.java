@@ -1,5 +1,8 @@
 package io.github.dirtyredz.herbalwitch.qualification.integration;
 
+import java.util.ArrayList;
+import java.util.List;
+import net.minecraft.world.InteractionResult;
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
 import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbSpec;
@@ -192,9 +195,19 @@ public final class SurvivalLoopGameTests {
     /** Harvests the mature plant on new farmland and returns every fresh herb it dropped, as one stack. */
     private static ItemStack harvest(GameTestHelper helper, ServerPlayer player, HerbSpec herb, BlockPos soil) {
         BlockPos plant = plantOnFarmland(helper, herb, soil, HerbSpec.MAX_AGE);
-        var result = click(helper, player, plant);
+        List<String> joins = new ArrayList<>();
+        java.util.function.Consumer<net.minecraftforge.event.entity.EntityJoinLevelEvent> spy = e -> {
+            if (e.getEntity() instanceof ItemEntity i) joins.add(i.getItem() + "@" + i.blockPosition() + (e.isCanceled() ? " CANCELED" : "") + (i.isRemoved() ? " REMOVED" : ""));
+        };
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(net.minecraftforge.eventbus.api.EventPriority.LOWEST, true,
+                net.minecraftforge.event.entity.EntityJoinLevelEvent.class, spy);
+        InteractionResult result;
+        try { result = click(helper, player, plant); } finally { net.minecraftforge.common.MinecraftForge.EVENT_BUS.unregister(spy); }
         check(result.consumesAction(), herb.id() + " was not harvested: " + result);
-        int loose = helper.getLevel().getEntitiesOfClass(ItemEntity.class, new AABB(helper.absolutePos(plant)).inflate(24)).size();
+        List<String> near = new ArrayList<>();
+        for (ItemEntity i : helper.getLevel().getEntitiesOfClass(ItemEntity.class, new AABB(helper.absolutePos(plant)).inflate(24)))
+            near.add(i.getItem() + "@" + i.blockPosition() + (i.isRemoved() ? " REMOVED" : ""));
+        String loose = near + " joins " + joins + " plot " + helper.absolutePos(BlockPos.ZERO);
         ItemStack fresh = collectDropped(helper, BotanyItems.fresh(herb));
         check(fresh.getCount() >= 2, herb.id() + " gave " + fresh + "; plant now " + helper.getBlockState(plant) + ", items within 24: " + loose
                 + ", drops rule " + helper.getLevel().getGameRules().getBoolean(net.minecraft.world.level.GameRules.RULE_DOBLOCKDROPS)

@@ -27,7 +27,8 @@ public final class AnimalInspectionGameTests {
         Map<UUID, AnimalSnapshot> snapshots = new HashMap<>(); AnimalPackets.observe((p, s) -> snapshots.put(p.getUUID(), s));
         try {
             one.send(first, true); two.send(second, true);
-            check(snapshots.size() == 2 && snapshots.get(first.getUUID()).trust() == 80 && snapshots.get(second.getUUID()).trust() == 0, "private relation leaked");
+            check(snapshots.size() == 2 && snapshots.get(first.getUUID()).trust() == 80 && snapshots.get(second.getUUID()).trust() == 0, "private relation leaked: " + snapshots.keySet()
+                    + " first " + diag(first, cow) + " second " + diag(second, cow));
             long revision = one.revision();
             AnimalMenu.request(first, new AnimalRequest(31, 999, cow.getUUID(), revision));
             AnimalMenu.request(first, new AnimalRequest(31, 101, cow.getUUID(), revision + 1));
@@ -40,5 +41,11 @@ public final class AnimalInspectionGameTests {
             check(!two.stillValid(second), "new foreign ownership retained access");
         } finally { AnimalPackets.observe(null); first.containerMenu = first.inventoryMenu; second.containerMenu = second.inventoryMenu; }
         h.succeed();
+    }
+    static String diag(net.minecraft.server.level.ServerPlayer p, net.minecraft.world.entity.Mob m) {
+        return "[at " + p.position() + " level " + (p.level() == m.level()) + " alive " + p.isAlive() + " reach " + p.canReach(m, 0) + " sight " + p.hasLineOfSight(m)
+                + " book " + p.getInventory().hasAnyMatching(io.github.dirtyredz.herbalwitch.grimoire.registry.GrimoireItems::isGrimoire)
+                + " care " + io.github.dirtyredz.herbalwitch.platform.permission.entity.EntityActionPermission.check(io.github.dirtyredz.herbalwitch.platform.permission.entity.EntityActionContext.Action.ANIMAL_CARE, p, m)
+                + " mob " + m.position() + " removed " + m.isRemoved() + " config " + io.github.dirtyredz.herbalwitch.companions.animals.config.AnimalServerConfig.generation() + "]";
     }
 }
