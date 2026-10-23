@@ -381,3 +381,5 @@ Familiar observations and queued scans are tied to the familiar-rules revision; 
 and clears private client marks. Offline navigation and Shadowstep authorize every candidate cell
 through the stored owner UUID. Garden targets and herb observations require target-position permission
 as well as the source permission. GameTest lighting needs propagation after changing a roof or lamp.
+
+Forge's MinecraftRunTask resolves arguments and module-path tokens inside exec(), so an ordinary JavaExec copy cannot launch an equivalent server. The restart task copies the merged RunConfig plus both token maps into the same Forge task type, with isolated world directories and namespaces. Equipment fixtures must respect the binding transaction interval before their first menu click.

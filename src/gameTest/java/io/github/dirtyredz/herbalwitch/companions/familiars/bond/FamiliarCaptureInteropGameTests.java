@@ -5,6 +5,7 @@ import io.github.dirtyredz.herbalwitch.companions.animals.capture.data.*;
 import io.github.dirtyredz.herbalwitch.companions.animals.fixture.AnimalFixtures;
 import io.github.dirtyredz.herbalwitch.companions.animals.registry.AnimalItems;
 import io.github.dirtyredz.herbalwitch.companions.familiars.bond.data.*;
+import io.github.dirtyredz.herbalwitch.companions.familiars.command.FamiliarCommand;
 import io.github.dirtyredz.herbalwitch.companions.familiars.fixture.FamiliarFixtures;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationEffects;
 import io.github.dirtyredz.herbalwitch.magic.ritual.session.AltarOffering;

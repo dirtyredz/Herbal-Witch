@@ -29,3 +29,5 @@ Evidence stays beside the isolated world: `evidence/prepared.json`, `verified.js
 checkpoint directories and their original entity/player files. The Node report requires distinct JVM
 process IDs, every lifecycle phase, 20–192 checkpoints and all required checks before reporting PASS.
 The ordinary server suite continues to cover actual transactions and denied actions independently.
+
+The transport/owner fixture additionally captures a real M8 capture-release-to-binding conversion. The second JVM rejects its copied old token and stale source entity, preserves released generation one, keeps the owner-death command at Stay, and resolves an unloaded home as pending without loading its terrain. Logout/reconnect use the Forge event bus; owner death uses actual lethal damage. The ordinary suite separately tests real cross-dimension owner movement and paid recall.

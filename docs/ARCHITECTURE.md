@@ -569,7 +569,7 @@ position/state before action. Protocol 10 adds these observations and reserve/au
 The detail card switches between equipment and powers without granting remote inventory access.
 Reserve charges use the same durable player/bond receipts as upgrades, in exact five-energy increments.
 Offline spending is restricted to eligible Protect Home guards and does not award practice again.
-Retrieval remains the next ability subphase: its stale-item retirement authority must precede UI exposure.
+Retrieval uses the durable source-retirement authority described below.
 
 Familiar pickup retires a whole loose stack before granting cargo. The source must fit the current
 8-item capacity (16 with matching gear), have no payload/capability inventory, pass the explicit
@@ -589,3 +589,5 @@ familiar page identity and pre-M8 ordering, with eight explicit M9 pages. Catalo
 ability costs/cooldowns and current server limits are passed as component arguments. The showcase
 adds nine inert, non-dropping, non-bindable samples and three labelled supply barrels; display
 cosmetics have no inventory or bond authority.
+
+Restart evidence uses two dedicated JVMs and exact snapshots taken around atomic replacement. Production indexing and entity-join events replay those snapshots; uncertain economic state quarantines without inventory replay. The test-only observer is thread-confined and absent from release jars. See tools/familiars/restart/README.md for the limits of checkpoint replay.

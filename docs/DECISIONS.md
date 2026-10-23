@@ -667,3 +667,5 @@ creating a partial remainder with a second recovery authority. A stack above 8 (
 gear), or above remaining compatible capacity, is a no-op. The source UUID's immutable retirement
 receipt survives cargo collection and is independent of later player receipt watermarks. Failures
 retain item data in pending bond/player escrow and never automatically replay a grant or refund.
+
+M9 restart qualification uses deterministic checkpoint replay between distinct dedicated server JVMs. It captures actual verified shard/player-save bytes around replacement and re-admits saved entity NBT through production events. It establishes conservative identity/inventory recovery at those boundaries; it does not claim host power-loss durability or random OS-kill coverage.
