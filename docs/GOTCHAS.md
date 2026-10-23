@@ -472,3 +472,7 @@ Full M10 profile runs exposed M9 fixture assumptions: the retreat owner was outs
   tick handlers; a copy per lookup was the largest Herbal Witch cost in the M12 flight recording. Hot paths
   use `has`, `compound`, `intValue`, `longValue`, `stringValue` and `sameIntent`; keep `state()` for code
   that needs the whole tag.
+- **GameTest batches run side by side.** Never sweep entities or drops beyond the test's own plot
+  (`WorldFixtures.clearEntities`, `clearDrops`): a 16- or 32-block sweep deleted neighbouring tests'
+  familiars and harvest drops and made unrelated tests flaky (M12: raven flight, the survival loop's
+  harvest, the crowded wand collection). Judge only your own entities instead (`WandUtilityGameTests.takes`).

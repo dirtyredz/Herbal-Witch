@@ -36,8 +36,8 @@ public final class FamiliarPowerCoverageGameTests {
                 b.mob().setDeltaMovement(net.minecraft.world.phys.Vec3.ZERO);
 
                 // One test per sensing batch: remove completed neighboring fixtures from the bounded query.
-                int radius = io.github.dirtyredz.herbalwitch.companions.familiars.config.FamiliarServerConfig.current().senseRadius();
-                h.getLevel().getEntities(b.mob(), b.mob().getBoundingBox().inflate(radius), e -> !(e instanceof net.minecraft.world.entity.player.Player)).forEach(net.minecraft.world.entity.Entity::discard);
+                // Only this test's own plot: neighbouring batches run beside it.
+                clearEntities(h, b.mob());
                 var victim = h.spawn(EntityType.PILLAGER, new BlockPos(6,1,5)); victim.setNoAi(true);
                 var task = new FamiliarSenseTask(b.mob(), power, new FamiliarHerbCursor());
                 check(task.valid() && b.mob().hasLineOfSight(victim), species + " sensing fixture is not ready or visible");
@@ -132,8 +132,8 @@ public final class FamiliarPowerCoverageGameTests {
         FamiliarFixtures.bound(h, "cat", "cat_magic_" + UUID.randomUUID(), b -> h.runAfterDelay(10, () -> {
             try (var online = OnlinePlayers.register(List.of(b.owner()))) {
                 b.mob().getNavigation().stop(); b.mob().moveTo(h.absolutePos(new BlockPos(4,1,5)).getCenter());
-                int radius = io.github.dirtyredz.herbalwitch.companions.familiars.config.FamiliarServerConfig.current().senseRadius();
-                h.getLevel().getEntities(b.mob(), b.mob().getBoundingBox().inflate(radius), e -> !(e instanceof net.minecraft.world.entity.player.Player)).forEach(net.minecraft.world.entity.Entity::discard);
+                // Only this test's own plot: neighbouring batches run beside it.
+                clearEntities(h, b.mob());
                 var thrower = PlayerFixtures.player(h, "m12_cat_magic_thrower", net.minecraft.world.level.GameType.SURVIVAL, net.minecraft.core.Direction.NORTH);
                 var vial = new io.github.dirtyredz.herbalwitch.apothecary.brewing.projectile.PreparationProjectile(h.getLevel(), thrower,
                         io.github.dirtyredz.herbalwitch.apothecary.brewing.application.ThrowableApplications.Burst.POISON);
@@ -181,8 +181,8 @@ public final class FamiliarPowerCoverageGameTests {
             try (var online = OnlinePlayers.register(List.of(listener))) {
                 b.mob().getNavigation().stop(); b.mob().moveTo(h.absolutePos(new BlockPos(4,1,5)).getCenter());
                 // The scan reads a bounded number of nearby entities: clear leftovers of earlier batches first.
-                int radius = io.github.dirtyredz.herbalwitch.companions.familiars.config.FamiliarServerConfig.current().senseRadius();
-                h.getLevel().getEntities(b.mob(), b.mob().getBoundingBox().inflate(radius), e -> !(e instanceof net.minecraft.world.entity.player.Player)).forEach(net.minecraft.world.entity.Entity::discard);
+                // Only this test's own plot: neighbouring batches run beside it.
+                clearEntities(h, b.mob());
                 var threat = h.spawn(EntityType.PILLAGER, new BlockPos(6,1,5)); threat.setNoAi(true);
                 check(b.mob().hasLineOfSight(threat), "scout fixture cannot see the threat");
                 new io.github.dirtyredz.herbalwitch.companions.familiars.command.ai.FamiliarScout(b.mob()).perform();
@@ -208,8 +208,8 @@ public final class FamiliarPowerCoverageGameTests {
             listener.connection = b.owner().connection; listener.moveTo(b.owner().position());
             try (var online = OnlinePlayers.register(List.of(listener))) {
                 b.mob().getNavigation().stop(); b.mob().moveTo(h.absolutePos(new BlockPos(4,1,5)).getCenter());
-                int radius = io.github.dirtyredz.herbalwitch.companions.familiars.config.FamiliarServerConfig.current().senseRadius();
-                h.getLevel().getEntities(b.mob(), b.mob().getBoundingBox().inflate(radius), e -> !(e instanceof net.minecraft.world.entity.player.Player)).forEach(net.minecraft.world.entity.Entity::discard);
+                // Only this test's own plot: neighbouring batches run beside it.
+                clearEntities(h, b.mob());
                 // More cattle than the scan's candidate bound, all closer to the scan's start than the hostile.
                 for (int i = 0; i < io.github.dirtyredz.herbalwitch.companions.familiars.work.FamiliarQueries.CANDIDATES + 8; i++) {
                     var cow = h.spawn(EntityType.COW, new BlockPos(1 + i % 7, 1, 1 + (i / 7) % 3)); cow.setNoAi(true);

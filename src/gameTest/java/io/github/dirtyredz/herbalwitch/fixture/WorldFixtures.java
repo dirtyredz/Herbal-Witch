@@ -51,6 +51,15 @@ public final class WorldFixtures {
         helper.getLevel().getEntitiesOfClass(ItemEntity.class, area(helper)).forEach(ItemEntity::discard);
     }
 
+    /**
+     * Removes every non-player entity in this test's own area except {@code keep}. Never sweep a wider
+     * radius: batches run side by side, and a wide sweep deletes a neighbouring test's mobs and drops.
+     */
+    public static void clearEntities(GameTestHelper helper, net.minecraft.world.entity.Entity keep) {
+        helper.getLevel().getEntities(keep, area(helper), e -> !(e instanceof net.minecraft.world.entity.player.Player))
+                .forEach(net.minecraft.world.entity.Entity::discard);
+    }
+
     private static AABB area(GameTestHelper helper) {
         return new AABB(helper.absolutePos(BlockPos.ZERO), helper.absolutePos(new BlockPos(9, 6, 9))).inflate(1);
     }
