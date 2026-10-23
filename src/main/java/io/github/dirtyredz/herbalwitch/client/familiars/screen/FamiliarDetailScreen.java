@@ -31,7 +31,7 @@ public final class FamiliarDetailScreen extends FamiliarRosterScreen<FamiliarDet
         menu.powersView(powers);
         button(powers ? "equipment" : "powers", 214, 72, 54, true, () -> { powers = !powers; rebuild(); });
         if (!powers) { button("collect_cargo", 138, 126, 130, active, () -> request("cargo", selected, null, "")); return; }
-        var available = Arrays.stream(FamiliarPower.values()).filter(p -> p != FamiliarPower.VENOM && p != FamiliarPower.RETRIEVE
+        var available = Arrays.stream(FamiliarPower.values()).filter(p -> p != FamiliarPower.VENOM
                 && p.available(chosen.species(), minecraft.level != null && minecraft.level.isNight(), chosen.buffs().contains("nightwatch"))).toList();
         powerIndex = Math.floorMod(powerIndex, available.size()); var power = available.get(powerIndex);
         button("previous_command", 12, 126, 20, active, () -> { powerIndex--; targetOffset = 0; rebuild(); });

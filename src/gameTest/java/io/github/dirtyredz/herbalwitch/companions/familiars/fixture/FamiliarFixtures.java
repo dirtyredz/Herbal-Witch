@@ -34,11 +34,18 @@ public final class FamiliarFixtures {
         check(helper.getLevel().addFreshEntity(source), "source insertion");
         AnimalFixtures.relationship(source, owner.getUUID(), spec.trust(), spec.feeds());
         if (!Set.of("cat", "wolf", "bat").contains(species)) check(AnimalTrustService.keeper(source, owner.getUUID()), "keeper adoption");
-        helper.runAfterDelay(6, () -> {
+        helper.runAfterDelay(6, () -> whenReady(helper, () -> {
             source.moveTo(position.getCenter()); source.setTarget(null);
+            String refusal = FamiliarEligibility.refusal(owner, source, helper.absolutePos(new BlockPos(4, 1, 4)));
+            check(refusal == null, "fixture eligibility: " + refusal);
             check(FamiliarBindingService.bind(owner, source, helper.absolutePos(new BlockPos(4, 1, 4)), AltarOffering.none()), "fixture binding");
             var record = FamiliarStore.get(owner.server).creature(source.getUUID()).orElseThrow();
             run.accept(new Bound(owner, (Mob) helper.getLevel().getEntity(source.getUUID()), record.bond()));
-        });
+        }));
+    }
+    /** Retained CI worlds can need more than six ticks to index their growing set of bond shards. */
+    public static void whenReady(GameTestHelper helper, Runnable action) {
+        if (!FamiliarStore.get(helper.getLevel().getServer()).ready()) helper.runAfterDelay(1, () -> whenReady(helper, action));
+        else action.run();
     }
 }

@@ -570,3 +570,12 @@ The detail card switches between equipment and powers without granting remote in
 Reserve charges use the same durable player/bond receipts as upgrades, in exact five-energy increments.
 Offline spending is restricted to eligible Protect Home guards and does not award practice again.
 Retrieval remains the next ability subphase: its stale-item retirement authority must precede UI exposure.
+
+Familiar pickup retires a whole loose stack before granting cargo. The source must fit the current
+8-item capacity (16 with matching gear), have no payload/capability inventory, pass the explicit
+small-object tag and owner-attribution rule, and match its observed stack. Oversize stacks are refused
+without splitting or scattering. A pending bond/player receipt retains the source NBT; an immutable
+verified receipt in `data/herbalwitch_familiar_pickups/<source UUID>.dat` permanently retires the old
+entity identity. Admission looks up that exact file with a bounded cache, never scans all entities or
+materializes the receipt directory. Collection does not remove retirement evidence. Unknown/corrupt
+receipt presence refuses the source; no interrupted operation replays cargo or refunds items.

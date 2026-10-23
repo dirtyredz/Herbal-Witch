@@ -241,3 +241,8 @@ and guard selections, automatic sensing/guard powers, and prepaid reserve chargi
 positions expire after five seconds. Spiritbond discounts costs; Nightwatch enables nighttime threat
 sensing; Hearthkeeper adjusts home repel. Retrieval is not exposed until durable pickup reconciliation
 is implemented. The milestone and version promotion remain open.
+
+Retrieval is now exposed for raven/crow and fox: owner-attributed, tagged simple loose stacks only,
+exact observation/permission rechecks, five energy per completed pickup, and durable cargo/source
+retirement. Public retrieval remains opt-in; oversized stacks, payload items, pickup delays, exclusive
+foreign ownership and full cargo refuse without charge. Verification is recorded per phase in Docket.

@@ -36,7 +36,7 @@ public final class FamiliarAbilities {
         try { power = FamiliarPower.valueOf(key.toUpperCase(Locale.ROOT)); } catch (IllegalArgumentException invalid) { return "unavailable"; }
         if (mob == null || !FamiliarAbilityService.ready(mob, power)) return "unavailable";
         if (token == null) {
-            if (power == FamiliarPower.RETRIEVE || power == FamiliarPower.VENOM) return "unavailable";
+            if (power == FamiliarPower.VENOM) return "unavailable";
             queue(mob, power); return "searching";
         }
         var target = FamiliarObservationsStore.target(owner, mob, token).orElse(null);
@@ -47,6 +47,8 @@ public final class FamiliarAbilities {
             case DISTRACT -> entity instanceof Mob victim && FamiliarCombatPowers.distract(mob, victim);
             case INTERCEPT -> entity instanceof Mob victim && FamiliarCombatPowers.intercept(mob, victim);
             case REPEL -> entity instanceof Mob victim && FamiliarCombatPowers.repel(mob, victim);
+            case RETRIEVE -> entity instanceof net.minecraft.world.entity.item.ItemEntity item
+                    && io.github.dirtyredz.herbalwitch.companions.familiars.ability.retrieval.FamiliarRetrieveItem.apply(owner, mob, item, target.stack());
             default -> false;
         };
         return success ? "updated" : "unavailable";

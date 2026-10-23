@@ -661,3 +661,9 @@ The plan gives fox pouch and raven satchel identical workbench inputs. The workb
 The specified bat chime also duplicates the landed M8 capture charm exactly. Bat chime replaces leather with an iron nugget, retaining its amethyst shard and two string, 200 ticks and 5 energy. M8 capture recipes remain unchanged. Quantity changes alone cannot distinguish recipes because processing accepts at least the required count.
 
 M9 recovery distinguishes actual lethal gameplay damage from administrative deletion. A lethal damage checkpoint retires the live incarnation without loot; revival restores half maximum health, clears familiar temporary buffs and keeps prepaid reserve unchanged. Level-two recovery commands never directly spawn or invent payloads, and cannot release unresolved inventory/payment escrow.
+
+M9 pickup decisions: retrieval accepts one whole eligible loose stack that fits cargo, rather than
+creating a partial remainder with a second recovery authority. A stack above 8 (16 with matching
+gear), or above remaining compatible capacity, is a no-op. The source UUID's immutable retirement
+receipt survives cargo collection and is independent of later player receipt watermarks. Failures
+retain item data in pending bond/player escrow and never automatically replay a grant or refund.

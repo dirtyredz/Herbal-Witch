@@ -424,3 +424,8 @@ Recovery lives in `companions/familiars/recovery/`: lethal damage checkpointing,
 Bond progression and durable named upgrades live in `companions/familiars/bond/`; `interaction/FamiliarCareContribution` observes the animal module's neutral `AnimalCareContributions` seam. The shared `ritual/FamiliarUpgradeAction` serves Heartwood, Spirit Well and Harmony. No familiar implementation is imported by animal care.
 
 `companions/familiars/preparation/` owns canonical buff rules, application validation, runtime projections, damage/Shadowstep events and familiar poison policy. M7 keeps the shared item/container, concealment, poison application and delayed harm-attribution implementations.
+
+Retrieval lives in `companions/familiars/ability/retrieval/`: exact loose-item eligibility, the durable
+pickup transaction, and immutable source-retirement receipts. `platform/permission/entity/ItemPickupPermission`
+owns the neutral entity-pickup veto (including Forge pickup cancellation); it is not block placement.
+`data/server/familiars/FamiliarRetrievalTags` contributes the small-object allowlist to the one item-tag writer.

@@ -42,6 +42,12 @@ public final class FamiliarSenseTask implements FamiliarWork.Task {
             }
         } else for (var entity : FamiliarQueries.entities((ServerLevel) familiar.level(), familiar.getBoundingBox().inflate(radius))) {
             if (result.size() >= (power == FamiliarPower.TRACK ? 1 : 8)) break;
+            if (power == FamiliarPower.RETRIEVE) {
+                if (entity instanceof net.minecraft.world.entity.item.ItemEntity item
+                        && io.github.dirtyredz.herbalwitch.companions.familiars.ability.retrieval.FamiliarRetrievalRules.eligible(owner, familiar, record, item))
+                    result.add(new FamiliarObservationsStore.Target(item.getUUID(), item.blockPosition(), null, "item", item.getName().getString(), item.getItem().save(new net.minecraft.nbt.CompoundTag())));
+                continue;
+            }
             if (power == FamiliarPower.THREATS && record.species().equals("cat")
                     && entity instanceof io.github.dirtyredz.herbalwitch.apothecary.brewing.projectile.PreparationProjectile projectile
                     && projectile.burst().harmful() && !projectile.isRemoved() && !projectile.isInvisible()

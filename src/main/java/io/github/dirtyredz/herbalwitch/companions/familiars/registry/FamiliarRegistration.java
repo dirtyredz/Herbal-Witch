@@ -57,6 +57,8 @@ public final class FamiliarRegistration {
         AltarSessionService.handle(FamiliarActionCatalog.REVIVAL, new io.github.dirtyredz.herbalwitch.companions.familiars.ritual.RevivalAction());
         bus.addListener(FamiliarLifecycleEvents::capabilities);
         var forge = MinecraftForge.EVENT_BUS;
+        forge.addListener(EventPriority.HIGHEST, io.github.dirtyredz.herbalwitch.companions.familiars.ability.retrieval.FamiliarPickupReceipts::join);
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.ability.retrieval.FamiliarPickupReceipts::stopped);
         forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.ability.FamiliarAbilities::tick);
         forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.ability.FamiliarAbilities::stopped);
         forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.ability.FamiliarAbilities::leave);

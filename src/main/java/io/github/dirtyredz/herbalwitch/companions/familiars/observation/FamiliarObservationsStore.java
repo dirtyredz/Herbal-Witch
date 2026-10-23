@@ -11,7 +11,11 @@ import java.util.*;
 
 /** At most 32 observed bonds per online owner, each with eight five-second action tokens. */
 public final class FamiliarObservationsStore {
-    public record Target(UUID entity, BlockPos block, BlockState state, String kind, String label) {}
+    public record Target(UUID entity, BlockPos block, BlockState state, String kind, String label, net.minecraft.nbt.CompoundTag stack) {
+        public Target(UUID entity, BlockPos block, BlockState state, String kind, String label) { this(entity, block, state, kind, label, new net.minecraft.nbt.CompoundTag()); }
+        public Target { stack = stack.copy(); }
+        @Override public net.minecraft.nbt.CompoundTag stack() { return stack.copy(); }
+    }
     private record Page(UUID bond, long generation, ServerLevel level, long until, Map<UUID, Target> targets) {}
     private static final Map<UUID, LinkedHashMap<UUID, Page>> OWNERS = new HashMap<>();
     private FamiliarObservationsStore() {}

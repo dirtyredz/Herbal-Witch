@@ -9,6 +9,7 @@ public final class FamiliarManifest {
     private FamiliarManifest() {}
     public static Set<String> files() {
         Set<String> out = new TreeSet<>();
+        out.add("data/herbalwitch/tags/items/familiars/retrievable.json");
         for (String species : SPECIES) out.add("data/herbalwitch/tags/items/familiars/equipment/" + species + ".json");
         out.add("data/herbalwitch/tags/items/familiars/charms.json");
         for (String key : List.of("bed", "nest", "perch")) {
