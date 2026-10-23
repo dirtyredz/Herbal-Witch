@@ -1,31 +1,35 @@
-// Two sequential copies of Forge's resolved dedicated-server JavaExec configuration.
-// Custom RunConfig parents are merged before Forge injects userdev's main class, so copy the
-// existing run task at execution time instead of duplicating Forge launch arguments/modules.
+// Forge resolves launch tokens inside MinecraftRunTask.exec(), not in JavaExec's getters.
+// Use that same task type with an isolated copy of the fully merged dedicated run configuration.
+def familiarConfigType = minecraft.runs.gameTestServer.class
+def familiarTaskType = familiarConfigType.classLoader.loadClass('net.minecraftforge.gradle.common.util.runs.MinecraftRunTask')
 def familiarRun = file("run/familiar-restart/${UUID.randomUUID()}")
 def familiarEvidence = new File(familiarRun, 'evidence')
 tasks.named('processGameTestResources').configure {
     from('src/gameTest/resources/data/herbalwitch/structures/empty.nbt') { into 'data/herbalwitch_restart/structures' }
 }
 ['Prepare', 'Verify'].each { phase ->
-    tasks.register("runFamiliarRestart${phase}", JavaExec) {
+    tasks.register("runFamiliarRestart${phase}", familiarTaskType) {
         group = 'verification'
         dependsOn { def base = tasks.named('runGameTestServer').get(); base.taskDependencies.getDependencies(base) }
         if (phase == 'Verify') dependsOn 'runFamiliarRestartPrepare'
         doFirst {
             def base = tasks.named('runGameTestServer', JavaExec).get()
-            if (!base.args.contains('forgegametestserveruserdev')) throw new GradleException('Restart harness requires the dedicated GameTest launch target')
-            mainClass.set(base.mainClass)
+            def config = familiarConfigType.getConstructor(Project, String).newInstance(project, "familiarRestart${phase}".toString())
+            config.merge(base.runConfig.get(), true)
+            if (config.client || !config.args.contains('forgegametestserveruserdev') || !config.main) {
+                throw new GradleException('Restart harness requires the resolved dedicated GameTest launch target')
+            }
+            config.workingDirectory(familiarRun)
+            config.property('forge.enabledGameTestNamespaces', 'herbalwitch_restart')
+            config.property('herbalwitch.restart.phase', phase.toLowerCase(Locale.ROOT))
+            config.property('herbalwitch.restart.evidence', familiarEvidence.absolutePath)
+            runConfig.set(config)
+            mainClass.set(config.main)
             classpath = base.classpath
-            jvmArgs = base.jvmArgs
-            args = base.args
-            environment = base.environment
-            systemProperties = new LinkedHashMap(base.systemProperties)
+            minecraftArtifacts.from(base.minecraftArtifacts)
+            runtimeClasspathArtifacts.from(base.runtimeClasspathArtifacts)
+            additionalClientArgs.set([])
             if (base.javaLauncher.present) javaLauncher.set(base.javaLauncher)
-            systemProperty 'forge.enabledGameTestNamespaces', 'herbalwitch_restart'
-            systemProperty 'herbalwitch.restart.phase', phase.toLowerCase(Locale.ROOT)
-            systemProperty 'herbalwitch.restart.evidence', familiarEvidence.absolutePath
-            familiarRun.mkdirs()
-            workingDir familiarRun
         }
     }
 }
