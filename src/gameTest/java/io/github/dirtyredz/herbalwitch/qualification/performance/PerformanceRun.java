@@ -112,6 +112,9 @@ final class PerformanceRun {
         phases.add(new Phase("churn", this::churn, 0));
         phases.add(new Phase("large_persistence", this::persistence, WINDOWS));
         phases.add(new Phase("commerce_checkpoints", this::commerce, 0));
+        // Attribution runs (-PperformanceOnly=a,b) keep the control, the named phases and every settle step.
+        var only = java.util.Set.of(System.getProperty("herbalwitch.performance.only", "").split(","));
+        if (!only.equals(java.util.Set.of(""))) phases.removeIf(p -> !p.name.equals("control") && !p.name.startsWith("settle") && !only.contains(p.name));
         next();
     }
 

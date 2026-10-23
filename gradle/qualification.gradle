@@ -127,7 +127,8 @@ tasks.register('saveUpgradeTest') {
 // world times startup indexing of the persisted bonds. report.mjs judges the frozen gates.
 def performanceRun = file("run/performance/${UUID.randomUUID()}")
 def performanceEvidence = new File(performanceRun, 'evidence')
-def performanceProps = { String phase -> ['herbalwitch.performance.phase': phase, 'herbalwitch.performance.evidence': performanceEvidence.absolutePath] }
+def performanceProps = { String phase -> ['herbalwitch.performance.phase': phase, 'herbalwitch.performance.evidence': performanceEvidence.absolutePath,
+        'herbalwitch.performance.only': (project.findProperty('performanceOnly') ?: '').toString()] }
 // -PperformanceProfile records a Java Flight Recording of the measuring JVM, for attribution only.
 def performanceJfr = project.hasProperty('performanceProfile')
         ? ['-XX:StartFlightRecording=filename=' + new File(performanceEvidence, 'measure.jfr').absolutePath + ',settings=profile'] : []
