@@ -1,0 +1,36 @@
+{
+  "project": "nest.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/familiars/homes/nest/wood",
+    "wood_v": "herbalwitch:block/pieces/familiars/homes/nest/wood_v",
+    "velvet": "herbalwitch:block/pieces/familiars/homes/nest/velvet",
+    "pink": "herbalwitch:block/pieces/familiars/homes/nest/pink",
+    "plum": "herbalwitch:block/pieces/familiars/homes/nest/plum",
+    "particle": "herbalwitch:block/pieces/familiars/homes/nest/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/familiars/homes/nest/wood",
+    "wood_v": "herbalwitch:block/pieces/familiars/homes/nest/wood_v",
+    "velvet": "herbalwitch:block/pieces/familiars/homes/nest/velvet",
+    "pink": "herbalwitch:block/pieces/familiars/homes/nest/pink",
+    "plum": "herbalwitch:block/pieces/familiars/homes/nest/plum"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/familiars/home/nest/base",
+      "item": true
+    }
+  ]
+}

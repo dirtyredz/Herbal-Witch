@@ -1,0 +1,38 @@
+{
+  "project": "bed.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/familiars/homes/bed/wood",
+    "wood_v": "herbalwitch:block/pieces/familiars/homes/bed/wood_v",
+    "velvet": "herbalwitch:block/pieces/familiars/homes/bed/velvet",
+    "plum": "herbalwitch:block/pieces/familiars/homes/bed/plum",
+    "gold": "herbalwitch:block/pieces/familiars/homes/bed/gold",
+    "ivy": "herbalwitch:block/pieces/familiars/homes/bed/ivy",
+    "particle": "herbalwitch:block/pieces/familiars/homes/bed/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/familiars/homes/bed/wood",
+    "wood_v": "herbalwitch:block/pieces/familiars/homes/bed/wood_v",
+    "velvet": "herbalwitch:block/pieces/familiars/homes/bed/velvet",
+    "plum": "herbalwitch:block/pieces/familiars/homes/bed/plum",
+    "gold": "herbalwitch:block/pieces/familiars/homes/bed/gold",
+    "ivy": "herbalwitch:block/pieces/familiars/homes/bed/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/familiars/home/bed/base",
+      "item": true
+    }
+  ]
+}

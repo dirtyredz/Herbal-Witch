@@ -26,7 +26,10 @@ required GameTests. The second phase adds private bounded roster pages and nearb
 ANU `HerbalWitch-m9-familiars-0.8.0-20261022-224023-3bb` at `5cea37a` passed 433 JUnit tests and
 all 238 required GameTests. The third phase adds seven command modes, loaded navigation and flight,
 shared mobile reservations, bounded scan/path scheduling, UUID-aware automated permissions and paid
-loaded recall. Homes, equipment, abilities, preparations, recovery and final art remain in progress.
+loaded recall. ANU `HerbalWitch-m9-familiars-0.8.0-20261022-233934-064` at `645dda1` passed 437
+JUnit tests and all 247 required GameTests. The first command run exposed a bat fall-immunity gap
+and a roster fixture that assumed ANU discarded old canonical bonds; both were corrected. Homes,
+equipment, abilities, preparations, recovery and final art remain in progress.
 M8 adds six baits, personal loaded-time care state, existing-salve targeting, temporary goal-based
 calming, reused M7 sleep, earned native taming/keepers, a private grimoire card, verified capture
 checkpoints/reconciliation/recovery and sixteen showcase habitats. Exact boundaries and defaults:

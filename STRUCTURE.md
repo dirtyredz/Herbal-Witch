@@ -68,7 +68,11 @@ herbalwitch/
 - `companions/familiars/config/` — atomic bounded server rule snapshots; acquisition switches never delete bonds.
 - `companions/familiars/command/` — command transitions, derived mobile reservations and loaded-only recall; `ai/` owns mutually exclusive behavior and observations, `navigation/` owns safe destinations and queued paths.
 - `companions/familiars/work/` — shared fair per-dimension scan/path queues and bounded engine queries; `observation/` owns private owner/target alert throttling.
-- `companions/familiars/home/` — dimension-qualified home-instance identity and loaded-only command destination checks; functional pieces follow in the home phase.
+- `companions/familiars/home/` — shared bed/nest/perch block, identity-only block entity, canonical occupancy index, assignment, safe rest and loaded-only destinations.
+- `companions/familiars/showcase/` — functional home and familiar feature sections in the witchcraft group.
+- `src/{test,gameTest}/java/io/github/dirtyredz/herbalwitch/companions/familiars/home/` — compatibility, occupancy, real placement/support loss, replacement identity, pending homes and loaded rest.
+- `src/art/blockbench/familiars/homes/<bed|nest|perch>/` — one-off owned-texture projects and sidecars; compiled models at `src/main/resources/assets/herbalwitch/models/block/familiars/home/<piece>/`, textures at `textures/block/pieces/familiars/homes/<piece>/`.
+- `tools/preview/scenes/familiars/` — actual home blockstates in each facing and floor-support context.
 - `platform/permission/PrincipalPermission` — UUID-aware automation location checks, vanilla spawn protection and additive protection policies; unsupported claims refuse automation.
 - `client/familiars/` — client bootstrap; `state/` retains only the current private page and `screen/` renders roster/detail cards.
 - `src/test/java/io/github/dirtyredz/herbalwitch/companions/familiars/network/` — wire limits and private projection contracts.
@@ -76,7 +80,7 @@ herbalwitch/
 - `src/test/java/io/github/dirtyredz/herbalwitch/companions/familiars/command/` — persisted reservation order, shared mobile classification, queue fairness and hard configuration bounds.
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/companions/familiars/command/` — real navigation, sleep, guard authorization, unloaded reservations and paid incarnation recall.
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/companions/familiars/config/` — live cap reduction and acquisition-only switches against real bonds.
-- `data/{client,server}/familiars/` — contributions to language and entity tags.
+- `data/{client,server}/familiars/` — language/entity tags, home states/item parents, empty loot and exact crafting recipes through the shared writers.
 - `src/test/java/io/github/dirtyredz/herbalwitch/companions/familiars/bond/` — shard bounds, indexing, corruption, receipt and write uncertainty tests.
 - `src/test/java/io/github/dirtyredz/herbalwitch/data/familiars/` — independent resource inventory.
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/companions/familiars/bond/` — real altar binding, cancellation and stale source admission tests in separate batches.
@@ -228,7 +232,7 @@ herbalwitch/
 
 **src/art**
 
-- `src/art/blockbench/` — Blockbench sources, never packaged (119 projects): `catalog.json` (the project list, pinned format, owned model directories) and `<stations|decor|preparations|grimoire|ritual|ward>/<piece>/` with `<piece>.bbmodel` and `piece.json`; Milestone 5 pieces at `decor/pieces/<family>/<group>/<piece>/`, M8 at `animals/<group>/<piece>/` (docs/BLOCKBENCH.md)
+- `src/art/blockbench/` — Blockbench sources, never packaged (122 block/item projects): `catalog.json` (the project list, pinned format, owned model directories) and `<stations|decor|preparations|grimoire|ritual|ward>/<piece>/` with `<piece>.bbmodel` and `piece.json`; Milestone 5 pieces at `decor/pieces/<family>/<group>/<piece>/`, M8 at `animals/<group>/<piece>/`, M9 homes at `familiars/homes/<piece>/` (docs/BLOCKBENCH.md)
 
 **src/test/java**
 

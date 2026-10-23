@@ -6,8 +6,21 @@ import java.util.*;
 public final class FamiliarManifest {
     public static final List<String> SPECIES = List.of("cat", "raven", "owl", "fox", "wolf", "snake", "rabbit", "bat");
     private FamiliarManifest() {}
+    public static Set<String> files() {
+        Set<String> out = new TreeSet<>();
+        for (String key : List.of("bed", "nest", "perch")) {
+            String path = "familiars/home/" + key + ".json";
+            out.add("assets/herbalwitch/blockstates/" + path); out.add("assets/herbalwitch/models/item/" + path);
+            out.add("data/herbalwitch/loot_tables/blocks/" + path); out.add("data/herbalwitch/recipes/" + path);
+            out.add("data/herbalwitch/advancements/recipes/decorations/" + path);
+        }
+        return out;
+    }
     public static Map<String, String> lang() {
         Map<String, String> out = new LinkedHashMap<>();
+        for (String key : List.of("bed", "nest", "perch")) out.put("block.herbalwitch.familiars.home." + key, null);
+        out.put("showcase.herbalwitch.section.familiar_homes", null); out.put("showcase.herbalwitch.label.familiar_home", null);
+        for (String key : List.of("choose_home", "assign_home", "home_assigned", "home_incompatible", "home_occupied")) out.put("familiar.herbalwitch." + key, null);
         out.put("familiar.herbalwitch.offline_limit", null);
         for (String key : List.of("roster", "detail", "first_page", "next_page", "altar_target", "loading", "health", "loaded", "last_observed", "home", "empty", "select", "stale", "nearby_only")) out.put("familiar.herbalwitch." + key, null);
         for (String key : List.of("previous_command", "next_command", "recall", "command_set", "mobile_cap", "mobile_reduced", "no_home", "home_unloaded", "home_missing", "other_dimension", "unloaded_route", "blocked", "path_pending", "retreating", "owner_offline", "owner_dead", "unavailable", "not_loaded", "controlled", "cooldown", "permission", "busy", "interrupted", "recalled", "threat")) out.put("familiar.herbalwitch." + key, null);

@@ -1,0 +1,40 @@
+{
+  "project": "perch.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/familiars/homes/perch/wood",
+    "wood_v": "herbalwitch:block/pieces/familiars/homes/perch/wood_v",
+    "velvet": "herbalwitch:block/pieces/familiars/homes/perch/velvet",
+    "pink": "herbalwitch:block/pieces/familiars/homes/perch/pink",
+    "plum": "herbalwitch:block/pieces/familiars/homes/perch/plum",
+    "gold": "herbalwitch:block/pieces/familiars/homes/perch/gold",
+    "ivy": "herbalwitch:block/pieces/familiars/homes/perch/ivy",
+    "particle": "herbalwitch:block/pieces/familiars/homes/perch/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/familiars/homes/perch/wood",
+    "wood_v": "herbalwitch:block/pieces/familiars/homes/perch/wood_v",
+    "velvet": "herbalwitch:block/pieces/familiars/homes/perch/velvet",
+    "pink": "herbalwitch:block/pieces/familiars/homes/perch/pink",
+    "plum": "herbalwitch:block/pieces/familiars/homes/perch/plum",
+    "gold": "herbalwitch:block/pieces/familiars/homes/perch/gold",
+    "ivy": "herbalwitch:block/pieces/familiars/homes/perch/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/familiars/home/perch/base",
+      "item": true
+    }
+  ]
+}

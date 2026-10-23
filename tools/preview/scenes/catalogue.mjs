@@ -4,6 +4,7 @@
 // reference image (in the job folder) for a side-by-side comparison.
 
 import { HERB_LIST } from '../../art/content/botany/herbs.mjs';
+import { FAMILIAR_HOME_SCENES } from './familiars/homes.mjs';
 
 const HW = 'herbalwitch:';
 const BED = `${HW}botany/garden/herb_bed`;
@@ -54,6 +55,7 @@ const growthRows = HERB_LIST.map(([group, herb]) => ({
 }));
 
 export const SCENES = [
+  ...FAMILIAR_HOME_SCENES,
   {
     name: 'garden-joined-2x2',
     reference: 'reference-joined-bed-2x2.png',

@@ -53,7 +53,8 @@ public class FamiliarRosterScreen<T extends FamiliarRosterMenu> extends Grimoire
             offset = 0; request("page", null, displayed.rows().get(displayed.rows().size() - 1).bond(), "");
         });
         button("detail", 12, 180, 123, chosen != null && chosen.loaded(), () -> request("detail", selected, null, ""));
-        button("altar_target", 145, 180, 123, chosen != null, () -> {
+        if (menu.homeContext()) button("assign_home", 145, 180, 123, chosen != null, () -> request("home", selected, null, ""));
+        else button("altar_target", 145, 180, 123, chosen != null, () -> {
             var current = row(); if (current != null) { RitualTargets.remember(current.bond(), current.name()); minecraft.player.closeContainer(); }
         });
     }

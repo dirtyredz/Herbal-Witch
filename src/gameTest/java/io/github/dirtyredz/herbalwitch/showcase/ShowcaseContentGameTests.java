@@ -161,6 +161,14 @@ public final class ShowcaseContentGameTests {
         for (Block station : StationBlocks.all()) {
             check(scan.blocks.getOrDefault(station, 0) >= 1, station + " missing from the showcase");
         }
+        var homeArea = plan.areas().stream().filter(a -> a.id().equals("familiar_homes")).findFirst().orElseThrow();
+        for (var entry : io.github.dirtyredz.herbalwitch.companions.familiars.registry.FamiliarHomes.ALL) {
+            check(scan.blocks.getOrDefault(entry.block().get(), 0) == 1, entry.kind() + " home missing or duplicated");
+            var relative = ORIGIN.offset(homeArea.x() + 1 + entry.kind().ordinal() * 3, 1, homeArea.z() + ShowcasePlan.HEADING_ROWS + 1);
+            var home = (io.github.dirtyredz.herbalwitch.companions.familiars.home.FamiliarHomeBlockEntity) helper.getLevel().getBlockEntity(helper.absolutePos(relative));
+            check(home != null && home.writable() && home.occupant() == null && home.owner() == null,
+                    "showcase home received a bond or cannot be claimed");
+        }
         for (HerbSpec herb : HerbCatalog.ALL) {
             check(scan.blocks.getOrDefault(PreparationBlocks.bundle(herb), 0) == 1, herb.id() + " bundle not hung once");
         }

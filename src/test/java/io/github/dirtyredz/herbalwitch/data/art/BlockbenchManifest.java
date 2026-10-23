@@ -48,7 +48,7 @@ public final class BlockbenchManifest {
             "block/stations/mortar", "block/stations/drying_rack", "block/stations/hearth", "block/stations/stove",
             "block/decor/templates", "block/preparations/templates", "block/grimoire/stand", "block/grimoire/bookshelf",
             "block/decor/pieces", "block/ritual/altar", "block/stations/cauldron", "block/stations/still",
-            "block/stations/bottling_bench", "block/stations/charm_workbench", "block/ritual/circle", "block/ward/ward_stone", "block/animals");
+            "block/stations/bottling_bench", "block/stations/charm_workbench", "block/ritual/circle", "block/ward/ward_stone", "block/animals", "block/familiars/home");
     /** Textures (under textures/) the fourteen pre-M5 pieces own, painted in their projects: block/pieces/<project>/<texture>.png. */
     public static final List<String> TEXTURES = List.of(
             "block/pieces/decor/apothecary_counter/gold.png",
@@ -154,6 +154,7 @@ public final class BlockbenchManifest {
         out.addAll(MILESTONE_6_PROJECTS);
         out.addAll(MILESTONE_7_PROJECTS);
         out.addAll(io.github.dirtyredz.herbalwitch.data.animals.AnimalManifest.PROJECTS);
+        out.addAll(List.of("familiars/homes/bed", "familiars/homes/nest", "familiars/homes/perch"));
         return List.copyOf(out);
     }
 
@@ -234,6 +235,7 @@ public final class BlockbenchManifest {
         out.addAll(MILESTONE_6_MODELS);
         out.addAll(MILESTONE_7_MODELS);
         io.github.dirtyredz.herbalwitch.data.animals.AnimalManifest.PROJECTS.forEach(p -> out.add("block/" + p + "/base.json"));
+        for (String key : List.of("bed", "nest", "perch")) out.add("block/familiars/home/" + key + "/base.json");
         out.sort(null);
         return out;
     }

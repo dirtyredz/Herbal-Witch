@@ -10,6 +10,10 @@ public final class FamiliarMenuActions {
     public static String apply(ServerPlayer owner, FamiliarRosterMenu menu, FamiliarRequest request) {
         if (request.bond() == null) return null;
         if (menu.selected() != null && !menu.selected().equals(request.bond())) return null;
+        if (request.action().equals("home")) {
+            var home = menu.home(owner);
+            return home == null ? "unavailable" : io.github.dirtyredz.herbalwitch.companions.familiars.home.FamiliarHomeService.assign(owner, home, request.bond());
+        }
         if (request.action().equals("recall")) return FamiliarRecall.recall(owner, request.bond());
         if (request.action().equals("command")) {
             try { return FamiliarCommands.set(owner, request.bond(), FamiliarCommand.parse(request.value())); }

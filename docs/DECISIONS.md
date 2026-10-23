@@ -1,5 +1,17 @@
 # Decisions - The Herbal Witch
 
+## 2026-10-23 - Home assignment belongs to the bond
+
+Bed, nest and floor perch share one placement/block implementation and one identity-only block entity.
+The bond owns the dimension, position and home-instance UUID; a derived index reserves that instance
+even while its familiar is unloaded or incapacitated. The block's occupant is a repairable cache.
+Breaking a loaded home clears the assignment, while an unloaded or unknown-schema home cannot prove
+absence. Replacement blocks receive new identities, and dropped items contain no assignment.
+
+Home selection uses the private roster with a bounded, same-level menu context. Ordinary safe rest
+heals one health per 100 loaded ticks, including offline rest, without energy or reserve. Internal rest
+clock changes do not invalidate every in-flight owner intent. Section 7 defaults are unchanged.
+
 ## 2026-10-22 - Loaded command work and UUID permission checks
 
 Seven stable command names share one exclusive goal, with bounded fair queues for scans and paths.

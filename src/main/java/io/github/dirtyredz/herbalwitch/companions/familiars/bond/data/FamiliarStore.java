@@ -18,6 +18,7 @@ public final class FamiliarStore implements AutoCloseable {
     private final FamiliarRosterIndex owners = new FamiliarRosterIndex();
     private final FamiliarEntityIndex creatures = new FamiliarEntityIndex();
     private final FamiliarMobileIndex mobile = new FamiliarMobileIndex();
+    private final io.github.dirtyredz.herbalwitch.companions.familiars.home.FamiliarHomeIndex homes = new io.github.dirtyredz.herbalwitch.companions.familiars.home.FamiliarHomeIndex();
     private final BiConsumer<String, FamiliarSavedData> register;
     private DirectoryStream<Path> stream;
     private Iterator<Path> pending;
@@ -39,6 +40,7 @@ public final class FamiliarStore implements AutoCloseable {
     public boolean ready() { return indexed && !corrupt; }
     public FamiliarRosterIndex roster() { return owners; }
     public FamiliarMobileIndex mobile() { return mobile; }
+    public io.github.dirtyredz.herbalwitch.companions.familiars.home.FamiliarHomeIndex homes() { return homes; }
     /** At most 32 shards per tick, including malformed files. No complete directory materialization. */
     public int indexBatch() {
         if (indexed) return 0;
@@ -50,7 +52,7 @@ public final class FamiliarStore implements AutoCloseable {
                     String file = path.getFileName().toString();
                     UUID id = UUID.fromString(file.substring(FamiliarSavedData.PREFIX.length(), file.length() - 4));
                     var data = new FamiliarSavedData(directory, id, new VerifiedSnapshotWriter(FamiliarSavedData.FORMAT)); data.load();
-                    if (!creatures.add(data.record()) || shards.putIfAbsent(id, data) != null) throw new IOException("Duplicate familiar identity");
+                    if (!creatures.add(data.record()) || !homes.changed(data.record()) || shards.putIfAbsent(id, data) != null) throw new IOException("Duplicate familiar or home identity");
                     owners.changed(data.record()); mobile.changed(data.record()); register.accept(FamiliarSavedData.name(id), data);
                     if (data.isDirty() && !data.checkpoint(FamiliarCodec.MAX_BYTES)) corrupt = true;
                 } catch (Exception failure) {
@@ -66,21 +68,27 @@ public final class FamiliarStore implements AutoCloseable {
     public Optional<FamiliarRecord> creature(UUID creature) { return creatures.bond(creature).flatMap(this::record); }
     public boolean writable(UUID bond) { var shard = shards.get(bond); return ready() && shard != null && shard.writable(); }
     public boolean create(FamiliarRecord record) {
-        if (!ready() || shards.containsKey(record.bond()) || creatures.bond(record.creature()).isPresent()
+        if (!ready() || !homes.accepts(record) || shards.containsKey(record.bond()) || creatures.bond(record.creature()).isPresent()
                 || Files.exists(directory.resolve(FamiliarSavedData.name(record.bond()) + ".dat"))) return false;
         var shard = new FamiliarSavedData(directory, record.bond(), new VerifiedSnapshotWriter(FamiliarSavedData.FORMAT));
         // Validate before adding derived entries; write uncertainty must still retain the identity.
         if (!shard.put(record, false, FamiliarServerConfig.current().recordBytes())) return false;
-        shards.put(record.bond(), shard); creatures.add(record); owners.changed(record); mobile.changed(record);
+        shards.put(record.bond(), shard); creatures.add(record); owners.changed(record); mobile.changed(record); homes.changed(record);
         register.accept(FamiliarSavedData.name(record.bond()), shard);
         return shard.checkpoint(FamiliarServerConfig.current().recordBytes());
     }
     public boolean update(FamiliarRecord next, boolean checkpoint) {
-        if (!ready()) return false;
+        if (!ready() || !homes.accepts(next)) return false;
         var shard = shards.get(next.bond()); if (shard == null) return false;
-        long previous = shard.record().revision();
+        var before = shard.record(); long previous = before.revision();
         boolean success = shard.put(next, checkpoint, FamiliarServerConfig.current().recordBytes());
-        if (shard.record().revision() != previous) { owners.changed(shard.record()); mobile.changed(shard.record()); }
+        if (shard.record().revision() != previous) {
+            var after = shard.record();
+            // Internal rest ticks persist without making every in-flight owner intent stale.
+            var oldView = before.state(); var newView = after.state(); oldView.remove("homeRest"); newView.remove("homeRest");
+            if (checkpoint || before.phase() != after.phase() || before.generation() != after.generation() || !oldView.equals(newView)) owners.changed(after);
+            mobile.changed(after); homes.changed(after);
+        }
         return success;
     }
     public boolean begin(long tick) {

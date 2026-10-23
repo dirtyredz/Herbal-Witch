@@ -1,5 +1,10 @@
 # Gotchas - The Herbal Witch
 
+- **A home cache is not an assignment.** Resolve dimension, position and instance UUID against the
+  canonical bond before use. The derived occupancy index includes unloaded bonds. Missing terrain
+  is pending; only an observed missing/replaced home invalidates it. Home selection menus additionally
+  bind the opening instance and continuously recheck reach, sight and owner (protocol 8).
+
 - **ANU retains its test world between jobs.** Roster fixtures that assert an exact count use a fresh
   player identity; old canonical bonds are legitimate entries, not cross-owner leakage. Flight tests
   also exercise explicit fall-damage calls, which vanilla bat landing suppression alone does not cover.

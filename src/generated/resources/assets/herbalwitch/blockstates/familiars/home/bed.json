@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "herbalwitch:block/familiars/home/bed/base",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "herbalwitch:block/familiars/home/bed/base"
+    },
+    "facing=south": {
+      "model": "herbalwitch:block/familiars/home/bed/base",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "herbalwitch:block/familiars/home/bed/base",
+      "y": 270
+    }
+  }
+}

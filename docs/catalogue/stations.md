@@ -197,6 +197,11 @@ rack and elsewhere; the decorative rack does not change that.
 
 ## Rules
 
+M9 familiar homes are functional one-block pieces, not processing stations. Bed, nest and perch use
+the shared checked floor-placement flow, open an owner-only grimoire assignment session and support
+ordinary loaded rest. They expose no item handler. Exact compatibility and recipes are in
+[familiars.md](familiars.md); identity and assignment never travel in the dropped item.
+
 - No universal machine superclass. Shared processing (`apothecary/stations/process/`: reservations, job, completion) is used by composition; `StationBlock` and `StationMenu` share only block and menu boilerplate.
 - Ordinary processing (drying, grinding, steeping, infusion, and the bottling bench) is open to non-witches and may be hopper-automated; magical jobs need an authorized witch nearby while progressing and at completion. Each recipe type has an execution policy (ordinary, magical or either) and a recipe's `requirements` (witch, energy) decide the rest.
 - A witch recipe reserves and runs nothing until a witch presses Start (a vanilla menu button); the energy is debited once, at completion, through `WitchStatusService`, and the starter is the payer.

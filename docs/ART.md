@@ -3,6 +3,15 @@
 Direction, the house style, the owner's reference pieces, how models and textures are made, how
 art is reviewed, and the owner checklist.
 
+M9 home drafts are editable projects at `src/art/blockbench/familiars/homes/{bed,nest,perch}/`.
+Each owns its 32px dark wood, plain deep green fabric, plum, brass and ivy textures. Previews show
+all four facings on floor supports; the geometry regression checks floor contact, one-cell bounds
+and overlapping coplanar faces. The first nest draft's four rim overlaps were corrected in its
+project. The full headless review rendered 55 images with 3,853 states, 244 items and all 825 models
+covered, without diagnostics, at `2026-10-22-herbal-witch-m9/previews/homes-qualified/` in the job
+artifacts. All three home scenes were inspected in four facings. Owner in-game scale, transforms and
+shader review remains pending.
+
 ## Owner direction
 
 - **2026-10-21 (dev.4):** "All of the colour options are terrible." The 18 finishes are gone; one

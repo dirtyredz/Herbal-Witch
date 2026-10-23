@@ -1,5 +1,14 @@
 # Architecture - The Herbal Witch
 
+Familiar homes share one floor-supported structure block and identity-only block entity. Placement
+uses `platform/placement`; the canonical bond's home reference owns assignment, and a derived
+instance-to-bond index enforces one occupant including unloaded/incapacitated bonds. The block's
+occupant cache is repaired on use. A nearby grimoire session carries the position and instance UUID,
+with owner, reach, sight and permission checks repeated for assignment. Replacement never inherits
+the old instance. Loaded rest heals one health per 100 safe ticks without energy or reserve;
+internal rest ticks persist without invalidating the roster's user-action revision. Protocol 8 adds
+the optional home selection context to the roster opening payload.
+
 How the mod is put together. Code map: [STRUCTURE.md](../STRUCTURE.md).
 Plan of record: milestones 1-12 (docs/FEATURES.md); traceability: docs/catalogue/.
 
@@ -71,7 +80,8 @@ no scan loads a chunk. Leave events remove only the exact object and shutdown cl
 
 Showcase plans include at most 32 pure entity descriptors. Habitat blocks are constructed first;
 the entity phase validates insertion and removes only its own samples if one fails. The full M8
-layout is 121 x 8 x 58, with sixteen adult animals and the original 65,536-write ceiling unchanged.
+layout is 119 x 8 x 60, with sixteen adult animals, three functional familiar homes and the original
+65,536-write ceiling unchanged. The home section fits the existing second row; no template expansion.
 Dedicated-server/restart qualification remains outside the local fast gate; see catalogue/animals.md.
 
 Everything below is server-authoritative; clients get vanilla block updates, menu slots and menu data.

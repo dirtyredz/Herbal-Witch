@@ -79,6 +79,7 @@ class GeneratedResourcesTest {
         expected.addAll(CircleManifest.files());
         expected.addAll(WardManifest.files());
         expected.addAll(io.github.dirtyredz.herbalwitch.data.animals.AnimalManifest.files());
+        expected.addAll(io.github.dirtyredz.herbalwitch.data.familiars.FamiliarManifest.files());
         assertEquals(expected, generatedFiles());
     }
 

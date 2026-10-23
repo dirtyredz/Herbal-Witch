@@ -7,6 +7,12 @@ import java.util.*;
 public final class FamiliarTranslations {
     private FamiliarTranslations() {}
     public static void addTo(LanguageProvider out) {
+        for (var home : FamiliarHomeKind.values()) out.add("block.herbalwitch." + home.path().replace('/', '.'), "Familiar " + title(home.key()));
+        out.add("showcase.herbalwitch.section.familiar_homes", "Familiar homes");
+        out.add("showcase.herbalwitch.label.familiar_home", "Use with grimoire");
+        Map.of("choose_home", "Choose a familiar for this home", "assign_home", "Assign this home", "home_assigned", "Home assigned.",
+                "home_incompatible", "This species needs a different home.", "home_occupied", "This home already has a familiar.")
+                .forEach((key, value) -> out.add("familiar.herbalwitch." + key, value));
         Map.ofEntries(Map.entry("roster", "Familiars"), Map.entry("detail", "Nearby detail"), Map.entry("first_page", "First page"),
                 Map.entry("next_page", "Next page"), Map.entry("altar_target", "Select for altar"), Map.entry("loading", "Reading your familiar bonds…"),
                 Map.entry("health", "Bond %s · %s / %s health · %s"), Map.entry("loaded", "Loaded"), Map.entry("last_observed", "Last observed"),

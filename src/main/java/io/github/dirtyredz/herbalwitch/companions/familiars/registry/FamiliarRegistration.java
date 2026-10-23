@@ -20,6 +20,7 @@ import net.minecraftforge.eventbus.api.*;
 public final class FamiliarRegistration {
     private FamiliarRegistration() {}
     public static void register(IEventBus bus) {
+        FamiliarHomes.register(bus);
         io.github.dirtyredz.herbalwitch.companions.familiars.config.FamiliarServerConfig.register(bus);
         FamiliarEntities.TYPES.register(bus); bus.addListener(FamiliarEntities::attributes);
         FamiliarMenus.MENUS.register(bus);

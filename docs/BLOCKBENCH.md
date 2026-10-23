@@ -16,6 +16,7 @@ docs/DECISIONS.md (0.2.0-dev.6); traps: docs/GOTCHAS.md.
 | Witch's Cauldron, Copper Still, Bottling Bench, Charm Workbench (0.6.0, first drafts by an agent) | `src/art/blockbench/stations/{cauldron,still,bottling_bench,charm_workbench}/` |
 | Ritual circle (0.6.0, first draft by an agent, a 5 x 5 ring of 16 cells) | `src/art/blockbench/ritual/circle/` |
 | Ward stone (0.6.0, first draft by an agent) | `src/art/blockbench/ward/ward_stone/` |
+| Familiar bed, nest and floor perch (M9 first drafts) | `src/art/blockbench/familiars/homes/{bed,nest,perch}/` |
 
 ### The 0.4.0 furniture projects
 

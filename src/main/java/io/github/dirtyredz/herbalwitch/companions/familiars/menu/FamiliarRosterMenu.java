@@ -22,21 +22,43 @@ public class FamiliarRosterMenu extends AbstractContainerMenu {
     private static final SecureRandom RANDOM = new SecureRandom();
     protected final long nonce;
     protected final UUID selected;
+    private BlockPos homePosition;
+    private UUID homeInstance;
+    private net.minecraft.world.level.Level homeLevel;
     private UUID cursor;
     private long sentAt = Long.MIN_VALUE / 2, sentRevision;
-    public FamiliarRosterMenu(int id, Inventory inventory, FriendlyByteBuf buffer) { this(FamiliarMenus.ROSTER.get(), id, buffer.readLong(), null); }
+    public FamiliarRosterMenu(int id, Inventory inventory, FriendlyByteBuf buffer) {
+        this(FamiliarMenus.ROSTER.get(), id, buffer.readLong(), null);
+        if (buffer.readBoolean()) { homePosition = buffer.readBlockPos(); homeInstance = buffer.readUUID(); }
+    }
     protected FamiliarRosterMenu(MenuType<?> type, int id, long nonce, UUID selected) { super(type, id); this.nonce = nonce; this.selected = selected; }
     public long nonce() { return nonce; }
     public UUID selected() { return selected; }
     public long sentRevision() { return sentRevision; }
-    @Override public boolean stillValid(Player player) { return !(player instanceof ServerPlayer owner) || FamiliarMenuAccess.roster(owner); }
+    public boolean homeContext() { return homePosition != null; }
+    public io.github.dirtyredz.herbalwitch.companions.familiars.home.FamiliarHomeBlockEntity home(ServerPlayer owner) {
+        if (!homeContext() || owner.level() != homeLevel || !owner.level().hasChunkAt(homePosition)) return null;
+        if (!(owner.level().getBlockEntity(homePosition) instanceof io.github.dirtyredz.herbalwitch.companions.familiars.home.FamiliarHomeBlockEntity home)
+                || !home.instance().equals(homeInstance) || !io.github.dirtyredz.herbalwitch.companions.familiars.home.FamiliarHomeService.mayUse(owner, home, false)) return null;
+        return home;
+    }
+    @Override public boolean stillValid(Player player) { return !(player instanceof ServerPlayer owner) || FamiliarMenuAccess.roster(owner) && (!homeContext() || home(owner) != null); }
     @Override public ItemStack quickMoveStack(Player player, int slot) { return ItemStack.EMPTY; }
     public static void open(ServerPlayer player) {
         if (!AnimalInteractionEvents.allowRequest(player) || !FamiliarMenuAccess.roster(player)) return;
         long nonce = issueNonce();
         NetworkHooks.openScreen(player, new SimpleMenuProvider((id, inventory, actor) -> new FamiliarRosterMenu(FamiliarMenus.ROSTER.get(), id, nonce, null),
-                Component.translatable("familiar.herbalwitch.roster")), b -> b.writeLong(nonce));
+                Component.translatable("familiar.herbalwitch.roster")), b -> { b.writeLong(nonce); b.writeBoolean(false); });
         if (player.containerMenu instanceof FamiliarRosterMenu menu) menu.send(player, true, "");
+    }
+    public static void openHome(ServerPlayer owner, io.github.dirtyredz.herbalwitch.companions.familiars.home.FamiliarHomeBlockEntity home) {
+        if (!AnimalInteractionEvents.allowRequest(owner) || !io.github.dirtyredz.herbalwitch.companions.familiars.home.FamiliarHomeService.mayUse(owner, home, false)) return;
+        long nonce = issueNonce();
+        NetworkHooks.openScreen(owner, new SimpleMenuProvider((id, inventory, player) -> {
+            var menu = new FamiliarRosterMenu(FamiliarMenus.ROSTER.get(), id, nonce, null);
+            menu.homePosition = home.getBlockPos(); menu.homeInstance = home.instance(); menu.homeLevel = owner.level(); return menu;
+        }, Component.translatable("familiar.herbalwitch.choose_home")), b -> { b.writeLong(nonce); b.writeBoolean(true); b.writeBlockPos(home.getBlockPos()); b.writeUUID(home.instance()); });
+        if (owner.containerMenu instanceof FamiliarRosterMenu menu) menu.send(owner, true, "");
     }
     protected static long issueNonce() { long value; do { value = RANDOM.nextLong(); } while (value == 0); return value; }
     public FamiliarRosterPage page(ServerPlayer player, String notice) {

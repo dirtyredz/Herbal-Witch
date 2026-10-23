@@ -97,6 +97,9 @@
     "herbalwitch:stations/charm_workbench/station",
     "herbalwitch:grimoire/stand",
     "herbalwitch:grimoire/bookshelf",
-    "herbalwitch:magic/ritual/altar"
+    "herbalwitch:magic/ritual/altar",
+    "herbalwitch:familiars/home/bed",
+    "herbalwitch:familiars/home/nest",
+    "herbalwitch:familiars/home/perch"
   ]
 }

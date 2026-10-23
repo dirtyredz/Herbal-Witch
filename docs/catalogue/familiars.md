@@ -38,7 +38,7 @@ Use the roster's command arrows to select an order, then press its named button.
 six blocks and stops within three; Stay keeps its saved anchor; Guard Witch defends against hostile
 threats to the owner or familiar. Protect Home patrols an assigned home, Scout visits at most four
 safe waypoints, Passive wanders locally without retaliation, and Return Home becomes Stay on arrival.
-Home orders require an assignment from the home phase. Controls/sleep, immediate hazards and retreat
+Home orders require an assigned compatible home. Controls/sleep, immediate hazards and retreat
 below one-quarter health take precedence. Ordinary commands cost no energy.
 
 Follow, Guard Witch and Scout share three mobile slots, including unloaded assignments. Logout or
@@ -58,3 +58,16 @@ scan/path budgets up to 32/16 (defaults 8/4), guard/sense radii up to 24/48 (def
 home guards up to eight, and public retrieval off by default. Lowering the mobile limit keeps oldest
 reservations. Existing oversized records remain preserved if the byte limit is lowered; raise it to
 allow a mutation that no longer fits. These settings do not erase existing bonds or their payloads.
+
+Place a familiar bed, nest or perch on a sturdy floor, then use it with the grimoire and select
+**Assign this home**. Beds accept cats, foxes, wolves, snakes and rabbits; nests accept ravens and
+owls; perches accept ravens, owls and bats. One bond occupies each home, including an unloaded or
+incapacitated familiar. Only its owner can assign it. Moving to another home releases the prior one.
+Breaking or losing support drops one empty home item; a replacement has a new identity. An unloaded
+home remains pending and never loads terrain. Safe rest within two blocks heals one health per
+100 loaded ticks, including while the owner is offline; it grants neither energy nor reserve.
+
+Home recipes are shapeless: bed = three dark oak planks, two green wool and two string; nest = four
+sticks, two wheat and two string; perch = two dark oak slabs, two sticks and one iron nugget. Their
+first-draft Blockbench projects own their cottage textures. The `familiar_homes` showcase section
+joins witchcraft and places each label beside its functional, initially unowned sample.

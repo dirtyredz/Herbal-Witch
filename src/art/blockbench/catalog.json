@@ -22,7 +22,8 @@
     "block/stations/charm_workbench",
     "block/ritual/circle",
     "block/ward/ward_stone",
-    "block/animals"
+    "block/animals",
+    "block/familiars/home"
   ],
   "projects": [
     "stations/kettle",
@@ -143,6 +144,9 @@
     "animals/bait/berry",
     "animals/care/calming_powder",
     "animals/capture/charm",
-    "animals/capture/filled_charm"
+    "animals/capture/filled_charm",
+    "familiars/homes/bed",
+    "familiars/homes/nest",
+    "familiars/homes/perch"
   ]
 }

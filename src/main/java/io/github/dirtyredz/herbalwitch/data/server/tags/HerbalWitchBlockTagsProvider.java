@@ -51,5 +51,6 @@ public class HerbalWitchBlockTagsProvider extends BlockTagsProvider {
         GrimoireTagContributions.blocks(sink);
         AltarTagContributions.blocks(sink);
         WardRecipes.blocks(sink);
+        io.github.dirtyredz.herbalwitch.data.server.familiars.FamiliarHomeRecipes.blocks(sink);
     }
 }
