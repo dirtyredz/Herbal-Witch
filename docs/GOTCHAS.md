@@ -392,3 +392,4 @@ Curios 5.14.1 attaches an exact `{Curios: []}` inventory payload to slotless ani
 and familiar snapshots preserve that inert shape; populated slots, extra fields, malformed tags and
 all other foreign capabilities remain refused. This is an empty-payload contract, not Curios storage
 support for familiars. No foreign runtime classes enter the validator.
+Player clone subscribers run at LOWEST priority: Curios revives the old player during its normal-priority clone callback. Copy after that callback, then invalidate the retired player's dispatcher. Capability providers renew invalid LazyOptional handles when Forge legitimately revives an entity, retaining the same durable state.

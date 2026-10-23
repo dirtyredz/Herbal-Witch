@@ -34,9 +34,14 @@ public final class ShowcaseCommandGameTests {
     }
 
     @GameTest(template = SECTION, batch = "herbalwitch_showcase_an_operator_builds_a_section")
-    public static void anOperatorBuildsASection(GameTestHelper helper) {
+    public static void anOperatorBuildsASection(GameTestHelper helper) throws io.github.dirtyredz.herbalwitch.showcase.layout.ShowcasePlan.InvalidPlanException {
         stoneFloor(helper, SECTION_X, SECTION_Z);
         ServerPlayer op = standing(helper, "op", GameType.SURVIVAL);
+        var plan = io.github.dirtyredz.herbalwitch.showcase.layout.ShowcasePlan.of(java.util.List.of(
+                io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseRegistry.byId("garden").orElseThrow()));
+        var problem = io.github.dirtyredz.herbalwitch.showcase.construction.ShowcasePreflight.check(
+                plan, helper.getLevel(), op, helper.absolutePos(ORIGIN));
+        check(problem.isEmpty(), "operator fixture preflight: " + problem.map(net.minecraft.network.chat.Component::getString).orElse(""));
         int placed = run(helper, as(op, 2), "herbalwitch showcase garden");
         check(placed > 0, "operator command placed nothing");
         check(helper.getBlockState(DRY_BED).is(BotanyBlocks.herbBed()), "garden bed missing: " + helper.getBlockState(DRY_BED));
