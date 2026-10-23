@@ -192,9 +192,13 @@ public final class SurvivalLoopGameTests {
     /** Harvests the mature plant on new farmland and returns every fresh herb it dropped, as one stack. */
     private static ItemStack harvest(GameTestHelper helper, ServerPlayer player, HerbSpec herb, BlockPos soil) {
         BlockPos plant = plantOnFarmland(helper, herb, soil, HerbSpec.MAX_AGE);
-        check(click(helper, player, plant).consumesAction(), herb.id() + " was not harvested");
+        var result = click(helper, player, plant);
+        check(result.consumesAction(), herb.id() + " was not harvested: " + result);
+        int loose = helper.getLevel().getEntitiesOfClass(ItemEntity.class, new AABB(helper.absolutePos(plant)).inflate(24)).size();
         ItemStack fresh = collectDropped(helper, BotanyItems.fresh(herb));
-        check(fresh.getCount() >= 2, herb.id() + " gave " + fresh);
+        check(fresh.getCount() >= 2, herb.id() + " gave " + fresh + "; plant now " + helper.getBlockState(plant) + ", items within 24: " + loose
+                + ", drops rule " + helper.getLevel().getGameRules().getBoolean(net.minecraft.world.level.GameRules.RULE_DOBLOCKDROPS)
+                + ", restoring " + helper.getLevel().restoringBlockSnapshots + ", capturing " + helper.getLevel().captureBlockSnapshots);
         return fresh;
     }
 
