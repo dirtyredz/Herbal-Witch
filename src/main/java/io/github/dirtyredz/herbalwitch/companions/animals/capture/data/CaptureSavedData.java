@@ -17,7 +17,8 @@ public final class CaptureSavedData extends SavedData {
     private final Map<UUID, CaptureRecord> records = new LinkedHashMap<>();
     private final CaptureCheckpoint writer;
     private final Path path;
-    private boolean uncertain, transaction;
+    // uncertain: no further write may run (a failed write or an unreadable file); unreadable: the records themselves are unknown.
+    private boolean uncertain, unreadable, transaction;
     private long nextTransaction;
 
     public CaptureSavedData(Path path, CaptureCheckpoint writer) { this.path = path; this.writer = writer; }
@@ -45,10 +46,13 @@ public final class CaptureSavedData extends SavedData {
             if (prepared) { setDirty(); checkpoint(); }
         } catch (Exception failure) {
             uncertain = true;
+            unreadable = true;
             org.slf4j.LoggerFactory.getLogger(CaptureSavedData.class).error("Capture ledger is read-only; preserve its file for operator inspection", failure);
         }
     }
     public synchronized boolean writable() { return !uncertain; }
+    /** Whether the records are known. A failed write locks writing but leaves every loaded record authoritative. */
+    public synchronized boolean readable() { return !unreadable; }
     public synchronized Optional<CaptureRecord> record(UUID animal) { return Optional.ofNullable(records.get(animal)); }
     public synchronized Optional<CaptureRecord> token(UUID token) {
         if (token == null) return Optional.empty();

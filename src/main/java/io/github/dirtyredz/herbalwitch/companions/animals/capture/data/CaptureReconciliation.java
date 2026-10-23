@@ -1,6 +1,5 @@
 package io.github.dirtyredz.herbalwitch.companions.animals.capture.data;
 
-import io.github.dirtyredz.herbalwitch.companions.animals.species.AnimalProfiles;
 import io.github.dirtyredz.herbalwitch.companions.animals.trust.AnimalCapability;
 import io.github.dirtyredz.herbalwitch.companions.lifecycle.CompanionLifecycleAuthority;
 import net.minecraft.server.MinecraftServer;
@@ -28,9 +27,12 @@ public final class CaptureReconciliation {
     public static void join(EntityJoinLevelEvent event) {
         if (!(event.getLevel() instanceof ServerLevel level) || !(event.getEntity() instanceof Mob mob)) return;
         var data = CaptureSavedData.get(level.getServer());
-        var record = data.record(mob.getUUID()).orElse(null);
         long generation = generation(mob);
-        if (!data.writable() && (generation > 0 || AnimalProfiles.find(EntityType.getKey(mob.getType()).toString()).isPresent())) { event.setCanceled(true); return; }
+        // An unreadable ledger cannot vouch for transport lineage, so only transported incarnations wait for it.
+        // A refused join is a permanent removal, so ordinary animals that were never transported still join.
+        if (!data.readable()) { if (generation > 0) event.setCanceled(true); return; }
+        // A write-locked ledger still knows every record: stale and duplicate incarnations stay refused below.
+        var record = data.record(mob.getUUID()).orElse(null);
         if (record == null) { if (generation > 0) event.setCanceled(true); return; }
         Permit permit = PERMITS.get(level.getServer());
         boolean permitted = permit != null && permit.entity() == mob && permit.transaction().equals(record.transaction())

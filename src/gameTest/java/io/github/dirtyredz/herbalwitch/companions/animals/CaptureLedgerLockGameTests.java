@@ -35,7 +35,7 @@ public final class CaptureLedgerLockGameTests {
             })) {
                 check(!data.checkpoint(), "injected ledger write succeeded");
             }
-            check(!data.writable(), "a failed write must lock writing");
+            check(!data.writable() && data.readable(), "a failed write must lock writing and keep the records known");
             var cow = helper.spawn(EntityType.COW, new BlockPos(4, 1, 4));
             check(helper.getLevel().getEntity(cow.getUUID()) == cow && !cow.isRemoved(), "write-locked ledger refused a never-captured cow");
             helper.succeed();

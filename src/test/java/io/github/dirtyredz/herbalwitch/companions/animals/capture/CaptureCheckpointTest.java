@@ -33,6 +33,8 @@ class CaptureCheckpointTest {
             var data = new CaptureSavedData(path, new CaptureCheckpoint(at -> { if (at == stage) throw new IOException("injected " + stage); }));
             assertFalse(data.commit(CaptureStateTest.prepared(1))); assertTrue(data.isDirty()); assertFalse(data.writable());
             assertFalse(data.commit(CaptureStateTest.prepared(2))); assertEquals(1, data.size());
+            // Writes stay locked, but the loaded records remain known for admission decisions.
+            assertTrue(data.readable()); assertTrue(data.record(CaptureStateTest.prepared(1).animal()).isPresent());
             data.save(path.toFile()); assertTrue(data.isDirty());
         }
     }
@@ -50,6 +52,6 @@ class CaptureCheckpointTest {
     @Test void corruptFileIsPreservedAndCannotBeReplacedByAnEmptySave() throws Exception {
         var path = directory.resolve("corrupt.dat"); byte[] corrupt = {4, 5, 6}; Files.write(path, corrupt);
         var data = new CaptureSavedData(path, new CaptureCheckpoint()); data.load(); data.setDirty(); data.save(path.toFile());
-        assertFalse(data.writable()); assertArrayEquals(corrupt, Files.readAllBytes(path));
+        assertFalse(data.writable()); assertFalse(data.readable()); assertArrayEquals(corrupt, Files.readAllBytes(path));
     }
 }

@@ -29,7 +29,13 @@ function parseState(s) {
 
 const deepEqual = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 
-/** Field paths (a.b.c) present in `before` whose value differs or vanished in `after`. */
+const emptyCompound = (v) => v !== null && typeof v === 'object' && !Array.isArray(v) && Object.keys(v).length === 0;
+
+/**
+ * Field paths (a.b.c) present in `before` whose value differs or vanished in `after`. An empty compound
+ * that is no longer written carries no data (Forge omits an empty ForgeCaps once foreign capabilities
+ * are gone), so its absence is not a change.
+ */
 function changedFields(before, after, prefix = '') {
   const out = [];
   if (before === null || typeof before !== 'object' || Array.isArray(before)) {
@@ -38,7 +44,7 @@ function changedFields(before, after, prefix = '') {
   }
   for (const [k, v] of Object.entries(before)) {
     const path = prefix ? `${prefix}.${k}` : k;
-    if (after === null || typeof after !== 'object' || !(k in after)) { out.push(path); continue; }
+    if (after === null || typeof after !== 'object' || !(k in after)) { if (!emptyCompound(v)) out.push(path); continue; }
     out.push(...changedFields(v, after[k], path));
   }
   return out;
@@ -94,7 +100,9 @@ export function compare(fixtureDir, runDir, expectations = json(join(here, 'expe
     if (pos in before.blockEntities) continue;
     notes.createdBlockEntities++;
     if (countItems(be) !== 0) violations.push(`created block entity at ${pos} (${be.id}) holds ${countItems(be)} items`);
-    if (!(expectations.createdBlockEntities ?? []).includes(be.id)) violations.push(`unexpected new block entity at ${pos}: ${be.id}`);
+    const rule = (expectations.createdBlockEntities ?? {})[be.id];
+    const block = parseState(after1.blocks[pos] ?? 'none').id;
+    if (!rule || !rule.blocks.includes(block)) violations.push(`unexpected new block entity at ${pos}: ${be.id} on ${block}`);
   }
 
   // 4. Players.

@@ -1,5 +1,15 @@
 {
   "comment": "Reviewed save migrations. Each entry names a saved field the candidate may rewrite, and why. Nothing here may be inferred from a failing run alone; every rule cites the decision or gotcha that makes the change intended.",
-  "migrations": {},
-  "createdBlockEntities": []
+  "migrations": {
+    "herbalwitch:stations/drying_rack/station": [{ "field": "Job.Schema", "why": "ProcessJob reads schema 1 (0.1.0-0.5.0) and writes schema 2 (0.6.0, M7 witch recipes); recipe, fingerprint, reservation and progress carry over (docs/GOTCHAS.md 'An unknown job schema is preserved')" }],
+    "herbalwitch:stations/mortar/station": [{ "field": "Job.Schema", "why": "as the drying rack" }],
+    "herbalwitch:stations/kettle/station": [{ "field": "Job.Schema", "why": "as the drying rack" }],
+    "herbalwitch:stations/infusion_pot/station": [{ "field": "Job.Schema", "why": "as the drying rack" }]
+  },
+  "createdBlockEntities": {
+    "herbalwitch:decor/storage": {
+      "blocks": ["herbalwitch:decor/storage/small_wall_shelf"],
+      "why": "The small wall shelf had no block entity before 0.4.0; it gains an empty one on first access and its modelled bottles never become items (docs/GOTCHAS.md 'Old small shelves have no block entity')"
+    }
+  }
 }

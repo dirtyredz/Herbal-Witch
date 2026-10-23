@@ -72,6 +72,10 @@ restartHarness('commerceRestartTest', 'commerce', 'herbalwitch_commerce_restart'
         'tools/qualification/restart/commerce/verify-report.mjs',
         'ANU only: two dedicated JVMs reconcile commerce transfers stopped at every durable boundary.')
 
+restartHarness('captureRestartTest', 'capture', 'herbalwitch_capture_restart', 'herbalwitch.capture.restart',
+        'tools/qualification/restart/capture/verify-report.mjs',
+        'ANU only: two dedicated JVMs reconcile captures and releases stopped at every ledger boundary.')
+
 // Save upgrade (Milestone 12): historical worlds prepared by tools/qualification/save-upgrade/fixture.mjs.
 // -PsaveUpgradeFixtures=<dir> holds one prepared fixture per subdirectory (world/, before.json,
 // chunks.txt, receipt.json). Three JVMs per fixture: upgrade (load, re-save), reload (load, re-save:

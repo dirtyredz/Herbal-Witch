@@ -362,6 +362,8 @@ herbalwitch/
 - `tools/qualification/restart/familiars/` — familiar restart report
 - `tools/qualification/restart/magic-tools/` — broom/wand restart report and queue script
 - `tools/qualification/restart/commerce/` — commerce restart report
+- `tools/qualification/restart/capture/` — M8 capture restart report and its README
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/companions/animals/persistence/` — capture restart qualification: real captures/releases stopped at each ledger boundary, reconciled in a second JVM
 - `tools/qualification/save-upgrade/` — lossless NBT and Anvil reading/writing, fixture sanitising, inventories and the upgrade comparison
 
 **other (gradle, docs)**
