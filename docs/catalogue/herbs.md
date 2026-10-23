@@ -94,3 +94,8 @@ Biome tags `herbalwitch:botany/habitat/<group>` drive both foraging and worldgen
   blocks, at the group's rarity, via per-group biome modifiers. No retrogen.
 - **Progression:** every herb stays cultivable once acquired; conditions only improve discovery or yield.
 - **Supplements** (not herbs): vanilla mushrooms, moss, roots, flowers, minerals, and resin.
+
+M9 uses fresh sage for binding, fresh yarrow for revival and Heartwood, mugwort for Spirit Well,
+and lavender for Bond Harmony. Dried chamomile distinguishes the rabbit sachet workbench recipe.
+Existing familiar preparation recipes remain unchanged; effects and exact offerings are listed in
+[familiars.md](familiars.md). Care still uses the matching M8 bait and its feeding cooldown.

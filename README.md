@@ -4,7 +4,7 @@ Forge 1.20.1 mod: woodland herbal witchcraft (herbs, stations, brewing, familiar
 an apothecary trade) together with a cottage furniture catalogue. Install on **both** the server and
 every client.
 
-**Status: private development, M9 implementation in progress on `0.6.1`. Protocol 6. Version `0.8.0` awaits the complete milestone gate.**
+**Status: private development, M9 implementation in progress on `0.6.1`. Protocol 10. Version `0.8.0` awaits the complete milestone gate.**
 Contains Milestone 1 (cottage decor in a single design), Milestone 2 (herbs and garden), Milestone 3
 (everyday preparation stations and products), Milestone 4 (the grimoire: discovery, recipe lookup,
 missing ingredients, research blocks and teaching), Milestone 5 (94 furniture pieces), Milestone 6
@@ -65,7 +65,7 @@ The nine new sprites are first drafts; owner art and two-client review remain pe
   Bench, Charm Workbench), 16 advanced preparations (night vision, water breathing, resistance and healing
   draughts; poison, concealment, slowing, binding, weakening and sleep vials; venom, thorn and two
   repellent oils; blinding dust; moon essence), four-dose mixtures, and ten preparations for familiars that
-  wait for Milestone 9 (see "Advanced brewing" below; docs/catalogue/products.md).
+  have their M9 consumer installed (see docs/catalogue/familiars.md).
 - **Charms, the ritual circle and wards** (tab "Apothecary"): protective charms, a ring that unlocks the
   Garden Blessing and Home Protection rituals, and the ward stone (see "Charms, circle and wards" below).
 - **Grimoire** (tab "Apothecary"): a portable book, a Grimoire Stand and a Witch's Bookshelf. They open the
@@ -161,8 +161,8 @@ everyday stations (docs/catalogue/stations.md), with one difference: a recipe th
   recipes at the infusion pot; Blinding Dust is a witch recipe at the mortar.
 - **For familiars:** ten more preparations (Guardian's Brew, Swiftpaw Tonic, Nightwatch Infusion, Moonveil
   Elixir, Spiritbond Potion, Hearthkeeper's Brew, Shadowstep Draught, Warding Essence, Venomleaf Extract,
-  Emberguard Oil) can be made now but refuse to be used ("available with familiar bonding") until
-  familiars arrive in a later milestone.
+  Emberguard Oil) apply to owned bonded familiars. Their timers, effects and costs are documented in
+  [the familiar reference](docs/catalogue/familiars.md).
 
 ## Charms, circle and wards
 
@@ -217,7 +217,7 @@ advisory: nothing in the game is locked behind it, and the recipe viewers (EMI, 
 
 Energy is the budget witchcraft spends. A witch has a capacity (100 to start, growing with
 practice) and an energy level; non-witches have neither. The altar's rituals, witch recipes at the
-advanced stations, the circle rituals and ward activation spend energy; the later familiar systems will.
+advanced stations, the circle rituals and ward activation spend energy; familiar binding, recall, upgrades, revival and powers do too.
 
 - **The altar:** `SAS` / `LGL` / `L L`: 2 smooth stone slabs (S), an amethyst shard (A), 4 dark oak
   logs (L), a gold ingot (G); Apothecary tab, broken fastest with an axe. One item places the whole
@@ -348,3 +348,19 @@ checks in docs/FEATURES.md.
 ## License
 
 MIT (LICENSE). All textures and models are original, generated or authored for this mod.
+
+## Multiple familiars
+
+Build trust with matching animal bait, then bind an eligible adult at the altar and circle. Open
+your grimoire roster to choose a command or recall a loaded familiar. Nearby detail pages manage
+one species accessory, one charm, cargo, observed power targets and prepaid guard reserve.
+Use a grimoire on an owned home to assign its compatible resident. Friendly visitors are never
+automatic targets. Missing or unloaded creatures never trigger replacement spawning.
+
+Lethal damage retains an incapacitated bond for paid revival. Ambiguous interrupted transactions
+remain quarantined; operators can inspect them with /herbalwitch familiar. The full acquisition,
+command, crafting and recovery reference is [familiars.md](docs/catalogue/familiars.md).
+
+The witchcraft showcase contains 25 animal appearances, including nine inert familiar displays,
+three functional homes and familiar supplies. Its measured bounds remain 119 x 8 x 60; furniture
+remains 41 x 8 x 28. All labels retain the sign-beside-block rule.

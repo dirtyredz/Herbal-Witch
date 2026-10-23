@@ -15,7 +15,7 @@ Version promotion to 0.7.0 awaits the orchestrator's dedicated-server and restar
 | Fox | Berry | Keeper; native trusted UUIDs retained | Yes | Yes |
 | Parrot | Seed | Native taming | Yes | Yes |
 | Axolotl | Fish | Keeper | No: native Brain | Yes, using sleep; release into water |
-| Bat | Berry | Trust only for later M9 | No: native flight | No |
+| Bat | Berry | Trust only; M9 binding establishes ownership | No: native flight | No |
 
 Direct matching bait gives 20 personal trust and one successful feed, once per 1,200 **loaded** ticks.
 Trust caps at 100, never passively decays, and is private to each player/animal pair. Default capacity
@@ -57,7 +57,7 @@ Capture needs a real player holding an empty charm, a tested eligible animal, no
 permission, ownership or 80 personal trust/four feeds, and active calm or sleep. Recent damage,
 attacking, environmental danger, passengers, riding and leashes refuse it. Native owners bypass only
 the trust requirement. Babies preserve their age. Unknown capabilities or persistent mod data are
-refused before removal; unsupported stored data is retained. M9 must supply its own lifecycle policy
+refused before removal; unsupported stored data is retained. M9 supplies its own canonical lifecycle policy
 before bonded animals can be transported.
 
 Use a filled charm against a block face. Its single adjacent-cell destination must be within reach,
@@ -109,3 +109,8 @@ axolotl and enclosed parrot/bat flight. Supplies contain all usable care items, 
 grimoire. No trust, owner, witch status, discovery or active effect is pre-granted.
 
 Bonded familiar owners may continue matching feeds at maximum trust through the existing care path. Trust remains capped, the same 1,200-loaded-tick feeding cooldown and hurt lockout apply, and successful feeding consumes one bait and contributes familiar bond XP. Ordinary animals still refuse maximum-trust feeds. Healing remains the existing salve interaction with its 200-tick target cooldown and bowl return.
+
+Raven/crow, owl and snake have exact M9 care profiles (seed, meat and meat bait), keeper adoption,
+and 80-trust/four-feed binding gates. Native cat/wolf ownership remains intact. Dedicated bonded
+representations retain care and transport lineage but are explicitly excluded from capture; an old
+capture token cannot recreate a released generation after binding. See [familiars.md](familiars.md).

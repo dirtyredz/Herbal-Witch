@@ -177,3 +177,5 @@ apply from: 'gradle/art.gradle'
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
+
+apply from: 'gradle/familiars.gradle'

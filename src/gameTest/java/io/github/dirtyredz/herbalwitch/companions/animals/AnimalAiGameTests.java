@@ -59,7 +59,7 @@ public final class AnimalAiGameTests {
         floor(h); var player = AnimalFixtures.player(h, "m8_sleep"); var cow = AnimalFixtures.animal(h, EntityType.COW);
         class Impact extends PreparationProjectile {
             Impact() { super(h.getLevel(), player, Burst.SLEEP); setItem(new ItemStack(AdvancedPreparations.item(AdvancedProductCatalog.SLEEP))); }
-            void hit() { onHit(new net.minecraft.world.phys.EntityHitResult(cow)); }
+            void hit() { onHit(new net.minecraft.world.phys.EntityHitResult(cow, cow.getBoundingBox().getCenter())); }
         }
         var projectile = new Impact(); projectile.setPos(cow.position()); h.getLevel().addFreshEntity(projectile); projectile.hit();
         check(cow.hasEffect(PreparationEffects.SLEEP.get()) && projectile.isRemoved(), "projectile did not put cow to sleep");

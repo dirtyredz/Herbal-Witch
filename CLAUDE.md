@@ -102,3 +102,7 @@ Markdown.
 
 Before your first item write in a session, run `docket guide` and follow it.
 <!-- docket:agent-snippet end -->
+
+- **M9 restart qualification:** the ANU-only named heavier task is familiarRestartTest. It starts two
+  sequential dedicated-server JVMs; tools/familiars/restart/README.md explains checkpoint evidence.
+  It is excluded from build/check and must not be run locally. Version promotion requires its green result.

@@ -12,6 +12,9 @@ import java.util.Objects;
 
 /** Serialized temp/force/atomic-replace/read-back mechanics, without capture or bond policy. */
 public final class VerifiedSnapshotWriter {
+    // Package-private fault/evidence probe, installed only by the separate GameTest source set.
+    // Thread confinement prevents a test observer from changing unrelated writer threads.
+    static final ThreadLocal<java.util.function.BiConsumer<Stage, Path>> PROBE = new ThreadLocal<>();
     public enum Stage { BEFORE_WRITE, BEFORE_FORCE, BEFORE_REPLACE, BEFORE_VERIFY }
     @FunctionalInterface public interface Fault { void at(Stage stage) throws IOException; }
     private final SnapshotEnvelope envelope;
@@ -32,20 +35,27 @@ public final class VerifiedSnapshotWriter {
             Files.createDirectories(target.getParent());
             temporary = Files.createTempFile(target.getParent(), "herbalwitch-snapshot-", ".tmp");
             fault.at(Stage.BEFORE_WRITE);
+            probe(Stage.BEFORE_WRITE, target);
             try (FileChannel channel = FileChannel.open(temporary, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING)) {
                 ByteBuffer bytes = ByteBuffer.wrap(encoded);
                 while (bytes.hasRemaining()) channel.write(bytes);
                 fault.at(Stage.BEFORE_FORCE);
+                probe(Stage.BEFORE_FORCE, target);
                 channel.force(true);
             }
             fault.at(Stage.BEFORE_REPLACE);
+            probe(Stage.BEFORE_REPLACE, target);
             Files.move(temporary, target, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
             temporary = null;
             fault.at(Stage.BEFORE_VERIFY);
+            probe(Stage.BEFORE_VERIFY, target);
             if (!Arrays.equals(snapshot, read(target, maximum))) throw new IOException("Snapshot verification mismatch");
         } finally {
             if (temporary != null) try { Files.deleteIfExists(temporary); } catch (IOException ignored) { /* not authoritative */ }
         }
+    }
+    private static void probe(Stage stage, Path target) {
+        var observer = PROBE.get(); if (observer != null) observer.accept(stage, target);
     }
 
     public synchronized byte[] read(Path path, int maximum) throws IOException {

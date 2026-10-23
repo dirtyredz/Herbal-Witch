@@ -436,3 +436,7 @@ in `src/art/blockbench/familiars/spawn_egg/<raven|owl|snake>/`, compiled to matc
 and owned texture directories. `companions/familiars/grimoire/` owns the installed guide source;
 `data/client/familiars/FamiliarGuideTranslations` supplies its prose. `showcase/` owns nine inert
 appearance samples and supply barrels. Acquisition tests live in `src/gameTest/.../familiars/acquisition/`.
+
+Restart qualification belongs in gradle/familiars.gradle and tools/familiars/restart/. Test-world
+support lives in src/gameTest/.../companions/familiars/persistence/; the test-only SnapshotProbe
+adapter lives in src/gameTest/.../platform/persistence/. Neither ships in the release jar.

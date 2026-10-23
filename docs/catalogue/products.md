@@ -39,7 +39,7 @@ Balanced by duration, recipe cost, cooldown and mob resistance. PvP targeting is
 | Product | Category | Station | Delivery | Witch-only? | Planned effect | Milestone | Status |
 |---|---|---|---|---|---|---|---|
 | Poison vials | offence | Witch's Cauldron | throwable | yes | Poison Vial: Poison I 0:08 | 7 | done (0.6.0) |
-| Venom oils | offence | Infusion pot | oil | yes | Venom Oil coats the blade in the off hand: 8 poisoning hits or 1:00 (familiar attacks wait for M9) | 7 | done (0.6.0) |
+| Venom oils | offence | Infusion pot | oil | yes | Venom Oil coats the blade in the off hand: 8 poisoning hits or 1:00 (also delivered by permitted familiar bites) | 7 | done (0.6.0) |
 | Blinding powder | control | Mortar and pestle | dust | yes | Blinding Dust, thrown: blinds; creatures cannot find anyone beyond 4 blocks, 0:05 | 7 | done (0.6.0) |
 | Concealment smoke | control | Witch's Cauldron | throwable | yes | Concealment Vial: a smoke burst; foes cannot find those in it beyond 4 blocks, 0:08 | 7 | done (0.6.0) |
 | Slowing mixture | control | Witch's Cauldron | throwable | yes | Slowing Vial: Slowness II 0:08 | 7 | done (0.6.0) |
@@ -74,21 +74,21 @@ rules; the live grimoire lists the current recipes. Version promotion awaits ANU
 
 ## Familiar preparations
 
-Recipes landed in milestone 7 (0.6.0) as `FamiliarPreparationCatalog` items; their effects on familiars land in milestone 9. Until M9 installs `FamiliarPreparationApplications.install` the ten new items refuse to be used, with "available with familiar bonding". Temporary buffs last 180 s. Permanent upgrades come only from a small named altar-ritual list. Familiar powers consume energy and/or have cooldowns.
+Recipes landed in milestone 7 (0.6.0). M9 installs `FamiliarPreparationApplications.install` and applies the ten buffs through the existing interaction/container path; Healing Salve remains the eleventh entry. Buffs last 180 loaded seconds and refresh without stacking. Exact effects and magical costs are in [familiars.md](familiars.md). Permanent upgrades use named altar rituals.
 
 | Product | Category | Station | Delivery | Witch-only? | Planned effect | Milestone | Status |
 |---|---|---|---|---|---|---|---|
-| Guardian's Brew | familiar brew | Witch's Cauldron | drink | yes | health and defense | 7 / 9 | item and recipe done (0.6.0); effect planned (M9) |
-| Swiftpaw Tonic | familiar brew | Witch's Cauldron | drink | yes | movement speed | 7 / 9 | item and recipe done (0.6.0); effect planned (M9) |
-| Nightwatch Infusion | familiar brew | Witch's Cauldron | drink | yes | nighttime detection | 7 / 9 | item and recipe done (0.6.0); effect planned (M9) |
-| Moonveil Elixir | familiar brew | Witch's Cauldron | drink | yes | temporary stealth | 7 / 9 | item and recipe done (0.6.0); effect planned (M9) |
-| Warding Essence | familiar brew | Distillation still | essence | yes | elemental/magic resistance (sage powder + quartz, 15 energy) | 7 / 9 | item and recipe done (0.6.0); effect planned (M9) |
-| Emberguard Oil | familiar brew | Infusion pot | oil | yes | fire resistance | 7 / 9 | item and recipe done (0.6.0); effect planned (M9) |
-| Venomleaf Extract | familiar brew | Distillation still | essence | yes | poison attacks (belladonna powder + spider eye, 15 energy) | 7 / 9 | item and recipe done (0.6.0); effect planned (M9) |
-| Spiritbond Potion | familiar brew | Witch's Cauldron | drink | yes | stronger bond and energy synergy | 7 / 9 | item and recipe done (0.6.0); effect planned (M9) |
-| Hearthkeeper's Brew | familiar brew | Witch's Cauldron | drink | yes | enhanced home defense | 7 / 9 | item and recipe done (0.6.0); effect planned (M9) |
-| Healing Salve | familiar brew | Infusion pot | salve | no | restore health (animal variant of everyday salve); the catalogue lists the existing everyday Healing Salve as the eleventh entry, no new item | 7 / 9 | catalogue entry done (0.6.0); animal use planned (M8/M9) |
-| Shadowstep Draught | familiar brew | Witch's Cauldron | drink | yes | brief repositioning | 7 / 9 | item and recipe done (0.6.0); effect planned (M9) |
+| Guardian's Brew | familiar brew | Witch's Cauldron | drink | yes | health and defense | 7 / 9 | item, recipe and M9 effect implemented; real application qualified |
+| Swiftpaw Tonic | familiar brew | Witch's Cauldron | drink | yes | movement speed | 7 / 9 | item, recipe and M9 effect implemented; real application qualified |
+| Nightwatch Infusion | familiar brew | Witch's Cauldron | drink | yes | nighttime detection | 7 / 9 | item, recipe and M9 effect implemented; real application qualified |
+| Moonveil Elixir | familiar brew | Witch's Cauldron | drink | yes | temporary stealth | 7 / 9 | item, recipe and M9 effect implemented; real application qualified |
+| Warding Essence | familiar brew | Distillation still | essence | yes | elemental/magic resistance (sage powder + quartz, 15 energy) | 7 / 9 | item, recipe and M9 effect implemented; real application qualified |
+| Emberguard Oil | familiar brew | Infusion pot | oil | yes | fire resistance | 7 / 9 | item, recipe and M9 effect implemented; real application qualified |
+| Venomleaf Extract | familiar brew | Distillation still | essence | yes | poison attacks (belladonna powder + spider eye, 15 energy) | 7 / 9 | item, recipe and M9 effect implemented; real application qualified |
+| Spiritbond Potion | familiar brew | Witch's Cauldron | drink | yes | stronger bond and energy synergy | 7 / 9 | item, recipe and M9 effect implemented; real application qualified |
+| Hearthkeeper's Brew | familiar brew | Witch's Cauldron | drink | yes | enhanced home defense | 7 / 9 | item, recipe and M9 effect implemented; real application qualified |
+| Healing Salve | familiar brew | Infusion pot | salve | no | restore health (animal variant of everyday salve); the catalogue lists the existing everyday Healing Salve as the eleventh entry, no new item | 7 / 9 | existing M8 capped healing/container path; familiar use qualified |
+| Shadowstep Draught | familiar brew | Witch's Cauldron | drink | yes | brief repositioning | 7 / 9 | item, recipe and M9 effect implemented; real application qualified |
 
 Moon Essence (a still recipe: mugwort powder, amethyst shard, water bottle, glass bottle, 10 energy) is the
 ingredient the strongest brews take.
@@ -120,4 +120,4 @@ habitats, discovery chances and worldgen rarity.
 
 Supplements (not herbs): vanilla mushrooms, moss, roots, flowers, minerals, and a resin ingredient. No extra herbs are invented to reach "about 20".
 
-M9 familiar application now consumes the existing finished products, with no extra energy payment. Guardian adds four maximum health and two armor without healing; Swiftpaw adds 20% commanded movement speed; Moonveil uses existing concealment; Warding reduces fire/freezing/lightning/magic damage by 20% except bypass/void/kill; Emberguard projects fire resistance. Venomleaf supplies permitted Poison I bites once per second, and ordinary Venom Oil shares the coating slot for eight hits or 60 loaded seconds; weaker oil cannot replace Venomleaf. Spiritbond adds one eligible care XP within the same cap. Hearthkeeper grants two armor while guarding inside the verified home radius. Shadowstep arms one checked loaded reposition up to eight blocks, spending its charge only on success. Timers last 3,600 loaded ticks, refresh without stacking and have a 20-tick per-product use gate. Salve keeps M8 healing and its bowl. Nightwatch sensing, Spiritbond ability cost and Hearthkeeper repel timing are connected in the following abilities phase.
+M9 familiar application now consumes the existing finished products, with no extra energy payment. Guardian adds four maximum health and two armor without healing; Swiftpaw adds 20% commanded movement speed; Moonveil uses existing concealment; Warding reduces fire/freezing/lightning/magic damage by 20% except bypass/void/kill; Emberguard projects fire resistance. Venomleaf supplies permitted Poison I bites once per second, and ordinary Venom Oil shares the coating slot for eight hits or 60 loaded seconds; weaker oil cannot replace Venomleaf. Spiritbond adds one eligible care XP within the same cap. Hearthkeeper grants two armor while guarding inside the verified home radius. Shadowstep arms one checked loaded reposition up to eight blocks, spending its charge only on success. Timers last 3,600 loaded ticks, refresh without stacking and have a 20-tick per-product use gate. Salve keeps M8 healing and its bowl. Nightwatch enables nocturnal threat sensing, Spiritbond discounts power costs by 20%, and Hearthkeeper reduces guarded-home repel cooldown from 40 to 30 ticks.
