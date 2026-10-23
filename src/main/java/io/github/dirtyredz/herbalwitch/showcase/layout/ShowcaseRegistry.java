@@ -1,6 +1,7 @@
 package io.github.dirtyredz.herbalwitch.showcase.layout;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +17,9 @@ public final class ShowcaseRegistry {
         if (!section.id().matches("[a-z0-9_]+")) {
             throw new IllegalArgumentException("bad showcase section id " + section.id());
         }
+        if (group(section.id()).isPresent()) {
+            throw new IllegalArgumentException("showcase section id " + section.id() + " is a group name");
+        }
         if (byId(section.id()).isPresent()) {
             throw new IllegalStateException("duplicate showcase section " + section.id());
         }
@@ -24,6 +28,16 @@ public final class ShowcaseRegistry {
 
     public static synchronized List<ShowcaseSection> sections() {
         return Collections.unmodifiableList(new ArrayList<>(SECTIONS));
+    }
+
+    /** The registered sections of one showcase, in layout order. */
+    public static synchronized List<ShowcaseSection> sections(ShowcaseGroup group) {
+        return SECTIONS.stream().filter(s -> s.group() == group).toList();
+    }
+
+    /** The group a command argument names, if it names one. */
+    public static Optional<ShowcaseGroup> group(String id) {
+        return Arrays.stream(ShowcaseGroup.values()).filter(g -> g.id().equals(id)).findFirst();
     }
 
     public static synchronized Optional<ShowcaseSection> byId(String id) {

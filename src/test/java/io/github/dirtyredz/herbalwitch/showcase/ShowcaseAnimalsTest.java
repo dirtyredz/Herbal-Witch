@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ShowcaseAnimalsTest {
     @Test void independentlyExpectedSixteenSpeciesHaveSeparateTranslatedHabitats() throws Exception {
-        var section = new AnimalShowcaseSection(); var plan = ShowcasePlan.of(ShowcasePlanTest.sections());
+        var section = new AnimalShowcaseSection(); var plan = ShowcasePlan.of(ShowcasePlanTest.group(io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseGroup.WITCHCRAFT));
         assertEquals(Set.of("cow", "sheep", "goat", "pig", "rabbit", "chicken", "horse", "donkey", "mule", "llama", "cat", "wolf", "fox", "parrot", "axolotl", "bat"),
                 section.entities().stream().map(s -> s.type().replace("minecraft:", "")).collect(java.util.stream.Collectors.toSet()));
         assertEquals(16, plan.entities().size()); assertEquals(16, new HashSet<>(plan.entities()).size());

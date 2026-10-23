@@ -26,7 +26,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 /**
- * One station's showcase: the working station facing the entrance with a sign naming it and its
+ * One station's showcase: the working station facing the entrance with a sign beside it naming its
  * recipe, stocked with real sample inputs (and a sample product) through its ordinary inventory.
  * Heated stations stand on a lit, fuelled witch's stove. A multiblock station is placed cell by
  * cell, origin first, so it stands complete. One parameterised class serves every station.
@@ -65,13 +65,13 @@ public final class StationShowcaseSection implements ShowcaseSection {
     @Override
     public List<ShowcasePlacement> placements() {
         List<ShowcasePlacement> out = new ArrayList<>();
-        out.add(ShowcasePlacement.label(1, 0, Line.translated(recipeKey)));
+        out.add(ShowcasePlacement.label(0, 1, Line.translated(recipeKey)));
         int y = 1;
         if (onStove) {
-            station(out, () -> StationBlocks.STOVE.get(), StationCatalog.STOVE.layout(), 0, 1, StationShowcaseSection::fuel);
+            station(out, () -> StationBlocks.STOVE.get(), StationCatalog.STOVE.layout(), 1, 1, StationShowcaseSection::fuel);
             y = 2;
         }
-        station(out, () -> StationBlocks.block(spec), spec.layout(), onStove ? 1 : 0, y, this::stock);
+        station(out, () -> StationBlocks.block(spec), spec.layout(), onStove ? 2 : 1, y, this::stock);
         return out;
     }
 

@@ -252,21 +252,29 @@ advanced stations, the circle rituals and ward activation spend energy; the late
 
 ## Showcase command
 
-`/herbalwitch showcase [section]` builds a labelled sample of every registered block, for owner review
+`/herbalwitch showcase [furniture|witchcraft|section]` builds a labelled sample of every registered block, for owner review
 and testing. It needs permission level 2 (operators; a non-op, in survival or creative, and the console
 are refused). Sections: `decor`, `herbs`, `garden`, `drying_rack`, `mortar`, `kettle`, `hearth`,
 `stove`, `infusion_pot`, `preparations`, `grimoire`, `altar`, `cauldron`, `still`, `bottling_bench`,
-`charm_workbench`, `advanced_preparations`, `ritual_circle`, `ward_stone`, `charms`; with no section it builds all of them. The grimoire
+`charm_workbench`, `advanced_preparations`, `ritual_circle`, `ward_stone`, `charms`. Two showcases are built separately:
+`furniture` (the `decor` section: the 94 pieces) and `witchcraft` (every other section: herbs, stations, products, magic
+and abilities). `/herbalwitch showcase furniture` or `... witchcraft` builds one; with no argument both are built, the
+witchcraft one 8 blocks behind (south of) the furniture one with open ground between; a section name builds that section
+alone. Each is checked before anything is written. The grimoire
   section (both research blocks, a barrel with two grimoires and supplies, signs) grants no knowledge.
 The `altar` section (an idle altar, a supply barrel and signs) initiates nobody, touches no founding
 record, grants no energy and starts no ritual.
-The `decor` section is a footprint-aware grid of all 94 pieces with signs, with wall pieces on walls and
+The `decor` section is a footprint-aware grid of all 94 pieces with a sign beside each, with wall pieces on walls and
 hanging pieces under ceilings, lights lit, storage stocked and the door in its four states.
 
-- **Where:** the box starts 2 blocks east of you on your row and extends east and south. The floor is
-  the block you stand on. Height 8 (floor layer plus 7 cleared). Sections pack into rows no wider than 126, so the full
-  layout is 121 x 8 x 58 in two rows, including sixteen live animal habitats (it was 121 x 8 x 38 in M7);
-  hard caps are 128 x 8 x 128 and 65,536 writes.
+- **Where:** the first box starts 2 blocks east of you on your row and extends east and south. The floor is
+  the block you stand on. Height 8 (floor layer plus 7 cleared). Sections pack into rows no wider than 126. The
+  furniture showcase is 41 x 8 x 28 and the witchcraft showcase 119 x 8 x 60 in two rows, including sixteen live animal habitats (the single
+  showcase was 121 x 8 x 38 before the split); hard caps per box are 128 x 8 x 128 and 65,536 writes.
+- **Signs:** a sign for a block stands on the floor in the block's own front row, one block west of it (your
+  right as you face it), so it never hides the block; the block north of every sign stays open. Notes that
+  annotate no block stand in the front row with nothing behind them, and each section's heading has an open
+  row below it. This holds for multiblock and wall-mounted pieces (the sign is at the piece's floor-level west edge).
 - **Destructive:** the whole box is replaced: terrain (grass, dirt, stone, plants, leaves, logs, water) is cleared (no drops) and the floor laid (grass blocks under the garden and herbs, smooth stone elsewhere), then the floor,
   supports, samples and signs are placed. There is no undo.
 - **Refuses** before any write if a chunk is unloaded, the box leaves the world border or build

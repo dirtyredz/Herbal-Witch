@@ -3,6 +3,7 @@ package io.github.dirtyredz.herbalwitch.decor.showcase;
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.decor.showcase.DecorShowcaseLayout.Slot;
 import io.github.dirtyredz.herbalwitch.decor.showcase.DecorShowcaseSamples.Sample;
+import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseGroup;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcasePlacement;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseSection;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -12,8 +13,8 @@ import java.util.List;
 import java.util.function.Consumer;
 
 /**
- * Every delivered furniture piece in a footprint-aware grid ({@link DecorShowcaseLayout}): a sign in
- * front of each, the piece facing the entrance (north) with the walls and ceilings it hangs from,
+ * Every delivered furniture piece in a footprint-aware grid ({@link DecorShowcaseLayout}): a sign beside
+ * each (to its west), the piece facing the entrance (north) with the walls and ceilings it hangs from,
  * lights lit, storage stocked from {@link #stock}, and the door's alternate states beside it
  * ({@link DecorShowcaseSamples}).
  */
@@ -36,6 +37,11 @@ public final class DecorShowcaseSection implements ShowcaseSection {
     @Override
     public String id() {
         return "decor";
+    }
+
+    @Override
+    public ShowcaseGroup group() {
+        return ShowcaseGroup.FURNITURE;
     }
 
     @Override

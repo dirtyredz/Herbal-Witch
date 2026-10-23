@@ -24,7 +24,7 @@ public final class AnimalShowcaseSection implements ShowcaseSection {
         List<ShowcaseEntitySample> out = new ArrayList<>();
         for (int i = 0; i < AnimalProfiles.ALL.size(); i++) {
             var p = AnimalProfiles.ALL.get(i);
-            out.add(new ShowcaseEntitySample(p.id(), (i % 4) * 6 + 2.5, p.id().endsWith("bat") || p.id().endsWith("parrot") ? 2 : 1,
+            out.add(new ShowcaseEntitySample(p.id(), (i % 4) * 6 + 3.5, p.id().endsWith("bat") || p.id().endsWith("parrot") ? 2 : 1,
                     (i / 4) * 7 + 3.5));
         }
         return List.copyOf(out);
@@ -32,8 +32,8 @@ public final class AnimalShowcaseSection implements ShowcaseSection {
     @Override public List<ShowcasePlacement> placements() {
         List<ShowcasePlacement> out = new ArrayList<>();
         for (int i = 0; i < AnimalProfiles.ALL.size(); i++) {
-            var profile = AnimalProfiles.ALL.get(i); int x = (i % 4) * 6, z = (i / 4) * 7;
-            out.add(ShowcasePlacement.label(x, z, ShowcasePlacement.Line.translated("entity." + profile.id().replace(':', '.')),
+            var profile = AnimalProfiles.ALL.get(i); int x = (i % 4) * 6 + 1, z = (i / 4) * 7; // the sign stands west of the habitat wall, never in front of it
+            out.add(ShowcasePlacement.label(x - 1, z, ShowcasePlacement.Line.translated("entity." + profile.id().replace(':', '.')),
                     ShowcasePlacement.Line.translated("item.herbalwitch.animals.bait." + profile.bait().id())));
             boolean water = profile.id().equals("minecraft:axolotl");
             for (int dx = 0; dx < 5; dx++) for (int dz = 1; dz <= 5; dz++) {

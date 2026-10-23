@@ -77,7 +77,7 @@ class ShowcaseCoverageTest {
         List<ShowcasePlacement> content = placements.stream().filter(p -> p.kind() == ShowcasePlacement.Kind.CONTENT).toList();
         assertEquals(5, content.size(), "four altar cells and a supply barrel");
         assertEquals(1, content.stream().filter(p -> p.init() != null).count(), "one stocked barrel");
-        assertEquals(4, content.stream().filter(p -> p.x() <= 1).count(), "the altar stands at x 0..1");
+        assertEquals(4, content.stream().filter(p -> p.x() <= 2).count(), "the altar stands at x 1..2");
         List<String> labels = placements.stream().filter(p -> p.kind() == ShowcasePlacement.Kind.LABEL)
                 .map(p -> p.lines().get(0).text()).toList();
         assertEquals(List.of("Witch's Altar", "showcase.herbalwitch.label.altar.use", "showcase.herbalwitch.label.altar.founding",
