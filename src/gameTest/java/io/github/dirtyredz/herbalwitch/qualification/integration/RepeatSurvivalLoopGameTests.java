@@ -20,6 +20,8 @@ public final class RepeatSurvivalLoopGameTests {
                 io.github.dirtyredz.herbalwitch.companions.animals.AnimalInspectionGameTests::privateCardAndSessionValidationPreventReplayAndCloseWhenBookIsLost));
         for (int i = 0; i < 24; i++) out.add(new TestFunction("herbalwitch_debug_release_" + i, "debugrelease" + i, "herbalwitch:empty", 100, 0, true,
                 io.github.dirtyredz.herbalwitch.companions.animals.AnimalCaptureGameTests::realActorCaptureReleaseAndCopiedTokenHaveOneAnimalEvenWithFullInventory));
+        for (int i = 0; i < 24; i++) out.add(new TestFunction("herbalwitch_debug_load_" + i, "debugload" + i, "herbalwitch:empty", 400, 0, true,
+                io.github.dirtyredz.herbalwitch.companions.familiars.command.FamiliarLoadGameTests::paginatedRosterAndManyOwnersShareOneWorkBudget));
         return out;
     }
 }

@@ -474,5 +474,10 @@ Full M10 profile runs exposed M9 fixture assumptions: the retreat owner was outs
   that needs the whole tag.
 - **GameTest batches run side by side.** Never sweep entities or drops beyond the test's own plot
   (`WorldFixtures.clearEntities`, `clearDrops`): a 16- or 32-block sweep deleted neighbouring tests'
-  familiars and harvest drops and made unrelated tests flaky (M12: raven flight, the survival loop's
-  harvest, the crowded wand collection). Judge only your own entities instead (`WandUtilityGameTests.takes`).
+  familiars and drops and made unrelated tests flaky (M12: raven flight, the admin recovery,
+  the crowded wand collection). Judge only your own entities instead (`WandUtilityGameTests.takes`).
+- **A fresh plot is not entity-ticking on its first tick.** The batch force-loads its chunks on placement, but
+  the ticket applies a tick later; an entity added before then lands in a hidden section that `getEntity` and
+  `getEntitiesOfClass` never see (M12: harvest drops joined and were then not found; a spawned cow was absent
+  from the animal card). Tests that add or look up entities on their first tick start through
+  `WorldFixtures.whenEntitiesLive`; familiar tests get it from `FamiliarFixtures.whenReady`.

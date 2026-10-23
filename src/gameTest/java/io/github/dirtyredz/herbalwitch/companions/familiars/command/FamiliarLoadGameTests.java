@@ -77,7 +77,7 @@ public final class FamiliarLoadGameTests {
         var work=FamiliarWork.in(h.getLevel());check(work.lastPaths()<=4 && work.lastScans()<=8,"shared work budget exceeded under load");
         check(!h.getLevel().hasChunkAt(far) && forced.containsAll(h.getLevel().getForcedChunks()),"familiar load created forced terrain");
         int totalPaths=paths+work.lastPaths(),totalScans=scans+work.lastScans();
-        if(left==0){check(totalPaths>0 && totalScans>0,"load fixture exercised no real work");loaded.forEach(Mob::discard);h.succeed();}
+        if(left==0){if(!(totalPaths>0 && totalScans>0))throw new net.minecraft.gametest.framework.GameTestAssertException("load fixture exercised no real work: paths "+totalPaths+", scans "+totalScans+", live "+io.github.dirtyredz.herbalwitch.fixture.WorldFixtures.entitiesLive(h)+", mobs "+loaded.stream().map(m->m.getId()+":"+m.tickCount+(m.isNoAi()?"/noai":"")+(m.isRemoved()?"/removed":"")+"/"+FamiliarStore.get(h.getLevel().getServer()).creature(m.getUUID()).map(r->r.phase()+"-"+r.command()).orElse("none")+"@"+m.blockPosition()).toList());loaded.forEach(Mob::discard);h.succeed();}
         else h.runAfterDelay(1,()->sample(h,loaded,far,forced,left-1,totalPaths,totalScans));
     }
 }
