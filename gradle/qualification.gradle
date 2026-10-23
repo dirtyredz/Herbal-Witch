@@ -18,7 +18,7 @@ tasks.named('processGameTestResources').configure {
 }
 
 /** One dedicated GameTest JVM running only {@code namespace}, in {@code workingDir}, with system properties. */
-def dedicatedPhase = { String taskName, File workingDir, String namespace, Map<String, String> properties, List<String> after ->
+def dedicatedPhase = { String taskName, File workingDir, String namespace, Map<String, String> properties, List<String> after, List<String> jvmArgs = [] ->
     tasks.register(taskName, harnessTaskType) {
         group = 'verification'
         dependsOn { def base = tasks.named('runGameTestServer').get(); base.taskDependencies.getDependencies(base) }
@@ -36,6 +36,7 @@ def dedicatedPhase = { String taskName, File workingDir, String namespace, Map<S
             config.workingDirectory(workingDir)
             config.property('forge.enabledGameTestNamespaces', namespace)
             properties.each { k, v -> config.property(k, v) }
+            jvmArgs.each { config.jvmArg(it) }
             config
         })
         mainClass.set(runConfig.map { it.main })
@@ -127,7 +128,10 @@ tasks.register('saveUpgradeTest') {
 def performanceRun = file("run/performance/${UUID.randomUUID()}")
 def performanceEvidence = new File(performanceRun, 'evidence')
 def performanceProps = { String phase -> ['herbalwitch.performance.phase': phase, 'herbalwitch.performance.evidence': performanceEvidence.absolutePath] }
-dedicatedPhase('runPerformanceMeasure', performanceRun, 'herbalwitch_performance', performanceProps('measure'), [])
+// -PperformanceProfile records a Java Flight Recording of the measuring JVM, for attribution only.
+def performanceJfr = project.hasProperty('performanceProfile')
+        ? ['-XX:StartFlightRecording=filename=' + new File(performanceEvidence, 'measure.jfr').absolutePath + ',settings=profile'] : []
+dedicatedPhase('runPerformanceMeasure', performanceRun, 'herbalwitch_performance', performanceProps('measure'), [], performanceJfr)
 dedicatedPhase('runPerformanceRestart', performanceRun, 'herbalwitch_performance', performanceProps('restart'), ['runPerformanceMeasure'])
 tasks.register('qualifyPerformance', Exec) {
     group = 'verification'
