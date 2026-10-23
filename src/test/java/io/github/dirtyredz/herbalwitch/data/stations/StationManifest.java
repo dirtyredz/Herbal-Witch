@@ -19,17 +19,17 @@ public final class StationManifest {
     public static final Map<String, String> STATIONS = linked("drying_rack", "Herb Drying Rack", "mortar", "Mortar and Pestle",
             "kettle", "Tea Kettle", "hearth", "Hearth", "stove", "Witch's Stove", "infusion_pot", "Infusion Pot",
             "cauldron", "Witch's Cauldron", "still", "Copper Still", "bottling_bench", "Bottling Bench",
-            "charm_workbench", "Charm Workbench");
+            "charm_workbench", "Charm Workbench", "tools/broom_stand", "Broom Stand", "tools/wand_bench", "Wand Bench");
     /** Multiblock stations: directory -> number of cells. */
     public static final Map<String, Integer> MULTIBLOCKS = Map.of("drying_rack", 4, "hearth", 4, "stove", 2,
-            "still", 2, "bottling_bench", 2, "charm_workbench", 2);
+            "still", 2, "bottling_bench", 2, "charm_workbench", 2, "tools/broom_stand", 2, "tools/wand_bench", 2);
     /** The overlay state a station shows and the overlay model prefix of its cells (fire while lit, bundles while drying, else active). */
     public static final Map<String, String> SHOWN = Map.of("drying_rack", "active", "hearth", "lit", "stove", "lit",
-            "still", "active", "bottling_bench", "active", "charm_workbench", "active");
+            "still", "active", "bottling_bench", "active", "charm_workbench", "active", "tools/broom_stand", "active", "tools/wand_bench", "active");
     public static final Map<String, String> OVERLAYS = Map.of("drying_rack", "bundles_", "hearth", "fire_", "stove", "fire_",
-            "still", "active_", "bottling_bench", "active_", "charm_workbench", "active_");
+            "still", "active_", "bottling_bench", "active_", "charm_workbench", "active_", "tools/broom_stand", "active_", "tools/wand_bench", "active_");
     public static final List<String> TYPES = List.of("drying", "grinding", "steeping", "infusion",
-            "cauldron", "distillation", "bottling", "charm_work");
+            "cauldron", "distillation", "bottling", "charm_work", "broom_work", "wand_carving");
     public static final List<String> GRINDING_EXTRAS = List.of("plant_oil", "fertilizer", "flower_dust", "mushroom_dust",
             "purple_dye", "green_dye", "yellow_dye", "black_dye", "bone_meal");
     public static final List<String> DRINKS = List.of("recovery_tea", "energy_tea", "restful_infusion", "warmth_remedy",
@@ -67,6 +67,7 @@ public final class StationManifest {
         for (String bait : List.of("grain", "root", "seed", "fish", "meat", "berry", "calming_powder")) recipes.add("processing/animals/grinding/" + bait);
         recipes.add("processing/animals/charm_work/capture_charm");
         for (String gear : io.github.dirtyredz.herbalwitch.data.familiars.FamiliarManifest.EQUIPMENT) recipes.add("processing/charm_work/familiars/equipment/" + gear);
+        recipes.addAll(List.of("processing/broom_work/craft", "processing/broom_work/repair", "processing/wand_carving/craft"));
         return recipes;
     }
 
@@ -77,8 +78,9 @@ public final class StationManifest {
             files.add("assets/herbalwitch/blockstates/" + id + ".json");
             files.add("assets/herbalwitch/models/item/" + id + ".json");
             files.add("data/herbalwitch/loot_tables/blocks/" + id + ".json");
-            files.add("data/herbalwitch/recipes/" + id + ".json");
-            files.add("data/herbalwitch/advancements/recipes/decorations/" + id + ".json");
+            String recipe = directory.startsWith("tools/") ? "stations/" + directory + "/crafting" : id;
+            files.add("data/herbalwitch/recipes/" + recipe + ".json");
+            files.add("data/herbalwitch/advancements/recipes/decorations/" + recipe + ".json");
         }
         processingRecipes().forEach(r -> files.add("data/herbalwitch/recipes/" + r + ".json"));
         files.add("assets/herbalwitch/lang/en_us.json");

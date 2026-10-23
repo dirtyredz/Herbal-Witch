@@ -1,5 +1,22 @@
 # Decisions - The Herbal Witch
 
+## 2026-10-23 - M10 wear timing and recipe-owned repair
+
+The owner delegated resolution of the M10 accumulator conflict. Item schema 1 accepts
+wearTicks 0..23,999: the longest supported wear interval is 24,000 loaded flying ticks.
+The 200-tick default is unchanged. Packing and repair preserve the accumulator and energy
+remainder; lowering the live interval accounts for accrued ticks on the next powered tick,
+clamping wear at 600. This avoids silently discarding time or rounding configurable intervals.
+
+Broom recipes implement the existing pure ResultDecorator contract. The process job applies
+that recipe-owned transformation after its station decorator, both before capacity checks and
+completion. Repair matching rejects pristine or unsupported brooms and includes the repair
+amount in JSON, recipe sync and fingerprints. A live result note supplies repair semantics to
+both recipe viewers and the grimoire. The normal processing transaction retains reservations,
+payer validation and the only energy debit. Tool stations reuse AdvancedStationBlock and
+StructurePlacementItem; their menus reuse the standard Start/Resume/Cancel panel.
+
+
 ## 2026-10-23 - Home assignment belongs to the bond
 
 Bed, nest and floor perch share one placement/block implementation and one identity-only block entity.

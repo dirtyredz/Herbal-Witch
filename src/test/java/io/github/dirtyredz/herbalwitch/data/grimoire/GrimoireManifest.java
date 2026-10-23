@@ -18,7 +18,7 @@ public final class GrimoireManifest {
     public static final Map<String, Integer> GUIDES = guides();
     /** Station entry directories (one page each). */
     public static final List<String> STATION_ENTRIES = List.of("drying_rack", "hearth", "infusion_pot", "kettle", "mortar", "stove",
-            "cauldron", "still", "bottling_bench", "charm_workbench");
+            "cauldron", "still", "bottling_bench", "charm_workbench", "tools/broom_stand", "tools/wand_bench");
     /** The herbs the reader names. */
     public static final List<String> HERBS = List.of("belladonna", "chamomile", "lavender", "mandrake", "mint", "mugwort",
             "nettle", "nightshade", "rosemary", "sage", "thyme", "valerian", "wolfsbane", "yarrow");
@@ -77,7 +77,7 @@ public final class GrimoireManifest {
                 lang.put("grimoire.herbalwitch.guide." + guide + "." + i, null);
             }
         });
-        STATION_ENTRIES.forEach(station -> lang.put("grimoire.herbalwitch.stations." + station + ".0", null));
+        STATION_ENTRIES.forEach(station -> lang.put("grimoire.herbalwitch.stations." + station.replace('/','.') + ".0", null));
         HERBS.forEach(herb -> lang.put("grimoire.herbalwitch.herb." + herb, null));
         for (String note : List.of("bonus", "discovery", "discovery.none", "form.bush", "form.crop", "likes", "no_conditions")) {
             lang.put("grimoire.herbalwitch.herb." + note, null);

@@ -14,7 +14,7 @@ public record BroomItemData(int wear, int wearTicks, int energyRemainder) {
     public static final BroomItemData FRESH = new BroomItemData(0, 0, 0);
 
     public BroomItemData {
-        if (wear < 0 || wear > BroomSpec.MAX_WEAR || wearTicks < 0 || wearTicks > 199
+        if (wear < 0 || wear > BroomSpec.MAX_WEAR || wearTicks < 0 || wearTicks > 23999
                 || energyRemainder < 0 || energyRemainder > 19) {
             throw new IllegalArgumentException("Invalid broom condition or accumulator");
         }

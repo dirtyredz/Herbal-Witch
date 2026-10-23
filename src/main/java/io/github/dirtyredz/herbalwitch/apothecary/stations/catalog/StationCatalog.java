@@ -25,14 +25,20 @@ public final class StationCatalog {
     public static final StationSpec CHARM_WORKBENCH = new StationSpec("charm_workbench", "Charm Workbench", true,
             MultiblockLayout.rectangle(2, 1));
 
+    public static final StationSpec BROOM_STAND = new StationSpec("tools/broom_stand", "Broom Stand", true,
+            MultiblockLayout.rectangle(2, 1));
+
+    public static final StationSpec WAND_BENCH = new StationSpec("tools/wand_bench", "Wand Bench", true,
+            MultiblockLayout.rectangle(2, 1));
+
     /** The everyday stations (Milestone 3 and the stove). */
     public static final List<StationSpec> EVERYDAY = List.of(DRYING_RACK, MORTAR, KETTLE, HEARTH, STOVE, INFUSION_POT);
     /** The production stations (Milestone 7). */
-    public static final List<StationSpec> ADVANCED = List.of(CAULDRON, STILL, BOTTLING_BENCH, CHARM_WORKBENCH);
+    public static final List<StationSpec> ADVANCED = List.of(CAULDRON, STILL, BOTTLING_BENCH, CHARM_WORKBENCH, BROOM_STAND, WAND_BENCH);
 
     /** Creative-tab and showcase order. */
     public static final List<StationSpec> ALL = List.of(DRYING_RACK, MORTAR, KETTLE, HEARTH, STOVE, INFUSION_POT, CAULDRON, STILL,
-            BOTTLING_BENCH, CHARM_WORKBENCH);
+            BOTTLING_BENCH, CHARM_WORKBENCH, BROOM_STAND, WAND_BENCH);
 
     private StationCatalog() {
     }

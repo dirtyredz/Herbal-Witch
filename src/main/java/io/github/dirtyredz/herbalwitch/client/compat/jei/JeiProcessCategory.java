@@ -81,6 +81,7 @@ public class JeiProcessCategory implements IRecipeCategory<ProcessRecipe> {
 
     @Override
     public void draw(ProcessRecipe recipe, IRecipeSlotsView slots, GuiGraphics graphics, double mouseX, double mouseY) {
+        recipe.resultNote().ifPresent(note -> graphics.drawString(Minecraft.getInstance().font, note, 0, 62, 0x404040, false));
         graphics.drawString(Minecraft.getInstance().font, "->", ViewerLayout.ARROW_X + 6, ViewerLayout.ARROW_Y + 4, 0x404040, false);
         graphics.drawString(Minecraft.getInstance().font, RecipeText.footer(recipe.description().duration(), recipe.description().heated()), 0, ViewerLayout.TEXT_Y, 0x404040, false);
         RecipeText.requirements(recipe.description().requirements(), WitchRules.current().workings().processingPercent()).ifPresent(r -> graphics.drawString(Minecraft.getInstance().font, r, 0,

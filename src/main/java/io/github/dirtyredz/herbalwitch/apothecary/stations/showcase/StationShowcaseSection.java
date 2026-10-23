@@ -54,7 +54,7 @@ public final class StationShowcaseSection implements ShowcaseSection {
 
     @Override
     public String id() {
-        return spec.directory();
+        return spec.directory().substring(spec.directory().lastIndexOf('/') + 1);
     }
 
     @Override

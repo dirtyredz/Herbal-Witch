@@ -80,7 +80,7 @@ no scan loads a chunk. Leave events remove only the exact object and shutdown cl
 
 Showcase plans include at most 32 pure entity descriptors. Habitat blocks are constructed first;
 the entity phase validates insertion and removes only its own samples if one fails. The full M8
-layout is 119 x 8 x 60, with sixteen adult animals, three functional familiar homes and the original
+layout is 126 x 8 x 60, with sixteen adult animals, three functional familiar homes and the original
 65,536-write ceiling unchanged. The home section fits the existing second row; no template expansion.
 Dedicated-server/restart qualification remains outside the local fast gate; see catalogue/animals.md.
 
@@ -471,13 +471,19 @@ primitives; seed layouts remain under `content/botany/seeds.mjs`. Herb and item 
 retain their distinct edge/darkening rules. GUI atlases use `interface/kit.mjs`; the reader's slot
 call preserves its frame coordinates. Frozen manifest/PNG hashes guard byte parity.
 
-**M10 foundation (not yet gameplay).** Broom condition is a strict versioned item value; invalid
+**M10 acquisition and foundation.** The broom stand and wand bench are two-cell advanced stations
+with magical batches. The broom stand adds a reserved base slot for repair; its pure recipe
+decorator copies the original broom and preserves its name and accumulators. Both viewers and
+the grimoire consume the recipe's live result note. The station screen projects before/after
+condition from the server-synchronized repair amount.
+
+ Broom condition is a strict versioned item value; invalid
 or future data is refused without overwriting it. Flight cost arithmetic retains twentieths of a
 hundredth between ticks, including when the configured price is zero. Movement math normalizes
 horizontal diagonals and bounds acceleration as a vector. The per-mount input lease authenticates
 rider and nonce, rejects replay, accepts at most one update per tick and limits packet attempts.
 It is deliberately absent from persistence. Wand preferences serialize seven stable string IDs.
-Runtime registration, transactions, movement collision and interaction adapters remain M10 work.
+Movement collision and interaction adapters remain M10 work.
 
 ## Whole-mod module map (plan section 2)
 

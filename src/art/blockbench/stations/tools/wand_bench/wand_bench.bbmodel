@@ -1,0 +1,1329 @@
+{
+  "meta": {
+    "format_version": "5.0",
+    "model_format": "java_block",
+    "box_uv": false
+  },
+  "name": "wand_bench",
+  "parent": "",
+  "ambientocclusion": true,
+  "front_gui_light": false,
+  "visible_box": [
+    1,
+    1,
+    0
+  ],
+  "variable_placeholders": "",
+  "variable_placeholder_buttons": [],
+  "unhandled_root_fields": {},
+  "java_block_version": "1.9.0",
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "work surface",
+      "box_uv": false,
+      "rescale": false,
+      "from": [
+        -16,
+        10,
+        1
+      ],
+      "to": [
+        16,
+        11.5,
+        13
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "8fc79e44-6790-4486-ac1c-402b465eb6e9"
+    },
+    {
+      "name": "left trestle",
+      "box_uv": false,
+      "rescale": false,
+      "from": [
+        -15.5,
+        0,
+        1.5
+      ],
+      "to": [
+        -13,
+        10,
+        12.5
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "3150f758-f99b-4352-9c45-cccfb60547cd"
+    },
+    {
+      "name": "right trestle",
+      "box_uv": false,
+      "rescale": false,
+      "from": [
+        13,
+        0,
+        1.5
+      ],
+      "to": [
+        15.5,
+        10,
+        12.5
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "d9d7feac-b1d6-494b-af7d-0e7c932d51cb"
+    },
+    {
+      "name": "low brace",
+      "box_uv": false,
+      "rescale": false,
+      "from": [
+        -13,
+        3,
+        4
+      ],
+      "to": [
+        13,
+        4.3,
+        9
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 2
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 2
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 2
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 2
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube",
+      "uuid": "b5b67304-4d3a-45a3-b208-dddbc4d2ae4e"
+    },
+    {
+      "name": "back board",
+      "box_uv": false,
+      "rescale": false,
+      "from": [
+        -15.5,
+        11.5,
+        13
+      ],
+      "to": [
+        15.5,
+        15.9,
+        14
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "495a522b-df15-403f-ae0d-f8805fb43efc"
+    },
+    {
+      "name": "gold peg",
+      "box_uv": false,
+      "rescale": false,
+      "from": [
+        -14.4,
+        13,
+        12.3
+      ],
+      "to": [
+        -13.6,
+        13.8,
+        13
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 1
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 1
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 1
+        }
+      },
+      "type": "cube",
+      "uuid": "6234f242-5088-47e3-9faa-6c208d2f00b2"
+    },
+    {
+      "name": "gold peg",
+      "box_uv": false,
+      "rescale": false,
+      "from": [
+        13.6,
+        13,
+        12.3
+      ],
+      "to": [
+        14.4,
+        13.8,
+        13
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 1
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 1
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 1
+        }
+      },
+      "type": "cube",
+      "uuid": "7ec19256-65c5-410b-9c60-94cba0894602"
+    },
+    {
+      "name": "carving pad",
+      "box_uv": false,
+      "rescale": false,
+      "from": [
+        -11,
+        11.5,
+        3
+      ],
+      "to": [
+        8,
+        11.9,
+        10
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 3
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 3
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 3
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 3
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 3
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 3
+        }
+      },
+      "type": "cube",
+      "uuid": "2a069b38-5c9c-4238-8311-8da7b43c5f69"
+    },
+    {
+      "name": "blank wand",
+      "box_uv": false,
+      "rescale": false,
+      "from": [
+        -8,
+        11.9,
+        6
+      ],
+      "to": [
+        5,
+        12.6,
+        6.8
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "709c2b24-eda9-4fd6-a364-ce592aede449"
+    },
+    {
+      "name": "knife blade",
+      "box_uv": false,
+      "rescale": false,
+      "from": [
+        9,
+        11.5,
+        3
+      ],
+      "to": [
+        11,
+        12,
+        7
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 2
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 2
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 2
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 2
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube",
+      "uuid": "2a2b9924-c99a-4441-918d-a501b8569a42"
+    },
+    {
+      "name": "knife grip",
+      "box_uv": false,
+      "rescale": false,
+      "from": [
+        9.5,
+        11.5,
+        7
+      ],
+      "to": [
+        10.5,
+        12.4,
+        10
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "f1d3fcea-0abb-4b37-9590-8f6edb4221e0"
+    },
+    {
+      "name": "working glint",
+      "box_uv": false,
+      "rescale": false,
+      "from": [
+        -0.4,
+        14,
+        12.6
+      ],
+      "to": [
+        0.4,
+        14.8,
+        13
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 5
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 5
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 5
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 5
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 5
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 5
+        }
+      },
+      "type": "cube",
+      "uuid": "5eeb106f-84b8-4c49-95c8-f3ad400c9f93"
+    }
+  ],
+  "groups": [
+    {
+      "name": "body",
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "color": 0,
+      "uuid": "e74d9595-bc61-4cba-9d9e-ef61b015abb2",
+      "export": true,
+      "mirror_uv": false,
+      "isOpen": false,
+      "locked": false,
+      "visibility": true,
+      "autouv": 0,
+      "selected": false
+    },
+    {
+      "name": "active",
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "color": 0,
+      "uuid": "29f52dd8-5c7a-4249-8a93-696b48892f12",
+      "export": true,
+      "mirror_uv": false,
+      "isOpen": false,
+      "locked": false,
+      "visibility": true,
+      "autouv": 0,
+      "selected": false
+    }
+  ],
+  "outliner": [
+    {
+      "uuid": "e74d9595-bc61-4cba-9d9e-ef61b015abb2",
+      "isOpen": false,
+      "children": [
+        "8fc79e44-6790-4486-ac1c-402b465eb6e9",
+        "3150f758-f99b-4352-9c45-cccfb60547cd",
+        "d9d7feac-b1d6-494b-af7d-0e7c932d51cb",
+        "b5b67304-4d3a-45a3-b208-dddbc4d2ae4e",
+        "495a522b-df15-403f-ae0d-f8805fb43efc",
+        "6234f242-5088-47e3-9faa-6c208d2f00b2",
+        "7ec19256-65c5-410b-9c60-94cba0894602",
+        "2a069b38-5c9c-4238-8311-8da7b43c5f69",
+        "709c2b24-eda9-4fd6-a364-ce592aede449",
+        "2a2b9924-c99a-4441-918d-a501b8569a42",
+        "f1d3fcea-0abb-4b37-9590-8f6edb4221e0"
+      ]
+    },
+    {
+      "uuid": "29f52dd8-5c7a-4249-8a93-696b48892f12",
+      "isOpen": false,
+      "children": [
+        "5eeb106f-84b8-4c49-95c8-f3ad400c9f93"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "path": "",
+      "name": "wood.png",
+      "folder": "block/pieces/stations/tools/wand_bench",
+      "namespace": "herbalwitch",
+      "id": "wood",
+      "group": "",
+      "width": 32,
+      "height": 32,
+      "uv_width": 16,
+      "uv_height": 16,
+      "particle": true,
+      "use_as_default": false,
+      "layers_enabled": false,
+      "sync_to_project": "",
+      "render_mode": "default",
+      "render_sides": "auto",
+      "pbr_channel": "color",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "frame_interpolate": false,
+      "visible": true,
+      "internal": true,
+      "saved": true,
+      "uuid": "e58a696c-a505-4228-839a-b01ead129f1d",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAExElEQVR42m2X6XIcNwyE+QiyrHhP2XFsHXtoJTlHpSpa74x37F35yPu/DVMN4uNgx/nBmosEgUajiUk/Hi/zt/t5Pt7N8vNmlg93s/xpMbHR3o7t2tyM63O3nORuNc1f1v3Quq/38zo0X/Oa23G9/+f9Kxt6t5m/sPeylzCmDfbLSf54PbKPu5tRvr88t0l6LyN69/D63Obs3ADrZEdBfN2UYBSYhpwzBzfz/K+CfShO/vH2wu4T0VqkvtnT+1f56WqUl9Oz/HRVPNem3D++Ps/tosxtAkqPb17mz+6INtVVg02f5dxmZgFrnkbCeyC6m7+ocGtTItTV0Lkd27zt1cieZQQ09MwA+pqy1bTaBVE9Jxnjpa6C6u93v7jHM+OH7hUFuY6GcLzacYd1Dwds+Dfe7ZxXSRP1QJ66VQ+Phjx9fHNu95Du+8NlTZuMlpQVJ44DIoPewXmmlBw8RdvrUU4yePCcRD7IKeDcOwG1mZzBkNbIGVBpvEpAQQ6tZ2cVoehQ60gkoNoHEsbyq/eOVOO51ntQOqwL2b4/FKIpuogQdvRNzsppAk9E2Aomg2aef//1pZFMXj87a/UN7zt3EueFTkyb5pKug+uE1lhKV9NM2o0Dekn+NLTJ3mFkkjbQoq2V4sick3HYXFFZjE/0gfVWrjfjqjOWTg8iRZWD8YrAmG9wlWcZ74KhyP5jIB1pMoQW45pWkMNxIWMkhP267hd93QqZNixSnnWFcEQRHdGI1cLagnJJKWiDUiI3wBXJRiREhrBoY1O4+3klL++3YSMrT+m/S7tkXEO2xDMFk1C4yP59EJomXIGfeUPimfRuZsZypFik/uai1rmuCE1SkrplDy/eM/R88HpHlHrmj/POpZp3sgUSe0cWVO3scCSFBgFZGWqznUcHYyGnDMYqgXAQLJIYfYDtpTImJ4IGWTm0EgeMFE5wCY0oLlGMcEJrxGDIpnx+CmcASH3w0zGmaUjaBFsRCVDgnk2OLkRRDbcemRCy8l2X8tV85V3vy5He68ewLBPC0QxEx1IStLsSyDnRl+O4pq9z6JFxDTU17EFPQKlqTYoEKqfWrEJJiQ2N0oRoDfD+9dtFlWwOqsP6tNsilZEv6RjK5+jn//Gu71oQE20m4sXGpJfq3iEgjhuCKik0nrjtFAlBRVCCutJoElXsF6Lckgqi61EqKURNTRe8uZFeJJoRiIaAlNyNKg+egkYc/ayIUgtaXLGjTWNQGm1Q2PQ59GpNOPvjGaCzAhhb7wlXodEYosZGchoSY5PW367rWU5qQlEmXclxlOj4L3ByJnj+Sz/R86F2UMterkldTEvtCeOkesaHnMYo2vqDUqBWfw9akJf+LzaosD7+ApxUgWCOfUAtJalhIBktVnSOw4vS5ZtQ4R3RC3rTkU0RLKuC7fXop3xqWMNp8nxa383gly22aGwYFZQmR5tH+1JJqwI0ewhR5+zHQf4LaGKoAG3y59uL2gsKwUhKa/UGQoYm1JZMjQLRmfCsfm7VQWs1Pcv/h1ws1aj3MB5VrBqhX7PYRFIRbcg5RtB1VE7zOKZjPxiPW1NGzv+bXqDqUS0Sxt6NhTCX5oHR3pYfUCpFqJX7fm1tRENJ7heTk7Ojc2SV+v8AhqcJidpfoFkAAAAASUVORK5CYII="
+    },
+    {
+      "path": "",
+      "name": "gold.png",
+      "folder": "block/pieces/stations/tools/wand_bench",
+      "namespace": "herbalwitch",
+      "id": "gold",
+      "group": "",
+      "width": 32,
+      "height": 32,
+      "uv_width": 16,
+      "uv_height": 16,
+      "particle": false,
+      "use_as_default": false,
+      "layers_enabled": false,
+      "sync_to_project": "",
+      "render_mode": "default",
+      "render_sides": "auto",
+      "pbr_channel": "color",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "frame_interpolate": false,
+      "visible": true,
+      "internal": true,
+      "saved": true,
+      "uuid": "c81bd361-0089-4672-ba79-15204245ad16",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAHOklEQVR42k3XaXtVVRIF4POXOrkZb+YwxV8mRmlwQEERERRFlEEIJAIxgWAAQ7coTog22qI4gGLr02pr9fPW2TvdH072zbnn7lq11qqqfZp4+4H4+shE/HRqKr58dTy+Oz4ZN14Yycv9d/cOx6WnBuLiE/1x/rG+vBYe6Y13nh2Ks9s6Mf9wbyxu78S5v3Zi+dG+WHmiPz460I3VJwfig+e7cX3fcNw6NBYf7O/GN0cnIi5sju9fn4x/nZ6OO0cnovn2+ET88/BYBrfePzUVd1+fjP+c2xg3D7ZA/r5nKK7sGsx16dG+BLW0oy8DLjzcm+vc1p44ubUnru0dShBXdg3E354ZimvPDsX7z3fj04Oj8e2xifjHy6MJ4N6JyVybr4+0gaFzE6o4vzl/IJOPD4xkwI/2d2Pt6cEEdHFnf7Ii67Ml8zPbeuO954bjzLZOsgXomzs6ceHx/ri8ayCTwsinL41mvM9eGo0vXhmLBuVY8MDdE5MRy5vih5NT8c2xibw+f2UsHwSAJKi/LPj2Tgap2csWAyQRlFRvPNKbz9x+dTylwAYQ2P74hZFko/HHDdTHpZn0AibulxVNn7w4Er+f3Zg/8BmlV58ZzEzf2tmfwWtQAYE4PduTILGILd+/vXswWcQuJiXbyJLWvyxMxxeHx9IcMv3ueGvM+3NTaZwvD4/HTcH3DacXBLYZiQTGhJUkqJ+f7U3pGJZJPX/16cFcAZE0cA0kKOcFclj9//P8dDIQqzNpHhd/YIHWfuz55cf6UuM3iylVxokH/5JSYQIgK2ZWHm9B+509+KC5/dp4fH5oLDf2BTNWIHF5Jn46PR1fvdYalR+UFNCkscmlJwcyGABM6br+3HCCqOYE0qo0AScZFv2uQQtnQsMYZABIJVQW7pbqACT9MjcVH+7vZskxJ1mUKWpJQn9BgTn1UE9KYBVc+YrJQxJoUOIDBpgL1X8sbsxgpPhxbirv8YbPgPENRrDBF+/sGYp3yx7kOFdo5wUVgn7Zk4cMb+0cSCmw0FQXQ25DwblU1oIoQTJ9RZLlTQkC/TcPjmbACsS9mpk9Kwhs2J9EZOEJctSKaSBGnx/SWL2qClnqD7K/XzIniZp2D5DbVZJTUwmG6+3DF8vZiPoySysZ9InavPQIXmqgWSz1SgKbvL+vmxrbFBhlyJhkqNVAnluHRiMubonPynMufWKtMCGA/WtzsvJCslLaeoOKa3uHEwQTpTv3DLWltr+btPMDABhiSuzoG3HlgWSBDFZSMDIQmKnZmw38IDBAWPeZJ5q13YNJBwCMAoTg9Pz3GxsyC0wIXKcmKWJpU0ojMEZuvdwOGyCt9nHJ3OxY3NFJ3TFTJyhJmloibkIHsR8ylVU2tfyUa/phdSZ198ydo23X1DcArT7JAXagmywAoG3zl2TFsvJCo1VCYooBQBcMrBUmeEGPsKbmFzZnr2BC1y/z0xk0G9fqlqwOLBg6foNBWWMKq1jWpo1xVdHQwgWR7DWVevCgncmnjIBwRrBhnZ7kaNv4RA4ypet/bAGCMUxgCBMYXS4TtJo/TQgJGaCrI9RlmgFhk3snJ7NKAJGhYDZmSC07u+bJVpb6ve94BxCVdb10zJXiC520qeWBprmH2lNNnWZQKimBcwSXz8qNLzLz1S3rZekeIKriTjl+aXAmqVW1ORMAQR6MN+gQhBeqLr4gy8WSPWY0lzpEOF6H/O3shqS7lilAGAAm2/mR8fXzRMtC26gABIa8DWQCkAITc+VUo2PRDDAs1a6GBfdlKgtAbE6iWhUOunnSOjaxPubJocWThI/MA3EbdNQDxbzmUHq4YOTIspntSQCew5ZqkNWNF0fS3TSvmTMjEMrUd8pWeRrzPpMQgA/LFG3qaVeWaEb9ld2D6+e9BDTbDg8jlrtrq62mVO/Zsle2ZDes7Zo8MiYRr1RWbpRuSd5GT+ZQ5za178ulku3S/00wYBjIysG1XVtlqEQFrGfMe1klLSu8QioeIRdvAI3Jpp4D6CGbtXJuU5aqQtboZ5o6xYDDGOY8T99b5VQluAONe3nQXdmcDUvwOkt4QSz3Gz+gpbrNeV5MllNstidNqRoEx4gVA/qDPsHE6tuBpA4i2XE62r8vx30A0K95AffnYstY4we/ntmQ1Ais1FaKHzDhfNdOsU4yMleMWV/BVurRfM/Q+giXnSmqY8qYGatJ81R1aSbZyFez389tzAdkAQwQ6tOB0YYyPl8OlVUCFxPW7+ok5Qk+qYfYT0qVGE4yb804k6uqyFcz7bO+A9Yjd31rQX2y8dRAlmYeNLd38v+FAiSBbWsB8ATjMXX1hKqpxzaS+IwVTADS+KCn1x5eXx4BqSZbLUcsAQVXorLWspm1vgNiDSOev1reIzk9p+j5/52qfi4TlBeaHBqlZpnEKxg50lh7h8vbzEAaz4YCCjK3tW1OC2V4AerQsVTekFZL6wbKnjIHQAnqmoDwxH8B9EbOJEhx4QgAAAAASUVORK5CYII="
+    },
+    {
+      "path": "",
+      "name": "iron.png",
+      "folder": "block/pieces/stations/tools/wand_bench",
+      "namespace": "herbalwitch",
+      "id": "iron",
+      "group": "",
+      "width": 32,
+      "height": 32,
+      "uv_width": 16,
+      "uv_height": 16,
+      "particle": false,
+      "use_as_default": false,
+      "layers_enabled": false,
+      "sync_to_project": "",
+      "render_mode": "default",
+      "render_sides": "auto",
+      "pbr_channel": "color",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "frame_interpolate": false,
+      "visible": true,
+      "internal": true,
+      "saved": true,
+      "uuid": "3d06aa20-c0c8-4834-91cc-1acb6c4e26a3",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFEUlEQVR42l1X7bLbVAz0o8D9SOJvx07sNLdloKWd0oEyMPzh/R/kMLvSygo/zvWNfSzprFYruTo+d+X0MpT6dSjd8VzG5lrO3VYu41u5jm9lGe5l7t9x4f65u/H/sVnLUF9KezyX5jCV2m3AVnuYSnecaQ97cMU9PGtexwKfLz/U5fTSlwp/Ts89H3anmQ6W/l0sBHIZLBAG0924B4Fif/PqhhHEK4IY3flM5/1pYQB9vTAIPH/9sSlH+uxLhWiOTx1PgM3ndjMEhjsdX8f3fnJf7Vbm/sYrnLSHMw29XT45CiPtDPW1/PrhDwaBYInWYSqGeM8gsKrDU8sA8BAvMQXtFif//uVfQr4woHsggX1whJMDQUALGw3hN+indg17uCJdCBCIwS8WA2DejmdCipcE9ez5vvjvqd2CEzLKIDyvln/jkTlfecV+48JsfPOFNDAA/AAsPTngMHc3IoClYCbCb2SEYeUa75qNTGRLkwV84zvkzXEmCiTsszjghLDcXYJoSAMN0eHm/9tvEaxxdiv/SAPuT81K5K5uA86xGvLA/GG/B9CRzUaYlQ6W/s4qUNmJB7ji9HBABE5WbuKBUEHAgt/QW70cbTFlz16G+AFI8EDkmR1CQYl7QkAGDYU5HDdRAYYOgsD/WF9//quM9dXLVfunUiGK2gXCaneJyOUsQ6hyFAElMnKcF55JkPBc5dif5kCqsvIxNdMmLDF9SqfHy7j3+cN3R2rjqch6V0YjmgUF24/acAnkVCVV47IJONqoXzuhmM8A/Kog4NDKbQtZVgBwpjITuggI9vHe2asJeyuRArDgxR2qq596FycpnPbIuQWzhnPxQjJvZTcSGaQvl3WlPAEJwS/jyj2cilh7Hhfqe879rg12KAmUcWTvDxI0VBlTQATqJU6BE6kK/g+tFE3GdF+pEoqdy67I3foBxZWUAuOAHir/OD1+y6ClanI9HzxtBvdeEXOonZ7DGZqS/o9DOp+qDGu+quNl42q7pn59IKEyEyomRGsoIlOW0pW5Vn16/ztPoc4lwlmE1wiA6vVk6iUVE8NVwtijIPRu5lQOgNV3mkuVT616p9S2G9VLBIUjtm7veo03FJHYat2kGVeRkmqaSliIYR8CrrixWSkuuelM3hM6Z68k1PrGGLVdvwxRxlnxzl5m1kukpFYlbaTMA+BLUjQ//eSRG7RTDB4QlyYc7wOIiJdLcmYZ76kVAnoPq9rLbH2EzfUevQH3G68AnbpJRqK5JDmnYnbbQzuPGdHRgr2QYpVQ5gOuSM1Onvnh9Bqx5FxTFavA1VGVRJFyx40rI+ywDNuUu11W10CF89zBjDeuart0ex9xNLJwSUV3kTL420DtbL1AQ6RKcHYSqmNpoGylms4LXfUs2xG5CX+24Qg0PpxGLxArH7iQRq8uOVGucf349u2h23WOjGQcNr789Ce5lCdjDabeC4wHff2oilKy3IDEYuV6Fx+bA0ZvXFZNazQ0KaPsCPmqjoFyiPzkaQaRa05QP1A5SVKVLjnQ1Kx5UEiqt4gnsFUJDk0vedAUQXehmSO43stTLA/JbVa22YyA9uRyx/scyTQVZ4WrXd+VbxEur6zxv/3yN0/KSXq4h5Cp52uyBhLfPv6zNyoMJHCMbzR9IdkEM4TYZOlU2eVPr3A03OO0lzy++5fW4qO9dcdr9Agby5/sAzXYHMtYPdTLQwBqNpZv/wKSAy9jNbU5fVdkMguF/wCOVSRxxpFJlQAAAABJRU5ErkJggg=="
+    },
+    {
+      "path": "",
+      "name": "plum.png",
+      "folder": "block/pieces/stations/tools/wand_bench",
+      "namespace": "herbalwitch",
+      "id": "plum",
+      "group": "",
+      "width": 32,
+      "height": 32,
+      "uv_width": 16,
+      "uv_height": 16,
+      "particle": false,
+      "use_as_default": false,
+      "layers_enabled": false,
+      "sync_to_project": "",
+      "render_mode": "default",
+      "render_sides": "auto",
+      "pbr_channel": "color",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "frame_interpolate": false,
+      "visible": true,
+      "internal": true,
+      "saved": true,
+      "uuid": "100c2821-75e5-4ffa-ab82-935f8b624a12",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFeklEQVR42m1X21YbORDUf2CMbQwYeN4NkIA9vt/GxheWBLIY9v//ofdUd5ekgbxkjsmMVKquqm6F8emj7K4/BM/N1UEGrVLWl7+l15jJ8uKn3J+MZXq2l+/1oYzbG7k9LqTfKuXvowd9F0/8/lbr6fOm1tP3ftRHMjt7koeTsSwufkq/uZDHy39l2Frpc3S6lu3VuwRsOlIQ7zJqrWR7dZB+c6kvEUS3MZXp2U5+1Icyaj/qJoPWSjcvWkt99pqLCAYgsSZAAHz3ZCrlxS8pGnM9HNbH5gAT8A8ZiExcvunpAALIy84veTiZyOz8Se6O+85E/wsIY6Kr397UChm1N3J3PNDvAIJMrDovCgKHD0BidBx0czxJE56rzqv0GnMpOy/OxN6YODUmhqdrfRYZA2TotlYoWJQPIO7rY5mf/xNBRAY2vjnKYCDeExPN0kHM9AQ4CRajJnBSPflRN5ah15zLt6OHCE5BgIkzYwIgWI6Ak2ITnnz7BcxBBs2lgiiac1lcPKswsRgW5SZ8cnOWh39Pmtjp94vzZz1UoDoJAi/ur//TzfFkeQAudwdOYuUY6SbQhG2WGKEmoBEIE/+v5TjbazkAIiyhTq3Jq7Acw1aZhBk18h5B4H18rMJ0EAB+y81r2Hz5R23gPZYDFg1AghPhRSxuAnzTTZM7klA1J1yYC88Jc8fANZHK0Xd3FE2CWUYX4X0wGCAIgIBPsSjVv7l6+6SJDwWx+VM5GlOZaE6MYk6QCQjzr6P7KFB1h5cLTAT6FHSiHPAnmdh8EqZa1sExMcHcMnMHTgj/oxzYhAxQEymsjIkwaW9VGJP2zsLi/NksQk2gHK21u2KjmrDYTmGF9wEiaWIow0wTEGZeBgNhv0OeWAqiMdXkA704ITepMpKB8JwoPKwAAlaLvcOZAAPKRK3rYAxcMAsVsYHQp6aJWUwsbrq//pAJmHBN0KJ4LwqzPlYmUGOWI8X0SnOCAg3saqbOrVkkZvezW9RA7NyKunlrrTmRM2MNbK7gkzv6wkOye1oZ7o0BS65u9CnVydhcagOxJEQiEoSGlAu02jteNOvnnhNwx50nJphQBmpJkCGvCRsIYxMCxSIQpoF48VZ6qJTD3LFWwaYGZr3DNGHlMP/342FRBmPAfVvJ7rYl1twtatk9jxblycEENcHkVCt3XpUJWJvCJBMEgcMH0D9wRACTJxnLocL0VqqJqYsvvXes1Q1sXHlYUZj4jq3cmNgq41g/gHb6k7UhI4xNHa+ciTL2jhfVBN1hPcPKwlY+jEPN0nvHVMvK8kKYgT69ycpQeEiQLix850yggWjvaMxNmL5JzgA1ws01MT2swCRjWxkYO5JBFIa1UoLIZzw2EIttG680rHImrj9iL/kqzHnsHWAUiRmAxED0KxbhWJX3cxUmYluZmMSw4kljbLsrmBexd3R+R4vaPLGTwGk3LwMtUv2d9fP6UJngZJPmiVJ7BsPKXPIRY/tzF8UhAud+Y2ITT15tqeYOlsWGisQEQdCiFlZlnCMICgwx1DQnMBGBRhsUnyIIJhbdYRZN/TwXZh5WbGDsHUb/IV56TJhvWU4giDSxPDbbu8pkMzhdxf6duyMmJud+L0fpMYxao+bUwt7LwbACOHRRaCesPLFKTSwLm+oNqKz0CvZzgMunXWNirAJjF+1778jdQVBM0sBGgpfTNSwNmqAbm3HQzGM7vwt+d4vyGqbl0AZWVvKhoomrNwnsbuxi+V1Q+3k+7WorXVTKksYrm6zAoFpUYzhpIrojG2YiA1sfxXkXhKDi5SNatHAG8hvQIoWVJ+pdxgQT87Mw954PW7sbHrLsXvnIPYsgciY+WzNngrEdr2HnnCfSZAU96W3cQWDG/B9gUNC/d3xFZwAAAABJRU5ErkJggg=="
+    },
+    {
+      "path": "",
+      "name": "linen.png",
+      "folder": "block/pieces/stations/tools/wand_bench",
+      "namespace": "herbalwitch",
+      "id": "linen",
+      "group": "",
+      "width": 32,
+      "height": 32,
+      "uv_width": 16,
+      "uv_height": 16,
+      "particle": false,
+      "use_as_default": false,
+      "layers_enabled": false,
+      "sync_to_project": "",
+      "render_mode": "default",
+      "render_sides": "auto",
+      "pbr_channel": "color",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "frame_interpolate": false,
+      "visible": true,
+      "internal": true,
+      "saved": true,
+      "uuid": "ba7b7503-a077-4271-b8b8-48611949bb7c",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABQElEQVR42rVXOQ4CMQyc//+Fb9DQUtBRQ8sDQIuUleX1NU62CBJx1rE94yN43C7f1/N6WNu+Jxvyruzzvu//sf3IDbm8/coaRmgd0rFNBkYZa4D01tMBy2vG8wyq7BvIi8/CPJKhi2W0mLNYqcyDMYoCuszOuGLJtCH/LBiKpHBFDRgGZJFAN8+ZFJVG6MhgVe6zXBnnITHNLo3KdjeC6OSyJKHmDltXMIs5mwl0IfIaSsW4CjSYIdYKToDxUMsYjy3ZDoEuPDOsZqMIa0rRH2cDi3SAiV5Kwmokor6QOQF2houg0ue8S+V36E44uuh0+QOvi3XnwAr5DhHost7CPtJl8QFMqbVw9RqZxRWrLWOm32cMr+jBGW+Cansvc6D7Qqr0CliHhvUVXGffCeiOUh1vLaeWvguqZ8NKuHrmy9YPlm8kphQz47kAAAAASUVORK5CYII="
+    },
+    {
+      "path": "",
+      "name": "pink.png",
+      "folder": "block/pieces/stations/tools/wand_bench",
+      "namespace": "herbalwitch",
+      "id": "pink",
+      "group": "",
+      "width": 32,
+      "height": 32,
+      "uv_width": 16,
+      "uv_height": 16,
+      "particle": false,
+      "use_as_default": false,
+      "layers_enabled": false,
+      "sync_to_project": "",
+      "render_mode": "default",
+      "render_sides": "auto",
+      "pbr_channel": "color",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "frame_interpolate": false,
+      "visible": true,
+      "internal": true,
+      "saved": true,
+      "uuid": "ab8e9718-20e3-4e1c-8e78-6f85959754f0",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEx0lEQVR42l2XXXIiMQyEfS2gKkDuEyCbhwRYbhd+M+xLJoEJ5Cyz1bI+j+DJZY8ty61WS5Oa0bKtBn/ay3jZHvrPbTNatPv+rP0ZL9tNb9Jexn9t/Bq+2fr3cG77vkcaZ209fGuPgz/2/aP/3J5GC5vr/HvvqT2PFu26N7FzWv99XBX7micZb/zQ73hl49UunZrRavBcjGj8N3ixw7v+1OZyXuO2N7VLtM6odTmrS3VO6x8DPZLHLdt08hdfxyt/wdwuiy/Xuka9WPtBRi+sHRk5Hy+tfT9Ofg2zXdnfB+SSPAJWGVkbIkt3YmkvEyI69Dl8NWeEgME4WtqLdAnr2p+dmdk5OdW4Uxe3o/v0CO1PXA4seqkZ8VjJuIzghIyse0+2X5drXnnYIpc+H15LrPUYOS/EeCTIJcVaHxUjYNdcRmRUznCJjOlSheHdncC41iOHOmQz3BFZOKYxZTbnGOuwNjHXy0GicSISw/gyndO4d9ghmjlt9rqY1x5G7dOjky4RXJV9zJtIpYxEjtneCaj1byeUnFesv4rxnDVGXOfG1jmw9XtAeOfETZdAMF60di5UnpqCu8TwMc8LoVwPQAbCifV6KYTj+7eva+4IdOIio0eHbevwZ9gX9jKcyUSceGpmYxuPsb3w4dXO/4wz/Iia7GWEOydSHWLfETCzfetiBEFhPUpnRp3VZ9eHiODaL8WpvYeLucYEGyuPOfkJJwiPnBEScoLswKilpCG4LLIrp88ucrU/orbLpwVx2U0QBnHhJSCiMV8+t7Fx2UVkqBGKOXJMbUA3Du4cyomThgAavXY4jy4mUeMFoy4jCzQ/BCKRUqTuyVNWj9I6czik8xA8AU/W8E4+65sYTktshQic2DnRhGDthETMcF770Q2FidpwdS4lLs3KtiiE3Bq8uXp9hRgeQmrhpJCIsDO/rQWdGHFeYzoHYsVCw+XUbUpyNjorYgJBG+dObWHIXEKOESnOR9ErOgAXEAv6A1KRbKicAygmildK+uC2pOcClTmicx/e9KCwqSYvPQVrz4o6FJj1XUwjrJTgs4XvxfYfAgLoBjWFmnH2gpaAdxdS5gT7w4u2nnJ4TsqRUhilFON8kV8nqi69+j3anxCb2rU/itAmXEKfIO2nrtMpsT+nYNeOQTgKGdXS1r02JGJ5cJmkoFgpHq+KU7AaI1tvUqIM36cuXOga3BiunDUpdqkQCmfIDuZ0uSIUzUUUJ/QEHaAtI1xwYucpnntCjwX1mXZJl+H5PVFBAqVD2UhJCk5X6BbWxskJqilOJuo8L7ZY96el3tdBXNB+smAfmhUIiHOEETuxVqCkmltXbKx1JLSIGFGau05pfiPbl9CoVuV/YlJacJync0IhT0GOE0TrOpdsnMLEzwlKSTU8Oazohs5HhSOb7htXiKpHGweo57vwoi7v56UqyonSL3iJpkbQfESi7u+ITFgqRxyOpPgHA0sxQurw08I6ikjXi9ZHWUau4+8ayMAh40Du+zMCtYvNKfzT8RuG1iMiFK6uN5wV5ST1cI5Uh8DoSoMSUqUoQBnWecn/oxeUzU0b1olJ1ANKeeNaH6tj7LaZJ7Qb9scYyplNyGtSB9nmp4Q+Ie+flPA0HtbyE+P/H+iOwvIfq0gGLk9nc68AAAAASUVORK5CYII="
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        1.06,
+        3.53,
+        -0.28
+      ],
+      "scale": [
+        0.188,
+        0.188,
+        0.188
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        -1.06,
+        1.47,
+        0.28
+      ],
+      "scale": [
+        0.188,
+        0.188,
+        0.188
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "translation": [
+        1.13,
+        0,
+        -1.13
+      ],
+      "scale": [
+        0.2,
+        0.2,
+        0.2
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        225,
+        0
+      ],
+      "translation": [
+        1.13,
+        0,
+        -1.13
+      ],
+      "scale": [
+        0.2,
+        0.2,
+        0.2
+      ]
+    },
+    "ground": {
+      "translation": [
+        1,
+        3,
+        0
+      ],
+      "scale": [
+        0.125,
+        0.125,
+        0.125
+      ]
+    },
+    "gui": {
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "translation": [
+        -1.77,
+        -0.89,
+        1.53
+      ],
+      "scale": [
+        0.313,
+        0.313,
+        0.313
+      ]
+    },
+    "fixed": {
+      "translation": [
+        2,
+        0,
+        0
+      ],
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ]
+    }
+  }
+}

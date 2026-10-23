@@ -42,6 +42,8 @@ public final class HerbalWitch {
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(CompanionLifecycleAuthority::stopped);
         DecorRegistration.register(modBus);
         BotanyRegistration.register(modBus);
+        io.github.dirtyredz.herbalwitch.magic.broom.registry.BroomItems.ITEMS.register(modBus);
+        io.github.dirtyredz.herbalwitch.magic.wand.registry.WandItems.ITEMS.register(modBus);
         StationRegistration.register(modBus);
         PreparationRegistration.register(modBus);
         GrimoireRegistration.register(modBus);
@@ -51,6 +53,7 @@ public final class HerbalWitch {
         CharmRegistration.register(modBus);
         io.github.dirtyredz.herbalwitch.companions.animals.registry.AnimalRegistration.register(modBus);
         io.github.dirtyredz.herbalwitch.companions.familiars.registry.FamiliarRegistration.register(modBus);
+        StationRegistration.registerToolShowcases();
         ShowcaseCommandRegistration.register();
         CompatibilityRegistration.register();
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> HerbalWitchClient::registerConfig);

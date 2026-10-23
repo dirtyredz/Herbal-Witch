@@ -49,6 +49,7 @@ public class HerbalWitchRecipeProvider extends RecipeProvider {
         DecorRecipes.addTo(writer);
         BotanyRecipes.addTo(writer);
         StationCraftingProvider.addTo(writer);
+        io.github.dirtyredz.herbalwitch.data.server.stations.recipes.tools.ToolStationRecipes.addTo(writer);
         PreparationCraftingProvider.addTo(writer);
         DryingRecipeProvider.addTo(writer);
         GrindingRecipeProvider.addTo(writer);

@@ -65,6 +65,7 @@ public final class StationRecipeEntries implements GrimoireContentSource {
             ProcessRecipeDescription d = recipe.description();
             ItemStack result = d.result();
             List<Component> body = new ArrayList<>();
+            recipe.resultNote().ifPresent(body::add);
             if (isProduct(result.getItem())) {
                 body.add(Component.translatable(ProductTooltips.key(result.getItem())));
             }

@@ -25,7 +25,11 @@
     "block/animals",
     "block/familiars/home",
     "block/familiars/equipment",
-    "block/familiars/spawn_egg"
+    "block/familiars/spawn_egg",
+    "item/magic/broom",
+    "item/magic/wand",
+    "block/stations/tools/broom_stand",
+    "block/stations/tools/wand_bench"
   ],
   "projects": [
     "stations/kettle",
@@ -160,6 +164,10 @@
     "familiars/equipment/wolf_harness",
     "familiars/spawn_egg/raven",
     "familiars/spawn_egg/owl",
-    "familiars/spawn_egg/snake"
+    "familiars/spawn_egg/snake",
+    "magic/broom",
+    "magic/wand",
+    "stations/tools/broom_stand",
+    "stations/tools/wand_bench"
   ]
 }

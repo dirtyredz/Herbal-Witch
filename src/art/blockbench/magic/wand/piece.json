@@ -1,0 +1,38 @@
+{
+  "project": "wand.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/magic/wand/wood",
+    "gold": "herbalwitch:block/pieces/magic/wand/gold",
+    "iron": "herbalwitch:block/pieces/magic/wand/iron",
+    "plum": "herbalwitch:block/pieces/magic/wand/plum",
+    "linen": "herbalwitch:block/pieces/magic/wand/linen",
+    "pink": "herbalwitch:block/pieces/magic/wand/pink",
+    "particle": "herbalwitch:block/pieces/magic/wand/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/magic/wand/wood",
+    "gold": "herbalwitch:block/pieces/magic/wand/gold",
+    "iron": "herbalwitch:block/pieces/magic/wand/iron",
+    "plum": "herbalwitch:block/pieces/magic/wand/plum",
+    "linen": "herbalwitch:block/pieces/magic/wand/linen",
+    "pink": "herbalwitch:block/pieces/magic/wand/pink"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      -16
+    ],
+    "max": [
+      16,
+      32,
+      32
+    ]
+  },
+  "outputs": [
+    {
+      "model": "item/magic/wand/base",
+      "item": true
+    }
+  ]
+}

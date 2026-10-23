@@ -1,0 +1,31 @@
+{
+  "type": "herbalwitch:processing/wand_carving",
+  "duration": 100,
+  "ingredients": [
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "minecraft:stick"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:amethyst_shard"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:gold_nugget"
+      }
+    }
+  ],
+  "requirements": {
+    "energy": 5,
+    "witch": true
+  },
+  "result": {
+    "item": "herbalwitch:magic/wand/wand"
+  }
+}

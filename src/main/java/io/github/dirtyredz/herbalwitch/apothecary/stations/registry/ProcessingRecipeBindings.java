@@ -20,6 +20,8 @@ public final class ProcessingRecipeBindings {
             case "distillation" -> StationRecipes.DISTILLATION.get();
             case "bottling" -> StationRecipes.BOTTLING.get();
             case "charm_work" -> StationRecipes.CHARM_WORK.get();
+            case "broom_work" -> StationRecipes.BROOM_WORK.get();
+            case "wand_carving" -> StationRecipes.WAND_CARVING.get();
             default -> throw new IllegalArgumentException("Unknown processing category " + category.id());
         };
     }

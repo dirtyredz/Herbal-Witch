@@ -369,3 +369,10 @@ Native familiar rendering uses vanilla models/textures with resettable cosmetic 
 <job>/previews/native-poses`; review its 20 idle/walk-or-flight/rest/guard poses. The runtime and preview
 share attachment positions, scales and pitch. Vanilla textures are read only from the cached dependency
 and are never copied into shipped assets. These samples do not replace owner animation/shader review.
+
+M10 station/tool drafts: the four projects under `magic/{broom,wand}` and
+`stations/tools/{broom_stand,wand_bench}` own their textures. Headless review on
+2026-10-23 checked both held hands, GUI, ground, untransformed broom geometry, and
+idle/working station views in the M10 job `previews/tools/scenes`. The drafts use
+dark wood, charcoal tools, plum cloth and grips, pale straw and gold fittings.
+These views do not qualify player posture, latency or shader behavior.

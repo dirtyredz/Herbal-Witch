@@ -204,6 +204,7 @@ public final class ProcessJob {
 
     private ProcessCommit commit(ProcessInventory inventory) {
         ItemStack result = decorator.decorate(recipe.description().result(), inventory, reservation);
+        if (recipe instanceof ResultDecorator transformation) { result = transformation.decorate(result, inventory, reservation); }
         return new ProcessCommit(inventory, layout, reservation, result, recipe.description().returns());
     }
 

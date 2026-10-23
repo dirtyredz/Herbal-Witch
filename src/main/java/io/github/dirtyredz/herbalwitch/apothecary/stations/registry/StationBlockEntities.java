@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.apothecary.stations.registry;
 
+import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.broom_stand.BroomStandBlockEntity;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.wand_bench.WandBenchBlockEntity;
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.bottling_bench.BottlingBenchBlockEntity;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.cauldron.CauldronBlockEntity;
@@ -49,6 +51,12 @@ public final class StationBlockEntities {
     public static final RegistryObject<BlockEntityType<CharmWorkbenchBlockEntity>> CHARM_WORKBENCH = TYPES.register(
             "stations/charm_workbench/station", () -> BlockEntityType.Builder.of(CharmWorkbenchBlockEntity::new,
                     StationBlocks.CHARM_WORKBENCH.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<BroomStandBlockEntity>> BROOM_STAND = TYPES.register(
+            "stations/tools/broom_stand/station", () -> BlockEntityType.Builder.of(BroomStandBlockEntity::new, StationBlocks.BROOM_STAND.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<WandBenchBlockEntity>> WAND_BENCH = TYPES.register(
+            "stations/tools/wand_bench/station", () -> BlockEntityType.Builder.of(WandBenchBlockEntity::new, StationBlocks.WAND_BENCH.get()).build(null));
 
     private StationBlockEntities() {
     }

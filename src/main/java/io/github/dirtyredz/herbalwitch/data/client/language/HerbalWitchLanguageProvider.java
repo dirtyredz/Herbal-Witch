@@ -32,6 +32,10 @@ public class HerbalWitchLanguageProvider extends LanguageProvider {
         DecorReferenceTranslations.addTo(this);
         BotanyTranslations.addTo(this);
         StationTranslations.addTo(this);
+        add("recipe.herbalwitch.broom.repair", "Up to +%s condition");
+        add("screen.herbalwitch.broom.condition", "Condition: %s -> %s");
+        add(io.github.dirtyredz.herbalwitch.magic.broom.registry.BroomItems.BROOM.get(), "Flying Broom");
+        add(io.github.dirtyredz.herbalwitch.magic.wand.registry.WandItems.WAND.get(), "Witch's Wand");
         PreparationTranslations.addTo(this);
         AdvancedTranslations.addTo(this);
         GrimoireTranslations.addTo(this);

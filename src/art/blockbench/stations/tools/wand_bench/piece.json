@@ -1,0 +1,54 @@
+{
+  "project": "wand_bench.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/stations/tools/wand_bench/wood",
+    "gold": "herbalwitch:block/pieces/stations/tools/wand_bench/gold",
+    "iron": "herbalwitch:block/pieces/stations/tools/wand_bench/iron",
+    "plum": "herbalwitch:block/pieces/stations/tools/wand_bench/plum",
+    "linen": "herbalwitch:block/pieces/stations/tools/wand_bench/linen",
+    "pink": "herbalwitch:block/pieces/stations/tools/wand_bench/pink",
+    "particle": "herbalwitch:block/pieces/stations/tools/wand_bench/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/stations/tools/wand_bench/wood",
+    "gold": "herbalwitch:block/pieces/stations/tools/wand_bench/gold",
+    "iron": "herbalwitch:block/pieces/stations/tools/wand_bench/iron",
+    "plum": "herbalwitch:block/pieces/stations/tools/wand_bench/plum",
+    "linen": "herbalwitch:block/pieces/stations/tools/wand_bench/linen",
+    "pink": "herbalwitch:block/pieces/stations/tools/wand_bench/pink"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/stations/tools/wand_bench",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ]
+    ],
+    "overlays": [
+      {
+        "name": "active",
+        "group": "active",
+        "emissive": true
+      }
+    ]
+  }
+}

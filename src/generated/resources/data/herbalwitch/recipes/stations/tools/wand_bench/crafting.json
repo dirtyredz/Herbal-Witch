@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:crafting_table"
+    },
+    {
+      "item": "minecraft:dark_oak_planks"
+    },
+    {
+      "item": "minecraft:dark_oak_planks"
+    },
+    {
+      "item": "minecraft:flint"
+    },
+    {
+      "item": "minecraft:gold_nugget"
+    }
+  ],
+  "result": {
+    "item": "herbalwitch:stations/tools/wand_bench/station"
+  }
+}

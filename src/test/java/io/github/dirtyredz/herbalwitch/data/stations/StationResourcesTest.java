@@ -31,7 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /** The stations' generated data and authored art: assembly recipes, the processing matrix, models, GUIs, heat tags. */
 class StationResourcesTest {
     private static final Map<String, Integer> DURATIONS = Map.of("drying", 1200, "grinding", 100, "steeping", 200, "infusion", 600,
-            "cauldron", 600, "distillation", 800, "bottling", 100, "charm_work", 200);
+            "cauldron", 600, "distillation", 800, "bottling", 100, "charm_work", 200, "broom_work", 200, "wand_carving", 100);
     /** One-block stations that show a second model while active (the others never change shape). */
     private static final Set<String> ACTIVE_ONE_BLOCK = Set.of("cauldron");
     private static final String WATER_BOTTLE = "Potion:\\\"minecraft:water\\\"";
@@ -99,6 +99,8 @@ class StationResourcesTest {
         }
         if (path.equals("processing/animals/charm_work/capture_charm")) energy = 10;
         if (path.startsWith("processing/charm_work/familiars/equipment/")) energy = 5;
+        if (path.equals("processing/broom_work/craft")) energy = 10;
+        if (path.equals("processing/broom_work/repair") || path.equals("processing/wand_carving/craft")) energy = 5;
         if (energy == null) {
             assertFalse(recipe.has("requirements"), path + " is ordinary work");
             return;
@@ -119,7 +121,7 @@ class StationResourcesTest {
             String type = path.split("/")[path.startsWith("processing/animals/") ? 2 : 1];
             JsonObject recipe = generated("data/herbalwitch/recipes/" + path + ".json");
             assertEquals("herbalwitch:processing/" + type, recipe.get("type").getAsString(), path);
-            assertEquals(DURATIONS.get(type), recipe.get("duration").getAsInt(), path);
+            assertEquals(path.equals("processing/broom_work/repair") ? 100 : DURATIONS.get(type), recipe.get("duration").getAsInt(), path);
             switch (type) {
                 case "steeping" -> {
                     assertTrue(recipe.getAsJsonObject("base").toString().contains(WATER_BOTTLE), path);
@@ -147,6 +149,10 @@ class StationResourcesTest {
                     assertEquals("{\"count\":4,\"ingredient\":{\"item\":\"minecraft:glass_bottle\"}}", recipe.getAsJsonObject("packaging").toString(), path);
                     assertEquals(4, recipe.getAsJsonObject("result").get("count").getAsInt(), path + ": a mixture is four doses");
                     assertFalse(recipe.has("returns"), path);
+                }
+                case "broom_work" -> {
+                    assertEquals(path.endsWith("/repair"), recipe.has("base"));
+                    assertFalse(recipe.has("packaging") || recipe.has("returns"));
                 }
                 case "charm_work" -> {
                     assertTrue(!recipe.has("base") && !recipe.has("packaging") && !recipe.has("returns"), path);

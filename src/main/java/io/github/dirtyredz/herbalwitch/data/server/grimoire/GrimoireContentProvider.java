@@ -132,6 +132,8 @@ public class GrimoireContentProvider implements DataProvider {
         pages.add(station(StationCatalog.CAULDRON, "A witch brews powders and a water bottle over heat into a mixture of four doses. Each batch waits for a witch to start it."));
         pages.add(station(StationCatalog.STILL, "A witch distils essences and extracts from a water or oil base into a bottle. It stands two blocks tall over its heat."));
         pages.add(station(StationCatalog.BOTTLING_BENCH, "Portions a whole mixture into four bottles or vials; gunpowder makes vials, paper adds a label. No witch needed."));
+        pages.add(station(StationCatalog.BROOM_STAND, "A witch binds a flying broom or repairs a worn one. Insert the old broom in the base slot; its name and remaining flight fractions are preserved."));
+        pages.add(station(StationCatalog.WAND_BENCH, "A witch carves a utility wand from a stick, amethyst and gold. The inputs wait until Start is pressed."));
         pages.add(station(StationCatalog.CHARM_WORKBENCH, "A witch works herbs, string and gold into protective charms here."));
         return pages;
     }

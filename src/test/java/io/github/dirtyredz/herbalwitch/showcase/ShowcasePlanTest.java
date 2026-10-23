@@ -43,7 +43,7 @@ class ShowcasePlanTest {
         List<ShowcaseSection> all = new ArrayList<>(List.of(new DecorShowcaseSection(), new HerbShowcaseSection(), new GardenShowcaseSection()));
         // the stations that stand on a lit witch's stove, as StationRegistration registers them
         List<StationSpec> heated = List.of(StationCatalog.KETTLE, StationCatalog.INFUSION_POT, StationCatalog.CAULDRON, StationCatalog.STILL);
-        for (StationSpec station : StationCatalog.ALL) {
+        for (StationSpec station : StationCatalog.ALL.stream().filter(s -> !s.directory().startsWith("tools/")).toList()) {
             all.add(new StationShowcaseSection(station, heated.contains(station), "recipe", Map::of));
         }
         all.add(new PreparationShowcaseSection());
@@ -56,6 +56,7 @@ class ShowcasePlanTest {
         all.add(new io.github.dirtyredz.herbalwitch.companions.animals.showcase.AnimalShowcaseSection());
         all.add(new io.github.dirtyredz.herbalwitch.companions.familiars.showcase.FamiliarHomeShowcaseSection());
         all.add(new io.github.dirtyredz.herbalwitch.companions.familiars.showcase.FamiliarShowcaseSection());
+        for (StationSpec station : List.of(StationCatalog.BROOM_STAND, StationCatalog.WAND_BENCH)) all.add(new StationShowcaseSection(station, false, "recipe", Map::of));
         return all;
     }
 
@@ -92,7 +93,7 @@ class ShowcasePlanTest {
         List<ShowcasePlan.SectionArea> areas = plan.areas();
         assertEquals(List.of("herbs", "garden", "drying_rack", "mortar", "kettle", "hearth", "stove", "infusion_pot", "cauldron",
                 "still", "bottling_bench", "charm_workbench", "preparations", "advanced_preparations", "grimoire", "altar", "ritual_circle",
-                "ward_stone", "charms", "animals", "familiar_homes", "familiars"), areas.stream().map(ShowcasePlan.SectionArea::id).toList());
+                "ward_stone", "charms", "animals", "familiar_homes", "familiars", "broom_stand", "wand_bench"), areas.stream().map(ShowcasePlan.SectionArea::id).toList());
         assertEquals(0, areas.get(0).x());
         assertEquals(0, areas.get(0).z());
         int rowZ = 0;
@@ -139,7 +140,7 @@ class ShowcasePlanTest {
         // the bare command stacks the furniture showcase and the witchcraft showcase one separation apart
         assertTrue(28 + ShowcaseCommand.SEPARATION + 60 + 1 <= 100, "both showcases outgrow the template depth");
         assertEquals(List.of(41, 28), bounds(ShowcaseGroup.FURNITURE), "the README documents the furniture showcase as 41 x 8 x 28");
-        assertEquals(List.of(119, 60), bounds(ShowcaseGroup.WITCHCRAFT), "the README documents the witchcraft showcase as 119 x 8 x 60");
+        assertEquals(List.of(126, 60), bounds(ShowcaseGroup.WITCHCRAFT), "the README documents the witchcraft showcase as 126 x 8 x 60");
     }
 
     private static List<Integer> bounds(ShowcaseGroup group) throws Exception {

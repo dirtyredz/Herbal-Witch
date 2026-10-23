@@ -27,6 +27,8 @@ public final class StationCreativeTab {
             .withTabsBefore(BotanyCreativeTab.GARDENING.getId())
             .displayItems((parameters, output) -> {
                 StationItems.all().forEach(output::accept);
+                output.accept(io.github.dirtyredz.herbalwitch.magic.broom.registry.BroomItems.BROOM.get());
+                output.accept(io.github.dirtyredz.herbalwitch.magic.wand.registry.WandItems.WAND.get());
                 PreparationItems.all().forEach(output::accept);
                 AdvancedPreparations.all().forEach(output::accept);
             })

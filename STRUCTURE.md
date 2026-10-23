@@ -7,7 +7,17 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 
 ## Layout
 
-M10 foundation (not yet registered as gameplay): `magic/broom/catalog/` owns physical constants;
+M10 tools: `apothecary/stations/advanced/{broom_stand,wand_bench}/` owns station adapters, recipes and
+repair transforms; `data/server/stations/recipes/tools/` contributes acquisition to the sole recipe
+writer. `data/client/magic/tools/` owns item parents; `client/stations/tools/` owns repair presentation.
+`magic/{broom,wand}/{item,registry}/` owns physical tool registration.
+`src/art/blockbench/magic/{broom,wand}/` and `src/art/blockbench/stations/tools/{broom_stand,wand_bench}/`
+own editable geometry and textures. Compiled handheld parents live in `models/item/magic/<tool>/`,
+station models in `models/block/stations/tools/<station>/`, and textures below `textures/block/pieces/`
+mirroring project directories. `tools/art/interface/tool-stations.mjs` supplies their GUI atlases.
+GameTests live in `src/gameTest/java/io/github/dirtyredz/herbalwitch/apothecary/stations/tools/`.
+
+M10 foundation: `magic/broom/catalog/` owns physical constants;
 `magic/broom/persistence/` owns strict item condition data; `magic/broom/flight/` owns pure movement
 and fixed-point cost arithmetic; `magic/broom/network/` owns ephemeral rider input leases.
 `magic/wand/catalog/` owns stable selector IDs and `magic/wand/persistence/` owns mode preferences.

@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.apothecary.stations.registry;
 
+import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.broom_stand.BroomStandMenu;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.wand_bench.WandBenchMenu;
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.bottling_bench.BottlingBenchMenu;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.cauldron.CauldronMenu;
@@ -38,6 +40,12 @@ public final class StationMenus {
             MENUS.register("stations/bottling_bench", () -> IForgeMenuType.create(BottlingBenchMenu::new));
     public static final RegistryObject<MenuType<CharmWorkbenchMenu>> CHARM_WORKBENCH =
             MENUS.register("stations/charm_workbench", () -> IForgeMenuType.create(CharmWorkbenchMenu::new));
+
+    public static final RegistryObject<MenuType<BroomStandMenu>> BROOM_STAND = MENUS.register(
+            "stations/tools/broom_stand/station", () -> IForgeMenuType.create(BroomStandMenu::new));
+
+    public static final RegistryObject<MenuType<WandBenchMenu>> WAND_BENCH = MENUS.register(
+            "stations/tools/wand_bench/station", () -> IForgeMenuType.create(WandBenchMenu::new));
 
     private StationMenus() {
     }

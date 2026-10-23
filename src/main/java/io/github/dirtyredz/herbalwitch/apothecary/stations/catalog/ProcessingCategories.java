@@ -36,8 +36,12 @@ public final class ProcessingCategories {
     public static final Category BOTTLING = new Category("bottling", StationCatalog.BOTTLING_BENCH, false);
     public static final Category CHARM_WORK = new Category("charm_work", StationCatalog.CHARM_WORKBENCH, false);
 
+    public static final Category BROOM_WORK = new Category("broom_work", StationCatalog.BROOM_STAND, false);
+
+    public static final Category WAND_CARVING = new Category("wand_carving", StationCatalog.WAND_BENCH, false);
+
     /** Station order. */
-    public static final List<Category> ALL = List.of(DRYING, GRINDING, STEEPING, INFUSION, CAULDRON, DISTILLATION, BOTTLING, CHARM_WORK);
+    public static final List<Category> ALL = List.of(DRYING, GRINDING, STEEPING, INFUSION, CAULDRON, DISTILLATION, BOTTLING, CHARM_WORK, BROOM_WORK, WAND_CARVING);
 
     private ProcessingCategories() {
     }

@@ -23,7 +23,7 @@ class BroomCodecTest {
             missing.putString(field, "0");
             assertTrue(BroomItemData.decode(missing).isEmpty());
         }
-        for (int[] values : new int[][] {{2, 0, 0, 0}, {1, -1, 0, 0}, {1, 601, 0, 0}, {1, 0, 200, 0}, {1, 0, 0, 20}}) {
+        for (int[] values : new int[][] {{2, 0, 0, 0}, {1, -1, 0, 0}, {1, 601, 0, 0}, {1, 0, 24000, 0}, {1, 0, 0, 20}}) {
             CompoundTag tag = new CompoundTag();
             tag.putInt("schema", values[0]); tag.putInt("wear", values[1]);
             tag.putInt("wearTicks", values[2]); tag.putInt("energyRemainder", values[3]);

@@ -20,10 +20,12 @@ import java.util.List;
 /** One processing recipe as an EMI recipe, laid out by {@link ViewerLayout}. */
 public class EmiProcessRecipe extends BasicEmiRecipe {
     private final ProcessRecipeDescription description;
+    private final java.util.Optional<net.minecraft.network.chat.Component> resultNote;
 
     public EmiProcessRecipe(EmiRecipeCategory category, ProcessRecipe recipe) {
         super(category, recipe.getId(), ViewerLayout.WIDTH, ViewerLayout.HEIGHT);
         this.description = recipe.description();
+        this.resultNote = recipe.resultNote();
         description.ingredients().forEach(c -> inputs.add(ingredient(c)));
         description.base().ifPresent(c -> inputs.add(ingredient(c)));
         description.packaging().ifPresent(c -> inputs.add(ingredient(c)));
@@ -52,6 +54,7 @@ public class EmiProcessRecipe extends BasicEmiRecipe {
         for (int i = 0; i < returns.size(); i++) {
             widgets.addSlot(EmiStack.of(returns.get(i)), ViewerLayout.returnX(i), ViewerLayout.RESULT_Y).recipeContext(this);
         }
+        resultNote.ifPresent(note -> widgets.addText(note, 0, 62, 0x404040, false));
         widgets.addText(RecipeText.footer(description.duration(), description.heated()), 0, ViewerLayout.TEXT_Y, 0x404040, false);
         RecipeText.requirements(description.requirements(), WitchRules.current().workings().processingPercent()).ifPresent(r -> widgets.addText(r, 0, ViewerLayout.REQUIREMENTS_Y, 0x6A2A5A, false));
     }

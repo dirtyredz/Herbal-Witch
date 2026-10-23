@@ -8,6 +8,7 @@ import { FAMILIAR_EQUIPMENT_SCENES } from './familiars/equipment.mjs';
 import { FAMILIAR_CREATURE_SCENES } from './familiars/creatures.mjs';
 import { FAMILIAR_HOME_SCENES } from './familiars/homes.mjs';
 
+import {TOOL_SCENES} from './magic/tools.mjs';
 const HW = 'herbalwitch:';
 const BED = `${HW}botany/garden/herb_bed`;
 const plant = (group, herb) => `${HW}botany/${group}/${herb}/plant`;
@@ -57,6 +58,7 @@ const growthRows = HERB_LIST.map(([group, herb]) => ({
 }));
 
 export const SCENES = [
+  ...TOOL_SCENES,
   ...FAMILIAR_HOME_SCENES, ...FAMILIAR_CREATURE_SCENES, ...FAMILIAR_EQUIPMENT_SCENES,
   {
     name: 'garden-joined-2x2',

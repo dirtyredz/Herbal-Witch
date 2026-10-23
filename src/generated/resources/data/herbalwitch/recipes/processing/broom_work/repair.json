@@ -1,0 +1,33 @@
+{
+  "type": "herbalwitch:processing/broom_work",
+  "base": {
+    "count": 1,
+    "ingredient": {
+      "item": "herbalwitch:magic/broom/broom"
+    }
+  },
+  "duration": 100,
+  "ingredients": [
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "minecraft:wheat"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:string"
+      }
+    }
+  ],
+  "operation": "repair",
+  "repair": 200,
+  "requirements": {
+    "energy": 5,
+    "witch": true
+  },
+  "result": {
+    "item": "herbalwitch:magic/broom/broom"
+  }
+}

@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.apothecary.stations.registry;
 
+import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.broom_stand.*;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.wand_bench.WandCarvingRecipe;
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.bottling_bench.BottlingRecipe;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.cauldron.CauldronRecipe;
@@ -55,6 +57,10 @@ public final class StationRecipes {
     public static final RegistryObject<ProcessRecipeSerializer<CharmRecipe>> CHARM_WORK_SERIALIZER = SERIALIZERS.register(
             "processing/charm_work", () -> new ProcessRecipeSerializer<>(CharmRecipe.BOUNDS, CharmRecipe::new));
 
+    public static final RegistryObject<RecipeType<BroomWorkRecipe>> BROOM_WORK = type("broom_work");
+    public static final RegistryObject<RecipeType<WandCarvingRecipe>> WAND_CARVING = type("wand_carving");
+    public static final RegistryObject<BroomWorkSerializer> BROOM_WORK_SERIALIZER = SERIALIZERS.register("processing/broom_work", BroomWorkSerializer::new);
+    public static final RegistryObject<ProcessRecipeSerializer<WandCarvingRecipe>> WAND_CARVING_SERIALIZER = SERIALIZERS.register("processing/wand_carving", () -> new ProcessRecipeSerializer<>(WandCarvingRecipe.BOUNDS,WandCarvingRecipe::new));
     private StationRecipes() {
     }
 
@@ -70,6 +76,6 @@ public final class StationRecipes {
 
     /** Every processing type, in station order, for viewers. */
     public static List<RegistryObject<? extends RecipeType<? extends ProcessRecipe>>> all() {
-        return List.of(DRYING, GRINDING, STEEPING, INFUSION, CAULDRON, DISTILLATION, BOTTLING, CHARM_WORK);
+        return List.of(DRYING, GRINDING, STEEPING, INFUSION, CAULDRON, DISTILLATION, BOTTLING, CHARM_WORK, BROOM_WORK, WAND_CARVING);
     }
 }

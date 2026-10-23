@@ -21,7 +21,7 @@ import java.util.Map;
 public final class StationTranslations {
     private static final Map<String, String> CATEGORIES = Map.of("drying", "Drying", "grinding", "Grinding",
             "steeping", "Steeping", "infusion", "Infusion", "cauldron", "Cauldron Brewing", "distillation", "Distillation",
-            "bottling", "Bottling", "charm_work", "Charm Work");
+            "bottling", "Bottling", "charm_work", "Charm Work", "broom_work", "Broom Work", "wand_carving", "Wand Carving");
     private static final Map<String, String> SHOWCASE = Map.ofEntries(
             Map.entry("drying_rack", "Fresh herb -> bundle"),
             Map.entry("mortar", "Bundle -> powder"),
@@ -32,7 +32,8 @@ public final class StationTranslations {
             Map.entry("cauldron", "A witch brews: four doses"),
             Map.entry("still", "A witch distils an essence"),
             Map.entry("bottling_bench", "Mixture -> four bottles"),
-            Map.entry("charm_workbench", "A witch makes a charm"));
+            Map.entry("charm_workbench", "A witch makes a charm"),
+            Map.entry("tools/broom_stand", "Craft or repair a broom"), Map.entry("tools/wand_bench", "Carve a utility wand"));
     private static final String PANEL = "screen." + HerbalWitch.MOD_ID + ".station.magic.";
 
     private StationTranslations() {

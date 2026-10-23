@@ -1,0 +1,71 @@
+{
+  "textures": {
+    "pink": "herbalwitch:block/pieces/stations/tools/wand_bench/pink",
+    "particle": "herbalwitch:block/pieces/stations/tools/wand_bench/wood"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        14,
+        12.6
+      ],
+      "to": [
+        0.4,
+        14.8,
+        13
+      ],
+      "forge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      },
+      "faces": {
+        "down": {
+          "uv": [
+            8,
+            0,
+            16,
+            16
+          ],
+          "texture": "#pink"
+        },
+        "up": {
+          "uv": [
+            8,
+            0,
+            16,
+            16
+          ],
+          "texture": "#pink"
+        },
+        "north": {
+          "uv": [
+            0,
+            0,
+            8,
+            16
+          ],
+          "texture": "#pink"
+        },
+        "south": {
+          "uv": [
+            8,
+            0,
+            16,
+            16
+          ],
+          "texture": "#pink"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#pink"
+        }
+      }
+    }
+  ]
+}

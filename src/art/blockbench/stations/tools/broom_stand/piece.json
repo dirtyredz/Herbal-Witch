@@ -1,0 +1,54 @@
+{
+  "project": "broom_stand.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/stations/tools/broom_stand/wood",
+    "gold": "herbalwitch:block/pieces/stations/tools/broom_stand/gold",
+    "iron": "herbalwitch:block/pieces/stations/tools/broom_stand/iron",
+    "plum": "herbalwitch:block/pieces/stations/tools/broom_stand/plum",
+    "linen": "herbalwitch:block/pieces/stations/tools/broom_stand/linen",
+    "pink": "herbalwitch:block/pieces/stations/tools/broom_stand/pink",
+    "particle": "herbalwitch:block/pieces/stations/tools/broom_stand/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/stations/tools/broom_stand/wood",
+    "gold": "herbalwitch:block/pieces/stations/tools/broom_stand/gold",
+    "iron": "herbalwitch:block/pieces/stations/tools/broom_stand/iron",
+    "plum": "herbalwitch:block/pieces/stations/tools/broom_stand/plum",
+    "linen": "herbalwitch:block/pieces/stations/tools/broom_stand/linen",
+    "pink": "herbalwitch:block/pieces/stations/tools/broom_stand/pink"
+  },
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "multiblock": {
+    "dir": "block/stations/tools/broom_stand",
+    "cells": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ]
+    ],
+    "overlays": [
+      {
+        "name": "active",
+        "group": "active",
+        "emissive": true
+      }
+    ]
+  }
+}

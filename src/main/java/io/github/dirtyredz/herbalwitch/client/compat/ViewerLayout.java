@@ -3,7 +3,7 @@ package io.github.dirtyredz.herbalwitch.client.compat;
 /** Geometry shared by EMI and JEI. Text and counted displays belong to client.recipe.RecipeText. */
 public final class ViewerLayout {
     public static final int WIDTH = 132;
-    public static final int HEIGHT = 60;
+    public static final int HEIGHT = 74;
     public static final int SLOT = 18;
     public static final int ARROW_X = 58;
     public static final int ARROW_Y = 10;

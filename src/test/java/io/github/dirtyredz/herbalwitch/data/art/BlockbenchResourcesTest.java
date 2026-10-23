@@ -81,8 +81,8 @@ class BlockbenchResourcesTest {
             }
         }
         assertEquals(new TreeSet<>(BlockbenchManifest.models()), actual);
-        assertEquals(34 + BlockbenchManifest.MILESTONE_6_MODELS.size() + BlockbenchManifest.MILESTONE_7_MODELS.size() + 9 + 3 + 8 + 3 + BlockbenchManifest.pieces().stream().mapToInt(p -> BlockbenchManifest.models(p).size()).sum(), actual.size());
-        assertEquals(34 + 7 + 50 + 9 + 3 + 8 + 3, BlockbenchManifest.models().size() - BlockbenchManifest.pieces().stream().mapToInt(p -> BlockbenchManifest.models(p).size()).sum());
+        assertEquals(34 + BlockbenchManifest.MILESTONE_6_MODELS.size() + BlockbenchManifest.MILESTONE_7_MODELS.size() + 9 + 3 + 8 + 3 + 12 + BlockbenchManifest.pieces().stream().mapToInt(p -> BlockbenchManifest.models(p).size()).sum(), actual.size());
+        assertEquals(34 + 7 + 50 + 9 + 3 + 8 + 3 + 12, BlockbenchManifest.models().size() - BlockbenchManifest.pieces().stream().mapToInt(p -> BlockbenchManifest.models(p).size()).sum());
         for (String model : BlockbenchManifest.models()) {
             assertFalse(Files.exists(ResourceFiles.GENERATED_ASSETS.resolve("models/" + model)), model + " also in the datagen tree");
         }

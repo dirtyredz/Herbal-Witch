@@ -1,0 +1,38 @@
+{
+  "project": "broom.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/magic/broom/wood",
+    "gold": "herbalwitch:block/pieces/magic/broom/gold",
+    "iron": "herbalwitch:block/pieces/magic/broom/iron",
+    "plum": "herbalwitch:block/pieces/magic/broom/plum",
+    "linen": "herbalwitch:block/pieces/magic/broom/linen",
+    "pink": "herbalwitch:block/pieces/magic/broom/pink",
+    "particle": "herbalwitch:block/pieces/magic/broom/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/magic/broom/wood",
+    "gold": "herbalwitch:block/pieces/magic/broom/gold",
+    "iron": "herbalwitch:block/pieces/magic/broom/iron",
+    "plum": "herbalwitch:block/pieces/magic/broom/plum",
+    "linen": "herbalwitch:block/pieces/magic/broom/linen",
+    "pink": "herbalwitch:block/pieces/magic/broom/pink"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      -16
+    ],
+    "max": [
+      16,
+      32,
+      32
+    ]
+  },
+  "outputs": [
+    {
+      "model": "item/magic/broom/base",
+      "item": true
+    }
+  ]
+}

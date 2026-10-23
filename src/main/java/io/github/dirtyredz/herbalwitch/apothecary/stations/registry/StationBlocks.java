@@ -1,5 +1,7 @@
 package io.github.dirtyredz.herbalwitch.apothecary.stations.registry;
 
+import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.broom_stand.BroomStandShapes;
+import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.wand_bench.WandBenchShapes;
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.AdvancedStationBlock;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.advanced.bottling_bench.BottlingBenchShapes;
@@ -58,6 +60,14 @@ public final class StationBlocks {
     public static final RegistryObject<Block> CHARM_WORKBENCH = register(StationCatalog.CHARM_WORKBENCH, () -> AdvancedStationBlock.create(
             working(MapColor.WOOD, SoundType.WOOD, 2.0F).ignitedByLava(), StationCatalog.CHARM_WORKBENCH.layout(),
             CharmWorkbenchShapes.CELLS, false, StationBlockEntities.CHARM_WORKBENCH));
+
+    public static final RegistryObject<Block> BROOM_STAND = register(StationCatalog.BROOM_STAND, () -> AdvancedStationBlock.create(
+            working(MapColor.WOOD, SoundType.WOOD, 2.0F).ignitedByLava(), StationCatalog.BROOM_STAND.layout(),
+            BroomStandShapes.CELLS, false, StationBlockEntities.BROOM_STAND));
+
+    public static final RegistryObject<Block> WAND_BENCH = register(StationCatalog.WAND_BENCH, () -> AdvancedStationBlock.create(
+            working(MapColor.WOOD, SoundType.WOOD, 2.0F).ignitedByLava(), StationCatalog.WAND_BENCH.layout(),
+            WandBenchShapes.CELLS, false, StationBlockEntities.WAND_BENCH));
 
     /** A production station's properties: a low light while it works. */
     private static BlockBehaviour.Properties working(MapColor color, SoundType sound, float strength) {

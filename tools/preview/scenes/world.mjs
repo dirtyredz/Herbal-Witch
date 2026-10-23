@@ -4,7 +4,7 @@
 // against a full proxy cube are culled as the game would.
 import {creatureQuads} from './familiars/creatures.mjs';
 import { select, enumerate } from './blockstates.mjs';
-import { variantRotation, translate } from '../geometry/transforms.mjs';
+import { variantRotation, translate, displayTransform } from '../geometry/transforms.mjs';
 import { bakeElement } from '../geometry/elements.mjs';
 
 /** Proxy blocks: [height in model pixels, top colour, side colour]. */
@@ -58,7 +58,11 @@ export function sceneQuads(entries, baker, res) {
     let local;
     if (e.creature) local = creatureQuads(e, res, baker);
     else if (e.proxy) local = proxyQuads(e.proxy);
-    else if (e.model) local = variantRotation(baker.bake(e.model).quads, { y: e.y ?? 0 });
+    else if (e.model) {
+      const baked = baker.bake(e.model);
+      if (e.display && !baked.model.display[e.display]) throw new Error('Missing display transform ' + e.display);
+      local = e.display ? displayTransform(baked.quads, baked.model.display[e.display]) : variantRotation(baked.quads, {y:e.y ?? 0});
+    }
     else {
       const bs = res.json('blockstates', e.block);
       if (!bs) throw new Error(`missing blockstate ${e.block}`);
