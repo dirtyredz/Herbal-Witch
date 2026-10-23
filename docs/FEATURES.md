@@ -68,7 +68,7 @@ docs/ARCHITECTURE.md ("Stations", "Advanced witchcraft"), docs/DECISIONS.md ("0.
 | Witch recipes: nothing is reserved or run until a witch presses Start (Start, Resume, Cancel are vanilla menu buttons); progress only while the payer is online, alive and within 8 blocks; energy debited once at completion with practice awarded; Cancel consumes nothing | implemented |
 | Recipe `requirements` (`witch`, `energy`) on the wire and in the fingerprint; `processingPercent` scales energy; mortar and infusion pot carry witch recipes (blinding dust, four oils) | implemented |
 | Four advanced stations: Witch's Cauldron, Copper Still, Bottling Bench, Charm Workbench (shared block and entity classes, previewed placement, `active` state) | implemented; art is an agent first draft |
-| 16 advanced preparations: 4 drinks, 6 thrown vials, 4 oils, blinding dust, moon essence; 17 four-dose mixtures; labelled vials (an NBT flag); 10 familiar preparations that refuse until M9 | implemented; the familiar effects wait for M9 |
+| 16 advanced preparations: 4 drinks, 6 thrown vials, 4 oils, blinding dust, moon essence; 17 four-dose mixtures; labelled vials (an NBT flag); 10 familiar preparations deferred to M9 | implemented; familiar effects now implemented in M9 below |
 | Control, combat and repellent effects (binding, sleep, steadfast, concealment, dazzled, thorns, repellents; weapon coating) with hard-control immunity and entity tags | implemented |
 | Thrown preparations: radius 3, 32 targets, line of sight, per-thrower and per-dimension limits, shared 20-tick throw cooldown | implemented |
 | One entity-action permission boundary (self, protected tag, foreign pets, PvP only when enabled, spawn protection, claim mods) | implemented |
@@ -79,7 +79,7 @@ docs/ARCHITECTURE.md ("Stations", "Advanced witchcraft"), docs/DECISIONS.md ("0.
 | Grimoire: four station pages, preparations, wards, charms, circle, garden blessing and home protection pages; 113 processing recipes | implemented |
 | JEI and EMI ritual categories; recipe viewers show the witch requirement | implemented; viewers are owner checks |
 | Showcase sections `cauldron`, `still`, `bottling_bench`, `charm_workbench`, `advanced_preparations`, `ritual_circle`, `ward_stone`, `charms`; rows packed to 126 wide, GameTest template 128 x 10 x 64 | implemented |
-| Familiar effects of the familiar preparations | not implemented (M9) |
+| Familiar effects of the familiar preparations | deferred in M7; implemented and tested in M9 below |
 
 Scope notes: all M7 energy is spent through `WitchStatusService`; `FamiliarPreparationApplications.install`
 is the M9 hook. Ward-charging GameTests run in their own batches (docs/GOTCHAS.md). Showcase bounds:
@@ -114,7 +114,7 @@ docs/ARCHITECTURE.md ("Witchcraft"), docs/DECISIONS.md ("0.5.0"). Protocol "3".
 | Energy HUD and `herbalwitch-client.toml` `[hud]`; `herbalwitch-server.toml` rules synced to clients | implemented |
 | Grimoire category "Witchcraft" (status, energy, recovery, altar, four ritual pages); founding and initiation grant the witchcraft and action discoveries | implemented |
 | Showcase section `altar`; showcase 126 x 8 x 28 | implemented |
-| Energy spent by production | implemented in 0.6.0 (M7); familiars not implemented (M9) |
+| Energy spent by production | implemented in 0.6.0 (M7); familiar spending implemented in M9 below |
 
 Scope notes: production consumes energy only through `WitchStatusService` (done in 0.6.0); M9 familiar powers charge
 the owner the same way.
@@ -225,7 +225,7 @@ owner visual, shader, reload and two-client checks remain pending independently.
 | Equipment, progression and preparations | Real menu/shift-click/cursor escrow, cargo conservation, shared charm charge, stable modifiers, paid upgrades, all eleven products and shared poison |
 | Paid bounded powers | Every species power, no-result/zero-energy/permission refusal, changed target tokens, retrieval tombstones, finite offline reserve and configuration invalidation |
 | Incapacitation and revival | No drops/XP, retained inventory, exact paid restoration, failed insertion, generation refusal and administrative recovery |
-| Restart and crash boundaries | ANU `HerbalWitch-m9-familiars-0.8.0-20261023-052253-a36` at `67360e9`: 76 actual checkpoint snapshots across two JVMs, all required evidence passed |
+| Restart and crash boundaries | ANU `HerbalWitch-9f3627badbc6a2751684cbde-20261023-055219-9f9` at `9f3627b`: 76 actual checkpoint snapshots across two JVMs, all required evidence passed |
 | Work limits | 120 paginated bonds, three owners at the three-mobile cap, three loaded offline home guards; scan/path counters and forced-chunk baseline; source guard forbids chunk/ticket acquisition |
 | Acquisition, grimoire and showcase | Daytime spawn rules, creative eggs, feature-owned root plus eight guide pages, nine inert appearances and complete labelled supply barrels |
 | Art | 1,100 generated files unchanged by repeat datagen; 86 Node tests; owned Blockbench gear/eggs/homes and raven/crow/owl/snake rigs; 19 new-species and 20 native equipped poses visually reviewed |

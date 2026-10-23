@@ -35,6 +35,12 @@ public final class ShowcaseFixtures {
                 helper.setBlock(new BlockPos(x, 0, z), Blocks.STONE);
             }
         }
+        // Replacing adjacent GameTest structures can drop their signs into this plot. Those are
+        // unrelated fixture debris; deliberate obstruction cases add their entities after setup.
+        helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,
+                new net.minecraft.world.phys.AABB(helper.absolutePos(BlockPos.ZERO),
+                        helper.absolutePos(new BlockPos(width, 10, depth))).inflate(1))
+                .forEach(net.minecraft.world.entity.Entity::discard);
     }
 
     /** A fake player standing at {@link #STAND}. */
