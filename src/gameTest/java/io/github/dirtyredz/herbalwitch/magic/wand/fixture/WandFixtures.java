@@ -11,8 +11,11 @@ import io.github.dirtyredz.herbalwitch.magic.wand.registry.WandItems;
 public final class WandFixtures {
  public static final BlockPos TARGET=new BlockPos(4,1,4),FEET=new BlockPos(4,1,2);
  private WandFixtures(){}
- /** Retained CI plots may contain older structures above the short empty template. */
- public static void openSky(GameTestHelper h,BlockPos relative){var at=h.absolutePos(relative);for(int y=at.getY()+1;y<h.getLevel().getMaxBuildHeight();y++)h.getLevel().setBlock(new BlockPos(at.getX(),y,at.getZ()),net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(),net.minecraft.world.level.block.Block.UPDATE_CLIENTS);}
+ /** Native crop placement depends on asynchronously propagated light in the underground test plots. */
+ public static void litCrop(GameTestHelper h,BlockPos relative,Runnable action){
+  h.setBlock(relative.above(2),net.minecraft.world.level.block.Blocks.GLOWSTONE);
+  h.startSequence().thenWaitUntil(()->io.github.dirtyredz.herbalwitch.fixture.WorldFixtures.check(h.getLevel().getRawBrightness(h.absolutePos(relative),0)>=8,"crop fixture awaits light propagation")).thenExecute(action);
+ }
 
  public static ItemStack wand(WandMode mode){var stack=new ItemStack(WandItems.WAND.get());WandItemData.write(stack,mode);return stack;}
  public static void cast(GameTestHelper h,ServerPlayer actor,WandMode mode,InteractionHand hand,BlockPos target){

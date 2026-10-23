@@ -412,3 +412,5 @@ Tool fixtures must aim at the actual outline height of candles and farmland rath
 A null controlling passenger alone does not establish chunk persistence. Vanilla `Entity.shouldBeSaved`, `ServerPlayer` RootVehicle NBT and `PlayerList` logout removal also consult `hasExactlyOnePlayerPassenger`. The broom opts out of that player-owned vehicle path; do not remove this override when changing rider controls.
 
 ANU keeps the ordinary GameTest world between jobs. Changing the test list can reuse plots with old overhead structures, entities or persisted familiar records. Milestone/profile qualification can select `-PgameTestRunId=<unique-id>` to use a fresh world without deleting prior evidence. IDs are restricted to lowercase letters, digits, underscores and hyphens, and cannot escape the repository run directory.
+
+Native crop placement in underground GameTest plots needs propagated light. A clear column does not synchronously refresh skylight; supply a lamp and wait for actual brightness before invoking native seed placement or neighbor updates. Do not weaken crop survival to make a fixture pass.

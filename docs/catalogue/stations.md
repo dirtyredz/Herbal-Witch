@@ -20,8 +20,8 @@ Module paths are relative to `io.github.dirtyredz.herbalwitch`. Milestones are f
 | Familiar beds, nests and perches | Assign rest locations and recovery | bed, nest, perch | `companions/familiars/home/` | none | familiar owner | 9 | functional placement, assignment and safe rest qualified |
 | Home ward stone | Define guarded home area and targeting settings | ward stone | `magic/ward/` | none (ward activation, 20 energy default) | yes | 7 | done (0.6.0): WardGameTests, WardCodecTest, WardIndexTest; see "Ward stone" below |
 | Apothecary counter, register, shelves and jars | Stock, sell, display, track goods | counter, register, stock shelves, jars; decor Apothecary Counter links here | `shop/block/` (with `shop/catalog/`, `shop/trade/`, `shop/order/`, `shop/persistence/`) | none | witch runs shop; non-witch inspects and buys | 11 | not started |
-| Broom crafting stand | Craft and repair rideable flying brooms | broom stand | `magic/broom/` + `apothecary/stations/broom_stand/` | broom work | yes (broom is witch-only) | 10 | not started |
-| Wand carving bench | Create utility wands for everyday tasks | wand bench | `magic/wand/` + `apothecary/stations/wand_bench/` | wand carving | assumed yes (wand uses energy); confirm at M10 | 10 | not started |
+| Broom crafting stand | Craft and repair rideable flying brooms | broom stand | `magic/broom/` + `apothecary/stations/advanced/broom_stand/` | broom work | yes; attending witch starts each batch | 10 | implemented; final qualification pending |
+| Wand carving bench | Create utility wands for everyday tasks | wand bench | `magic/wand/` + `apothecary/stations/advanced/wand_bench/` | wand carving | yes; attending witch starts each batch | 10 | implemented; final qualification pending |
 
 ## Milestone 3 stations in detail
 
@@ -210,3 +210,5 @@ ordinary loaded rest. They expose no item handler. Exact compatibility and recip
 - Recipe matching never consumes inputs; mutation happens separately, revalidated at completion (inputs, output capacity, witch, energy). `ProcessMatcher` matches, `ProcessCommit` mutates.
 - Station inventories and progress live in the block entity; at most 12 source files per station directory, split into `block/`, `menu/`, `recipe/` when needed.
 - Each station row closes only with implementation and acceptance evidence (milestone 12 qualification).
+
+M10 tool stations use two supported floor cells, the shared placement preview, advanced processing menus and Start/Resume/Cancel authorization. Neither needs heat. The broom stand reserves its separate base slot for repair and previews preserved condition; the wand bench makes a Harvest-selected wand. Exact IDs, ingredients, prices and controls are in [tools.md](tools.md).

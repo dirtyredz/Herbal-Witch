@@ -122,3 +122,7 @@ private retrieval. Existing bonds remain recoverable when new binding is disable
 The witchcraft showcase includes three functional homes, nine inert appearances and complete supply
 barrels. Display equipment is cosmetic; displays have no owner, bond, cargo or recovery authority.
 Headless qualification is recorded in Features; owner visual, shader and two-client review remains separate.
+
+## Wand access (M10)
+
+The [utility wand](tools.md) in Familiar Commands mode is an additional focus for the existing roster and detail menus. Target an owned familiar for detail, or use it without an entity target for the private roster. The same seven commands, home/mobile-cap checks, session nonces and paid bounded recall service apply; ordinary commands remain free even at zero energy. Changing or removing the focus ends access unless another supported focus remains held. Brooms carry only their player rider, with no automatic familiar transport.
