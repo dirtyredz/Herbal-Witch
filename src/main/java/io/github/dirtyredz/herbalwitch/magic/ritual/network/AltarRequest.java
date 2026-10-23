@@ -22,7 +22,10 @@ import java.util.UUID;
  * @param place       the block the player chose for a circle ritual: the herb bed to bless ({@link Op#BLESS}) or the ward
  *                    stone to charge ({@link Op#PROTECT}); the server revalidates it
  */
-public record AltarRequest(int containerId, long session, int rules, Op op, Optional<UUID> target, long offer, Optional<BlockPos> place) {
+public record AltarRequest(int containerId, long session, int rules, Op op, Optional<UUID> target, long offer, Optional<BlockPos> place, String action) {
+    public AltarRequest(int containerId, long session, int rules, Op op, Optional<UUID> target, long offer, Optional<BlockPos> place) {
+        this(containerId, session, rules, op, target, offer, place, "");
+    }
     /** A request naming no place (every Milestone 6 operation). */
     public AltarRequest(int containerId, long session, int rules, Op op, Optional<UUID> target, long offer) {
         this(containerId, session, rules, op, target, offer, Optional.empty());
@@ -38,7 +41,8 @@ public record AltarRequest(int containerId, long session, int rules, Op op, Opti
         ATTUNE,
         STOP,
         BLESS,
-        PROTECT
+        PROTECT,
+        CONTRIBUTED
     }
 
     public void encode(FriendlyByteBuf buf) {
@@ -51,6 +55,7 @@ public record AltarRequest(int containerId, long session, int rules, Op op, Opti
         buf.writeLong(offer);
         buf.writeBoolean(place.isPresent());
         place.ifPresent(buf::writeBlockPos);
+        buf.writeUtf(action, 80);
     }
 
     public static AltarRequest decode(FriendlyByteBuf buf) {
@@ -62,6 +67,6 @@ public record AltarRequest(int containerId, long session, int rules, Op op, Opti
         Optional<UUID> target = buf.readBoolean() ? Optional.of(buf.readUUID()) : Optional.empty();
         long offer = buf.readLong();
         Optional<BlockPos> place = buf.readBoolean() ? Optional.of(buf.readBlockPos()) : Optional.empty();
-        return new AltarRequest(containerId, session, rules, op, target, offer, place);
+        return new AltarRequest(containerId, session, rules, op, target, offer, place, PayloadBounds.readString(buf, 80));
     }
 }

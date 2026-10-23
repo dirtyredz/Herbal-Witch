@@ -15,6 +15,9 @@ public final class CaptureReconciliation {
     private record Permit(Mob entity, UUID transaction, long generation) {}
     private static final Map<MinecraftServer, Permit> PERMITS = new WeakHashMap<>();
     private CaptureReconciliation() {}
+    private static final List<java.util.function.BiPredicate<Mob, CaptureRecord>> LINEAGES = new ArrayList<>();
+    /** Additional verified representations; capture tokens still retain their original type and tombstone. */
+    public static void lineage(java.util.function.BiPredicate<Mob, CaptureRecord> lineage) { LINEAGES.add(lineage); }
     public static long generation(Mob mob) { return AnimalCapability.of(mob).flatMap(AnimalCapability::state).map(s -> s.generation()).orElse(0L); }
     public static AutoCloseable permit(ServerLevel level, Mob mob, CaptureRecord record) {
         MinecraftServer server = level.getServer();
@@ -32,7 +35,8 @@ public final class CaptureReconciliation {
         Permit permit = PERMITS.get(level.getServer());
         boolean permitted = permit != null && permit.entity() == mob && permit.transaction().equals(record.transaction())
                 && permit.generation() == generation && record.phase() == CaptureRecord.Phase.RELEASE_PREPARED;
-        if (generation != record.generation() || !permitted && record.phase() != CaptureRecord.Phase.RELEASED
+        boolean type = EntityType.getKey(mob.getType()).toString().equals(record.type()) || LINEAGES.stream().anyMatch(rule -> rule.test(mob, record));
+        if (!type || generation != record.generation() || !permitted && record.phase() != CaptureRecord.Phase.RELEASED
                 || !CompanionLifecycleAuthority.admit(level.getServer(), mob)) event.setCanceled(true);
     }
     public static void reset() { PERMITS.clear(); }

@@ -16,10 +16,12 @@ Local fast-gate evidence: 335 existing + 31 added JUnit tests; 75 existing + 4 a
 are delegated to the orchestrator after the committed handoff; no client was launched. Owner checks
 remain for all four panel hosts, changed-rule recipe text, drinks/oils, wards and two-client private
 updates. Headless preview review and all 2,693 baseline resource/art hashes are recorded locally.
-M8 ordinary-animal implementation is now a candidate on this branch; M9 familiars remain unimplemented.
+M8 ordinary-animal implementation is now a candidate on this branch; M9 implementation is in progress.
 M9 prerequisites now include the neutral familiar-guide handoff, shared verified snapshot writer and
 shared loaded companion identity index. Their tests preserve M8 capture bytes and guide ordering;
-they do not constitute binding, commands, recovery or a 0.8.0 milestone implementation.
+they do not constitute a 0.8.0 milestone implementation. The first M9 phase adds canonical per-bond
+storage, conservative admission, eight species adapters, and paid altar binding. Its runtime gate is
+being qualified; roster, commands, homes, equipment, abilities, preparations, recovery and art follow.
 M8 adds six baits, personal loaded-time care state, existing-salve targeting, temporary goal-based
 calming, reused M7 sleep, earned native taming/keepers, a private grimoire card, verified capture
 checkpoints/reconciliation/recovery and sixteen showcase habitats. Exact boundaries and defaults:

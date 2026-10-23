@@ -1,6 +1,7 @@
 {
   "values": [
     "minecraft:cat",
-    "minecraft:axolotl"
+    "minecraft:axolotl",
+    "herbalwitch:familiars/entity/cat"
   ]
 }

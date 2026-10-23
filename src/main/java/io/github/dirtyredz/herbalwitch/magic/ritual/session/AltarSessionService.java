@@ -23,7 +23,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
 
-import java.util.EnumMap;
+import java.util.LinkedHashMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,7 +60,7 @@ public final class AltarSessionService {
     }
 
     public static final String KEY = "ritual.herbalwitch.";
-    private static final Map<AltarActionSpec, Handler> HANDLERS = new EnumMap<>(AltarActionSpec.class);
+    private static final Map<AltarActionSpec, Handler> HANDLERS = new LinkedHashMap<>();
     private static final Map<UUID, String> NOTICES = new HashMap<>();
     private static AltarSessions sessions;
     private static MinecraftServer server;

@@ -55,7 +55,7 @@ class GeneratedResourcesTest {
         for (Map<String, String> part : List.of(DecorManifest.lang(), BotanyManifest.lang(), StationManifest.lang(),
                 PreparationManifest.lang(), ShowcaseManifest.lang(), GrimoireManifest.lang(), WitchManifest.lang(), AltarManifest.lang(),
                 AdvancedManifest.lang(), CharmManifest.lang(), CircleManifest.lang(), WardManifest.lang(),
-                io.github.dirtyredz.herbalwitch.data.animals.AnimalManifest.lang())) {
+                io.github.dirtyredz.herbalwitch.data.animals.AnimalManifest.lang(), io.github.dirtyredz.herbalwitch.data.familiars.FamiliarManifest.lang())) {
             part.forEach((key, value) -> {
                 assertFalse(lang.containsKey(key), "two features claim " + key);
                 lang.put(key, value);

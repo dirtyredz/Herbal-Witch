@@ -11,6 +11,10 @@ import java.util.UUID;
 public final class CapturePayloadValidator {
     private CapturePayloadValidator() {}
     public static boolean valid(CompoundTag payload, UUID animal, String type, AnimalRules rules) {
+        return valid(payload, animal, type, rules.payloadBytes(), rules.nbtDepth());
+    }
+    /** Exact vanilla-compatible payload validation, reusable by a separately bounded lifecycle owner. */
+    public static boolean valid(CompoundTag payload, UUID animal, String type, int maximumBytes, int maximumDepth) {
         try {
             if (!payload.hasUUID("UUID") || !payload.getUUID("UUID").equals(animal) || !payload.getString("id").equals(type)
                     || payload.contains("Passengers") || payload.contains("Leash") || !payload.contains("Health", Tag.TAG_ANY_NUMERIC)
@@ -23,7 +27,7 @@ public final class CapturePayloadValidator {
                 if (caps.contains("herbalwitch:animals/care") && (!caps.contains("herbalwitch:animals/care", Tag.TAG_COMPOUND)
                         || !AnimalCodec.read(caps.getCompound("herbalwitch:animals/care")).writable())) return false;
             }
-            walk(payload, 0, rules.nbtDepth());
+            walk(payload, 0, maximumDepth);
             if (payload.contains("Attributes")) {
                 if (!(payload.get("Attributes") instanceof ListTag attributes) || !attributes.isEmpty() && attributes.getElementType() != Tag.TAG_COMPOUND) return false;
                 for (Tag entry : attributes) {
@@ -34,7 +38,7 @@ public final class CapturePayloadValidator {
                             || definition.sanitizeValue(attribute.getDouble("Base")) != attribute.getDouble("Base")) return false;
                 }
             }
-            CaptureCodec.bytes(payload, rules.payloadBytes());
+            CaptureCodec.bytes(payload, maximumBytes);
             return true;
         } catch (Exception failure) { return false; }
     }

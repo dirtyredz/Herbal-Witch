@@ -463,6 +463,24 @@ call preserves its frame coordinates. Frozen manifest/PNG hashes guard byte pari
 
 ## Whole-mod module map (plan section 2)
 
+M9 binding introduces bounded per-bond `herbalwitch_familiar_<uuid>.dat` shards in the Overworld.
+`FamiliarStore` derives owner keyset pages and creature lineage indexes in batches of 32 files; an
+incomplete or corrupt index cannot authorize a mutation. Loaded candidates wait without a persistent
+NoAI flag. Every shard uses the shared forced, atomic, verified writer for checkpoints and normal saves.
+Prepared records and unresolved receipts become quarantined on restart; absence never means death.
+
+Binding delegates to an altar contribution with a 200-loaded-tick session, circle validation, exact
+offering snapshots and repeated care/ownership checks. `FamiliarBindingService` prepares recovery before
+discarding the source, admits one exact candidate, spends through `WitchStatusService.spend`, and only
+compacts after verified bond/player completion. Entity references contain identity and generation only.
+M8 transport generations and released tombstones remain intact; exact converted lineage is contributed
+to capture reconciliation, while the bond UUID index rejects old sources without binding capabilities.
+
+Altar action descriptions are a bootstrap registry with permanent string identities. The original six
+remain built-ins; contributed handlers share the same sessions and rate-limited packet path. Protocol 6
+encodes action identities explicitly. The client presents one contributed action at a time and sends a
+remembered creature/bond UUID; only the server determines whether it is a valid target.
+
 Paths under `src/main/java/io/github/dirtyredz/herbalwitch/`. Implemented so far: decor, apothecary/{botany,stations,brewing},
 showcase, platform/permission, platform/network, compat, grimoire and magic/{witch,ritual,charm,ward}. Later milestones create the rest when needed.
 

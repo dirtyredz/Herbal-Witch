@@ -1,5 +1,8 @@
 {
   "values": [
-    "minecraft:wolf"
+    "minecraft:wolf",
+    "herbalwitch:familiars/entity/owl",
+    "herbalwitch:familiars/entity/wolf",
+    "herbalwitch:familiars/entity/snake"
   ]
 }

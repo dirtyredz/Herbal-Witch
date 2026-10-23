@@ -5,7 +5,7 @@ import io.github.dirtyredz.herbalwitch.platform.network.PayloadBounds;
 import net.minecraft.network.FriendlyByteBuf;
 
 import java.util.ArrayList;
-import java.util.EnumMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -68,7 +68,7 @@ public record AltarUpdate(int containerId, long session, boolean foundingOpen, O
         buf.writeBoolean(foundingOpen);
         buf.writeBoolean(activity.isPresent());
         activity.ifPresent(a -> {
-            PayloadBounds.writeEnum(buf, a.action());
+            buf.writeUtf(a.action().identity(), 80);
             buf.writeVarInt(a.elapsed());
             buf.writeVarInt(a.duration());
             buf.writeBoolean(a.mine());
@@ -91,7 +91,7 @@ public record AltarUpdate(int containerId, long session, boolean foundingOpen, O
         });
         buf.writeVarInt(counts.size());
         counts.forEach((action, list) -> {
-            PayloadBounds.writeEnum(buf, action);
+            buf.writeUtf(action.identity(), 80);
             buf.writeVarInt(list.size());
             list.forEach(c -> {
                 buf.writeVarInt(c.have());
@@ -110,7 +110,7 @@ public record AltarUpdate(int containerId, long session, boolean foundingOpen, O
         int containerId = buf.readVarInt();
         long session = buf.readLong();
         boolean foundingOpen = buf.readBoolean();
-        Optional<Activity> activity = buf.readBoolean() ? Optional.of(new Activity(PayloadBounds.readEnum(buf, AltarActionSpec.class),
+        Optional<Activity> activity = buf.readBoolean() ? Optional.of(new Activity(AltarActionSpec.byIdentity(PayloadBounds.readString(buf, 80)),
                 buf.readVarInt(), buf.readVarInt(), buf.readBoolean(), PayloadBounds.readString(buf, MAX_NAME))) : Optional.empty();
         Optional<Invitation> incoming = readInvitation(buf);
         Optional<Invitation> outgoing = readInvitation(buf);
@@ -120,9 +120,9 @@ public record AltarUpdate(int containerId, long session, boolean foundingOpen, O
             nearby.add(new Nearby(buf.readUUID(), PayloadBounds.readString(buf, MAX_NAME)));
         }
         int actions = PayloadBounds.readCount(buf, AltarActionSpec.values().length);
-        Map<AltarActionSpec, List<Count>> counts = new EnumMap<>(AltarActionSpec.class);
+        Map<AltarActionSpec, List<Count>> counts = new LinkedHashMap<>();
         for (int a = 0; a < actions; a++) {
-            AltarActionSpec action = PayloadBounds.readEnum(buf, AltarActionSpec.class);
+            AltarActionSpec action = AltarActionSpec.byIdentity(PayloadBounds.readString(buf, 80));
             int size = PayloadBounds.readCount(buf, MAX_REQUIREMENTS);
             List<Count> list = new ArrayList<>();
             for (int i = 0; i < size; i++) {

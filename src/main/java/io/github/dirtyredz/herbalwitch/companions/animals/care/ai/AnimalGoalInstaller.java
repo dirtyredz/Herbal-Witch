@@ -21,6 +21,8 @@ public final class AnimalGoalInstaller {
     private static final Map<Mob, Goals> INSTALLED = new WeakHashMap<>();
     private static final Map<ServerLevel, ArrayDeque<HerbalBaitGoal>> WAITING = new HashMap<>();
     private AnimalGoalInstaller() {}
+    private static final java.util.List<java.util.function.Predicate<Mob>> EXCLUSIONS = new java.util.ArrayList<>();
+    public static void exclude(java.util.function.Predicate<Mob> exclusion) { EXCLUSIONS.add(exclusion); }
 
     public static void tick(LivingEvent.LivingTickEvent event) {
         if (!(event.getEntity() instanceof Mob mob) || !(mob.level() instanceof ServerLevel)) return;
@@ -31,6 +33,9 @@ public final class AnimalGoalInstaller {
             BaitInterestIndex.budget((ServerLevel) mob.level()).release(mob.getUUID(), null);
     }
     public static void reconcile(Mob mob) {
+        if (EXCLUSIONS.stream().anyMatch(rule -> rule.test(mob))) {
+            var old = INSTALLED.remove(mob); if (old != null) remove(mob, old); return;
+        }
         long generation = AnimalServerConfig.generation();
         var previous = INSTALLED.get(mob);
         if (previous != null && previous.generation == generation) return;
@@ -46,7 +51,7 @@ public final class AnimalGoalInstaller {
     public static boolean prepareCalm(Mob mob) {
         if (mob.isNoAi()) return false;
         reconcile(mob);
-        return INSTALLED.get(mob).calm != null && BaitInterestIndex.budget((ServerLevel) mob.level())
+        return INSTALLED.containsKey(mob) && INSTALLED.get(mob).calm != null && BaitInterestIndex.budget((ServerLevel) mob.level())
                 .claim(mob.getUUID(), null, AnimalServerConfig.current());
     }
     private static void remove(Mob mob, Goals goals) {

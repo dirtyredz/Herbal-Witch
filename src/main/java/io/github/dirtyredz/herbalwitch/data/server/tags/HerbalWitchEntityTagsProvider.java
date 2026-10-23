@@ -22,5 +22,6 @@ public final class HerbalWitchEntityTagsProvider extends EntityTypeTagsProvider 
     @Override protected void addTags(HolderLookup.Provider lookup) {
         PreparationEntityTagContributions.addTo(this::tag);
         AnimalTagContributions.entities(this::tag);
+        io.github.dirtyredz.herbalwitch.data.server.familiars.FamiliarTags.entities(this::tag);
     }
 }

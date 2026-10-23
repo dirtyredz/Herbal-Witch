@@ -60,7 +60,8 @@ public final class RitualCardLayout {
         WitchRules rules = WitchRules.current();
         WorkingRules w = rules.workings();
         EnergyBalance e = rules.energy();
-        Component terms = switch (action) {
+        Component terms = switch (action.kind()) {
+            case CONTRIBUTED -> Component.translatable(KEY + "terms", TickTime.ceilingSeconds(action.ticks()), action.energy());
             case FOUNDING -> Component.translatable(KEY + "time", TickTime.ceilingSeconds(rules.foundingTicks()));
             case INITIATION -> Component.translatable(KEY + "terms", TickTime.ceilingSeconds(rules.initiationTicks()), e.initiationCost());
             case MEDITATION -> Component.translatable(KEY + "open");

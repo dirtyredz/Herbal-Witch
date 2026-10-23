@@ -18,7 +18,10 @@ import net.minecraftforge.common.util.FakePlayer;
 
 public final class CapturePolicy {
     private CapturePolicy() {}
+    private static final java.util.List<java.util.function.Predicate<Mob>> EXCLUSIONS = new java.util.ArrayList<>();
+    public static void exclude(java.util.function.Predicate<Mob> exclusion) { EXCLUSIONS.add(exclusion); }
     public static String check(ServerPlayer player, Mob mob, InteractionHand hand) {
+        if (EXCLUSIONS.stream().anyMatch(rule -> rule.test(mob))) return "unsupported";
         if (player instanceof FakePlayer || player.isSpectator() || !player.isAlive()) return "actor";
         if (!AnimalServerConfig.current().captures()) return "disabled";
         var stack = player.getItemInHand(hand);

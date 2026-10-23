@@ -16,6 +16,8 @@ public final class AnimalOwnership {
     }
 
     private AnimalOwnership() {}
+    private static final java.util.List<java.util.function.Function<Mob, UUID>> ADAPTERS = new java.util.ArrayList<>();
+    public static void register(java.util.function.Function<Mob, UUID> adapter) { ADAPTERS.add(adapter); }
 
     public static View of(Mob mob, AnimalProfile profile) {
         UUID nativeId = mob instanceof OwnableEntity pet ? pet.getOwnerUUID()
@@ -24,6 +26,13 @@ public final class AnimalOwnership {
         boolean tamed = mob instanceof net.minecraft.world.entity.TamableAnimal pet && pet.isTame()
                 || mob instanceof AbstractHorse horse && horse.isTamed();
         boolean conflict = nativeId != null && keeper != null && !nativeId.equals(keeper) || tamed && nativeId == null;
+        for (var adapter : ADAPTERS) {
+            UUID additional = adapter.apply(mob);
+            if (additional != null) {
+                conflict |= nativeId != null && !nativeId.equals(additional) || keeper != null && !keeper.equals(additional);
+                if (nativeId == null) nativeId = additional;
+            }
+        }
         return new View(nativeId == null ? keeper : nativeId, conflict,
                 profile.ownership() != AnimalProfile.Ownership.UNKNOWN, nativeId != null);
     }

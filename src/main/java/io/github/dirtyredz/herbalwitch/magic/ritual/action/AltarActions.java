@@ -20,6 +20,11 @@ public final class AltarActions {
     public static final int MAX_REQUESTS = 5;
     public static final int WINDOW = 20;
     private static final RateLimit LIMIT = new RateLimit(MAX_REQUESTS, WINDOW);
+    @FunctionalInterface public interface Contribution { String begin(ServerPlayer player, AltarMenu menu, Optional<java.util.UUID> target); }
+    private static final java.util.Map<String, Contribution> CONTRIBUTIONS = new java.util.LinkedHashMap<>();
+    public static void register(io.github.dirtyredz.herbalwitch.magic.ritual.catalog.AltarActionSpec action, Contribution contribution) {
+        if (CONTRIBUTIONS.putIfAbsent(action.identity(), contribution) != null) throw new IllegalArgumentException("Duplicate altar handler");
+    }
 
     private AltarActions() {
     }
@@ -47,6 +52,8 @@ public final class AltarActions {
             return Optional.of("rules_changed");
         }
         String suffix = switch (request.op()) {
+            case CONTRIBUTED -> CONTRIBUTIONS.containsKey(request.action())
+                    ? CONTRIBUTIONS.get(request.action()).begin(sender, menu.get(), request.target()) : "unknown_action";
             case FOUND -> FoundingAction.begin(sender, menu.get());
             case INVITE -> request.target().map(t -> InitiationAction.invite(sender, menu.get(), t)).orElse("initiation.not_near");
             case WITHDRAW -> InitiationAction.withdraw(sender);

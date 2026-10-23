@@ -1,6 +1,8 @@
 {
   "values": [
     "minecraft:fox",
-    "minecraft:bat"
+    "minecraft:bat",
+    "herbalwitch:familiars/entity/fox",
+    "herbalwitch:familiars/entity/bat"
   ]
 }

@@ -12,6 +12,9 @@
     "minecraft:cat",
     "minecraft:wolf",
     "minecraft:fox",
-    "minecraft:parrot"
+    "minecraft:parrot",
+    "herbalwitch:familiars/entity/raven",
+    "herbalwitch:familiars/entity/owl",
+    "herbalwitch:familiars/entity/snake"
   ]
 }

@@ -141,7 +141,7 @@ public final class CircleTranslations {
                 AltarActionSpec.ATTUNEMENT, "Practice towards capacity",
                 AltarActionSpec.GARDEN_BLESSING, "Enriches herb beds",
                 AltarActionSpec.HOME_PROTECTION, "Charges a ward stone");
-        for (AltarActionSpec action : AltarActionSpec.values()) {
+        for (AltarActionSpec action : AltarActionSpec.builtins()) {
             m.put(CARD + "result." + action.key(), results.get(action));
         }
         return m;

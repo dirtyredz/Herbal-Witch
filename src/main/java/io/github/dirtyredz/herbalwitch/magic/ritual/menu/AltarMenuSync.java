@@ -20,7 +20,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.TickEvent;
 
 import java.util.Comparator;
-import java.util.EnumMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -67,7 +67,7 @@ public final class AltarMenuSync {
         Optional<AltarUpdate.Invitation> outgoing = consent.flatMap(c -> c.outgoing(player.getUUID()))
                 .map(o -> invitation(o, Optional.of(o.recipient()), now, site));
         List<AltarUpdate.Nearby> nearby = WitchStatusService.isWitch(player) ? nearby(player, menu) : List.of();
-        Map<AltarActionSpec, List<AltarUpdate.Count>> counts = new EnumMap<>(AltarActionSpec.class);
+        Map<AltarActionSpec, List<AltarUpdate.Count>> counts = new LinkedHashMap<>();
         for (AltarActionSpec action : List.of(AltarActionSpec.FOUNDING, AltarActionSpec.INITIATION, AltarActionSpec.ATTUNEMENT,
                 AltarActionSpec.GARDEN_BLESSING, AltarActionSpec.HOME_PROTECTION)) {
             counts.put(action, AltarOffering.counts(player, AltarOffering.requirements(action)).stream()

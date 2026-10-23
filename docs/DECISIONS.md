@@ -1,5 +1,20 @@
 # Decisions - The Herbal Witch
 
+## 2026-10-22 - Per-bond authority and conservative cross-file binding
+
+M9 stores one bounded verified shard per bond, with incremental derived indexes and no roster cap.
+Unknown/corrupt shards are preserved and block mutations. Interrupted conversions retain payloads and
+quarantine; neither an unloaded creature nor a missing player-side receipt permits replay or refund.
+A single monotonic player receipt is persisted through vanilla's single-player save and read back.
+That method is protected in 1.20.1, so the feature uses Forge's remapping helper for the pinned SRG
+method `PlayerList.m_6765_`, then forces and verifies the saved marker. It does not save every player,
+replace player NBT serialization, or introduce a player roster capability. Runtime qualification must
+exercise this mapping on the dedicated server.
+
+Altar actions become registered descriptions instead of a closed enum, so companions owns familiar
+rituals without reverse imports into witchcraft. Built-in behavior remains in its original handlers;
+the same session, cancellation and payment boundaries apply to contributions.
+
 Newest first.
 
 ## 2026-10-22 - Shared prerequisites for M9, with M8 file compatibility

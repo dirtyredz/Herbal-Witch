@@ -60,6 +60,14 @@ herbalwitch/
 
 - `src/main/java/io/github/dirtyredz/herbalwitch/companions/` and `companions/animals/` — grouping parents only.
 - `companions/lifecycle/` — loaded object-identity index and cross-dimension lookup/admission/retirement; no capture or bond records.
+- `companions/familiars/` — grouping parent; `catalog/` holds permanent species/action facts, `registry/` wires contributions, `command/` owns serialized command identities.
+- `companions/familiars/bond/` — binding eligibility and paid conversion; `data/` owns bounded per-bond shards and derived owner/entity indexes, `entity/` owns lightweight references and admission, `transaction/` owns durable player receipts.
+- `companions/familiars/species/` — exact animal participation and payload adapters; `ground/` and `flying/` contain thin native representations and shared flight mechanics.
+- `companions/familiars/ritual/` — feature-owned altar session handlers through the neutral action registry.
+- `data/{client,server}/familiars/` — contributions to language and entity tags.
+- `src/test/java/io/github/dirtyredz/herbalwitch/companions/familiars/bond/` — shard bounds, indexing, corruption, receipt and write uncertainty tests.
+- `src/test/java/io/github/dirtyredz/herbalwitch/data/familiars/` — independent resource inventory.
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/companions/familiars/bond/` — real altar binding, cancellation and stale source admission tests in separate batches.
 - `src/test/java/io/github/dirtyredz/herbalwitch/companions/lifecycle/` — duplicate, removed and late-leave object identity tests.
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/companions/lifecycle/` — real-entity admission, retirement and replacement tests.
 - `companions/animals/catalog/`, `species/`, `config/`, `registry/` — bait identities, exact species profiles and live eligibility, validated server limits, bootstrap and tags.

@@ -15,6 +15,14 @@
     "minecraft:fox",
     "minecraft:parrot",
     "minecraft:axolotl",
-    "minecraft:bat"
+    "minecraft:bat",
+    "herbalwitch:familiars/entity/cat",
+    "herbalwitch:familiars/entity/raven",
+    "herbalwitch:familiars/entity/owl",
+    "herbalwitch:familiars/entity/fox",
+    "herbalwitch:familiars/entity/wolf",
+    "herbalwitch:familiars/entity/snake",
+    "herbalwitch:familiars/entity/rabbit",
+    "herbalwitch:familiars/entity/bat"
   ]
 }

@@ -1,5 +1,15 @@
 # Gotchas - The Herbal Witch
 
+- **Familiar indexing is not absence.** A pending or corrupt shard index suspends eligible loaded
+  creatures without saving a permanent NoAI flag. Never bind or reconstruct from a partial lookup.
+- **Player receipts are not automatic refunds.** A pending bond/player receipt blocks another
+  economic operation. Keep both files for inspection; the owner must resolve an interrupted bond.
+  The pinned Forge remapping helper invokes the protected single-player save, then forces and reads
+  its marker. A successful method return alone is not a durable checkpoint.
+- **Familiar and transport generations are separate.** Binding preserves M8's released generation
+  and tombstone; its new entity capability identifies the bond incarnation. Both authorities check
+  exact lineage, and an old unmarked source is rejected by the bond's creature index.
+
 - **Install familiar guidance during bootstrap.** `FamiliarGuideContribution.INSTANCE.install`
   registers the feature's source at its priority and suppresses brewing's lazy fallback. Adding a
   second page later without the handoff loses to first-key-wins. This is not a runtime reload hook.

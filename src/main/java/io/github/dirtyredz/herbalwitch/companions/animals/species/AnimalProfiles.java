@@ -25,9 +25,18 @@ public final class AnimalProfiles {
             profile("axolotl", Bait.FISH, KEEPER, false, true),
             profile("bat", Bait.BERRY, TRUST_ONLY, false, false));
 
+    private static final java.util.Map<String, AnimalProfile> CONTRIBUTIONS = new java.util.LinkedHashMap<>();
     private AnimalProfiles() {}
+    /** Exact adapters supplied at bootstrap; tags alone never invent participation. */
+    public static void register(AnimalProfile profile) {
+        if (find(profile.id()).isPresent()) throw new IllegalArgumentException("Duplicate animal profile " + profile.id());
+        CONTRIBUTIONS.put(profile.id(), profile);
+    }
     private static AnimalProfile profile(String id, Bait bait, AnimalProfile.Ownership owner, boolean ai, boolean capture) {
         return new AnimalProfile("minecraft:" + id, bait, owner, ai, capture);
     }
-    public static Optional<AnimalProfile> find(String id) { return ALL.stream().filter(p -> p.id().equals(id)).findFirst(); }
+    public static Optional<AnimalProfile> find(String id) {
+        var contribution = CONTRIBUTIONS.get(id);
+        return contribution == null ? ALL.stream().filter(p -> p.id().equals(id)).findFirst() : Optional.of(contribution);
+    }
 }

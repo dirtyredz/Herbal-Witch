@@ -50,7 +50,7 @@ public final class AltarEntries implements GrimoireContentSource {
     public void contribute(GrimoireContent.Inputs inputs, Consumer<GrimoireEntry> out) {
         WitchRules rules = WitchRules.current();
         List<EntryKey> actions = new ArrayList<>();
-        for (AltarActionSpec action : AltarActionSpec.values()) {
+        for (AltarActionSpec action : AltarActionSpec.builtins()) {
             actions.add(key(action));
         }
         List<Component> altar = List.of(Component.translatable(PREFIX + "altar.0"), Component.translatable(PREFIX + "altar.size"),
@@ -62,13 +62,13 @@ public final class AltarEntries implements GrimoireContentSource {
         out.accept(GrimoireEntry.page(CIRCLE, GrimoireContent.WITCHCRAFT, Component.translatable("block." + HerbalWitch.MOD_ID + "."
                 + CircleCatalog.PATH.replace('/', '.')), RitualItems.CIRCLE.get().getDefaultInstance(), circle,
                 List.of(ALTAR, key(AltarActionSpec.GARDEN_BLESSING), key(AltarActionSpec.HOME_PROTECTION))));
-        for (AltarActionSpec action : AltarActionSpec.values()) {
+        for (AltarActionSpec action : AltarActionSpec.builtins()) {
             List<Component> body = new ArrayList<>();
             body.add(Component.translatable(PREFIX + action.key() + ".0"));
             if (!action.offering().isEmpty()) {
                 body.add(Component.translatable(PREFIX + "offering", offering(action)));
             }
-            switch (action) {
+            switch (action.kind()) {
                 case FOUNDING -> {
                     body.add(Component.translatable(PREFIX + "founding.terms", TickTime.ceilingSeconds(rules.foundingTicks())));
                     body.add(Component.translatable(PREFIX + (rules.foundingEnabled() ? "founding.once" : "founding.disabled")));

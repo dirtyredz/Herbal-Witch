@@ -35,7 +35,7 @@ import java.util.UUID;
  * or interruption. Everything shown comes from the server's private updates and snapshot; buttons
  * send intent only. The grimoire opens beside it on the altar's page.
  */
-public class AltarScreen extends GrimoirePanelHost<AltarMenu> implements CirclePanel.CircleUi {
+public class AltarScreen extends GrimoirePanelHost<AltarMenu> implements CirclePanel.CircleUi, io.github.dirtyredz.herbalwitch.client.magic.ritual.widgets.ContributedRitualPanel.Ui {
     public static final ResourceLocation ATLAS = ResourceLocation.fromNamespaceAndPath(HerbalWitch.MOD_ID, "textures/gui/witch/altar.png");
     private static final String UI = "ritual.herbalwitch.ui.";
     private static final int INK = 0xFF3B2416;
@@ -48,7 +48,8 @@ public class AltarScreen extends GrimoirePanelHost<AltarMenu> implements CircleP
     private final AltarActionPanel actions = new AltarActionPanel();
     private final InitiationPanel initiation = new InitiationPanel();
     private final CirclePanel circle = new CirclePanel();
-    private boolean circleView;
+    private int ritualView;
+    private final io.github.dirtyredz.herbalwitch.client.magic.ritual.widgets.ContributedRitualPanel contributed = new io.github.dirtyredz.herbalwitch.client.magic.ritual.widgets.ContributedRitualPanel();
     private int built = -1;
     private Optional<AltarUpdate.Activity> activity = Optional.empty();
 
@@ -98,11 +99,13 @@ public class AltarScreen extends GrimoirePanelHost<AltarMenu> implements CircleP
             }
         } else if (witch) {
             actions.witch(this, u, status.get(), left, y, COLUMN);
-            button(Component.translatable(UI + (circleView ? "view_initiation" : "view_circle")), right, top, COLUMN, true, () -> {
-                circleView = !circleView;
+            button(Component.translatable(UI + (ritualView == 0 ? "view_circle" : ritualView == 1 ? "view_contributed" : "view_initiation")), right, top, COLUMN, true, () -> {
+                ritualView = (ritualView + 1) % 3;
                 refresh();
             });
-            if (circleView) {
+            if (ritualView == 2) {
+                contributed.draw(this, u, status.get(), right, top + 18, COLUMN);
+            } else if (ritualView == 1) {
                 circle.witch(this, u, status.get(), right, top + 18, COLUMN);
             } else {
                 initiation.initiator(this, u, status.get(), right, top + 18, COLUMN);
@@ -118,6 +121,10 @@ public class AltarScreen extends GrimoirePanelHost<AltarMenu> implements CircleP
     }
 
     // ---------------------------------------------------------------- AltarUi
+    @Override public void contributed(io.github.dirtyredz.herbalwitch.magic.ritual.catalog.AltarActionSpec action, UUID target) {
+        AltarPackets.sendToServer(new AltarRequest(menu.containerId, menu.nonce(), WitchRules.current().fingerprint(), AltarRequest.Op.CONTRIBUTED,
+                Optional.of(target), 0, Optional.empty(), action.identity()));
+    }
 
     @Override
     public int text(Component text, int x, int y, int width, int color) {

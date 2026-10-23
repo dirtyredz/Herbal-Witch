@@ -40,10 +40,13 @@ class AnimalResourcesTest {
         return out;
     }
     @Test void exactEntityMembershipAndSpecializedBrainExclusions() {
-        assertEquals(AnimalManifest.SPECIES, values("entity_types/animals/eligible"));
+        var eligible = new TreeSet<>(AnimalManifest.SPECIES);
+        io.github.dirtyredz.herbalwitch.data.familiars.FamiliarManifest.SPECIES.forEach(s -> eligible.add("herbalwitch:familiars/entity/" + s));
+        assertEquals(eligible, values("entity_types/animals/eligible"));
         var capturable = new TreeSet<>(AnimalManifest.SPECIES); capturable.remove("bat");
         assertEquals(capturable, values("entity_types/animals/capturable"));
         var ai = new TreeSet<>(capturable); ai.removeAll(Set.of("axolotl", "goat"));
+        for (String s : Set.of("raven", "owl", "snake")) ai.add("herbalwitch:familiars/entity/" + s);
         assertEquals(ai, values("entity_types/animals/ai/attractable"));
         assertEquals(ai, values("entity_types/animals/ai/calmable"));
         assertTrue(values("entity_types/animals/excluded").isEmpty());
@@ -52,7 +55,12 @@ class AnimalResourcesTest {
         Map.of("grain", Set.of("cow", "sheep", "goat", "horse", "donkey", "mule", "llama"),
                 "root", Set.of("pig", "rabbit"), "seed", Set.of("chicken", "parrot"), "fish", Set.of("cat", "axolotl"),
                 "meat", Set.of("wolf"), "berry", Set.of("fox", "bat"))
-                .forEach((bait, types) -> assertEquals(types, values("entity_types/animals/bait/" + bait)));
+                .forEach((bait, types) -> {
+                    var expected = new TreeSet<>(types);
+                    var additions = Map.of("root", Set.of("rabbit"), "seed", Set.of("raven"), "fish", Set.of("cat"), "meat", Set.of("wolf", "owl", "snake"), "berry", Set.of("fox", "bat"));
+                    for (String s : additions.getOrDefault(bait, Set.of())) expected.add("herbalwitch:familiars/entity/" + s);
+                    assertEquals(expected, values("entity_types/animals/bait/" + bait));
+                });
         Map.of("grain", Set.of("wheat"), "root", Set.of("carrot", "beetroot"),
                 "seed", Set.of("wheat_seeds", "melon_seeds", "pumpkin_seeds", "beetroot_seeds"),
                 "fish", Set.of("cod", "salmon", "tropical_fish"), "meat", Set.of("beef", "porkchop", "chicken", "mutton", "rabbit"),
