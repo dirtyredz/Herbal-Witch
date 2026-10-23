@@ -363,3 +363,9 @@ M9 acquisition adds three owned Blockbench egg drafts, reviewed in
 2026-10-22-herbal-witch-m9/previews/acquisition-showcase/eggs-review.png.
 The full preview passed: 82 images, 3,853 states, 255 items, 847/847 models and no diagnostics.
 The charcoal/plum raven, tan owl and sage/brass snake eggs remain untinted editable drafts.
+Native familiar rendering uses vanilla models/textures with resettable cosmetic rest/guard poses.
+`FamiliarNativePoseTest` exports actual model vertices and attachment matrices to
+`build/familiar-native-previews/`. After `test`, run `node tools/preview-native-familiars.mjs --output
+<job>/previews/native-poses`; review its 20 idle/walk-or-flight/rest/guard poses. The runtime and preview
+share attachment positions, scales and pitch. Vanilla textures are read only from the cached dependency
+and are never copied into shipped assets. These samples do not replace owner animation/shader review.

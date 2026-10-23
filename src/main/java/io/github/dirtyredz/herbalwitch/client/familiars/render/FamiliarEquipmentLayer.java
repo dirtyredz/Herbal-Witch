@@ -17,7 +17,9 @@ import java.util.function.Supplier;
 
 /** Gear follows the animated parent bone. Only public cosmetic item identities enter this layer. */
 public final class FamiliarEquipmentLayer<T extends LivingEntity, M extends EntityModel<T>> extends RenderLayer<T, M> {
-    public record Attachment(float x, float y, float z, float scale) {}
+    public record Attachment(float x, float y, float z, float scale, float pitch) {
+        public Attachment(float x, float y, float z, float scale) { this(x,y,z,scale,0); }
+    }
     private final ItemRenderer items;
     private final java.util.function.Consumer<PoseStack> anchor;
     private final Attachment attachment;
@@ -37,6 +39,7 @@ public final class FamiliarEquipmentLayer<T extends LivingEntity, M extends Enti
     private void renderItem(PoseStack pose, MultiBufferSource buffers, int light, T entity, ItemStack stack, boolean charm) {
         pose.pushPose(); anchor.accept(pose);
         pose.translate(attachment.x() / 16, attachment.y() / 16, attachment.z() / 16);
+        pose.mulPose(com.mojang.math.Axis.XP.rotationDegrees(attachment.pitch()));
         if (charm) pose.translate(attachment.scale() * .65, 0, 0);
         float scale = attachment.scale() * (charm ? .55F : 1);
         pose.scale(scale, -scale, -scale);

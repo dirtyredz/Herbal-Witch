@@ -106,3 +106,5 @@ Before your first item write in a session, run `docket guide` and follow it.
 - **M9 restart qualification:** the ANU-only named heavier task is familiarRestartTest. It starts two
   sequential dedicated-server JVMs; tools/familiars/restart/README.md explains checkpoint evidence.
   It is excluded from build/check and must not be run locally. Version promotion requires its green result.
+
+- Native familiar attachment changes also require test (exports the vanilla geometry) followed by node tools/preview-native-familiars.mjs --output <job>/previews/native-poses and sheet inspection.

@@ -440,3 +440,5 @@ appearance samples and supply barrels. Acquisition tests live in `src/gameTest/.
 Restart qualification belongs in gradle/familiars.gradle and tools/familiars/restart/. Test-world
 support lives in src/gameTest/.../companions/familiars/persistence/; the test-only SnapshotProbe
 adapter lives in src/gameTest/.../platform/persistence/. Neither ships in the release jar.
+
+Native pose exports live in src/test/.../client/familiars/FamiliarNativePoseTest.java; tools/preview-native-familiars.mjs renders them with the owned equipment models. Runtime pose and attachment ownership remains client/familiars/{model,render}/.

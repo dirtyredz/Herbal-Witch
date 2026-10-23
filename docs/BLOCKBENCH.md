@@ -227,3 +227,9 @@ Creature atlases use a logical 32-unit square exported at 64 x 64, preserving tw
 Creative wild-species eggs live at src/art/blockbench/familiars/spawn_egg/<raven|owl|snake>/.
 They use the ordinary block/item compiler and owned 32px textures, not the living-rig parser.
 Current block compiler inventory: 133 projects, 438 models and 856 owned textures.
+Native familiar rendering uses vanilla models/textures with resettable cosmetic rest/guard poses.
+`FamiliarNativePoseTest` exports actual model vertices and attachment matrices to
+`build/familiar-native-previews/`. After `test`, run `node tools/preview-native-familiars.mjs --output
+<job>/previews/native-poses`; review its 20 idle/walk-or-flight/rest/guard poses. The runtime and preview
+share attachment positions, scales and pitch. Vanilla textures are read only from the cached dependency
+and are never copied into shipped assets. These samples do not replace owner animation/shader review.
