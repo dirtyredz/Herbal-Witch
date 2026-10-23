@@ -44,7 +44,8 @@ final class PerformanceRun {
     static final int RECORDS = 4096;
     static final int SALES = 32;
     private static final BlockPos IDLE = new BlockPos(4096, -60, 4096), BUSY = new BlockPos(6144, -60, 6144),
-            SATURATION = new BlockPos(8192, -60, 8192), CHURN = new BlockPos(10240, -60, 10240);
+            SATURATION = new BlockPos(8192, -60, 8192), CHURN = new BlockPos(10240, -60, 10240),
+            VANILLA = new BlockPos(12288, -60, 12288), PART = new BlockPos(14336, -60, 14336);
 
     private record Phase(String name, Runnable setup, int windows) {
     }
@@ -77,14 +78,32 @@ final class PerformanceRun {
         phases.add(new Phase("control", () -> { }, WINDOWS));
         phases.add(new Phase("idle_cottage", () -> report.put("idleBlockEntitiesPlaced", workloads.idleCottage(IDLE)), WINDOWS));
         phases.add(new Phase("settle", workloads::release, 0));
+        // The matched control: the busy settlement's counts with vanilla stand-ins.
+        phases.add(new Phase("busy_vanilla_control", () -> report.put("vanillaBlockEntitiesPlaced", workloads.vanillaSettlement(VANILLA)), WINDOWS));
+        phases.add(new Phase("settle_after_vanilla", workloads::release, 0));
+        // Attribution: each part of the busy settlement alone (informational, not gated).
+        for (var part : Workloads.Part.values()) {
+            String tag = "p" + part.ordinal();
+            phases.add(new Phase("busy_part_" + part.name().toLowerCase(java.util.Locale.ROOT), () -> {
+                workloads.busySettlement(PART.offset(part.ordinal() * 2048, 0, 0), tag, java.util.EnumSet.of(part));
+                if (part == Workloads.Part.FAMILIARS) online = OnlinePlayers.register(List.copyOf(workloads.owners.subList(workloads.owners.size() - Workloads.OWNERS, workloads.owners.size())));
+            }, WINDOWS));
+            phases.add(new Phase("settle_after_" + tag, () -> {
+                if (online != null) { online.close(); online = null; }
+                workloads.release();
+            }, 0));
+        }
         phases.add(new Phase("busy_settlement", () -> {
-            report.put("busyBlockEntitiesPlaced", workloads.busySettlement(BUSY, "b"));
-            online = OnlinePlayers.register(List.copyOf(workloads.owners.subList(0, Workloads.OWNERS)));
+            int before = workloads.owners.size();
+            report.put("busyBlockEntitiesPlaced", workloads.busySettlement(BUSY, "b", java.util.EnumSet.allOf(Workloads.Part.class)));
+            online = OnlinePlayers.register(List.copyOf(workloads.owners.subList(before, before + Workloads.OWNERS)));
         }, WINDOWS));
         phases.add(new Phase("saturation", () -> {
-            report.put("saturationBlockEntitiesPlaced", workloads.busySettlement(SATURATION, "c"));
+            int before = workloads.owners.size();
+            report.put("saturationBlockEntitiesPlaced", workloads.busySettlement(SATURATION, "c", java.util.EnumSet.allOf(Workloads.Part.class)));
+            var both = new java.util.ArrayList<>(workloads.owners.subList(before - Workloads.OWNERS, before + Workloads.OWNERS));
             online.close();
-            online = OnlinePlayers.register(List.copyOf(workloads.owners));
+            online = OnlinePlayers.register(List.copyOf(both));
         }, WINDOWS));
         phases.add(new Phase("settle_after_saturation", () -> {
             online.close();

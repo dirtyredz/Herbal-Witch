@@ -20,7 +20,7 @@ docs/ARCHITECTURE.md and docs/catalogue/).
   6. Optional-mod runtime profiles: `.\gradlew.bat runGameTestServer -PcompatProfile=<base|emi|jei|viewers|farmersdelight|thirst|curios|doggy|all> -PcompatModsDir=<mods folder>`
      (the folder supplies the Farmer's Delight and Thirst jars; see docs/COMPATIBILITY.md)
   Creature art also: `node tools/compile-entity-models.mjs` and its `--check`; Gradle includes both.
-  Art changes also: `node --test "tools/art/test/*.test.mjs" "tools/blockbench/test/*.test.mjs" "tools/blockbench/dev-art/test/*.test.mjs" "tools/preview/test/*.test.mjs" "tools/entities/test/*.test.mjs"` and
+  Art changes also: `node --test "tools/art/test/*.test.mjs" "tools/blockbench/test/*.test.mjs" "tools/blockbench/dev-art/test/*.test.mjs" "tools/preview/test/*.test.mjs" "tools/entities/test/*.test.mjs"` (tools/qualification changes: `"tools/qualification/test/*.test.mjs"`) and
   `node tools/preview-models.mjs --output <job folder>/previews/<name> --references <job folder>`,
   then review the sheets before any jar goes to the mod's test instance (docs/ART.md "Review").
   The owner checks visuals, transforms, shaders and two-client behaviour in the mod's test instance.
@@ -121,3 +121,14 @@ Before your first item write in a session, run `docket guide` and follow it.
   fixtures hold claims, not authority. GameTests use `ShopFixtures` (fresh identities; the ANU world keeps
   old shops). Restart qualification: ANU-only `commerceRestartTest` (two dedicated JVMs; see
   `tools/commerce/restart/README.md`); never run it locally. Version promotion requires its green result.
+
+- **Release qualification (M12; docs/qualification/README.md):** every harness is ANU-only and outside
+  `build`/`check`, registered in `gradle/qualification.gradle`: `captureRestartTest`,
+  `familiarRestartTest`, `magicToolsRestartTest`, `commerceRestartTest`,
+  `saveUpgradeTest -PsaveUpgradeFixtures=G:/mods-ci/work/HerbalWitch/build/save-fixtures`,
+  `qualifyPerformance`, `qualifyDedicatedServer` (installed Forge server + release jar; inputs in
+  `build/qualification-inputs/`). Profiles: `runGameTestServer -PcompatProfile=<p> -PgameTestRunId=<id>
+  -PcompatModsDir=G:/mods-ci/work/HerbalWitch/build/compat-inputs`. Add `--continue` to see every
+  failure. Qualification tooling tests: `node --test "tools/qualification/test/*.test.mjs"`.
+  New persisted state needs a save-upgrade expectation or a restart harness; a new registered thing
+  needs an English name (TranslationRegistryGameTests).

@@ -11,7 +11,7 @@ export const GATES = Object.freeze({
   idleDeltaP95: 2, // ms over the matched control
   busyP95: 40,
   busyP99: 50,
-  busyDeltaP95: 10,
+  busyDeltaP95: 10, // ms over the matched vanilla control (same counts, vanilla stand-ins)
   checkpointP95: 100, // ms per durable commerce sale (a finding above this)
   saturationEntityGrowth: 0.02, // entity total may not grow by more than 2 % across measured windows
 });
@@ -22,7 +22,7 @@ export function judge(perf, restart) {
   const failures = [];
   const rows = [];
   const phases = perf.phases;
-  for (const name of ['control', 'idle_cottage', 'busy_settlement', 'saturation', 'large_persistence']) {
+  for (const name of ['control', 'idle_cottage', 'busy_vanilla_control', 'busy_settlement', 'saturation', 'large_persistence']) {
     if (!phases[name] || phases[name].windows.length !== perf.protocol.windows) failures.push(`${name}: ${phases[name]?.windows.length ?? 0} measured windows`);
   }
   if (failures.length) return { failures, rows };
@@ -33,7 +33,12 @@ export function judge(perf, restart) {
   const busy = phases.busy_settlement.windows;
   row('busy settlement p95 ms', `<= ${GATES.busyP95}`, worst(busy, 'p95'), worst(busy, 'p95') <= GATES.busyP95);
   row('busy settlement p99 ms', `<= ${GATES.busyP99}`, worst(busy, 'p99'), worst(busy, 'p99') <= GATES.busyP99);
-  row('busy settlement p95 delta ms', `<= ${GATES.busyDeltaP95}`, +(worst(busy, 'p95') - control).toFixed(2), worst(busy, 'p95') - control <= GATES.busyDeltaP95);
+  const matched = worst(phases.busy_vanilla_control.windows, 'p95');
+  row('busy settlement p95 over matched vanilla ms', `<= ${GATES.busyDeltaP95}`, +(worst(busy, 'p95') - matched).toFixed(2), worst(busy, 'p95') - matched <= GATES.busyDeltaP95);
+  for (const part of ['stations', 'familiars', 'creatures']) {
+    const w = phases[`busy_part_${part}`]?.windows;
+    if (w?.length) row(`busy part ${part} alone p95 over control ms`, 'reported', +(worst(w, 'p95') - control).toFixed(2), true);
+  }
   const sat = phases.saturation.windows;
   const first = sat[0].census.entityTotal, last = sat[sat.length - 1].census.entityTotal;
   row('saturation entity growth', `<= ${GATES.saturationEntityGrowth * 100}%`, `${first} -> ${last}`, last <= first * (1 + GATES.saturationEntityGrowth));

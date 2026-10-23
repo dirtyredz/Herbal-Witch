@@ -109,33 +109,81 @@ final class Workloads {
         return placed;
     }
 
+    /** What a busy settlement is made of, so each part can also be measured alone. */
+    enum Part { STATIONS, FAMILIARS, CREATURES }
+
     /** Busy settlement: 128 processors (64 grinding), 128 more block entities, familiars, brooms, villagers, animals. */
-    int busySettlement(BlockPos base, String tag) {
+    int busySettlement(BlockPos base, String tag, java.util.Set<Part> parts) {
+        plot(base);
+        int placed = 0;
+        if (parts.contains(Part.STATIONS)) {
+            for (int i = 0; i < PROCESSORS; i++) {
+                BlockPos at = cell(base, i);
+                boolean active = i % 2 == 0;
+                placed += station(active ? StationBlocks.MORTAR.get() : StationBlocks.KETTLE.get(), at) ? 1 : 0;
+                if (active && level.getBlockEntity(at) instanceof ProcessStationEntity mortar) {
+                    mortar.inventory().setStackInSlot(0, new ItemStack(PreparationItems.bundle(HerbCatalog.SAGE), 64));
+                }
+            }
+            placed += furniture(base, PROCESSORS, 128, true);
+        }
+        if (parts.contains(Part.FAMILIARS)) familiars(base.offset(4, 0, 34), tag);
+        if (parts.contains(Part.CREATURES)) {
+            for (int i = 0; i < BROOMS; i++) {
+                var broom = BroomEntities.BROOM.get().create(level);
+                broom.moveTo(base.getX() + 40.5, base.getY(), base.getZ() + 4.5 + i * 2, 0, 0);
+                broom.initialize(keeper(tag, i), new ItemStack(BroomItems.BROOM.get()));
+                check(level.addFreshEntity(broom), "workload broom");
+            }
+            for (int i = 0; i < VILLAGERS; i++) spawn(EntityType.VILLAGER, base.offset(44, 0, 4 + i * 2));
+            EntityType<?>[] animals = {EntityType.COW, EntityType.SHEEP, EntityType.PIG, EntityType.CHICKEN};
+            for (int i = 0; i < ANIMALS; i++) {
+                Mob animal = spawn(animals[i % 4], base.offset(20 + (i % 20), 0, 34 + (i / 20)));
+                AnimalFixtures.relationship(animal, keeper(tag, i), 40, 2);
+            }
+        }
+        return placed;
+    }
+
+    /**
+     * The matched vanilla control for a busy settlement: the same counts with vanilla stand-ins (64
+     * smelting and 64 idle furnaces for the processors, 128 stocked chests, 56 tame wolves for the
+     * familiars, 8 minecarts for the brooms) and the same villagers and animals without Herbal Witch care.
+     */
+    int vanillaSettlement(BlockPos base) {
         plot(base);
         int placed = 0;
         for (int i = 0; i < PROCESSORS; i++) {
             BlockPos at = cell(base, i);
-            boolean active = i % 2 == 0;
-            placed += station(active ? StationBlocks.MORTAR.get() : StationBlocks.KETTLE.get(), at) ? 1 : 0;
-            if (active && level.getBlockEntity(at) instanceof ProcessStationEntity mortar) {
-                mortar.inventory().setStackInSlot(0, new ItemStack(PreparationItems.bundle(HerbCatalog.SAGE), 64));
+            placed += place(at, Blocks.FURNACE.defaultBlockState()) ? 1 : 0;
+            if (i % 2 == 0 && level.getBlockEntity(at) instanceof net.minecraft.world.level.block.entity.FurnaceBlockEntity furnace) {
+                furnace.setItem(0, new ItemStack(Items.RAW_IRON, 64));
+                furnace.setItem(1, new ItemStack(Items.COAL_BLOCK, 64));
             }
         }
-        placed += furniture(base, PROCESSORS, 128, true);
-        familiars(base.offset(4, 0, 34), tag);
+        for (int i = 0; i < 128; i++) {
+            BlockPos at = cell(base, PROCESSORS + i);
+            placed += place(at, Blocks.CHEST.defaultBlockState()) ? 1 : 0;
+            if (level.getBlockEntity(at) instanceof net.minecraft.world.Container chest) for (int slot = 0; slot < 13; slot++) chest.setItem(slot, new ItemStack(Items.WHEAT));
+        }
+        for (int i = 0; i < OWNERS * MOBILE_PER_OWNER + HOME_GUARDS; i++) {
+            var wolf = (net.minecraft.world.entity.animal.Wolf) spawn(EntityType.WOLF, base.offset(4 + i % 16, 0, 34 + (i / 16) * 3));
+            wolf.setTame(true);
+            wolf.setOwnerUUID(keeper("vanilla", i));
+        }
         for (int i = 0; i < BROOMS; i++) {
-            var broom = BroomEntities.BROOM.get().create(level);
-            broom.moveTo(base.getX() + 40.5, base.getY(), base.getZ() + 4.5 + i * 2, 0, 0);
-            broom.initialize(owners.get(owners.size() - OWNERS + i % OWNERS).getUUID(), new ItemStack(BroomItems.BROOM.get()));
-            check(level.addFreshEntity(broom), "workload broom");
+            var cart = EntityType.MINECART.create(level);
+            cart.moveTo(base.getX() + 40.5, base.getY(), base.getZ() + 4.5 + i * 2, 0, 0);
+            check(level.addFreshEntity(cart), "workload minecart");
         }
         for (int i = 0; i < VILLAGERS; i++) spawn(EntityType.VILLAGER, base.offset(44, 0, 4 + i * 2));
         EntityType<?>[] animals = {EntityType.COW, EntityType.SHEEP, EntityType.PIG, EntityType.CHICKEN};
-        for (int i = 0; i < ANIMALS; i++) {
-            Mob animal = spawn(animals[i % 4], base.offset(20 + (i % 20), 0, 34 + (i / 20)));
-            AnimalFixtures.relationship(animal, owners.get(owners.size() - OWNERS + i % OWNERS).getUUID(), 40, 2);
-        }
+        for (int i = 0; i < ANIMALS; i++) spawn(animals[i % 4], base.offset(20 + (i % 20), 0, 34 + (i / 20)));
         return placed;
+    }
+
+    private static UUID keeper(String tag, int i) {
+        return UUID.nameUUIDFromBytes(("perf_" + tag + "_keeper_" + (i % OWNERS)).getBytes());
     }
 
     /** Eight online owners at the three-follower cap and thirty-two loaded offline home guards. */

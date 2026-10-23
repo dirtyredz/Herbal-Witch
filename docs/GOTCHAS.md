@@ -439,3 +439,27 @@ ANU keeps the ordinary GameTest world between jobs. Changing the test list can r
 Native crop placement in underground GameTest plots needs propagated light. A clear column does not synchronously refresh skylight; supply a lamp and wait for actual brightness before invoking native seed placement or neighbor updates. Do not weaken crop survival to make a fixture pass.
 
 Full M10 profile runs exposed M9 fixture assumptions: the retreat owner was outside the nine-block floor, sensing relied on ten ticks for darkness and random mob position, and the species matrix skipped shared binding readiness/retries. Fixtures now keep retreat within the template, isolate sensing candidates and assert propagated darkness/visibility, and share binding setup. This changes no familiar gameplay, scan budget or acceptance assertion.
+- **A refused world join deletes the entity.** Cancelling `EntityJoinLevelEvent` for an entity loaded
+  from a chunk drops it from the chunk for good. Refuse only incarnations you can prove are stale or
+  duplicate; when the authority cannot be read, refuse only what it alone could vouch for (M12 capture
+  ledger fix, `CaptureLedgerLockGameTests`).
+- **Historical worlds come from a pack.** The owner's worlds carry other mods' blocks, biomes, block
+  entities, capabilities and even extra block-state properties (a pack mod adds `waterlogged` to every
+  door). `tools/qualification/save-upgrade/fixture.mjs` replaces foreign content with vanilla stand-ins
+  and counts it; proto (unfinished) chunks are left out because the candidate would finish generating
+  them and its worldgen would add herbs that were never history.
+- **The GameTest server keeps generating around a loaded fixture.** A save-upgrade comparison must stay
+  inside the carried chunks; anything else in the world is the candidate's own generation.
+- **NBT compounds are unordered.** Compare plain projections with sorted keys; re-saving reorders
+  `tag` and `Count` inside item stacks.
+- **A bare `new ServerPlayer` has no connection.** Riding, dismounting and some interactions call
+  `connection.teleport`; borrow a fake player's no-op connection (as `AnimalFixtures.realPlayer` and the
+  performance workloads do).
+- **ANU keeps `build/` and `run/` between jobs.** Qualification inputs live in
+  `build/compat-inputs/` (optional-mod jars for GameTest profiles), `build/save-fixtures/` (prepared
+  historical worlds) and `build/qualification-inputs/` (installed Forge server and release jars). Every
+  harness writes a fresh `run/<harness>/<uuid>/`; queued jobs fetch the ref when they start, so pushing
+  the same ref again changes what a still-queued job tests.
+- **Foreign data-pack errors are not ours.** With Thirst Was Taken and Farmer's Delight installed, their
+  own recipes name absent mods (brewinandchewin, farmersrespite) and log JSON exceptions; the production
+  server check fails only on exceptions whose stack names Herbal Witch.
