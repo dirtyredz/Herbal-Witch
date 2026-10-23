@@ -1,5 +1,12 @@
 # Gotchas - The Herbal Witch
 
+- **Install familiar guidance during bootstrap.** `FamiliarGuideContribution.INSTANCE.install`
+  registers the feature's source at its priority and suppresses brewing's lazy fallback. Adding a
+  second page later without the handoff loses to first-key-wins. This is not a runtime reload hook.
+- **Shared persistence is mechanics only.** `VerifiedSnapshotWriter` can fail after replacement;
+  callers retain payloads, dirty state and their own write lockout. Capture's HWC8 envelope remains
+  compatible. Shared loaded identity lookup is not proof of death or permission to respawn.
+
 - **Transport batches share the world cooldown.** A separate GameTest batch does not reset the
   capture ledger's transaction interval. Wait the configured interval before the first transaction
   and between transactions; do not reset authority or relax the production gate. Assert service

@@ -12,13 +12,13 @@ herbalwitch/
   HerbalWitch.java
   apothecary/                 botany/ -> cultivation; brewing/ -> preparations; stations/ -> processing
   client/                    screens, rendering, recipe text and optional viewers; magic/ -> ritual, ward, witch
-  companions/                grouping parent: animals/ care and transport; future familiars/ consume trust views
+  companions/                animals/ care and transport; lifecycle/ loaded identities; future familiars/ consume trust views
   data/                      generated resources, one writer per shared output
   decor/                     catalogue, structures and furniture behaviour
   grimoire/                  contracts, content, knowledge, reading and transport
   magic/                     witch/, ritual/, charm/, ward/
   platform/                  compat/, geometry/, inventory/, multiblock/, network/, permission/,
-                             placement/, player/, recipe/, time/
+                             persistence/, placement/, player/, recipe/, time/
   showcase/                  planning, construction and commands
 ```
 
@@ -38,7 +38,7 @@ herbalwitch/
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/botany/grimoire/` — herb pages and condition-to-summary adapter
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/botany/registry/` — herb plants, seeds, fresh herbs, herb bed, tags, gardening tab, bootstrap
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/botany/showcase/` — the herb and garden showcase sections
-- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/brewing/application/` — unified drink/oil application tables, thrown preparations, containers and the familiar application seam
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/brewing/application/` — unified drink/oil application tables, thrown preparations, containers, familiar application and guide-ownership seams
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/brewing/effect/` — `TimedEffect` lazy effect facts, ordered `EffectRegistration`, warmth/pest/plain effects; `combat/` (weapon coating), `control/` (binding, sleep, steadfast, concealment, dazzled), `repellent/` (target profiles and filters)
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/brewing/grimoire/` — preparation guidance contributions
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/brewing/product/` — preparations: `catalog/`, `registry/`, `item/`, `lighting/` (oil lantern), `metadata/` (water-to-drink data), `showcase/`, with `DriedBundleBlock` (hung bundles) and `ResinDropModifier` (resin) loose; Milestone 7 adds the advanced, familiar and mixture catalogues with their items and registries
@@ -59,6 +59,9 @@ herbalwitch/
 **src/main/java: companions**
 
 - `src/main/java/io/github/dirtyredz/herbalwitch/companions/` and `companions/animals/` — grouping parents only.
+- `companions/lifecycle/` — loaded object-identity index and cross-dimension lookup/admission/retirement; no capture or bond records.
+- `src/test/java/io/github/dirtyredz/herbalwitch/companions/lifecycle/` — duplicate, removed and late-leave object identity tests.
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/companions/lifecycle/` — real-entity admission, retirement and replacement tests.
 - `companions/animals/catalog/`, `species/`, `config/`, `registry/` — bait identities, exact species profiles and live eligibility, validated server limits, bootstrap and tags.
 - `companions/animals/trust/` — lazy Mob capability, immutable personal views, schema codec and loaded-clock lifecycle.
 - `companions/animals/care/taming/` — authoritative native-owner/keeper resolution; care responsibilities group beneath `care/` to keep the animal root narrow.
@@ -161,6 +164,7 @@ herbalwitch/
 - `src/main/java/io/github/dirtyredz/herbalwitch/platform/multiblock/` — multiblock cell layout and lifecycle (placement, removal, shared state) used by the rack, hearth and stove
 - `src/main/java/io/github/dirtyredz/herbalwitch/platform/network/` — the mod's channel, payload bounds and chunked snapshot assembly (no gameplay policy)
 - `src/main/java/io/github/dirtyredz/herbalwitch/platform/permission/` — the shared authorization boundary for custom world changes; `entity/` (harmful entity actions, claim-mod adapters, harm attribution, the ward protection check)
+- `src/main/java/io/github/dirtyredz/herbalwitch/platform/persistence/` — checksummed snapshot envelope and serialized temp/force/atomic-replace/read-back writer; feature adapters retain failure policy and schemas.
 - `src/main/java/io/github/dirtyredz/herbalwitch/platform/placement/` — pure placement resolution, world checks and the transactional commit for multi-cell pieces
 - `src/main/java/io/github/dirtyredz/herbalwitch/platform/player/` — server-lifecycle online roster and independently scoped fake registrations
 - `src/main/java/io/github/dirtyredz/herbalwitch/platform/recipe/` — immutable processing facts, live `RecipeView` and ordered ingredient queries
@@ -210,6 +214,7 @@ herbalwitch/
 
 - `src/test/java/io/github/dirtyredz/herbalwitch/apothecary/botany/` — pure JUnit tests for catalogues and conditions
 - `src/test/java/io/github/dirtyredz/herbalwitch/apothecary/brewing/` — preparation catalogue tests (the advanced, familiar and mixture inventories)
+- `src/test/java/io/github/dirtyredz/herbalwitch/apothecary/brewing/application/` — familiar-guide handoff and registration-order regression tests.
 - `src/test/java/io/github/dirtyredz/herbalwitch/apothecary/stations/catalog/` — registry-free category facts
 - `src/test/java/io/github/dirtyredz/herbalwitch/apothecary/stations/process/` — reservation and completion arithmetic tests (requirements tests live in `platform/recipe/`)
 - `src/test/java/io/github/dirtyredz/herbalwitch/client/` — headless client tests (`magic/witch/hud/`, `grimoire/` panel routing and `recipe/` text contracts)
@@ -224,6 +229,7 @@ herbalwitch/
 - `src/test/java/io/github/dirtyredz/herbalwitch/platform/inventory/` — allocation characterization
 - `src/test/java/io/github/dirtyredz/herbalwitch/platform/multiblock/` — 3D and sparse layout tests
 - `src/test/java/io/github/dirtyredz/herbalwitch/platform/network/` — payload bounds and chunk assembly tests
+- `src/test/java/io/github/dirtyredz/herbalwitch/platform/persistence/` — exact capture-envelope compatibility, filesystem fault stages and malformed/oversized snapshots.
 - `src/test/java/io/github/dirtyredz/herbalwitch/platform/placement/` — placement resolution tests
 - `src/test/java/io/github/dirtyredz/herbalwitch/platform/recipe/` — processing requirement codec and bounds
 - `src/test/java/io/github/dirtyredz/herbalwitch/platform/time/` — duration boundaries and fractional text

@@ -2,6 +2,19 @@
 
 Newest first.
 
+## 2026-10-22 - Shared prerequisites for M9, with M8 file compatibility
+
+Extract verified filesystem operations into platform persistence, preserving the capture envelope
+byte for byte and leaving transaction phases, dirty-state handling and quarantine in capture.
+Extract live object identities into companions lifecycle: source lookup also checks loaded level UUID
+maps, and late removal of an old object cannot evict a replacement. Neither shared layer owns payloads
+or decides that an absent entity is dead.
+
+The familiar guide has an explicit ownership handoff beside the application seam. Brewing supplies
+only a lazy fallback; the bonding feature registers its source at its own priority. Reject a second
+owner rather than overriding entries after the grimoire's first-key-wins assembly. This checkpoint
+does not enable familiar gameplay or promote the milestone version.
+
 ## 2026-10-22 - M8 care and verified transport candidate
 
 - Keep all section 7 defaults except the already documented goat Brain correction. Damage blocks

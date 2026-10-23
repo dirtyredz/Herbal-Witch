@@ -28,6 +28,11 @@ Botany supplies cached summaries keyed by condition-set identity; stations suppl
 generation. Recipe-manager, tag, definition and herb changes still invalidate server content, and
 client disconnect still clears all connection data. The herb wire record remains protocol 4.
 
+`FamiliarGuideContribution` beside the familiar application seam provides a bootstrap-only handoff.
+Brewing registers a lazy deferred fallback. A bonding feature installs its own content source and
+numeric priority; the earlier fallback then emits nothing, preserving first-key-wins without a late
+override or an import of companions into brewing. Until installation, the M7 familiar page is unchanged.
+
 ## Current system (0.6.1 structural refactor: Milestones 1-7 plus the art pass; furniture is Milestone 5, initiation and energy Milestone 6, advanced brewing, charms, circle and wards Milestone 7)
 
 M8 groundwork adds `companions/animals`: exact profiles and datapack membership are separate;
@@ -56,6 +61,13 @@ RELEASED precedes item replacement. Payload compaction occurs only after verifie
 quarantines incomplete or un-compacted final records; recovery advances generation and never spawns.
 The loaded cross-dimension index rejects stale/duplicate incarnations without inferring death from
 unload. Exact vanilla serialization adapters reject unknown capability/persistent data before capture.
+
+The filesystem mechanics now live in `platform/persistence/{SnapshotEnvelope,VerifiedSnapshotWriter}`.
+`CaptureCheckpoint` retains its exact HWC8/version-1 envelope, failure return and logging policy;
+`CaptureSavedData` still owns dirty state and transport lockout. `companions/lifecycle` owns the shared
+loaded-object index, lookup and retirement. Capture still decides generations, phases and exact-object
+permits. Admission also checks already loaded level UUID maps for sources predating their first record;
+no scan loads a chunk. Leave events remove only the exact object and shutdown clears only that server.
 
 Showcase plans include at most 32 pure entity descriptors. Habitat blocks are constructed first;
 the entity phase validates insertion and removes only its own samples if one fails. The full M8
