@@ -33,6 +33,8 @@ public record WitchRulesUpdate(WitchRules rules) {
         for (int v : rules.workings().numbers()) {
             buf.writeVarInt(v);
         }
+        ToolRulesCodec.broom(buf,rules.broom());
+        ToolRulesCodec.wand(buf,rules.wand());
     }
 
     private static int[] numbers(EnergyBalance e) {
@@ -63,7 +65,7 @@ public record WitchRulesUpdate(WitchRules rules) {
         for (int i = 0; i < w.length; i++) {
             w[i] = buf.readVarInt();
         }
-        WitchRules rules = new WitchRules(founding, initiation, t[0], t[1], t[2], t[3], t[4], energy, WorkingRules.of(w));
+        WitchRules rules = new WitchRules(founding, initiation, t[0], t[1], t[2], t[3], t[4], energy, WorkingRules.of(w), ToolRulesCodec.broom(buf), ToolRulesCodec.wand(buf));
         if (!rules.problems().isEmpty()) {
             throw new DecoderException("invalid witch rules: " + rules.problems());
         }

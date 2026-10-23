@@ -695,3 +695,4 @@ Curios 5.14.1 attaches an exact `{Curios: []}` inventory payload to slotless ani
 and familiar snapshots preserve that inert shape; populated slots, extra fields, malformed tags and
 all other foreign capabilities remain refused. This is an empty-payload contract, not Curios storage
 support for familiars. No foreign runtime classes enter the validator.
+M10 flight authority: a broom never assigns vanilla vehicle-position authority to its rider. Dedicated intent packets carry only nonce, sequence and flags. Default flight costs zero; configured costs still use the existing spend transaction. No client prediction is promised: observed entity movement uses server snapshots. The saved physical item is not a crash-atomic transfer across player/chunk files; ordinary Minecraft save limitations apply.

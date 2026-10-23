@@ -605,3 +605,5 @@ adds nine inert, non-dropping, non-bindable samples and three labelled supply ba
 cosmetics have no inventory or bond authority.
 
 Restart evidence uses two dedicated JVMs and exact snapshots taken around atomic replacement. Production indexing and entity-join events replay those snapshots; uncertain economic state quarantines without inventory replay. The test-only observer is thread-confined and absent from release jars. See tools/familiars/restart/README.md for the limits of checkpoint replay.
+
+Broom movement is server-only. The entity deliberately returns no vanilla controlling passenger; a fresh per-mount nonce authenticates bounded intent instead. The single recoverable item retains its name, wear and fractional accumulators. Collision queries first reject unloaded swept volumes; rider clearance is checked in addition to the physical body. WitchStatusService.spend commits flight wear and hundredth-energy remainders together. Unload/reload forgets control state and velocity and resumes only loaded landing. Tool settings extend the existing WitchRules snapshot and fingerprint; no second player energy store exists.

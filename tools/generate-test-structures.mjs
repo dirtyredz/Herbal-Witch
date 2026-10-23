@@ -48,7 +48,7 @@ function structure([x, y, z]) {
 mkdirSync(outDir, { recursive: true });
 // empty: per-feature tests. showcase: the bare /herbalwitch showcase boxes: both showcases one SEPARATION apart (plan width + entrance, plan depths + separation + 1).
 // showcase_section: one small section and the boundary tests.
-const TEMPLATES = { empty: [9, 6, 9], showcase: [128, 10, 100], showcase_section: [16, 10, 14] };
+const TEMPLATES = { broom_flight: [32, 20, 32], empty: [9, 6, 9], showcase: [128, 10, 100], showcase_section: [16, 10, 14] };
 for (const [name, size] of Object.entries(TEMPLATES)) {
   writeFileSync(join(outDir, `${name}.nbt`), structure(size));
   console.log(`wrote ${name}.nbt ${size.join('x')}`);

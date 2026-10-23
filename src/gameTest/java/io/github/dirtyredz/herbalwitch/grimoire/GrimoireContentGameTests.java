@@ -97,7 +97,7 @@ public final class GrimoireContentGameTests {
                 recipes++;
             }
         }
-        check(recipes == 129 && content.recipes().size() == 129, "M9 has 129 recipes, saw " + recipes + "/" + content.recipes().size());
+        check(recipes == 132 && content.recipes().size() == 132, "M10 has 132 recipes, saw " + recipes + "/" + content.recipes().size());
         // the editorial guides, the three witchcraft pages, the six altar action pages (Milestones 6 and 7), the three
         // advanced preparation pages, wards and charms (Milestone 7), and ordinary animal care (Milestone 8)
         long guides = content.entries().stream().filter(e -> e.key().kind() == EntryKey.Kind.GUIDE).count();

@@ -22,6 +22,8 @@ public final class WitchServerConfig {
     public static final String FILE = "herbalwitch-server.toml";
     private static final Logger LOGGER = LogUtils.getLogger();
     public static final ForgeConfigSpec SPEC;
+    private static final io.github.dirtyredz.herbalwitch.magic.broom.config.BroomConfigValues BROOM;
+    private static final io.github.dirtyredz.herbalwitch.magic.wand.config.WandConfigValues WAND;
     private static final ForgeConfigSpec.BooleanValue FOUNDING_ENABLED;
     private static final ForgeConfigSpec.BooleanValue INITIATION_ENABLED;
     private static final ForgeConfigSpec.IntValue FOUNDING_TICKS;
@@ -127,6 +129,8 @@ public final class WitchServerConfig {
         CHARM_CHARGE_SECONDS = b.comment("Equipped seconds a fresh charm lasts.")
                 .defineInRange("chargeSeconds", w.charmChargeSeconds(), 1, WorkingRules.MAX_SECONDS);
         b.pop();
+        BROOM = new io.github.dirtyredz.herbalwitch.magic.broom.config.BroomConfigValues(b);
+        WAND = new io.github.dirtyredz.herbalwitch.magic.wand.config.WandConfigValues(b);
         SPEC = b.build();
     }
 
@@ -146,7 +150,7 @@ public final class WitchServerConfig {
                 WARD_RADIUS.get(), WARD_FOCUS_RADIUS.get(), WARD_HEIGHT.get(), WARDS_PER_OWNER.get(), WARDS_PER_DIMENSION.get(),
                 CHARM_CHARGE_SECONDS.get(), PREPARATION_PVP.get());
         return new WitchRules(FOUNDING_ENABLED.get(), INITIATION_ENABLED.get(), FOUNDING_TICKS.get(), INITIATION_TICKS.get(),
-                ATTUNEMENT_TICKS.get(), INVITE_EXPIRY.get(), INVITE_COOLDOWN.get(), energy, workings);
+                ATTUNEMENT_TICKS.get(), INVITE_EXPIRY.get(), INVITE_COOLDOWN.get(), energy, workings, BROOM.read(), WAND.read());
     }
 
     /** Mod bus: the server config loaded or changed on disk. Applied on the server thread. */

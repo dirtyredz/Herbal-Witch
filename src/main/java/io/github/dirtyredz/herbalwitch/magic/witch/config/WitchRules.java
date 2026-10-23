@@ -3,6 +3,8 @@ package io.github.dirtyredz.herbalwitch.magic.witch.config;
 import io.github.dirtyredz.herbalwitch.magic.witch.energy.EnergyBalance;
 import net.minecraftforge.fml.util.thread.EffectiveSide;
 
+import io.github.dirtyredz.herbalwitch.magic.broom.config.BroomServerConfig;
+import io.github.dirtyredz.herbalwitch.magic.wand.config.WandServerConfig;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -25,7 +27,7 @@ import java.util.function.Consumer;
  * @param workings          what magical processing, circle rituals, wards and charms cost or last (Milestone 7)
  */
 public record WitchRules(boolean foundingEnabled, boolean initiationEnabled, int foundingTicks, int initiationTicks,
-                         int attunementTicks, int inviteExpiry, int inviteCooldown, EnergyBalance energy, WorkingRules workings) {
+                         int attunementTicks, int inviteExpiry, int inviteCooldown, EnergyBalance energy, WorkingRules workings, BroomServerConfig broom, WandServerConfig wand) {
     public static final WitchRules DEFAULTS = new WitchRules(true, true, 200, 200, 100, 600, 100, EnergyBalance.DEFAULTS);
 
     /** Rules with the default workings (Milestone 6 callers). */
@@ -35,6 +37,10 @@ public record WitchRules(boolean foundingEnabled, boolean initiationEnabled, int
                 WorkingRules.DEFAULTS);
     }
 
+    /** Existing callers retain default tool settings. */
+    public WitchRules(boolean foundingEnabled,boolean initiationEnabled,int foundingTicks,int initiationTicks,int attunementTicks,int inviteExpiry,int inviteCooldown,EnergyBalance energy,WorkingRules workings){
+        this(foundingEnabled,initiationEnabled,foundingTicks,initiationTicks,attunementTicks,inviteExpiry,inviteCooldown,energy,workings,BroomServerConfig.DEFAULTS,WandServerConfig.DEFAULTS);
+    }
     private static volatile WitchRules server = DEFAULTS;
     private static volatile WitchRules client = DEFAULTS;
     private static final List<Consumer<WitchRules>> LISTENERS = new CopyOnWriteArrayList<>();
@@ -43,6 +49,8 @@ public record WitchRules(boolean foundingEnabled, boolean initiationEnabled, int
     public List<String> problems() {
         List<String> out = new ArrayList<>(energy.problems());
         out.addAll(workings.problems());
+        out.addAll(broom.problems());
+        out.addAll(wand.problems());
         for (int[] t : new int[][] {{foundingTicks}, {initiationTicks}, {attunementTicks}, {inviteExpiry}}) {
             if (t[0] < 1 || t[0] > EnergyBalance.MAX_TICKS) {
                 out.add("durations must be 1.." + EnergyBalance.MAX_TICKS);
@@ -74,6 +82,8 @@ public record WitchRules(boolean foundingEnabled, boolean initiationEnabled, int
         for (int v : workings.numbers()) {
             h = h * 31 + v;
         }
+        h = h * 31 + broom.hashCode();
+        h = h * 31 + wand.hashCode();
         return h;
     }
 
