@@ -59,7 +59,8 @@ public final class FamiliarLoadGameTests {
                 check(FamiliarCommands.set(owner,record.bond(),FamiliarCommand.PROTECT_HOME).equals("command_set"),"offline guard command");
             }
             var far=new BlockPos(20_000_000,80,20_000_000);check(!h.getLevel().hasChunkAt(far),"load fixture remote chunk");
-            h.runAfterDelay(10,()->sample(h,loaded,far,40,0,0));
+            var forced=Set.copyOf(h.getLevel().getForcedChunks());
+            h.runAfterDelay(10,()->sample(h,loaded,far,forced,40,0,0));
         });
     }
     private static FamiliarRecord record(GameTestHelper h,ServerPlayer owner){
@@ -72,11 +73,11 @@ public final class FamiliarLoadGameTests {
         FamiliarBinding.of(mob).orElseThrow().bind(record.bond(),record.owner(),record.generation());
         mob.moveTo(h.absolutePos(new BlockPos(2+x*2,1,2+z)).getCenter());check(h.getLevel().addFreshEntity(mob),"load real entity admission");spawned.add(mob);return mob;
     }
-    private static void sample(GameTestHelper h,List<Mob> loaded,BlockPos far,int left,int paths,int scans){
+    private static void sample(GameTestHelper h,List<Mob> loaded,BlockPos far,Set<Long> forced,int left,int paths,int scans){
         var work=FamiliarWork.in(h.getLevel());check(work.lastPaths()<=4 && work.lastScans()<=8,"shared work budget exceeded under load");
-        check(!h.getLevel().hasChunkAt(far) && h.getLevel().getForcedChunks().isEmpty(),"familiar load created forced terrain");
+        check(!h.getLevel().hasChunkAt(far) && forced.containsAll(h.getLevel().getForcedChunks()),"familiar load created forced terrain");
         int totalPaths=paths+work.lastPaths(),totalScans=scans+work.lastScans();
         if(left==0){check(totalPaths>0 && totalScans>0,"load fixture exercised no real work");loaded.forEach(Mob::discard);h.succeed();}
-        else h.runAfterDelay(1,()->sample(h,loaded,far,left-1,totalPaths,totalScans));
+        else h.runAfterDelay(1,()->sample(h,loaded,far,forced,left-1,totalPaths,totalScans));
     }
 }

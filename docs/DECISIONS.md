@@ -669,3 +669,12 @@ receipt survives cargo collection and is independent of later player receipt wat
 retain item data in pending bond/player escrow and never automatically replay a grant or refund.
 
 M9 restart qualification uses deterministic checkpoint replay between distinct dedicated server JVMs. It captures actual verified shard/player-save bytes around replacement and re-admits saved entity NBT through production events. It establishes conservative identity/inventory recovery at those boundaries; it does not claim host power-loss durability or random OS-kill coverage.
+
+M9 qualification found a player capability lifecycle gap: Forge invalidates handles on dimension
+transfer and revives its dispatcher, but the provider's old LazyOptional stays invalid. Witch and
+Grimoire discovery providers now renew the handle on a subsequent dispatcher query while retaining
+the same durable state. The real cross-dimension recall test asserts preserved energy and knowledge.
+Curios 5.14.1 attaches an exact `{Curios: []}` inventory payload to slotless animals. Native capture
+and familiar snapshots preserve that inert shape; populated slots, extra fields, malformed tags and
+all other foreign capabilities remain refused. This is an empty-payload contract, not Curios storage
+support for familiars. No foreign runtime classes enter the validator.

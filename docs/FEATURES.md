@@ -16,20 +16,7 @@ Local fast-gate evidence: 335 existing + 31 added JUnit tests; 75 existing + 4 a
 are delegated to the orchestrator after the committed handoff; no client was launched. Owner checks
 remain for all four panel hosts, changed-rule recipe text, drinks/oils, wards and two-client private
 updates. Headless preview review and all 2,693 baseline resource/art hashes are recorded locally.
-M8 ordinary-animal implementation is now a candidate on this branch; M9 implementation is in progress.
-M9 prerequisites now include the neutral familiar-guide handoff, shared verified snapshot writer and
-shared loaded companion identity index. Their tests preserve M8 capture bytes and guide ordering;
-they do not constitute a 0.8.0 milestone implementation. The first M9 phase adds canonical per-bond
-storage, conservative admission, eight species adapters, and paid altar binding. ANU job
-`HerbalWitch-m9-familiars-0.8.0-20261022-220551-fa8` at `b63b688` passed 429 JUnit tests and all 237
-required GameTests. The second phase adds private bounded roster pages and nearby detail access;
-ANU `HerbalWitch-m9-familiars-0.8.0-20261022-224023-3bb` at `5cea37a` passed 433 JUnit tests and
-all 238 required GameTests. The third phase adds seven command modes, loaded navigation and flight,
-shared mobile reservations, bounded scan/path scheduling, UUID-aware automated permissions and paid
-loaded recall. ANU `HerbalWitch-m9-familiars-0.8.0-20261022-233934-064` at `645dda1` passed 437
-JUnit tests and all 247 required GameTests. The first command run exposed a bat fall-immunity gap
-and a roster fixture that assumed ANU discarded old canonical bonds; both were corrected. Homes,
-equipment, abilities, preparations, recovery and final art remain in progress.
+M9 gameplay is implemented; the final acceptance table below supersedes the historical phase status. Version promotion waits for the remaining server qualification. M8 ordinary-animal history follows.
 M8 adds six baits, personal loaded-time care state, existing-salve targeting, temporary goal-based
 calming, reused M7 sleep, earned native taming/keepers, a private grimoire card, verified capture
 checkpoints/reconciliation/recovery and sixteen showcase habitats. Exact boundaries and defaults:
@@ -225,35 +212,25 @@ No new gameplay: the same blocks, items, states and textures, authored different
 
 Not planned: publishing, pack integration or a release before the owner decides.
 
-M9 equipment phase: two validated equipment slots, cursor escrow and saved-player receipt verification,
-shared M7 charm charging/effects, species gear and stable armor modifiers, private cargo collection,
-and tracker-only cosmetic snapshots. Eight gear projects and raven/crow, owl and snake rigs compile
-from Blockbench sources. Headless previews cover 19 equipped creature poses and eight gear items;
-native attachment pose review remains pending. Local gate passes 446 Java tests and 86 Node tests;
-1,091 generated resources match across repeated datagen. The home baseline ANU found a real return
-path failure above partial-height furniture; navigation now selects a checked adjacent floor.
-Equipment and corrected home behavior await the next committed ANU qualification. Milestone remains open.
+### M9: multiple familiars — final qualification
 
-M9 equipment and recovery are server-qualified at `417141b`: ANU `HerbalWitch-m9-familiars-0.8.0-20261023-014942-c54` passed 446 Java tests and all 261 required GameTests. This includes the partial-home return fix, gear/cursor/cargo transactions, charm reuse, lethal incapacitation, paid revival, failed admission, administrative recovery and owner-directed retreat. Progression/upgrades are the next phase; abilities, familiar preparation effects, acquisition, complete guidance/showcase and restart qualification remain open.
+All gameplay phases are implemented. The private version remains 0.6.1 until final acceptance;
+owner visual, shader, reload and two-client checks remain pending independently.
 
-M9 ability checkpoint: the Powers detail view exposes bounded sensing, explicit garden/distraction
-and guard selections, automatic sensing/guard powers, and prepaid reserve charging. Private observed
-positions expire after five seconds. Spiritbond discounts costs; Nightwatch enables nighttime threat
-sensing; Hearthkeeper adjusts home repel. Retrieval is not exposed until durable pickup reconciliation
-is implemented. The milestone and version promotion remain open.
+| Area | Automated coverage |
+|---|---|
+| Eight species, paid binding and canonical identity | Species matrix, ownership/trust refusal, conversion cancellation, stale-source admission, M8 release-to-binding interop |
+| Private unlimited roster, detail and seven commands | Keyset pages, forged/stale sessions, real ground/flight navigation, cap reductions, offline reservations, friendly-target refusal |
+| Homes and safe rest | Real placement/support loss, compatibility/occupancy, instance replacement, pending unloaded homes, navigation and offline healing |
+| Equipment, progression and preparations | Real menu/shift-click/cursor escrow, cargo conservation, shared charm charge, stable modifiers, paid upgrades, all eleven products and shared poison |
+| Paid bounded powers | Every species power, no-result/zero-energy/permission refusal, changed target tokens, retrieval tombstones, finite offline reserve and configuration invalidation |
+| Incapacitation and revival | No drops/XP, retained inventory, exact paid restoration, failed insertion, generation refusal and administrative recovery |
+| Restart and crash boundaries | ANU `HerbalWitch-m9-familiars-0.8.0-20261023-052253-a36` at `67360e9`: 76 actual checkpoint snapshots across two JVMs, all required evidence passed |
+| Work limits | 120 paginated bonds, three owners at the three-mobile cap, three loaded offline home guards; scan/path counters and forced-chunk baseline; source guard forbids chunk/ticket acquisition |
+| Acquisition, grimoire and showcase | Daytime spawn rules, creative eggs, feature-owned root plus eight guide pages, nine inert appearances and complete labelled supply barrels |
+| Art | 1,100 generated files unchanged by repeat datagen; 86 Node tests; owned Blockbench gear/eggs/homes and raven/crow/owl/snake rigs; 19 new-species and 20 native equipped poses visually reviewed |
 
-Retrieval is now exposed for raven/crow and fox: owner-attributed, tagged simple loose stacks only,
-exact observation/permission rechecks, five energy per completed pickup, and durable cargo/source
-retirement. Public retrieval remains opt-in; oversized stacks, payload items, pickup delays, exclusive
-foreign ownership and full cargo refuse without charge. Verification is recorded per phase in Docket.
-
-M9 acquisition/presentation checkpoint adds natural acquisition, three creative-only eggs, eight
-feature-owned guide pages plus the existing familiar entry, and nine inert showcase appearances
-with all gear, charms, preparations and altar supplies. The egg models use their own
-painted textures; no vanilla egg tint is required. Automated and visual qualification follows.
-
-The presentation fast gate passed 457 JUnit and 86 Node checks with 1,100 byte-identical generated
-files. ANU f3e4dec passed Java tests but exposed an unsettled-light acquisition fixture and a stale
-guide-count assertion; both are corrected in the next qualification phase. Eight additional real
-entity power cases cover species sensing, growth permission, empty energy, venom and offline reserve
-exhaustion. Configuration changes invalidate queued work and observed action tokens.
+Final base and optional-profile results are being qualified. The restart runner is isolated from
+normal build/check and uses checkpoint replay rather than random process termination. See
+[restart procedure](../tools/familiars/restart/README.md) and [familiar reference](catalogue/familiars.md).
+Phase commits, failed runs and corrections are recorded in Docket `dk-5b3234c4`.

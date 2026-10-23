@@ -13,10 +13,13 @@ import net.minecraftforge.common.util.LazyOptional;
  */
 public final class WitchProvider implements ICapabilitySerializable<CompoundTag> {
     private final WitchCapability capability = new WitchCapability();
-    private final LazyOptional<WitchCapability> optional = LazyOptional.of(() -> capability);
+    private LazyOptional<WitchCapability> optional = LazyOptional.of(() -> capability);
 
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
+        // The owning Forge dispatcher rejects access while invalid. After reviveCaps (dimension
+        // transfer or clone), renew the invalid handle while retaining this exact durable state.
+        if (cap == WitchCapability.CAPABILITY && !optional.isPresent()) optional = LazyOptional.of(() -> capability);
         return WitchCapability.CAPABILITY.orEmpty(cap, optional);
     }
 

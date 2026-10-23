@@ -119,3 +119,18 @@ Optional integrations stay optional. Foreign mods and their classes never ship i
 Witch's own optional adapter classes do ship, guarded so they load only when their mod is present: they
 live under `platform/compat/<integration>/` (or `client/compat/<viewer>/` for viewers). There is no
 claim of universal compatibility.
+
+## Familiars (M9 qualification)
+
+Native conversion accepts exact supported animal types and retains care/transport lineage. Trained
+Doggy Talents entities are outside that catalogue; no foreign ownership or AI is converted.
+Unknown persistent mod data and capability inventories refuse. The one tested foreign payload
+exception is Curios 5.14.1's exact empty slotless inventory (`{Curios: []}`), retained unchanged;
+nonempty slots, unknown fields and malformed tags still refuse.
+
+Optional-profile inputs are never bundled. `-PcompatProfile=all -PcompatModsDir=<local jars>` uses
+EMI 1.1.24+1.20.1, JEI 15.62.0.219, Curios 5.14.1+1.20.1, Farmer's Delight 1.3.4 and Thirst 1.4.0.
+With a local folder, Curios resolves that supplied jar, allowing fully offline CI qualification.
+No protection adapter is installed; automated UUID-aware checks and recognized unsupported-claim
+refusal remain conservative. Viewer UI, Curios UI, shaders and two-client interaction are owner checks.
+Final profile job IDs will be recorded with the M9 acceptance table.

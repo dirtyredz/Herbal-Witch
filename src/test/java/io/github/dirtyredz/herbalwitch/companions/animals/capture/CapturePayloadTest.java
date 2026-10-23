@@ -14,6 +14,13 @@ class CapturePayloadTest {
     static boolean valid(CompoundTag tag) { return CapturePayloadValidator.valid(tag, ANIMAL, "minecraft:cow", AnimalRules.DEFAULTS); }
     static void rejects(Consumer<CompoundTag> edit) { var tag = payload(); edit.accept(tag); assertFalse(valid(tag)); }
     @Test void boundedOrdinaryPayloadIsAcceptedWithoutMutation() { var tag = payload(); var copy = tag.copy(); assertTrue(valid(tag)); assertEquals(copy, tag); }
+    @Test void onlyTheExactEmptyCuriosInventoryCanCrossTheNativeBoundary() {
+        var tag=payload();var caps=new CompoundTag();var curios=new CompoundTag();curios.put("Curios",new ListTag());caps.put("curios:inventory",curios);tag.put("ForgeCaps",caps);
+        var original=tag.copy();assertTrue(valid(tag));assertEquals(original,tag);
+        curios.putInt("futureSchema",2);assertFalse(valid(tag));curios.remove("futureSchema");
+        var items=new ListTag();items.add(new CompoundTag());curios.put("Curios",items);assertFalse(valid(tag));
+        curios.putString("Curios","");assertFalse(valid(tag));curios.remove("Curios");assertFalse(valid(tag));
+    }
     @Test void unknownCapabilitiesPersistentDataNestedEntitiesAndIdentityChangesAreRefused() {
         rejects(t -> { var caps = new CompoundTag(); caps.putInt("unknown:inventory", 1); t.put("ForgeCaps", caps); });
         rejects(t -> { var data = new CompoundTag(); data.putString("other:external", "bond"); t.put("ForgeData", data); });

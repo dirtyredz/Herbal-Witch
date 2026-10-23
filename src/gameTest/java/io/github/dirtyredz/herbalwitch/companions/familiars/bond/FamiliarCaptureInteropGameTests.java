@@ -38,8 +38,12 @@ public final class FamiliarCaptureInteropGameTests {
                 destination.setBlock(new BlockPos(x,y,z),(y==119?net.minecraft.world.level.block.Blocks.STONE:net.minecraft.world.level.block.Blocks.AIR).defaultBlockState(),3);
             owner.getInventory().setItem(0,new ItemStack(io.github.dirtyredz.herbalwitch.grimoire.registry.GrimoireItems.BOOK.get()));
             online=io.github.dirtyredz.herbalwitch.platform.player.OnlinePlayers.register(List.of(owner));
+            var knowledge=io.github.dirtyredz.herbalwitch.grimoire.knowledge.discovery.DiscoveryCapability.of(owner).orElseThrow();
+            var page=io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey.of(io.github.dirtyredz.herbalwitch.grimoire.content.EntryKey.Kind.GUIDE,"herbalwitch:familiar");
+            knowledge.grant(page);
             check(io.github.dirtyredz.herbalwitch.companions.familiars.command.FamiliarCommands.set(owner,b.bond(),FamiliarCommand.FOLLOW).equals("command_set"),"dimension follow");
             owner.teleportTo(destination,8.5,120,8.5,0,0);
+            check(WitchStatusService.energyUnits(owner)==7500 && io.github.dirtyredz.herbalwitch.grimoire.knowledge.discovery.DiscoveryCapability.of(owner).orElseThrow().knows(page),"dimension change invalidated witch/discovery state");
             h.runAfterDelay(10,()->{
                 check(b.mob().level()==h.getLevel() && !b.mob().isRemoved() && b.record().state().getString("status").equals("other_dimension"),"dimension change silently moved familiar");
                 String recalled=io.github.dirtyredz.herbalwitch.companions.familiars.command.FamiliarRecall.recall(owner,b.bond());

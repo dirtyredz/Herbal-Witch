@@ -383,3 +383,12 @@ through the stored owner UUID. Garden targets and herb observations require targ
 as well as the source permission. GameTest lighting needs propagation after changing a roof or lamp.
 
 Forge's MinecraftRunTask resolves arguments and module-path tokens inside exec(), so an ordinary JavaExec copy cannot launch an equivalent server. The restart task copies the merged RunConfig plus both token maps into the same Forge task type, with isolated world directories and namespaces. Equipment fixtures must respect the binding transaction interval before their first menu click.
+
+M9 qualification found a player capability lifecycle gap: Forge invalidates handles on dimension
+transfer and revives its dispatcher, but the provider's old LazyOptional stays invalid. Witch and
+Grimoire discovery providers now renew the handle on a subsequent dispatcher query while retaining
+the same durable state. The real cross-dimension recall test asserts preserved energy and knowledge.
+Curios 5.14.1 attaches an exact `{Curios: []}` inventory payload to slotless animals. Native capture
+and familiar snapshots preserve that inert shape; populated slots, extra fields, malformed tags and
+all other foreign capabilities remain refused. This is an empty-payload contract, not Curios storage
+support for familiars. No foreign runtime classes enter the validator.

@@ -3,6 +3,7 @@ package io.github.dirtyredz.herbalwitch.companions.animals.capture.payload;
 import io.github.dirtyredz.herbalwitch.companions.animals.capture.data.CaptureCodec;
 import io.github.dirtyredz.herbalwitch.companions.animals.config.AnimalRules;
 import io.github.dirtyredz.herbalwitch.companions.animals.trust.AnimalCodec;
+import io.github.dirtyredz.herbalwitch.platform.compat.curios.CuriosNativePayload;
 import net.minecraft.nbt.*;
 import java.util.Set;
 import java.util.UUID;
@@ -23,7 +24,8 @@ public final class CapturePayloadValidator {
             if (payload.contains("ForgeCaps")) {
                 if (!payload.contains("ForgeCaps", Tag.TAG_COMPOUND)) return false;
                 CompoundTag caps = payload.getCompound("ForgeCaps");
-                if (!Set.of("herbalwitch:animals/care").containsAll(caps.getAllKeys())) return false;
+                if (!Set.of("herbalwitch:animals/care",CuriosNativePayload.ID).containsAll(caps.getAllKeys())) return false;
+                if (caps.contains(CuriosNativePayload.ID) && !CuriosNativePayload.empty(caps.get(CuriosNativePayload.ID))) return false;
                 if (caps.contains("herbalwitch:animals/care") && (!caps.contains("herbalwitch:animals/care", Tag.TAG_COMPOUND)
                         || !AnimalCodec.read(caps.getCompound("herbalwitch:animals/care")).writable())) return false;
             }

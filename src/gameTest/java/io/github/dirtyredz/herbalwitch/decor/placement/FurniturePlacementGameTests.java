@@ -124,6 +124,9 @@ public final class FurniturePlacementGameTests {
     @GameTest(template = TEMPLATE, timeoutTicks = 200)
     public static void everyDeliveredPiecePlacesWholeInEveryFacing(GameTestHelper helper) {
         floor(helper);
+        // Retained CI worlds now include naturally spawning familiars. This synchronous matrix
+        // tests empty-space placement; entity obstruction has its own explicit test below.
+        helper.killAllEntities();
         for (FurnitureSpec spec : FurnitureCatalog.ALL) {
             Block block = DecorBlocks.block(spec);
             if (!(block instanceof StructurePlacement)) {

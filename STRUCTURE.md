@@ -12,7 +12,7 @@ herbalwitch/
   HerbalWitch.java
   apothecary/                 botany/ -> cultivation; brewing/ -> preparations; stations/ -> processing
   client/                    screens, rendering, recipe text and optional viewers; magic/ -> ritual, ward, witch
-  companions/                animals/ care and transport; lifecycle/ loaded identities; future familiars/ consume trust views
+  companions/                animals/ care and transport; lifecycle/ loaded identities; familiars/ consume trust views
   data/                      generated resources, one writer per shared output
   decor/                     catalogue, structures and furniture behaviour
   grimoire/                  contracts, content, knowledge, reading and transport

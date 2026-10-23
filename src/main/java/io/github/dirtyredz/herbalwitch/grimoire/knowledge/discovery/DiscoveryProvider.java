@@ -13,10 +13,13 @@ import net.minecraftforge.common.util.LazyOptional;
  */
 public final class DiscoveryProvider implements ICapabilitySerializable<CompoundTag> {
     private final DiscoveryCapability capability = new DiscoveryCapability();
-    private final LazyOptional<DiscoveryCapability> optional = LazyOptional.of(() -> capability);
+    private LazyOptional<DiscoveryCapability> optional = LazyOptional.of(() -> capability);
 
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
+        // The owner dispatcher gates invalid entities; a revived player needs a fresh handle,
+        // not a new discovery record or the permanently invalid old LazyOptional.
+        if (cap == DiscoveryCapability.CAPABILITY && !optional.isPresent()) optional = LazyOptional.of(() -> capability);
         return DiscoveryCapability.CAPABILITY.orEmpty(cap, optional);
     }
 
