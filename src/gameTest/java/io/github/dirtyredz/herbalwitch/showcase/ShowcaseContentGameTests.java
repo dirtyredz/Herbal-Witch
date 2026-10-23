@@ -15,7 +15,6 @@ import io.github.dirtyredz.herbalwitch.decor.registry.DecorBlocks;
 import io.github.dirtyredz.herbalwitch.grimoire.knowledge.discovery.DiscoveryCapability;
 import io.github.dirtyredz.herbalwitch.grimoire.registry.GrimoireBlocks;
 import io.github.dirtyredz.herbalwitch.showcase.command.ShowcaseCommand;
-import io.github.dirtyredz.herbalwitch.showcase.construction.ShowcasePreflight;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseGroup;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcasePlan;
 import io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseRegistry;
@@ -99,7 +98,7 @@ public final class ShowcaseContentGameTests {
     @GameTest(template = FULL, timeoutTicks = 400, batch = "herbalwitch_showcase_the_furniture_showcase_holds_every_decor_piece")
     public static void theFurnitureShowcaseHoldsEveryDecorPiece(GameTestHelper helper) throws Exception {
         ServerPlayer op = prepare(helper, "op_furniture");
-        runChecked(helper, op, "herbalwitch showcase furniture", ShowcaseGroup.FURNITURE, ORIGIN);
+        runChecked(helper, op, "herbalwitch showcase furniture");
         ShowcasePlan plan = plan(ShowcaseGroup.FURNITURE);
         Scan scan = scan(helper, ORIGIN, plan);
         for (DecorBlocks.Entry entry : DecorBlocks.entries()) {
@@ -120,7 +119,7 @@ public final class ShowcaseContentGameTests {
     @GameTest(template = FULL, timeoutTicks = 400, batch = "herbalwitch_showcase_the_witchcraft_showcase_holds_everything_but_furniture")
     public static void theWitchcraftShowcaseHoldsEverythingButFurniture(GameTestHelper helper) throws Exception {
         ServerPlayer op = prepare(helper, "op_witchcraft");
-        runChecked(helper, op, "herbalwitch showcase witchcraft", ShowcaseGroup.WITCHCRAFT, ORIGIN);
+        runChecked(helper, op, "herbalwitch showcase witchcraft");
         ShowcasePlan plan = plan(ShowcaseGroup.WITCHCRAFT);
         Scan scan = scan(helper, ORIGIN, plan);
         for (DecorBlocks.Entry entry : DecorBlocks.entries()) {
@@ -178,10 +177,7 @@ public final class ShowcaseContentGameTests {
         ShowcasePlan furniture = plan(ShowcaseGroup.FURNITURE);
         ShowcasePlan witchcraft = plan(ShowcaseGroup.WITCHCRAFT);
         BlockPos second = ORIGIN.offset(0, 0, furniture.depth() + ShowcaseCommand.SEPARATION);
-        if (run(helper, as(op, 2), "herbalwitch showcase") == 0) {
-            var why = ShowcasePreflight.check(furniture, helper.getLevel(), op, helper.absolutePos(ORIGIN));
-            check(false, "bare showcase failed: " + why.map(c -> c.getString()).orElse("furniture preflight passed"));
-        }
+        runChecked(helper, op, "herbalwitch showcase");
         Scan first = scan(helper, ORIGIN, furniture);
         Scan other = scan(helper, second, witchcraft);
         Block armchair = DecorBlocks.entries().get(0).block().get();
@@ -217,10 +213,17 @@ public final class ShowcaseContentGameTests {
         return op;
     }
 
-    private static void runChecked(GameTestHelper helper, ServerPlayer op, String command, ShowcaseGroup group, BlockPos origin) throws Exception {
-        if (run(helper, as(op, 2), command) == 0) {
-            var why = ShowcasePreflight.check(plan(group), helper.getLevel(), op, helper.absolutePos(origin));
-            check(false, command + " failed: " + why.map(c -> c.getString()).orElse("preflight passed"));
+    private static void runChecked(GameTestHelper helper, ServerPlayer op, String command) throws Exception {
+        // Rechecking the preflight after a failed build would report the build's own blocks, so report what the command said.
+        java.util.List<String> said = new java.util.ArrayList<>();
+        net.minecraft.commands.CommandSource capture = new net.minecraft.commands.CommandSource() {
+            @Override public void sendSystemMessage(net.minecraft.network.chat.Component message) { said.add(message.getString()); }
+            @Override public boolean acceptsSuccess() { return false; }
+            @Override public boolean acceptsFailure() { return true; }
+            @Override public boolean shouldInformAdmins() { return false; }
+        };
+        if (run(helper, as(op, 2).withSource(capture), command) == 0) {
+            check(false, command + " failed: " + said);
         }
         check(DiscoveryCapability.of(op).map(c -> c.state().size()).orElse(0) == 0, "building the showcase granted discoveries");
     }
