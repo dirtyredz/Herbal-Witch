@@ -1,42 +1,38 @@
-// Two independent server JVMs share only copied checkpoint evidence and their isolated test world.
-// Never wired into check/build: this is the named ANU-only heavier qualification.
+// Two sequential copies of Forge's resolved dedicated-server JavaExec configuration.
+// Custom RunConfig parents are merged before Forge injects userdev's main class, so copy the
+// existing run task at execution time instead of duplicating Forge launch arguments/modules.
 def familiarRun = file("run/familiar-restart/${UUID.randomUUID()}")
 def familiarEvidence = new File(familiarRun, 'evidence')
-minecraft.runs {
-    familiarRestartPrepare {
-        taskName 'runFamiliarRestartPrepare'
-        parent minecraft.runs.gameTestServer
-        client false
-        property 'forge.gameTestServer', 'true'
-        workingDirectory familiarRun
-        property 'forge.enabledGameTestNamespaces', 'herbalwitch_restart'
-        property 'herbalwitch.restart.phase', 'prepare'
-        property 'herbalwitch.restart.evidence', familiarEvidence.absolutePath
-    }
-    familiarRestartVerify {
-        taskName 'runFamiliarRestartVerify'
-        parent minecraft.runs.gameTestServer
-        client false
-        property 'forge.gameTestServer', 'true'
-        workingDirectory familiarRun
-        property 'forge.enabledGameTestNamespaces', 'herbalwitch_restart'
-        property 'herbalwitch.restart.phase', 'verify'
-        property 'herbalwitch.restart.evidence', familiarEvidence.absolutePath
-    }
-}
 tasks.named('processGameTestResources').configure {
-    from('src/gameTest/resources/data/herbalwitch/structures/empty.nbt') {
-        into 'data/herbalwitch_restart/structures'
+    from('src/gameTest/resources/data/herbalwitch/structures/empty.nbt') { into 'data/herbalwitch_restart/structures' }
+}
+['Prepare', 'Verify'].each { phase ->
+    tasks.register("runFamiliarRestart${phase}", JavaExec) {
+        group = 'verification'
+        dependsOn { def base = tasks.named('runGameTestServer').get(); base.taskDependencies.getDependencies(base) }
+        if (phase == 'Verify') dependsOn 'runFamiliarRestartPrepare'
+        doFirst {
+            def base = tasks.named('runGameTestServer', JavaExec).get()
+            if (!base.args.contains('forgegametestserveruserdev')) throw new GradleException('Restart harness requires the dedicated GameTest launch target')
+            mainClass.set(base.mainClass)
+            classpath = base.classpath
+            jvmArgs = base.jvmArgs
+            args = base.args
+            environment = base.environment
+            systemProperties = new LinkedHashMap(base.systemProperties)
+            if (base.javaLauncher.present) javaLauncher.set(base.javaLauncher)
+            systemProperty 'forge.enabledGameTestNamespaces', 'herbalwitch_restart'
+            systemProperty 'herbalwitch.restart.phase', phase.toLowerCase(Locale.ROOT)
+            systemProperty 'herbalwitch.restart.evidence', familiarEvidence.absolutePath
+            familiarRun.mkdirs()
+            workingDir familiarRun
+        }
     }
 }
-// Configure after Forge has created the run tasks. dependsOn prevents overlap even with --parallel.
-tasks.configureEach { if (name == 'runFamiliarRestartVerify') dependsOn 'runFamiliarRestartPrepare' }
-afterEvaluate {
-    tasks.register('familiarRestartTest', Exec) {
-        group = 'verification'
-        description = 'ANU only: capture actual checkpoints, restart in a second JVM, qualify admission and inventory.'
-        dependsOn 'runFamiliarRestartVerify'
-        commandLine (project.findProperty('nodeExecutable') ?: 'node').toString(),
-                'tools/familiars/restart/verify-report.mjs', familiarEvidence.absolutePath
-    }
+tasks.register('familiarRestartTest', Exec) {
+    group = 'verification'
+    description = 'ANU only: two dedicated JVMs qualify actual familiar checkpoints.'
+    dependsOn 'runFamiliarRestartVerify'
+    commandLine (project.findProperty('nodeExecutable') ?: 'node').toString(),
+            'tools/familiars/restart/verify-report.mjs', familiarEvidence.absolutePath
 }
