@@ -14,16 +14,16 @@ base {
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 // Optional-mod runtime profile for headless adapter checks (docs/COMPATIBILITY.md):
-//   -PcompatProfile=base|emi|jei|viewers|farmersdelight|thirst|curios|all   (default base: no optional mods)
+//   -PcompatProfile=base|emi|jei|viewers|farmersdelight|thirst|curios|doggy|all   (default base: no optional mods)
 // Farmer's Delight and Thirst Was Taken come from a local mods folder: -PcompatModsDir=<folder>.
 def compatProfile = (project.findProperty('compatProfile') ?: 'base').toString()
-if (!(compatProfile in ['base', 'emi', 'jei', 'viewers', 'farmersdelight', 'thirst', 'curios', 'all'])) {
+if (!(compatProfile in ['base', 'emi', 'jei', 'viewers', 'farmersdelight', 'thirst', 'curios', 'doggy', 'all'])) {
     throw new GradleException("Unknown compatProfile '${compatProfile}'")
 }
-def needsLocalMods = compatProfile in ['farmersdelight', 'thirst', 'all']
+def needsLocalMods = compatProfile in ['farmersdelight', 'thirst', 'doggy', 'all']
 def compatModsDir = project.findProperty('compatModsDir')?.toString()
 if (needsLocalMods && !compatModsDir) {
-    throw new GradleException("compatProfile '${compatProfile}' needs -PcompatModsDir=<folder holding the FarmersDelight and ThirstWasTaken jars>")
+    throw new GradleException("compatProfile '${compatProfile}' needs -PcompatModsDir=<folder holding its optional runtime jars>")
 }
 
 // Generated assets and data are checked in and packaged; the datagen cache is not.
@@ -132,6 +132,9 @@ dependencies {
     }
     if (compatProfile in ['thirst', 'all']) {
         runtimeOnly fg.deobf("local:ThirstWasTaken-${minecraft_version}:${thirst_version}")
+    }
+    if (compatProfile == 'doggy') {
+        runtimeOnly fg.deobf("local:DoggyTalentsNext-${minecraft_version}:${doggytalents_version}")
     }
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'

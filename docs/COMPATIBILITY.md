@@ -134,3 +134,4 @@ With a local folder, Curios resolves that supplied jar, allowing fully offline C
 No protection adapter is installed; automated UUID-aware checks and recognized unsupported-claim
 refusal remain conservative. Viewer UI, Curios UI, shaders and two-client interaction are owner checks.
 Final profile job IDs will be recorded with the M9 acceptance table.
+The separate doggy profile loads the supplied Doggy Talents Next 1.19.1 jar and runs a real registered dog through binding/capture refusal, asserting unchanged health, item, energy and both authorities. It is intentionally separate from the ordinary all profile.

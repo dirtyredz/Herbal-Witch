@@ -17,7 +17,7 @@ docs/ARCHITECTURE.md and docs/catalogue/).
   3. `.\gradlew.bat test build`
   4. `.\gradlew.bat runGameTestServer` (one GameTest server at a time across the workspace)
   5. `git diff --check`, and from the workspace root `.\tools\sync-mod-files.ps1 -Check`
-  6. Optional-mod runtime profiles: `.\gradlew.bat runGameTestServer -PcompatProfile=<base|emi|jei|viewers|farmersdelight|thirst|all> -PcompatModsDir=<mods folder>`
+  6. Optional-mod runtime profiles: `.\gradlew.bat runGameTestServer -PcompatProfile=<base|emi|jei|viewers|farmersdelight|thirst|curios|doggy|all> -PcompatModsDir=<mods folder>`
      (the folder supplies the Farmer's Delight and Thirst jars; see docs/COMPATIBILITY.md)
   Creature art also: `node tools/compile-entity-models.mjs` and its `--check`; Gradle includes both.
   Art changes also: `node --test "tools/art/test/*.test.mjs" "tools/blockbench/test/*.test.mjs" "tools/blockbench/dev-art/test/*.test.mjs" "tools/preview/test/*.test.mjs" "tools/entities/test/*.test.mjs"` and

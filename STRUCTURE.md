@@ -442,3 +442,5 @@ support lives in src/gameTest/.../companions/familiars/persistence/; the test-on
 adapter lives in src/gameTest/.../platform/persistence/. Neither ships in the release jar.
 
 Native pose exports live in src/test/.../client/familiars/FamiliarNativePoseTest.java; tools/preview-native-familiars.mjs renders them with the owned equipment models. Runtime pose and attachment ownership remains client/familiars/{model,render}/.
+
+Optional native-payload compatibility lives in platform/compat/curios/CuriosNativePayload; it depends only on NBT. Doggy Talents exclusion qualification lives beside binding tests and has no foreign class imports. Optional runtime profile versions remain in gradle.properties.
