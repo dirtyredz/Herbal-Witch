@@ -30,11 +30,13 @@ public final class AnimalCareService {
         if (AnimalCareAccess.awake(mob) != READY) return AnimalCareAccess.awake(mob);
         if (AnimalEligibility.profile(mob).orElseThrow().bait() != bait || !player.getItemInHand(hand).is(AnimalItems.bait(bait))) return WRONG_BAIT;
         var view = AnimalTrustService.relationship(mob, player.getUUID());
-        if (view.trust() >= 100) return MAX_TRUST;
+        boolean capped = view.trust() >= 100 && AnimalCareContributions.capped(player, mob);
+        if (view.trust() >= 100 && !capped) return MAX_TRUST;
         if (view.remaining(AnimalTrustService.clock(mob)) > 0) return COOLDOWN;
-        if (!AnimalTrustService.feed(mob, player.getUUID())) return CAPACITY;
+        if (!AnimalTrustService.feed(mob, player.getUUID(), capped)) return CAPACITY;
         consume(player, hand, ItemStack.EMPTY);
         particles(player, mob);
+        AnimalCareContributions.completed(player, mob, false);
         return READY;
     }
 
@@ -49,6 +51,7 @@ public final class AnimalCareService {
         if (mob.getHealth() <= before) return CANCELED;
         AnimalTrustService.healed(mob);
         consume(player, hand, new ItemStack(Items.BOWL));
+        AnimalCareContributions.completed(player, mob, true);
         return READY;
     }
 

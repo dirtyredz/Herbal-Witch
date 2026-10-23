@@ -88,6 +88,7 @@ public final class FamiliarStore implements AutoCloseable {
             var after = shard.record();
             // Internal rest ticks persist without making every in-flight owner intent stale.
             var oldView = before.state(); var newView = after.state(); oldView.remove("homeRest"); newView.remove("homeRest"); oldView.remove("charmTicks"); newView.remove("charmTicks");
+            oldView.remove("progress"); newView.remove("progress"); oldView.remove("homeProgress"); newView.remove("homeProgress");
             if (checkpoint || before.phase() != after.phase() || before.generation() != after.generation() || !oldView.equals(newView)) owners.changed(after);
             mobile.changed(after); homes.changed(after);
         }

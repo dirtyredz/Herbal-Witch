@@ -6,6 +6,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TrustRulesTest {
     private static final UUID PLAYER = new UUID(0, 1);
+    @Test void contributedMaximumTrustFeedKeepsCooldownAndHurtLockout() {
+        var state = new AnimalState(); state.relationships.put(PLAYER, new AnimalRelationshipView(100, 5, 0));
+        assertFalse(state.feed(PLAYER, 8)); assertTrue(state.feed(PLAYER, 8, true));
+        assertEquals(100, state.relationship(PLAYER).trust()); assertFalse(state.feed(PLAYER, 8, true));
+        for (int i = 0; i < 1200; i++) state.tick();
+        state.damaged(null); assertFalse(state.feed(PLAYER, 8, true));
+        for (int i = 0; i < 600; i++) state.tick(); assertTrue(state.feed(PLAYER, 8, true));
+    }
 
     @Test void personalFeedsHaveExactLoadedCooldownAndThresholds() {
         var state = new AnimalState();

@@ -79,7 +79,7 @@ public class FamiliarRosterMenu extends AbstractContainerMenu {
     }
     private static FamiliarRosterPage.Row project(ServerPlayer player, FamiliarRecord r) {
         var state = r.state(); var live = FamiliarMenuAccess.loaded(player, r); int xp = state.getInt("xp");
-        int level = xp >= 350 ? 5 : xp >= 200 ? 4 : xp >= 100 ? 3 : xp >= 40 ? 2 : 1;
+        int level = io.github.dirtyredz.herbalwitch.companions.familiars.bond.FamiliarBondProgress.level(xp);
         String dimension = live == null ? state.getString("dimension") : live.level().dimension().location().toString();
         long position = live == null ? state.getLong("position") : live.blockPosition().asLong();
         String home = state.contains("home") ? state.getCompound("home").getString("dimension") + " " + BlockPos.of(state.getCompound("home").getLong("position")).toShortString() : "";

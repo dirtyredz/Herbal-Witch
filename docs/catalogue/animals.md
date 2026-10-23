@@ -107,3 +107,5 @@ second and 4 KiB; private cards update at most every ten ticks unless an operati
 The `animals` showcase adds sixteen labeled adult specimens in separate glass habitats, water for
 axolotl and enclosed parrot/bat flight. Supplies contain all usable care items, salve, sleep and a
 grimoire. No trust, owner, witch status, discovery or active effect is pre-granted.
+
+Bonded familiar owners may continue matching feeds at maximum trust through the existing care path. Trust remains capped, the same 1,200-loaded-tick feeding cooldown and hurt lockout apply, and successful feeding consumes one bait and contributes familiar bond XP. Ordinary animals still refuse maximum-trust feeds. Healing remains the existing salve interaction with its 200-tick target cooldown and bowl return.

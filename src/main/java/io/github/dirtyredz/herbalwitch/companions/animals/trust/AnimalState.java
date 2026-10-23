@@ -32,9 +32,12 @@ public final class AnimalState {
     public long generation() { return generation; }
 
     boolean feed(UUID player, int capacity) {
+        return feed(player, capacity, false);
+    }
+    boolean feed(UUID player, int capacity, boolean allowMaximum) {
         var before = relationship(player);
         if (player == null || capacity < 1 || capacity > TrustRules.MAX_CAPACITY
-                || before.trust() == TrustRules.MAX_TRUST || before.remaining(clock) > 0 || hurtRemaining() > 0
+                || before.trust() == TrustRules.MAX_TRUST && !allowMaximum || before.remaining(clock) > 0 || hurtRemaining() > 0
                 || (!relationships.containsKey(player) && relationships.size() >= capacity)
                 || clock > Long.MAX_VALUE - TrustRules.FEED_INTERVAL) return false;
         relationships.put(player, new AnimalRelationshipView(Math.min(100, before.trust() + TrustRules.FEED_GAIN),

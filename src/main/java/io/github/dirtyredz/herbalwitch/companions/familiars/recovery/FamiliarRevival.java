@@ -42,7 +42,9 @@ public final class FamiliarRevival {
                 @Override public boolean apply() {
                     var current = store.record(bond).orElseThrow(); candidate[0] = FamiliarSpeciesAdapters.restore(owner.serverLevel(), current);
                     if (candidate[0] == null) return false;
-                    candidate[0].moveTo(destination.get()); candidate[0].setHealth(candidate[0].getMaxHealth() / 2);
+                    candidate[0].moveTo(destination.get());
+                    io.github.dirtyredz.herbalwitch.companions.familiars.bond.FamiliarBondProgress.project(candidate[0], current);
+                    candidate[0].setHealth(candidate[0].getMaxHealth() / 2);
                     candidate[0].setRemainingFireTicks(0); candidate[0].setAirSupply(candidate[0].getMaxAirSupply()); candidate[0].setTicksFrozen(0);
                     if (!FamiliarDestinations.safe(owner.serverLevel(), candidate[0], destination.get(), owner)) return false;
                     try (var permit = FamiliarReconciliation.permit(candidate[0], current)) {

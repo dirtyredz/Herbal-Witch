@@ -67,6 +67,9 @@ public final class FamiliarHomeGameTests {
             long viewRevision = store.roster().revision(owner.getUUID());
             FamiliarHomeRest.tick(new net.minecraftforge.event.entity.living.LivingEvent.LivingTickEvent(b.mob()));
             check(b.record().state().getInt("homeRest") == 1 && store.roster().revision(owner.getUUID()) == viewRevision, "internal rest clock invalidated the owner session");
+            store.update(b.record().change(s -> s.putInt("homeProgress", 599)), false);
+            FamiliarHomeRest.tick(new net.minecraftforge.event.entity.living.LivingEvent.LivingTickEvent(b.mob()));
+            check(b.record().state().getInt("xp") == 1 && b.record().state().getInt("homeProgress") == 0, "600 safe home ticks did not grant one XP");
             var other = new FamiliarRecord(UUID.randomUUID(), owner.getUUID(), UUID.randomUUID(), "cat", "minecraft:cat", 1, FamiliarRecord.Phase.ACTIVE, UUID.randomUUID(), 1, otherState, new CompoundTag());
             check(store.create(other) && FamiliarHomeService.assign(owner, bed, other.bond()).equals("home_occupied"), "unloaded bond overwrote occupant");
             var stranger = AnimalFixtures.player(h, "m9_home_foreign"); stranger.getInventory().setItem(0, new ItemStack(GrimoireItems.BOOK.get()));

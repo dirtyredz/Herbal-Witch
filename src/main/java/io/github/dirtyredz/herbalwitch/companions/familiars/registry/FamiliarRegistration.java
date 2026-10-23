@@ -22,6 +22,7 @@ public final class FamiliarRegistration {
     public static void register(IEventBus bus) {
         FamiliarHomes.register(bus);
         FamiliarItems.register(bus);
+        io.github.dirtyredz.herbalwitch.companions.animals.care.interaction.AnimalCareContributions.register(new io.github.dirtyredz.herbalwitch.companions.familiars.interaction.FamiliarCareContribution());
         io.github.dirtyredz.herbalwitch.companions.familiars.equipment.FamiliarCharmAdapter.install();
         io.github.dirtyredz.herbalwitch.companions.familiars.config.FamiliarServerConfig.register(bus);
         FamiliarEntities.TYPES.register(bus); bus.addListener(FamiliarEntities::attributes);
@@ -48,11 +49,13 @@ public final class FamiliarRegistration {
                 && FamiliarStore.get(level.getServer()).creature(mob.getUUID()).filter(r -> r.originalType().equals(capture.type())
                 && FamiliarReconciliation.matches(mob, r)).isPresent());
         AltarActions.register(FamiliarActionCatalog.BINDING, BindingAction::begin);
+        io.github.dirtyredz.herbalwitch.companions.familiars.ritual.FamiliarUpgradeAction.register();
         AltarSessionService.handle(FamiliarActionCatalog.BINDING, new BindingAction());
         AltarActions.register(FamiliarActionCatalog.REVIVAL, io.github.dirtyredz.herbalwitch.companions.familiars.ritual.RevivalAction::begin);
         AltarSessionService.handle(FamiliarActionCatalog.REVIVAL, new io.github.dirtyredz.herbalwitch.companions.familiars.ritual.RevivalAction());
         bus.addListener(FamiliarLifecycleEvents::capabilities);
         var forge = MinecraftForge.EVENT_BUS;
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.bond.FamiliarBondProgress::tick);
         forge.addListener(EventPriority.LOWEST, io.github.dirtyredz.herbalwitch.companions.familiars.recovery.FamiliarIncapacitation::damage);
         forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.admin.FamiliarRecoveryCommand::register);
         forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.equipment.FamiliarCharmAdapter::tick);

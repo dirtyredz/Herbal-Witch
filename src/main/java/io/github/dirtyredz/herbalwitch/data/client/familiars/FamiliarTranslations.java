@@ -58,7 +58,7 @@ public final class FamiliarTranslations {
                 Map.entry("trust", "More successful care is needed before binding."), Map.entry("permission", "You cannot bind this animal here."),
                 Map.entry("care_read_only", "This animal's care data needs inspection."), Map.entry("capture_read_only", "Transport records need inspection."),
                 Map.entry("capture_lineage", "This animal's transport identity is unresolved."), Map.entry("begun", "The familiar ritual has begun."),
-                Map.entry("revived", "Your familiar has revived and is waiting beside the altar."), Map.entry("bound", "Your familiar is bound and waiting here."), Map.entry("interrupted", "Binding was interrupted; the bond is retained for operator inspection."));
+                Map.entry("upgraded", "The familiar ritual is complete."), Map.entry("revived", "Your familiar has revived and is waiting beside the altar."), Map.entry("bound", "Your familiar is bound and waiting here."), Map.entry("interrupted", "Binding was interrupted; the bond is retained for operator inspection."));
         notices.forEach((key, text) -> { out.add("ritual.herbalwitch.familiar." + key, text); out.add("ritual.herbalwitch.cancel.familiar_" + key, text); });
     }
     private static String title(String key) { return Character.toUpperCase(key.charAt(0)) + key.substring(1); }

@@ -15,9 +15,13 @@ public final class AnimalTrustService {
     public static long clock(Mob mob) { return AnimalCapability.of(mob).flatMap(AnimalCapability::state).map(AnimalState::clock).orElse(0L); }
 
     public static boolean feed(Mob mob, UUID player) {
+        return feed(mob, player, false);
+    }
+    /** The caller must hold a registered care contribution's owner-only maximum-trust authorization. */
+    public static boolean feed(Mob mob, UUID player, boolean allowMaximum) {
         if (mob.level().isClientSide) return false;
         return AnimalCapability.of(mob).filter(AnimalCapability::writable).map(cap -> {
-            boolean changed = cap.initialize().feed(player, AnimalServerConfig.current().relationshipsPerAnimal());
+            boolean changed = cap.initialize().feed(player, AnimalServerConfig.current().relationshipsPerAnimal(), allowMaximum);
             if (changed) cap.changed();
             return changed;
         }).orElse(false);

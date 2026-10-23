@@ -233,3 +233,5 @@ native attachment pose review remains pending. Local gate passes 446 Java tests 
 1,091 generated resources match across repeated datagen. The home baseline ANU found a real return
 path failure above partial-height furniture; navigation now selects a checked adjacent floor.
 Equipment and corrected home behavior await the next committed ANU qualification. Milestone remains open.
+
+M9 equipment and recovery are server-qualified at `417141b`: ANU `HerbalWitch-m9-familiars-0.8.0-20261023-014942-c54` passed 446 Java tests and all 261 required GameTests. This includes the partial-home return fix, gear/cursor/cargo transactions, charm reuse, lethal incapacitation, paid revival, failed admission, administrative recovery and owner-directed retreat. Progression/upgrades are the next phase; abilities, familiar preparation effects, acquisition, complete guidance/showcase and restart qualification remain open.

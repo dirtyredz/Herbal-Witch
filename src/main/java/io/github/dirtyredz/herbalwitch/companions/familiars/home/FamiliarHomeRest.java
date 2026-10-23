@@ -19,6 +19,10 @@ public final class FamiliarHomeRest {
         int ticks = safe ? r.state().getInt("homeRest") + 1 : 0;
         if (ticks >= 100) { mob.heal(1); ticks = 0; }
         final int next = ticks;
-        if (next != r.state().getInt("homeRest")) FamiliarStore.get(mob.getServer()).update(r.change(s -> s.putInt("homeRest", next)), false);
+        int progress = safe ? r.state().getInt("homeProgress") + 1 : 0;
+        final int rest = progress >= 600 ? 0 : progress;
+        var updated = r.change(s -> { s.putInt("homeRest", next); s.putInt("homeProgress", rest); });
+        if (progress >= 600) updated = io.github.dirtyredz.herbalwitch.companions.familiars.bond.FamiliarBondProgress.award(updated, 1, false);
+        FamiliarStore.get(mob.getServer()).update(updated, false);
     }
 }

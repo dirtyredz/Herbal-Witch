@@ -367,3 +367,5 @@ Discovery forms resolve lazily after registration, in seeds/fresh/bundle/powder 
 - A menu cursor is absent from ordinary player NBT. Familiar equipment receipts retain it until settlement; unresolved transfers never automatically replay or refund.
 
 Familiar revival must start from `INCAPACITATED`, never from a missing ACTIVE UUID. `/kill` administrative damage is excluded from incapacitation, as are unload and other removals. The lethal hook snapshots positive health before vanilla death destroys state. Exact-admission failure quarantines the retained payload and removes the candidate; do not retry or refund by inference.
+
+Reapply familiar level/Heartwood maximum-health modifiers before assigning saved health during restoration. Vanilla does not save transient modifiers; assigning health against the native maximum first silently clips a leveled familiar during recall. Progress clocks are loaded time and never use world-time catch-up.

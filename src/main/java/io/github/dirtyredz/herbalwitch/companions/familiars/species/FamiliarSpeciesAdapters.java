@@ -40,6 +40,9 @@ public final class FamiliarSpeciesAdapters {
         candidate.setPersistenceRequired(); candidate.setCanPickUpLoot(false); candidate.setTarget(null);
         candidate.goalSelector.removeAllGoals(goal -> true); candidate.targetSelector.removeAllGoals(goal -> true);
         if (candidate instanceof TamableAnimal pet) { pet.setOrderedToSit(false); pet.setInSittingPose(false); }
+        io.github.dirtyredz.herbalwitch.companions.familiars.bond.FamiliarBondProgress.project(candidate, r);
+        // Transient bond modifiers are absent from vanilla attribute NBT; restore health after projection.
+        candidate.setHealth(payload.getFloat("Health"));
         return candidate;
     }
 }
