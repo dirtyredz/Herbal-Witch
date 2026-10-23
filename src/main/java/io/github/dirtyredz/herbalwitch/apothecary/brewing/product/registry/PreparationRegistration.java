@@ -7,6 +7,8 @@ import io.github.dirtyredz.herbalwitch.apothecary.botany.grimoire.HerbEntries;
 import io.github.dirtyredz.herbalwitch.grimoire.content.reference.DiscoveryForms;
 
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.grimoire.AdvancedPreparationEntries;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.grimoire.DeferredFamiliarEntries;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.application.FamiliarGuideContribution;
 
 import io.github.dirtyredz.herbalwitch.grimoire.content.GrimoireContent;
 
@@ -43,6 +45,8 @@ public final class PreparationRegistration {
     /** Called once from the mod constructor. */
     public static void register(IEventBus modBus) {
         GrimoireContent.register(AdvancedPreparationEntries.PRIORITY, new AdvancedPreparationEntries());
+        GrimoireContent.register(AdvancedPreparationEntries.PRIORITY,
+                FamiliarGuideContribution.INSTANCE.fallback(new DeferredFamiliarEntries()));
         HerbCatalog.ALL.forEach(h -> DiscoveryForms.register(HerbEntries.key(h), DiscoveryForms.Order.PREPARED,
                 () -> java.util.List.of(PreparationItems.bundle(h), PreparationItems.powder(h))));
         PreparationBlocks.BLOCKS.register(modBus);
