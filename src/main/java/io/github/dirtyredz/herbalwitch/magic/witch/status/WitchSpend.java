@@ -15,7 +15,7 @@ final class WitchSpend {
             if (change.prepare() && EnergyService.debit(state, units) == EnergyService.Result.OK) {
                 if (units > 0) { debited.run(); }
                 if (change.apply()) {
-                    EnergyService.awardPractice(state, balance, units);
+                    if (change.awardsPractice()) { EnergyService.awardPractice(state, balance, units); }
                     change.afterPractice();
                     committed.run();
                     return true;

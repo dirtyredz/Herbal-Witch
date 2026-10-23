@@ -25,6 +25,17 @@ class WitchSpendTest {
     }
 
     @Test
+    void passiveMaintenancePaysWithoutPractice() {
+        var state=witch();
+        assertTrue(spend(state,250,new WitchStatusService.Change(){
+            public boolean apply(){return true;}
+            public boolean awardsPractice(){return false;}
+        }));
+        assertEquals(9750,state.energyUnits());
+        assertEquals(0,state.practiceSpent());
+    }
+
+    @Test
     void refusalNeverInvokesAnyParticipantOrNotification() {
         Runnable unexpected = () -> fail("callback on refused spend");
         WitchStatusService.Change change = new WitchStatusService.Change() {

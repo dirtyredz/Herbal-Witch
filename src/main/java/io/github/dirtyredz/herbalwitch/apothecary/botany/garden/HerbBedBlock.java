@@ -46,16 +46,6 @@ public class HerbBedBlock extends Block {
         return state.getValue(MOISTURE) > 0;
     }
 
-    /** If the bed at {@code pos} is enriched, clears it and returns 1 extra herb; otherwise 0. */
-    public static int consumeEnrichment(Level level, BlockPos pos) {
-        BlockState state = level.getBlockState(pos);
-        if (state.getBlock() instanceof HerbBedBlock && state.getValue(ENRICHED)) {
-            level.setBlock(pos, state.setValue(ENRICHED, false), Block.UPDATE_CLIENTS);
-            return 1;
-        }
-        return 0;
-    }
-
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(MOISTURE, ENRICHED, GardenBedConnections.NORTH, GardenBedConnections.EAST, GardenBedConnections.SOUTH,

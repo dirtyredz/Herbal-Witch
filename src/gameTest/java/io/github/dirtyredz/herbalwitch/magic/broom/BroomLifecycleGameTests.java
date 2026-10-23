@@ -8,7 +8,7 @@ import net.minecraft.gametest.framework.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.gametest.*;
 import static io.github.dirtyredz.herbalwitch.magic.broom.fixture.BroomFixtures.*;
-import static io.github.dirtyredz.herbalwitch.fixture.WitchFixtures.witch;
+import static io.github.dirtyredz.herbalwitch.magic.broom.fixture.BroomFixtures.witch;
 import static io.github.dirtyredz.herbalwitch.fixture.WorldFixtures.check;
 @GameTestHolder(HerbalWitch.MOD_ID) @PrefixGameTestTemplate(false)
 public final class BroomLifecycleGameTests {

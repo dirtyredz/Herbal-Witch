@@ -11,6 +11,6 @@ public final class BroomPackets {
  private BroomPackets(){}
  public static void client(Consumer<Lease> listener){client=listener;}
  public static void register(){Messages.toServer(BroomInput.class,BroomInput::encode,BroomInput::decode,BroomPackets::handle);Messages.toClient(Lease.class,Lease::encode,Lease::decode,m->client.accept(m));}
- public static void handle(ServerPlayer actor,BroomInput m){if(actor.getVehicle() instanceof BroomEntity broom)broom.input(actor,m);}
+ public static void handle(ServerPlayer actor,BroomInput m){if(!(actor instanceof net.minecraftforge.common.util.FakePlayer)&&actor.getVehicle() instanceof BroomEntity broom)broom.input(actor,m);}
  public static void lease(ServerPlayer actor,BroomEntity broom,UUID nonce){Messages.send(actor,new Lease(broom.getId(),nonce));}
 }

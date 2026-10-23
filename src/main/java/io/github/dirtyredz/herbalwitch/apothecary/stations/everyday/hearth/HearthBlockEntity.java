@@ -85,7 +85,7 @@ public class HearthBlockEntity extends BlockEntity implements StationEntity {
             burn--;
         }
         if (burn == 0) {
-            ignite();
+            HearthIgnition.ignite(this);
         }
         boolean lit = burn > 0;
         BlockState state = getBlockState();
@@ -97,22 +97,8 @@ public class HearthBlockEntity extends BlockEntity implements StationEntity {
         }
     }
 
-    private void ignite() {
-        ItemStack fuel = inventory.getStackInSlot(FUEL);
-        int time = ForgeHooks.getBurnTime(fuel, null);
-        if (time <= 0) {
-            burnTotal = 0;
-            return;
-        }
-        ItemStack container = fuel.getCraftingRemainingItem();
-        if (!ProcessCompletion.fits(inventory.amount(RETURN), ProcessInventory.amountOf(container))) {
-            return;
-        }
-        inventory.consume(FUEL, 1);
-        inventory.insertInternal(RETURN, container);
-        burn = time;
-        burnTotal = time;
-    }
+    /** Package-owned ignition state; fuel accounting belongs to HearthIgnition. */
+    void ignition(int time) { burn = time; burnTotal = time; setChanged(); }
 
     @Override
     public void dropContents() {

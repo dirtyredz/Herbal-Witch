@@ -614,3 +614,7 @@ normal item renderer with ItemDisplayContext.NONE, resolving the baked model aft
 instead of caching a second mesh. Placement outlines remain advisory; deployment is checked again
 on the server. Remappable descend/land keys and vanilla movement/jump/dismount bindings appear in
 the mounted HUD.
+
+### Wand transactions
+
+Wand use derives targets from the server eye ray and the actual held stack. Actor-wide attempt and successful-cast gates cover both hands and every wand copy. Local utilities participate in `WitchStatusService.spend`; mutable targets and supplies are revalidated before applying. Harvest drops and collection notifications follow successful commit. Native offhand seed placement retains Forge placement cancellation. Hand and wand herb harvesting share one yield/reset plan; hearth ticking and wand ignition share actual fuel and returned-container accounting. Focus delegates to M7 block/menu access, and familiar mode enters M9 roster/detail menus through its existing command authority. Selecting a mode is a separate bounded request checked against the observed hand, slot and stack.

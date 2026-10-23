@@ -8,8 +8,11 @@ import net.minecraft.world.entity.Mob;
 
 public final class FamiliarMenuAccess {
     private FamiliarMenuAccess() {}
+    private static final java.util.List<java.util.function.Predicate<ServerPlayer>> FOCI = new java.util.concurrent.CopyOnWriteArrayList<>();
+    /** Alternate held focus authorization; menu/session/ownership checks remain here. */
+    public static void focus(java.util.function.Predicate<ServerPlayer> contribution) { FOCI.add(contribution); }
     public static boolean roster(ServerPlayer owner) {
-        return owner.isAlive() && !owner.isSpectator() && owner.getInventory().hasAnyMatching(GrimoireItems::isGrimoire)
+        return owner.isAlive() && !owner.isSpectator() && (owner.getInventory().hasAnyMatching(GrimoireItems::isGrimoire) || FOCI.stream().anyMatch(f -> f.test(owner)))
                 && FamiliarStore.get(owner.server).ready();
     }
     public static Mob loaded(ServerPlayer owner, FamiliarRecord record) {

@@ -32,11 +32,13 @@ public final class BroomFlightController {
    velocity=new Vec3(horizontal.x(),y,horizontal.z());
   }else velocity=new Vec3(0,state==BroomFlightState.LANDING?-rules.landingSpeed()/20:-.02,0);
   Vec3 allowed=bounded(broom,velocity);
+  state=broom.flight();
   if(state==BroomFlightState.FLYING&&supported(broom)&&allowed.y<=0){state=BroomFlightState.GROUNDED;broom.flight(state);allowed=new Vec3(0,-.02,0);}
   if(state==BroomFlightState.FLYING){
    var previous=broom.condition();var cost=BroomFlightCost.next(rules.energyPerSecond(),previous.energyRemainder());
    var next=BroomFlightState.worn(previous,rules.wearInterval(),cost.remainder());
    boolean paid=WitchStatusService.spend(rider,cost.units(),new WitchStatusService.Change(){
+    public boolean awardsPractice(){return false;}
     public boolean apply(){broom.condition(next);return true;}
     public void rollback(){broom.condition(previous);}
    });

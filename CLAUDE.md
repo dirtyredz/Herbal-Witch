@@ -41,7 +41,7 @@ docs/ARCHITECTURE.md and docs/catalogue/).
   mutate a player's energy or practice only through `WitchStatusService`; paid changes use its
   `WitchStatusService.spend` transaction (M7 production included, and M9 familiars will). Shared online lookup/enumeration
   belongs to `platform/player/OnlinePlayers`; features retain their own eligibility rules.
-  Bump `HerbalWitchNetwork.PROTOCOL` (now "12") on any wire change and register new messages
+  Bump `HerbalWitchNetwork.PROTOCOL` (now "13") on any wire change and register new messages
   after the grimoire's. The founding record is world-global: GameTests that convert anyone close it, so
   they reset it (`FoundingService.resetForTest`) and run their rituals synchronously. Grimoire prose
   never hard-codes a witch number (the rules are quoted from the synced rules; a test enforces it).

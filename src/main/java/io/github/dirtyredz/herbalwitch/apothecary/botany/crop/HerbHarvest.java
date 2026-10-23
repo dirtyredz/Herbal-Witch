@@ -1,21 +1,14 @@
 package io.github.dirtyredz.herbalwitch.apothecary.botany.crop;
 
-import io.github.dirtyredz.herbalwitch.apothecary.botany.conditions.HerbConditionEvaluator;
-import io.github.dirtyredz.herbalwitch.apothecary.botany.garden.HerbBedBlock;
-import io.github.dirtyredz.herbalwitch.apothecary.botany.registry.BotanyItems;
 import io.github.dirtyredz.herbalwitch.platform.permission.ActionContext;
 import io.github.dirtyredz.herbalwitch.platform.permission.ActionPermissionService;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
 
 /**
  * Harvest by hand: a server-side transaction on a mature plant. The plant is cut back first, then
@@ -42,15 +35,11 @@ public final class HerbHarvest {
         if (!ActionPermissionService.mayModify(ActionContext.of(player, level, pos))) {
             return InteractionResult.FAIL;
         }
-        ServerLevel server = (ServerLevel) level;
-        level.setBlock(pos, block.getStateForAge(block.harvestResetAge()), Block.UPDATE_CLIENTS);
-        int fresh = BASE_FRESH + HerbConditionEvaluator.harvestBonus(server, pos, block.herb(), level.random)
-                + HerbBedBlock.consumeEnrichment(level, pos.below());
-        Block.popResource(level, pos, new ItemStack(BotanyItems.fresh(block.herb()), fresh));
-        Block.popResource(level, pos, new ItemStack(BotanyItems.seeds(block.herb()), BASE_SEEDS));
-        level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F,
-                0.8F + level.random.nextFloat() * 0.4F);
-        level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
+        var plan = io.github.dirtyredz.herbalwitch.apothecary.botany.harvest.HerbHarvestPlan.prepare((ServerLevel) level, pos).orElse(null);
+        if (plan == null) return InteractionResult.PASS;
+        var commit = new io.github.dirtyredz.herbalwitch.apothecary.botany.harvest.HerbHarvestCommit((ServerLevel) level, player, plan);
+        if (!commit.apply()) { commit.rollback(); return InteractionResult.FAIL; }
+        commit.emit();
         return InteractionResult.CONSUME;
     }
 }

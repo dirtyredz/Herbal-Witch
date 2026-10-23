@@ -26,20 +26,33 @@ public final class AnimalInteractionEvents {
     private static final java.util.List<java.util.function.BiPredicate<ServerPlayer, Mob>> INSPECTIONS = new java.util.ArrayList<>();
     public static void inspection(java.util.function.BiPredicate<ServerPlayer, Mob> contribution) { INSPECTIONS.add(contribution); }
 
+    public interface ToolRoute {
+        boolean matches(net.minecraft.world.item.ItemStack stack);
+        void interact(ServerPlayer actor, Mob mob, InteractionHand hand);
+    }
+    private static final java.util.List<ToolRoute> TOOLS = new java.util.ArrayList<>();
+    public static void tool(ToolRoute route) { TOOLS.add(route); }
+    public static boolean inspect(ServerPlayer actor, Mob mob) {
+        for (var inspection : INSPECTIONS) if (inspection.test(actor, mob)) return true;
+        return false;
+    }
+
     public static void interact(PlayerInteractEvent.EntityInteract event) {
         if (!(event.getTarget() instanceof Mob mob)) return;
         var stack = event.getItemStack();
+        ToolRoute tool = TOOLS.stream().filter(t -> t.matches(stack)).findFirst().orElse(null);
         boolean ownItem = stack.getItem() instanceof AnimalCareItem;
         boolean charm = stack.getItem() instanceof io.github.dirtyredz.herbalwitch.companions.animals.capture.CaptureCharmItem;
         boolean salve = stack.is(PreparationItems.product(EverydayProductCatalog.HEALING_SALVE));
         boolean book = GrimoireItems.isGrimoire(stack) && AnimalEligibility.profile(mob).isPresent();
-        if (!ownItem && !salve && !book && !charm) return;
+        if (tool == null && !ownItem && !salve && !book && !charm) return;
         event.setCanceled(true);
         event.setCancellationResult(InteractionResult.SUCCESS);
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
         long tick = player.server.getTickCount();
         if (USED.getOrDefault(player.getUUID(), Long.MIN_VALUE) == tick || !allowRequest(player)) return;
         USED.put(player.getUUID(), tick);
+        if (tool != null) { tool.interact(player, mob, event.getHand()); return; }
         if (charm) {
             String reason = io.github.dirtyredz.herbalwitch.companions.animals.capture.CaptureService.capture(player, mob, event.getHand());
             io.github.dirtyredz.herbalwitch.companions.animals.capture.CaptureCharmItem.message(player, reason); return;
@@ -48,7 +61,7 @@ public final class AnimalInteractionEvents {
         if (ownItem) result = ((AnimalCareItem) stack.getItem()).apply(player, mob, event.getHand());
         else if (salve) result = AnimalCareService.heal(player, mob, event.getHand());
         else {
-            for (var inspection : INSPECTIONS) if (inspection.test(player, mob)) return;
+            if (inspect(player, mob)) return;
             AnimalMenu.open(player, mob); return;
         }
         if (result != AnimalCareAccess.Reason.READY) message(player, result);

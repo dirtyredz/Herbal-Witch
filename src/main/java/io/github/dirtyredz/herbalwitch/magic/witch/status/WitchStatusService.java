@@ -60,6 +60,8 @@ public final class WitchStatusService {
     public interface Change {
         default boolean prepare() { return true; }
         boolean apply();
+        /** Passive maintenance may debit without advancing practice. */
+        default boolean awardsPractice() { return true; }
         /** Success-only side effects that must precede the private status update. */
         default void afterPractice() { }
         default void rollback() { }

@@ -468,3 +468,8 @@ Optional native-payload compatibility lives in platform/compat/curios/CuriosNati
 
 - `client/broom/`: remappable intent controls, authoritative condition/state HUD, advisory deployment outline and the reload-aware item-model entity renderer.
 - `data/client/magic/tools/`, `src/test/.../data/magic/tools/`: tool-owned language and independent generated-resource manifest.
+
+- `magic/wand/{action,use,network}/`: seven utility adapters, actor-wide limits, server targeting and held-stack selector validation.
+- `client/wand/`: remappable selector and mode HUD; no casting authority.
+- `apothecary/botany/harvest/`: shared reversible hand/wand herb harvest plan and commit.
+- `src/gameTest/.../magic/wand/fixture/`: actual held-item utility fixtures; sibling GameTests cover gardening, collection, lighting and selection.
