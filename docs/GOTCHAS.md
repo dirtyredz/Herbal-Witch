@@ -106,6 +106,13 @@ Discovery forms resolve lazily after registration, in seeds/fresh/bundle/powder 
   fixture ends; never replace another feature's roster. Closing teaching registrations must preserve
   witch fixtures. Server stop closes every remaining scope, and removed fakes are never returned.
 
+- **Broom protocol integration must retain server authority.** Inspection of the cached Forge
+  1.20.1/47.4.10 `ServerGamePacketListenerImpl` bytecode confirms that `handleMoveVehicle`
+  requires `rootVehicle.getControllingPassenger() == player` before applying position. Its tick
+  also excludes passengers from ordinary floating kicks and clears vehicle floating counters
+  when that controlling-passenger condition fails. Keep a broom's authenticated rider separate
+  from vanilla's controlling passenger; prove this with the planned real protocol GameTest before
+  enabling flight. This inspection alone is not runtime qualification.
 - **Never run `runClient` from an agent.** GameTests are the headless check; the owner verifies
   visuals, item transforms, shaders and two-client sync in the mod's test instance.
 - **Client classes stay in `client/`.** `HerbalWitchClient` is a `Dist.CLIENT` subscriber; feature and

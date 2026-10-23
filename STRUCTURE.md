@@ -7,6 +7,13 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 
 ## Layout
 
+M10 foundation (not yet registered as gameplay): `magic/broom/catalog/` owns physical constants;
+`magic/broom/persistence/` owns strict item condition data; `magic/broom/flight/` owns pure movement
+and fixed-point cost arithmetic; `magic/broom/network/` owns ephemeral rider input leases.
+`magic/wand/catalog/` owns stable selector IDs and `magic/wand/persistence/` owns mode preferences.
+Tests mirror these responsibilities under `src/test/java/io/github/dirtyredz/herbalwitch/magic/`,
+with the wand's selector tests directly in `magic/wand/`.
+
 ```text
 herbalwitch/
   HerbalWitch.java

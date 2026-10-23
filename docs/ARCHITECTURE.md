@@ -471,6 +471,14 @@ primitives; seed layouts remain under `content/botany/seeds.mjs`. Herb and item 
 retain their distinct edge/darkening rules. GUI atlases use `interface/kit.mjs`; the reader's slot
 call preserves its frame coordinates. Frozen manifest/PNG hashes guard byte parity.
 
+**M10 foundation (not yet gameplay).** Broom condition is a strict versioned item value; invalid
+or future data is refused without overwriting it. Flight cost arithmetic retains twentieths of a
+hundredth between ticks, including when the configured price is zero. Movement math normalizes
+horizontal diagonals and bounds acceleration as a vector. The per-mount input lease authenticates
+rider and nonce, rejects replay, accepts at most one update per tick and limits packet attempts.
+It is deliberately absent from persistence. Wand preferences serialize seven stable string IDs.
+Runtime registration, transactions, movement collision and interaction adapters remain M10 work.
+
 ## Whole-mod module map (plan section 2)
 
 M9 binding introduces bounded per-bond `herbalwitch_familiar_<uuid>.dat` shards in the Overworld.
