@@ -42,7 +42,8 @@ public final class FamiliarCaptureInteropGameTests {
             owner.teleportTo(destination,8.5,120,8.5,0,0);
             h.runAfterDelay(10,()->{
                 check(b.mob().level()==h.getLevel() && !b.mob().isRemoved() && b.record().state().getString("status").equals("other_dimension"),"dimension change silently moved familiar");
-                check(io.github.dirtyredz.herbalwitch.companions.familiars.command.FamiliarRecall.recall(owner,b.bond()).equals("recalled"),"cross-dimension recall refused");
+                String recalled=io.github.dirtyredz.herbalwitch.companions.familiars.command.FamiliarRecall.recall(owner,b.bond());
+                check(recalled.equals("recalled"),"cross-dimension recall refused: "+recalled+", owner="+owner.position()+", energy="+WitchStatusService.energyUnits(owner));
                 var current=destination.getEntity(b.record().creature());
                 check(b.mob().isRemoved() && h.getLevel().getEntity(b.mob().getUUID())==null && current instanceof Mob
                         && b.record().generation()==2 && WitchStatusService.energyUnits(owner)==7000,"cross-dimension identity/payment mismatch");

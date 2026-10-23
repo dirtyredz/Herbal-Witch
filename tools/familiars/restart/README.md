@@ -27,7 +27,7 @@ This is deterministic checkpoint-boundary replay across processes, not random OS
 claim of power-loss durability of the host filesystem. No codec-only result is counted as a restart.
 Evidence stays beside the isolated world: `evidence/prepared.json`, `verified.json`, numbered
 checkpoint directories and their original entity/player files. The Node report requires distinct JVM
-process IDs, every lifecycle phase, 20–192 checkpoints and all required checks before reporting PASS.
+process IDs, every lifecycle phase, 20â€“192 checkpoints and all required checks before reporting PASS.
 The ordinary server suite continues to cover actual transactions and denied actions independently.
 
-The transport/owner fixture additionally captures a real M8 capture-release-to-binding conversion. The second JVM rejects its copied old token and stale source entity, preserves released generation one, keeps the owner-death command at Stay, and resolves an unloaded home as pending without loading its terrain. Logout/reconnect use the Forge event bus; owner death uses actual lethal damage. The ordinary suite separately tests real cross-dimension owner movement and paid recall.
+The transport/owner fixture additionally captures a real M8 capture-release-to-binding conversion. The second JVM rejects its copied old token and stale source entity, preserves released generation one, keeps the owner-death command at Stay, and resolves an unloaded home as pending without loading its terrain. Logout uses the Forge event bus; reconnect invokes the familiar subscribers directly because the headless connection has no negotiated network channel. Owner death uses actual lethal damage. The ordinary suite separately tests real cross-dimension owner movement and paid recall.

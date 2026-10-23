@@ -24,7 +24,8 @@ import static io.github.dirtyredz.herbalwitch.fixture.WorldFixtures.*;
 @GameTestHolder("herbalwitch") @PrefixGameTestTemplate(false)
 public final class FamiliarLoadGameTests {
     private static OnlinePlayers.Registration online;
-    @AfterBatch(batch="herbalwitch_familiar_load") public static void cleanup(ServerLevel level){if(online!=null){online.close();online=null;}}
+    private static final List<Mob> spawned=new ArrayList<>();
+    @AfterBatch(batch="herbalwitch_familiar_load") public static void cleanup(ServerLevel level){if(online!=null){online.close();online=null;}spawned.forEach(Mob::discard);spawned.clear();}
     @GameTest(template=TEMPLATE,batch="herbalwitch_familiar_load",timeoutTicks=180)
     public static void paginatedRosterAndManyOwnersShareOneWorkBudget(GameTestHelper h) {
         floor(h);FamiliarFixtures.whenReady(h,()->{
@@ -53,7 +54,8 @@ public final class FamiliarLoadGameTests {
                 check(PlayerFixtures.placeOnFloor(h,owner,FamiliarHomes.get(FamiliarHomeKind.BED).item().get(),pos).consumesAction(),"load home placement");
                 owner.getInventory().setItem(0,new ItemStack(GrimoireItems.BOOK.get()));
                 var home=(FamiliarHomeBlockEntity)h.getLevel().getBlockEntity(h.absolutePos(pos));
-                check(FamiliarHomeService.assign(owner,home,record.bond()).equals("home_assigned"),"load home assignment");
+                owner.moveTo(h.absolutePos(pos.north()).getCenter());
+                String assigned=FamiliarHomeService.assign(owner,home,record.bond());check(assigned.equals("home_assigned"),"load home assignment: "+assigned);
                 check(FamiliarCommands.set(owner,record.bond(),FamiliarCommand.PROTECT_HOME).equals("command_set"),"offline guard command");
             }
             var far=new BlockPos(20_000_000,80,20_000_000);check(!h.getLevel().hasChunkAt(far),"load fixture remote chunk");
@@ -68,7 +70,7 @@ public final class FamiliarLoadGameTests {
     private static Mob spawn(GameTestHelper h,FamiliarRecord record,int x,int z){
         var mob=FamiliarEntities.WOLF.get().create(h.getLevel());mob.setUUID(record.creature());mob.setTame(true);mob.setOwnerUUID(record.owner());
         FamiliarBinding.of(mob).orElseThrow().bind(record.bond(),record.owner(),record.generation());
-        mob.moveTo(h.absolutePos(new BlockPos(2+x*2,1,2+z)).getCenter());check(h.getLevel().addFreshEntity(mob),"load real entity admission");return mob;
+        mob.moveTo(h.absolutePos(new BlockPos(2+x*2,1,2+z)).getCenter());check(h.getLevel().addFreshEntity(mob),"load real entity admission");spawned.add(mob);return mob;
     }
     private static void sample(GameTestHelper h,List<Mob> loaded,BlockPos far,int left,int paths,int scans){
         var work=FamiliarWork.in(h.getLevel());check(work.lastPaths()<=4 && work.lastScans()<=8,"shared work budget exceeded under load");

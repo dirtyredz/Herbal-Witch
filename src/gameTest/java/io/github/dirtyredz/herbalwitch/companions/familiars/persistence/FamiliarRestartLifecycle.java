@@ -31,7 +31,10 @@ final class FamiliarRestartLifecycle {
             check(FamiliarCommands.set(b.owner(),b.bond(),FamiliarCommand.FOLLOW).equals("command_set"),"restart lifecycle follow");
             MinecraftForge.EVENT_BUS.post(new PlayerEvent.PlayerLoggedOutEvent(b.owner()));
             check(store.record(b.bond()).orElseThrow().command()==FamiliarCommand.STAY,"logout retained mobile command");
-            MinecraftForge.EVENT_BUS.post(new PlayerEvent.PlayerLoggedInEvent(b.owner()));
+            // The headless connection has no negotiated channel for unrelated login sync packets.
+            var login=new PlayerEvent.PlayerLoggedInEvent(b.owner());
+            FamiliarCommands.login(login);
+            io.github.dirtyredz.herbalwitch.companions.familiars.bond.transaction.FamiliarPlayerReceipt.login(login);
             check(store.mobile().count(b.owner().getUUID())==0,"reconnect resumed mobile command");
             check(FamiliarCommands.set(b.owner(),b.bond(),FamiliarCommand.GUARD_WITCH).equals("command_set"),"restart lifecycle guard");
             b.owner().hurt(b.owner().damageSources().genericKill(),Float.MAX_VALUE);

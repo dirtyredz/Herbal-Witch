@@ -124,7 +124,8 @@ dependencies {
         runtimeOnly fg.deobf("dev.emi:emi-forge:${emi_version}")
     }
     if (compatProfile in ['curios', 'all']) {
-        runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
+        // Reuse an owner-supplied runtime jar for fully offline qualification when available.
+        runtimeOnly fg.deobf("${compatModsDir ? 'local' : 'top.theillusivec4.curios'}:curios-forge:${curios_version}")
     }
     if (compatProfile in ['farmersdelight', 'all']) {
         runtimeOnly fg.deobf("local:FarmersDelight-${minecraft_version}:${farmersdelight_version}")
