@@ -117,7 +117,7 @@ public final class AnimalCaptureGameTests {
     @GameTest(template = "empty", batch = "herbalwitch_animal_canceled_release", timeoutTicks = 100)
     public static void canceledReleaseRetainsPayloadAndItemWithoutAutomaticSecondSpawn(GameTestHelper h) {
         AnimalFixtures.afterTransportInterval(h, () -> {
-            floor(h); var player = AnimalFixtures.realPlayer(h, "cancel_release"); var cow = AnimalFixtures.animal(h, EntityType.COW);
+            floor(h); var player = AnimalFixtures.realPlayer(h, "cancel_release_" + java.util.UUID.randomUUID()); var cow = AnimalFixtures.animal(h, EntityType.COW);
             AnimalFixtures.relationship(cow, player.getUUID(), 80, 4); cow.addEffect(new MobEffectInstance(PreparationEffects.SLEEP.get(), 100));
             player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(AnimalItems.CHARM.get()));
             String denial = CaptureService.capture(player, cow, InteractionHand.MAIN_HAND);
