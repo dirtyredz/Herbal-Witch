@@ -125,4 +125,71 @@ public final class FamiliarPowerCoverageGameTests {
             }
         });
     }
+    // M12 design trace: the cat also senses harmful magic, the fox is stealthy until it distracts,
+    // and a scout warns its witch privately.
+    @GameTest(template=TEMPLATE,batch="herbalwitch_cat_magic_sense",timeoutTicks=100)
+    public static void catSensesAHarmfulPreparationInFlight(GameTestHelper h) {
+        FamiliarFixtures.bound(h, "cat", "cat_magic_" + UUID.randomUUID(), b -> h.runAfterDelay(10, () -> {
+            try (var online = OnlinePlayers.register(List.of(b.owner()))) {
+                b.mob().getNavigation().stop(); b.mob().moveTo(h.absolutePos(new BlockPos(4,1,5)).getCenter());
+                int radius = io.github.dirtyredz.herbalwitch.companions.familiars.config.FamiliarServerConfig.current().senseRadius();
+                h.getLevel().getEntities(b.mob(), b.mob().getBoundingBox().inflate(radius), e -> !(e instanceof net.minecraft.world.entity.player.Player)).forEach(net.minecraft.world.entity.Entity::discard);
+                var thrower = PlayerFixtures.player(h, "m12_cat_magic_thrower", net.minecraft.world.level.GameType.SURVIVAL, net.minecraft.core.Direction.NORTH);
+                var vial = new io.github.dirtyredz.herbalwitch.apothecary.brewing.projectile.PreparationProjectile(h.getLevel(), thrower,
+                        io.github.dirtyredz.herbalwitch.apothecary.brewing.application.ThrowableApplications.Burst.POISON);
+                vial.setItem(new ItemStack(io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.AdvancedPreparations.item(
+                        io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.AdvancedProductCatalog.POISON)));
+                vial.setNoGravity(true); vial.setDeltaMovement(net.minecraft.world.phys.Vec3.ZERO);
+                vial.moveTo(h.absolutePos(new BlockPos(6,2,5)).getCenter());
+                check(h.getLevel().addFreshEntity(vial) && vial.burst().harmful(), "harmful vial fixture");
+                var task = new FamiliarSenseTask(b.mob(), FamiliarPower.THREATS, new FamiliarHerbCursor());
+                check(task.valid() && b.mob().hasLineOfSight(vial), "cat sensing fixture is not ready or the vial is not visible");
+                task.perform();
+                check(b.record().state().getCompound("powerCooldowns").contains(FamiliarPower.THREATS.key()), "the cat did not sense a harmful preparation");
+                vial.discard(); h.succeed();
+            }
+        }));
+    }
+    @GameTest(template=TEMPLATE,batch="herbalwitch_fox_stealth",timeoutTicks=100)
+    public static void aFoxIsStealthyUntilItDistracts(GameTestHelper h) {
+        FamiliarFixtures.bound(h, "fox", "fox_stealth_" + UUID.randomUUID(), b -> {
+            try (var online = OnlinePlayers.register(List.of(b.owner()))) {
+                var concealment = io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationEffects.CONCEALMENT.get();
+                io.github.dirtyredz.herbalwitch.companions.familiars.preparation.FamiliarBuffEffects.project(b.mob(), b.record());
+                check(b.mob().hasEffect(concealment), "a bonded fox is not stealthy");
+                var hunter = h.spawn(EntityType.PILLAGER, new BlockPos(8,1,1)); hunter.setNoAi(true);
+                check(hunter.distanceTo(b.mob()) > io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.repellent.TargetFilters.NEAR, "stealth fixture too close");
+                hunter.setTarget(b.mob());
+                check(hunter.getTarget() == null, "a hostile picked out a stealthy fox from afar");
+                check(FamiliarCombatPowers.distract(b.mob(), hunter) && hunter.getTarget() == b.mob(), "a stealthy fox could not distract");
+                check(!b.mob().hasEffect(concealment), "a distracting fox stayed hidden");
+                h.succeed();
+            }
+        });
+    }
+    @GameTest(template=TEMPLATE,batch="herbalwitch_scout_alert",timeoutTicks=100)
+    public static void aScoutWarnsOnlyItsWitch(GameTestHelper h) {
+        FamiliarFixtures.bound(h, "wolf", "scout_" + UUID.randomUUID(), b -> {
+            b.owner().getInventory().setItem(0, new ItemStack(GrimoireItems.BOOK.get())); // the roster needs the grimoire
+            String scouting = FamiliarCommands.set(b.owner(), b.bond(), FamiliarCommand.SCOUT);
+            check(scouting.equals("command_set"), "scout command refused: " + scouting);
+            var warnings = new ArrayList<net.minecraft.network.chat.Component>();
+            var listener = new net.minecraft.server.level.ServerPlayer(h.getLevel().getServer(), h.getLevel(), b.owner().getGameProfile()) {
+                @Override public void displayClientMessage(net.minecraft.network.chat.Component message, boolean actionBar) { warnings.add(message); }
+            };
+            listener.connection = b.owner().connection; listener.moveTo(b.owner().position());
+            try (var online = OnlinePlayers.register(List.of(listener))) {
+                b.mob().getNavigation().stop(); b.mob().moveTo(h.absolutePos(new BlockPos(4,1,5)).getCenter());
+                var threat = h.spawn(EntityType.PILLAGER, new BlockPos(6,1,5)); threat.setNoAi(true);
+                check(b.mob().hasLineOfSight(threat), "scout fixture cannot see the threat");
+                new io.github.dirtyredz.herbalwitch.companions.familiars.command.ai.FamiliarScout(b.mob()).perform();
+                check(warnings.stream().anyMatch(m -> m.getContents() instanceof net.minecraft.network.chat.contents.TranslatableContents t
+                        && t.getKey().equals("familiar.herbalwitch.threat")), "the scout did not warn its witch: " + warnings);
+                int count = warnings.size();
+                new io.github.dirtyredz.herbalwitch.companions.familiars.command.ai.FamiliarScout(b.mob()).perform();
+                check(warnings.size() == count, "one threat warned twice inside five seconds");
+                h.succeed();
+            }
+        });
+    }
 }

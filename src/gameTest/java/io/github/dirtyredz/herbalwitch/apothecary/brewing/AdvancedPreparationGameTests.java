@@ -166,6 +166,35 @@ public final class AdvancedPreparationGameTests {
         helper.succeed();
     }
 
+    /** M12 design trace: the weakening vial, blinding dust and thorn oil each do what the design promises. */
+    @GameTest(template = TEMPLATE)
+    public static void weakeningBlindingAndThornsDoWhatTheyPromise(GameTestHelper helper) {
+        floor(helper);
+        ServerPlayer witch = standing(helper, "m12_weakener", FEET);
+        Zombie weak = zombie(helper, new BlockPos(4, 1, 5));
+        check(ThrowableApplications.affect(Burst.WEAKENING, witch, weak) && weak.hasEffect(MobEffects.WEAKNESS), "the weakening vial did not weaken");
+
+        Zombie dazzled = zombie(helper, new BlockPos(1, 1, 7));
+        check(ThrowableApplications.affect(Burst.BLINDING, witch, dazzled) && dazzled.hasEffect(PreparationEffects.DAZZLED.get()), "blinding dust did not dazzle a mob");
+        ServerPlayer far = standing(helper, "m12_far_from_dazzle", new BlockPos(7, 1, 7));
+        dazzled.setTarget(far);
+        check(dazzled.getTarget() == null, "a dazzled mob chose a target six blocks away");
+        ServerPlayer near = standing(helper, "m12_near_dazzle", new BlockPos(2, 1, 7));
+        dazzled.setTarget(near);
+        check(dazzled.getTarget() == near, "a dazzled mob could not see a target beside it");
+        check(!ThrowableApplications.affect(Burst.BLINDING, witch, near) && !near.hasEffect(MobEffects.BLINDNESS), "blinding dust reached a player without preparation PvP");
+
+        ServerPlayer thorny = standing(helper, "m12_thorny", new BlockPos(6, 1, 2));
+        check(OilApplication.apply(thorny, OilApplication.Oil.THORN) && thorny.hasEffect(PreparationEffects.THORNS.get()), "thorn oil not applied");
+        Zombie attacker = zombie(helper, new BlockPos(6, 1, 4));
+        float before = attacker.getHealth();
+        CombatEvents.onDamage(new LivingDamageEvent(thorny, attacker.damageSources().mobAttack(attacker), 2.0F));
+        check(attacker.getHealth() == before - CombatEvents.THORN_DAMAGE, "thorn oil did not retaliate: " + before + " -> " + attacker.getHealth());
+        CombatEvents.onDamage(new LivingDamageEvent(thorny, attacker.damageSources().mobAttack(attacker), 2.0F));
+        check(attacker.getHealth() == before - CombatEvents.THORN_DAMAGE, "thorns retaliated twice inside one second");
+        helper.succeed();
+    }
+
     @GameTest(template = TEMPLATE)
     public static void aThrowerHasAtMostFourVialsInFlight(GameTestHelper helper) {
         floor(helper);

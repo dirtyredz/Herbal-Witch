@@ -9,7 +9,7 @@ treated as dead. All IDs below have the `herbalwitch:` namespace.
 | cat | Native owner, 100 trust, five feeds | Vanilla cat; threat sense |
 | raven | Keeper, 80 trust, four feeds | Wooded Overworld, weight 6; retrieval; crow is an appearance |
 | owl | Keeper, 80 trust, four feeds | Wooded Overworld, weight 4; herb sense and nocturnal threat sense |
-| fox | Keeper, 80 trust, four feeds | Vanilla fox; retrieval and hostile distraction |
+| fox | Keeper, 80 trust, four feeds | Vanilla fox; retrieval, hostile distraction and native stealth (concealment: hostiles cannot choose it from farther than four blocks, dropped while it distracts) |
 | wolf | Native owner, 100 trust, five feeds | Vanilla wolf; hostile tracking and interception |
 | snake | Keeper, 80 trust, four feeds | Warm/dry Overworld, weight 6; creature sense and venom |
 | rabbit | Keeper, 80 trust, four feeds | Vanilla rabbit; herb sense and garden aid |

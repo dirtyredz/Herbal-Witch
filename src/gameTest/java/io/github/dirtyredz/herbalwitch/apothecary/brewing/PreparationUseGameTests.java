@@ -170,6 +170,22 @@ public final class PreparationUseGameTests {
         helper.succeed();
     }
 
+    /** M12 design trace: mushroom growth dust grows a mushroom where one can live, and only there. */
+    @GameTest(template = TEMPLATE)
+    public static void mushroomDustGrowsAMushroomWhereOneCanLive(GameTestHelper helper) {
+        floor(helper);
+        ServerPlayer gardener = player(helper, "m12_mushroom_gardener", GameType.SURVIVAL, Direction.NORTH);
+        BlockPos podzol = new BlockPos(4, 1, 4);
+        helper.setBlock(podzol, Blocks.PODZOL);
+        ItemStack dust = product(EverydayProductCatalog.MUSHROOM_DUST, 2);
+        check(useItemOn(helper, gardener, dust, podzol, Direction.UP).consumesAction() && dust.getCount() == 1, "mushroom dust failed on podzol");
+        var grown = helper.getBlockState(podzol.above());
+        check(grown.is(Blocks.BROWN_MUSHROOM) || grown.is(Blocks.RED_MUSHROOM), "no mushroom grew: " + grown);
+        useItemOn(helper, gardener, dust, podzol, Direction.UP);
+        check(dust.getCount() == 1, "mushroom dust was spent where nothing could grow");
+        helper.succeed();
+    }
+
     @GameTest(template = TEMPLATE)
     public static void adventurePlayersCannotUseGardenProducts(GameTestHelper helper) {
         floor(helper);

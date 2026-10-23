@@ -28,7 +28,9 @@ public final class FamiliarBuffEffects {
         modifier(mob, Attributes.ARMOR, ARMOR, (guardian ? 2 : 0) + (FamiliarBuffRules.active(state, "hearthkeeper") && homeGuard(mob, record) ? 2 : 0), AttributeModifier.Operation.ADDITION);
         modifier(mob, Attributes.MOVEMENT_SPEED, SPEED, FamiliarBuffRules.active(state, "swiftpaw") ? .2 : 0, AttributeModifier.Operation.MULTIPLY_TOTAL);
         if (mob.getHealth() > mob.getMaxHealth()) mob.setHealth(mob.getMaxHealth());
-        effect(mob, PreparationEffects.CONCEALMENT.get(), FamiliarBuffRules.active(state, "moonveil"));
+        boolean stealth = io.github.dirtyredz.herbalwitch.companions.familiars.catalog.FamiliarCatalog.find(record.species()).map(s -> s.stealthy()).orElse(false)
+                && !io.github.dirtyredz.herbalwitch.companions.familiars.ability.action.FamiliarCombatPowers.distracting(mob);
+        effect(mob, PreparationEffects.CONCEALMENT.get(), FamiliarBuffRules.active(state, "moonveil") || stealth);
         effect(mob, MobEffects.FIRE_RESISTANCE, FamiliarBuffRules.active(state, "emberguard"));
     }
     private static void modifier(Mob mob, Attribute attribute, UUID id, double amount, AttributeModifier.Operation operation) {

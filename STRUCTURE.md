@@ -357,6 +357,8 @@ herbalwitch/
 
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/qualification/` — grouping parent: cross-milestone release qualification
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/qualification/upgrade/` — save-upgrade phases: open a historical world's chunks and players, touch, re-save, first job tick
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/qualification/integration/` — cross-milestone loops through production entry points (forage to shop to non-witch use; witch-only brewing charged once)
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/qualification/localization/` — every registered block, item, entity, effect and tab has an English name
 - `tools/qualification/` — grouping parent: release qualification tooling (Node and PowerShell)
 - `tools/qualification/restart/` — grouping parent: the M9-M11 restart report validators
 - `tools/qualification/restart/familiars/` — familiar restart report

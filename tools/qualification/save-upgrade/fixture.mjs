@@ -123,6 +123,7 @@ export function prepareFixture(source, outDir, { label, version }) {
     for (let dx = -1; dx <= 1; dx++) for (let dz = -1; dz <= 1; dz++) if (all.has(`${cx + dx},${cz + dz}`)) keep.add(`${cx + dx},${cz + dz}`);
   }
   const byRegion = new Map();
+  const written = new Set();
   for (const key of keep) {
     const { file, chunk } = all.get(key);
     const status = get(chunk.doc.root, 'Status')?.v;
@@ -130,6 +131,7 @@ export function prepareFixture(source, outDir, { label, version }) {
     sanitizeChunk(chunk.doc, counts);
     if (!byRegion.has(file)) byRegion.set(file, []);
     byRegion.get(file).push(chunk);
+    written.add(key);
   }
   for (const [file, chunks] of byRegion) writeRegion(join(world, 'region', file), chunks);
   const players = join(source, 'playerdata');
@@ -138,7 +140,8 @@ export function prepareFixture(source, outDir, { label, version }) {
     for (const f of readdirSync(players)) if (/^[0-9a-f-]{36}\.dat$/.test(f)) sanitizePlayer(join(players, f), join(world, 'playerdata', f), counts);
   }
   const before = inventory(world, NAMESPACE);
-  const chunks = [...keep].filter((k) => wanted.has(k)).map((k) => k.split(',').map(Number)).sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+  // Unfinished (proto) chunks are not carried: the candidate would finish generating them, so they are not history.
+  const chunks = [...written].filter((k) => wanted.has(k)).map((k) => k.split(',').map(Number)).sort((a, b) => a[0] - b[0] || a[1] - b[1]);
   const sourceFiles = {};
   for (const f of walk(source)) {
     const rel = f.slice(source.length + 1).replaceAll('\\', '/');
@@ -146,7 +149,7 @@ export function prepareFixture(source, outDir, { label, version }) {
   }
   const receipt = {
     label, version, source: resolve(source).replaceAll('\\', '/'), sourceFiles,
-    keptChunks: keep.size, chunks, substitutions: counts,
+    keptChunks: written.size, kept: [...written].map((k) => k.split(',').map(Number)).sort((a, b) => a[0] - b[0] || a[1] - b[1]), chunks, substitutions: counts,
     summary: { blocks: Object.keys(before.blocks).length, blockEntities: Object.keys(before.blockEntities).length, players: Object.keys(before.players).length },
   };
   writeFileSync(join(outDir, 'receipt.json'), JSON.stringify(receipt, null, 1));

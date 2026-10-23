@@ -3,6 +3,7 @@ package io.github.dirtyredz.herbalwitch.companions.familiars.ability.action;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.effect.combat.CombatEvents;
 import io.github.dirtyredz.herbalwitch.companions.familiars.ability.*;
 import io.github.dirtyredz.herbalwitch.companions.familiars.bond.entity.FamiliarReconciliation;
+import io.github.dirtyredz.herbalwitch.companions.familiars.preparation.FamiliarBuffEffects;
 import io.github.dirtyredz.herbalwitch.companions.familiars.preparation.FamiliarBuffRules;
 import io.github.dirtyredz.herbalwitch.platform.permission.entity.*;
 import net.minecraft.server.level.ServerLevel;
@@ -37,10 +38,18 @@ public final class FamiliarCombatPowers {
         if (!target(familiar, target, 32) || target.getTarget() == familiar) return false;
         return FamiliarAbilityService.perform(familiar, FamiliarPower.DISTRACT, () -> {
             if (!target(familiar, target, 32)) return false;
-            target.setTarget(familiar); if (target.getTarget() != familiar) return false;
             var record = FamiliarReconciliation.record(familiar).orElseThrow();
-            DISTRACTIONS.put(target, new Distraction(familiar, record.owner(), target.level().getGameTime() + 100)); return true;
+            // A distracting fox gives up its native stealth first, or the target could not choose it.
+            DISTRACTIONS.put(target, new Distraction(familiar, record.owner(), target.level().getGameTime() + 100));
+            FamiliarBuffEffects.project(familiar, record);
+            target.setTarget(familiar);
+            if (target.getTarget() == familiar) return true;
+            DISTRACTIONS.remove(target); FamiliarBuffEffects.project(familiar, record); return false;
         });
+    }
+    /** Whether this familiar is currently drawing a distracted target onto itself. */
+    public static boolean distracting(Mob familiar) {
+        return DISTRACTIONS.values().stream().anyMatch(d -> d.familiar() == familiar);
     }
     public static boolean intercept(Mob familiar, Mob threat) {
         var record = FamiliarReconciliation.record(familiar).orElse(null);
