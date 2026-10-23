@@ -28,8 +28,18 @@ public final class FamiliarConfigGameTests {
                 check(FamiliarCommands.set(owner, record.bond(), FamiliarCommand.FOLLOW).equals("command_set"), "reserve slot");
             }
             var before = FamiliarServerConfig.current();
-            try {
+            try (var online = io.github.dirtyredz.herbalwitch.platform.player.OnlinePlayers.register(List.of(owner))) {
+                var task = new io.github.dirtyredz.herbalwitch.companions.familiars.ability.sensing.FamiliarSenseTask(bound.mob(), io.github.dirtyredz.herbalwitch.companions.familiars.ability.FamiliarPower.THREATS, new io.github.dirtyredz.herbalwitch.companions.familiars.ability.sensing.FamiliarHerbCursor());
+                check(task.valid(), "initial queued sensing invalid");
+                var targetPos = bound.mob().blockPosition().below();
+                var targets = io.github.dirtyredz.herbalwitch.companions.familiars.observation.FamiliarObservationsStore.class;
+                check(io.github.dirtyredz.herbalwitch.companions.familiars.observation.FamiliarObservationsStore.publish(owner, bound.mob(), List.of(new io.github.dirtyredz.herbalwitch.companions.familiars.observation.FamiliarObservationsStore.Target(null,targetPos,h.getLevel().getBlockState(targetPos),"herb","test"))), "observation setup");
+                UUID token = observedToken(owner.getUUID(),bound.bond());
+                check(io.github.dirtyredz.herbalwitch.companions.familiars.observation.FamiliarObservationsStore.target(owner,bound.mob(),token).isPresent(), "initial observation invalid");
                 FamiliarServerConfig.install(new FamiliarRules(false, before.species(), 1, before.recordBytes(), before.transactionInterval(), before.scans(), before.paths(), before.guardRadius(), before.senseRadius(), before.offlineGuards(), before.publicRetrieval()));
+                check(!task.valid(), "config reload retained queued work");
+                check(io.github.dirtyredz.herbalwitch.companions.familiars.observation.FamiliarObservationsStore.target(owner,bound.mob(),token).isEmpty(), "config reload retained action token");
+                var untouched = bound.record(); task.perform(); check(bound.record().equals(untouched), "stale task mutated bond");
                 FamiliarCommands.reconcileCap(owner.server);
                 check(store.mobile().assignments(owner.getUUID()).equals(List.of(bonds.get(0))), "cap reload did not retain oldest");
                 for (int i = 1; i < 3; i++) check(store.record(bonds.get(i)).orElseThrow().command() == FamiliarCommand.STAY, "excess reservation not released");
@@ -39,5 +49,14 @@ public final class FamiliarConfigGameTests {
             } finally { FamiliarServerConfig.install(before); FamiliarCommands.reconcileCap(owner.server); }
             h.succeed();
         });
+    }
+    /** Inspect the server-created opaque token without exposing a production enumeration API. */
+    private static UUID observedToken(UUID owner, UUID bond) {
+        try {
+            var field=io.github.dirtyredz.herbalwitch.companions.familiars.observation.FamiliarObservationsStore.class.getDeclaredField("OWNERS"); field.setAccessible(true);
+            var pages=(java.util.Map<?,?>)((java.util.Map<?,?>)field.get(null)).get(owner); var page=pages.get(bond);
+            var accessor=page.getClass().getDeclaredMethod("targets"); accessor.setAccessible(true);
+            return (UUID)((java.util.Map<?,?>)accessor.invoke(page)).keySet().iterator().next();
+        } catch(ReflectiveOperationException failure) { throw new AssertionError(failure); }
     }
 }

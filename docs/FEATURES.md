@@ -251,3 +251,9 @@ M9 acquisition/presentation checkpoint adds natural acquisition, three creative-
 feature-owned guide pages plus the existing familiar entry, and nine inert showcase appearances
 with all gear, charms, preparations and altar supplies. The egg models use their own
 painted textures; no vanilla egg tint is required. Automated and visual qualification follows.
+
+The presentation fast gate passed 457 JUnit and 86 Node checks with 1,100 byte-identical generated
+files. ANU f3e4dec passed Java tests but exposed an unsettled-light acquisition fixture and a stale
+guide-count assertion; both are corrected in the next qualification phase. Eight additional real
+entity power cases cover species sensing, growth permission, empty energy, venom and offline reserve
+exhaustion. Configuration changes invalidate queued work and observed action tokens.

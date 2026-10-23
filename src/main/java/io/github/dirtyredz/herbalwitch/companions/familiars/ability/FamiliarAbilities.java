@@ -19,6 +19,10 @@ public final class FamiliarAbilities {
     private static final Map<Mob, FamiliarHerbCursor> CURSORS = new WeakHashMap<>();
     private static final Map<Mob, Integer> NEXT = new WeakHashMap<>();
     private FamiliarAbilities() {}
+    public static void invalidate() {
+        JOBS.forEach((mob, task) -> { if (mob.level() instanceof ServerLevel level) FamiliarWork.in(level).remove(task); });
+        JOBS.clear(); CURSORS.clear(); NEXT.clear();
+    }
     public static boolean automatic(Mob mob) {
         return FamiliarReconciliation.record(mob).filter(r -> r.state().getBoolean("autoPowers")).isPresent()
                 && mob.getHealth() >= mob.getMaxHealth() * .25F;

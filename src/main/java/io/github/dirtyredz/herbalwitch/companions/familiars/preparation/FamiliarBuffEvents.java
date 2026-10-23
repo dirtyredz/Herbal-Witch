@@ -29,7 +29,7 @@ public final class FamiliarBuffEvents {
         if (FamiliarStore.get(mob.getServer()).update(next, false)) FamiliarBuffEffects.project(mob, next);
         if (FamiliarBuffRules.active(next.state(), "shadowstep") && (mob.isOnFire() || mob.isInLava() || mob.isFreezing()
                 || mob.getAirSupply() < mob.getMaxAirSupply() / 2 || mob.getHealth() < mob.getMaxHealth() * .25F)) {
-            var owner = OnlinePlayers.find(next.owner()).orElse(null); if (owner == null || owner.level() != mob.level()) return;
+            var owner = OnlinePlayers.find(next.owner()).orElse(null); if (owner != null && owner.level() != mob.level()) owner = null;
             var destination = FamiliarDestinations.near((ServerLevel) mob.level(), mob, mob.position(), owner, 3);
             if (destination.isEmpty() || destination.get().distanceToSqr(mob.position()) > 64) return;
             var point = destination.get();

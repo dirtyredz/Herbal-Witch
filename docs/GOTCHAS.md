@@ -376,3 +376,8 @@ Familiar ability GameTests must register real fixture owners through `OnlinePlay
 online behavior; the synthetic real-player fixture is not in the live player list. New entity action
 categories must be admitted as general harm in the animal permission adapter before familiar-specific
 policies run; treating `FAMILIAR_HARM` as animal care incorrectly refuses hostile monsters.
+
+Familiar observations and queued scans are tied to the familiar-rules revision; reload cancels work
+and clears private client marks. Offline navigation and Shadowstep authorize every candidate cell
+through the stored owner UUID. Garden targets and herb observations require target-position permission
+as well as the source permission. GameTest lighting needs propagation after changing a roof or lamp.

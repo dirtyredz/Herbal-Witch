@@ -29,6 +29,8 @@ public final class FamiliarRegistration {
         io.github.dirtyredz.herbalwitch.companions.animals.care.interaction.AnimalCareContributions.register(new io.github.dirtyredz.herbalwitch.companions.familiars.interaction.FamiliarCareContribution());
         io.github.dirtyredz.herbalwitch.companions.familiars.equipment.FamiliarCharmAdapter.install();
         io.github.dirtyredz.herbalwitch.companions.familiars.config.FamiliarServerConfig.register(bus);
+        io.github.dirtyredz.herbalwitch.companions.familiars.config.FamiliarServerConfig.listen(io.github.dirtyredz.herbalwitch.companions.familiars.ability.FamiliarAbilities::invalidate);
+        io.github.dirtyredz.herbalwitch.companions.familiars.config.FamiliarServerConfig.listen(io.github.dirtyredz.herbalwitch.companions.familiars.observation.FamiliarObservationsStore::invalidate);
         FamiliarEntities.TYPES.register(bus); bus.addListener(FamiliarEntities::attributes);
         bus.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.acquisition.FamiliarWildSpawns::register);
         FamiliarMenus.MENUS.register(bus);

@@ -91,6 +91,12 @@ public final class FamiliarPreparationGameTests {
             FamiliarBuffEvents.tick(new LivingEvent.LivingTickEvent(b.mob()));
             check(FamiliarBuffRules.active(b.record().state(), "shadowstep"), "failed destination consumed charge");
             b.mob().moveTo(net.minecraft.world.phys.Vec3.atBottomCenterOf(h.absolutePos(new BlockPos(4,1,5)))); var before = b.mob().position();
+            online.close(); // Prepared emergency movement remains safe with the owner offline.
+            boolean[] blocked = {true};
+            io.github.dirtyredz.herbalwitch.platform.permission.PrincipalPermission.register((level, id, pos) -> blocked[0] && id.equals(b.owner().getUUID()) ? io.github.dirtyredz.herbalwitch.platform.permission.entity.EntityActionPermission.Denial.CLAIMS : io.github.dirtyredz.herbalwitch.platform.permission.entity.EntityActionPermission.Denial.NONE);
+            try { FamiliarBuffEvents.tick(new LivingEvent.LivingTickEvent(b.mob()));
+                check(b.mob().position().equals(before) && FamiliarBuffRules.active(b.record().state(), "shadowstep"), "offline escape bypassed permission or consumed charge");
+            } finally { blocked[0] = false; }
             FamiliarBuffEvents.tick(new LivingEvent.LivingTickEvent(b.mob()));
             check(!FamiliarBuffRules.active(b.record().state(), "shadowstep") && b.mob().position().distanceToSqr(before) > .1
                     && b.mob().position().distanceToSqr(before) <= 64, "successful step failed bounds or kept charge"); h.succeed();

@@ -21,21 +21,24 @@ public final class FamiliarSenseTask implements FamiliarWork.Task {
     private final Mob familiar;
     private final FamiliarPower power;
     private final FamiliarHerbCursor herbs;
+    private final long rulesRevision = FamiliarServerConfig.revision();
     private boolean done;
     private int turns;
     public FamiliarSenseTask(Mob familiar, FamiliarPower power, FamiliarHerbCursor herbs) { this.familiar = familiar; this.power = power; this.herbs = herbs; }
     public boolean done() { return done; }
-    @Override public boolean valid() { return !done && FamiliarAbilityService.ready(familiar, power)
+    @Override public boolean valid() { return !done && rulesRevision == FamiliarServerConfig.revision() && FamiliarAbilityService.ready(familiar, power)
             && FamiliarReconciliation.record(familiar).flatMap(r -> OnlinePlayers.find(r.owner())).filter(p -> p.level() == familiar.level()).isPresent(); }
     @Override public void perform() {
-        done = true; if (!FamiliarAbilityService.ready(familiar, power)) return;
+        if (!valid()) { done = true; return; }
+        done = true;
         var record = FamiliarReconciliation.record(familiar).orElseThrow(); var owner = OnlinePlayers.find(record.owner()).orElse(null); if (owner == null) return;
         var result = new ArrayList<FamiliarObservationsStore.Target>(); int radius = FamiliarServerConfig.current().senseRadius();
         if (power == FamiliarPower.HERBS || power == FamiliarPower.GARDEN) {
             for (int i = 0; i < FamiliarQueries.BLOCKS && result.size() < 8; i++) {
                 BlockPos pos = herbs.next(familiar.blockPosition());
                 if (pos.distSqr(familiar.blockPosition()) > radius * radius || !familiar.level().hasChunkAt(pos)
-                        || !ActionPermissionService.mayUse(ActionContext.of(owner, familiar.level(), pos))) continue;
+                        || !ActionPermissionService.mayUse(ActionContext.of(owner, familiar.level(), pos))
+                        || !PrincipalPermission.mayUse(owner.serverLevel(), record.owner(), pos).allowed()) continue;
                 var state = familiar.level().getBlockState(pos);
                 if (state.getBlock() instanceof HerbCropBlock crop && crop.isMaxAge(state) == (power == FamiliarPower.HERBS))
                     result.add(new FamiliarObservationsStore.Target(null, pos, state, "herb", state.getBlock().getName().getString()));

@@ -19,6 +19,10 @@ public final class FamiliarDestinations {
                 || box.getXsize() > 4 || box.getYsize() > 4 || box.getZsize() > 4) return false;
         for (var pos : BlockPos.betweenClosed(BlockPos.containing(box.minX, box.minY, box.minZ), BlockPos.containing(box.maxX - .001, box.maxY - .001, box.maxZ - .001))) {
             if (!level.hasChunkAt(pos) || owner != null && !ActionPermissionService.mayUse(ActionContext.of(owner, level, pos))) return false;
+            if (owner == null) {
+                var record = io.github.dirtyredz.herbalwitch.companions.familiars.bond.entity.FamiliarReconciliation.record(mob).orElse(null);
+                if (record == null || !PrincipalPermission.mayUse(level, record.owner(), pos).allowed()) return false;
+            }
             var state = level.getBlockState(pos);
             if (!state.getFluidState().isEmpty() || dangerous(level, pos)) return false;
         }
