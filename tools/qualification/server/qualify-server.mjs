@@ -75,14 +75,23 @@ function boot(dir, commands, label) {
   });
 }
 
-/** Problems in a console log: exceptions, crashes, Herbal Witch errors and mods that failed to load. */
+/**
+ * Problems in a console log: crashes, mods that failed to load, Herbal Witch errors, and any exception
+ * whose message or stack trace (the next 40 lines) names Herbal Witch. Other exceptions belong to the
+ * foreign mods (their own data packs referencing absent mods) and are reported, not failed.
+ */
 function problems(text) {
-  const found = [];
-  for (const line of text.split(/\r?\n/)) {
-    if (/Exception|Crash report|FATAL|has failed to load|ModLoadingException/.test(line) && !/\bWARN\b/.test(line)) found.push(line.trim().slice(0, 300));
-    else if (/\/ERROR\]/.test(line) && /herbalwitch|dirtyredz/i.test(line)) found.push(line.trim().slice(0, 300));
-  }
-  return found;
+  const lines = text.split(/\r?\n/);
+  const ours = [], foreign = [];
+  lines.forEach((line, i) => {
+    if (/Crash report|FATAL|has failed to load|ModLoadingException/.test(line)) ours.push(line.trim().slice(0, 300));
+    else if (/\/ERROR\]/.test(line) && /herbalwitch|dirtyredz/i.test(line)) ours.push(line.trim().slice(0, 300));
+    else if (/Exception/.test(line) && !/\bWARN\b/.test(line)) {
+      const trace = lines.slice(i, i + 40).join('\n');
+      (/herbalwitch|dirtyredz/i.test(trace) ? ours : foreign).push(line.trim().slice(0, 300));
+    }
+  });
+  return { ours, foreign: [...new Set(foreign)] };
 }
 
 const report = { candidate: { jar: basename(args.jar), sha256: sha256(args.jar) }, java, profiles: {} };
@@ -100,8 +109,9 @@ for (const profile of selected) {
     const kubejs = existsSync(join(dir, 'logs', 'kubejs', 'server.log')) ? readFileSync(join(dir, 'logs', 'kubejs', 'server.log'), 'utf8') : '';
     const everything = run.out + '\n' + log + '\n' + kubejs;
     const missing = step.expect.filter((marker) => !everything.includes(marker));
-    const bad = problems(run.out + '\n' + log).filter((line) => !(spec.tolerate ?? []).some((t) => line.includes(t)));
-    result.boots.push({ label, exit: run.code, reachedDone: run.done, seconds: run.seconds, missing, problems: bad.slice(0, 20) });
+    const found = problems(run.out + '\n' + log);
+    const bad = found.ours;
+    result.boots.push({ label, exit: run.code, reachedDone: run.done, seconds: run.seconds, missing, problems: bad.slice(0, 20), foreignExceptions: found.foreign.slice(0, 20) });
     if (!run.done) result.failures.push(`${label}: never reached Done`);
     if (run.code !== 0) result.failures.push(`${label}: exit ${run.code}`);
     for (const m of missing) result.failures.push(`${label}: missing "${m}"`);

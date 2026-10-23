@@ -89,6 +89,7 @@ public final class DecorManifest {
     public static Map<String, String> lang() {
         Map<String, String> lang = new LinkedHashMap<>();
         lang.put("itemGroup.herbalwitch.decor", "The Herbal Witch: Cottage Decor");
+        lang.put("entity.herbalwitch.decor.seat", "Seat");
         for (Piece piece : pieces()) {
             lang.put("block.herbalwitch." + piece.path().replace('/', '.'), piece.name());
         }

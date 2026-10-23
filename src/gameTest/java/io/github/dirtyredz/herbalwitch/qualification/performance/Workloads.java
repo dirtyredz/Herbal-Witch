@@ -168,6 +168,8 @@ final class Workloads {
 
     ServerPlayer player(String name, BlockPos at) {
         ServerPlayer player = new ServerPlayer(level.getServer(), level, new GameProfile(UUID.nameUUIDFromBytes(name.getBytes()), name.length() > 16 ? name.substring(name.length() - 16) : name));
+        // A real player object (not a FakePlayer) borrows only a fake player's no-op connection.
+        player.connection = net.minecraftforge.common.util.FakePlayerFactory.get(level, new GameProfile(UUID.nameUUIDFromBytes((name + "_wire").getBytes()), "wire")).connection;
         player.moveTo(at.getX() + .5, at.getY(), at.getZ() + .5, 0, 0);
         player.getInventory().setItem(0, new ItemStack(GrimoireItems.BOOK.get()));
         return player;

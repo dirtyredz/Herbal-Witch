@@ -135,6 +135,7 @@ public final class AdvancedManifest {
 
     public static Map<String, String> lang() {
         Map<String, String> lang = new LinkedHashMap<>();
+        lang.put("entity.herbalwitch.brewing.preparation_projectile", "Thrown Preparation");
         for (Map<String, String> group : List.of(ADVANCED, FAMILIAR, MIXTURES)) {
             group.forEach((path, name) -> {
                 String key = "item.herbalwitch.preparations." + path.replace('/', '.');

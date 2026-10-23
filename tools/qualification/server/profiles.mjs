@@ -54,8 +54,6 @@ export const PROFILES = {
         `setblock 4 ${Y} 0 herbalwitch:magic/ward/stone`, 'say HWQ optional done'],
       expect: ['HWQ optional done'],
     }],
-    // Foreign mods' own warnings are theirs; Herbal Witch errors still fail the profile.
-    tolerate: [],
   },
   // Doggy Talents Next stays separate from the ordinary optional set (docs/COMPATIBILITY.md).
   doggy: {
