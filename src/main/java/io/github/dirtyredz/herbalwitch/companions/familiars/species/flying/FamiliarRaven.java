@@ -16,6 +16,10 @@ public final class FamiliarRaven extends Animal implements FlyingAnimal {
     @Override protected void defineSynchedData() { super.defineSynchedData(); entityData.define(APPEARANCE, 0); }
     public int appearance() { return entityData.get(APPEARANCE); }
     public void appearance(int value) { entityData.set(APPEARANCE, Math.max(0, Math.min(1, value))); }
+    @Override public SpawnGroupData finalizeSpawn(net.minecraft.world.level.ServerLevelAccessor level, net.minecraft.world.DifficultyInstance difficulty,
+            MobSpawnType reason, SpawnGroupData group, CompoundTag tag) {
+        appearance(random.nextBoolean() ? 1 : 0); return super.finalizeSpawn(level, difficulty, reason, group, tag);
+    }
     @Override public void addAdditionalSaveData(CompoundTag tag) { super.addAdditionalSaveData(tag); tag.putInt("Appearance", appearance()); }
     @Override public void readAdditionalSaveData(CompoundTag tag) { super.readAdditionalSaveData(tag); appearance(tag.getInt("Appearance")); }
     @Override protected void registerGoals() { goalSelector.addGoal(7, new net.minecraft.world.entity.ai.goal.WaterAvoidingRandomFlyingGoal(this, .8)); }

@@ -579,3 +579,13 @@ verified receipt in `data/herbalwitch_familiar_pickups/<source UUID>.dat` perman
 entity identity. Admission looks up that exact file with a bounded cache, never scans all entities or
 materializes the receipt directory. Collection does not remove retirement evidence. Unknown/corrupt
 receipt presence refuses the source; no interrupted operation replays cargo or refunds items.
+
+M9 acquisition uses ordinary passive natural spawning in existing worlds: raven/owl in wooded
+Overworld tags, snake in warm/dry tags, weights 6/4/6 and groups 1-2. Safe ground and daylight
+brightness permit all three species during daytime. Creative-only eggs have authored untinted
+Blockbench models; they never carry a bond. Raven/crow is one entity type with an appearance field.
+The familiar guide installs through the M7 ownership seam at priority 301, preserving the old
+familiar page identity and pre-M8 ordering, with eight explicit M9 pages. Catalogue action costs,
+ability costs/cooldowns and current server limits are passed as component arguments. The showcase
+adds nine inert, non-dropping, non-bindable samples and three labelled supply barrels; display
+cosmetics have no inventory or bond authority.

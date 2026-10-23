@@ -11,11 +11,13 @@ class ShowcaseAnimalsTest {
         var section = new AnimalShowcaseSection(); var plan = ShowcasePlan.of(ShowcasePlanTest.group(io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseGroup.WITCHCRAFT));
         assertEquals(Set.of("cow", "sheep", "goat", "pig", "rabbit", "chicken", "horse", "donkey", "mule", "llama", "cat", "wolf", "fox", "parrot", "axolotl", "bat"),
                 section.entities().stream().map(s -> s.type().replace("minecraft:", "")).collect(java.util.stream.Collectors.toSet()));
-        assertEquals(16, plan.entities().size()); assertEquals(16, new HashSet<>(plan.entities()).size());
+        assertEquals(25, plan.entities().size()); assertEquals(25, new HashSet<>(plan.entities()).size());
+        assertEquals(16, plan.entities().stream().filter(s -> !s.inert()).count());
+        assertEquals(9, plan.entities().stream().filter(ShowcaseEntitySample::inert).count());
         var area = plan.areas().stream().filter(a -> a.id().equals("animals")).findFirst().orElseThrow();
         assertEquals(section.entities().get(0).offset(area.x(), area.z() + ShowcasePlan.HEADING_ROWS), plan.entities().get(0));
         assertTrue(plan.cellCount() < 65536);
-        System.out.println("M8 showcase: " + plan.width() + "x8x" + plan.depth() + ", " + plan.cellCount() + " writes, " + plan.placements().size() + " placements, 16 entities");
+        System.out.println("M9 showcase: " + plan.width() + "x8x" + plan.depth() + ", " + plan.cellCount() + " writes, " + plan.placements().size() + " placements, 25 entities");
     }
     /** The widest sample (a horse, 1.4 across) and a 2-block height must fit between the planned walls: the cause of a refused spawn once the heading rows moved. */
     @Test void everySampleStandsClearOfPlannedBlocks() throws Exception {

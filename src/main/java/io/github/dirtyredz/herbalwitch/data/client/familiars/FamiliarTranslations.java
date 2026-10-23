@@ -7,6 +7,14 @@ import java.util.*;
 public final class FamiliarTranslations {
     private FamiliarTranslations() {}
     public static void addTo(LanguageProvider out) {
+        FamiliarGuideTranslations.addTo(out);
+        out.add("showcase.herbalwitch.section.familiars", "Multiple familiars");
+        out.add("showcase.herbalwitch.familiar.display", "Inert appearance sample");
+        for (String species : List.of("cat", "raven", "crow", "owl", "fox", "wolf", "snake", "rabbit", "bat")) out.add("showcase.herbalwitch.familiar." + species, title(species));
+        out.add("showcase.herbalwitch.familiar.supplies.0", "Gear and charms");
+        out.add("showcase.herbalwitch.familiar.supplies.1", "Preparations and eggs");
+        out.add("showcase.herbalwitch.familiar.supplies.2", "Altar offerings and bait");
+        for (String species : List.of("raven", "owl", "snake")) out.add("item.herbalwitch.familiars.spawn_egg." + species, title(species) + " Spawn Egg");
         Map.ofEntries(Map.entry("powers", "Powers"), Map.entry("equipment", "Gear"), Map.entry("auto_on", "Automatic: on"), Map.entry("auto_off", "Automatic: off"),
                 Map.entry("charge", "Charge 5 energy"), Map.entry("reserve", "Prepaid reserve: %s energy"), Map.entry("reserve_full", "Reserve has no room for five energy."),
                 Map.entry("reserve_charged", "Five energy stored."), Map.entry("searching", "Searching nearby loaded terrain."), Map.entry("updated", "Familiar updated."))

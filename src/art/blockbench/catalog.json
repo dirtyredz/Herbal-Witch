@@ -24,7 +24,8 @@
     "block/ward/ward_stone",
     "block/animals",
     "block/familiars/home",
-    "block/familiars/equipment"
+    "block/familiars/equipment",
+    "block/familiars/spawn_egg"
   ],
   "projects": [
     "stations/kettle",
@@ -156,6 +157,9 @@
     "familiars/equipment/rabbit_sachet",
     "familiars/equipment/raven_satchel",
     "familiars/equipment/snake_ring",
-    "familiars/equipment/wolf_harness"
+    "familiars/equipment/wolf_harness",
+    "familiars/spawn_egg/raven",
+    "familiars/spawn_egg/owl",
+    "familiars/spawn_egg/snake"
   ]
 }

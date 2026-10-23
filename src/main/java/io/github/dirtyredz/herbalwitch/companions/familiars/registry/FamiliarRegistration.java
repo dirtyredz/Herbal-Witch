@@ -22,12 +22,15 @@ public final class FamiliarRegistration {
     public static void register(IEventBus bus) {
         FamiliarHomes.register(bus);
         FamiliarItems.register(bus);
+        io.github.dirtyredz.herbalwitch.apothecary.brewing.application.FamiliarGuideContribution.INSTANCE.install(
+                io.github.dirtyredz.herbalwitch.companions.familiars.grimoire.FamiliarEntries.PRIORITY, new io.github.dirtyredz.herbalwitch.companions.familiars.grimoire.FamiliarEntries());
         io.github.dirtyredz.herbalwitch.apothecary.brewing.application.FamiliarPreparationApplications.install(io.github.dirtyredz.herbalwitch.companions.familiars.preparation.FamiliarPreparationConsumer::apply);
         io.github.dirtyredz.herbalwitch.platform.permission.entity.EntityActionPermission.register(io.github.dirtyredz.herbalwitch.companions.familiars.preparation.FamiliarPoison::permission);
         io.github.dirtyredz.herbalwitch.companions.animals.care.interaction.AnimalCareContributions.register(new io.github.dirtyredz.herbalwitch.companions.familiars.interaction.FamiliarCareContribution());
         io.github.dirtyredz.herbalwitch.companions.familiars.equipment.FamiliarCharmAdapter.install();
         io.github.dirtyredz.herbalwitch.companions.familiars.config.FamiliarServerConfig.register(bus);
         FamiliarEntities.TYPES.register(bus); bus.addListener(FamiliarEntities::attributes);
+        bus.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.acquisition.FamiliarWildSpawns::register);
         FamiliarMenus.MENUS.register(bus);
         io.github.dirtyredz.herbalwitch.companions.familiars.network.FamiliarPackets.register();
         io.github.dirtyredz.herbalwitch.grimoire.access.menu.GrimoireMenuActions.register("familiar.herbalwitch.roster",
@@ -46,6 +49,12 @@ public final class FamiliarRegistration {
                         ? io.github.dirtyredz.herbalwitch.platform.permission.entity.EntityActionPermission.Denial.UNSUPPORTED
                         : io.github.dirtyredz.herbalwitch.platform.permission.entity.EntityActionPermission.Denial.NONE);
         CapturePolicy.exclude(FamiliarReconciliation::governed);
+        CapturePolicy.exclude(io.github.dirtyredz.herbalwitch.companions.familiars.showcase.FamiliarShowcaseDisplay::isDisplay);
+        io.github.dirtyredz.herbalwitch.platform.permission.entity.EntityActionPermission.register((action, owner, target) ->
+                io.github.dirtyredz.herbalwitch.companions.familiars.showcase.FamiliarShowcaseDisplay.isDisplay(target)
+                        ? io.github.dirtyredz.herbalwitch.platform.permission.entity.EntityActionPermission.Denial.UNSUPPORTED
+                        : io.github.dirtyredz.herbalwitch.platform.permission.entity.EntityActionPermission.Denial.NONE);
+        io.github.dirtyredz.herbalwitch.showcase.layout.ShowcaseRegistry.register(new io.github.dirtyredz.herbalwitch.companions.familiars.showcase.FamiliarShowcaseSection());
         CaptureReconciliation.lineage((mob, capture) -> mob.level() instanceof ServerLevel level
                 && capture.phase() == CaptureRecord.Phase.RELEASED && !capture.storedPayload()
                 && FamiliarStore.get(level.getServer()).creature(mob.getUUID()).filter(r -> r.originalType().equals(capture.type())
@@ -57,6 +66,8 @@ public final class FamiliarRegistration {
         AltarSessionService.handle(FamiliarActionCatalog.REVIVAL, new io.github.dirtyredz.herbalwitch.companions.familiars.ritual.RevivalAction());
         bus.addListener(FamiliarLifecycleEvents::capabilities);
         var forge = MinecraftForge.EVENT_BUS;
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.showcase.FamiliarShowcaseDisplay::drops);
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.showcase.FamiliarShowcaseDisplay::experience);
         forge.addListener(EventPriority.HIGHEST, io.github.dirtyredz.herbalwitch.companions.familiars.ability.retrieval.FamiliarPickupReceipts::join);
         forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.ability.retrieval.FamiliarPickupReceipts::stopped);
         forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.ability.FamiliarAbilities::tick);

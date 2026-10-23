@@ -34,14 +34,24 @@ public final class FamiliarFixtures {
         check(helper.getLevel().addFreshEntity(source), "source insertion");
         AnimalFixtures.relationship(source, owner.getUUID(), spec.trust(), spec.feeds());
         if (!Set.of("cat", "wolf", "bat").contains(species)) check(AnimalTrustService.keeper(source, owner.getUUID()), "keeper adoption");
-        helper.runAfterDelay(6, () -> whenReady(helper, () -> {
-            source.moveTo(position.getCenter()); source.setTarget(null);
-            String refusal = FamiliarEligibility.refusal(owner, source, helper.absolutePos(new BlockPos(4, 1, 4)));
-            check(refusal == null, "fixture eligibility: " + refusal);
-            check(FamiliarBindingService.bind(owner, source, helper.absolutePos(new BlockPos(4, 1, 4)), AltarOffering.none()), "fixture binding");
-            var record = FamiliarStore.get(owner.server).creature(source.getUUID()).orElseThrow();
-            run.accept(new Bound(owner, (Mob) helper.getLevel().getEntity(source.getUUID()), record.bond()));
-        }));
+        helper.runAfterDelay(6, () -> whenReady(helper, () -> bind(helper, owner, source, position, run, 20)));
+    }
+    private static void bind(GameTestHelper helper, ServerPlayer owner, Mob source, BlockPos position, Consumer<Bound> run, int retries) {
+        source.moveTo(position.getCenter()); source.setTarget(null);
+        var altar = helper.absolutePos(new BlockPos(4, 1, 4));
+        String refusal = FamiliarEligibility.refusal(owner, source, altar); check(refusal == null, "fixture eligibility: " + refusal);
+        check(io.github.dirtyredz.herbalwitch.companions.familiars.species.FamiliarSpeciesAdapters.snapshot(source).isPresent(), "fixture source snapshot refused");
+        check(WitchStatusService.energyUnits(owner) >= 2500, "fixture binding energy");
+        var store = FamiliarStore.get(owner.server);
+        if (!FamiliarBindingService.bind(owner, source, altar, AltarOffering.none())) {
+            if (retries > 0 && store.creature(source.getUUID()).isEmpty() && source.isAlive() && !source.isRemoved()
+                    && !io.github.dirtyredz.herbalwitch.companions.familiars.bond.transaction.FamiliarPlayerReceipt.pending(owner)) {
+                helper.runAfterDelay(1, () -> bind(helper, owner, source, position, run, retries - 1)); return;
+            }
+            check(false, "fixture binding failed after transaction-budget wait");
+        }
+        var record = store.creature(source.getUUID()).orElseThrow();
+        run.accept(new Bound(owner, (Mob) helper.getLevel().getEntity(source.getUUID()), record.bond()));
     }
     /** Retained CI worlds can need more than six ticks to index their growing set of bond shards. */
     public static void whenReady(GameTestHelper helper, Runnable action) {

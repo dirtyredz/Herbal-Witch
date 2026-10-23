@@ -68,7 +68,10 @@ public final class ContentContractGameTests {
         check(preparations.links().equals(List.of(WitchcraftKeys.key("brewing"), WitchcraftKeys.key("familiar"))), "preparation links");
         var familiar = index.get(WitchcraftKeys.key("familiar")).orElseThrow();
         check(familiar.body().size() == 2 && familiar.always() && familiar.hint().isEmpty(), "familiar shape");
-        check(familiar.links().equals(List.of(WitchcraftKeys.key("brewing"), WitchcraftKeys.key("preparations"))), "familiar links");
+        var familiarLinks = new java.util.ArrayList<>(List.of(WitchcraftKeys.key("brewing"), WitchcraftKeys.key("preparations")));
+        for (String page : List.of("species", "commands", "homes", "equipment", "abilities", "preparations", "progression", "recovery"))
+            familiarLinks.add(EntryKey.of(EntryKey.Kind.GUIDE, "herbalwitch:familiars/" + page));
+        check(familiar.links().equals(familiarLinks), "familiar links");
         helper.succeed();
     }
 

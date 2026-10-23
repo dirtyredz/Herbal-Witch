@@ -96,6 +96,8 @@ public final class HerbalWitchDataProviders {
         generator.addProvider(event.includeServer(), new EnergyBiomeTagsProvider(output, lookup, existingFiles));
         generator.addProvider(event.includeServer(), new HerbalWitchEntityTagsProvider(output, lookup, existingFiles));
         generator.addProvider(event.includeServer(), new BotanyWorldgenProvider(output, lookup));
+        generator.addProvider(event.includeServer(), new io.github.dirtyredz.herbalwitch.data.server.familiars.FamiliarSpawnProvider(output, lookup));
+        generator.addProvider(event.includeServer(), new io.github.dirtyredz.herbalwitch.data.server.familiars.FamiliarBiomeTagsProvider(output, lookup, existingFiles));
         generator.addProvider(event.includeServer(), new BotanyConditionProvider(output));
         generator.addProvider(event.includeServer(), new HerbalWitchLootModifierProvider(output));
         generator.addProvider(event.includeServer(), new GrimoireContentProvider(output));

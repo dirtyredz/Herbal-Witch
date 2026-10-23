@@ -223,3 +223,7 @@ The pack is client-side only; a second client sees the edits only with its own c
 The separate `src/art/entities/catalog.json` lists raven (including crow), owl and snake. Each owns a Blockbench 5.2.2 modded-entity project in format 5.0 plus `rig.json`. Cuboids use named parent-before-child bones, pivots and box UVs. Meshes, per-cube rotations and authored animation clips are refused. Runtime reads compiled JSON and applies procedural idle, walk/slither, flight, rest and attack. The block compiler still rejects entity projects.
 
 Creature atlases use a logical 32-unit square exported at 64 x 64, preserving two texels per model unit. Block/item textures remain 32 x 32. Native species retain vanilla textures and variants. Compile with `node tools/compile-entity-models.mjs`; `--check` verifies without writing. Gradle includes both. Eight equipment projects live at `src/art/blockbench/familiars/equipment/<gear>/`.
+
+Creative wild-species eggs live at src/art/blockbench/familiars/spawn_egg/<raven|owl|snake>/.
+They use the ordinary block/item compiler and owned 32px textures, not the living-rig parser.
+Current block compiler inventory: 133 projects, 438 models and 856 owned textures.

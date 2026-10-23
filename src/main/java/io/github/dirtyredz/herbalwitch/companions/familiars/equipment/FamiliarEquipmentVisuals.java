@@ -16,6 +16,7 @@ public final class FamiliarEquipmentVisuals {
     private static final Map<Mob, FamiliarVisualSnapshot> SENT = new WeakHashMap<>();
     private FamiliarEquipmentVisuals() {}
     public static FamiliarVisualSnapshot project(Mob mob) {
+        var display = io.github.dirtyredz.herbalwitch.companions.familiars.showcase.FamiliarShowcaseDisplay.visual(mob); if (display != null) return display;
         var r = FamiliarReconciliation.record(mob).orElse(null); if (r == null) return null;
         var gear = FamiliarEquipmentInventory.item(r, 1); var charm = FamiliarEquipmentInventory.item(r, 0);
         boolean resting = r.command() == FamiliarCommand.STAY && mob.getDeltaMovement().horizontalDistanceSqr() < .0004 && mob.getTarget() == null;

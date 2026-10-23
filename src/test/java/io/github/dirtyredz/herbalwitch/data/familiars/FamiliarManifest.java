@@ -10,6 +10,11 @@ public final class FamiliarManifest {
     public static Set<String> files() {
         Set<String> out = new TreeSet<>();
         out.add("data/herbalwitch/tags/items/familiars/retrievable.json");
+        for (String species : List.of("raven", "owl", "snake")) {
+            out.add("assets/herbalwitch/models/item/familiars/spawn_egg/" + species + ".json");
+            out.add("data/herbalwitch/forge/biome_modifier/familiars/spawns/" + species + ".json");
+        }
+        for (String biome : List.of("wooded", "warm_dry")) out.add("data/herbalwitch/tags/worldgen/biome/familiars/spawns/" + biome + ".json");
         for (String species : SPECIES) out.add("data/herbalwitch/tags/items/familiars/equipment/" + species + ".json");
         out.add("data/herbalwitch/tags/items/familiars/charms.json");
         for (String key : List.of("bed", "nest", "perch")) {
@@ -26,6 +31,18 @@ public final class FamiliarManifest {
     }
     public static Map<String, String> lang() {
         Map<String, String> out = new LinkedHashMap<>();
+        out.put("familiar.herbalwitch.guide.title", null);
+        for (String species : List.of("raven", "owl", "snake")) out.put("item.herbalwitch.familiars.spawn_egg." + species, null);
+        out.put("showcase.herbalwitch.section.familiars", null); out.put("showcase.herbalwitch.familiar.display", null);
+        for (String species : List.of("cat", "raven", "crow", "owl", "fox", "wolf", "snake", "rabbit", "bat")) out.put("showcase.herbalwitch.familiar." + species, null);
+        for (int i = 0; i < 3; i++) out.put("showcase.herbalwitch.familiar.supplies." + i, null);
+        for (String page : List.of("species", "commands", "homes", "equipment", "abilities", "preparations", "progression", "recovery")) out.put("familiar.herbalwitch.guide." + page + ".title", null);
+        for (String key : List.of("overview", "limits", "enabled", "disabled", "species.intro", "species.row", "species.wild", "commands.limits",
+                "homes.rules", "homes.row", "equipment.rules", "equipment.row", "abilities.rules", "abilities.row", "abilities.effects", "abilities.reserve", "abilities.retrieval",
+                "preparations.rules", "preparations.row", "preparations.shared", "progression.rules", "ritual.row", "recovery.rules", "recovery.revival", "recovery.admin")) out.put("familiar.herbalwitch.guide." + key, null);
+        for (String command : List.of("follow", "stay", "guard_witch", "protect_home", "scout", "passive", "return_home")) out.put("familiar.herbalwitch.guide.command." + command, null);
+        for (String gear : EQUIPMENT) out.put("familiar.herbalwitch.guide.gear." + gear, null);
+        for (String product : List.of("guardian", "swiftpaw", "nightwatch", "moonveil", "warding", "emberguard", "venomleaf", "spiritbond", "hearthkeeper", "shadowstep")) out.put("familiar.herbalwitch.guide.preparation." + product, null);
         for (String key : List.of("powers", "equipment", "auto_on", "auto_off", "charge", "reserve", "reserve_full", "reserve_charged", "searching", "updated")) out.put("familiar.herbalwitch." + key, null);
         for (String key : List.of("threats", "herbs", "creatures", "track", "retrieve", "distract", "intercept", "venom", "garden", "repel")) out.put("familiar.herbalwitch.power." + key, null);
         for (String gear : EQUIPMENT) out.put("item.herbalwitch.familiars.equipment." + gear, null);

@@ -55,6 +55,7 @@ class ShowcasePlanTest {
         all.add(new CharmShowcaseSection());
         all.add(new io.github.dirtyredz.herbalwitch.companions.animals.showcase.AnimalShowcaseSection());
         all.add(new io.github.dirtyredz.herbalwitch.companions.familiars.showcase.FamiliarHomeShowcaseSection());
+        all.add(new io.github.dirtyredz.herbalwitch.companions.familiars.showcase.FamiliarShowcaseSection());
         return all;
     }
 
@@ -91,7 +92,7 @@ class ShowcasePlanTest {
         List<ShowcasePlan.SectionArea> areas = plan.areas();
         assertEquals(List.of("herbs", "garden", "drying_rack", "mortar", "kettle", "hearth", "stove", "infusion_pot", "cauldron",
                 "still", "bottling_bench", "charm_workbench", "preparations", "advanced_preparations", "grimoire", "altar", "ritual_circle",
-                "ward_stone", "charms", "animals", "familiar_homes"), areas.stream().map(ShowcasePlan.SectionArea::id).toList());
+                "ward_stone", "charms", "animals", "familiar_homes", "familiars"), areas.stream().map(ShowcasePlan.SectionArea::id).toList());
         assertEquals(0, areas.get(0).x());
         assertEquals(0, areas.get(0).z());
         int rowZ = 0;

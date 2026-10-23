@@ -46,6 +46,7 @@ public final class ShowcaseEntitySpawner {
                     LOGGER.warn("Showcase sample {} at {} refused: {}", sample.type(), mob.blockPosition(), refused);
                     return new Result(0, false);
                 }
+                if (sample.inert()) io.github.dirtyredz.herbalwitch.companions.familiars.showcase.FamiliarShowcaseDisplay.prepare(mob, sample.appearance());
             }
             complete = true; return new Result(created.size(), true);
         } catch (RuntimeException failure) {

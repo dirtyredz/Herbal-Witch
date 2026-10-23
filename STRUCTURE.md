@@ -429,3 +429,10 @@ Retrieval lives in `companions/familiars/ability/retrieval/`: exact loose-item e
 pickup transaction, and immutable source-retirement receipts. `platform/permission/entity/ItemPickupPermission`
 owns the neutral entity-pickup veto (including Forge pickup cancellation); it is not block placement.
 `data/server/familiars/FamiliarRetrievalTags` contributes the small-object allowlist to the one item-tag writer.
+
+M9 acquisition/presentation layout: `companions/familiars/acquisition/` owns safe passive spawn
+placement rules; `data/server/familiars/` owns its biome tags/modifiers. Creative egg projects live
+in `src/art/blockbench/familiars/spawn_egg/<raven|owl|snake>/`, compiled to matching block-model
+and owned texture directories. `companions/familiars/grimoire/` owns the installed guide source;
+`data/client/familiars/FamiliarGuideTranslations` supplies its prose. `showcase/` owns nine inert
+appearance samples and supply barrels. Acquisition tests live in `src/gameTest/.../familiars/acquisition/`.

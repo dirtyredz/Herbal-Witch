@@ -1,0 +1,28 @@
+{
+  "project": "raven.bbmodel",
+  "textures": {
+    "shell": "herbalwitch:block/pieces/familiars/spawn_egg/raven/shell",
+    "particle": "herbalwitch:block/pieces/familiars/spawn_egg/raven/shell"
+  },
+  "owned_textures": {
+    "shell": "herbalwitch:block/pieces/familiars/spawn_egg/raven/shell"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/familiars/spawn_egg/raven/base",
+      "item": true
+    }
+  ]
+}

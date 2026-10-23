@@ -11,6 +11,8 @@ public enum FamiliarPower {
     private final int energy, ticks;
     FamiliarPower(int energy, int ticks) { this.energy = energy; this.ticks = ticks; }
     public String key() { return name().toLowerCase(Locale.ROOT); }
+    public int energy() { return energy; }
+    public int ticks() { return ticks; }
     public int cost(FamiliarRecord record) { return FamiliarBuffRules.cost(record.state(), energy); }
     public boolean guardOnly() { return this == INTERCEPT || this == VENOM || this == REPEL; }
     public boolean sensing() { return this == THREATS || this == HERBS || this == CREATURES || this == TRACK; }

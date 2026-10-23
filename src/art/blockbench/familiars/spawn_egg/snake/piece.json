@@ -1,0 +1,28 @@
+{
+  "project": "snake.bbmodel",
+  "textures": {
+    "shell": "herbalwitch:block/pieces/familiars/spawn_egg/snake/shell",
+    "particle": "herbalwitch:block/pieces/familiars/spawn_egg/snake/shell"
+  },
+  "owned_textures": {
+    "shell": "herbalwitch:block/pieces/familiars/spawn_egg/snake/shell"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/familiars/spawn_egg/snake/base",
+      "item": true
+    }
+  ]
+}

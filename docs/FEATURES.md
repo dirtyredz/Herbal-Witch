@@ -246,3 +246,8 @@ Retrieval is now exposed for raven/crow and fox: owner-attributed, tagged simple
 exact observation/permission rechecks, five energy per completed pickup, and durable cargo/source
 retirement. Public retrieval remains opt-in; oversized stacks, payload items, pickup delays, exclusive
 foreign ownership and full cargo refuse without charge. Verification is recorded per phase in Docket.
+
+M9 acquisition/presentation checkpoint adds natural acquisition, three creative-only eggs, eight
+feature-owned guide pages plus the existing familiar entry, and nine inert showcase appearances
+with all gear, charms, preparations and altar supplies. The egg models use their own
+painted textures; no vanilla egg tint is required. Automated and visual qualification follows.

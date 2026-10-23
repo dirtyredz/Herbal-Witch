@@ -48,7 +48,7 @@ public final class BlockbenchManifest {
             "block/stations/mortar", "block/stations/drying_rack", "block/stations/hearth", "block/stations/stove",
             "block/decor/templates", "block/preparations/templates", "block/grimoire/stand", "block/grimoire/bookshelf",
             "block/decor/pieces", "block/ritual/altar", "block/stations/cauldron", "block/stations/still",
-            "block/stations/bottling_bench", "block/stations/charm_workbench", "block/ritual/circle", "block/ward/ward_stone", "block/animals", "block/familiars/home", "block/familiars/equipment");
+            "block/stations/bottling_bench", "block/stations/charm_workbench", "block/ritual/circle", "block/ward/ward_stone", "block/animals", "block/familiars/home", "block/familiars/equipment", "block/familiars/spawn_egg");
     /** Textures (under textures/) the fourteen pre-M5 pieces own, painted in their projects: block/pieces/<project>/<texture>.png. */
     public static final List<String> TEXTURES = List.of(
             "block/pieces/decor/apothecary_counter/gold.png",
@@ -156,6 +156,7 @@ public final class BlockbenchManifest {
         out.addAll(io.github.dirtyredz.herbalwitch.data.animals.AnimalManifest.PROJECTS);
         out.addAll(List.of("familiars/homes/bed", "familiars/homes/nest", "familiars/homes/perch"));
         for (String gear : io.github.dirtyredz.herbalwitch.data.familiars.FamiliarManifest.EQUIPMENT.stream().sorted().toList()) out.add("familiars/equipment/" + gear);
+        for (String species : List.of("raven", "owl", "snake")) out.add("familiars/spawn_egg/" + species);
         return List.copyOf(out);
     }
 
@@ -238,6 +239,7 @@ public final class BlockbenchManifest {
         io.github.dirtyredz.herbalwitch.data.animals.AnimalManifest.PROJECTS.forEach(p -> out.add("block/" + p + "/base.json"));
         for (String gear : io.github.dirtyredz.herbalwitch.data.familiars.FamiliarManifest.EQUIPMENT) out.add("block/familiars/equipment/" + gear + "/base.json");
         for (String key : List.of("bed", "nest", "perch")) out.add("block/familiars/home/" + key + "/base.json");
+        for (String species : List.of("raven", "owl", "snake")) out.add("block/familiars/spawn_egg/" + species + "/base.json");
         out.sort(null);
         return out;
     }

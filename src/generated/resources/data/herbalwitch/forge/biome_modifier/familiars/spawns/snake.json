@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#herbalwitch:familiars/spawns/warm_dry",
+  "spawners": {
+    "type": "herbalwitch:familiars/entity/snake",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 6
+  }
+}

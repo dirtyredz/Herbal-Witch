@@ -132,13 +132,15 @@ public final class ShowcaseContentGameTests {
         }
         check(scan.blocks.getOrDefault(BotanyBlocks.herbBed(), 0) >= 56, "herb beds " + scan.blocks.get(BotanyBlocks.herbBed()));
         // one per herb, powders, products, grimoire and altar supplies; Milestone 7: three preparation barrels, circle supplies, charms
-        check(scan.barrels == HerbCatalog.ALL.size() + 4 + 5 + 1, "sample barrels " + scan.barrels);
+        check(scan.barrels == HerbCatalog.ALL.size() + 4 + 5 + 1 + 3, "sample barrels " + scan.barrels);
         var animalArea = plan.areas().stream().filter(a -> a.id().equals("animals")).findFirst().orElseThrow();
         var supplies = (Container) helper.getLevel().getBlockEntity(helper.absolutePos(ORIGIN.offset(animalArea.x() + 24, 1, animalArea.z() + ShowcasePlan.HEADING_ROWS)));
         check(supplies != null && supplies.countItem(io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.AdvancedPreparations.item(
                 io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.AdvancedProductCatalog.SLEEP)) == 16, "animal-care sleep supplies missing");
         var animalBox = new AABB(helper.absolutePos(ORIGIN), helper.absolutePos(ORIGIN.offset(plan.width(), ShowcasePlan.HEIGHT, plan.depth())));
-        var samples = helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.Mob.class, animalBox);
+        var allSamples = helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.Mob.class, animalBox);
+        check(allSamples.size() == 25, "combined showcase sample count " + allSamples.size());
+        var samples = allSamples.stream().filter(m -> !io.github.dirtyredz.herbalwitch.companions.familiars.showcase.FamiliarShowcaseDisplay.isDisplay(m)).toList();
         check(samples.size() == 16, "animal sample count " + samples.size());
         check(samples.stream().map(m -> net.minecraft.world.entity.EntityType.getKey(m.getType()).toString()).collect(java.util.stream.Collectors.toSet())
                 .equals(java.util.Set.of("minecraft:cow", "minecraft:sheep", "minecraft:goat", "minecraft:pig", "minecraft:rabbit", "minecraft:chicken",
@@ -146,6 +148,20 @@ public final class ShowcaseContentGameTests {
         for (var sample : samples) {
             check(!sample.isNoAi() && sample.getActiveEffects().isEmpty(), "sample received disabled AI or effects");
             check(io.github.dirtyredz.herbalwitch.companions.animals.trust.AnimalCapability.of(sample).orElseThrow().state().isEmpty(), "sample received care state");
+        }
+        var displays = allSamples.stream().filter(io.github.dirtyredz.herbalwitch.companions.familiars.showcase.FamiliarShowcaseDisplay::isDisplay).toList();
+        check(displays.size() == 9, "missing familiar appearances");
+        check(displays.stream().filter(m -> m instanceof io.github.dirtyredz.herbalwitch.companions.familiars.species.flying.FamiliarRaven raven && raven.appearance() == 1).count() == 1, "crow appearance missing");
+        for (var display : displays) {
+            check(display.isNoAi() && display.isInvulnerable() && io.github.dirtyredz.herbalwitch.companions.familiars.bond.entity.FamiliarBinding.of(display).orElseThrow().reference().isEmpty(), "display received live authority");
+            check(io.github.dirtyredz.herbalwitch.companions.familiars.bond.data.FamiliarStore.get(helper.getLevel().getServer()).creature(display.getUUID()).isEmpty(), "display created canonical bond");
+            check(io.github.dirtyredz.herbalwitch.companions.familiars.equipment.FamiliarEquipmentVisuals.project(display) != null, "display cosmetics absent");
+        }
+        var familiarArea = plan.areas().stream().filter(a -> a.id().equals("familiars")).findFirst().orElseThrow();
+        for (int i = 0; i < 3; i++) {
+            var barrel = (Container) helper.getLevel().getBlockEntity(helper.absolutePos(ORIGIN.offset(familiarArea.x() + i * 6 + 1, 1, familiarArea.z() + ShowcasePlan.HEADING_ROWS + 18)));
+            check(barrel != null, "familiar supply barrel absent");
+            for (var item : io.github.dirtyredz.herbalwitch.companions.familiars.showcase.FamiliarShowcaseSection.supplies(i)) check(barrel.countItem(item) == 1, "familiar supplies incomplete");
         }
         for (Block piece : GrimoireBlocks.all()) {
             check(scan.blocks.getOrDefault(piece, 0) == 1, piece + " shown " + scan.blocks.getOrDefault(piece, 0) + " times");
