@@ -70,6 +70,9 @@ The nine new sprites are first drafts; owner art and two-client review remain pe
   have their M9 consumer installed (see docs/catalogue/familiars.md).
 - **Charms, the ritual circle and wards** (tab "Apothecary"): protective charms, a ring that unlocks the
   Garden Blessing and Home Protection rituals, and the ward stone (see "Charms, circle and wards" below).
+- **Broom and wand** (tab "Apothecary"): two crafting stations, repairable owner-bound flight, and
+  seven utility selectors. The grimoire explains acquisition, live costs, control bindings and the
+  original ritual/familiar controls (see [tools](docs/catalogue/tools.md)).
 - **Grimoire** (tab "Apothecary"): a portable book, a Grimoire Stand and a Witch's Bookshelf. They open the
   same recipe-backed reader (see "The Grimoire" below).
 

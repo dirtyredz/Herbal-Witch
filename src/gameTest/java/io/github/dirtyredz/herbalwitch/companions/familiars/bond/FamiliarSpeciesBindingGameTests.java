@@ -42,7 +42,7 @@ public final class FamiliarSpeciesBindingGameTests {
             String refusal = FamiliarEligibility.refusal(player, source, origin); check(refusal == null, "eligibility: " + refusal);
             source.getPersistentData().putString("foreign", "preserve me");
             check(FamiliarSpeciesAdapters.snapshot(source).isEmpty(), "foreign payload silently stripped"); source.getPersistentData().remove("foreign");
-            check(FamiliarBindingService.bind(player, source, origin, AltarOffering.none()), "species conversion failed: " + key);
+            io.github.dirtyredz.herbalwitch.companions.familiars.fixture.FamiliarFixtures.bindPrepared(helper, player, source, helper.absolutePos(new BlockPos(4,1,5)), bound -> {
             var store = FamiliarStore.get(player.server); var r = store.creature(source.getUUID()).orElseThrow();
             var familiar = (Mob) helper.getLevel().getEntity(source.getUUID());
             check(familiar != null && familiar != source && familiar.getType() == FamiliarEntities.type(key), "wrong familiar species");
@@ -55,6 +55,7 @@ public final class FamiliarSpeciesBindingGameTests {
                 check(familiar.isRemoved() && store.record(r.bond()).orElseThrow().phase() == FamiliarRecord.Phase.QUARANTINED, "conflict chose first incarnation instead of quarantine");
             }
             helper.succeed();
+            });
         });
     }
     @GameTest(template = TEMPLATE, batch = "herbalwitch_familiar_raven", timeoutTicks = 100) public static void raven(GameTestHelper helper) { species(helper, "raven", false); }

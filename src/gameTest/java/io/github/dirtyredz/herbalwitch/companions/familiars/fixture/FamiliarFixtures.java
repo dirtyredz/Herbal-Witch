@@ -35,7 +35,11 @@ public final class FamiliarFixtures {
         check(helper.getLevel().addFreshEntity(source), "source insertion");
         AnimalFixtures.relationship(source, owner.getUUID(), spec.trust(), spec.feeds());
         if (!Set.of("cat", "wolf", "bat").contains(species)) check(AnimalTrustService.keeper(source, owner.getUUID()), "keeper adoption");
-        helper.runAfterDelay(6, () -> whenReady(helper, () -> bind(helper, owner, source, position, run, 20)));
+        helper.runAfterDelay(6, () -> bindPrepared(helper, owner, source, position, run));
+    }
+    /** Shared setup for already spawned, trusted native sources, including the exact-species matrix. */
+    public static void bindPrepared(GameTestHelper helper, ServerPlayer owner, Mob source, BlockPos position, Consumer<Bound> run) {
+        whenReady(helper, () -> bind(helper, owner, source, position, run, 20));
     }
     private static void bind(GameTestHelper helper, ServerPlayer owner, Mob source, BlockPos position, Consumer<Bound> run, int retries) {
         source.moveTo(position.getCenter()); source.setTarget(null);

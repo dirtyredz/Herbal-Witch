@@ -33,7 +33,7 @@ herbalwitch/
   data/                      generated resources, one writer per shared output
   decor/                     catalogue, structures and furniture behaviour
   grimoire/                  contracts, content, knowledge, reading and transport
-  magic/                     witch/, ritual/, charm/, ward/
+  magic/                     witch/, ritual/, charm/, ward/, broom/, wand/
   platform/                  compat/, geometry/, inventory/, multiblock/, network/, permission/,
                              persistence/, placement/, player/, recipe/, time/
   showcase/                  planning, construction and commands

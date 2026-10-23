@@ -30,16 +30,24 @@ public final class FamiliarPowerCoverageGameTests {
     private static void sense(GameTestHelper h, String species, FamiliarPower power) {
         FamiliarFixtures.bound(h, species, "sense_" + species + UUID.randomUUID(), b -> {
             if (species.equals("bat")) for (int x=0;x<9;x++) for(int y=1;y<=4;y++) for(int z=0;z<9;z++) if(x==0||x==8||z==0||z==8||y==4) h.setBlock(new BlockPos(x,y,z), Blocks.STONE);
-            h.runAfterDelay(10, () -> { try (var online = OnlinePlayers.register(List.of(b.owner()))) {
-                // A low ceiling gives the bat genuinely dark nearby targets, without changing world time.
+            Runnable sense = () -> { try (var online = OnlinePlayers.register(List.of(b.owner()))) {
+                // This exercises sensing, not random wandering or a light-engine timing assumption.
+                b.mob().getNavigation().stop(); b.mob().moveTo(h.absolutePos(new BlockPos(4,1,5)).getCenter());
+                b.mob().setDeltaMovement(net.minecraft.world.phys.Vec3.ZERO);
 
+                // One test per sensing batch: remove completed neighboring fixtures from the bounded query.
+                int radius = io.github.dirtyredz.herbalwitch.companions.familiars.config.FamiliarServerConfig.current().senseRadius();
+                h.getLevel().getEntities(b.mob(), b.mob().getBoundingBox().inflate(radius), e -> !(e instanceof net.minecraft.world.entity.player.Player)).forEach(net.minecraft.world.entity.Entity::discard);
                 var victim = h.spawn(EntityType.PILLAGER, new BlockPos(6,1,5)); victim.setNoAi(true);
                 var task = new FamiliarSenseTask(b.mob(), power, new FamiliarHerbCursor());
+                check(task.valid() && b.mob().hasLineOfSight(victim), species + " sensing fixture is not ready or visible");
                 task.perform();
                 check(b.record().state().getCompound("powerCooldowns").contains(power.key()), species + " sensing produced no paid result");
                 check(WitchStatusService.energyUnits(b.owner()) == 7200, species + " sensing payment");
                 h.succeed();
-            } });
+            } };
+            if (species.equals("bat")) h.startSequence().thenWaitUntil(() -> check(h.getLevel().getMaxLocalRawBrightness(h.absolutePos(new BlockPos(6,1,5))) <= 7, "bat fixture awaits darkness")).thenExecute(sense);
+            else h.runAfterDelay(10, sense);
         });
     }
     @GameTest(template=TEMPLATE,batch="herbalwitch_cat_sense",timeoutTicks=100)

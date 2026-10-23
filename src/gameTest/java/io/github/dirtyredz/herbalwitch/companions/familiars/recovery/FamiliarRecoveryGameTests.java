@@ -58,7 +58,9 @@ public final class FamiliarRecoveryGameTests {
         FamiliarFixtures.bound(h, "wolf", "retreat_" + UUID.randomUUID(), b -> {
             var store = FamiliarStore.get(b.owner().server);
             store.update(b.record().change(s -> s.putString("command", "passive")), true);
-            b.owner().moveTo(h.absolutePos(new BlockPos(10,1,5)).getCenter());
+            // Keep both ends of the six-block retreat inside the declared nine-block floor.
+            b.mob().moveTo(h.absolutePos(new BlockPos(2,1,5)).getCenter());
+            b.owner().moveTo(h.absolutePos(new BlockPos(8,1,5)).getCenter());
             b.mob().setHealth(2); double before = b.mob().distanceToSqr(b.owner());
             h.succeedWhen(() -> check(b.mob().isAlive() && b.mob().distanceToSqr(b.owner()) < before / 2
                     && b.mob().getTarget() == null, "injured familiar did not retreat toward owner"));
