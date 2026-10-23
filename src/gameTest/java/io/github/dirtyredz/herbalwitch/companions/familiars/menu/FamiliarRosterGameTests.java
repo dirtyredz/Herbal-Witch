@@ -16,7 +16,8 @@ import static io.github.dirtyredz.herbalwitch.fixture.WorldFixtures.*;
 public final class FamiliarRosterGameTests {
     @GameTest(template = TEMPLATE, batch = "herbalwitch_familiar_roster_private", timeoutTicks = 120)
     public static void privatePagesRefreshStaleSessionsAndNearbyDetailCloses(GameTestHelper h) {
-        FamiliarFixtures.bound(h, "cat", "roster_private", bound -> {
+        // ANU retains its world between jobs; prior bonds are valid roster entries.
+        FamiliarFixtures.bound(h, "cat", "roster_private_" + UUID.randomUUID(), bound -> {
             var owner = bound.owner(); var stranger = AnimalFixtures.player(h, "m9_roster_stranger");
             owner.getInventory().setItem(0, new ItemStack(GrimoireItems.BOOK.get()));
             stranger.getInventory().setItem(0, new ItemStack(GrimoireItems.BOOK.get()));

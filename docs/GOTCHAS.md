@@ -1,5 +1,9 @@
 # Gotchas - The Herbal Witch
 
+- **ANU retains its test world between jobs.** Roster fixtures that assert an exact count use a fresh
+  player identity; old canonical bonds are legitimate entries, not cross-owner leakage. Flight tests
+  also exercise explicit fall-damage calls, which vanilla bat landing suppression alone does not cover.
+
 - **Navigation needs a loaded search region, not just loaded endpoints.** Familiar paths check the
   entire native follow-range-plus-margin neighborhood, queue actual path creation per dimension,
   and revalidate the command when that queued turn arrives. A mode switch must invalidate old work.
