@@ -14,7 +14,7 @@ public final class RepeatSurvivalLoopGameTests {
     @GameTestGenerator
     public static Collection<TestFunction> repeat() {
         List<TestFunction> out = new ArrayList<>();
-        for (int i = 0; i < 24; i++) out.add(new TestFunction("herbalwitch_debug_loop_" + i, "debugloop" + i, "herbalwitch:empty", 400, 0, true,
+        for (int i = 0; i < 48; i++) out.add(new TestFunction("herbalwitch_debug_loop_" + i, "debugloop" + i, "herbalwitch:empty", 400, 0, true,
                 SurvivalLoopGameTests::forageToShopToNonWitchUse));
         for (int i = 0; i < 24; i++) out.add(new TestFunction("herbalwitch_debug_card_" + i, "debugcard" + i, "herbalwitch:empty", 100, 0, true,
                 io.github.dirtyredz.herbalwitch.companions.animals.AnimalInspectionGameTests::privateCardAndSessionValidationPreventReplayAndCloseWhenBookIsLost));

@@ -58,9 +58,10 @@ public final class FamiliarFixtures {
         var record = store.creature(source.getUUID()).orElseThrow();
         run.accept(new Bound(owner, (Mob) helper.getLevel().getEntity(source.getUUID()), record.bond()));
     }
-    /** Retained CI worlds can need more than six ticks to index their growing set of bond shards. */
+    /** Waits for the bond index (retained CI worlds can need more than six ticks) and for an entity-ticking plot. */
     public static void whenReady(GameTestHelper helper, Runnable action) {
-        if (!FamiliarStore.get(helper.getLevel().getServer()).ready()) helper.runAfterDelay(1, () -> whenReady(helper, action));
+        if (!FamiliarStore.get(helper.getLevel().getServer()).ready() || !io.github.dirtyredz.herbalwitch.fixture.WorldFixtures.entitiesLive(helper))
+            helper.runAfterDelay(1, () -> whenReady(helper, action));
         else action.run();
     }
 }

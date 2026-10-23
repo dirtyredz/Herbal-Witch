@@ -60,6 +60,35 @@ public final class WorldFixtures {
                 .forEach(net.minecraft.world.entity.Entity::discard);
     }
 
+    /**
+     * Runs {@code body} once every chunk under the test plot is entity-ticking (bounded). A batch's plot
+     * is force-loaded when it is placed, but the ticket takes effect a tick later; an entity added
+     * before that sits in a hidden section, which {@code getEntity} and {@code getEntitiesOfClass}
+     * never see (a harvest drop "vanishes", a spawned cow is "gone"). Tests that add or look up
+     * entities on their first tick start through this.
+     */
+    public static void whenEntitiesLive(GameTestHelper helper, Runnable body) {
+        whenEntitiesLive(helper, body, 40);
+    }
+
+    private static void whenEntitiesLive(GameTestHelper helper, Runnable body, int left) {
+        if (entitiesLive(helper)) {
+            body.run();
+        } else {
+            check(left > 0, "test plot never became entity-ticking");
+            helper.runAfterDelay(1, () -> whenEntitiesLive(helper, body, left - 1));
+        }
+    }
+
+    /** Whether entities anywhere in the test area are visible and ticking. */
+    public static boolean entitiesLive(GameTestHelper helper) {
+        AABB box = area(helper);
+        for (int x = (int) Math.floor(box.minX) >> 4; x <= (int) Math.floor(box.maxX) >> 4; x++)
+            for (int z = (int) Math.floor(box.minZ) >> 4; z <= (int) Math.floor(box.maxZ) >> 4; z++)
+                if (!helper.getLevel().isPositionEntityTicking(new BlockPos(x << 4, (int) box.minY, z << 4))) return false;
+        return true;
+    }
+
     private static AABB area(GameTestHelper helper) {
         return new AABB(helper.absolutePos(BlockPos.ZERO), helper.absolutePos(new BlockPos(9, 6, 9))).inflate(1);
     }

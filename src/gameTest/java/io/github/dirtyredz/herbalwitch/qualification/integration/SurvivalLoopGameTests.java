@@ -1,8 +1,5 @@
 package io.github.dirtyredz.herbalwitch.qualification.integration;
 
-import java.util.ArrayList;
-import java.util.List;
-import net.minecraft.world.InteractionResult;
 import io.github.dirtyredz.herbalwitch.HerbalWitch;
 import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
 import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbSpec;
@@ -60,6 +57,8 @@ import static io.github.dirtyredz.herbalwitch.fixture.StationFixtures.tick;
 import static io.github.dirtyredz.herbalwitch.fixture.StationFixtures.water;
 import static io.github.dirtyredz.herbalwitch.fixture.WorldFixtures.check;
 import static io.github.dirtyredz.herbalwitch.fixture.WorldFixtures.floor;
+import static io.github.dirtyredz.herbalwitch.fixture.WorldFixtures.whenEntitiesLive;
+import static io.github.dirtyredz.herbalwitch.fixture.WorldFixtures.entitiesLive;
 
 /** Milestone 12 cross-milestone integration: the design's gameplay loop end to end through production entry points. */
 @GameTestHolder(HerbalWitch.MOD_ID)
@@ -76,6 +75,10 @@ public final class SurvivalLoopGameTests {
 
     @GameTest(template = TEMPLATE, batch = "herbalwitch_qualification_forage_to_shop_to_non_witch_use", timeoutTicks = 400)
     public static void forageToShopToNonWitchUse(GameTestHelper helper) {
+        whenEntitiesLive(helper, () -> forageToShop(helper));
+    }
+
+    private static void forageToShop(GameTestHelper helper) {
         floor(helper);
         ServerPlayer forager = PlayerFixtures.player(helper, "m12_loop_forager", GameType.SURVIVAL, Direction.NORTH);
 
@@ -147,6 +150,10 @@ public final class SurvivalLoopGameTests {
     @GameTest(template = TEMPLATE, batch = "herbalwitch_qualification_magical_brew_requires_a_witch_and_charges_once",
             timeoutTicks = 400)
     public static void magicalBrewRequiresAWitchAndChargesOnce(GameTestHelper helper) {
+        whenEntitiesLive(helper, () -> magicalBrew(helper));
+    }
+
+    private static void magicalBrew(GameTestHelper helper) {
         floor(helper);
         campfire(helper, AT.below(), true);
         place(helper, StationBlocks.CAULDRON.get(), AT);
@@ -195,23 +202,11 @@ public final class SurvivalLoopGameTests {
     /** Harvests the mature plant on new farmland and returns every fresh herb it dropped, as one stack. */
     private static ItemStack harvest(GameTestHelper helper, ServerPlayer player, HerbSpec herb, BlockPos soil) {
         BlockPos plant = plantOnFarmland(helper, herb, soil, HerbSpec.MAX_AGE);
-        List<String> joins = new ArrayList<>();
-        java.util.function.Consumer<net.minecraftforge.event.entity.EntityJoinLevelEvent> spy = e -> {
-            if (e.getEntity() instanceof ItemEntity i) joins.add(i.getItem() + "@" + i.blockPosition() + (e.isCanceled() ? " CANCELED" : "") + (i.isRemoved() ? " REMOVED" : ""));
-        };
-        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(net.minecraftforge.eventbus.api.EventPriority.LOWEST, true,
-                net.minecraftforge.event.entity.EntityJoinLevelEvent.class, spy);
-        InteractionResult result;
-        try { result = click(helper, player, plant); } finally { net.minecraftforge.common.MinecraftForge.EVENT_BUS.unregister(spy); }
+        var result = click(helper, player, plant);
         check(result.consumesAction(), herb.id() + " was not harvested: " + result);
-        List<String> near = new ArrayList<>();
-        for (ItemEntity i : helper.getLevel().getEntitiesOfClass(ItemEntity.class, new AABB(helper.absolutePos(plant)).inflate(24)))
-            near.add(i.getItem() + "@" + i.blockPosition() + (i.isRemoved() ? " REMOVED" : ""));
-        String loose = near + " joins " + joins + " plot " + helper.absolutePos(BlockPos.ZERO);
         ItemStack fresh = collectDropped(helper, BotanyItems.fresh(herb));
-        check(fresh.getCount() >= 2, herb.id() + " gave " + fresh + "; plant now " + helper.getBlockState(plant) + ", items within 24: " + loose
-                + ", drops rule " + helper.getLevel().getGameRules().getBoolean(net.minecraft.world.level.GameRules.RULE_DOBLOCKDROPS)
-                + ", restoring " + helper.getLevel().restoringBlockSnapshots + ", capturing " + helper.getLevel().captureBlockSnapshots);
+        check(fresh.getCount() >= 2, herb.id() + " gave " + fresh + "; plant now " + helper.getBlockState(plant)
+                + ", entities live " + entitiesLive(helper));
         return fresh;
     }
 
