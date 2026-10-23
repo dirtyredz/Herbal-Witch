@@ -255,6 +255,7 @@ Both checked-placement crafting stations and screens, owner-bound broom flight/l
 | Check | Commit / ANU job | Result |
 |---|---|---|
 | Base, offline test build runGameTestServer | 7d76a67 / HerbalWitch-7d76a67c6362a4cad151b615-20261023-090203-b2c | 479 unit tests, build/art checks and all 319 required GameTests passed; 285 seconds |
+| Final 0.9.0, offline test build runGameTestServer | f59f2f5 / HerbalWitch-f59f2f5c750658c598c379f9-20261023-093324-fa2 | 479 unit tests, build/art checks and all 319 required GameTests passed; 253 seconds |
 | Two-process physical restart | bbbe6f8 / HerbalWitch-bbbe6f8e9d4d04918caee244-20261023-083739-389 | Nine assertions passed; JVMs 2092 and 21788; 130 seconds |
 | EMI | 7d76a67 / HerbalWitch-7d76a67c6362a4cad151b615-20261023-090220-edc | All 319 required GameTests passed; 220 seconds |
 | JEI | 7d76a67 / HerbalWitch-7d76a67c6362a4cad151b615-20261023-090222-9da | All 319 required GameTests passed; 241 seconds |
@@ -268,3 +269,5 @@ The restart harness saves actual deployed/packed tools and an interrupted repair
 Acceptance found and corrected vanilla mounted-vehicle save ownership, crop-fixture lighting, and existing familiar fixture assumptions about bounds, random position, bounded-query contamination and binding readiness. Familiar gameplay remained unchanged. Phase commits and failed/canceled runs remain in Docket dk-2d540cf6; successful reruns do not erase that history. M11 commerce remains independent and unimplemented here.
 
 Owner follow-up: survival crafting/repair and all controls, live rider animation/camera, GUI scales, shaders, F3+T, two-client latency/reconnect and both familiar/ritual entry points in the dedicated mod-test instance. No client, Blockbench UI, pack installation or public release was performed.
+
+The final local 0.9.0 gate passed in 3m26s. The private jar is `build/libs/herbalwitch-1.20.1-0.9.0.jar` (5,085 entries), SHA-256 `be30724d4e19c7fc2981aaf00c1c8e5087f45d0644793761eee7fec05d264ecd`; its metadata is 0.9.0 and it contains no test/tool/fixture or foreign class files. Docket dk-2d540cf6 is complete.
