@@ -29,6 +29,7 @@ public final class FamiliarFixtures {
         var spec = FamiliarCatalog.find(species).orElseThrow();
         var source = (Mob) ForgeRegistries.ENTITY_TYPES.getValue(ResourceLocation.parse(spec.originalType())).create(helper.getLevel());
         if (source instanceof AgeableMob ageable) ageable.setAge(0);
+        source.setPersistenceRequired(); // A remote real-player dimension fixture must not despawn this source.
         if (source instanceof TamableAnimal pet) { pet.setTame(true); pet.setOwnerUUID(owner.getUUID()); }
         var position = helper.absolutePos(new BlockPos(4, 1, 5)); source.moveTo(position.getCenter());
         check(helper.getLevel().addFreshEntity(source), "source insertion");
@@ -48,7 +49,7 @@ public final class FamiliarFixtures {
                     && !io.github.dirtyredz.herbalwitch.companions.familiars.bond.transaction.FamiliarPlayerReceipt.pending(owner)) {
                 helper.runAfterDelay(1, () -> bind(helper, owner, source, position, run, retries - 1)); return;
             }
-            check(false, "fixture binding failed after transaction-budget wait");
+            check(false, "fixture binding failed after transaction-budget wait: alive="+source.isAlive()+", removed="+source.isRemoved()+", record="+store.creature(source.getUUID()));
         }
         var record = store.creature(source.getUUID()).orElseThrow();
         run.accept(new Bound(owner, (Mob) helper.getLevel().getEntity(source.getUUID()), record.bond()));

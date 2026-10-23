@@ -48,7 +48,7 @@ public final class WitchRegistration {
 
         IEventBus forge = MinecraftForge.EVENT_BUS;
         forge.addGenericListener(Entity.class, WitchLifecycleEvents::attach);
-        forge.addListener(WitchLifecycleEvents::clone);
+        forge.addListener(net.minecraftforge.eventbus.api.EventPriority.LOWEST, WitchLifecycleEvents::clone);
         forge.addListener(WitchLifecycleEvents::loggedIn);
         forge.addListener(WitchLifecycleEvents::respawned);
         forge.addListener(WitchLifecycleEvents::changedDimension);

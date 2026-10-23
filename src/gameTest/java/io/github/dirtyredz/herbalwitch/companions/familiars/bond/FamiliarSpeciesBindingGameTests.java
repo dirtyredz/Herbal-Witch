@@ -29,6 +29,7 @@ public final class FamiliarSpeciesBindingGameTests {
         var spec = FamiliarCatalog.find(key).orElseThrow();
         var type = ForgeRegistries.ENTITY_TYPES.getValue(ResourceLocation.parse(spec.originalType()));
         var source = (Mob) type.create(helper.getLevel());
+        source.setPersistenceRequired();
         if (source instanceof AgeableMob ageable) ageable.setAge(0);
         if (source instanceof TamableAnimal pet) { pet.setTame(true); pet.setOwnerUUID(player.getUUID()); }
         source.moveTo(helper.absolutePos(new BlockPos(4, 1, 5)).getCenter());

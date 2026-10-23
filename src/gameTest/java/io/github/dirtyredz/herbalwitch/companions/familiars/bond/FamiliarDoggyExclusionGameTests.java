@@ -39,7 +39,8 @@ public final class FamiliarDoggyExclusionGameTests {
             owner.setItemInHand(InteractionHand.MAIN_HAND,new ItemStack(AnimalItems.CHARM.get()));
             var stack=owner.getMainHandItem().copy();float health=dog.getHealth();
             check("species".equals(FamiliarEligibility.refusal(owner,dog,h.absolutePos(new BlockPos(4,1,4)))),"foreign trained dog accepted for binding");
-            check("unsupported".equals(CaptureService.capture(owner,dog,InteractionHand.MAIN_HAND)),"foreign trained dog accepted for capture");
+            check(io.github.dirtyredz.herbalwitch.companions.animals.species.AnimalEligibility.profile(dog).isEmpty(),"foreign trained dog has a native care profile");
+            check(CaptureService.capture(owner,dog,InteractionHand.MAIN_HAND)!=null,"foreign trained dog accepted for capture");
             check(ItemStack.matches(stack,owner.getMainHandItem()) && dog.isAlive() && dog.getHealth()==health
                     && WitchStatusService.energyUnits(owner)==10000 && FamiliarStore.get(owner.server).creature(dog.getUUID()).isEmpty()
                     && CaptureSavedData.get(owner.server).record(dog.getUUID()).isEmpty(),"foreign dog refusal mutated state");

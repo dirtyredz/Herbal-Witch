@@ -126,7 +126,9 @@ public final class FurniturePlacementGameTests {
         floor(helper);
         // Retained CI worlds now include naturally spawning familiars. This synchronous matrix
         // tests empty-space placement; entity obstruction has its own explicit test below.
-        helper.killAllEntities();
+        var volume=new net.minecraft.world.phys.AABB(helper.absolutePos(BlockPos.ZERO),helper.absolutePos(new BlockPos(9,8,9)));
+        helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.Entity.class,volume,
+                entity->!(entity instanceof net.minecraft.world.entity.player.Player)).forEach(net.minecraft.world.entity.Entity::discard);
         for (FurnitureSpec spec : FurnitureCatalog.ALL) {
             Block block = DecorBlocks.block(spec);
             if (!(block instanceof StructurePlacement)) {

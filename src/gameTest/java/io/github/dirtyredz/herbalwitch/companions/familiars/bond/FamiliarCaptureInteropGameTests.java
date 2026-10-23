@@ -26,12 +26,16 @@ import static io.github.dirtyredz.herbalwitch.fixture.WorldFixtures.*;
 @GameTestHolder("herbalwitch") @PrefixGameTestTemplate(false)
 public final class FamiliarCaptureInteropGameTests {
     private static io.github.dirtyredz.herbalwitch.platform.player.OnlinePlayers.Registration online;
+    private static ServerPlayer dimensionOwner;
     @AfterBatch(batch="herbalwitch_familiar_dimension")
-    public static void cleanup(net.minecraft.server.level.ServerLevel level){if(online!=null){online.close();online=null;}}
+    public static void cleanup(net.minecraft.server.level.ServerLevel level){
+        if(online!=null){online.close();online=null;}
+        if(dimensionOwner!=null){dimensionOwner.serverLevel().removePlayerImmediately(dimensionOwner,Entity.RemovalReason.DISCARDED);dimensionOwner=null;}
+    }
     @GameTest(template=TEMPLATE,batch="herbalwitch_familiar_dimension",timeoutTicks=180)
     public static void ownerChangesDimensionAndExplicitRecallTransfersExactlyOneIncarnation(GameTestHelper h) {
         FamiliarFixtures.bound(h,"cat","dimension_"+UUID.randomUUID(),b->{
-            var owner=b.owner();var destination=owner.server.getLevel(net.minecraft.world.level.Level.NETHER);
+            var owner=b.owner();dimensionOwner=owner;var destination=owner.server.getLevel(net.minecraft.world.level.Level.NETHER);
             check(destination!=null,"nether fixture unavailable");
             // The test explicitly prepares one destination chunk; familiar code may not load terrain.
             for(int x=4;x<=12;x++)for(int z=4;z<=12;z++)for(int y=119;y<=123;y++)
@@ -51,7 +55,7 @@ public final class FamiliarCaptureInteropGameTests {
                 var current=destination.getEntity(b.record().creature());
                 check(b.mob().isRemoved() && h.getLevel().getEntity(b.mob().getUUID())==null && current instanceof Mob
                         && b.record().generation()==2 && WitchStatusService.energyUnits(owner)==7000,"cross-dimension identity/payment mismatch");
-                current.discard();owner.teleportTo(h.getLevel(),h.absolutePos(new BlockPos(4,1,3)).getX()+.5,h.absolutePos(new BlockPos(4,1,3)).getY(),h.absolutePos(new BlockPos(4,1,3)).getZ()+.5,0,0);
+                current.discard();
                 h.succeed();
             });
         });

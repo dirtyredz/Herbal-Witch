@@ -57,7 +57,9 @@ public final class GrimoireRegistration {
 
         IEventBus forge = MinecraftForge.EVENT_BUS;
         forge.addGenericListener(Entity.class, DiscoveryEvents::attach);
-        forge.addListener(DiscoveryEvents::clone);
+        // Copy after normal-priority integrations (Curios revives the original during cloning),
+        // then leave the retired player's dispatcher invalid as required by our lifecycle contract.
+        forge.addListener(net.minecraftforge.eventbus.api.EventPriority.LOWEST, DiscoveryEvents::clone);
         forge.addListener(DiscoveryEvents::loggedIn);
         forge.addListener(DiscoveryEvents::respawned);
         forge.addListener(DiscoveryEvents::changedDimension);
