@@ -376,3 +376,5 @@ M10 station/tool drafts: the four projects under `magic/{broom,wand}` and
 idle/working station views in the M10 job `previews/tools/scenes`. The drafts use
 dark wood, charcoal tools, plum cloth and grips, pale straw and gold fittings.
 These views do not qualify player posture, latency or shader behavior.
+
+M10 ridden-pose review also combines exported vanilla PlayerModel geometry and cached skin with the actual item model. Three views in the job `previews/ridden/` were inspected; the runtime 0.55-block model height meets the vanilla seated hips. This is a static headless check, not live animation or shader qualification.

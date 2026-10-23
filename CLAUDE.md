@@ -110,3 +110,7 @@ Before your first item write in a session, run `docket guide` and follow it.
 - Native familiar attachment changes also require test (exports the vanilla geometry) followed by node tools/preview-native-familiars.mjs --output <job>/previews/native-poses and sheet inspection.
 
 - M10 restart qualification: ANU-only `magicToolsRestartTest` starts two sequential dedicated JVMs against one disposable world. See `tools/test/README.md`; never run it locally.
+
+- For reproducible milestone/profile qualification, add `-PgameTestRunId=<unique-lowercase-id>` to the ANU task string. It selects a new `run/gametest-<id>/` world without deleting the default retained test world. The restart task always supplies its own isolated shared world.
+
+- Broom ridden-pose review: after `test`, run `node tools/preview-broom-rider.mjs --output <job>/previews/ridden` and inspect all three images. The test exports actual cached vanilla player geometry and the runtime seat offsets; it launches no client.

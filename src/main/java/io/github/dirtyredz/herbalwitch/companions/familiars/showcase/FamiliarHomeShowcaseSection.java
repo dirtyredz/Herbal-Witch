@@ -10,11 +10,11 @@ public final class FamiliarHomeShowcaseSection implements ShowcaseSection {
     @Override public String id() { return "familiar_homes"; }
     @Override public String titleKey() { return "showcase.herbalwitch.section.familiar_homes"; }
     @Override public List<ShowcasePlacement> placements() {
-        var out = new ArrayList<ShowcasePlacement>(); int x = 0;
+        var out = new ArrayList<ShowcasePlacement>(); int z = 1;
         for (var kind : FamiliarHomeKind.values()) {
-            out.add(ShowcasePlacement.label(x, 1, ShowcasePlacement.Line.translated("block.herbalwitch." + kind.path().replace('/', '.')),
+            out.add(ShowcasePlacement.label(0, z, ShowcasePlacement.Line.translated("block.herbalwitch." + kind.path().replace('/', '.')),
                     ShowcasePlacement.Line.translated("showcase.herbalwitch.label.familiar_home")));
-            out.add(ShowcasePlacement.content(x + 1, 1, 1, () -> FamiliarHomes.get(kind).block().get().defaultBlockState())); x += 3;
+            out.add(ShowcasePlacement.content(1, 1, z, () -> FamiliarHomes.get(kind).block().get().defaultBlockState())); z += 3;
         }
         return out;
     }

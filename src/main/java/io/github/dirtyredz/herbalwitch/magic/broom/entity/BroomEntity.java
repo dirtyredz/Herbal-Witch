@@ -52,12 +52,14 @@ public final class BroomEntity extends Entity {
  public boolean input(ServerPlayer actor,BroomInput input){return rider()==actor && controls!=null && controls.accept(actor.getUUID(),input.nonce(),input.sequence(),input.flags(),level().getGameTime());}
  public void endFlight(){controls=null;setDeltaMovement(Vec3.ZERO);flight(BroomFlightState.LANDING);}
  @Override protected boolean canAddPassenger(Entity passenger){return !isVehicle()&&passenger instanceof Player&&passenger.getUUID().equals(owner);}
+ /** Opt out of vanilla's player-owned mount save/removal path; this entity always belongs to its chunk. */
+ @Override public boolean hasExactlyOnePlayerPassenger(){return false;}
  @Override public LivingEntity getControllingPassenger(){return null;}
  @Override public boolean isControlledByLocalInstance(){return false;}
  @Override public boolean canChangeDimensions(){return false;}
  @Override public boolean isPickable(){return !isRemoved();}
  @Override public boolean isPushable(){return false;}
- @Override public double getPassengersRidingOffset(){return .2;}
+ @Override public double getPassengersRidingOffset(){return io.github.dirtyredz.herbalwitch.magic.broom.catalog.BroomSpec.RIDER_OFFSET;}
  @Override protected void removePassenger(Entity passenger){super.removePassenger(passenger);if(!level().isClientSide){if(flown&&passenger instanceof ServerPlayer p)BroomDismount.protect(p);endFlight();flown=false;}}
  @Override public Vec3 getDismountLocationForPassenger(LivingEntity passenger){return BroomDismount.location(this,passenger);}
  @Override public InteractionResult interact(Player player,InteractionHand hand){

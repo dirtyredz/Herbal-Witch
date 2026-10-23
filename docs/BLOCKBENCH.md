@@ -5,7 +5,7 @@ F3+T, with no datagen and no new jar. How it works: docs/ARCHITECTURE.md ("Art p
 docs/DECISIONS.md (0.2.0-dev.6); traps: docs/GOTCHAS.md.
 
 M10 first drafts: `magic/{broom,wand}/` and `stations/tools/{broom_stand,wand_bench}/`.
-Each owns six 32px textures. The broom's item parent is also its future ridden geometry; authored
+Each owns six 32px textures. The broom's item parent is also its ridden geometry; authored
 display transforms apply only to item poses. Station sidecars cut the two supported cells.
 
 | Piece | Project |

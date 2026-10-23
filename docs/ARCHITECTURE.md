@@ -85,9 +85,9 @@ layout is 126 x 8 x 60, with sixteen adult animals, three functional familiar ho
 Dedicated-server/restart qualification remains outside the local fast gate; see catalogue/animals.md.
 
 Everything below is server-authoritative; clients get vanilla block updates, menu slots and menu data.
-The one custom channel, `herbalwitch:main` (protocol "5", `platform/network/HerbalWitchNetwork`), carries
+The one custom channel, `herbalwitch:main` (protocol "13", `platform/network/HerbalWitchNetwork`), carries
 the grimoire's six bounded messages, the witch's two (`WitchSnapshot`, `WitchRulesUpdate`) and the
-altar's two (`AltarRequest`, `AltarUpdate`), then animal request/snapshot messages, registered in that order; any wire change bumps the protocol
+altar's two (`AltarRequest`, `AltarUpdate`), then animal, familiar, broom intent and wand-selection messages; features register at bootstrap. Any wire change bumps the protocol
 (protocol 2 let entry keys name furniture pages; protocol 3 added the witch and altar messages; protocol 4
 grew `WitchRulesUpdate` with the working rules; protocol 5 adds the private animal card). Paths
 are under `src/main/java/io/github/dirtyredz/herbalwitch/`.

@@ -19,19 +19,19 @@ public final class FamiliarShowcaseSection implements ShowcaseSection {
         var out = new ArrayList<ShowcaseEntitySample>();
         for (int i = 0; i < 9; i++) {
             String species = i == 8 ? "raven" : FamiliarCatalog.ALL.get(i).key();
-            out.add(new ShowcaseEntitySample("herbalwitch:familiars/entity/" + species, (i % 3) * 6 + 2.5, 1, (i / 3) * 6 + 2.5, true, i == 8 ? 1 : 0));
+            out.add(new ShowcaseEntitySample("herbalwitch:familiars/entity/" + species, (i % 3) * 4 + 2.5, 1, (i / 3) * 6 + 2.5, true, i == 8 ? 1 : 0));
         }
         return List.copyOf(out);
     }
     @Override public List<ShowcasePlacement> placements() {
         var out = new ArrayList<ShowcasePlacement>();
         for (int i = 0; i < 9; i++) {
-            int x = (i % 3) * 6, z = (i / 3) * 6; String species = i == 8 ? "crow" : FamiliarCatalog.ALL.get(i).key();
+            int x = (i % 3) * 4, z = (i / 3) * 6; String species = i == 8 ? "crow" : FamiliarCatalog.ALL.get(i).key();
             out.add(ShowcasePlacement.label(x, z, ShowcasePlacement.Line.translated("showcase.herbalwitch.familiar." + species), ShowcasePlacement.Line.translated("showcase.herbalwitch.familiar.display")));
             for (int dx = 1; dx < 5; dx++) for (int dz = 1; dz < 5; dz++) out.add(ShowcasePlacement.floor(x + dx, z + dz, () -> Blocks.GRASS_BLOCK.defaultBlockState()));
         }
         for (int i = 0; i < 3; i++) {
-            int supplies = i, x = i * 6;
+            int supplies = i, x = i * 4;
             out.add(ShowcasePlacement.label(x, 18, ShowcasePlacement.Line.translated("showcase.herbalwitch.familiar.supplies." + i)));
             out.add(ShowcasePlacement.content(x + 1, 1, 18, () -> Blocks.BARREL.defaultBlockState(), block -> {
                 if (block instanceof BarrelBlockEntity barrel) { int slot = 0; for (var item : supplies(supplies)) barrel.setItem(slot++, new ItemStack(item)); }

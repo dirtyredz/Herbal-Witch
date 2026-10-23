@@ -36,11 +36,11 @@ public final class ToolManifest {
   Map.entry("wand.herbalwitch.mode.light","Light"),
   Map.entry("wand.herbalwitch.mode.focus","Ritual and ward focus"),
   Map.entry("wand.herbalwitch.mode.familiar","Familiar commands"),
-  Map.entry("wand.herbalwitch.action.harvest","Harvest one mature herb or vanilla crop and leave it growing."),
+  Map.entry("wand.herbalwitch.action.harvest","Harvest one mature herb, wheat, carrot, potato or beetroot crop and leave it growing."),
   Map.entry("wand.herbalwitch.action.plant","Plant one seed from your offhand on suitable soil."),
   Map.entry("wand.herbalwitch.action.water","Moisten one farmland or herb bed without changing its enrichment."),
   Map.entry("wand.herbalwitch.action.collect","Gather nearby loose items at your aim point into available inventory space."),
-  Map.entry("wand.herbalwitch.action.light","Light an unlit candle, campfire, or fueled hearth or stove."),
+  Map.entry("wand.herbalwitch.action.light","Light an unlit vanilla candle (including on cake), campfire, or fueled hearth or stove."),
   Map.entry("wand.herbalwitch.action.focus","Open an altar, ritual circle or ward. Their normal ownership and costs apply."),
   Map.entry("wand.herbalwitch.action.familiar","Use on your loaded familiar for commands; use elsewhere for your roster."),
   Map.entry("wand.herbalwitch.result.success","Wand utility ready."),
@@ -72,5 +72,9 @@ public final class ToolManifest {
   Map.entry("showcase.herbalwitch.wand.harvest","Harvest / replant"),
   Map.entry("showcase.herbalwitch.wand.herbs","Mature herb"),
   Map.entry("showcase.herbalwitch.wand.water","Water / plant bed"),
-  Map.entry("showcase.herbalwitch.wand.light","Light this candle"));}
+  Map.entry("showcase.herbalwitch.wand.light","Light this candle"),
+  Map.entry("showcase.herbalwitch.broom.controls","Jump up; Ctrl down"),
+  Map.entry("showcase.herbalwitch.broom.exit","R land; Sneak off"),
+  Map.entry("showcase.herbalwitch.wand.focus","Focus: altar / ward"),
+  Map.entry("showcase.herbalwitch.wand.familiar","Familiar: roster"));}
 }

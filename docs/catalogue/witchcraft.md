@@ -276,3 +276,5 @@ The wand's V selector chooses Harvest, Plant, Water, Collect, Light, Ritual/Ward
 Focus opens the existing M7 menus: no free ritual, bypassed consent or ward ownership. Familiar mode opens M9 roster/detail controls and retains command, mobile-cap, home, recall-cost and recall-cooldown rules. Utilities require witch status, reject casting while riding a broom, and charge nothing on refusal. Selector preference persists in item NBT; unknown schemas remain unusable and unchanged.
 
 The grimoire quotes synchronized tool limits and links live crafting/repair recipes. Witchcraft showcase plots include stocked but unstarted stations, fresh/worn brooms, a marked practice strip, wand/seeds, mature crops and herbs, a dry bed and an unlit candle. Signs stand beside their samples. Showcase construction grants no witch status, energy or ownership.
+
+See the [complete tool reference](tools.md) for exact acquisition, controls and lifecycle rules.

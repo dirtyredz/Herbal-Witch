@@ -133,11 +133,11 @@ public final class ShowcaseContentGameTests {
         check(scan.blocks.getOrDefault(BotanyBlocks.herbBed(), 0) >= 56, "herb beds " + scan.blocks.get(BotanyBlocks.herbBed()));
         // one per herb, powders, products, grimoire and altar supplies; Milestone 7: three preparation barrels, circle supplies, charms
         check(scan.barrels == HerbCatalog.ALL.size() + 4 + 5 + 1 + 3 + 2, "sample barrels " + scan.barrels);
-        for (String tool : java.util.List.of("broom_stand", "wand_bench")) {
+        for (String tool : java.util.List.of("broom", "wand")) {
             var area = plan.areas().stream().filter(a -> a.id().equals(tool)).findFirst().orElseThrow();
             var barrel = (Container) helper.getLevel().getBlockEntity(helper.absolutePos(ORIGIN.offset(area.x()+1,1,area.z()+ShowcasePlan.HEADING_ROWS+4)));
             check(barrel != null, "tool supply barrel absent");
-            check(barrel.countItem(tool.equals("broom_stand") ? io.github.dirtyredz.herbalwitch.magic.broom.registry.BroomItems.BROOM.get() : io.github.dirtyredz.herbalwitch.magic.wand.registry.WandItems.WAND.get()) == (tool.equals("broom_stand") ? 2 : 1), "tool supplies incomplete");
+            check(barrel.countItem(tool.equals("broom") ? io.github.dirtyredz.herbalwitch.magic.broom.registry.BroomItems.BROOM.get() : io.github.dirtyredz.herbalwitch.magic.wand.registry.WandItems.WAND.get()) == (tool.equals("broom") ? 2 : 1), "tool supplies incomplete");
         }
         var animalArea = plan.areas().stream().filter(a -> a.id().equals("animals")).findFirst().orElseThrow();
         var supplies = (Container) helper.getLevel().getBlockEntity(helper.absolutePos(ORIGIN.offset(animalArea.x() + 24, 1, animalArea.z() + ShowcasePlan.HEADING_ROWS)));
@@ -165,7 +165,7 @@ public final class ShowcaseContentGameTests {
         }
         var familiarArea = plan.areas().stream().filter(a -> a.id().equals("familiars")).findFirst().orElseThrow();
         for (int i = 0; i < 3; i++) {
-            var barrel = (Container) helper.getLevel().getBlockEntity(helper.absolutePos(ORIGIN.offset(familiarArea.x() + i * 6 + 1, 1, familiarArea.z() + ShowcasePlan.HEADING_ROWS + 18)));
+            var barrel = (Container) helper.getLevel().getBlockEntity(helper.absolutePos(ORIGIN.offset(familiarArea.x() + i * 4 + 1, 1, familiarArea.z() + ShowcasePlan.HEADING_ROWS + 18)));
             check(barrel != null, "familiar supply barrel absent");
             for (var item : io.github.dirtyredz.herbalwitch.companions.familiars.showcase.FamiliarShowcaseSection.supplies(i)) check(barrel.countItem(item) == 1, "familiar supplies incomplete");
         }
@@ -186,7 +186,7 @@ public final class ShowcaseContentGameTests {
         var homeArea = plan.areas().stream().filter(a -> a.id().equals("familiar_homes")).findFirst().orElseThrow();
         for (var entry : io.github.dirtyredz.herbalwitch.companions.familiars.registry.FamiliarHomes.ALL) {
             check(scan.blocks.getOrDefault(entry.block().get(), 0) == 1, entry.kind() + " home missing or duplicated");
-            var relative = ORIGIN.offset(homeArea.x() + 1 + entry.kind().ordinal() * 3, 1, homeArea.z() + ShowcasePlan.HEADING_ROWS + 1);
+            var relative = ORIGIN.offset(homeArea.x() + 1, 1, homeArea.z() + ShowcasePlan.HEADING_ROWS + 1 + entry.kind().ordinal() * 3);
             var home = (io.github.dirtyredz.herbalwitch.companions.familiars.home.FamiliarHomeBlockEntity) helper.getLevel().getBlockEntity(helper.absolutePos(relative));
             check(home != null && home.writable() && home.occupant() == null && home.owner() == null,
                     "showcase home received a bond or cannot be claimed");

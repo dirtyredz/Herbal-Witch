@@ -34,11 +34,11 @@ public final class ToolTranslations {
   lang.add("wand.herbalwitch.mode.light","Light");
   lang.add("wand.herbalwitch.mode.focus","Ritual and ward focus");
   lang.add("wand.herbalwitch.mode.familiar","Familiar commands");
-  lang.add("wand.herbalwitch.action.harvest","Harvest one mature herb or vanilla crop and leave it growing.");
+  lang.add("wand.herbalwitch.action.harvest","Harvest one mature herb, wheat, carrot, potato or beetroot crop and leave it growing.");
   lang.add("wand.herbalwitch.action.plant","Plant one seed from your offhand on suitable soil.");
   lang.add("wand.herbalwitch.action.water","Moisten one farmland or herb bed without changing its enrichment.");
   lang.add("wand.herbalwitch.action.collect","Gather nearby loose items at your aim point into available inventory space.");
-  lang.add("wand.herbalwitch.action.light","Light an unlit candle, campfire, or fueled hearth or stove.");
+  lang.add("wand.herbalwitch.action.light","Light an unlit vanilla candle (including on cake), campfire, or fueled hearth or stove.");
   lang.add("wand.herbalwitch.action.focus","Open an altar, ritual circle or ward. Their normal ownership and costs apply.");
   lang.add("wand.herbalwitch.action.familiar","Use on your loaded familiar for commands; use elsewhere for your roster.");
   lang.add("wand.herbalwitch.result.success","Wand utility ready.");
@@ -71,5 +71,9 @@ public final class ToolTranslations {
   lang.add("showcase.herbalwitch.wand.herbs","Mature herb");
   lang.add("showcase.herbalwitch.wand.water","Water / plant bed");
   lang.add("showcase.herbalwitch.wand.light","Light this candle");
+  lang.add("showcase.herbalwitch.broom.controls","Jump up; Ctrl down");
+  lang.add("showcase.herbalwitch.broom.exit","R land; Sneak off");
+  lang.add("showcase.herbalwitch.wand.focus","Focus: altar / ward");
+  lang.add("showcase.herbalwitch.wand.familiar","Familiar: roster");
  }
 }

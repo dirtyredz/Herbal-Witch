@@ -16,6 +16,9 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 // Optional-mod runtime profile for headless adapter checks (docs/COMPATIBILITY.md):
 //   -PcompatProfile=base|emi|jei|viewers|farmersdelight|thirst|curios|doggy|all   (default base: no optional mods)
 // Farmer's Delight and Thirst Was Taken come from a local mods folder: -PcompatModsDir=<folder>.
+// Optional isolated qualification world; preserve the ordinary retained test world by default.
+def gameTestRunId = project.findProperty('gameTestRunId')?.toString()
+if (gameTestRunId && !(gameTestRunId ==~ /[a-z0-9_-]{1,64}/)) throw new GradleException('Invalid gameTestRunId')
 def compatProfile = (project.findProperty('compatProfile') ?: 'base').toString()
 if (!(compatProfile in ['base', 'emi', 'jei', 'viewers', 'farmersdelight', 'thirst', 'curios', 'doggy', 'all'])) {
     throw new GradleException("Unknown compatProfile '${compatProfile}'")
@@ -75,7 +78,7 @@ minecraft {
 
         // Headless: a dedicated server that runs every GameTest in the herbalwitch namespace, then exits.
         gameTestServer {
-            workingDirectory project.file('run/gametest')
+            workingDirectory project.file(gameTestRunId ? "run/gametest-${gameTestRunId}" : 'run/gametest')
             property 'forge.enabledGameTestNamespaces', mod_id
             mods {
                 "${mod_id}" {

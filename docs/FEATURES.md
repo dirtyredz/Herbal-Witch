@@ -251,6 +251,6 @@ Owner checks still pending: species silhouettes and animation, equipped/rest pos
 
 ## M10: broom and wand (qualification in progress)
 
-Both checked-placement tool stations, physical broom lifecycle and client controls, seven wand selectors, shared harvesting/fuel transactions, owned Blockbench drafts and live-rule grimoire pages are implemented. The witchcraft showcase keeps its existing station plots and adds practice supplies with adjacent signs. Version remains 0.8.0 while restart and complete server acceptance are pending.
+Both checked-placement tool stations, physical broom lifecycle and client controls, seven wand selectors, shared harvesting/fuel transactions, owned Blockbench drafts and live-rule grimoire pages are implemented. Four witchcraft showcase sections separate the unstarted stations from practice supplies, with adjacent signs. Version remains 0.8.0 while restart and complete server acceptance are pending.
 
 Phase evidence: ac7104d passed 475 unit tests and 300 ANU GameTests. 85f4473 passed 478 local unit tests and 87 Node tests; its ANU run exposed short-block targeting fixtures and shared-batch drop contamination, under correction. Headless model previews cover both station states and every authored held-tool transform. Owner checks remain in-game pose, shaders, remapped controls and two-client presentation; no client was launched.

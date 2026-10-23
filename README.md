@@ -14,6 +14,8 @@ Automated acceptance for M1 to M5 passed headless (unit tests and GameTests on t
 and M7 acceptance is tracked in docs/FEATURES.md. Owner review of the art (the 89 M5 pieces, the
 altar and the six M7 pieces are agent first drafts), the station UIs, the grimoire, the furniture and
 the witch behaviour in game, with two clients, is pending.
+M10 tool implementation is undergoing final qualification: a broom stand crafts and repairs physical flying brooms, and a wand bench carves a wand with seven utility selectors. Broom controls are movement keys, Jump, Left Control (descend), R (land) and Sneak (dismount); the V wand selector and broom actions are remappable. Both tool stations require an attending witch to press Start. See [the tool catalogue](docs/catalogue/tools.md) for utility boundaries and [restart qualification](tools/test/README.md) for the dedicated-server check.
+
 Later systems are listed in docs/FEATURES.md. Not published; not in any pack.
 
 Ordinary animal care is implemented in this candidate: grind species-specific herbal bait, feed at
@@ -269,7 +271,7 @@ hanging pieces under ceilings, lights lit, storage stocked and the door in its f
 
 - **Where:** the first box starts 2 blocks east of you on your row and extends east and south. The floor is
   the block you stand on. Height 8 (floor layer plus 7 cleared). Sections pack into rows no wider than 126. The
-  furniture showcase is 41 x 8 x 28 and the witchcraft showcase 126 x 8 x 60 in two rows, including sixteen live animal habitats (the single
+  furniture showcase is 41 x 8 x 28 and the witchcraft showcase 125 x 8 x 60 in two rows, including sixteen live animal habitats (the single
   showcase was 121 x 8 x 38 before the split); hard caps per box are 128 x 8 x 128 and 65,536 writes.
 - **Signs:** a sign for a block stands on the floor in the block's own front row, one block west of it (your
   right as you face it), so it never hides the block; the block north of every sign stays open. Notes that
@@ -362,5 +364,5 @@ remain quarantined; operators can inspect them with /herbalwitch familiar. The f
 command, crafting and recovery reference is [familiars.md](docs/catalogue/familiars.md).
 
 The witchcraft showcase contains 25 animal appearances, including nine inert familiar displays,
-three functional homes and familiar supplies. Its measured bounds remain 126 x 8 x 60; furniture
+three functional homes and familiar supplies. Its measured bounds remain 125 x 8 x 60; furniture
 remains 41 x 8 x 28. All labels retain the sign-beside-block rule.

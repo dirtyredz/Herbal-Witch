@@ -137,3 +137,7 @@ Green ANU runs at `2237de0`: EMI-only `HerbalWitch-2237de0e20833d758241c5fd-2026
 The separate doggy profile loads the supplied Doggy Talents Next 1.19.1 jar and runs a real registered dog through binding/capture refusal, asserting unchanged health, item, energy and both authorities. It is intentionally separate from the ordinary all profile.
 
 Doggy Talents Next passed all 286 required tests at 2237de0: ANU HerbalWitch-2237de0e20833d758241c5fd-20261023-060146-4e1 (107 seconds).
+
+## Broom and wand (M10)
+
+Flight keeps server authority with default vanilla flight settings; a wire-decoded vanilla vehicle-position packet cannot move the broom. Wand harvest/plant support the herb catalogue and four explicit vanilla crops. Lighting supports vanilla candles/cakes/campfires plus the existing fueled hearth/stove service. Claim adapters remain action-specific; no installed protection-mod integration or arbitrary modded crop/light support is claimed. Focus and familiar selectors retain the M7/M9 authority and prices. Optional-profile qualification results are recorded in FEATURES.md.

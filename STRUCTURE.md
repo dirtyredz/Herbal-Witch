@@ -474,6 +474,10 @@ Optional native-payload compatibility lives in platform/compat/curios/CuriosNati
 - `apothecary/botany/harvest/`: shared reversible hand/wand herb harvest plan and commit.
 - `src/gameTest/.../magic/wand/fixture/`: actual held-item utility fixtures; sibling GameTests cover gardening, collection, lighting and selection.
 
-- `magic/{broom,wand}/{grimoire,showcase}/`: tool-owned live-rule guides and narrow station/practice plots, registered at bootstrap after the established witchcraft sections.
+- `magic/{broom,wand}/{grimoire,showcase}/`: tool-owned live-rule guides and separate compact station/practice plots, registered at bootstrap after the established witchcraft sections.
 
 - `src/gameTest/.../magic/tools/restart/`: actual world save/reopen qualification for vehicles, packed preferences and interrupted repair. `gradle/magic-tools-test.gradle` isolates the two dedicated runs; `tools/test/` queues them and validates distinct-process evidence.
+
+- `src/test/.../client/fixture/NativeVertices` shares actual vanilla model export between familiar and broom pose tests. `client/broom/BroomRiderPoseTest` exports the seated player; `tools/preview-broom-rider.mjs` combines it with the owned broom model and runtime offsets.
+
+The M10 item/recipe/control reference lives in `docs/catalogue/tools.md`; witchcraft and familiar catalogues link their unchanged service authority.

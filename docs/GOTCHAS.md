@@ -408,3 +408,7 @@ fixture timeout does not change production indexing budgets or power cooldowns.
 M10 tool selection is a preference request, never a cast. Compare the observed hand, selected slot and full held stack before writing it. Both hands and wand copies share actor cooldowns. Collection must preserve partial remainders even in creative inventories. Broom maintenance uses `Change.awardsPractice() == false`; paid station and wand operations retain successful practice.
 
 Tool fixtures must aim at the actual outline height of candles and farmland rather than a unit cube center. Drop-producing wand tests use dedicated batches. The restart harness loads actual saved chunks in two JVMs; separate player NBT is replayed only for payer identity. Ordinary Minecraft player/chunk files do not provide power-loss-atomic deployment or packing.
+
+A null controlling passenger alone does not establish chunk persistence. Vanilla `Entity.shouldBeSaved`, `ServerPlayer` RootVehicle NBT and `PlayerList` logout removal also consult `hasExactlyOnePlayerPassenger`. The broom opts out of that player-owned vehicle path; do not remove this override when changing rider controls.
+
+ANU keeps the ordinary GameTest world between jobs. Changing the test list can reuse plots with old overhead structures, entities or persisted familiar records. Milestone/profile qualification can select `-PgameTestRunId=<unique-id>` to use a fresh world without deleting prior evidence. IDs are restricted to lowercase letters, digits, underscores and hyphens, and cannot escape the repository run directory.

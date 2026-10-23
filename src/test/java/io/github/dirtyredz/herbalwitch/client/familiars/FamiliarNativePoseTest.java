@@ -29,7 +29,7 @@ class FamiliarNativePoseTest {
             for(String pose:List.of("idle",species.equals("bat")?"flight":"walk","rest","guard")) {
                 FamiliarNativePose.reset(root);sampleNativeLocomotion(root,species,pose);
                 FamiliarNativePose.apply(root,species,pose.equals("rest"),pose.equals("guard"));
-                var vertices=new Vertices(species);root.render(new PoseStack(),vertices,0,0);
+                var vertices=new io.github.dirtyredz.herbalwitch.client.fixture.NativeVertices("native:"+species);root.render(new PoseStack(),vertices,0,0);
                 assertTrue(vertices.quads.size()>=12);assertTrue(vertices.pending.isEmpty());
                 var matrix=new PoseStack();root.getChild(anchor.bone()).translateAndRotate(matrix);float[] transform=new float[16];matrix.last().pose().get(transform);
                 for(float value:transform)assertTrue(Float.isFinite(value));
@@ -54,24 +54,6 @@ class FamiliarNativePoseTest {
             var body=root.getChild("body");body.xRot=.785F;
             body.getChild("right_wing").yRot=pose.equals("flight")?.8F:.2F;
             body.getChild("left_wing").yRot=pose.equals("flight")?-.8F:-.2F;
-        }
-    }
-    private static final class Vertices implements VertexConsumer {
-        final String species;final List<Map<String,Object>> quads=new ArrayList<>();final List<double[]> pending=new ArrayList<>(),uvs=new ArrayList<>();
-        double[] position,uv,normal;
-        Vertices(String species){this.species=species;}
-        public VertexConsumer vertex(double x,double y,double z){position=new double[]{16*x,24-16*y,16*z};return this;}
-        public VertexConsumer uv(float u,float v){uv=new double[]{16*u,16*v};return this;}
-        public VertexConsumer normal(float x,float y,float z){normal=new double[]{x,-y,z};return this;}
-        public VertexConsumer color(int r,int g,int b,int a){return this;}
-        public VertexConsumer overlayCoords(int u,int v){return this;}
-        public VertexConsumer uv2(int u,int v){return this;}
-        public void defaultColor(int r,int g,int b,int a){}
-        public void unsetDefaultColor(){}
-        public void endVertex(){
-            for(double value:position)assertTrue(Double.isFinite(value)&&Math.abs(value)<64,"pose escaped bounds");
-            pending.add(position);uvs.add(uv);
-            if(pending.size()==4){quads.add(Map.of("pos",List.copyOf(pending),"uv",List.copyOf(uvs),"normal",normal,"texture","native:"+species,"shade",true));pending.clear();uvs.clear();}
         }
     }
 }
