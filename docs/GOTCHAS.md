@@ -365,3 +365,5 @@ Discovery forms resolve lazily after registration, in seeds/fresh/bundle/powder 
 
 - Ground paths cannot finish in the air above a partial home. Return Home chooses checked adjacent floor within the rest radius; home identity and rest centre stay unchanged.
 - A menu cursor is absent from ordinary player NBT. Familiar equipment receipts retain it until settlement; unresolved transfers never automatically replay or refund.
+
+Familiar revival must start from `INCAPACITATED`, never from a missing ACTIVE UUID. `/kill` administrative damage is excluded from incapacitation, as are unload and other removals. The lethal hook snapshots positive health before vanilla death destroys state. Exact-admission failure quarantines the retained payload and removes the candidate; do not retry or refund by inference.

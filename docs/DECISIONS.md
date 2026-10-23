@@ -659,3 +659,5 @@ Canonical equipment transfers retain cursor escrow and a completed receipt water
 The plan gives fox pouch and raven satchel identical workbench inputs. The workbench has no recipe selector and requires unique inputs. Pending owner preference, fox pouch uses a sweet berry instead of rabbit hide; raven satchel retains rabbit hide. Leather, two string, 200 ticks and 5 energy remain unchanged.
 
 The specified bat chime also duplicates the landed M8 capture charm exactly. Bat chime replaces leather with an iron nugget, retaining its amethyst shard and two string, 200 ticks and 5 energy. M8 capture recipes remain unchanged. Quantity changes alone cannot distinguish recipes because processing accepts at least the required count.
+
+M9 recovery distinguishes actual lethal gameplay damage from administrative deletion. A lethal damage checkpoint retires the live incarnation without loot; revival restores half maximum health, clears familiar temporary buffs and keeps prepaid reserve unchanged. Level-two recovery commands never directly spawn or invent payloads, and cannot release unresolved inventory/payment escrow.

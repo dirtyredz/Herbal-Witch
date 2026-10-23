@@ -54,6 +54,16 @@ public final class FamiliarCommandGoal extends Goal {
         }
         if (mob.getHealth() < mob.getMaxHealth() * .25F) {
             var threat = guard.target(); guard.clear();
+            var home = FamiliarHomeTarget.resolve(mob, record);
+            Vec3 centre = home.position() != null && mob.position().distanceToSqr(home.position()) <= 64 * 64
+                    ? home.position().add(0, -1, 0) : owner != null && owner.level() == mob.level()
+                    && mob.distanceToSqr(owner) <= 64 * 64 ? owner.position() : null;
+            if (centre != null) {
+                var safe = FamiliarDestinations.near((ServerLevel) mob.level(), mob, centre, owner, 1);
+                if (safe.isPresent() && FamiliarDestinations.routeLoaded(mob, safe.get())) {
+                    hold(safe.get(), 1.2); motion.status("retreating"); return;
+                }
+            }
             Vec3 refuge = threat == null ? mob.position() : mob.position().add(mob.position().subtract(threat.position()).normalize().scale(4));
             escape(refuge, owner); motion.status("retreating"); return;
         }

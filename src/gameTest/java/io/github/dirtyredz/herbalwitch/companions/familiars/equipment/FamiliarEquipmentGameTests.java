@@ -62,6 +62,9 @@ public final class FamiliarEquipmentGameTests {
                     menu.clicked(1, 0, ClickType.PICKUP, owner);
                     check(menu.getCarried().is(bell) && FamiliarEquipmentInventory.item(b.record(), 1).isEmpty() && FamiliarPlayerReceipt.pending(owner), "cursor was not durably held");
                     check(b.record().state().getCompound("receipt").contains("cursor"), "cursor missing from receipt");
+                    float health = b.mob().getHealth();
+                    b.mob().hurt(b.mob().damageSources().generic(), 1000);
+                    check(b.mob().isAlive() && b.mob().getHealth() == health, "pending cursor allowed destructive damage");
                     h.runAfterDelay(6, () -> {
                         menu.clicked(2, 0, ClickType.PICKUP, owner);
                         check(menu.getCarried().isEmpty() && owner.getInventory().getItem(9).is(bell) && !FamiliarPlayerReceipt.pending(owner), "normal extraction did not settle");

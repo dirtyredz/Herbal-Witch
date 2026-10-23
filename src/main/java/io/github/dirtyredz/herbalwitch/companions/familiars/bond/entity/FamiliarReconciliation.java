@@ -14,6 +14,7 @@ public final class FamiliarReconciliation {
     private record Permit(Mob entity, UUID transaction, long generation) {}
     private static final Map<MinecraftServer, Permit> PERMITS = new WeakHashMap<>();
     private static final Map<Mob, Boolean> WAITING = new WeakHashMap<>();
+    private static final Set<Mob> HELD = Collections.newSetFromMap(new WeakHashMap<>());
     private FamiliarReconciliation() {}
     public static AutoCloseable permit(Mob candidate, FamiliarRecord r) {
         var server = candidate.getServer();
@@ -24,7 +25,7 @@ public final class FamiliarReconciliation {
     public static Optional<FamiliarRecord> record(Mob mob) {
         if (!(mob.level() instanceof ServerLevel level)) return Optional.empty();
         var store = FamiliarStore.get(level.getServer());
-        if (!store.ready()) return Optional.empty();
+        if (!store.ready() || HELD.contains(mob)) return Optional.empty();
         return store.creature(mob.getUUID()).filter(r -> store.writable(r.bond()) && r.phase() == FamiliarRecord.Phase.ACTIVE
                 && !r.state().contains("receipt") && matches(mob, r));
     }
@@ -44,7 +45,15 @@ public final class FamiliarReconciliation {
         var store = FamiliarStore.get(level.getServer());
         return FamiliarBinding.of(mob).filter(cap -> !cap.empty()).isPresent() || store.creature(mob.getUUID()).isPresent() || WAITING.containsKey(mob);
     }
-    public static boolean suspended(Mob mob) { return WAITING.containsKey(mob); }
+    public static boolean suspended(Mob mob) {
+        if (WAITING.containsKey(mob) || HELD.contains(mob)) return true;
+        if (!(mob.level() instanceof ServerLevel level)) return false;
+        var store = FamiliarStore.get(level.getServer());
+        return store.creature(mob.getUUID()).map(r -> !store.writable(r.bond())
+                || r.phase() != FamiliarRecord.Phase.ACTIVE || r.state().contains("receipt")).orElse(false);
+    }
+    /** A failed critical snapshot keeps the live object inert until explicit administrative recovery. */
+    public static void hold(Mob mob) { mob.getNavigation().stop(); mob.setTarget(null); HELD.add(mob); }
     public static void join(EntityJoinLevelEvent event) {
         if (!(event.getLevel() instanceof ServerLevel level) || !(event.getEntity() instanceof Mob mob)) return;
         var store = FamiliarStore.get(level.getServer());
@@ -85,5 +94,6 @@ public final class FamiliarReconciliation {
     }
     public static void stopped(MinecraftServer server) {
         PERMITS.remove(server); WAITING.keySet().removeIf(mob -> mob.getServer() == server);
+        HELD.removeIf(mob -> mob.getServer() == server);
     }
 }

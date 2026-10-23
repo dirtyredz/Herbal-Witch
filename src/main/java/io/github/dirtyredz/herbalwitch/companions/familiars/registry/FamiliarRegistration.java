@@ -49,8 +49,12 @@ public final class FamiliarRegistration {
                 && FamiliarReconciliation.matches(mob, r)).isPresent());
         AltarActions.register(FamiliarActionCatalog.BINDING, BindingAction::begin);
         AltarSessionService.handle(FamiliarActionCatalog.BINDING, new BindingAction());
+        AltarActions.register(FamiliarActionCatalog.REVIVAL, io.github.dirtyredz.herbalwitch.companions.familiars.ritual.RevivalAction::begin);
+        AltarSessionService.handle(FamiliarActionCatalog.REVIVAL, new io.github.dirtyredz.herbalwitch.companions.familiars.ritual.RevivalAction());
         bus.addListener(FamiliarLifecycleEvents::capabilities);
         var forge = MinecraftForge.EVENT_BUS;
+        forge.addListener(EventPriority.LOWEST, io.github.dirtyredz.herbalwitch.companions.familiars.recovery.FamiliarIncapacitation::damage);
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.admin.FamiliarRecoveryCommand::register);
         forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.equipment.FamiliarCharmAdapter::tick);
         forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.equipment.FamiliarEquipmentEffects::tick);
         forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.equipment.FamiliarEquipmentVisuals::tick);

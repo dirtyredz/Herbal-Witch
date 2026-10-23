@@ -42,7 +42,7 @@ public final class FamiliarManifest {
             out.put("grimoire.herbalwitch.ritual.familiar." + action + ".offering", null);
             out.put("category.herbalwitch.ritual.result.familiar." + action, null);
         }
-        for (String key : List.of("not_witch", "disabled", "no_target", "indexing", "already_bound", "species", "range", "danger", "owner", "trust", "permission", "care_read_only", "capture_read_only", "capture_lineage", "begun", "bound", "interrupted")) {
+        for (String key : List.of("not_witch", "disabled", "no_target", "indexing", "already_bound", "species", "range", "danger", "owner", "trust", "permission", "care_read_only", "capture_read_only", "capture_lineage", "begun", "bound", "revived", "interrupted")) {
             out.put("ritual.herbalwitch.familiar." + key, null); out.put("ritual.herbalwitch.cancel.familiar_" + key, null);
         }
         return out;
