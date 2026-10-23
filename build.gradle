@@ -185,8 +185,4 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
 
-apply from: 'gradle/familiars.gradle'
-
-apply from: 'gradle/magic-tools-test.gradle'
-
-apply from: 'gradle/commerce-tests.gradle'
+apply from: 'gradle/qualification.gradle'

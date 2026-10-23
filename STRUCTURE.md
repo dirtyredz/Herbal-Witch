@@ -155,7 +155,7 @@ herbalwitch/
 - `src/test/java/io/github/dirtyredz/herbalwitch/data/stations/shop/` — the independent commerce resource manifest and resource tests
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/apothecary/shop/` — commerce GameTests by responsibility; `fixture/` shared shop setup; `persistence/` restart qualification
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/apothecary/shop/ledger/transaction/` — the test-only player checkpoint fault probe (same package as the production seam)
-- `tools/commerce/restart/` — the commerce restart report validator and its README
+- `tools/qualification/restart/commerce/` — the commerce restart report validator and its README
 - `tools/preview/scenes/shop/` — commerce review scenes
 
 **src/main/java: client**
@@ -353,10 +353,21 @@ herbalwitch/
 - `tools/models/` — the procedural model code: `geometry` (boxes, planes, position UVs, buried-face removal), `model-output` (model JSON serialisation shared with the Blockbench compiler), `textures`, `catalogue` (families and owned directories); `botany/` (bed, herbs, coplanar separation for organic models), `preparations/` (dried bundles, also the Blockbench attachments)
 - `tools/preview/` — the headless model previewer: `assets/` (resource lookup, model inheritance, vanilla parents), `geometry/` (element baking, transforms, item sprites, coplanar-face detection), `render/` (cameras, rasterizer), `scenes/` (blockstate evaluation, review scenes), `report/` (coverage, the z-fighting sweep, sheets, manifest), `test/` (node --test)
 
+**qualification (Milestone 12; never packaged)**
+
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/qualification/` — grouping parent: cross-milestone release qualification
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/qualification/upgrade/` — save-upgrade phases: open a historical world's chunks and players, touch, re-save, first job tick
+- `tools/qualification/` — grouping parent: release qualification tooling (Node and PowerShell)
+- `tools/qualification/restart/` — grouping parent: the M9-M11 restart report validators
+- `tools/qualification/restart/familiars/` — familiar restart report
+- `tools/qualification/restart/magic-tools/` — broom/wand restart report and queue script
+- `tools/qualification/restart/commerce/` — commerce restart report
+- `tools/qualification/save-upgrade/` — lossless NBT and Anvil reading/writing, fixture sanitising, inventories and the upgrade comparison
+
 **other (gradle, docs)**
 
 - `docs/` — architecture, decisions, gotchas, features, art, compatibility; `docs/catalogue/` traces the design to implementation
-- `gradle/` — `art.gradle` (the art pipeline tasks); the wrapper comes from the workspace template
+- `gradle/` — `art.gradle` (the art pipeline tasks) and `qualification.gradle` (every ANU-only dedicated-JVM harness, one shared phase factory); the wrapper comes from the workspace template
 
 ## Components
 
@@ -488,7 +499,7 @@ and owned texture directories. `companions/familiars/grimoire/` owns the install
 `data/client/familiars/FamiliarGuideTranslations` supplies its prose. `showcase/` owns nine inert
 appearance samples and supply barrels. Acquisition tests live in `src/gameTest/.../familiars/acquisition/`.
 
-Restart qualification belongs in gradle/familiars.gradle and tools/familiars/restart/. Test-world
+Restart qualification belongs in gradle/qualification.gradle and tools/qualification/restart/familiars/. Test-world
 support lives in src/gameTest/.../companions/familiars/persistence/; the test-only SnapshotProbe
 adapter lives in src/gameTest/.../platform/persistence/. Neither ships in the release jar.
 
@@ -510,7 +521,7 @@ Optional native-payload compatibility lives in platform/compat/curios/CuriosNati
 
 - `magic/{broom,wand}/{grimoire,showcase}/`: tool-owned live-rule guides and separate compact station/practice plots, registered at bootstrap after the established witchcraft sections.
 
-- `src/gameTest/.../magic/tools/restart/`: actual world save/reopen qualification for vehicles, packed preferences and interrupted repair. `gradle/magic-tools-test.gradle` isolates the two dedicated runs; `tools/test/` queues them and validates distinct-process evidence.
+- `src/gameTest/.../magic/tools/restart/`: actual world save/reopen qualification for vehicles, packed preferences and interrupted repair. `gradle/qualification.gradle` isolates the two dedicated runs; `tools/qualification/restart/magic-tools/` queues them and validates distinct-process evidence.
 
 - `src/test/.../client/fixture/NativeVertices` shares actual vanilla model export between familiar and broom pose tests. `client/broom/BroomRiderPoseTest` exports the seated player; `tools/preview-broom-rider.mjs` combines it with the owned broom model and runtime offsets.
 

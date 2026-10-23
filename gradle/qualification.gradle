@@ -1,0 +1,119 @@
+// Release qualification harnesses (ANU only; none is part of build or check). Each one starts
+// separate dedicated GameTest JVMs, in sequence, on its own disposable world and validates their
+// evidence with a Node report. docs/qualification/README.md lists them.
+//
+// Forge resolves launch tokens inside MinecraftRunTask.exec(), not in JavaExec's getters, so every
+// phase uses that task type with a copy of the fully merged dedicated GameTest run configuration.
+def harnessConfigType = minecraft.runs.gameTestServer.class
+def harnessTaskType = harnessConfigType.classLoader.loadClass('net.minecraftforge.gradle.common.util.runs.MinecraftRunTask')
+def nodeCommand = { (project.findProperty('nodeExecutable') ?: 'node').toString() }
+
+// Every harness namespace gets the shared empty GameTest template.
+def harnessNamespaces = ['herbalwitch_restart', 'herbalwitch_tools_restart', 'herbalwitch_commerce_restart',
+                         'herbalwitch_capture_restart', 'herbalwitch_save_upgrade', 'herbalwitch_performance']
+tasks.named('processGameTestResources').configure {
+    harnessNamespaces.each { ns ->
+        from('src/gameTest/resources/data/herbalwitch/structures/empty.nbt') { into "data/${ns}/structures" }
+    }
+}
+
+/** One dedicated GameTest JVM running only {@code namespace}, in {@code workingDir}, with system properties. */
+def dedicatedPhase = { String taskName, File workingDir, String namespace, Map<String, String> properties, List<String> after ->
+    tasks.register(taskName, harnessTaskType) {
+        group = 'verification'
+        dependsOn { def base = tasks.named('runGameTestServer').get(); base.taskDependencies.getDependencies(base) }
+        after.each { dependsOn it }
+        runConfig.set(providers.provider {
+            def base = tasks.named('runGameTestServer', JavaExec).get()
+            def config = harnessConfigType.getConstructor(Project, String).newInstance(project, taskName)
+            config.merge(base.runConfig.get(), true)
+            // RunConfig.merge deliberately omits token maps, including the JPMS module path.
+            config.setTokens(base.runConfig.get().tokens)
+            config.setLazyTokens(base.runConfig.get().lazyTokens)
+            if (config.client || !config.args.contains('forgegametestserveruserdev') || !config.main) {
+                throw new GradleException('Qualification harness requires the resolved dedicated GameTest launch target')
+            }
+            config.workingDirectory(workingDir)
+            config.property('forge.enabledGameTestNamespaces', namespace)
+            properties.each { k, v -> config.property(k, v) }
+            config
+        })
+        mainClass.set(runConfig.map { it.main })
+        classpath = files(providers.provider { tasks.named('runGameTestServer').get().classpath })
+        minecraftArtifacts.from(providers.provider { tasks.named('runGameTestServer').get().minecraftArtifacts })
+        runtimeClasspathArtifacts.from(providers.provider { tasks.named('runGameTestServer').get().runtimeClasspathArtifacts })
+        additionalClientArgs.set([])
+    }
+}
+
+/** A prepare/verify restart harness: two JVMs on one fresh world, then the report validator. */
+def restartHarness = { String name, String phasePrefix, String namespace, String propertyPrefix, String report, String description ->
+    def run = file("run/${phasePrefix}-restart/${UUID.randomUUID()}")
+    def evidence = new File(run, 'evidence')
+    def props = { String phase -> [(propertyPrefix + '.phase'): phase, (propertyPrefix + '.evidence'): evidence.absolutePath] }
+    def cap = phasePrefix.capitalize()
+    dedicatedPhase("run${cap}RestartPrepare", run, namespace, props('prepare'), [])
+    dedicatedPhase("run${cap}RestartVerify", run, namespace, props('verify'), ["run${cap}RestartPrepare"])
+    tasks.register(name, Exec) {
+        group = 'verification'
+        delegate.description = description
+        dependsOn "run${cap}RestartVerify"
+        commandLine nodeCommand(), report, evidence.absolutePath
+    }
+}
+
+restartHarness('familiarRestartTest', 'familiar', 'herbalwitch_restart', 'herbalwitch.restart',
+        'tools/qualification/restart/familiars/verify-report.mjs',
+        'ANU only: two dedicated JVMs qualify actual familiar checkpoints.')
+restartHarness('magicToolsRestartTest', 'magicTools', 'herbalwitch_tools_restart', 'herbalwitch.tools.restart',
+        'tools/qualification/restart/magic-tools/magic-tools-restart-report.mjs',
+        'ANU only: two dedicated JVMs qualify physical broom, packed tools and interrupted repair persistence.')
+restartHarness('commerceRestartTest', 'commerce', 'herbalwitch_commerce_restart', 'herbalwitch.commerce.restart',
+        'tools/qualification/restart/commerce/verify-report.mjs',
+        'ANU only: two dedicated JVMs reconcile commerce transfers stopped at every durable boundary.')
+
+// Save upgrade (Milestone 12): historical worlds prepared by tools/qualification/save-upgrade/fixture.mjs.
+// -PsaveUpgradeFixtures=<dir> holds one prepared fixture per subdirectory (world/, before.json,
+// chunks.txt, receipt.json). Three JVMs per fixture: upgrade (load, re-save), reload (load, re-save:
+// must be byte-for-byte stable) and behave (first ticks of saved jobs), then compare.mjs.
+def saveFixtureRoot = project.findProperty('saveUpgradeFixtures')?.toString()
+def saveRun = file("run/save-upgrade/${UUID.randomUUID()}")
+def saveCompares = []
+if (saveFixtureRoot) {
+    (file(saveFixtureRoot).listFiles() ?: []).findAll { new File(it, 'receipt.json').isFile() }.sort { it.name }.each { fixture ->
+        def label = fixture.name.replaceAll(/[^A-Za-z0-9]/, '_')
+        def dir = new File(saveRun, label)
+        def prop = { String phase -> ['herbalwitch.upgrade.phase': phase, 'herbalwitch.upgrade.fixture': fixture.absolutePath,
+                                      'herbalwitch.upgrade.evidence': new File(dir, 'evidence').absolutePath] }
+        tasks.register("prepareSaveUpgrade_${label}", Sync) {
+            from new File(fixture, 'world')
+            into new File(dir, 'world')
+        }
+        dedicatedPhase("runSaveUpgrade_${label}_upgrade", dir, 'herbalwitch_save_upgrade', prop('upgrade'), ["prepareSaveUpgrade_${label}"])
+        tasks.register("snapshotSaveUpgrade_${label}_after1", Sync) {
+            dependsOn "runSaveUpgrade_${label}_upgrade"
+            from new File(dir, 'world')
+            into new File(dir, 'after1')
+        }
+        dedicatedPhase("runSaveUpgrade_${label}_reload", dir, 'herbalwitch_save_upgrade', prop('reload'), ["snapshotSaveUpgrade_${label}_after1"])
+        tasks.register("snapshotSaveUpgrade_${label}_after2", Sync) {
+            dependsOn "runSaveUpgrade_${label}_reload"
+            from new File(dir, 'world')
+            into new File(dir, 'after2')
+        }
+        dedicatedPhase("runSaveUpgrade_${label}_behave", dir, 'herbalwitch_save_upgrade', prop('behave'), ["snapshotSaveUpgrade_${label}_after2"])
+        tasks.register("compareSaveUpgrade_${label}", Exec) {
+            dependsOn "runSaveUpgrade_${label}_behave"
+            commandLine nodeCommand(), 'tools/qualification/save-upgrade/compare.mjs', fixture.absolutePath, dir.absolutePath
+        }
+        saveCompares << "compareSaveUpgrade_${label}"
+    }
+}
+tasks.register('saveUpgradeTest') {
+    group = 'verification'
+    description = 'ANU only: historical worlds upgrade into the candidate and stay stable across restarts.'
+    dependsOn saveCompares
+    doFirst {
+        if (saveCompares.isEmpty()) throw new GradleException('saveUpgradeTest needs -PsaveUpgradeFixtures=<dir of prepared fixtures>')
+    }
+}

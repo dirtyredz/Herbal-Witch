@@ -1,0 +1,5 @@
+{
+  "comment": "Reviewed save migrations. Each entry names a saved field the candidate may rewrite, and why. Nothing here may be inferred from a failing run alone; every rule cites the decision or gotcha that makes the change intended.",
+  "migrations": {},
+  "createdBlockEntities": []
+}

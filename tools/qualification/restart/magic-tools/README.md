@@ -2,7 +2,7 @@
 
 The ANU-only named heavier task `magicToolsRestartTest` starts two sequential dedicated GameTest JVMs against one fresh disposable world under `run/magicTools-restart/<uuid>`. It is excluded from ordinary build/check and must never run locally.
 
-Queue the committed SHA through the workspace's `tools/anu-test.ps1 -Mod HerbalWitch -Ref <sha> -Path <worktree> -Tasks magicToolsRestartTest -Wait`, or use `tools/test/magic-tools-restart.ps1 -WorkspaceRoot <workspace> -Ref <sha>`.
+Queue the committed SHA through the workspace's `tools/anu-test.ps1 -Mod HerbalWitch -Ref <sha> -Path <worktree> -Tasks magicToolsRestartTest -Wait`, or use `tools/qualification/restart/magic-tools/magic-tools-restart.ps1 -WorkspaceRoot <workspace> -Ref <sha>`.
 
 Prepare places a real owner-bound broom, issues an input lease, saves a container holding a named worn broom and all seven wand preferences, and starts an attended repair. The normal server save and shutdown persist the world. Verify loads those actual chunks in another JVM, waits for entity admission, checks exactly one broom and no resumed lease, confirms every packed field and preference, and verifies the interrupted repair remains paused without charging. Cancellation must release the original named broom. An old nonce cannot move the recovered vehicle.
 
