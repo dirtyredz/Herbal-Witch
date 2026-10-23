@@ -12,7 +12,7 @@ tasks.named('processGameTestResources').configure {
         group = 'verification'
         dependsOn { def base = tasks.named('runGameTestServer').get(); base.taskDependencies.getDependencies(base) }
         if (phase == 'Verify') dependsOn 'runFamiliarRestartPrepare'
-        doFirst {
+        runConfig.set(providers.provider {
             def base = tasks.named('runGameTestServer', JavaExec).get()
             def config = familiarConfigType.getConstructor(Project, String).newInstance(project, "familiarRestart${phase}".toString())
             config.merge(base.runConfig.get(), true)
@@ -23,14 +23,13 @@ tasks.named('processGameTestResources').configure {
             config.property('forge.enabledGameTestNamespaces', 'herbalwitch_restart')
             config.property('herbalwitch.restart.phase', phase.toLowerCase(Locale.ROOT))
             config.property('herbalwitch.restart.evidence', familiarEvidence.absolutePath)
-            runConfig.set(config)
-            mainClass.set(config.main)
-            classpath = base.classpath
-            minecraftArtifacts.from(base.minecraftArtifacts)
-            runtimeClasspathArtifacts.from(base.runtimeClasspathArtifacts)
-            additionalClientArgs.set([])
-            if (base.javaLauncher.present) javaLauncher.set(base.javaLauncher)
-        }
+            config
+        })
+        mainClass.set(runConfig.map { it.main })
+        classpath = files(providers.provider { tasks.named('runGameTestServer').get().classpath })
+        minecraftArtifacts.from(providers.provider { tasks.named('runGameTestServer').get().minecraftArtifacts })
+        runtimeClasspathArtifacts.from(providers.provider { tasks.named('runGameTestServer').get().runtimeClasspathArtifacts })
+        additionalClientArgs.set([])
     }
 }
 tasks.register('familiarRestartTest', Exec) {
