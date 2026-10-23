@@ -16,6 +16,9 @@ tasks.named('processGameTestResources').configure {
             def base = tasks.named('runGameTestServer', JavaExec).get()
             def config = familiarConfigType.getConstructor(Project, String).newInstance(project, "familiarRestart${phase}".toString())
             config.merge(base.runConfig.get(), true)
+            // RunConfig.merge deliberately omits token maps, including the JPMS module path.
+            config.setTokens(base.runConfig.get().tokens)
+            config.setLazyTokens(base.runConfig.get().lazyTokens)
             if (config.client || !config.args.contains('forgegametestserveruserdev') || !config.main) {
                 throw new GradleException('Restart harness requires the resolved dedicated GameTest launch target')
             }
