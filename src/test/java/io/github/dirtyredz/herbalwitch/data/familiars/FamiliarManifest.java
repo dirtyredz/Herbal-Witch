@@ -8,6 +8,7 @@ public final class FamiliarManifest {
     private FamiliarManifest() {}
     public static Map<String, String> lang() {
         Map<String, String> out = new LinkedHashMap<>();
+        for (String key : List.of("roster", "detail", "first_page", "next_page", "altar_target", "loading", "health", "loaded", "last_observed", "home", "empty", "select", "stale", "nearby_only")) out.put("familiar.herbalwitch." + key, null);
         for (String s : SPECIES) out.put("entity.herbalwitch.familiars.entity." + s, "Familiar " + Character.toUpperCase(s.charAt(0)) + s.substring(1));
         out.put("ritual.herbalwitch.ui.view_contributed", "Familiar rituals"); out.put("ritual.herbalwitch.ui.contributed_terms", null);
         for (String action : List.of("binding", "revival", "heartwood", "spirit_well", "bond_harmony")) {

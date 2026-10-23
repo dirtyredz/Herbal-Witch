@@ -1,6 +1,6 @@
 # Familiars (M9 implementation in progress)
 
-The first phase supplies canonical bond storage and binding. Version remains 0.6.1 until all M9
+The first phases supply canonical bond storage, binding and the private roster. Version remains 0.6.1 until all M9
 phases, headless previews and the committed ANU acceptance are complete. Section 7 defaults of the
 binding plan remain unchanged.
 
@@ -26,3 +26,10 @@ has one monotonic receipt marker, never a copied roster. Preserve these files wi
 The five native-derived entities preserve UUID, native appearance, ownership, intrinsic gear and M8
 care. Raven, owl and snake use dedicated wild/bound representations. Art, acquisition spawns and the
 remaining gameplay phases are still in development; these declarations are not milestone acceptance.
+
+Open **Familiars** from the grimoire reader. Pages contain at most 32 summaries and 24 KiB, with a
+keyset cursor and owner revision. Stale actions refresh the page. Unloaded health/location is marked
+last observed; no recovery data, receipts or inventories are sent. Select a row for an altar ritual,
+or open its detail card while the loaded creature is in ordinary reach and sight. Clicking an owned
+familiar with the book uses the same detail access through the existing animal interaction router.
+Losing the book closes the roster; leaving reach closes detail. Neither action loads chunks.

@@ -23,6 +23,8 @@ public final class AnimalInteractionEvents {
     private static final RateLimit REQUESTS = new RateLimit(5, 20);
     private static final Map<UUID, Long> USED = new HashMap<>();
     private AnimalInteractionEvents() {}
+    private static final java.util.List<java.util.function.BiPredicate<ServerPlayer, Mob>> INSPECTIONS = new java.util.ArrayList<>();
+    public static void inspection(java.util.function.BiPredicate<ServerPlayer, Mob> contribution) { INSPECTIONS.add(contribution); }
 
     public static void interact(PlayerInteractEvent.EntityInteract event) {
         if (!(event.getTarget() instanceof Mob mob)) return;
@@ -45,7 +47,10 @@ public final class AnimalInteractionEvents {
         AnimalCareAccess.Reason result;
         if (ownItem) result = ((AnimalCareItem) stack.getItem()).apply(player, mob, event.getHand());
         else if (salve) result = AnimalCareService.heal(player, mob, event.getHand());
-        else { AnimalMenu.open(player, mob); return; }
+        else {
+            for (var inspection : INSPECTIONS) if (inspection.test(player, mob)) return;
+            AnimalMenu.open(player, mob); return;
+        }
         if (result != AnimalCareAccess.Reason.READY) message(player, result);
         if (player.containerMenu instanceof AnimalMenu menu) menu.send(player, true);
     }

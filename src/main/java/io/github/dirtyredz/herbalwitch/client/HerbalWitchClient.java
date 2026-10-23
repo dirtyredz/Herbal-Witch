@@ -42,6 +42,7 @@ public final class HerbalWitchClient {
         event.enqueueWork(StationScreens::register);
         event.enqueueWork(GrimoireScreens::register);
         event.enqueueWork(io.github.dirtyredz.herbalwitch.client.animals.AnimalClientState::setup);
+        event.enqueueWork(io.github.dirtyredz.herbalwitch.client.familiars.FamiliarClient::setup);
         event.enqueueWork(DecorClientRegistration::screens);
         event.enqueueWork(AltarScreens::register);
         event.enqueueWork(WitchClientEvents::setup);

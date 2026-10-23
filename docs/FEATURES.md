@@ -20,8 +20,10 @@ M8 ordinary-animal implementation is now a candidate on this branch; M9 implemen
 M9 prerequisites now include the neutral familiar-guide handoff, shared verified snapshot writer and
 shared loaded companion identity index. Their tests preserve M8 capture bytes and guide ordering;
 they do not constitute a 0.8.0 milestone implementation. The first M9 phase adds canonical per-bond
-storage, conservative admission, eight species adapters, and paid altar binding. Its runtime gate is
-being qualified; roster, commands, homes, equipment, abilities, preparations, recovery and art follow.
+storage, conservative admission, eight species adapters, and paid altar binding. ANU job
+`HerbalWitch-m9-familiars-0.8.0-20261022-220551-fa8` at `b63b688` passed 429 JUnit tests and all 237
+required GameTests. The second phase adds private bounded roster pages and nearby detail access;
+commands, homes, equipment, abilities, preparations, recovery and art follow.
 M8 adds six baits, personal loaded-time care state, existing-salve targeting, temporary goal-based
 calming, reused M7 sleep, earned native taming/keepers, a private grimoire card, verified capture
 checkpoints/reconciliation/recovery and sixteen showcase habitats. Exact boundaries and defaults:

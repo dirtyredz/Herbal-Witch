@@ -64,6 +64,10 @@ herbalwitch/
 - `companions/familiars/bond/` — binding eligibility and paid conversion; `data/` owns bounded per-bond shards and derived owner/entity indexes, `entity/` owns lightweight references and admission, `transaction/` owns durable player receipts.
 - `companions/familiars/species/` — exact animal participation and payload adapters; `ground/` and `flying/` contain thin native representations and shared flight mechanics.
 - `companions/familiars/ritual/` — feature-owned altar session handlers through the neutral action registry.
+- `companions/familiars/menu/` and `network/` — owner-derived roster pages, nearby detail sessions and bounded request/projection messages.
+- `client/familiars/` — client bootstrap; `state/` retains only the current private page and `screen/` renders roster/detail cards.
+- `src/test/java/io/github/dirtyredz/herbalwitch/companions/familiars/network/` — wire limits and private projection contracts.
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/companions/familiars/{fixture,menu}/` — real bound entities and private session/nearby access checks.
 - `data/{client,server}/familiars/` — contributions to language and entity tags.
 - `src/test/java/io/github/dirtyredz/herbalwitch/companions/familiars/bond/` — shard bounds, indexing, corruption, receipt and write uncertainty tests.
 - `src/test/java/io/github/dirtyredz/herbalwitch/data/familiars/` — independent resource inventory.

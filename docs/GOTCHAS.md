@@ -1,5 +1,11 @@
 # Gotchas - The Herbal Witch
 
+- **Roster revisions are owner-derived.** Never accept an owner identity from a familiar request.
+  Validate container, nonce, current owner revision and the five-per-second gate before acting;
+  stale revisions refresh. Detail additionally rechecks the live entity, normal reach and sight.
+  The neutral grimoire menu-action and animal inspection contributions keep companions out of
+  their core reader and care implementations. Wire protocol 7 adds the private familiar messages.
+
 - **Initialize native entity goals before suppressing them.** Fox NBT loading restores prey goals
   through fields initialized by `registerGoals`. Native familiar adapters call the native initializer,
   then remove movement/target goals both there and after NBT loading. Skipping initialization crashes

@@ -7,6 +7,12 @@ import java.util.*;
 public final class FamiliarTranslations {
     private FamiliarTranslations() {}
     public static void addTo(LanguageProvider out) {
+        Map.ofEntries(Map.entry("roster", "Familiars"), Map.entry("detail", "Nearby detail"), Map.entry("first_page", "First page"),
+                Map.entry("next_page", "Next page"), Map.entry("altar_target", "Select for altar"), Map.entry("loading", "Reading your familiar bonds…"),
+                Map.entry("health", "Bond %s · %s / %s health · %s"), Map.entry("loaded", "Loaded"), Map.entry("last_observed", "Last observed"),
+                Map.entry("home", "Home: %s"), Map.entry("empty", "No familiar bonds yet."), Map.entry("select", "Select a familiar. Scroll to read this page."),
+                Map.entry("stale", "The roster changed. Review the refreshed page."), Map.entry("nearby_only", "Approach your familiar with a clear line of sight."))
+                .forEach((key, value) -> out.add("familiar.herbalwitch." + key, value));
         for (var species : FamiliarCatalog.ALL) out.add("entity.herbalwitch.familiars.entity." + species.key(), "Familiar " + title(species.key()));
         out.add("ritual.herbalwitch.ui.view_contributed", "Familiar rituals");
         out.add("ritual.herbalwitch.ui.contributed_terms", "%s energy, %s seconds");

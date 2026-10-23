@@ -481,6 +481,12 @@ remain built-ins; contributed handlers share the same sessions and rate-limited 
 encodes action identities explicitly. The client presents one contributed action at a time and sends a
 remembered creature/bond UUID; only the server determines whether it is a valid target.
 
+The grimoire contributes a neutral menu action for the private familiar roster. Owner-index keyset
+pages carry at most 32 summaries and 24 KiB through protocol 7, with a container nonce and owner
+revision. Live observations update snapshots without making unloaded creatures actionable. The nearby
+detail card reuses M8's inspection router and continuously checks book, ownership, sight and reach.
+No inventory, receipt or recovery payload enters these summary packets.
+
 Paths under `src/main/java/io/github/dirtyredz/herbalwitch/`. Implemented so far: decor, apothecary/{botany,stations,brewing},
 showcase, platform/permission, platform/network, compat, grimoire and magic/{witch,ritual,charm,ward}. Later milestones create the rest when needed.
 

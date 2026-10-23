@@ -28,6 +28,7 @@ public final class FamiliarBindingService {
             s.putString("dimension", source.level().dimension().location().toString()); s.putLong("position", source.blockPosition().asLong());
             s.putLong("anchor", source.blockPosition().asLong()); s.putString("anchorDimension", source.level().dimension().location().toString());
             s.putString("name", source.getName().getString());
+            s.putFloat("health", source.getHealth()); s.putFloat("maxHealth", source.getMaxHealth());
         });
         final UUID bond = prepared.bond();
         Mob[] candidate = {null}; boolean[] succeeded = {false};

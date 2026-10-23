@@ -57,4 +57,7 @@ public class GrimoireMenu extends AbstractContainerMenu {
     public ItemStack quickMoveStack(Player player, int index) {
         return ItemStack.EMPTY; // no slots
     }
+    @Override public boolean clickMenuButton(Player player, int button) {
+        return player instanceof net.minecraft.server.level.ServerPlayer server && GrimoireMenuActions.open(server, this, button);
+    }
 }

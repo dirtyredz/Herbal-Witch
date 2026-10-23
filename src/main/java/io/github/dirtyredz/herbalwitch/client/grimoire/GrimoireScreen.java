@@ -36,6 +36,13 @@ public class GrimoireScreen extends AbstractContainerScreen<GrimoireMenu> {
                     Optional.of(new GrimoireView.ReaderLink(menu.containerId, menu.nonce(), menu.access())), filter, Optional.empty());
         }
         view.setBounds(leftPos + 10, topPos + 10, 232, 160);
+        var actions = io.github.dirtyredz.herbalwitch.grimoire.access.menu.GrimoireMenuActions.actions();
+        for (int i = 0; i < actions.size(); i++) {
+            int button = i;
+            addRenderableWidget(net.minecraft.client.gui.components.Button.builder(Component.translatable(actions.get(i).label()),
+                    ignored -> minecraft.gameMode.handleInventoryButtonClick(menu.containerId, button))
+                    .bounds(leftPos + i * 62, topPos + imageHeight + 2, 60, 16).build());
+        }
     }
 
     @Override

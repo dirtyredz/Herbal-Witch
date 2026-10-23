@@ -29,4 +29,18 @@ public final class FamiliarLifecycleEvents {
     public static void attack(net.minecraftforge.event.entity.living.LivingAttackEvent event) {
         if (event.getEntity() instanceof Mob mob && FamiliarReconciliation.suspended(mob)) event.setCanceled(true);
     }
+    public static void observe(net.minecraftforge.event.entity.living.LivingEvent.LivingTickEvent event) {
+        if (!(event.getEntity() instanceof Mob mob) || mob.level().isClientSide || mob.tickCount % 10 != 0) return;
+        FamiliarReconciliation.record(mob).ifPresent(record -> {
+            var state = record.state(); String dimension = mob.level().dimension().location().toString();
+            if (state.getLong("position") == mob.blockPosition().asLong() && state.getString("dimension").equals(dimension)
+                    && state.getFloat("health") == mob.getHealth() && state.getFloat("maxHealth") == mob.getMaxHealth()
+                    && state.getString("name").equals(mob.getName().getString())) return;
+            FamiliarStore.get(mob.getServer()).update(record.change(next -> {
+                next.putLong("position", mob.blockPosition().asLong()); next.putString("dimension", dimension);
+                next.putFloat("health", mob.getHealth()); next.putFloat("maxHealth", mob.getMaxHealth());
+                next.putString("name", mob.getName().getString());
+            }), false);
+        });
+    }
 }

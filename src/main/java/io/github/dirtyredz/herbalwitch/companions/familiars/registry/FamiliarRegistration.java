@@ -21,6 +21,16 @@ public final class FamiliarRegistration {
     private FamiliarRegistration() {}
     public static void register(IEventBus bus) {
         FamiliarEntities.TYPES.register(bus); bus.addListener(FamiliarEntities::attributes);
+        FamiliarMenus.MENUS.register(bus);
+        io.github.dirtyredz.herbalwitch.companions.familiars.network.FamiliarPackets.register();
+        io.github.dirtyredz.herbalwitch.grimoire.access.menu.GrimoireMenuActions.register("familiar.herbalwitch.roster",
+                io.github.dirtyredz.herbalwitch.companions.familiars.menu.FamiliarRosterMenu::open);
+        io.github.dirtyredz.herbalwitch.companions.animals.care.interaction.AnimalInteractionEvents.inspection((owner, mob) -> {
+            if (!FamiliarReconciliation.governed(mob)) return false;
+            FamiliarStore.get(owner.server).creature(mob.getUUID()).filter(r -> r.owner().equals(owner.getUUID())).ifPresent(r ->
+                    io.github.dirtyredz.herbalwitch.companions.familiars.menu.FamiliarDetailMenu.open(owner, r.bond()));
+            return true;
+        });
         FamiliarAnimalProfiles.register();
         AnimalOwnership.register(mob -> FamiliarBinding.of(mob).flatMap(FamiliarBinding::reference).map(FamiliarBinding.Reference::owner).orElse(null));
         AnimalGoalInstaller.exclude(FamiliarReconciliation::governed);
@@ -42,6 +52,8 @@ public final class FamiliarRegistration {
         forge.addListener(FamiliarLifecycleEvents::tick); forge.addListener(FamiliarLifecycleEvents::stopped);
         forge.addListener(EventPriority.HIGHEST, FamiliarLifecycleEvents::living);
         forge.addListener(EventPriority.HIGHEST, FamiliarLifecycleEvents::attack);
+        forge.addListener(EventPriority.LOWEST, FamiliarLifecycleEvents::observe);
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.menu.FamiliarRosterMenu::tick);
         forge.addListener(FamiliarPlayerReceipt::login); forge.addListener(FamiliarPlayerReceipt::clonePlayer);
     }
 }
