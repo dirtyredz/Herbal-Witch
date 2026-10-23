@@ -400,3 +400,7 @@ and familiar snapshots preserve that inert shape; populated slots, extra fields,
 all other foreign capabilities remain refused. This is an empty-payload contract, not Curios storage
 support for familiars. No foreign runtime classes enter the validator.
 Player clone subscribers run at LOWEST priority: Curios revives the old player during its normal-priority clone callback. Copy after that callback, then invalidate the retired player's dispatcher. Capability providers renew invalid LazyOptional handles when Forge legitimately revives an entity, retaining the same durable state.
+
+The first familiar power fixture can also be the server's first batch. It waits for the retained
+CI world's bounded shard index; its 600-tick timeout includes that startup work. Increasing this
+fixture timeout does not change production indexing budgets or power cooldowns.

@@ -21,15 +21,6 @@ public final class BroomFlightController {
   BroomFlightState state=broom.flight().next(permitted,ascend,broom.onGround());
   if(state==BroomFlightState.GROUNDED&&!broom.onGround()&&!supported(broom))state=BroomFlightState.LANDING;
   broom.flight(state);
-  if(state==BroomFlightState.FLYING){
-   var previous=broom.condition();var cost=BroomFlightCost.next(rules.energyPerSecond(),previous.energyRemainder());
-   var next=BroomFlightState.worn(previous,rules.wearInterval(),cost.remainder());
-   boolean paid=WitchStatusService.spend(rider,cost.units(),new WitchStatusService.Change(){
-    public boolean apply(){broom.condition(next);return true;}
-    public void rollback(){broom.condition(previous);}
-   });
-   if(!paid){broom.flight(BroomFlightState.LANDING);state=BroomFlightState.LANDING;}
-  }
   Vec3 velocity;
   if(state==BroomFlightState.FLYING){
    float heading=(float)BroomMotion.turn(broom.getYRot(),rider.getYRot(),rules.turnRate());broom.setYRot(heading);
@@ -41,8 +32,19 @@ public final class BroomFlightController {
    velocity=new Vec3(horizontal.x(),y,horizontal.z());
   }else velocity=new Vec3(0,state==BroomFlightState.LANDING?-rules.landingSpeed()/20:-.02,0);
   Vec3 allowed=bounded(broom,velocity);
+  if(state==BroomFlightState.FLYING&&supported(broom)&&allowed.y<=0){state=BroomFlightState.GROUNDED;broom.flight(state);allowed=new Vec3(0,-.02,0);}
+  if(state==BroomFlightState.FLYING){
+   var previous=broom.condition();var cost=BroomFlightCost.next(rules.energyPerSecond(),previous.energyRemainder());
+   var next=BroomFlightState.worn(previous,rules.wearInterval(),cost.remainder());
+   boolean paid=WitchStatusService.spend(rider,cost.units(),new WitchStatusService.Change(){
+    public boolean apply(){broom.condition(next);return true;}
+    public void rollback(){broom.condition(previous);}
+   });
+   if(!paid){broom.flight(BroomFlightState.LANDING);state=BroomFlightState.LANDING;allowed=bounded(broom,new Vec3(0,-rules.landingSpeed()/20,0));}
+  }
+
   broom.setDeltaMovement(allowed);broom.move(MoverType.SELF,allowed);
-  if(state==BroomFlightState.FLYING&&!broom.onGround()){broom.flew();broom.fallDistance=0;if(rider!=null)rider.fallDistance=0;}
+  if(state==BroomFlightState.FLYING&&!supported(broom)){broom.flew();broom.fallDistance=0;if(rider!=null)rider.fallDistance=0;}
   if(broom.onGround()&&state==BroomFlightState.LANDING){broom.flight(BroomFlightState.GROUNDED);broom.setDeltaMovement(Vec3.ZERO);}
  }
  private static boolean supported(BroomEntity broom){var box=broom.getBoundingBox().move(0,-.03,0);return loaded(broom,box)&&!broom.level().noCollision(broom,box);}

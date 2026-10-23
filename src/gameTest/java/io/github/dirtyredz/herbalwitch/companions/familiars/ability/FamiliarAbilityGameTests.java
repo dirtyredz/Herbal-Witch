@@ -36,7 +36,8 @@ public final class FamiliarAbilityGameTests {
             }
         });
     }
-    @GameTest(template = TEMPLATE, batch = "herbalwitch_familiar_power_targets", timeoutTicks = 100)
+    // First batch also waits for the retained CI world's bounded shard index to become ready.
+    @GameTest(template = TEMPLATE, batch = "herbalwitch_familiar_power_targets", timeoutTicks = 600)
     public static void distractionRejectsPassiveTargetsAndPaysForOneHostile(GameTestHelper h) {
         FamiliarFixtures.bound(h, "fox", "power_targets_" + UUID.randomUUID(), b -> {
             try (var online = OnlinePlayers.register(List.of(b.owner()))) {

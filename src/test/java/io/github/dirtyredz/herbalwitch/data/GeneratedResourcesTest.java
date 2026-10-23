@@ -61,10 +61,7 @@ class GeneratedResourcesTest {
                 lang.put(key, value);
             });
         }
-        lang.put("item.herbalwitch.magic.broom.broom", "Flying Broom");
-        lang.put("item.herbalwitch.magic.wand.wand", "Witch's Wand");
-        lang.put("recipe.herbalwitch.broom.repair", "Up to +%s condition");
-        lang.put("screen.herbalwitch.broom.condition", "Condition: %s -> %s");
+        lang.putAll(io.github.dirtyredz.herbalwitch.data.magic.tools.ToolManifest.lang());
         return lang;
     }
 
@@ -84,7 +81,7 @@ class GeneratedResourcesTest {
         expected.addAll(WardManifest.files());
         expected.addAll(io.github.dirtyredz.herbalwitch.data.animals.AnimalManifest.files());
         expected.addAll(io.github.dirtyredz.herbalwitch.data.familiars.FamiliarManifest.files());
-        for (String tool : List.of("broom", "wand")) expected.add("assets/herbalwitch/models/item/magic/" + tool + "/" + tool + ".json");
+        expected.addAll(io.github.dirtyredz.herbalwitch.data.magic.tools.ToolManifest.files());
         assertEquals(expected, generatedFiles());
     }
 

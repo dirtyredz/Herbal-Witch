@@ -105,7 +105,7 @@ public final class GrimoireContentGameTests {
         check(content.entries().stream().anyMatch(e -> e.key().serialized().equals("guide|herbalwitch:animals/care")), "animal care guide missing");
         check(content.entries().stream().filter(e -> e.key().kind() == EntryKey.Kind.HERB).count() == HerbCatalog.ALL.size(), "herbs");
         long stations = content.entries().stream().filter(e -> e.key().kind() == EntryKey.Kind.STATION).count();
-        check(stations == 10 + 2, "stations, the altar and the circle: " + stations);
+        check(stations == 12 + 2, "stations, the altar and the circle: " + stations);
         check(content.entries().get(0).key().equals(GuideEntries.key("getting_started")), "the book opens on getting started");
         helper.succeed();
     }

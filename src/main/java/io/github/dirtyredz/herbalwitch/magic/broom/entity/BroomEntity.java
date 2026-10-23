@@ -63,7 +63,9 @@ public final class BroomEntity extends Entity {
  @Override public InteractionResult interact(Player player,InteractionHand hand){
   if(level().isClientSide)return InteractionResult.SUCCESS;
   if(!(player instanceof ServerPlayer actor))return InteractionResult.FAIL;
-  return (actor.isShiftKeyDown()?BroomPacking.pack(actor,this):mount(actor))?InteractionResult.CONSUME:InteractionResult.FAIL;
+  boolean success=actor.isShiftKeyDown()?BroomPacking.pack(actor,this):mount(actor);
+  if(!success)actor.displayClientMessage(net.minecraft.network.chat.Component.translatable("broom.herbalwitch.refused"),true);
+  return success?InteractionResult.CONSUME:InteractionResult.FAIL;
  }
  @Override public void tick(){
   super.tick();

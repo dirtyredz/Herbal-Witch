@@ -465,3 +465,6 @@ Optional native-payload compatibility lives in platform/compat/curios/CuriosNati
 - `magic/broom/{config,entity,flight,interaction,lifecycle,network,persistence,registry}/`: validated flight rules, physical entity/item ownership, authenticated rider intent and server movement.
 - `magic/wand/config/`: local utility limits and five prices, installed alongside broom settings in the existing witch rules/config/sync.
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/magic/broom/fixture/`: bounded flight arena setup and authenticated actor fixtures.
+
+- `client/broom/`: remappable intent controls, authoritative condition/state HUD, advisory deployment outline and the reload-aware item-model entity renderer.
+- `data/client/magic/tools/`, `src/test/.../data/magic/tools/`: tool-owned language and independent generated-resource manifest.

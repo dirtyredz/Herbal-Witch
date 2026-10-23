@@ -31,4 +31,7 @@ public final class BroomLifecycleGameTests {
  @GameTest(template=ARENA) public static void fallGraceRequiresActualFlightAndProtectsOnlyOneOrdinaryFall(GameTestHelper h){
   floor(h);var actor=witch(h,"broom_fall",AT.offset(0,0,-2));var b=broom(h,actor);check(b.mount(actor),"mount");actor.stopRiding();var ground=new net.minecraftforge.event.entity.living.LivingFallEvent(actor,20,1);BroomDismount.fall(ground);check(!ground.isCanceled(),"grounded loop granted grace");for(int i=0;i<2;i++)b.tick();up(actor,b);for(int i=0;i<5;i++)b.tick();actor.stopRiding();var fall=new net.minecraftforge.event.entity.living.LivingFallEvent(actor,20,1);BroomDismount.fall(fall);check(fall.isCanceled(),"real flight had no fall grace");var repeat=new net.minecraftforge.event.entity.living.LivingFallEvent(actor,20,1);BroomDismount.fall(repeat);check(!repeat.isCanceled(),"grace reusable");h.succeed();
  }
+ @GameTest(template=ARENA) public static void aBlockedTakeoffCannotFarmFallProtection(GameTestHelper h){
+  floor(h);h.setBlock(AT.above(2),net.minecraft.world.level.block.Blocks.STONE);var actor=witch(h,"broom_blocked_grace",AT.offset(0,0,-2));var b=broom(h,actor);up(actor,b);for(int i=0;i<20;i++)b.tick();actor.stopRiding();var fall=new net.minecraftforge.event.entity.living.LivingFallEvent(actor,20,1);BroomDismount.fall(fall);check(!fall.isCanceled(),"blocked ground takeoff granted grace");check(b.condition().equals(BroomItemData.FRESH),"blocked takeoff advanced wear");h.succeed();
+ }
 }

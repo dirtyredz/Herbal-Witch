@@ -39,6 +39,7 @@ public final class HerbalWitchClient {
 
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
+        event.enqueueWork(io.github.dirtyredz.herbalwitch.client.broom.BroomClientRegistration::setup);
         event.enqueueWork(StationScreens::register);
         event.enqueueWork(GrimoireScreens::register);
         event.enqueueWork(io.github.dirtyredz.herbalwitch.client.animals.AnimalClientState::setup);
@@ -54,6 +55,7 @@ public final class HerbalWitchClient {
 
     @SubscribeEvent
     public static void renderers(EntityRenderersEvent.RegisterRenderers event) {
+        io.github.dirtyredz.herbalwitch.client.broom.BroomClientRegistration.renderers(event);
         DecorClientRegistration.renderers(event);
         PreparationRenderers.renderers(event);
         io.github.dirtyredz.herbalwitch.client.familiars.render.FamiliarNativeRenderers.register(event);
@@ -61,7 +63,11 @@ public final class HerbalWitchClient {
     }
 
     @SubscribeEvent
+    public static void toolKeys(net.minecraftforge.client.event.RegisterKeyMappingsEvent event) { io.github.dirtyredz.herbalwitch.client.broom.BroomClientRegistration.keys(event); }
+
+    @SubscribeEvent
     public static void overlays(RegisterGuiOverlaysEvent event) {
+        io.github.dirtyredz.herbalwitch.client.broom.BroomClientRegistration.overlays(event);
         WitchClientEvents.overlays(event);
     }
 }
