@@ -15,7 +15,22 @@ import java.util.List;
 /** Runs after habitats exist. A failed insertion cleans up only this invocation's exact sample objects. */
 public final class ShowcaseEntitySpawner {
     public record Result(int spawned, boolean complete) {}
+    private static final org.slf4j.Logger LOGGER = org.slf4j.LoggerFactory.getLogger(ShowcaseEntitySpawner.class);
     private ShowcaseEntitySpawner() {}
+
+    /** Why this sample cannot stand where it is, or null after it has been added to the level. */
+    private static String refusal(ShowcasePlan plan, ServerLevel level, ServerPlayer actor, BlockPos origin, Mob mob) {
+        var box = mob.getBoundingBox();
+        if (box.minX < origin.getX() || box.maxX > origin.getX() + plan.width() || box.minZ < origin.getZ()
+                || box.maxZ > origin.getZ() + plan.depth() || box.minY < origin.getY() + 1 || box.maxY > origin.getY() + ShowcasePlan.HEIGHT) return "outside the planned box " + box;
+        if (!level.hasChunkAt(mob.blockPosition())) return "chunk not loaded";
+        if (!level.noCollision(mob, box)) return "collides with a block";
+        if (!EntityActionPermission.checkHarm(actor, mob).allowed()) return "permission denied";
+        if (!level.addFreshEntity(mob)) return "the level refused the entity";
+        if (level.getEntity(mob.getUUID()) != mob || mob.isRemoved()) return "not present after adding";
+        return null;
+    }
+
     public static Result spawn(ShowcasePlan plan, ServerLevel level, ServerPlayer actor, BlockPos origin) {
         List<Mob> created = new ArrayList<>(); boolean complete = false;
         try {
@@ -26,16 +41,15 @@ public final class ShowcaseEntitySpawner {
                 mob.moveTo(origin.getX() + sample.x(), origin.getY() + sample.y(), origin.getZ() + sample.z(), 0, 0);
                 if (mob instanceof AgeableMob ageable) ageable.setAge(0);
                 mob.setPersistenceRequired();
-                var box = mob.getBoundingBox();
-                if (box.minX < origin.getX() || box.maxX > origin.getX() + plan.width() || box.minZ < origin.getZ()
-                        || box.maxZ > origin.getZ() + plan.depth() || box.minY < origin.getY() + 1 || box.maxY > origin.getY() + ShowcasePlan.HEIGHT
-                        || !level.hasChunkAt(mob.blockPosition()) || !level.noCollision(mob, box)
-                        || !EntityActionPermission.checkHarm(actor, mob).allowed() || !level.addFreshEntity(mob)
-                        || level.getEntity(mob.getUUID()) != mob || mob.isRemoved()) return new Result(0, false);
+                String refused = refusal(plan, level, actor, origin, mob);
+                if (refused != null) {
+                    LOGGER.warn("Showcase sample {} at {} refused: {}", sample.type(), mob.blockPosition(), refused);
+                    return new Result(0, false);
+                }
             }
             complete = true; return new Result(created.size(), true);
         } catch (RuntimeException failure) {
-            org.slf4j.LoggerFactory.getLogger(ShowcaseEntitySpawner.class).error("Showcase sample failed; block construction remains", failure);
+            LOGGER.error("Showcase sample failed; block construction remains", failure);
             return new Result(0, false);
         } finally { if (!complete) created.forEach(Mob::discard); }
     }
