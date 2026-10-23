@@ -4,7 +4,7 @@ Records the supported platform, what is actually tested, and each planned option
 
 Supported platform: Minecraft 1.20.1, Forge 47.x (built and tested on 47.4.10), Java 17. Install on both server and clients.
 
-## Tested now (0.1.0-dev.4)
+## Earlier evidence (0.1.0-dev.4; superseded by "Release candidate (M12)" below)
 
 Exact versions: Farmer's Delight 1.3.4, Thirst Was Taken 1.4.0, EMI 1.1.24+1.20.1, JEI 15.62.0.219.
 
@@ -153,3 +153,29 @@ shop owner, so a recognised but unsupported claim mod suspends it; player buying
 both ends. Shop stock exposes no item handler, so hoppers, pipes and familiars cannot reach it. Thirst
 purity is preserved exactly in trades (pristine purity 3 for villager purchases) and is matched only
 when Thirst writes it.
+
+## Release candidate (M12): what is actually tested
+
+Exact inputs (SHA-256 prefixes; full hashes in the job evidence): Forge 1.20.1-47.4.10 (installer
+`66bfea99...` SHA-1), EMI 1.1.24+1.20.1 (`92784dcf`), JEI 15.62.0.219 (`e05b2427`), Curios
+5.14.1+1.20.1 (`1e817919`), Farmer's Delight 1.3.4 (`34f03eb6`), Thirst Was Taken 1.4.0 (`803cc265`),
+Doggy Talents Next 1.19.1 (`4e4e0aee`), KubeJS 2001.6.5-build.26 (`17693121`), Rhino 2001.2.3-build.10
+(`fed22114`), Architectury 9.2.14 (`218b471d`). Java 17.0.20.1 (Temurin) on ANU.
+
+| Integration | Status | Evidence |
+|---|---|---|
+| Dedicated server, release jar alone | supported and tested | `qualifyDedicatedServer` base: every block id placed, stateful pieces read back after restart |
+| EMI, JEI, both | loads; server behaviour tested; screens are owner checks | GameTest profiles `emi`, `jei`, `viewers`; production profile `optional` |
+| Curios | supported and tested (server); slot UI owner check | GameTest profile `curios` (first run alone in M12) and `all`; production `optional` |
+| Farmer's Delight | supported and tested (heat both ways) | profiles `farmersdelight`, `all`; production `optional` |
+| Thirst Was Taken | supported and tested (hydration once, purity carried and sold) | profiles `thirst`, `all`; production `optional` |
+| Doggy Talents Next | excluded from binding and capture, tested | profile `doggy`; production `doggy` |
+| KubeJS | supported through recipe JSON (add/remove processing recipes), tested | production `kubejs` (a mortar grinds a KubeJS recipe) |
+| Oculus / Embeddium shaders | owner check only | owner case M12-4 |
+| Create, Supplementaries, Macaw's, Roundwood | untested; no adapters | - |
+| Claim mods (FTB Chunks, Open Parties and Claims, Cadmus, Flan, GriefDefender, MineColonies) | recognised and conservatively refused; no adapter; untested at runtime | - |
+| External economies | unsupported (emeralds only) | - |
+
+GameTest profile and production-server job ids for the candidate are in docs/qualification/README.md.
+Foreign data-pack JSON errors logged by Thirst and Farmer's Delight (recipes naming absent mods) are
+theirs and harmless.
