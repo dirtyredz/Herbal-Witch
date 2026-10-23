@@ -11,4 +11,5 @@ assert.deepEqual(verified.failures,[]);
 for(const phase of ['BINDING_PREPARED','ACTIVE','TRANSFER_PREPARED','INCAPACITATION_PREPARED','INCAPACITATED','REVIVAL_PREPARED'])
   assert.ok(prepared.phases.includes(phase),`missing actual ${phase} checkpoint`);
 assert.ok(verified.staleItems && verified.corruptPreserved && verified.schemaPreserved && verified.indexBounded && verified.duplicatesQuarantined);
+assert.ok(verified.captureLifecycle,'missing capture/owner lifecycle/unloaded-home restart evidence');
 console.log(`PASS familiar restart: ${verified.cases} checkpoint snapshots, distinct JVMs ${prepared.process} -> ${verified.process}; stale item, corruption, schema, bounded index and duplicate admission verified.`);

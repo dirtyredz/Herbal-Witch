@@ -39,8 +39,10 @@ final class FamiliarRestartReplay {
             var item=EntityType.loadEntityRecursive(oldItem,h.getLevel(),e->e);check(item!=null,"stale item decode");
             check(!h.getLevel().addFreshEntity(item) && item.isRemoved(),"stale item entity became usable after restart");
             var extra=FamiliarRestartExtra.verify(h,root);
+            FamiliarRestartLifecycle.verify(h,root);
             var report=new LinkedHashMap<String,Object>();report.put("process",ProcessHandle.current().pid());report.put("cases",count);report.put("failures",List.of());
             report.put("staleItems",true);report.put("duplicatesQuarantined",duplicates);report.putAll(extra);
+            report.put("captureLifecycle",true);
             Files.writeString(root.resolve("verified.json"),new Gson().toJson(report));h.succeed();
         } catch(java.io.IOException failure){throw new java.io.UncheckedIOException(failure);}
     }

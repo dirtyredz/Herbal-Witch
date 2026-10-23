@@ -40,7 +40,7 @@ public final class FamiliarRestartGameTests {
     @AfterBatch(batch="familiar_restart") public static void cleanup(ServerLevel level) { if(capture!=null){capture.close();capture=null;} }
     private static void prepare(GameTestHelper h) {
         capture=new FamiliarRestartCapture(evidence(),h.getLevel().getServer());
-        FamiliarFixtures.bound(h,"raven","restart_"+UUID.randomUUID(),b -> {
+        FamiliarFixtures.bound(h,"raven","restart_"+UUID.randomUUID(),b -> h.runAfterDelay(6,()->{
             b.owner().getInventory().setItem(0,new ItemStack(GrimoireItems.BOOK.get()));
             b.owner().getInventory().setItem(9,new ItemStack(FamiliarItems.gear("raven_satchel")));
             var menu=new FamiliarDetailMenu(40,b.owner().getInventory(),24L,b.bond());b.owner().containerMenu=menu;
@@ -57,7 +57,7 @@ public final class FamiliarRestartGameTests {
                     h.runAfterDelay(6,()->pickup(h,b));
                 });
             });
-        });
+        }));
     }
     private static void pickup(GameTestHelper h,FamiliarFixtures.Bound b) {
         var mob=FamiliarReconciliation.loaded(b.owner().server,b.record());check(mob!=null,"revived entity missing");
@@ -78,7 +78,9 @@ public final class FamiliarRestartGameTests {
                 capture.failNext=true;
                 check(!FamiliarReserve.charge(b.owner(),b.bond()).equals("reserve_charged"),"injected final write succeeded");
                 check(!FamiliarStore.get(b.owner().server).writable(b.bond()),"write failure did not make shard read-only");
-                capture.finish();FamiliarRestartExtra.prepare(evidence());h.succeed();
+                FamiliarRestartLifecycle.prepare(h,evidence(),()->{
+                    capture.finish();FamiliarRestartExtra.prepare(evidence());h.succeed();
+                });
             });
         });
     }
