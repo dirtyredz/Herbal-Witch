@@ -487,6 +487,14 @@ revision. Live observations update snapshots without making unloaded creatures a
 detail card reuses M8's inspection router and continuously checks book, ownership, sight and reach.
 No inventory, receipt or recovery payload enters these summary packets.
 
+Commands persist desired behavior and a monotonically ordered mobile reservation in the same shard.
+The derived mobile index includes unloaded records and is separate from the live-entity index. Owner
+logout/death touches only those assignments; cap changes keep the oldest. A single mutually exclusive
+goal gives control, hazard escape and low-health retreat priority over its selected command. Fair
+dimension queues bound real path creation and entity iterator queries. No command requests a chunk.
+Loaded recall uses `TRANSFER_PREPARED`, a newer generation and the same exact-candidate admission and
+verified payment receipt as binding; absence never licenses a spawn.
+
 Paths under `src/main/java/io/github/dirtyredz/herbalwitch/`. Implemented so far: decor, apothecary/{botany,stations,brewing},
 showcase, platform/permission, platform/network, compat, grimoire and magic/{witch,ritual,charm,ward}. Later milestones create the rest when needed.
 

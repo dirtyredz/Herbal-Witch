@@ -18,9 +18,11 @@ public final class FamiliarLifecycleEvents {
     public static void tick(TickEvent.ServerTickEvent event) {
         if (event.phase != TickEvent.Phase.START) return;
         FamiliarStore.get(event.getServer()).indexBatch(); FamiliarReconciliation.indexed(event.getServer());
+        io.github.dirtyredz.herbalwitch.companions.familiars.command.FamiliarCommands.reconcileCap(event.getServer());
     }
     public static void stopped(ServerStoppedEvent event) {
         FamiliarReconciliation.stopped(event.getServer()); FamiliarStore.stopped(event.getServer());
+        io.github.dirtyredz.herbalwitch.companions.familiars.command.FamiliarCommands.stopped(event.getServer());
     }
     /** Suspend without setting a persistent NoAI bit while the complete identity index is unavailable. */
     public static void living(net.minecraftforge.event.entity.living.LivingEvent.LivingTickEvent event) {

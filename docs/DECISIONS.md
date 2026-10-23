@@ -1,5 +1,19 @@
 # Decisions - The Herbal Witch
 
+## 2026-10-22 - Loaded command work and UUID permission checks
+
+Seven stable command names share one exclusive goal, with bounded fair queues for scans and paths.
+Mobile reservations live in a derived canonical index, including unloaded bonds; logout, death and
+restart clear them to Stay. Lowering the configured cap retains the oldest reservations. Configuration
+reload publishes one validated snapshot; lowering record size never overwrites an existing larger
+shard, but refuses its mutations until the limit permits them again.
+
+Offline automation uses the shared UUID principal permission boundary, including vanilla spawn
+protection and conservative refusal with unsupported claims. Existing M7 hostile targeting keeps its
+own policy. Familiar target selection and each attack repeat both checks. Recall is an explicit
+loaded-source generation transfer with the existing player receipt and WitchStatusService payment;
+absence never permits reconstruction. No section 7 balance defaults changed.
+
 ## 2026-10-22 - Per-bond authority and conservative cross-file binding
 
 M9 stores one bounded verified shard per bond, with incremental derived indexes and no roster cap.

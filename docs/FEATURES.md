@@ -23,7 +23,10 @@ they do not constitute a 0.8.0 milestone implementation. The first M9 phase adds
 storage, conservative admission, eight species adapters, and paid altar binding. ANU job
 `HerbalWitch-m9-familiars-0.8.0-20261022-220551-fa8` at `b63b688` passed 429 JUnit tests and all 237
 required GameTests. The second phase adds private bounded roster pages and nearby detail access;
-commands, homes, equipment, abilities, preparations, recovery and art follow.
+ANU `HerbalWitch-m9-familiars-0.8.0-20261022-224023-3bb` at `5cea37a` passed 433 JUnit tests and
+all 238 required GameTests. The third phase adds seven command modes, loaded navigation and flight,
+shared mobile reservations, bounded scan/path scheduling, UUID-aware automated permissions and paid
+loaded recall. Homes, equipment, abilities, preparations, recovery and final art remain in progress.
 M8 adds six baits, personal loaded-time care state, existing-salve targeting, temporary goal-based
 calming, reused M7 sleep, earned native taming/keepers, a private grimoire card, verified capture
 checkpoints/reconciliation/recovery and sixteen showcase habitats. Exact boundaries and defaults:

@@ -1,5 +1,10 @@
 # Gotchas - The Herbal Witch
 
+- **Navigation needs a loaded search region, not just loaded endpoints.** Familiar paths check the
+  entire native follow-range-plus-margin neighborhood, queue actual path creation per dimension,
+  and revalidate the command when that queued turn arrives. A mode switch must invalidate old work.
+  Ground GameTests let real physics settle their mob and check movement, not a navigation mock.
+
 - **Roster revisions are owner-derived.** Never accept an owner identity from a familiar request.
   Validate container, nonce, current owner revision and the five-per-second gate before acting;
   stale revisions refresh. Detail additionally rechecks the live entity, normal reach and sight.

@@ -42,6 +42,12 @@ recipes through existing contracts; their UI and reload behavior still require o
 
 ## Integrations
 
+M9 familiar automation additionally checks a UUID principal at the source and target. Unsupported
+claims suspend it even for hostile targets; an offline owner never bypasses spawn protection. Guard
+selection excludes players, passive creatures, owned pets, protected entity tags and control-immune
+targets. Permission changes are checked again before pursuit and damage. This is conservative base
+behavior, not a claim-mod adapter or an optional-profile qualification.
+
 Milestones are derived from plan section 3; exact dependency versions are pinned from the trial instance when each integration is implemented.
 
 | Integration | Planned behaviour | Milestone | Tested version |

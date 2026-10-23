@@ -13,10 +13,7 @@ public final class FamiliarMenuAccess {
                 && FamiliarStore.get(owner.server).ready();
     }
     public static Mob loaded(ServerPlayer owner, FamiliarRecord record) {
-        for (var level : owner.server.getAllLevels()) {
-            if (level.getEntity(record.creature()) instanceof Mob mob && mob.isAlive() && !mob.isRemoved() && FamiliarReconciliation.matches(mob, record)) return mob;
-        }
-        return null;
+        return FamiliarReconciliation.loaded(owner.server, record);
     }
     public static boolean detail(ServerPlayer owner, FamiliarRecord record) {
         if (!roster(owner) || record == null || !record.owner().equals(owner.getUUID()) || record.phase() != FamiliarRecord.Phase.ACTIVE

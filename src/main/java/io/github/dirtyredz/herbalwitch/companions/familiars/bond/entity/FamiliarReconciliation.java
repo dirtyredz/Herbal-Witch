@@ -25,7 +25,14 @@ public final class FamiliarReconciliation {
         if (!(mob.level() instanceof ServerLevel level)) return Optional.empty();
         var store = FamiliarStore.get(level.getServer());
         if (!store.ready()) return Optional.empty();
-        return store.creature(mob.getUUID()).filter(r -> store.writable(r.bond()) && r.phase() == FamiliarRecord.Phase.ACTIVE && matches(mob, r));
+        return store.creature(mob.getUUID()).filter(r -> store.writable(r.bond()) && r.phase() == FamiliarRecord.Phase.ACTIVE
+                && !r.state().contains("receipt") && matches(mob, r));
+    }
+    public static Mob loaded(MinecraftServer server, FamiliarRecord record) {
+        for (var level : server.getAllLevels()) {
+            if (level.getEntity(record.creature()) instanceof Mob mob && mob.isAlive() && !mob.isRemoved() && matches(mob, record)) return mob;
+        }
+        return null;
     }
     public static boolean matches(Mob mob, FamiliarRecord r) {
         return r.creature().equals(mob.getUUID()) && EntityType.getKey(mob.getType()).toString().equals(FamiliarCatalog.find(r.species()).orElseThrow().entityId())

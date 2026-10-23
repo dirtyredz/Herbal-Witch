@@ -21,6 +21,7 @@ public final class FamiliarOwl extends Animal implements FlyingAnimal {
     @Override protected void registerGoals() { goalSelector.addGoal(7, new net.minecraft.world.entity.ai.goal.WaterAvoidingRandomFlyingGoal(this, .8)); }
     @Override protected PathNavigation createNavigation(Level level) { return FamiliarFlight.navigation(this, level); }
     @Override public boolean isFlying() { return !onGround(); }
+    @Override public boolean causeFallDamage(float distance, float multiplier, net.minecraft.world.damagesource.DamageSource source) { return false; }
+    @Override protected void checkFallDamage(double distance, boolean grounded, net.minecraft.world.level.block.state.BlockState state, net.minecraft.core.BlockPos pos) { }
     @Override public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob partner) { return null; }
 }
-

@@ -22,6 +22,8 @@ public final class FamiliarEligibility {
         var species = FamiliarCatalog.type(EntityType.getKey(mob.getType()).toString()).orElse(null);
         var profile = AnimalEligibility.profile(mob).orElse(null);
         if (species == null || profile == null) return "species";
+        var rules = io.github.dirtyredz.herbalwitch.companions.familiars.config.FamiliarServerConfig.current();
+        if (!rules.binding() || !rules.species().contains(species.key())) return "disabled";
         if (player.level() != mob.level() || !mob.level().isLoaded(mob.blockPosition()) || !player.isAlive() || player.isSpectator()
                 || !mob.isAlive() || mob.isRemoved() || mob.isNoAi() || player.distanceToSqr(Vec3.atCenterOf(altar)) > 16
                 || mob.distanceToSqr(Vec3.atCenterOf(altar)) > 16 || !player.hasLineOfSight(mob)) return "range";

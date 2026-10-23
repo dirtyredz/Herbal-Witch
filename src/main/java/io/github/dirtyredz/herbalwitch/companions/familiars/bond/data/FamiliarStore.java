@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.nio.file.*;
 import java.util.*;
 import java.util.function.BiConsumer;
+import io.github.dirtyredz.herbalwitch.companions.familiars.command.FamiliarMobileIndex;
+import io.github.dirtyredz.herbalwitch.companions.familiars.config.FamiliarServerConfig;
 
 /** Server-thread shard address book. Incomplete or corrupt indexes never prove absence. */
 public final class FamiliarStore implements AutoCloseable {
@@ -15,6 +17,7 @@ public final class FamiliarStore implements AutoCloseable {
     private final Map<UUID, FamiliarSavedData> shards = new HashMap<>();
     private final FamiliarRosterIndex owners = new FamiliarRosterIndex();
     private final FamiliarEntityIndex creatures = new FamiliarEntityIndex();
+    private final FamiliarMobileIndex mobile = new FamiliarMobileIndex();
     private final BiConsumer<String, FamiliarSavedData> register;
     private DirectoryStream<Path> stream;
     private Iterator<Path> pending;
@@ -35,6 +38,7 @@ public final class FamiliarStore implements AutoCloseable {
     public boolean indexed() { return indexed; }
     public boolean ready() { return indexed && !corrupt; }
     public FamiliarRosterIndex roster() { return owners; }
+    public FamiliarMobileIndex mobile() { return mobile; }
     /** At most 32 shards per tick, including malformed files. No complete directory materialization. */
     public int indexBatch() {
         if (indexed) return 0;
@@ -47,7 +51,7 @@ public final class FamiliarStore implements AutoCloseable {
                     UUID id = UUID.fromString(file.substring(FamiliarSavedData.PREFIX.length(), file.length() - 4));
                     var data = new FamiliarSavedData(directory, id, new VerifiedSnapshotWriter(FamiliarSavedData.FORMAT)); data.load();
                     if (!creatures.add(data.record()) || shards.putIfAbsent(id, data) != null) throw new IOException("Duplicate familiar identity");
-                    owners.changed(data.record()); register.accept(FamiliarSavedData.name(id), data);
+                    owners.changed(data.record()); mobile.changed(data.record()); register.accept(FamiliarSavedData.name(id), data);
                     if (data.isDirty() && !data.checkpoint(FamiliarCodec.MAX_BYTES)) corrupt = true;
                 } catch (Exception failure) {
                     corrupt = true;
@@ -66,22 +70,22 @@ public final class FamiliarStore implements AutoCloseable {
                 || Files.exists(directory.resolve(FamiliarSavedData.name(record.bond()) + ".dat"))) return false;
         var shard = new FamiliarSavedData(directory, record.bond(), new VerifiedSnapshotWriter(FamiliarSavedData.FORMAT));
         // Validate before adding derived entries; write uncertainty must still retain the identity.
-        if (!shard.put(record, false, FamiliarCodec.MAX_BYTES)) return false;
-        shards.put(record.bond(), shard); creatures.add(record); owners.changed(record);
+        if (!shard.put(record, false, FamiliarServerConfig.current().recordBytes())) return false;
+        shards.put(record.bond(), shard); creatures.add(record); owners.changed(record); mobile.changed(record);
         register.accept(FamiliarSavedData.name(record.bond()), shard);
-        return shard.checkpoint(FamiliarCodec.MAX_BYTES);
+        return shard.checkpoint(FamiliarServerConfig.current().recordBytes());
     }
     public boolean update(FamiliarRecord next, boolean checkpoint) {
         if (!ready()) return false;
         var shard = shards.get(next.bond()); if (shard == null) return false;
         long previous = shard.record().revision();
-        boolean success = shard.put(next, checkpoint, FamiliarCodec.MAX_BYTES);
-        if (shard.record().revision() != previous) owners.changed(shard.record());
+        boolean success = shard.put(next, checkpoint, FamiliarServerConfig.current().recordBytes());
+        if (shard.record().revision() != previous) { owners.changed(shard.record()); mobile.changed(shard.record()); }
         return success;
     }
     public boolean begin(long tick) {
         if (!ready() || transaction || tick < nextTransaction) return false;
-        transaction = true; nextTransaction = tick + 5; return true;
+        transaction = true; nextTransaction = tick + FamiliarServerConfig.current().transactionInterval(); return true;
     }
     public void end() { transaction = false; }
     @Override public void close() {

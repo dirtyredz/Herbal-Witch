@@ -65,9 +65,17 @@ herbalwitch/
 - `companions/familiars/species/` — exact animal participation and payload adapters; `ground/` and `flying/` contain thin native representations and shared flight mechanics.
 - `companions/familiars/ritual/` — feature-owned altar session handlers through the neutral action registry.
 - `companions/familiars/menu/` and `network/` — owner-derived roster pages, nearby detail sessions and bounded request/projection messages.
+- `companions/familiars/config/` — atomic bounded server rule snapshots; acquisition switches never delete bonds.
+- `companions/familiars/command/` — command transitions, derived mobile reservations and loaded-only recall; `ai/` owns mutually exclusive behavior and observations, `navigation/` owns safe destinations and queued paths.
+- `companions/familiars/work/` — shared fair per-dimension scan/path queues and bounded engine queries; `observation/` owns private owner/target alert throttling.
+- `companions/familiars/home/` — dimension-qualified home-instance identity and loaded-only command destination checks; functional pieces follow in the home phase.
+- `platform/permission/PrincipalPermission` — UUID-aware automation location checks, vanilla spawn protection and additive protection policies; unsupported claims refuse automation.
 - `client/familiars/` — client bootstrap; `state/` retains only the current private page and `screen/` renders roster/detail cards.
 - `src/test/java/io/github/dirtyredz/herbalwitch/companions/familiars/network/` — wire limits and private projection contracts.
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/companions/familiars/{fixture,menu}/` — real bound entities and private session/nearby access checks.
+- `src/test/java/io/github/dirtyredz/herbalwitch/companions/familiars/command/` — persisted reservation order, shared mobile classification, queue fairness and hard configuration bounds.
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/companions/familiars/command/` — real navigation, sleep, guard authorization, unloaded reservations and paid incarnation recall.
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/companions/familiars/config/` — live cap reduction and acquisition-only switches against real bonds.
 - `data/{client,server}/familiars/` — contributions to language and entity tags.
 - `src/test/java/io/github/dirtyredz/herbalwitch/companions/familiars/bond/` — shard bounds, indexing, corruption, receipt and write uncertainty tests.
 - `src/test/java/io/github/dirtyredz/herbalwitch/data/familiars/` — independent resource inventory.

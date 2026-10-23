@@ -33,3 +33,28 @@ last observed; no recovery data, receipts or inventories are sent. Select a row 
 or open its detail card while the loaded creature is in ordinary reach and sight. Clicking an owned
 familiar with the book uses the same detail access through the existing animal interaction router.
 Losing the book closes the roster; leaving reach closes detail. Neither action loads chunks.
+
+Use the roster's command arrows to select an order, then press its named button. Follow starts beyond
+six blocks and stops within three; Stay keeps its saved anchor; Guard Witch defends against hostile
+threats to the owner or familiar. Protect Home patrols an assigned home, Scout visits at most four
+safe waypoints, Passive wanders locally without retaliation, and Return Home becomes Stay on arrival.
+Home orders require an assignment from the home phase. Controls/sleep, immediate hazards and retreat
+below one-quarter health take precedence. Ordinary commands cost no energy.
+
+Follow, Guard Witch and Scout share three mobile slots, including unloaded assignments. Logout or
+owner death changes those assignments to Stay; dimension travel leaves followers waiting. Paths
+replan no more often than every 20 ticks, stop after three failed attempts, and refuse unloaded search
+regions. A fair dimension queue permits four paths and eight scans per tick; entity queries stop at
+32 candidates and observations return at most eight results. Friendly visitors, pets and passive mobs
+are never automatic combat targets.
+
+**Recall** spends five energy, has a 100-tick cooldown, and moves an existing loaded familiar to a
+checked nearby position. Transfer uses a newer generation, retained recovery payload and verified
+player receipt. It never summons an absent familiar. Home, equipment and ability phases still follow.
+
+`herbalwitch-familiars-server.toml` atomically installs validated settings: new binding/species switches,
+mobile limit 1–8 (default 3), record limit up to 128 KiB, lifecycle interval at least five ticks,
+scan/path budgets up to 32/16 (defaults 8/4), guard/sense radii up to 24/48 (defaults 16/32), offline
+home guards up to eight, and public retrieval off by default. Lowering the mobile limit keeps oldest
+reservations. Existing oversized records remain preserved if the byte limit is lowered; raise it to
+allow a mutation that no longer fits. These settings do not erase existing bonds or their payloads.

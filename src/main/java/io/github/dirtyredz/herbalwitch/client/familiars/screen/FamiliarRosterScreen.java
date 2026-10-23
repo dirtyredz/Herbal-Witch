@@ -5,6 +5,7 @@ import io.github.dirtyredz.herbalwitch.client.grimoire.GrimoirePanelHost;
 import io.github.dirtyredz.herbalwitch.client.magic.ritual.RitualTargets;
 import io.github.dirtyredz.herbalwitch.companions.familiars.menu.FamiliarRosterMenu;
 import io.github.dirtyredz.herbalwitch.companions.familiars.network.*;
+import io.github.dirtyredz.herbalwitch.companions.familiars.command.FamiliarCommand;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
@@ -15,6 +16,7 @@ public class FamiliarRosterScreen<T extends FamiliarRosterMenu> extends Grimoire
     protected UUID selected;
     protected int offset;
     private FamiliarRosterPage displayed;
+    private FamiliarCommand desired = FamiliarCommand.STAY;
     public FamiliarRosterScreen(T menu, Inventory inventory, Component title) {
         super(menu, inventory, title, Optional.empty(), Optional.empty(), false); imageWidth = 280; imageHeight = 220; selected = menu.selected();
     }
@@ -36,11 +38,16 @@ public class FamiliarRosterScreen<T extends FamiliarRosterMenu> extends Grimoire
         offset = Math.max(0, Math.min(offset, Math.max(0, displayed.rows().size() - 5)));
         for (int i = offset; i < Math.min(offset + 5, displayed.rows().size()); i++) {
             var row = displayed.rows().get(i);
-            String label = (row.bond().equals(selected) ? "> " : "") + row.name() + " · " + row.species() + " · " + row.command();
-            addRenderableWidget(Button.builder(Component.literal(font.plainSubstrByWidth(label, 248)), ignored -> { selected = row.bond(); rebuild(); })
+            String label = (row.bond().equals(selected) ? "> " : "") + row.name() + " · " + row.species() + " · " + Component.translatable("familiar.herbalwitch.command." + row.command()).getString();
+            addRenderableWidget(Button.builder(Component.literal(font.plainSubstrByWidth(label, 248)), ignored -> { selected = row.bond(); desired = FamiliarCommand.parse(row.command()); rebuild(); })
                     .bounds(leftPos + 12, topPos + 26 + (i - offset) * 17, 256, 16).build());
         }
         var chosen = row();
+        boolean active = chosen != null && chosen.phase().equals("ACTIVE");
+        button("previous_command", 12, 162, 20, active, () -> { desired = FamiliarCommand.values()[Math.floorMod(desired.ordinal() - 1, 7)]; rebuild(); });
+        button("command." + desired.key(), 36, 162, 150, active, () -> request("command", selected, null, desired.key()));
+        button("next_command", 190, 162, 20, active, () -> { desired = FamiliarCommand.values()[(desired.ordinal() + 1) % 7]; rebuild(); });
+        button("recall", 214, 162, 54, active && chosen.loaded(), () -> request("recall", selected, null, ""));
         button("first_page", 12, 8, 70, menu.selected() == null, () -> { offset = 0; request("page", null, null, ""); });
         button("next_page", 198, 8, 70, menu.selected() == null && displayed.more(), () -> {
             offset = 0; request("page", null, displayed.rows().get(displayed.rows().size() - 1).bond(), "");
@@ -75,9 +82,9 @@ public class FamiliarRosterScreen<T extends FamiliarRosterMenu> extends Grimoire
         if (row != null) {
             line(g, Component.translatable("familiar.herbalwitch.health", row.level(), row.health(), row.maximum(),
                     Component.translatable("familiar.herbalwitch." + (row.loaded() ? "loaded" : "last_observed"))), 114);
-            line(g, Component.literal(row.phase() + " · " + row.dimension()), 126);
+            line(g, Component.translatable("familiar.herbalwitch.phase." + row.phase().toLowerCase(Locale.ROOT)).append(" · " + row.dimension()), 126);
             line(g, Component.translatable("familiar.herbalwitch.home", row.home().isEmpty() ? "—" : row.home()), 138);
-            line(g, Component.literal(row.buffs().isEmpty() ? row.status() : row.buffs()), 150);
+            line(g, row.buffs().isEmpty() ? row.status().isEmpty() ? Component.empty() : Component.translatable("familiar.herbalwitch." + row.status()) : Component.literal(row.buffs()), 150);
         } else line(g, Component.translatable(page.rows().isEmpty() ? "familiar.herbalwitch.empty" : "familiar.herbalwitch.select"), 114);
         if (!page.notice().isEmpty()) line(g, Component.translatable("familiar.herbalwitch." + page.notice()), 202);
     }

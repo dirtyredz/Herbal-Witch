@@ -8,7 +8,11 @@ public final class FamiliarManifest {
     private FamiliarManifest() {}
     public static Map<String, String> lang() {
         Map<String, String> out = new LinkedHashMap<>();
+        out.put("familiar.herbalwitch.offline_limit", null);
         for (String key : List.of("roster", "detail", "first_page", "next_page", "altar_target", "loading", "health", "loaded", "last_observed", "home", "empty", "select", "stale", "nearby_only")) out.put("familiar.herbalwitch." + key, null);
+        for (String key : List.of("previous_command", "next_command", "recall", "command_set", "mobile_cap", "mobile_reduced", "no_home", "home_unloaded", "home_missing", "other_dimension", "unloaded_route", "blocked", "path_pending", "retreating", "owner_offline", "owner_dead", "unavailable", "not_loaded", "controlled", "cooldown", "permission", "busy", "interrupted", "recalled", "threat")) out.put("familiar.herbalwitch." + key, null);
+        for (String key : List.of("follow", "stay", "guard_witch", "protect_home", "scout", "passive", "return_home")) out.put("familiar.herbalwitch.command." + key, null);
+        for (String key : List.of("binding_prepared", "active", "incapacitation_prepared", "incapacitated", "revival_prepared", "transfer_prepared", "quarantined")) out.put("familiar.herbalwitch.phase." + key, null);
         for (String s : SPECIES) out.put("entity.herbalwitch.familiars.entity." + s, "Familiar " + Character.toUpperCase(s.charAt(0)) + s.substring(1));
         out.put("ritual.herbalwitch.ui.view_contributed", "Familiar rituals"); out.put("ritual.herbalwitch.ui.contributed_terms", null);
         for (String action : List.of("binding", "revival", "heartwood", "spirit_well", "bond_harmony")) {
@@ -16,7 +20,7 @@ public final class FamiliarManifest {
             out.put("grimoire.herbalwitch.ritual.familiar." + action + ".offering", null);
             out.put("category.herbalwitch.ritual.result.familiar." + action, null);
         }
-        for (String key : List.of("not_witch", "no_target", "indexing", "already_bound", "species", "range", "danger", "owner", "trust", "permission", "care_read_only", "capture_read_only", "capture_lineage", "begun", "bound", "interrupted")) {
+        for (String key : List.of("not_witch", "disabled", "no_target", "indexing", "already_bound", "species", "range", "danger", "owner", "trust", "permission", "care_read_only", "capture_read_only", "capture_lineage", "begun", "bound", "interrupted")) {
             out.put("ritual.herbalwitch.familiar." + key, null); out.put("ritual.herbalwitch.cancel.familiar_" + key, null);
         }
         return out;

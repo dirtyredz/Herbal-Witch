@@ -20,6 +20,7 @@ import net.minecraftforge.eventbus.api.*;
 public final class FamiliarRegistration {
     private FamiliarRegistration() {}
     public static void register(IEventBus bus) {
+        io.github.dirtyredz.herbalwitch.companions.familiars.config.FamiliarServerConfig.register(bus);
         FamiliarEntities.TYPES.register(bus); bus.addListener(FamiliarEntities::attributes);
         FamiliarMenus.MENUS.register(bus);
         io.github.dirtyredz.herbalwitch.companions.familiars.network.FamiliarPackets.register();
@@ -55,5 +56,15 @@ public final class FamiliarRegistration {
         forge.addListener(EventPriority.LOWEST, FamiliarLifecycleEvents::observe);
         forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.menu.FamiliarRosterMenu::tick);
         forge.addListener(FamiliarPlayerReceipt::login); forge.addListener(FamiliarPlayerReceipt::clonePlayer);
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.command.ai.FamiliarGoals::tick);
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.command.ai.FamiliarGoals::leave);
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.command.ai.FamiliarGoals::stopped);
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.command.FamiliarCommands::logout);
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.command.FamiliarCommands::login);
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.command.FamiliarCommands::death);
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.work.FamiliarWork::tick);
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.work.FamiliarWork::stopped);
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.observation.FamiliarAlerts::logout);
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.observation.FamiliarAlerts::stopped);
     }
 }

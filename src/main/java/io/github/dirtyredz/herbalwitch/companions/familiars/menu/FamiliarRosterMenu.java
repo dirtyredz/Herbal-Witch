@@ -87,6 +87,9 @@ public class FamiliarRosterMenu extends AbstractContainerMenu {
             menu.cursor = request.cursor(); menu.send(owner, true, "");
         } else if (request.action().equals("detail") && request.bond() != null) {
             if (!FamiliarDetailMenu.open(owner, request.bond())) menu.send(owner, true, "nearby_only");
+        } else {
+            String notice = FamiliarMenuActions.apply(owner, menu, request);
+            if (notice != null) menu.send(owner, true, notice);
         }
     }
 }
