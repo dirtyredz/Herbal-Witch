@@ -156,3 +156,5 @@ tasks.register('qualifyDedicatedServer', Exec) {
             '--out', out.absolutePath,
             '--profiles', (project.findProperty('serverProfiles') ?: 'base,optional,doggy,kubejs').toString()
 }
+// The flight recorder opens its file at JVM start, before the run writes any evidence.
+tasks.named('runPerformanceMeasure').configure { doFirst { performanceEvidence.mkdirs() } }
