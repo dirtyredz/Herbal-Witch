@@ -48,7 +48,7 @@ public final class FamiliarReconciliation {
             return;
         }
         if (!admit(mob, store)) { event.setCanceled(true); mob.discard(); }
-        else if (event.isCanceled()) mob.discard();
+        else if (event.isCanceled() && store.creature(mob.getUUID()).isPresent()) mob.discard();
     }
     private static boolean admit(Mob mob, FamiliarStore store) {
         var r = store.creature(mob.getUUID()).orElse(null);

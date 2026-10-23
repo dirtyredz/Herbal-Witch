@@ -1,5 +1,10 @@
 # Gotchas - The Herbal Witch
 
+- **Initialize native entity goals before suppressing them.** Fox NBT loading restores prey goals
+  through fields initialized by `registerGoals`. Native familiar adapters call the native initializer,
+  then remove movement/target goals both there and after NBT loading. Skipping initialization crashes
+  fox conversion. Familiar admission also leaves unrelated canceled capture joins to capture's policy.
+
 - **Familiar indexing is not absence.** A pending or corrupt shard index suspends eligible loaded
   creatures without saving a permanent NoAI flag. Never bind or reconstruct from a partial lookup.
 - **Player receipts are not automatic refunds.** A pending bond/player receipt blocks another
