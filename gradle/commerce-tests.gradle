@@ -1,0 +1,45 @@
+// Commerce restart qualification (Milestone 11): two sequential dedicated GameTest JVMs on one fresh,
+// isolated world. Forge resolves launch tokens inside MinecraftRunTask.exec(), so each phase uses that
+// task type with a copy of the fully merged dedicated run configuration (as the M9/M10 harnesses do).
+def commerceConfigType = minecraft.runs.gameTestServer.class
+def commerceTaskType = commerceConfigType.classLoader.loadClass('net.minecraftforge.gradle.common.util.runs.MinecraftRunTask')
+def commerceRun = file("run/commerce-restart/${UUID.randomUUID()}")
+def commerceEvidence = new File(commerceRun, 'evidence')
+tasks.named('processGameTestResources').configure {
+    from('src/gameTest/resources/data/herbalwitch/structures/empty.nbt') { into 'data/herbalwitch_commerce_restart/structures' }
+}
+['Prepare', 'Verify'].each { phase ->
+    tasks.register("runCommerceRestart${phase}", commerceTaskType) {
+        group = 'verification'
+        dependsOn { def base = tasks.named('runGameTestServer').get(); base.taskDependencies.getDependencies(base) }
+        if (phase == 'Verify') dependsOn 'runCommerceRestartPrepare'
+        runConfig.set(providers.provider {
+            def base = tasks.named('runGameTestServer', JavaExec).get()
+            def config = commerceConfigType.getConstructor(Project, String).newInstance(project, "commerceRestart${phase}".toString())
+            config.merge(base.runConfig.get(), true)
+            // RunConfig.merge deliberately omits token maps, including the JPMS module path.
+            config.setTokens(base.runConfig.get().tokens)
+            config.setLazyTokens(base.runConfig.get().lazyTokens)
+            if (config.client || !config.args.contains('forgegametestserveruserdev') || !config.main) {
+                throw new GradleException('Restart harness requires the resolved dedicated GameTest launch target')
+            }
+            config.workingDirectory(commerceRun)
+            config.property('forge.enabledGameTestNamespaces', 'herbalwitch_commerce_restart')
+            config.property('herbalwitch.commerce.restart.phase', phase.toLowerCase(Locale.ROOT))
+            config.property('herbalwitch.commerce.restart.evidence', commerceEvidence.absolutePath)
+            config
+        })
+        mainClass.set(runConfig.map { it.main })
+        classpath = files(providers.provider { tasks.named('runGameTestServer').get().classpath })
+        minecraftArtifacts.from(providers.provider { tasks.named('runGameTestServer').get().minecraftArtifacts })
+        runtimeClasspathArtifacts.from(providers.provider { tasks.named('runGameTestServer').get().runtimeClasspathArtifacts })
+        additionalClientArgs.set([])
+    }
+}
+tasks.register('commerceRestartTest', Exec) {
+    group = 'verification'
+    description = 'ANU only: two dedicated JVMs reconcile commerce transfers stopped at every durable boundary.'
+    dependsOn 'runCommerceRestartVerify'
+    commandLine (project.findProperty('nodeExecutable') ?: 'node').toString(),
+            'tools/commerce/restart/verify-report.mjs', commerceEvidence.absolutePath
+}

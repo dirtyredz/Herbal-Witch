@@ -212,3 +212,9 @@ ordinary loaded rest. They expose no item handler. Exact compatibility and recip
 - Each station row closes only with implementation and acceptance evidence (milestone 12 qualification).
 
 M10 tool stations use two supported floor cells, the shared placement preview, advanced processing menus and Start/Resume/Cancel authorization. Neither needs heat. The broom stand reserves its separate base slot for repair and previews preserved condition; the wand bench makes a Harvest-selected wand. Exact IDs, ingredients, prices and controls are in [tools.md](tools.md).
+
+## Commerce fixtures (Milestone 11)
+
+The shop register (on an apothecary counter), stock shelf, stock jar and order board are functional
+commerce pieces in the Apothecary tab, placed through the shared checked placement. They hold no
+processing and no inventory; see [commerce](commerce.md).

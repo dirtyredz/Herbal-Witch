@@ -143,3 +143,13 @@ Doggy Talents Next passed all 286 required tests at 2237de0: ANU HerbalWitch-223
 Flight keeps server authority with default vanilla flight settings; a wire-decoded vanilla vehicle-position packet cannot move the broom. Wand harvest/plant support the herb catalogue and four explicit vanilla crops. Lighting supports vanilla candles/cakes/campfires plus the existing fueled hearth/stove service. Claim adapters remain action-specific; no installed protection-mod integration or arbitrary modded crop/light support is claimed. Focus and familiar selectors retain the M7/M9 authority and prices. Optional-profile qualification results are recorded in FEATURES.md.
 
 M10 optional profiles passed on `7d76a67`: EMI, JEI, combined viewers and the all profile each passed all 319 required GameTests using offline cached inputs. The all profile includes Curios 5.14.1, Farmer's Delight 1.3.4 and Thirst 1.4.0. Exact immutable job IDs and earlier failed fixture runs are recorded in FEATURES.md and Docket dk-2d540cf6. These are dedicated-server checks; viewer screens and shaders remain owner checks.
+
+## Commerce (Milestone 11)
+
+No external economy, currency or MineColonies customer adapter: ordinary emeralds only, and only
+vanilla villagers are customers. Villager service uses the UUID-aware `PrincipalPermission` with the
+shop owner, so a recognised but unsupported claim mod suspends it; player buying is interaction
+(`ActionPermissionService.mayUse`, adventure allowed), linking needs world-modification permission at
+both ends. Shop stock exposes no item handler, so hoppers, pipes and familiars cannot reach it. Thirst
+purity is preserved exactly in trades (pristine purity 3 for villager purchases) and is matched only
+when Thirst writes it.

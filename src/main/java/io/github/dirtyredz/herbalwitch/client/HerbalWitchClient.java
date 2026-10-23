@@ -47,6 +47,7 @@ public final class HerbalWitchClient {
         event.enqueueWork(io.github.dirtyredz.herbalwitch.client.familiars.FamiliarClient::setup);
         event.enqueueWork(DecorClientRegistration::screens);
         event.enqueueWork(AltarScreens::register);
+        event.enqueueWork(io.github.dirtyredz.herbalwitch.client.stations.shop.ShopClient::setup);
         event.enqueueWork(WitchClientEvents::setup);
         event.enqueueWork(() -> PlacementPreviewRenderer.register(MinecraftForge.EVENT_BUS));
         event.enqueueWork(() -> CirclePlacementPreview.register(MinecraftForge.EVENT_BUS));
@@ -59,6 +60,7 @@ public final class HerbalWitchClient {
         io.github.dirtyredz.herbalwitch.client.broom.BroomClientRegistration.renderers(event);
         DecorClientRegistration.renderers(event);
         PreparationRenderers.renderers(event);
+        io.github.dirtyredz.herbalwitch.client.stations.shop.ShopClient.renderers(event);
         io.github.dirtyredz.herbalwitch.client.familiars.render.FamiliarNativeRenderers.register(event);
         io.github.dirtyredz.herbalwitch.client.familiars.render.FamiliarRenderers.register(event);
     }

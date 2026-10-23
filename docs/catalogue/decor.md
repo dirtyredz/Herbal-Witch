@@ -229,3 +229,10 @@ History: the look of the five pieces that existed at the time.
 The concept sheet (13 room/category groups) is not an exact manifest of ~120 unique models. Repeated
 illustrations map to one piece id unless the form differs, which gives 94 pieces: the five 0.1.0 pieces
 plus 89 added in 0.4.0 (wave A 22, wave B 30, wave C 37).
+
+## Commerce link (Milestone 11)
+
+The apothecary counter keeps its id, recipe and decor behaviour. A shop register stands on it, and a
+counter linked to a shop (or the one under its register) opens public browsing when used; see
+[commerce](commerce.md). Ordinary furniture shelves keep their own inventories and cannot become shop
+displays.

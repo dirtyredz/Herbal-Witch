@@ -26,6 +26,17 @@ public final class ShowcaseRegistry {
         SECTIONS.add(section);
     }
 
+    /**
+     * Registers {@code section} directly after the section {@code after} (appended when that section is
+     * absent), so a late feature can take a free slot in an earlier row without reflowing later rows.
+     */
+    public static synchronized void registerAfter(String after, ShowcaseSection section) {
+        register(section);
+        SECTIONS.remove(section);
+        int at = SECTIONS.indexOf(byId(after).orElse(null));
+        SECTIONS.add(at < 0 ? SECTIONS.size() : at + 1, section);
+    }
+
     public static synchronized List<ShowcaseSection> sections() {
         return Collections.unmodifiableList(new ArrayList<>(SECTIONS));
     }

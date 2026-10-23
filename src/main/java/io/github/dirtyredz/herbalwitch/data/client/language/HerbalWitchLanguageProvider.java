@@ -44,5 +44,6 @@ public class HerbalWitchLanguageProvider extends LanguageProvider {
         ShowcaseTranslations.addTo(this);
         io.github.dirtyredz.herbalwitch.data.client.animals.AnimalTranslations.addTo(this);
         io.github.dirtyredz.herbalwitch.data.client.familiars.FamiliarTranslations.addTo(this);
+        io.github.dirtyredz.herbalwitch.data.client.stations.shop.ShopTranslations.addTo(this);
     }
 }

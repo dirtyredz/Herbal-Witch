@@ -121,3 +121,11 @@ habitats, discovery chances and worldgen rarity.
 Supplements (not herbs): vanilla mushrooms, moss, roots, flowers, minerals, and a resin ingredient. No extra herbs are invented to reach "about 20".
 
 M9 familiar application now consumes the existing finished products, with no extra energy payment. Guardian adds four maximum health and two armor without healing; Swiftpaw adds 20% commanded movement speed; Moonveil uses existing concealment; Warding reduces fire/freezing/lightning/magic damage by 20% except bypass/void/kill; Emberguard projects fire resistance. Venomleaf supplies permitted Poison I bites once per second, and ordinary Venom Oil shares the coating slot for eight hits or 60 loaded seconds; weaker oil cannot replace Venomleaf. Spiritbond adds one eligible care XP within the same cap. Hearthkeeper grants two armor while guarding inside the verified home radius. Shadowstep arms one checked loaded reposition up to eight blocks, spending its charge only on success. Timers last 3,600 loaded ticks, refresh without stacking and have a 20-tick per-product use gate. Salve keeps M8 healing and its bowl. Nightwatch enables nocturnal threat sensing, Spiritbond discounts power costs by 20%, and Hearthkeeper reduces guarded-home repel cooldown from 40 to 30 ticks.
+
+## Trade eligibility (Milestone 11)
+
+Seeds, fresh herbs, bundles, powders, every everyday product, advanced and familiar preparations and
+protective charms can be sold in shops; four-dose mixtures, capture charms and other items cannot.
+Thirst purity, the bottling label and a charm's used charge are kept exactly and shown before buying;
+any other item data (a custom name included) makes a stack unsellable. Villagers buy only recovery tea,
+warmth and cooling remedies and healing salve with default data. See [commerce](commerce.md).

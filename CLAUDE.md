@@ -41,7 +41,7 @@ docs/ARCHITECTURE.md and docs/catalogue/).
   mutate a player's energy or practice only through `WitchStatusService`; paid changes use its
   `WitchStatusService.spend` transaction (M7 production included, and M9 familiars will). Shared online lookup/enumeration
   belongs to `platform/player/OnlinePlayers`; features retain their own eligibility rules.
-  Bump `HerbalWitchNetwork.PROTOCOL` (now "13") on any wire change and register new messages
+  Bump `HerbalWitchNetwork.PROTOCOL` (now "14") on any wire change and register new messages
   after the grimoire's. The founding record is world-global: GameTests that convert anyone close it, so
   they reset it (`FoundingService.resetForTest`) and run their rituals synchronously. Grimoire prose
   never hard-codes a witch number (the rules are quoted from the synced rules; a test enforces it).
@@ -114,3 +114,10 @@ Before your first item write in a session, run `docket guide` and follow it.
 - For reproducible milestone/profile qualification, add `-PgameTestRunId=<unique-lowercase-id>` to the ANU task string. It selects a new `run/gametest-<id>/` world without deleting the default retained test world. The restart task always supplies its own isolated shared world.
 
 - Broom ridden-pose review: after `test`, run `node tools/preview-broom-rider.mjs --output <job>/previews/ridden` and inspect all three images. The test exports actual cached vanilla player geometry and the runtime seat offsets; it launches no client.
+
+- **Commerce (M11, `apothecary/shop/`; docs/catalogue/commerce.md):** every value move goes through
+  `ShopTransfer` (prepare, apply, verified player checkpoint, commit); never mutate stock, proceeds or a
+  player inventory for commerce anywhere else, and never treat a vanilla save as a checkpoint. Shop
+  fixtures hold claims, not authority. GameTests use `ShopFixtures` (fresh identities; the ANU world keeps
+  old shops). Restart qualification: ANU-only `commerceRestartTest` (two dedicated JVMs; see
+  `tools/commerce/restart/README.md`); never run it locally. Version promotion requires its green result.

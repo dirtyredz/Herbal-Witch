@@ -10,6 +10,8 @@ import net.minecraft.world.item.ItemStack;
  */
 public final class ThirstPurity {
     public static final String TAG = "Purity";
+    /** Thirst 1.4.0's purified (pristine) level, the only purity villager customers accept. */
+    public static final int PRISTINE = 3;
 
     private ThirstPurity() {
     }

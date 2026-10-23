@@ -62,6 +62,10 @@ class GeneratedResourcesTest {
             });
         }
         lang.putAll(io.github.dirtyredz.herbalwitch.data.magic.tools.ToolManifest.lang());
+        io.github.dirtyredz.herbalwitch.data.stations.shop.ShopManifest.lang().forEach((key, value) -> {
+            assertFalse(lang.containsKey(key), "two features claim " + key);
+            lang.put(key, value);
+        });
         return lang;
     }
 
@@ -82,6 +86,7 @@ class GeneratedResourcesTest {
         expected.addAll(io.github.dirtyredz.herbalwitch.data.animals.AnimalManifest.files());
         expected.addAll(io.github.dirtyredz.herbalwitch.data.familiars.FamiliarManifest.files());
         expected.addAll(io.github.dirtyredz.herbalwitch.data.magic.tools.ToolManifest.files());
+        expected.addAll(io.github.dirtyredz.herbalwitch.data.stations.shop.ShopManifest.files());
         assertEquals(expected, generatedFiles());
     }
 

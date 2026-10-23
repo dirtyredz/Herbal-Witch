@@ -48,7 +48,7 @@ public final class BlockbenchManifest {
             "block/stations/mortar", "block/stations/drying_rack", "block/stations/hearth", "block/stations/stove",
             "block/decor/templates", "block/preparations/templates", "block/grimoire/stand", "block/grimoire/bookshelf",
             "block/decor/pieces", "block/ritual/altar", "block/stations/cauldron", "block/stations/still",
-            "block/stations/bottling_bench", "block/stations/charm_workbench", "block/ritual/circle", "block/ward/ward_stone", "block/animals", "block/familiars/home", "block/familiars/equipment", "block/familiars/spawn_egg", "item/magic/broom", "item/magic/wand", "block/stations/tools/broom_stand", "block/stations/tools/wand_bench");
+            "block/stations/bottling_bench", "block/stations/charm_workbench", "block/ritual/circle", "block/ward/ward_stone", "block/animals", "block/familiars/home", "block/familiars/equipment", "block/familiars/spawn_egg", "item/magic/broom", "item/magic/wand", "block/stations/tools/broom_stand", "block/stations/tools/wand_bench", "block/shop");
     /** Textures (under textures/) the fourteen pre-M5 pieces own, painted in their projects: block/pieces/<project>/<texture>.png. */
     public static final List<String> TEXTURES = List.of(
             "block/pieces/decor/apothecary_counter/gold.png",
@@ -158,6 +158,7 @@ public final class BlockbenchManifest {
         for (String gear : io.github.dirtyredz.herbalwitch.data.familiars.FamiliarManifest.EQUIPMENT.stream().sorted().toList()) out.add("familiars/equipment/" + gear);
         for (String species : List.of("raven", "owl", "snake")) out.add("familiars/spawn_egg/" + species);
         out.addAll(List.of("magic/broom", "magic/wand", "stations/tools/broom_stand", "stations/tools/wand_bench"));
+        out.addAll(List.of("shop/register", "shop/stock_shelf", "shop/stock_jar", "shop/order_board"));
         return List.copyOf(out);
     }
 
@@ -243,6 +244,8 @@ public final class BlockbenchManifest {
         for (String species : List.of("raven", "owl", "snake")) out.add("block/familiars/spawn_egg/" + species + "/base.json");
         out.addAll(List.of("item/magic/broom/base.json", "item/magic/wand/base.json"));
         for (String station : List.of("broom_stand", "wand_bench")) for (String model : List.of("part_0", "part_1", "active_0", "active_1", "assembly")) out.add("block/stations/tools/" + station + "/" + model + ".json");
+        out.addAll(List.of("block/shop/register/closed.json", "block/shop/register/open.json", "block/shop/stock_shelf/base.json",
+                "block/shop/stock_jar/base.json", "block/shop/order_board/base.json"));
         out.sort(null);
         return out;
     }

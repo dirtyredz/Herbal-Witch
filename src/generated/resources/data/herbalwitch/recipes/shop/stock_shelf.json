@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:dark_oak_slab"
+    },
+    {
+      "item": "minecraft:dark_oak_slab"
+    },
+    {
+      "item": "minecraft:dark_oak_slab"
+    },
+    {
+      "item": "minecraft:stick"
+    },
+    {
+      "item": "minecraft:stick"
+    },
+    {
+      "item": "minecraft:gold_nugget"
+    }
+  ],
+  "result": {
+    "item": "herbalwitch:shop/stock_shelf"
+  }
+}

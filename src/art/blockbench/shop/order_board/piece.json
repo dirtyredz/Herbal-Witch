@@ -1,0 +1,38 @@
+{
+  "project": "order_board.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/shop/order_board/wood",
+    "wood_v": "herbalwitch:block/pieces/shop/order_board/wood_v",
+    "gold": "herbalwitch:block/pieces/shop/order_board/gold",
+    "plum": "herbalwitch:block/pieces/shop/order_board/plum",
+    "ivy": "herbalwitch:block/pieces/shop/order_board/ivy",
+    "paper": "herbalwitch:block/pieces/shop/order_board/paper",
+    "particle": "herbalwitch:block/pieces/shop/order_board/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/shop/order_board/wood",
+    "wood_v": "herbalwitch:block/pieces/shop/order_board/wood_v",
+    "gold": "herbalwitch:block/pieces/shop/order_board/gold",
+    "plum": "herbalwitch:block/pieces/shop/order_board/plum",
+    "ivy": "herbalwitch:block/pieces/shop/order_board/ivy",
+    "paper": "herbalwitch:block/pieces/shop/order_board/paper"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/shop/order_board/base",
+      "item": true
+    }
+  ]
+}

@@ -1,5 +1,28 @@
 # Gotchas - The Herbal Witch
 
+- **A commerce save that returns is not a checkpoint.** `ShopSavedData` writes only through the verified
+  writer and `ShopPlayerCheckpoint` forces and reads back the player file (or, for the integrated host,
+  `level.dat`'s `Player` tag) before a transfer may commit. A failed write leaves the shard read-only for
+  the rest of the run; never "retry" by rewriting it.
+- **The integrated host's player data lives in level.dat.** Vanilla prefers that tag over
+  `playerdata/<uuid>.dat` at the next load, so the host checkpoint writes and verifies level data. This
+  path cannot run on the dedicated GameTest server and is not automation-qualified.
+- **Exact metadata or nothing.** Offers and stock compare item plus every tag. A custom name, unknown tag
+  or capability data makes a stack untradeable; never strip a tag to make it fit.
+- **Register claims are not bindings.** A copied, cloned or creative-picked register carries an old claim;
+  `ShopBindingService.resolveRegister` releases any claim the record does not name exactly (dimension,
+  position, instance, generation). The checked placement item never applies item block-entity data.
+- **Display samples are pictures.** `ShopDisplayBlockEntity` samples are a public projection rebuilt from
+  the record; they are not inventory and showcase demonstrations never link.
+- **History is not a recovery journal.** The 128-entry ledger may evict; transactions and receipts are
+  kept separately and resolved only by proof.
+- **GameTest shops persist in ANU's retained world.** Fixtures use fresh player identities (owner shop
+  limits) and raise `shopsPerWorld`; the villager scheduler round-robins every known shop, old ones
+  included, so customer tests allow for slower evaluation. Villagers are Brain-driven: commerce offers a
+  walk target, it never adds a goal.
+- **Use `Supplier` lambdas in showcase sections**, not bound method references such as
+  `Blocks.X::defaultBlockState`: the reference initialises `Blocks` when the plan is built in a unit test.
+
 - **A home cache is not an assignment.** Resolve dimension, position and instance UUID against the
   canonical bond before use. The derived occupancy index includes unloaded bonds. Missing terrain
   is pending; only an observed missing/replaced home invalidates it. Home selection menus additionally

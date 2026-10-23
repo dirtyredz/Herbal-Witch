@@ -30,7 +30,7 @@ public final class DecorReferenceTranslations {
             Map.entry("garden_bench", "Slatted dark wood on iron scrolls, for sitting among the herbs."),
             Map.entry("outdoor_chair", "The garden bench's single companion."),
             Map.entry("garden_swing", "A swinging seat for two under its own frame. It hangs still."),
-            Map.entry("apothecary_counter", "The apothecary's chest, with a runner over the top. Selling from it comes later."),
+            Map.entry("apothecary_counter", "The apothecary's chest, with a runner over the top. A shop register stands on it, and a linked counter lets customers browse."),
             Map.entry("kitchen_counter", "A stone-topped worktop over drawers and doors."),
             Map.entry("corner_counter", "Turns a run of counters round a corner."),
             Map.entry("kitchen_island", "A butcher-block work table with a rack below and pans at hand."),

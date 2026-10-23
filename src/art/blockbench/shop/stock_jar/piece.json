@@ -1,0 +1,36 @@
+{
+  "project": "stock_jar.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/shop/stock_jar/wood",
+    "wood_v": "herbalwitch:block/pieces/shop/stock_jar/wood_v",
+    "gold": "herbalwitch:block/pieces/shop/stock_jar/gold",
+    "plum": "herbalwitch:block/pieces/shop/stock_jar/plum",
+    "glass": "herbalwitch:block/pieces/shop/stock_jar/glass",
+    "particle": "herbalwitch:block/pieces/shop/stock_jar/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/shop/stock_jar/wood",
+    "wood_v": "herbalwitch:block/pieces/shop/stock_jar/wood_v",
+    "gold": "herbalwitch:block/pieces/shop/stock_jar/gold",
+    "plum": "herbalwitch:block/pieces/shop/stock_jar/plum",
+    "glass": "herbalwitch:block/pieces/shop/stock_jar/glass"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/shop/stock_jar/base",
+      "item": true
+    }
+  ]
+}

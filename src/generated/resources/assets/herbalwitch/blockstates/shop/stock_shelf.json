@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "herbalwitch:block/shop/stock_shelf/base",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "herbalwitch:block/shop/stock_shelf/base"
+    },
+    "facing=south": {
+      "model": "herbalwitch:block/shop/stock_shelf/base",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "herbalwitch:block/shop/stock_shelf/base",
+      "y": 270
+    }
+  }
+}

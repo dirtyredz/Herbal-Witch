@@ -18,7 +18,7 @@
 //   (  0,   0) 200 x 150  the panel: wood frame, parchment, a vine along the top, a faint divider at y 74..75
 //   (  0, 154) 120 x   8  charge bar frame (dark wood, plum track inside x 2..117, y 2..5)
 //   (  0, 164) 116 x   4  charge fill (violet to pink, lit top row)
-import { C, Sheet, hex } from './kit.mjs';
+import { C, Sheet, hex, screenPanel, ornament } from './kit.mjs';
 import { rng } from '../pixels.mjs';
 
 const VIOLET = [hex('#5c3a8a'), hex('#7a4aa8'), hex('#b0509a'), hex('#d8407a')];
@@ -98,41 +98,6 @@ export const energy = () => {
   stamp(s, 94, 0, MOON, { m: hex('#8e86a8'), M: hex('#ece8f4') });
   return s.image();
 };
-
-/**
- * A W x H witchcraft screen panel at the sheet origin: wood frame, bevelled parchment with `specks`
- * fibre flecks, gold corner studs and a vine along the top frame. `rand` is the panel's seeded source.
- */
-function screenPanel(s, W, H, rand, specks) {
-  s.rect(0, 0, W, H, C.edge);
-  for (let yy = 1; yy < H - 1; yy++) {
-    for (let x = 1; x < W - 1; x++) {
-      const t = rand();
-      s.set(x, yy, t < 0.18 ? C.woodLo : t > 0.86 ? C.woodHi : C.wood);
-    }
-  }
-  s.rect(3, 3, W - 6, H - 6, C.parchLo);
-  s.rect(4, 4, W - 7, H - 7, C.parchHi);
-  s.rect(4, 4, W - 8, H - 8, C.parch);
-  for (let i = 0; i < specks; i++) s.set(6 + Math.floor(rand() * (W - 12)), 6 + Math.floor(rand() * (H - 12)), rand() < 0.5 ? C.parchHi : C.parchLo);
-}
-
-/** Gold corner studs and a vine along the top frame of a W x H panel. */
-function ornament(s, W, H) {
-  for (const [cx, cy] of [[1, 1], [W - 4, 1], [1, H - 4], [W - 4, H - 4]]) {
-    s.rect(cx, cy, 3, 3, GOLD);
-    s.set(cx + 2, cy + 2, GOLD_LO);
-  }
-  const vine = [hex('#2f5a2c'), hex('#4a8040'), hex('#1f3f1e')];
-  for (let x = 6; x < W - 6; x++) {
-    const vy = 2 + (Math.round(Math.sin(x * 0.45)) > 0 ? 1 : 0);
-    s.set(x, vy, vine[0]);
-    if (x % 6 === 2) {
-      s.set(x, vy - 1, vine[1]);
-      s.set(x + 1, vy + 1, vine[2]);
-    }
-  }
-}
 
 /** The altar screen atlas. */
 export const altar = () => {

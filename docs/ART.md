@@ -378,3 +378,13 @@ dark wood, charcoal tools, plum cloth and grips, pale straw and gold fittings.
 These views do not qualify player posture, latency or shader behavior.
 
 M10 ridden-pose review also combines exported vanilla PlayerModel geometry and cached skin with the actual item model. Three views in the job `previews/ridden/` were inspected; the runtime 0.55-block model height meets the vanilla seated hips. This is a static headless check, not live animation or shader qualification.
+
+## Commerce pieces (Milestone 11)
+
+Four agent first drafts in the dark-wood cottage palette, each owning its textures:
+`shop/register` (countertop till; plum closed sign, green open sign with a gold dot), `shop/stock_shelf`
+(wall shelf with three display spots), `shop/stock_jar` (glass jar with its own painted rim texture and
+an empty interior for the merchandise) and `shop/order_board` (framed request board). Review scenes:
+`tools/preview/scenes/shop/commerce.mjs` (every facing, on actual counters or proxy walls). Display
+merchandise is a block-entity projection drawn in game only. The commerce screen atlas is
+`tools/art/interface/shop.mjs` (252 x 200 panel). Owner refinement and in-game review are pending.

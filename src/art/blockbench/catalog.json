@@ -29,7 +29,8 @@
     "item/magic/broom",
     "item/magic/wand",
     "block/stations/tools/broom_stand",
-    "block/stations/tools/wand_bench"
+    "block/stations/tools/wand_bench",
+    "block/shop"
   ],
   "projects": [
     "stations/kettle",
@@ -168,6 +169,10 @@
     "magic/broom",
     "magic/wand",
     "stations/tools/broom_stand",
-    "stations/tools/wand_bench"
+    "stations/tools/wand_bench",
+    "shop/register",
+    "shop/stock_shelf",
+    "shop/stock_jar",
+    "shop/order_board"
   ]
 }

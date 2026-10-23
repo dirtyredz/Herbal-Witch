@@ -1,5 +1,44 @@
 # Decisions - The Herbal Witch
 
+## 2026-10-23 - M11 apothecary commerce: emeralds, per-shop authority, conservative recovery
+
+Commerce lives under `apothecary/shop/` (not a top-level `shop/` as the plan placed it): the Java root
+was already at its breadth cap, and commerce is an apothecary trade. Client and datagen homes nest under
+the existing `stations/` folders for the same reason. The four menus the plan named are one zero-slot
+`ShopMenu` with four client views (browse, manage, orders, create): every view shares the same session,
+nonce, sequence and access checks, so separate menu types would duplicate validation. Config is
+feature-owned (`ShopServerConfig`), as every earlier feature's is; there is no `platform/config`.
+
+- **Currency** is ordinary untagged emeralds, whole-emerald prices, one lot per request, no change,
+  fees or emerald-block conversion. No currency item, deed or external economy adapter.
+- **Authority**: one verified shard per shop, owner and register/fixture indexes derived from records.
+  Block entities hold only an instance UUID and a claim; a claim binds only when the record's binding
+  names the exact dimension, position, instance and generation. Reconnecting persists a newer generation
+  first. Unreadable or newer-schema shards stay preserved and unavailable; absence is never a fresh shop.
+- **One transfer path** (prepare, apply, verified player checkpoint, commit) for deposits, withdrawals,
+  purchases and proceeds. Outgoing value is reserved at prepare and incoming value only becomes
+  spendable at commit. While any transfer is unresolved the whole shop refuses economic operations
+  (simpler and stricter than per-player locks; at most one transfer per shop exists at a time).
+- **Recovery is proof-based**: finalize only on a saved player file carrying the receipt; roll back
+  only on a saved file one sequence earlier whose affected slots equal the before-state; otherwise
+  quarantine for an operator (reconcile from proof, or discard the reservation as a recorded loss).
+  A runtime player-checkpoint failure quarantines immediately; online pending players are re-verified
+  every 200 ticks and resolve only after a fresh verified save.
+- **Actual villager customers supersede the original "no simulated customers" default.** Real
+  adult villagers walk to an open, loaded register through their own brain's walk target (no goal
+  replacement: villagers are Brain-driven, so the plan's goal class became a walk-target scheduler),
+  buy four default preparations at one item for one emerald, and the product is consumed as demand.
+  NPC emeralds are an explicit bounded source (world/owner/shop/villager budgets per running-tick
+  window). The budget debit is durable before the sale commits; an interrupted sale may burn budget,
+  never refund it or replay it.
+- **Requests are nonbinding**: no payment, reservation or delivery. A purchase that names an offered
+  request advances it inside the same transfer.
+- **Showcase**: an inert villager sample needed the shared entity spawner to accept a PROTECTED harm
+  denial for inert samples only (spawning a demonstration is not harm); every other denial still refuses.
+- Rejected: per-player shop locks (more state, same safety), a private player-inventory file (a second
+  authority), vanilla trade offers for villagers (would grant XP/reputation and resale), automatic
+  refunds on uncertainty (can duplicate value).
+
 ## 2026-10-23 - M10 wear timing and recipe-owned repair
 
 The owner delegated resolution of the M10 accumulator conflict. Item schema 1 accepts

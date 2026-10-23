@@ -100,6 +100,10 @@
     "herbalwitch:magic/ritual/altar",
     "herbalwitch:familiars/home/bed",
     "herbalwitch:familiars/home/nest",
-    "herbalwitch:familiars/home/perch"
+    "herbalwitch:familiars/home/perch",
+    "herbalwitch:shop/register",
+    "herbalwitch:shop/stock_shelf",
+    "herbalwitch:shop/stock_jar",
+    "herbalwitch:shop/order_board"
   ]
 }

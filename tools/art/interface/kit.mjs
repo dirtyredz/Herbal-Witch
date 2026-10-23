@@ -1,6 +1,7 @@
 // The house GUI drawing shared by every interface atlas (stations, decor storage): a 256 x 256 RGBA
 // sheet in vanilla's container layout, the wood-framed parchment panel (any height), 18 x 18 slot
-// frames, faint slot silhouettes and the player inventory. Deterministic, no dependencies.
+// frames, faint slot silhouettes, the player inventory, and the witchcraft screen panel with its gold
+// studs and vine (altar, ward and shop screens). Deterministic, no dependencies.
 import { rng } from '../pixels.mjs';
 
 export const W = 256;
@@ -119,4 +120,42 @@ export function ghost(s, ix, iy, rows) {
 export function inventory(s, top = 84) {
   for (let r = 0; r < 3; r++) for (let c = 0; c < 9; c++) slot(s, 8 + 18 * c, top + 18 * r);
   for (let c = 0; c < 9; c++) slot(s, 8 + 18 * c, top + 58);
+}
+
+const KIT_GOLD = hex('#e0b040');
+const KIT_GOLD_LO = hex('#8a5e18');
+
+/**
+ * A W x H witchcraft screen panel at the sheet origin: wood frame, bevelled parchment with `specks`
+ * fibre flecks, gold corner studs and a vine along the top frame. `rand` is the panel's seeded source.
+ */
+export function screenPanel(s, W, H, rand, specks) {
+  s.rect(0, 0, W, H, C.edge);
+  for (let yy = 1; yy < H - 1; yy++) {
+    for (let x = 1; x < W - 1; x++) {
+      const t = rand();
+      s.set(x, yy, t < 0.18 ? C.woodLo : t > 0.86 ? C.woodHi : C.wood);
+    }
+  }
+  s.rect(3, 3, W - 6, H - 6, C.parchLo);
+  s.rect(4, 4, W - 7, H - 7, C.parchHi);
+  s.rect(4, 4, W - 8, H - 8, C.parch);
+  for (let i = 0; i < specks; i++) s.set(6 + Math.floor(rand() * (W - 12)), 6 + Math.floor(rand() * (H - 12)), rand() < 0.5 ? C.parchHi : C.parchLo);
+}
+
+/** Gold corner studs and a vine along the top frame of a W x H panel. */
+export function ornament(s, W, H) {
+  for (const [cx, cy] of [[1, 1], [W - 4, 1], [1, H - 4], [W - 4, H - 4]]) {
+    s.rect(cx, cy, 3, 3, KIT_GOLD);
+    s.set(cx + 2, cy + 2, KIT_GOLD_LO);
+  }
+  const vine = [hex('#2f5a2c'), hex('#4a8040'), hex('#1f3f1e')];
+  for (let x = 6; x < W - 6; x++) {
+    const vy = 2 + (Math.round(Math.sin(x * 0.45)) > 0 ? 1 : 0);
+    s.set(x, vy, vine[0]);
+    if (x % 6 === 2) {
+      s.set(x, vy - 1, vine[1]);
+      s.set(x + 1, vy + 1, vine[2]);
+    }
+  }
 }

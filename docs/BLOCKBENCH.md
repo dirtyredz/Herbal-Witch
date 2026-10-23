@@ -237,3 +237,10 @@ Native familiar rendering uses vanilla models/textures with resettable cosmetic 
 <job>/previews/native-poses`; review its 20 idle/walk-or-flight/rest/guard poses. The runtime and preview
 share attachment positions, scales and pitch. Vanilla textures are read only from the cached dependency
 and are never copied into shipped assets. These samples do not replace owner animation/shader review.
+
+## Commerce projects (Milestone 11)
+
+`src/art/blockbench/shop/{register,stock_shelf,stock_jar,order_board}/` compile to
+`models/block/shop/<piece>/` (the register to `closed` and `open` through `exclude` groups
+`open_sign`/`closed_sign`). The drafts were generated once by a job script; edit the projects from now
+on and check edits in the mod-test instance, never an Evil Eye instance.

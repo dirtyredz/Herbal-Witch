@@ -47,6 +47,7 @@ class ShowcasePlanTest {
             all.add(new StationShowcaseSection(station, heated.contains(station), "recipe", Map::of));
         }
         all.add(new PreparationShowcaseSection());
+        all.add(new io.github.dirtyredz.herbalwitch.apothecary.shop.guide.ShopShowcaseSection());
         all.add(new AdvancedPreparationShowcaseSection());
         all.add(new GrimoireShowcaseSection());
         all.add(new AltarShowcaseSection());
@@ -94,7 +95,7 @@ class ShowcasePlanTest {
         ShowcasePlan plan = ShowcasePlan.of(group(ShowcaseGroup.WITCHCRAFT));
         List<ShowcasePlan.SectionArea> areas = plan.areas();
         assertEquals(List.of("herbs", "garden", "drying_rack", "mortar", "kettle", "hearth", "stove", "infusion_pot", "cauldron",
-                "still", "bottling_bench", "charm_workbench", "preparations", "advanced_preparations", "grimoire", "altar", "ritual_circle",
+                "still", "bottling_bench", "charm_workbench", "preparations", "shop", "advanced_preparations", "grimoire", "altar", "ritual_circle",
                 "ward_stone", "charms", "animals", "familiar_homes", "familiars", "broom_stand", "wand_bench", "broom", "wand"), areas.stream().map(ShowcasePlan.SectionArea::id).toList());
         assertEquals(0, areas.get(0).x());
         assertEquals(0, areas.get(0).z());
@@ -142,7 +143,7 @@ class ShowcasePlanTest {
         // the bare command stacks the furniture showcase and the witchcraft showcase one separation apart
         assertTrue(28 + ShowcaseCommand.SEPARATION + 60 + 1 <= 100, "both showcases outgrow the template depth");
         assertEquals(List.of(41, 28), bounds(ShowcaseGroup.FURNITURE), "the README documents the furniture showcase as 41 x 8 x 28");
-        assertEquals(List.of(125, 60), bounds(ShowcaseGroup.WITCHCRAFT), "the README documents the witchcraft showcase as 125 x 8 x 60");
+        assertEquals(List.of(126, 60), bounds(ShowcaseGroup.WITCHCRAFT), "the README documents the witchcraft showcase as 126 x 8 x 60");
     }
 
     private static List<Integer> bounds(ShowcaseGroup group) throws Exception {

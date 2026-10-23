@@ -19,13 +19,15 @@ public final class ShowcaseEntitySpawner {
     private ShowcaseEntitySpawner() {}
 
     /** Why this sample cannot stand where it is, or null after it has been added to the level. */
-    private static String refusal(ShowcasePlan plan, ServerLevel level, ServerPlayer actor, BlockPos origin, Mob mob) {
+    private static String refusal(ShowcasePlan plan, ServerLevel level, ServerPlayer actor, BlockPos origin, Mob mob, boolean inert) {
         var box = mob.getBoundingBox();
         if (box.minX < origin.getX() || box.maxX > origin.getX() + plan.width() || box.minZ < origin.getZ()
                 || box.maxZ > origin.getZ() + plan.depth() || box.minY < origin.getY() + 1 || box.maxY > origin.getY() + ShowcasePlan.HEIGHT) return "outside the planned box " + box;
         if (!level.hasChunkAt(mob.blockPosition())) return "chunk not loaded";
         if (!level.noCollision(mob, box)) return "collides with a block";
-        if (!EntityActionPermission.checkHarm(actor, mob).allowed()) return "permission denied";
+        // Spawning is not harm: an inert demonstration of a protected species (the commerce villager) is allowed.
+        var denial = EntityActionPermission.checkHarm(actor, mob);
+        if (!denial.allowed() && !(inert && denial == EntityActionPermission.Denial.PROTECTED)) return "permission denied";
         if (!level.addFreshEntity(mob)) return "the level refused the entity";
         if (level.getEntity(mob.getUUID()) != mob || mob.isRemoved()) return "not present after adding";
         return null;
@@ -41,7 +43,7 @@ public final class ShowcaseEntitySpawner {
                 mob.moveTo(origin.getX() + sample.x(), origin.getY() + sample.y(), origin.getZ() + sample.z(), 0, 0);
                 if (mob instanceof AgeableMob ageable) ageable.setAge(0);
                 mob.setPersistenceRequired();
-                String refused = refusal(plan, level, actor, origin, mob);
+                String refused = refusal(plan, level, actor, origin, mob, sample.inert());
                 if (refused != null) {
                     LOGGER.warn("Showcase sample {} at {} refused: {}", sample.type(), mob.blockPosition(), refused);
                     return new Result(0, false);

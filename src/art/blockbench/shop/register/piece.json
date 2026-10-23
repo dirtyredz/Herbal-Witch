@@ -1,0 +1,45 @@
+{
+  "project": "register.bbmodel",
+  "textures": {
+    "wood": "herbalwitch:block/pieces/shop/register/wood",
+    "wood_v": "herbalwitch:block/pieces/shop/register/wood_v",
+    "gold": "herbalwitch:block/pieces/shop/register/gold",
+    "plum": "herbalwitch:block/pieces/shop/register/plum",
+    "ivy": "herbalwitch:block/pieces/shop/register/ivy",
+    "particle": "herbalwitch:block/pieces/shop/register/wood"
+  },
+  "owned_textures": {
+    "wood": "herbalwitch:block/pieces/shop/register/wood",
+    "wood_v": "herbalwitch:block/pieces/shop/register/wood_v",
+    "gold": "herbalwitch:block/pieces/shop/register/gold",
+    "plum": "herbalwitch:block/pieces/shop/register/plum",
+    "ivy": "herbalwitch:block/pieces/shop/register/ivy"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/shop/register/closed",
+      "item": true,
+      "exclude": [
+        "open_sign"
+      ]
+    },
+    {
+      "model": "block/shop/register/open",
+      "exclude": [
+        "closed_sign"
+      ]
+    }
+  ]
+}

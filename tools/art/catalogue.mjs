@@ -20,6 +20,7 @@ import * as interfaces from './interface/stations.mjs';
 import * as toolInterfaces from './interface/tool-stations.mjs';
 import * as decorInterfaces from './interface/decor.mjs';
 import * as witchInterfaces from './interface/witch.mjs';
+import * as shopInterfaces from './interface/shop.mjs';
 import { PREPARATION_HERBS, bundleSprite, powderSprite } from './content/preparations/materials.mjs';
 import { PRODUCTS } from './content/preparations/products.mjs';
 import { ADVANCED } from './content/preparations/advanced.mjs';
@@ -75,6 +76,7 @@ function drawnManifest() {
   for (const [rel, make] of MAGIC) out.push([`item/${rel}`, drawnAt1x(make)]);
   out.push(['item/grimoire/book.png', drawnAt1x(book)], ['gui/grimoire/reader.png', drawnAt1x(reader)]);
   for (const [name, make] of Object.entries(toolInterfaces)) out.push([`gui/stations/tools/${name}.png`, drawnAt1x(make)]);
+  for (const [name, make] of Object.entries(shopInterfaces)) out.push([`gui/shop/${name}.png`, drawnAt1x(make)]);
   return out;
 }
 

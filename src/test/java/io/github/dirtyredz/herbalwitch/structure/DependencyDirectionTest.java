@@ -25,6 +25,22 @@ class DependencyDirectionTest {
         for (Path file : javaFiles(ROOT.resolve("companions/familiars"))) reject(file, forbidden);
     }
 
+    /** Commerce never loads a chunk or adds a ticket: unloaded shops simply do not sell (no catch-up). */
+    @Test
+    void commerceCannotAcquireChunksTicketsOrTeleport() throws IOException {
+        var forbidden = Pattern.compile("\\b(?:getChunk|getChunkAt|getChunkFuture|addRegionTicket|registerTickingTicket|forceChunk|setChunkForced|teleportTo|randomTeleport)\\s*\\(");
+        for (Path file : javaFiles(ROOT.resolve("apothecary/shop"))) reject(file, forbidden);
+    }
+
+    /** Stations and decor never import commerce; commerce contributes to them, never the reverse. */
+    @Test
+    void stationsAndDecorDoNotDependOnCommerce() throws IOException {
+        var forbidden = Pattern.compile("import\\s+io\\.github\\.dirtyredz\\.herbalwitch\\.apothecary\\.shop\\.");
+        for (String dir : List.of("apothecary/stations", "apothecary/brewing", "apothecary/botany", "decor")) {
+            for (Path file : javaFiles(ROOT.resolve(dir))) reject(file, forbidden);
+        }
+    }
+
     private static List<Path> javaFiles(Path root) throws IOException {
         try (var files = Files.walk(root)) {
             return files.filter(p -> p.toString().endsWith(".java")).toList();

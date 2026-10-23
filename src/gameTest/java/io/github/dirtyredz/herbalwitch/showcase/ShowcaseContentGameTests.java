@@ -45,6 +45,7 @@ import static io.github.dirtyredz.herbalwitch.fixture.ShowcaseFixtures.FULL;
 import static io.github.dirtyredz.herbalwitch.fixture.ShowcaseFixtures.FULL_X;
 import static io.github.dirtyredz.herbalwitch.fixture.ShowcaseFixtures.FULL_Z;
 import static io.github.dirtyredz.herbalwitch.fixture.ShowcaseFixtures.ORIGIN;
+import io.github.dirtyredz.herbalwitch.apothecary.shop.showcase.ShopShowcaseChecks;
 import static io.github.dirtyredz.herbalwitch.fixture.ShowcaseFixtures.as;
 import static io.github.dirtyredz.herbalwitch.fixture.ShowcaseFixtures.run;
 import static io.github.dirtyredz.herbalwitch.fixture.ShowcaseFixtures.standing;
@@ -122,9 +123,13 @@ public final class ShowcaseContentGameTests {
         runChecked(helper, op, "herbalwitch showcase witchcraft");
         ShowcasePlan plan = plan(ShowcaseGroup.WITCHCRAFT);
         Scan scan = scan(helper, ORIGIN, plan);
+        Block counter = DecorBlocks.block(io.github.dirtyredz.herbalwitch.decor.catalog.pieces.SurfacesCatalog.APOTHECARY_COUNTER);
         for (DecorBlocks.Entry entry : DecorBlocks.entries()) {
+            if (entry.block().get() == counter) continue;
             check(scan.blocks.getOrDefault(entry.block().get(), 0) == 0, entry.block().getId() + " stands in the witchcraft showcase");
         }
+        check(scan.blocks.getOrDefault(counter, 0) == 4, "the commerce section supports its registers and jars on four apothecary counters");
+        ShopShowcaseChecks.verify(helper, plan);
         for (HerbSpec herb : HerbCatalog.ALL) {
             for (int age = 0; age <= HerbSpec.MAX_AGE; age++) {
                 check(scan.herbAges.contains(herb.id() + "@" + age), herb.id() + " age " + age + " missing");
@@ -145,7 +150,7 @@ public final class ShowcaseContentGameTests {
                 io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.AdvancedProductCatalog.SLEEP)) == 16, "animal-care sleep supplies missing");
         var animalBox = new AABB(helper.absolutePos(ORIGIN), helper.absolutePos(ORIGIN.offset(plan.width(), ShowcasePlan.HEIGHT, plan.depth())));
         var allSamples = helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.Mob.class, animalBox);
-        check(allSamples.size() == 25, "combined showcase sample count " + allSamples.size());
+        check(allSamples.size() == 26, "combined showcase sample count " + allSamples.size());
         var samples = allSamples.stream().filter(m -> !io.github.dirtyredz.herbalwitch.companions.familiars.showcase.FamiliarShowcaseDisplay.isDisplay(m)).toList();
         check(samples.size() == 16, "animal sample count " + samples.size());
         check(samples.stream().map(m -> net.minecraft.world.entity.EntityType.getKey(m.getType()).toString()).collect(java.util.stream.Collectors.toSet())
@@ -155,7 +160,8 @@ public final class ShowcaseContentGameTests {
             check(!sample.isNoAi() && sample.getActiveEffects().isEmpty(), "sample received disabled AI or effects");
             check(io.github.dirtyredz.herbalwitch.companions.animals.trust.AnimalCapability.of(sample).orElseThrow().state().isEmpty(), "sample received care state");
         }
-        var displays = allSamples.stream().filter(io.github.dirtyredz.herbalwitch.companions.familiars.showcase.FamiliarShowcaseDisplay::isDisplay).toList();
+        var displays = allSamples.stream().filter(io.github.dirtyredz.herbalwitch.companions.familiars.showcase.FamiliarShowcaseDisplay::isDisplay)
+                .filter(m -> !(m instanceof net.minecraft.world.entity.npc.Villager)).toList();
         check(displays.size() == 9, "missing familiar appearances");
         check(displays.stream().filter(m -> m instanceof io.github.dirtyredz.herbalwitch.companions.familiars.species.flying.FamiliarRaven raven && raven.appearance() == 1).count() == 1, "crow appearance missing");
         for (var display : displays) {

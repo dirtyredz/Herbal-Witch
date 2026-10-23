@@ -85,9 +85,9 @@ layout is 126 x 8 x 60, with sixteen adult animals, three functional familiar ho
 Dedicated-server/restart qualification remains outside the local fast gate; see catalogue/animals.md.
 
 Everything below is server-authoritative; clients get vanilla block updates, menu slots and menu data.
-The one custom channel, `herbalwitch:main` (protocol "13", `platform/network/HerbalWitchNetwork`), carries
+The one custom channel, `herbalwitch:main` (protocol "14", `platform/network/HerbalWitchNetwork`), carries
 the grimoire's six bounded messages, the witch's two (`WitchSnapshot`, `WitchRulesUpdate`) and the
-altar's two (`AltarRequest`, `AltarUpdate`), then animal, familiar, broom intent and wand-selection messages; features register at bootstrap. Any wire change bumps the protocol
+altar's two (`AltarRequest`, `AltarUpdate`), then animal, familiar, broom intent and wand-selection messages, then the commerce request and update (protocol 14); features register at bootstrap. Any wire change bumps the protocol
 (protocol 2 let entry keys name furniture pages; protocol 3 added the witch and altar messages; protocol 4
 grew `WitchRulesUpdate` with the working rules; protocol 5 adds the private animal card). Paths
 are under `src/main/java/io/github/dirtyredz/herbalwitch/`.
@@ -485,6 +485,44 @@ rider and nonce, rejects replay, accepts at most one update per tick and limits 
 It is deliberately absent from persistence. Wand preferences serialize seven stable string IDs.
 Server movement checks loaded swept volumes, world bounds, rider headroom and travel permissions before collision queries. Utility adapters and their shared transactions are described below.
 
+## Commerce (Milestone 11, `apothecary/shop/`)
+
+Numbers and procedures: [catalogue/commerce.md](catalogue/commerce.md).
+
+- *Authority:* one Overworld shard per shop (`ledger/ShopSavedData`, `herbalwitch_shop_<uuid>.dat`,
+  schema 1, `ShopCodec`, 512 KiB) holds name, owner, lifecycle (CLOSED, OPEN, DETACHED, QUARANTINED,
+  RETIRED), the register binding (dimension, position, instance, generation), fixture links, 27 stock
+  slots, up to 12 offers, proceeds, requests, a 128-entry ledger, retained transactions, receipts,
+  access settings. `ShopStore` indexes shards 32 per tick before any mutation (with startup
+  reconciliation per shard) and derives owner, register and fixture indexes; unreadable shards are
+  listed unavailable and preserved.
+- *Fixtures:* `fixture/block` are thin adapters (facing, support, shapes, checked placement, piston
+  refusal) over identity-only block entities; `fixture/link` resolves claims against records, binds,
+  detaches, reconnects and retires registers, links counters/displays/boards through a 200-tick armed
+  click, publishes register state and display projections (`ShopProjection`), and owns the Forge
+  adapters (counter browsing, owner-only hand breaking).
+- *Transfers:* `ledger/transaction/ShopTransfer` is the single path: prepare (shard checkpoint with the
+  transaction and outgoing value reserved), apply (player slots plus `ShopPlayerReceipt` in one step),
+  `ShopPlayerCheckpoint` (save, force, read back, compare; integrated host through level.dat), commit
+  (`ShopRecovery.finalizeTransfer`, checkpoint). `trade/` derives every plan from server state with the
+  pure `ShopInventoryModel`/`ShopPurchasePlan` (payment before output, no drops). `ShopReconciliation`
+  decides retained transfers from saved player files (startup), freshly loaded data (login) or a new
+  verified save (online, every 200 ticks; operator reconcile); unproven cases stay quarantined.
+- *Sessions:* `session/ShopMenu` has no slots; `ShopSessionService` opens it with a nonce, accepts only
+  the next sequence (retransmission replays the result, anything else is stale), rate-limits 5 mutations
+  and 10 reads per second, rechecks presence, reach (4), sight and use permission per request, and
+  closes on rebind, rule change or a new recovery state. `ShopRequest` (4 KiB) and `ShopUpdate`
+  (role-filtered NBT snapshot at most 24 KiB, ledger paged) are registered after the wand messages
+  (protocol 14).
+- *Villagers:* `customer/ShopCustomerScheduler` evaluates 4 shops, 16 candidates and 1 path per tick,
+  offers the register as the villager brain's walk target, revalidates every tick and buys through
+  `ShopTransfer.villager` after `customer/demand/NpcDemandService` durably debits world, owner, shop and
+  villager budgets. The demand record also carries the running-tick commerce clock used by requests.
+- *Requests:* `order/ShopOrderRules` (pure lifecycle) and `ShopOrderService`; a purchase naming an
+  offered request advances it inside the purchase transaction.
+- *Client:* `client/stations/shop` renders the projection (one panel per tab) and display samples
+  (`ShopDisplayRenderer`); it decides nothing.
+
 ## Whole-mod module map (plan section 2)
 
 M9 binding introduces bounded per-bond `herbalwitch_familiar_<uuid>.dat` shards in the Overworld.
@@ -532,7 +570,7 @@ showcase, platform/permission, platform/network, compat, grimoire and magic/{wit
 | `apothecary/brewing/product/`, `effect/`, `application/`, `projectile/` | Products; effect mechanics; how an effect reaches a target; thrown preparations |
 | `companions/animals/{trust,capture,taming}/`, `companions/familiars/{bond,command,ability,home,recovery,species}/` | Animal relationships; familiar bonds without one god manager |
 | `magic/ritual/{catalog,registry,altar,circle,menu,session,action,network,grimoire,showcase}` (implemented, 0.5.0; `circle/` 0.6.0), `magic/ward/` and `magic/charm/` (implemented, 0.6.0), `magic/broom/`, `magic/wand/` | The altar, its menu, sessions and actions; the ritual circle; home wards; charms; broom entity; one class per wand mode |
-| `shop/{catalog,trade,order,persistence,block}/` | Offers, transactions, orders, persistence, counter/register |
+| `apothecary/shop/{catalog,config,registry,fixture,ledger,trade,session,order,customer,guide}/` (implemented, 0.10.0) | Pieces and eligibility, rules, fixtures and links, per-shop records and transfers, trades, sessions, requests, villager customers, guidance |
 | `grimoire/{catalog,registry,access,content,knowledge,reading,network}/`, `grimoire/showcase/` (implemented) | Ids and registration; book, research blocks and reader menu (`access/{item,block,menu}`); recipe-backed entries and editorial reload; personal knowledge (`knowledge/{discovery,research,teaching}`); reader sessions and ingredient requirements (`reading/`, using `platform/inventory`); the six messages |
 | `decor/{catalog,registry,showcase}/`, `decor/structure/`, `decor/behavior/{seating,storage,sleeping}/` (doors and lights sit directly in `decor/behavior/`) | Furniture (implemented, 0.4.0): the design and 94 pieces; shared structure (block, placement, support, shapes); one implementation per behaviour |
 | `client/<feature>/`, `client/compat/<viewer>/` | Screens, HUD, renderers, particles; optional EMI/JEI plugins (`client/placement/` is the shared structure preview; `client/magic/witch/{hud}`, `client/magic/ritual/{widgets}` are M6) |
@@ -550,7 +588,7 @@ showcase, platform/permission, platform/network, compat, grimoire and magic/{wit
 | Familiar bonds, commands, homes, recovery | Overworld `FamiliarSavedData` by bond id | Owner's roster; visual state nearby |
 | Capture payloads | Overworld `CaptureSavedData` | Opaque token + display summary on the item |
 | Wards (implemented, Milestone 7: `herbalwitch_wards`, schema 1) | World-wide `WardSavedData` (dimension-qualified records) plus an in-memory chunk index | The owner's ward screen (menu data); the boundary preview |
-| Shop stock, proceeds, history | `ShopSavedData`; register stores shop id | Public offers; owner-only management |
+| Shop stock, offers, proceeds, requests, ledger, transfers (implemented, Milestone 11, schema 1) | Per-shop Overworld `ShopSavedData` shard; fixtures hold an instance UUID and a claim only | Role-filtered menu snapshots (owner: everything; customers: public offers and their own requests); display sample projections |
 | Furniture | Block properties (facing, cell, lit, bed and door states); the origin cell's storage entity; seat entities (never saved) | Vanilla updates; display contents in the block-entity update tag on change; open menus |
 
 Rules: clients send intent and ids, never inventories, costs or results; servers revalidate sender,

@@ -55,9 +55,11 @@ public final class HerbalWitch {
         io.github.dirtyredz.herbalwitch.companions.familiars.registry.FamiliarRegistration.register(modBus);
         io.github.dirtyredz.herbalwitch.magic.broom.registry.BroomRegistration.register(modBus);
         io.github.dirtyredz.herbalwitch.magic.wand.registry.WandRegistration.register(modBus);
+        io.github.dirtyredz.herbalwitch.apothecary.shop.registry.ShopRegistration.register(modBus);
         StationRegistration.registerToolShowcases();
         io.github.dirtyredz.herbalwitch.magic.broom.registry.BroomRegistration.showcase();
         io.github.dirtyredz.herbalwitch.magic.wand.registry.WandRegistration.showcase();
+        io.github.dirtyredz.herbalwitch.apothecary.shop.registry.ShopRegistration.showcase();
         ShowcaseCommandRegistration.register();
         CompatibilityRegistration.register();
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> HerbalWitchClient::registerConfig);
