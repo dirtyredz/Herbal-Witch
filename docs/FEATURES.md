@@ -206,7 +206,6 @@ No new gameplay: the same blocks, items, states and textures, authored different
 |---|---|
 | 8 | Ordinary-animal candidate implemented; ANU lifecycle/restart qualification and owner review pending |
 
-| 10 | Broom and wand |
 | 11 | Apothecary commerce: register, counters, stock, offers, proceeds, history, order board |
 | 12 | Complete-release qualification |
 
@@ -249,8 +248,23 @@ Local offline runData/test/build/compileGameTestJava passed; 460 Java tests and 
 
 Owner checks still pending: species silhouettes and animation, equipped/rest poses, UI and private synchronization with two clients, shaders and F3+T. No client, Blockbench, pack installation or public release was performed. There is no available protection-mod adapter; unsupported-claim refusal and UUID-aware permission seams are tested instead.
 
-## M10: broom and wand (qualification in progress)
+## M10: broom and wand ? private 0.9.0
 
-Both checked-placement tool stations, physical broom lifecycle and client controls, seven wand selectors, shared harvesting/fuel transactions, owned Blockbench drafts and live-rule grimoire pages are implemented. Four witchcraft showcase sections separate the unstarted stations from practice supplies, with adjacent signs. Version remains 0.8.0 while restart and complete server acceptance are pending.
+Both checked-placement crafting stations and screens, owner-bound broom flight/lifecycle, seven wand selectors, shared harvesting/fuel transactions, owned Blockbench drafts, grimoire guidance and four separately labelled witchcraft showcase sections are implemented. The combined showcase is 125 x 8 x 60. Automated acceptance passed before promotion to private 0.9.0; owner visual/two-client checks remain separate.
 
-Phase evidence: ac7104d passed 475 unit tests and 300 ANU GameTests. 85f4473 passed 478 local unit tests and 87 Node tests; its ANU run exposed short-block targeting fixtures and shared-batch drop contamination, under correction. Headless model previews cover both station states and every authored held-tool transform. Owner checks remain in-game pose, shaders, remapped controls and two-client presentation; no client was launched.
+| Check | Commit / ANU job | Result |
+|---|---|---|
+| Base, offline test build runGameTestServer | 7d76a67 / HerbalWitch-7d76a67c6362a4cad151b615-20261023-090203-b2c | 479 unit tests, build/art checks and all 319 required GameTests passed; 285 seconds |
+| Two-process physical restart | bbbe6f8 / HerbalWitch-bbbe6f8e9d4d04918caee244-20261023-083739-389 | Nine assertions passed; JVMs 2092 and 21788; 130 seconds |
+| EMI | 7d76a67 / HerbalWitch-7d76a67c6362a4cad151b615-20261023-090220-edc | All 319 required GameTests passed; 220 seconds |
+| JEI | 7d76a67 / HerbalWitch-7d76a67c6362a4cad151b615-20261023-090222-9da | All 319 required GameTests passed; 241 seconds |
+| Combined viewers | 7d76a67 / HerbalWitch-7d76a67c6362a4cad151b615-20261023-090225-a87 | All 319 required GameTests passed; 207 seconds |
+| Combined viewers, Curios, Farmer's Delight, Thirst | 7d76a67 / HerbalWitch-7d76a67c6362a4cad151b615-20261023-090622-03a | All 319 required GameTests passed; 246 seconds |
+
+Local offline runData twice matched all 1,117 generated files. The local test/build/compileGameTestJava gate passed: 479 Java tests and 87 Node tests. All 17 tool/station poses and three native-player riding views were inspected in the M10 job previews directory. Jar inspection found no test classes, fixtures, structures, tooling or foreign dependencies; diff, workspace-sync and Docket guards passed. ANU profiles use existing cached inputs with offline dependency resolution.
+
+The restart harness saves actual deployed/packed tools and an interrupted repair in one JVM, then recovers them in another without reconstructing world objects. It proves one world broom, no restored lease, packed metadata, seven mode preferences, paused repair, cancellation conservation, no offline spending and stale-nonce refusal. It does not promise power-loss atomicity across Minecraft player/chunk files. See [tool reference](catalogue/tools.md) and [restart procedure](../tools/test/README.md).
+
+Acceptance found and corrected vanilla mounted-vehicle save ownership, crop-fixture lighting, and existing familiar fixture assumptions about bounds, random position, bounded-query contamination and binding readiness. Familiar gameplay remained unchanged. Phase commits and failed/canceled runs remain in Docket dk-2d540cf6; successful reruns do not erase that history. M11 commerce remains independent and unimplemented here.
+
+Owner follow-up: survival crafting/repair and all controls, live rider animation/camera, GUI scales, shaders, F3+T, two-client latency/reconnect and both familiar/ritual entry points in the dedicated mod-test instance. No client, Blockbench UI, pack installation or public release was performed.

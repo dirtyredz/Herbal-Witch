@@ -20,8 +20,8 @@ Module paths are relative to `io.github.dirtyredz.herbalwitch`. Milestones are f
 | Familiar beds, nests and perches | Assign rest locations and recovery | bed, nest, perch | `companions/familiars/home/` | none | familiar owner | 9 | functional placement, assignment and safe rest qualified |
 | Home ward stone | Define guarded home area and targeting settings | ward stone | `magic/ward/` | none (ward activation, 20 energy default) | yes | 7 | done (0.6.0): WardGameTests, WardCodecTest, WardIndexTest; see "Ward stone" below |
 | Apothecary counter, register, shelves and jars | Stock, sell, display, track goods | counter, register, stock shelves, jars; decor Apothecary Counter links here | `shop/block/` (with `shop/catalog/`, `shop/trade/`, `shop/order/`, `shop/persistence/`) | none | witch runs shop; non-witch inspects and buys | 11 | not started |
-| Broom crafting stand | Craft and repair rideable flying brooms | broom stand | `magic/broom/` + `apothecary/stations/advanced/broom_stand/` | broom work | yes; attending witch starts each batch | 10 | implemented; final qualification pending |
-| Wand carving bench | Create utility wands for everyday tasks | wand bench | `magic/wand/` + `apothecary/stations/advanced/wand_bench/` | wand carving | yes; attending witch starts each batch | 10 | implemented; final qualification pending |
+| Broom crafting stand | Craft and repair rideable flying brooms | broom stand | `magic/broom/` + `apothecary/stations/advanced/broom_stand/` | broom work | yes; attending witch starts each batch | 10 | implemented and headless-qualified in 0.9.0 |
+| Wand carving bench | Create utility wands for everyday tasks | wand bench | `magic/wand/` + `apothecary/stations/advanced/wand_bench/` | wand carving | yes; attending witch starts each batch | 10 | implemented and headless-qualified in 0.9.0 |
 
 ## Milestone 3 stations in detail
 

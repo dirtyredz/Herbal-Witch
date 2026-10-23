@@ -4,7 +4,7 @@ Forge 1.20.1 mod: woodland herbal witchcraft (herbs, stations, brewing, familiar
 an apothecary trade) together with a cottage furniture catalogue. Install on **both** the server and
 every client.
 
-**Status: private `0.8.0`, Milestone 9 headless acceptance passed. Protocol 10. Owner visual and two-client review remains pending; no publication or pack installation.**
+**Status: private `0.9.0`, Milestone 10 headless acceptance passed. Protocol 13. Owner visual and two-client review remains pending; no publication or pack installation.**
 Contains Milestone 1 (cottage decor in a single design), Milestone 2 (herbs and garden), Milestone 3
 (everyday preparation stations and products), Milestone 4 (the grimoire: discovery, recipe lookup,
 missing ingredients, research blocks and teaching), Milestone 5 (94 furniture pieces), Milestone 6
@@ -14,7 +14,7 @@ Automated acceptance for M1 to M5 passed headless (unit tests and GameTests on t
 and M7 acceptance is tracked in docs/FEATURES.md. Owner review of the art (the 89 M5 pieces, the
 altar and the six M7 pieces are agent first drafts), the station UIs, the grimoire, the furniture and
 the witch behaviour in game, with two clients, is pending.
-M10 tool implementation is undergoing final qualification: a broom stand crafts and repairs physical flying brooms, and a wand bench carves a wand with seven utility selectors. Broom controls are movement keys, Jump, Left Control (descend), R (land) and Sneak (dismount); the V wand selector and broom actions are remappable. Both tool stations require an attending witch to press Start. See [the tool catalogue](docs/catalogue/tools.md) for utility boundaries and [restart qualification](tools/test/README.md) for the dedicated-server check.
+M10 adds craftable tools: a broom stand crafts and repairs physical flying brooms, and a wand bench carves a wand with seven utility selectors. Broom controls are movement keys, Jump, Left Control (descend), R (land) and Sneak (dismount); the V wand selector and broom actions are remappable. Both tool stations require an attending witch to press Start. See [the tool catalogue](docs/catalogue/tools.md) for utility boundaries and [restart qualification](tools/test/README.md) for the dedicated-server check.
 
 Later systems are listed in docs/FEATURES.md. Not published; not in any pack.
 

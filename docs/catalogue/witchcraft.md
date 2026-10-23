@@ -267,7 +267,7 @@ AltarAction, AltarShowcase; 0.6.0: CircleGameTests, WardGameTests, CharmGameTest
 (docs/GOTCHAS.md). Not covered: a true out-of-process server restart; the vanilla sleep path (tested
 through `EnergyEvents.sleptThrough`).
 
-## M10 tools (acceptance in progress)
+## M10 tools (0.9.0)
 
 The flying broom is a physical, owner-bound vehicle. Place, mount, fly with movement keys and Jump; descend with Left Control and request landing with R (both remappable). Sneak dismounts; owner sneak-use packs a grounded broom into an empty inventory slot. Default horizontal/vertical speed is 8/4 blocks per second, acceleration 8, turn rate 120 degrees per second, landing speed 2. Upkeep defaults to zero, configurable through 20 energy per second. Hovering accrues one wear per 200 ticks; 600 wear requires repair. Repair restores up to 200 condition while preserving names and accrued fractions. Passive upkeep never awards practice.
 
