@@ -222,7 +222,7 @@ public final class ShowcaseContentGameTests {
             @Override public boolean acceptsFailure() { return true; }
             @Override public boolean shouldInformAdmins() { return false; }
         };
-        if (run(helper, as(op, 2).withSource(capture), command) == 0) {
+        if (helper.getLevel().getServer().getCommands().performPrefixedCommand(as(op, 2).withSource(capture), command) == 0) {
             check(false, command + " failed: " + said);
         }
         check(DiscoveryCapability.of(op).map(c -> c.state().size()).orElse(0) == 0, "building the showcase granted discoveries");
