@@ -26,6 +26,15 @@ public final class FamiliarSenseTask implements FamiliarWork.Task {
     private int turns;
     public FamiliarSenseTask(Mob familiar, FamiliarPower power, FamiliarHerbCursor herbs) { this.familiar = familiar; this.power = power; this.herbs = herbs; }
     public boolean done() { return done; }
+    /** What each entity power can use, so the bounded scan is never filled by entities it would skip. */
+    private static java.util.function.Predicate<Entity> relevant(FamiliarPower power) {
+        return switch (power) {
+            case RETRIEVE -> e -> e instanceof net.minecraft.world.entity.item.ItemEntity;
+            case THREATS -> FamiliarQueries.HOSTILE.or(e -> e instanceof io.github.dirtyredz.herbalwitch.apothecary.brewing.projectile.PreparationProjectile);
+            case TRACK -> FamiliarQueries.HOSTILE;
+            default -> e -> e instanceof Mob;
+        };
+    }
     @Override public boolean valid() { return !done && rulesRevision == FamiliarServerConfig.revision() && FamiliarAbilityService.ready(familiar, power)
             && FamiliarReconciliation.record(familiar).flatMap(r -> OnlinePlayers.find(r.owner())).filter(p -> p.level() == familiar.level()).isPresent(); }
     @Override public void perform() {
@@ -43,7 +52,7 @@ public final class FamiliarSenseTask implements FamiliarWork.Task {
                 if (state.getBlock() instanceof HerbCropBlock crop && crop.isMaxAge(state) == (power == FamiliarPower.HERBS))
                     result.add(new FamiliarObservationsStore.Target(null, pos, state, "herb", state.getBlock().getName().getString()));
             }
-        } else for (var entity : FamiliarQueries.entities((ServerLevel) familiar.level(), familiar.getBoundingBox().inflate(radius))) {
+        } else for (var entity : FamiliarQueries.entities((ServerLevel) familiar.level(), familiar.getBoundingBox().inflate(radius), relevant(power))) {
             if (result.size() >= (power == FamiliarPower.TRACK ? 1 : 8)) break;
             if (power == FamiliarPower.RETRIEVE) {
                 if (entity instanceof net.minecraft.world.entity.item.ItemEntity item

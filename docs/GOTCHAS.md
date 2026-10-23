@@ -463,3 +463,7 @@ Full M10 profile runs exposed M9 fixture assumptions: the retreat owner was outs
 - **Foreign data-pack errors are not ours.** With Thirst Was Taken and Farmer's Delight installed, their
   own recipes name absent mods (brewinandchewin, farmersrespite) and log JSON exceptions; the production
   server check fails only on exceptions whose stack names Herbal Witch.
+- **A bounded entity scan must filter before it counts.** `FamiliarQueries.entities` stops at 32
+  entities; it takes a cheap type predicate (`HOSTILE`, items, mobs) that the engine applies before
+  counting. Counting everything let a herd or dropped items hide a hostile from guards, scouts and
+  senses (M12, `aScoutSeesAHostileBeyondAHerd`).

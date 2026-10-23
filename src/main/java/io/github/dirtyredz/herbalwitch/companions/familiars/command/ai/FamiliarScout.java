@@ -27,7 +27,7 @@ public final class FamiliarScout implements FamiliarWork.Task {
         var record = FamiliarReconciliation.record(mob).orElse(null); if (record == null) return;
         var owner = OnlinePlayers.find(record.owner()).orElse(null); if (owner == null || owner.level() != mob.level()) return;
         int results = 0;
-        for (var entity : FamiliarQueries.entities((ServerLevel) mob.level(), mob.getBoundingBox().inflate(FamiliarServerConfig.current().senseRadius()))) {
+        for (var entity : FamiliarQueries.entities((ServerLevel) mob.level(), mob.getBoundingBox().inflate(FamiliarServerConfig.current().senseRadius()), FamiliarQueries.HOSTILE)) {
             if (!(entity instanceof Mob candidate) || !(candidate instanceof Enemy) || candidate instanceof OwnableEntity pet && pet.getOwnerUUID() != null
                     || candidate.getType().is(ControlEffects.IMMUNE) || !mob.hasLineOfSight(candidate)
                     || !io.github.dirtyredz.herbalwitch.platform.permission.PrincipalPermission.mayUse((ServerLevel) mob.level(), record.owner(), candidate.blockPosition()).allowed()

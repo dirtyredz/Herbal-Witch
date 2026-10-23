@@ -36,7 +36,7 @@ public final class FamiliarGuard implements FamiliarWork.Task {
         nextScan = familiar.level().getGameTime() + 20;
         if (!valid()) return;
         double radius = FamiliarServerConfig.current().guardRadius();
-        for (var entity : FamiliarQueries.entities((ServerLevel) familiar.level(), new AABB(anchor, anchor).inflate(radius))) {
+        for (var entity : FamiliarQueries.entities((ServerLevel) familiar.level(), new AABB(anchor, anchor).inflate(radius), FamiliarQueries.HOSTILE)) {
             if (entity instanceof Mob candidate && allowed(candidate)) { target = candidate; break; }
         }
         if (target != null) {
