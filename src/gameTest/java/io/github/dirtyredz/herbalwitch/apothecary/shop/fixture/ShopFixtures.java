@@ -153,6 +153,12 @@ public final class ShopFixtures {
         return true;
     }
 
+    /** Removes this test's loose item entities so neighbouring tests never count them. */
+    public static void clean(GameTestHelper h) {
+        h.getLevel().getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,
+                new net.minecraft.world.phys.AABB(h.absolutePos(BlockPos.ZERO), h.absolutePos(new BlockPos(9, 6, 9))).inflate(4)).forEach(net.minecraft.world.entity.Entity::discard);
+    }
+
     public static void floor(GameTestHelper h) {
         for (int x = 0; x < 9; x++) for (int z = 0; z < 9; z++) h.setBlock(new BlockPos(x, 0, z), net.minecraft.world.level.block.Blocks.STONE);
     }

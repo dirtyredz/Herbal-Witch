@@ -86,6 +86,7 @@ public final class ShopDemandGameTests {
                 teas += record(h, s).stock.count(ShopStackKey.of(tea(1)));
                 proceeds += record(h, s).proceeds;
             }
+            clean(h);
             check(teas == 10 && proceeds == 2, "only the two charged sales consumed stock and paid: " + teas + "/" + proceeds);
             h.succeed();
         } finally {

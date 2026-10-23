@@ -88,6 +88,7 @@ public final class ShopPermissionGameTests {
         other.gameMode.destroyBlock(register);
         check(h.getLevel().getBlockState(register).is(io.github.dirtyredz.herbalwitch.apothecary.shop.registry.ShopBlocks.REGISTER.get()), "a non-owner broke the register");
         check(h.getLevel().getBlockState(register).getPistonPushReaction() == net.minecraft.world.level.material.PushReaction.BLOCK, "pistons can move a register");
+        clean(h);
         h.succeed();
     }
 

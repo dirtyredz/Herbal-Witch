@@ -79,14 +79,15 @@ public final class ShopCustomerGameTests {
         hurt.setAge(0);
         Villager trading = h.spawn(EntityType.VILLAGER, new BlockPos(1, 1, 7));
         trading.setAge(0);
-        trading.setTradingPlayer(player(h, "trader"));
         // A sealed glass room around the counter: nothing can reach the register.
         for (int x = 3; x <= 5; x++) for (int y = 1; y <= 3; y++) for (int z = 3; z <= 5; z++) {
             if ((x == 4 && z == 4 && y <= 2)) continue;
             h.setBlock(new BlockPos(x, y, z), Blocks.GLASS);
         }
         h.runAtTickTime(300, () -> {
+            // Set just before the check: vanilla clears a stale trading partner and a hurt memory over time.
             hurt.getBrain().setMemory(MemoryModuleType.HURT_BY, h.getLevel().damageSources().generic());
+            trading.setTradingPlayer(player(h, "trader"));
             check(record(h, shop).proceeds == 0 && record(h, shop).stock.count(ShopStackKey.of(tea(1))) == 3, "an ineligible villager bought");
             check(!ShopCustomerRules.eligible(baby) && !ShopCustomerRules.eligible(hurt) && !ShopCustomerRules.eligible(trading), "eligibility");
             h.succeed();

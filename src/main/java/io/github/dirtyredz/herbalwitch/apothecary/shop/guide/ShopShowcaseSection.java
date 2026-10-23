@@ -36,7 +36,7 @@ public final class ShopShowcaseSection implements ShowcaseSection {
     public static final int SPACING = 3;
     /** Every exhibit block stands in this column, its sign one cell west; notes and the villager yard sit east. */
     public static final int COLUMN = 1;
-    public static final int NOTES_X = 3;
+    public static final int NOTES_X = 2;
 
     public static String label(String topic) {
         return "showcase." + HerbalWitch.MOD_ID + ".label.shop." + topic;
@@ -52,7 +52,7 @@ public final class ShopShowcaseSection implements ShowcaseSection {
         return TITLE;
     }
 
-    /** The exhibit's block row (z) in section coordinates: a narrow five-wide section, deep rather than wide. */
+    /** The exhibit's block row (z) in section coordinates: a narrow four-wide section, deep rather than wide. */
     public static int row(int exhibit) {
         return 1 + exhibit * SPACING;
     }

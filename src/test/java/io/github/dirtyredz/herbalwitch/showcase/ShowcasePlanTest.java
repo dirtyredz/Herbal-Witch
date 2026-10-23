@@ -143,7 +143,7 @@ class ShowcasePlanTest {
         // the bare command stacks the furniture showcase and the witchcraft showcase one separation apart
         assertTrue(28 + ShowcaseCommand.SEPARATION + 60 + 1 <= 100, "both showcases outgrow the template depth");
         assertEquals(List.of(41, 28), bounds(ShowcaseGroup.FURNITURE), "the README documents the furniture showcase as 41 x 8 x 28");
-        assertEquals(List.of(126, 60), bounds(ShowcaseGroup.WITCHCRAFT), "the README documents the witchcraft showcase as 126 x 8 x 60");
+        assertEquals(List.of(125, 60), bounds(ShowcaseGroup.WITCHCRAFT), "the README documents the witchcraft showcase as 125 x 8 x 60");
     }
 
     private static List<Integer> bounds(ShowcaseGroup group) throws Exception {

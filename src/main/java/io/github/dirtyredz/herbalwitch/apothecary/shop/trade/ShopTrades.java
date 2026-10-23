@@ -75,12 +75,12 @@ public final class ShopTrades {
     /** One displayed lot of {@code offer} at {@code revision}, optionally against the buyer's offered request. */
     public static ShopResult purchase(ServerPlayer buyer, ShopStore store, UUID shop, UUID offerId, long revision, UUID orderId) {
         ShopRecord record = store.record(shop).orElse(null);
-        if (record == null) return ShopResult.refused("unavailable");
+        if (record == null || !store.writable(shop)) return ShopResult.refused("unavailable");
         if (!economicActor(buyer)) return ShopResult.refused("actor");
         if (record.owner.equals(buyer.getUUID())) return ShopResult.refused("own_shop");
         if (record.bans.contains(buyer.getUUID()) || !record.publicBuying) return ShopResult.refused("banned");
-        if (record.lifecycle != ShopRecord.Lifecycle.OPEN) return ShopResult.refused("closed");
         if (record.blocked()) return ShopResult.refused("recovery");
+        if (record.lifecycle != ShopRecord.Lifecycle.OPEN) return ShopResult.refused("closed");
         ShopOffer offer = record.offer(offerId).orElse(null);
         if (offer == null || offer.revision() != revision) return ShopResult.refused("stale_offer");
         int orderQuantity = 0;
@@ -103,6 +103,7 @@ public final class ShopTrades {
     public static ShopResult deposit(ServerPlayer owner, ShopStore store, UUID shop, int slot, int count) {
         ShopRecord record = store.record(shop).orElse(null);
         if (record == null || !record.owner.equals(owner.getUUID())) return ShopResult.refused("not_owner");
+        if (!store.writable(shop)) return ShopResult.refused("unavailable");
         if (!economicActor(owner)) return ShopResult.refused("actor");
         if (record.retired()) return ShopResult.refused("retired");
         if (slot < 0 || slot >= ShopInventoryModel.SLOTS) return ShopResult.refused("amount");
@@ -120,6 +121,7 @@ public final class ShopTrades {
     public static ShopResult withdraw(ServerPlayer owner, ShopStore store, UUID shop, int stockSlot, int count) {
         ShopRecord record = store.record(shop).orElse(null);
         if (record == null || !record.owner.equals(owner.getUUID())) return ShopResult.refused("not_owner");
+        if (!store.writable(shop)) return ShopResult.refused("unavailable");
         if (!economicActor(owner)) return ShopResult.refused("actor");
         ShopInventoryModel before = model(owner);
         var outcome = ShopPurchasePlan.withdraw(before, record.stock, stockSlot, count);
@@ -133,6 +135,7 @@ public final class ShopTrades {
     public static ShopResult proceeds(ServerPlayer owner, ShopStore store, UUID shop, int count) {
         ShopRecord record = store.record(shop).orElse(null);
         if (record == null || !record.owner.equals(owner.getUUID())) return ShopResult.refused("not_owner");
+        if (!store.writable(shop)) return ShopResult.refused("unavailable");
         if (!economicActor(owner)) return ShopResult.refused("actor");
         ShopInventoryModel before = model(owner);
         var outcome = ShopPurchasePlan.proceeds(before, record.proceeds, count);

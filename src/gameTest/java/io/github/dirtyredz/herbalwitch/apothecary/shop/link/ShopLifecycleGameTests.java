@@ -53,14 +53,14 @@ public final class ShopLifecycleGameTests {
         ServerPlayer owner = witch(h, "owner");
         Shop broken = shop(h, owner, new BlockPos(1, 1, 4));
         Shop unsupported = shop(h, owner, new BlockPos(4, 1, 4));
-        Shop exploded = shop(h, owner, new BlockPos(7, 1, 7));
+        Shop exploded = shop(h, owner, new BlockPos(4, 1, 7));
         stock(h, broken, tea(3));
         stock(h, unsupported, tea(4));
         stock(h, exploded, tea(5));
         owner.gameMode.destroyBlock(h.absolutePos(broken.register()));
         h.setBlock(unsupported.counter(), Blocks.AIR);
         h.getLevel().explode(null, h.absolutePos(exploded.register()).getX() + 0.5, h.absolutePos(exploded.register()).getY() + 0.5,
-                h.absolutePos(exploded.register()).getZ() + 0.5, 2.0F, Level.ExplosionInteraction.BLOCK);
+                h.absolutePos(exploded.register()).getZ() + 0.5, 1.0F, Level.ExplosionInteraction.BLOCK);
         h.runAfterDelay(3, () -> {
             check(h.getBlockState(unsupported.register()).isAir(), "register survived losing its counter");
             detached(h, broken, 3, "breaking");
@@ -71,6 +71,7 @@ public final class ShopLifecycleGameTests {
             check(!drops.isEmpty() && drops.stream().noneMatch(e -> e.getItem().hasTag()), "a register drop carried data");
             check(h.getLevel().getEntitiesOfClass(ItemEntity.class, new AABB(h.absolutePos(BlockPos.ZERO)).inflate(12), e -> e.getItem().is(tea(1).getItem())).isEmpty(),
                     "stock leaked into the world");
+            clean(h);
             h.succeed();
         });
     }
@@ -97,6 +98,7 @@ public final class ShopLifecycleGameTests {
         check(ShopBindingService.resolveRegister(h.getLevel(), h.absolutePos(copy), fixture(h, copy)).isEmpty(), "a copied register bound the shop");
         check(fixture(h, copy).shop() == null, "the stale claim was kept");
         check(ShopBindingService.resolveRegister(h.getLevel(), h.absolutePos(register), fixture(h, register)).map(x -> x.id).orElse(null) != null, "real register lost");
+        clean(h);
         h.succeed();
     }
 
@@ -133,6 +135,7 @@ public final class ShopLifecycleGameTests {
             check(record(h, a).links.stream().noneMatch(l -> l.kind() == ShopLink.Kind.SHELF), "removed shelf still linked");
             check(h.getLevel().getEntitiesOfClass(ItemEntity.class, new AABB(h.absolutePos(BlockPos.ZERO)).inflate(12),
                     e -> e.getItem().is(tea(1).getItem())).isEmpty(), "display removal dropped stock");
+            clean(h);
             h.succeed();
         });
     }

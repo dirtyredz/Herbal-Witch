@@ -283,7 +283,7 @@ hanging pieces under ceilings, lights lit, storage stocked and the door in its f
 
 - **Where:** the first box starts 2 blocks east of you on your row and extends east and south. The floor is
   the block you stand on. Height 8 (floor layer plus 7 cleared). Sections pack into rows no wider than 126. The
-  furniture showcase is 41 x 8 x 28 and the witchcraft showcase 126 x 8 x 60 in two rows (63,193 writes), including sixteen live animal habitats (the single
+  furniture showcase is 41 x 8 x 28 and the witchcraft showcase 125 x 8 x 60 in two rows (62,713 writes), including sixteen live animal habitats (the single
   showcase was 121 x 8 x 38 before the split); hard caps per box are 128 x 8 x 128 and 65,536 writes.
 - **Signs:** a sign for a block stands on the floor in the block's own front row, one block west of it (your
   right as you face it), so it never hides the block; the block north of every sign stays open. Notes that
@@ -376,5 +376,5 @@ remain quarantined; operators can inspect them with /herbalwitch familiar. The f
 command, crafting and recovery reference is [familiars.md](docs/catalogue/familiars.md).
 
 The witchcraft showcase contains 26 appearances, including nine inert familiar displays and the inert
-commerce villager, three functional homes and familiar supplies. Its measured bounds are 126 x 8 x 60; furniture
+commerce villager, three functional homes and familiar supplies. Its measured bounds remain 125 x 8 x 60; furniture
 remains 41 x 8 x 28. All labels retain the sign-beside-block rule.
