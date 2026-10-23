@@ -206,7 +206,6 @@ No new gameplay: the same blocks, items, states and textures, authored different
 |---|---|
 | 8 | Ordinary-animal candidate implemented; ANU lifecycle/restart qualification and owner review pending |
 
-| 11 | Apothecary commerce: register, counters, stock, offers, proceeds, history, order board |
 | 12 | Complete-release qualification |
 
 Not planned: publishing, pack integration or a release before the owner decides.
@@ -271,3 +270,26 @@ Acceptance found and corrected vanilla mounted-vehicle save ownership, crop-fixt
 Owner follow-up: survival crafting/repair and all controls, live rider animation/camera, GUI scales, shaders, F3+T, two-client latency/reconnect and both familiar/ritual entry points in the dedicated mod-test instance. No client, Blockbench UI, pack installation or public release was performed.
 
 The final local 0.9.0 gate passed in 3m26s. The private jar is `build/libs/herbalwitch-1.20.1-0.9.0.jar` (5,085 entries), SHA-256 `be30724d4e19c7fc2981aaf00c1c8e5087f45d0644793761eee7fec05d264ecd`; its metadata is 0.9.0 and it contains no test/tool/fixture or foreign class files. Docket dk-2d540cf6 is complete.
+
+## M11: apothecary commerce - private 0.10.0
+
+Shop register, stock shelf, stock jar and order board (owned Blockbench first drafts), per-shop verified
+records, one prepare/apply/player-checkpoint/commit transfer path for deposits, withdrawals, purchases and
+proceeds, proof-based restart and login reconciliation with operator inspect/reconcile/discard, sessions
+with nonce and sequence replay protection, role-filtered screens, fixture linking and display projections,
+real villager customers with durable bounded demand budgets, nonbinding requests, ten grimoire guides and an
+inert showcase section (witchcraft showcase stays 125 x 8 x 60, 62,713 writes). Catalogue:
+[commerce](catalogue/commerce.md).
+
+| Evidence | Commit / job | Result |
+|---|---|---|
+| Local fast gate | 85e886c | runData twice byte-identical; shop, showcase, resource and dependency JUnit suites and `build -x test` (incl. checkArt) green; 90 Node art/preview tests. Two local full `test build` runs were interrupted by an external Gradle daemon stop; the full 519-test JUnit suite ran on ANU |
+| ANU test runGameTestServer (first) | dbdb00b / HerbalWitch-m11-commerce-0.10.0-20261023-124323-d72 | 7 of 346 failed: 2 production refusal-order defects, 5 test defects/pins; fixed |
+| ANU test runGameTestServer (second) | 14c55b4 / ...-20261023-125643-8ab | 2 of 346 failed: neighbour item interference in two existing tests; isolated |
+| ANU test runGameTestServer | 85e886c / HerbalWitch-m11-commerce-0.10.0-20261023-130225-baa | 519 unit, all 346 GameTests passed |
+| ANU commerceRestartTest | 85e886c / HerbalWitch-m11-commerce-0.10.0-20261023-130503-90b | two JVMs, 25 checks passed |
+
+Pending: owner in-game review (placement preview, facings and item views, two clients buying the last lot,
+owner logout during a sale, privacy of proceeds/ledger/requests, villager arrival and exhausted demand,
+the board request-to-purchase flow, the commerce screen layout, Blockbench edit/recompile). The
+integrated-host (level.dat) player checkpoint path is implemented but not automation-qualified.

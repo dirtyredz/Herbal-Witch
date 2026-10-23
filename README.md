@@ -4,7 +4,7 @@ Forge 1.20.1 mod: woodland herbal witchcraft (herbs, stations, brewing, familiar
 an apothecary trade) together with a cottage furniture catalogue. Install on **both** the server and
 every client.
 
-**Status: private `0.9.0`, Milestone 10 headless acceptance passed. Protocol 13. Owner visual and two-client review remains pending; no publication or pack installation.**
+**Status: private `0.10.0`, Milestone 11 headless acceptance passed. Protocol 14. Owner visual and two-client review remains pending; no publication or pack installation.**
 Contains Milestone 1 (cottage decor in a single design), Milestone 2 (herbs and garden), Milestone 3
 (everyday preparation stations and products), Milestone 4 (the grimoire: discovery, recipe lookup,
 missing ingredients, research blocks and teaching), Milestone 5 (94 furniture pieces), Milestone 6
