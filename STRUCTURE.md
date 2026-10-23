@@ -68,6 +68,7 @@ herbalwitch/
 - `companions/familiars/config/` — atomic bounded server rule snapshots; acquisition switches never delete bonds.
 - `companions/familiars/command/` — command transitions, derived mobile reservations and loaded-only recall; `ai/` owns mutually exclusive behavior and observations, `navigation/` owns safe destinations and queued paths.
 - `companions/familiars/work/` — shared fair per-dimension scan/path queues and bounded engine queries; `observation/` owns private owner/target alert throttling.
+- `companions/familiars/ability/` — payment, reserve and scheduling; `sensing/` owns incremental plant/entity observations and `action/` owns concrete garden/guard effects. `observation/` also owns short-lived private action tokens; `client/familiars/state/` caches their bounded projections and `render/` draws observed positions. Tests live in `src/{test,gameTest}/.../companions/familiars/ability/`.
 - `companions/familiars/home/` — shared bed/nest/perch block, identity-only block entity, canonical occupancy index, assignment, safe rest and loaded-only destinations.
 - `companions/familiars/showcase/` — functional home and familiar feature sections in the witchcraft group.
 - `src/{test,gameTest}/java/io/github/dirtyredz/herbalwitch/companions/familiars/home/` — compatibility, occupancy, real placement/support loss, replacement identity, pending homes and loaded rest.

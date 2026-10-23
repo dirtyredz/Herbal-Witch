@@ -57,6 +57,14 @@ public final class FamiliarRegistration {
         AltarSessionService.handle(FamiliarActionCatalog.REVIVAL, new io.github.dirtyredz.herbalwitch.companions.familiars.ritual.RevivalAction());
         bus.addListener(FamiliarLifecycleEvents::capabilities);
         var forge = MinecraftForge.EVENT_BUS;
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.ability.FamiliarAbilities::tick);
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.ability.FamiliarAbilities::stopped);
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.ability.FamiliarAbilities::leave);
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.ability.action.FamiliarCombatPowers::tick);
+        forge.addListener(EventPriority.LOW, io.github.dirtyredz.herbalwitch.companions.familiars.ability.action.FamiliarCombatPowers::damage);
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.ability.action.FamiliarCombatPowers::stopped);
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.observation.FamiliarObservationsStore::logout);
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.observation.FamiliarObservationsStore::stopped);
         forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.preparation.FamiliarBuffEvents::tick);
         forge.addListener(EventPriority.LOW, io.github.dirtyredz.herbalwitch.companions.familiars.preparation.FamiliarBuffEvents::damage);
         forge.addListener(EventPriority.LOWEST, io.github.dirtyredz.herbalwitch.companions.familiars.preparation.FamiliarPoison::damage);

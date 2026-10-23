@@ -25,6 +25,8 @@ public final class FamiliarManifest {
     }
     public static Map<String, String> lang() {
         Map<String, String> out = new LinkedHashMap<>();
+        for (String key : List.of("powers", "equipment", "auto_on", "auto_off", "charge", "reserve", "reserve_full", "reserve_charged", "searching", "updated")) out.put("familiar.herbalwitch." + key, null);
+        for (String key : List.of("threats", "herbs", "creatures", "track", "retrieve", "distract", "intercept", "venom", "garden", "repel")) out.put("familiar.herbalwitch.power." + key, null);
         for (String gear : EQUIPMENT) out.put("item.herbalwitch.familiars.equipment." + gear, null);
         for (String key : List.of("collect_cargo", "equipment_hint", "charm_slot", "gear_slot", "cargo_empty", "inventory_full", "cargo_collected")) out.put("familiar.herbalwitch." + key, null);
         for (String key : List.of("bed", "nest", "perch")) out.put("block.herbalwitch.familiars.home." + key, null);

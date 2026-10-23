@@ -26,7 +26,7 @@ public final class AnimalPermissionPolicy {
             return Denial.FOREIGN_PET;
         var known = AnimalProfiles.find(EntityType.getKey(mob.getType()).toString());
         if (known.isPresent() && AnimalOwnership.of(mob, known.get()).conflict()) return Denial.OWNER_CONFLICT;
-        if (action == Action.HARM) return Denial.NONE;
+        if (action == Action.HARM || action == Action.FAMILIAR_HARM) return Denial.NONE;
         // Preserve M7 sleep on other vanilla creatures; participating animals additionally obey M8 ownership.
         if (action == Action.ANIMAL_SEDATE && known.isEmpty() && keeper == null) return Denial.NONE;
         var profile = AnimalEligibility.profile(mob);

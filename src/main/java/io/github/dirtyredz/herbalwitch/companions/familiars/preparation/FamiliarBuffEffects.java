@@ -18,7 +18,7 @@ public final class FamiliarBuffEffects {
     public static boolean homeGuard(Mob mob, FamiliarRecord record) {
         if (record.command() != FamiliarCommand.PROTECT_HOME || !(mob.level() instanceof net.minecraft.server.level.ServerLevel level)
                 || level.getEntity(mob.getUUID()) != mob) return false;
-        var home = FamiliarHomeTarget.resolve(mob, record);
+        var home = FamiliarHomeTarget.inspect(mob, record);
         int radius = io.github.dirtyredz.herbalwitch.companions.familiars.config.FamiliarServerConfig.current().guardRadius();
         return home.position() != null && mob.position().distanceToSqr(home.position()) <= radius * radius;
     }

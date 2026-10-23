@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class FamiliarWireTest {
     private static FamiliarRosterPage.Row row(String text) {
         return new FamiliarRosterPage.Row(UUID.randomUUID(), text, "cat", 1, 8, 10, "stay", "ACTIVE", false,
-                "minecraft:overworld", 123, text.repeat(2), text, text.repeat(2));
+                "minecraft:overworld", 123, text.repeat(2), text, text.repeat(2), 500, true);
     }
     @Test void roundTripsMaximumRowCountWithoutRecoveryOrInventoryFields() {
         var rows = new ArrayList<FamiliarRosterPage.Row>(); for (int i = 0; i < 32; i++) rows.add(row("Whiskers"));
@@ -18,7 +18,7 @@ class FamiliarWireTest {
         var buffer = new FriendlyByteBuf(Unpooled.buffer());
         try { page.encode(buffer); assertEquals(page, FamiliarRosterPage.decode(buffer)); assertFalse(buffer.isReadable()); }
         finally { buffer.release(); }
-        assertEquals(Set.of("bond", "name", "species", "level", "health", "maximum", "command", "phase", "loaded", "dimension", "position", "home", "status", "buffs"),
+        assertEquals(Set.of("bond", "name", "species", "level", "health", "maximum", "command", "phase", "loaded", "dimension", "position", "home", "status", "buffs", "reserve", "automatic"),
                 Arrays.stream(FamiliarRosterPage.Row.class.getRecordComponents()).map(java.lang.reflect.RecordComponent::getName).collect(java.util.stream.Collectors.toSet()));
     }
     @Test void boundsActualUtf8BytesAndRejectsExcessRowsBeforeAllocation() {
@@ -43,7 +43,7 @@ class FamiliarWireTest {
         assertFalse(Arrays.stream(FamiliarRequest.class.getRecordComponents()).anyMatch(f -> f.getName().equals("owner")));
     }
     @Test void rejectsNonfiniteHealthAndUnknownLevel() {
-        assertThrows(IllegalArgumentException.class, () -> new FamiliarRosterPage.Row(UUID.randomUUID(), "", "cat", 1, Float.NaN, 10, "stay", "ACTIVE", false, "", 0, "", "", ""));
-        assertThrows(IllegalArgumentException.class, () -> new FamiliarRosterPage.Row(UUID.randomUUID(), "", "cat", 6, 10, 10, "stay", "ACTIVE", false, "", 0, "", "", ""));
+        assertThrows(IllegalArgumentException.class, () -> new FamiliarRosterPage.Row(UUID.randomUUID(), "", "cat", 1, Float.NaN, 10, "stay", "ACTIVE", false, "", 0, "", "", "", 0, false));
+        assertThrows(IllegalArgumentException.class, () -> new FamiliarRosterPage.Row(UUID.randomUUID(), "", "cat", 6, 10, 10, "stay", "ACTIVE", false, "", 0, "", "", "", 0, false));
     }
 }

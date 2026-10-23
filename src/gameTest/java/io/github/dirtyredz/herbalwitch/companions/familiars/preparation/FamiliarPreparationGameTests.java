@@ -60,6 +60,7 @@ public final class FamiliarPreparationGameTests {
     @GameTest(template = TEMPLATE, batch = "herbalwitch_familiar_poison", timeoutTicks = 100)
     public static void poisonCoatingsShareOneSlotAndRecheckDelayedProtection(GameTestHelper h) {
         FamiliarFixtures.bound(h, "snake", "poison_" + UUID.randomUUID(), b -> {
+            try (var online = io.github.dirtyredz.herbalwitch.platform.player.OnlinePlayers.register(java.util.List.of(b.owner()))) {
             check(apply(b, FamiliarPreparationCatalog.VENOMLEAF) == InteractionResult.CONSUME, "venomleaf refused");
             check(apply(b, AdvancedProductCatalog.VENOM_OIL) == InteractionResult.FAIL, "weak oil replaced venomleaf");
             var target = h.spawn(EntityType.PILLAGER, new BlockPos(7,1,5)); target.setNoAi(true);
@@ -78,11 +79,13 @@ public final class FamiliarPreparationGameTests {
             check(apply(b, AdvancedProductCatalog.VENOM_OIL) == InteractionResult.CONSUME && b.record().state().getCompound("poisonCoating").getInt("hits") == 8, "ordinary oil did not share the familiar coating slot");
             for (int i = 0; i < 8; i++) FamiliarPoison.damage(new LivingDamageEvent(target, b.mob().damageSources().mobAttack(b.mob()), 2));
             check(!b.record().state().contains("poisonCoating"), "ordinary oil survived eight successful permitted hits"); h.succeed();
+            }
         });
     }
     @GameTest(template = TEMPLATE, batch = "herbalwitch_familiar_shadowstep", timeoutTicks = 100)
     public static void shadowstepKeepsItsChargeWhenNoSafePositionExists(GameTestHelper h) {
         FamiliarFixtures.bound(h, "cat", "shadowstep_" + UUID.randomUUID(), b -> {
+            try (var online = io.github.dirtyredz.herbalwitch.platform.player.OnlinePlayers.register(java.util.List.of(b.owner()))) {
             check(apply(b, FamiliarPreparationCatalog.SHADOWSTEP) == InteractionResult.CONSUME, "shadowstep refused");
             b.mob().moveTo(h.absolutePos(new BlockPos(4,5,5)).getCenter()); b.mob().setRemainingFireTicks(100);
             FamiliarBuffEvents.tick(new LivingEvent.LivingTickEvent(b.mob()));
@@ -91,6 +94,7 @@ public final class FamiliarPreparationGameTests {
             FamiliarBuffEvents.tick(new LivingEvent.LivingTickEvent(b.mob()));
             check(!FamiliarBuffRules.active(b.record().state(), "shadowstep") && b.mob().position().distanceToSqr(before) > .1
                     && b.mob().position().distanceToSqr(before) <= 64, "successful step failed bounds or kept charge"); h.succeed();
+            }
         });
     }
 }

@@ -235,3 +235,9 @@ path failure above partial-height furniture; navigation now selects a checked ad
 Equipment and corrected home behavior await the next committed ANU qualification. Milestone remains open.
 
 M9 equipment and recovery are server-qualified at `417141b`: ANU `HerbalWitch-m9-familiars-0.8.0-20261023-014942-c54` passed 446 Java tests and all 261 required GameTests. This includes the partial-home return fix, gear/cursor/cargo transactions, charm reuse, lethal incapacitation, paid revival, failed admission, administrative recovery and owner-directed retreat. Progression/upgrades are the next phase; abilities, familiar preparation effects, acquisition, complete guidance/showcase and restart qualification remain open.
+
+M9 ability checkpoint: the Powers detail view exposes bounded sensing, explicit garden/distraction
+and guard selections, automatic sensing/guard powers, and prepaid reserve charging. Private observed
+positions expire after five seconds. Spiritbond discounts costs; Nightwatch enables nighttime threat
+sensing; Hearthkeeper adjusts home repel. Retrieval is not exposed until durable pickup reconciliation
+is implemented. The milestone and version promotion remain open.

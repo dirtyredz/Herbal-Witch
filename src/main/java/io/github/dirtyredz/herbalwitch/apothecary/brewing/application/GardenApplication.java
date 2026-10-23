@@ -45,6 +45,13 @@ public final class GardenApplication {
 
     private GardenApplication() {
     }
+    /** One permission-checked growth attempt, shared by finished fertilizer and familiar garden aid. */
+    public static boolean growCrop(Player player, Level level, BlockPos pos) {
+        if (player == null || !level.hasChunkAt(pos)) return false;
+        var before = level.getBlockState(pos);
+        if (!before.is(BlockTags.CROPS) || !ActionPermissionService.mayModify(ActionContext.of(player, level, pos))) return false;
+        return BoneMealItem.growCrop(new ItemStack(Items.BONE_MEAL), level, pos) && !before.equals(level.getBlockState(pos)) && changed(level, player, pos);
+    }
 
     /** Server side. True when the world changed. */
     public static boolean apply(UseOnContext context, Garden kind) {

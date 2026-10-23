@@ -86,7 +86,8 @@ public class FamiliarRosterMenu extends AbstractContainerMenu {
         String name = live == null ? state.getString("name") : live.getName().getString();
         return new FamiliarRosterPage.Row(r.bond(), limit(name, 64), r.species(), level, live == null ? state.getFloat("health") : live.getHealth(),
                 live == null ? state.getFloat("maxHealth") : live.getMaxHealth(), r.command().key(), r.phase().name(), live != null,
-                limit(dimension, 96), position, limit(home, 128), limit(state.getString("status"), 96), limit(String.join(", ", state.getCompound("buffs").getAllKeys()), 128));
+                limit(dimension, 96), position, limit(home, 128), limit(state.getString("status"), 96), limit(String.join(", ", state.getCompound("buffs").getAllKeys()), 128),
+                state.getInt("reserve"), state.getBoolean("autoPowers"));
     }
     private static String limit(String value, int length) { return value.length() <= length ? value : value.substring(0, length); }
     public void send(ServerPlayer player, boolean immediate, String notice) {

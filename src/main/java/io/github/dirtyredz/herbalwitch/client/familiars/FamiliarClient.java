@@ -16,6 +16,9 @@ public final class FamiliarClient {
                 FamiliarMenus.ROSTER.get(), FamiliarRosterScreen::new);
         MenuScreens.register(FamiliarMenus.DETAIL.get(), FamiliarDetailScreen::new);
         FamiliarPackets.client(FamiliarClientState::accept);
+        FamiliarPackets.observations(io.github.dirtyredz.herbalwitch.client.familiars.state.FamiliarObservationCache::accept);
+        MinecraftForge.EVENT_BUS.addListener(io.github.dirtyredz.herbalwitch.client.familiars.render.FamiliarObservationRenderer::render);
+        MinecraftForge.EVENT_BUS.addListener((ClientPlayerNetworkEvent.LoggingOut event) -> io.github.dirtyredz.herbalwitch.client.familiars.state.FamiliarObservationCache.clear());
         FamiliarPackets.visuals(io.github.dirtyredz.herbalwitch.client.familiars.state.FamiliarVisualCache::accept);
         MinecraftForge.EVENT_BUS.addListener(io.github.dirtyredz.herbalwitch.client.familiars.state.FamiliarVisualCache::leave);
         MinecraftForge.EVENT_BUS.addListener((ClientPlayerNetworkEvent.LoggingOut event) -> io.github.dirtyredz.herbalwitch.client.familiars.state.FamiliarVisualCache.clear());

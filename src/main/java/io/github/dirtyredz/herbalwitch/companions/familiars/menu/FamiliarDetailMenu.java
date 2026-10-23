@@ -21,20 +21,23 @@ public class FamiliarDetailMenu extends FamiliarRosterMenu {
     private final FamiliarEquipmentService transfer;
     private final Player actor;
     private boolean clicking;
+    private boolean powersView;
+    public void powersView(boolean value) { powersView = value; }
     public FamiliarDetailMenu(int id, Inventory inventory, FriendlyByteBuf buffer) { this(id, inventory, buffer.readLong(), buffer.readUUID()); }
     public FamiliarDetailMenu(int id, Inventory inventory, long nonce, UUID bond) {
         super(FamiliarMenus.DETAIL.get(), id, nonce, bond); actor = inventory.player; transfer = new FamiliarEquipmentService(bond);
         for (int i = 0; i < 2; i++) {
             final int equipmentSlot = i;
             addSlot(new Slot(equipment, i, 18 + i * 68, 126) {
+                @Override public boolean isActive() { return !powersView; }
                 @Override public int getMaxStackSize() { return 1; }
                 @Override public boolean mayPlace(ItemStack stack) { return accepts(equipmentSlot, stack); }
                 @Override public boolean mayPickup(Player player) { return stillValid(player); }
             });
         }
         for (int row = 0; row < 3; row++) for (int column = 0; column < 9; column++)
-            addSlot(new Slot(inventory, column + row * 9 + 9, 59 + column * 18, 148 + row * 18));
-        for (int column = 0; column < 9; column++) addSlot(new Slot(inventory, column, 59 + column * 18, 206));
+            addSlot(new Slot(inventory, column + row * 9 + 9, 59 + column * 18, 148 + row * 18) { @Override public boolean isActive() { return !powersView; } });
+        for (int column = 0; column < 9; column++) addSlot(new Slot(inventory, column, 59 + column * 18, 206) { @Override public boolean isActive() { return !powersView; } });
         refresh();
     }
     private boolean accepts(int slot, ItemStack stack) {

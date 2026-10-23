@@ -560,3 +560,13 @@ Familiar lethal-damage handling runs after damage modifiers and before health re
 Familiar progression stores its loaded clock, reward window and travel accumulation in the bond. Care observers run only after successful M8 consumption; a registered owner contribution can allow maximum-trust feeds without bypassing M8 timing. Routine progress clocks do not invalidate roster sessions. Level and Heartwood health are stable transient projections, rebuilt before restored health is applied; neither raising maximum health nor an upgrade heals. Named upgrades use the same player receipt boundary as equipment and retain a recovery payload until payment settles.
 
 Familiar preparation application installs into the existing M7 consumer seam. Ten product timers live in the bond and advance only on loaded ticks; the existing M8 Healing Salve path supplies the eleventh preparation. Attribute modifiers have stable identities. Concealment and fire resistance are short projections of the canonical timer; longer external effects are preserved, and known owned projections are omitted from recovery payloads. Ordinary Venom Oil and Venomleaf share a coating boundary and the existing M7 poison application/attribution machinery. Delayed attribution retains an explicit action purpose so familiar poison rechecks the stricter no-friendly-target policy even after the owner disconnects.
+
+M9 ability foundation: all powers share fixed-point owner payment, canonical loaded-tick cooldowns,
+and no-result refusal. Automatic sensing is initially off and rotates eligible powers through the
+shared scan queue; plant work examines at most 64 positions per turn. Five-second owner-only
+observations carry opaque target tokens, checked against owner, generation, world and current
+position/state before action. Protocol 10 adds these observations and reserve/automatic roster fields.
+The detail card switches between equipment and powers without granting remote inventory access.
+Reserve charges use the same durable player/bond receipts as upgrades, in exact five-energy increments.
+Offline spending is restricted to eligible Protect Home guards and does not award practice again.
+Retrieval remains the next ability subphase: its stale-item retirement authority must precede UI exposure.

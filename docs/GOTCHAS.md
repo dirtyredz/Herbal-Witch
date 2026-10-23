@@ -371,3 +371,8 @@ Familiar revival must start from `INCAPACITATED`, never from a missing ACTIVE UU
 Reapply familiar level/Heartwood maximum-health modifiers before assigning saved health during restoration. Vanilla does not save transient modifiers; assigning health against the native maximum first silently clips a leveled familiar during recall. Progress clocks are loaded time and never use world-time catch-up.
 
 Do not independently consume a familiar preparation in its consumer: the item returns its bottle after APPLIED. Salve already consumes through AnimalCareService and returns its bowl. A projected two-tick concealment/fire-resistance effect is not an independent buff clock; preserve longer externally refreshed effects on expiry and omit only known owned projections from lifecycle snapshots.
+
+Familiar ability GameTests must register real fixture owners through `OnlinePlayers.register` for
+online behavior; the synthetic real-player fixture is not in the live player list. New entity action
+categories must be admitted as general harm in the animal permission adapter before familiar-specific
+policies run; treating `FAMILIAR_HARM` as animal care incorrectly refuses hostile monsters.

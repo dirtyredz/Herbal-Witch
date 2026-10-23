@@ -42,6 +42,11 @@ public final class FamiliarGuard implements FamiliarWork.Task {
         if (target != null) {
             FamiliarReconciliation.record(familiar).flatMap(r -> OnlinePlayers.find(r.owner())).ifPresent(owner ->
                     io.github.dirtyredz.herbalwitch.companions.familiars.observation.FamiliarAlerts.warn(owner, familiar, target));
+            if (io.github.dirtyredz.herbalwitch.companions.familiars.ability.FamiliarAbilities.automatic(familiar)) {
+                io.github.dirtyredz.herbalwitch.companions.familiars.ability.action.FamiliarCombatPowers.intercept(familiar, target);
+                io.github.dirtyredz.herbalwitch.companions.familiars.ability.action.FamiliarCombatPowers.distract(familiar, target);
+                io.github.dirtyredz.herbalwitch.companions.familiars.ability.action.FamiliarCombatPowers.repel(familiar, target);
+            }
         }
     }
     public boolean allowed(Mob candidate) {
@@ -71,7 +76,9 @@ public final class FamiliarGuard implements FamiliarWork.Task {
         if (familiar.distanceToSqr(enemy) > reach * reach || !allowed(enemy)) return;
         nextAttack = familiar.level().getGameTime() + 20;
         familiar.swing(net.minecraft.world.InteractionHand.MAIN_HAND);
-        enemy.hurt(familiar.damageSources().mobAttack(familiar), damage);
+        if (enemy.hurt(familiar.damageSources().mobAttack(familiar), damage)
+                && io.github.dirtyredz.herbalwitch.companions.familiars.ability.FamiliarAbilities.automatic(familiar))
+            io.github.dirtyredz.herbalwitch.companions.familiars.ability.action.FamiliarCombatPowers.venom(familiar, enemy);
     }
     public void clear() { FamiliarWork.in((ServerLevel) familiar.level()).remove(this); anchor = null; target = null; familiar.setTarget(null); }
 }

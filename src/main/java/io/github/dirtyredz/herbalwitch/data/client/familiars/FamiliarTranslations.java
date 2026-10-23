@@ -7,6 +7,14 @@ import java.util.*;
 public final class FamiliarTranslations {
     private FamiliarTranslations() {}
     public static void addTo(LanguageProvider out) {
+        Map.ofEntries(Map.entry("powers", "Powers"), Map.entry("equipment", "Gear"), Map.entry("auto_on", "Automatic: on"), Map.entry("auto_off", "Automatic: off"),
+                Map.entry("charge", "Charge 5 energy"), Map.entry("reserve", "Prepaid reserve: %s energy"), Map.entry("reserve_full", "Reserve has no room for five energy."),
+                Map.entry("reserve_charged", "Five energy stored."), Map.entry("searching", "Searching nearby loaded terrain."), Map.entry("updated", "Familiar updated."))
+                .forEach((key, value) -> out.add("familiar.herbalwitch." + key, value));
+        Map.ofEntries(Map.entry("threats", "Sense threats"), Map.entry("herbs", "Find mature herbs"), Map.entry("creatures", "Sense creatures"), Map.entry("track", "Track a hostile"),
+                Map.entry("retrieve", "Retrieve a dropped item"), Map.entry("distract", "Choose distraction target"), Map.entry("intercept", "Choose interception target"),
+                Map.entry("venom", "Venom bite"), Map.entry("garden", "Choose a herb to tend"), Map.entry("repel", "Choose a hostile to repel"))
+                .forEach((key, value) -> out.add("familiar.herbalwitch.power." + key, value));
         for (var gear : FamiliarEquipmentCatalog.ALL) out.add("item.herbalwitch." + gear.path().replace('/', '.'), gear.name());
         Map.of("collect_cargo", "Collect cargo", "equipment_hint", "Equip one charm and one species accessory.", "charm_slot", "Charm", "gear_slot", "Gear", "cargo_empty", "No cargo to collect.", "inventory_full", "Make space in your inventory.", "cargo_collected", "Cargo collected.").forEach((key, value) -> out.add("familiar.herbalwitch." + key, value));
         for (var home : FamiliarHomeKind.values()) out.add("block.herbalwitch." + home.path().replace('/', '.'), "Familiar " + title(home.key()));
