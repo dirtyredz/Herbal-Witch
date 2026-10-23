@@ -121,3 +121,17 @@ tasks.register('saveUpgradeTest') {
         if (saveCompares.isEmpty()) throw new GradleException('saveUpgradeTest needs -PsaveUpgradeFixtures=<dir of prepared fixtures>')
     }
 }
+
+// Performance (Milestone 12): one dedicated JVM measures the frozen workloads; a second JVM on the same
+// world times startup indexing of the persisted bonds. report.mjs judges the frozen gates.
+def performanceRun = file("run/performance/${UUID.randomUUID()}")
+def performanceEvidence = new File(performanceRun, 'evidence')
+def performanceProps = { String phase -> ['herbalwitch.performance.phase': phase, 'herbalwitch.performance.evidence': performanceEvidence.absolutePath] }
+dedicatedPhase('runPerformanceMeasure', performanceRun, 'herbalwitch_performance', performanceProps('measure'), [])
+dedicatedPhase('runPerformanceRestart', performanceRun, 'herbalwitch_performance', performanceProps('restart'), ['runPerformanceMeasure'])
+tasks.register('qualifyPerformance', Exec) {
+    group = 'verification'
+    description = 'ANU only: measured tick time, populations and checkpoint latency against the frozen M12 gates.'
+    dependsOn 'runPerformanceRestart'
+    commandLine nodeCommand(), 'tools/qualification/performance/report.mjs', performanceEvidence.absolutePath
+}

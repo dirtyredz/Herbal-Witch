@@ -7,6 +7,7 @@ import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item.ProductTo
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.item.ThrowablePreparationItem;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.metadata.PreparationMetadata;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.AdvancedPreparations;
+import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.BrewingEntities;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.PreparationEffects;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.showcase.AdvancedPreparationShowcaseSection;
 import io.github.dirtyredz.herbalwitch.apothecary.brewing.grimoire.AdvancedPreparationEntries;
@@ -36,6 +37,7 @@ public final class AdvancedTranslations {
         PreparationEffects.advanced().forEach(e -> lang.add(e.get(), effects.get(e.getId().getPath().substring("brewing/effects/".length()))));
         lang.add(PreparationMetadata.LABEL_KEY, "Labelled: %s");
         lang.add(HerbalOilItem.NO_WEAPON, "Hold a sword or axe in your off hand to coat it.");
+        lang.add(BrewingEntities.PREPARATION_PROJECTILE.get(), "Thrown Preparation");
         lang.add(ThrowablePreparationItem.LIMIT, "Too many of your preparations are in flight.");
         lang.add(FamiliarPreparationItem.UNAVAILABLE, "Use on your nearby bonded familiar; wait before refreshing the same preparation");
         lang.add(AdvancedPreparationShowcaseSection.TITLE, "Witch's Preparations");

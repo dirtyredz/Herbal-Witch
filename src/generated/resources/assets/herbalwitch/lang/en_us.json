@@ -298,6 +298,8 @@
   "emi.category.herbalwitch.processing.steeping": "Steeping",
   "emi.category.herbalwitch.processing.wand_carving": "Wand Carving",
   "emi.category.herbalwitch.ritual": "Rituals",
+  "entity.herbalwitch.brewing.preparation_projectile": "Thrown Preparation",
+  "entity.herbalwitch.decor.seat": "Seat",
   "entity.herbalwitch.familiars.entity.bat": "Familiar Bat",
   "entity.herbalwitch.familiars.entity.cat": "Familiar Cat",
   "entity.herbalwitch.familiars.entity.fox": "Familiar Fox",

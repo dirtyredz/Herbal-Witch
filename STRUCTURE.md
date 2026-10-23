@@ -358,6 +358,8 @@ herbalwitch/
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/qualification/` — grouping parent: cross-milestone release qualification
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/qualification/upgrade/` — save-upgrade phases: open a historical world's chunks and players, touch, re-save, first job tick
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/qualification/integration/` — cross-milestone loops through production entry points (forage to shop to non-witch use; witch-only brewing charged once)
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/qualification/performance/` — the frozen performance workloads, tick sampling from vanilla's tick ring, population census and the restart indexing probe (run by `qualifyPerformance` only)
+- `tools/qualification/performance/` — the performance gate judge (`report.mjs`, gates frozen before measurement)
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/qualification/localization/` — every registered block, item, entity, effect and tab has an English name
 - `tools/qualification/` — grouping parent: release qualification tooling (Node and PowerShell)
 - `tools/qualification/restart/` — grouping parent: the M9-M11 restart report validators
