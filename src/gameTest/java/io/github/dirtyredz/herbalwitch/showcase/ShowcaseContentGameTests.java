@@ -134,7 +134,7 @@ public final class ShowcaseContentGameTests {
         // one per herb, powders, products, grimoire and altar supplies; Milestone 7: three preparation barrels, circle supplies, charms
         check(scan.barrels == HerbCatalog.ALL.size() + 4 + 5 + 1, "sample barrels " + scan.barrels);
         var animalArea = plan.areas().stream().filter(a -> a.id().equals("animals")).findFirst().orElseThrow();
-        var supplies = (Container) helper.getLevel().getBlockEntity(helper.absolutePos(ORIGIN.offset(animalArea.x() + 24, 1, animalArea.z() + 1)));
+        var supplies = (Container) helper.getLevel().getBlockEntity(helper.absolutePos(ORIGIN.offset(animalArea.x() + 24, 1, animalArea.z() + ShowcasePlan.HEADING_ROWS)));
         check(supplies != null && supplies.countItem(io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.AdvancedPreparations.item(
                 io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.AdvancedProductCatalog.SLEEP)) == 16, "animal-care sleep supplies missing");
         var animalBox = new AABB(helper.absolutePos(ORIGIN), helper.absolutePos(ORIGIN.offset(plan.width(), ShowcasePlan.HEIGHT, plan.depth())));

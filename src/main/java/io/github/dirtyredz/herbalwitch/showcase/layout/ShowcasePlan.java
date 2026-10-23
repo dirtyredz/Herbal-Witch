@@ -81,7 +81,7 @@ public final class ShowcasePlan {
             if (entities.size() + samples.size() > MAX_ENTITIES) throw new InvalidPlanException("more than 32 entity samples");
             for (var sample : samples) {
                 if (sample.x() < 0 || sample.z() < 0 || sample.y() < 1 || sample.y() >= HEIGHT
-                        || sample.x() >= sectionWidth || sample.z() + 1 >= sectionDepth) throw new InvalidPlanException("entity sample outside section");
+                        || sample.x() >= sectionWidth || sample.z() + HEADING_ROWS >= sectionDepth) throw new InvalidPlanException("entity sample outside section");
             }
             if (x > 0 && x + sectionWidth > ROW_WIDTH) {
                 rowZ += rowDepth + GAP;
@@ -91,7 +91,7 @@ public final class ShowcasePlan {
             for (ShowcasePlacement p : own) {
                 all.add(p.offset(x, rowZ));
             }
-            for (var sample : samples) entities.add(sample.offset(x, rowZ + 1));
+            for (var sample : samples) entities.add(sample.offset(x, rowZ + HEADING_ROWS));
             areas.add(new SectionArea(section.id(), x, rowZ, sectionWidth, sectionDepth, own.size()));
             rowDepth = Math.max(rowDepth, sectionDepth);
             width = Math.max(width, x + sectionWidth);

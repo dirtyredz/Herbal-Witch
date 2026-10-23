@@ -13,9 +13,26 @@ class ShowcaseAnimalsTest {
                 section.entities().stream().map(s -> s.type().replace("minecraft:", "")).collect(java.util.stream.Collectors.toSet()));
         assertEquals(16, plan.entities().size()); assertEquals(16, new HashSet<>(plan.entities()).size());
         var area = plan.areas().stream().filter(a -> a.id().equals("animals")).findFirst().orElseThrow();
-        assertEquals(section.entities().get(0).offset(area.x(), area.z() + 1), plan.entities().get(0));
+        assertEquals(section.entities().get(0).offset(area.x(), area.z() + ShowcasePlan.HEADING_ROWS), plan.entities().get(0));
         assertTrue(plan.cellCount() < 65536);
         System.out.println("M8 showcase: " + plan.width() + "x8x" + plan.depth() + ", " + plan.cellCount() + " writes, " + plan.placements().size() + " placements, 16 entities");
+    }
+    /** The widest sample (a horse, 1.4 across) and a 2-block height must fit between the planned walls: the cause of a refused spawn once the heading rows moved. */
+    @Test void everySampleStandsClearOfPlannedBlocks() throws Exception {
+        var plan = ShowcasePlan.of(ShowcasePlanTest.group(ShowcaseGroup.WITCHCRAFT));
+        Set<String> solid = new HashSet<>();
+        for (ShowcasePlacement p : plan.placements()) {
+            if (p.kind() == ShowcasePlacement.Kind.SUPPORT) solid.add(p.x() + "," + p.y() + "," + p.z());
+        }
+        for (var sample : plan.entities()) {
+            for (int x = (int) Math.floor(sample.x() - 0.7); x <= (int) Math.floor(sample.x() + 0.7); x++) {
+                for (int z = (int) Math.floor(sample.z() - 0.7); z <= (int) Math.floor(sample.z() + 0.7); z++) {
+                    for (int y = (int) sample.y(); y < sample.y() + 2; y++) {
+                        assertFalse(solid.contains(x + "," + y + "," + z), sample.type() + " overlaps a planned block at " + x + "," + y + "," + z);
+                    }
+                }
+            }
+        }
     }
     @Test void entityCapAndOutsideSamplesFailDuringPurePlanning() {
         ShowcaseSection section = new ShowcaseSection() {
