@@ -180,6 +180,9 @@ public final class FamiliarPowerCoverageGameTests {
             listener.connection = b.owner().connection; listener.moveTo(b.owner().position());
             try (var online = OnlinePlayers.register(List.of(listener))) {
                 b.mob().getNavigation().stop(); b.mob().moveTo(h.absolutePos(new BlockPos(4,1,5)).getCenter());
+                // The scan reads a bounded number of nearby entities: clear leftovers of earlier batches first.
+                int radius = io.github.dirtyredz.herbalwitch.companions.familiars.config.FamiliarServerConfig.current().senseRadius();
+                h.getLevel().getEntities(b.mob(), b.mob().getBoundingBox().inflate(radius), e -> !(e instanceof net.minecraft.world.entity.player.Player)).forEach(net.minecraft.world.entity.Entity::discard);
                 var threat = h.spawn(EntityType.PILLAGER, new BlockPos(6,1,5)); threat.setNoAi(true);
                 check(b.mob().hasLineOfSight(threat), "scout fixture cannot see the threat");
                 new io.github.dirtyredz.herbalwitch.companions.familiars.command.ai.FamiliarScout(b.mob()).perform();
@@ -188,6 +191,34 @@ public final class FamiliarPowerCoverageGameTests {
                 int count = warnings.size();
                 new io.github.dirtyredz.herbalwitch.companions.familiars.command.ai.FamiliarScout(b.mob()).perform();
                 check(warnings.size() == count, "one threat warned twice inside five seconds");
+                h.succeed();
+            }
+        });
+    }
+    /** M12 regression: the bounded scan counted every entity, so a herd hid the hostile behind it. */
+    @GameTest(template=TEMPLATE,batch="herbalwitch_scout_herd",timeoutTicks=100)
+    public static void aScoutSeesAHostileBeyondAHerd(GameTestHelper h) {
+        FamiliarFixtures.bound(h, "wolf", "scout_herd_" + UUID.randomUUID(), b -> {
+            b.owner().getInventory().setItem(0, new ItemStack(GrimoireItems.BOOK.get()));
+            check(FamiliarCommands.set(b.owner(), b.bond(), FamiliarCommand.SCOUT).equals("command_set"), "scout command refused");
+            var warnings = new ArrayList<net.minecraft.network.chat.Component>();
+            var listener = new net.minecraft.server.level.ServerPlayer(h.getLevel().getServer(), h.getLevel(), b.owner().getGameProfile()) {
+                @Override public void displayClientMessage(net.minecraft.network.chat.Component message, boolean actionBar) { warnings.add(message); }
+            };
+            listener.connection = b.owner().connection; listener.moveTo(b.owner().position());
+            try (var online = OnlinePlayers.register(List.of(listener))) {
+                b.mob().getNavigation().stop(); b.mob().moveTo(h.absolutePos(new BlockPos(4,1,5)).getCenter());
+                int radius = io.github.dirtyredz.herbalwitch.companions.familiars.config.FamiliarServerConfig.current().senseRadius();
+                h.getLevel().getEntities(b.mob(), b.mob().getBoundingBox().inflate(radius), e -> !(e instanceof net.minecraft.world.entity.player.Player)).forEach(net.minecraft.world.entity.Entity::discard);
+                // More cattle than the scan's candidate bound, all closer to the scan's start than the hostile.
+                for (int i = 0; i < io.github.dirtyredz.herbalwitch.companions.familiars.work.FamiliarQueries.CANDIDATES + 8; i++) {
+                    var cow = h.spawn(EntityType.COW, new BlockPos(1 + i % 7, 1, 1 + (i / 7) % 3)); cow.setNoAi(true);
+                }
+                var threat = h.spawn(EntityType.PILLAGER, new BlockPos(6,1,7)); threat.setNoAi(true);
+                check(b.mob().hasLineOfSight(threat), "herd fixture hides the threat from sight");
+                new io.github.dirtyredz.herbalwitch.companions.familiars.command.ai.FamiliarScout(b.mob()).perform();
+                check(warnings.stream().anyMatch(m -> m.getContents() instanceof net.minecraft.network.chat.contents.TranslatableContents t
+                        && t.getKey().equals("familiar.herbalwitch.threat")), "a herd hid the hostile from the scout");
                 h.succeed();
             }
         });
