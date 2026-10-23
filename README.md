@@ -4,7 +4,7 @@ Forge 1.20.1 mod: woodland herbal witchcraft (herbs, stations, brewing, familiar
 an apothecary trade) together with a cottage furniture catalogue. Install on **both** the server and
 every client.
 
-**Status: STATUS_LINE**
+**Status: private release candidate `1.0.0-rc.1` (Milestone 12): automated qualification passed; owner in-game acceptance is pending. Not published; not in any pack. Protocol 14.**
 
 ## The loop
 
