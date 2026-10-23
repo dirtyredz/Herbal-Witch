@@ -98,6 +98,7 @@ class StationResourcesTest {
             energy = CharmManifest.ENERGY.get(path.substring("processing/charm_work/".length()));
         }
         if (path.equals("processing/animals/charm_work/capture_charm")) energy = 10;
+        if (path.startsWith("processing/charm_work/familiars/equipment/")) energy = 5;
         if (energy == null) {
             assertFalse(recipe.has("requirements"), path + " is ordinary work");
             return;

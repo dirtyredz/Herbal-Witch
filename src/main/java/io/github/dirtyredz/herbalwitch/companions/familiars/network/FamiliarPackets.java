@@ -7,10 +7,13 @@ import java.util.function.Consumer;
 import java.util.function.BiConsumer;
 
 public final class FamiliarPackets {
+    private static Consumer<FamiliarVisualSnapshot> visual = ignored -> {};
+    public static void visuals(Consumer<FamiliarVisualSnapshot> consumer) { visual = consumer; }
     private static Consumer<FamiliarRosterPage> client = ignored -> {};
     private static BiConsumer<ServerPlayer, FamiliarRosterPage> observer;
     private FamiliarPackets() {}
     public static void register() {
+        Messages.toClient(FamiliarVisualSnapshot.class, FamiliarVisualSnapshot::encode, FamiliarVisualSnapshot::decode, value -> visual.accept(value));
         Messages.toServer(FamiliarRequest.class, FamiliarRequest::encode, FamiliarRequest::decode, FamiliarRosterMenu::request);
         Messages.toClient(FamiliarRosterPage.class, FamiliarRosterPage::encode, FamiliarRosterPage::decode, page -> client.accept(page));
     }

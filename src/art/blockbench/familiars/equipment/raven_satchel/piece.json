@@ -1,0 +1,36 @@
+{
+  "project": "raven_satchel.bbmodel",
+  "textures": {
+    "strap": "herbalwitch:block/pieces/familiars/equipment/raven_satchel/strap",
+    "leather": "herbalwitch:block/pieces/familiars/equipment/raven_satchel/leather",
+    "plum": "herbalwitch:block/pieces/familiars/equipment/raven_satchel/plum",
+    "gold": "herbalwitch:block/pieces/familiars/equipment/raven_satchel/gold",
+    "green": "herbalwitch:block/pieces/familiars/equipment/raven_satchel/green",
+    "particle": "herbalwitch:block/pieces/familiars/equipment/raven_satchel/strap"
+  },
+  "owned_textures": {
+    "strap": "herbalwitch:block/pieces/familiars/equipment/raven_satchel/strap",
+    "leather": "herbalwitch:block/pieces/familiars/equipment/raven_satchel/leather",
+    "plum": "herbalwitch:block/pieces/familiars/equipment/raven_satchel/plum",
+    "gold": "herbalwitch:block/pieces/familiars/equipment/raven_satchel/gold",
+    "green": "herbalwitch:block/pieces/familiars/equipment/raven_satchel/green"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/familiars/equipment/raven_satchel/base",
+      "item": true
+    }
+  ]
+}

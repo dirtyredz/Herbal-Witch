@@ -1,0 +1,986 @@
+{
+  "meta": {
+    "format_version": "5.0",
+    "model_format": "java_block",
+    "box_uv": false
+  },
+  "name": "cat_bell",
+  "parent": "",
+  "ambientocclusion": true,
+  "front_gui_light": false,
+  "visible_box": [
+    1,
+    1,
+    0
+  ],
+  "variable_placeholders": "",
+  "variable_placeholder_buttons": [],
+  "unhandled_root_fields": {},
+  "java_block_version": "1.9.0",
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "green collar left",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        3,
+        10,
+        6
+      ],
+      "to": [
+        4,
+        14,
+        10
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        3.5,
+        12,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            2,
+            4,
+            6
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3,
+            2,
+            4,
+            6
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6,
+            2,
+            10,
+            6
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6,
+            2,
+            10,
+            6
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            3,
+            6,
+            4,
+            10
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            3,
+            6,
+            4,
+            10
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "15591710-0fa6-4931-ad17-9262f8a18d46"
+    },
+    {
+      "name": "green collar right",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        12,
+        10,
+        6
+      ],
+      "to": [
+        13,
+        14,
+        10
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        12.5,
+        12,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            12,
+            2,
+            13,
+            6
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12,
+            2,
+            13,
+            6
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6,
+            2,
+            10,
+            6
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6,
+            2,
+            10,
+            6
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            12,
+            6,
+            13,
+            10
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            12,
+            6,
+            13,
+            10
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "33913adf-6e15-4888-aeb4-2e31323ce7a2"
+    },
+    {
+      "name": "green collar top",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        4,
+        13,
+        6
+      ],
+      "to": [
+        12,
+        14,
+        10
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        13.5,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            2,
+            12,
+            3
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4,
+            2,
+            12,
+            3
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6,
+            2,
+            10,
+            3
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6,
+            2,
+            10,
+            3
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            4,
+            6,
+            12,
+            10
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            4,
+            6,
+            12,
+            10
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "deabfe79-08c6-4c90-a794-be941f92f669"
+    },
+    {
+      "name": "green collar bottom",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        4,
+        10,
+        6
+      ],
+      "to": [
+        12,
+        11,
+        10
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        10.5,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            5,
+            12,
+            6
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4,
+            5,
+            12,
+            6
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6,
+            5,
+            10,
+            6
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6,
+            5,
+            10,
+            6
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            4,
+            6,
+            12,
+            10
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            4,
+            6,
+            12,
+            10
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "522b8ee1-5485-41de-ad19-46e76a450f13"
+    },
+    {
+      "name": "bell crown",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        6,
+        8.5,
+        6.5
+      ],
+      "to": [
+        10,
+        10,
+        9.5
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        9.25,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            6,
+            6,
+            10,
+            7.5
+          ],
+          "texture": 1
+        },
+        "south": {
+          "uv": [
+            6,
+            6,
+            10,
+            7.5
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            6.5,
+            6,
+            9.5,
+            7.5
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            6.5,
+            6,
+            9.5,
+            7.5
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            6,
+            6.5,
+            10,
+            9.5
+          ],
+          "texture": 1
+        },
+        "down": {
+          "uv": [
+            6,
+            6.5,
+            10,
+            9.5
+          ],
+          "texture": 1
+        }
+      },
+      "type": "cube",
+      "uuid": "cfe10312-8df8-4ad0-a4b4-a40d5a5134a5"
+    },
+    {
+      "name": "bell body",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        5,
+        4.5,
+        6
+      ],
+      "to": [
+        11,
+        8.5,
+        10
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        6.5,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            5,
+            7.5,
+            11,
+            11.5
+          ],
+          "texture": 1
+        },
+        "south": {
+          "uv": [
+            5,
+            7.5,
+            11,
+            11.5
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            6,
+            7.5,
+            10,
+            11.5
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            6,
+            7.5,
+            10,
+            11.5
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            5,
+            6,
+            11,
+            10
+          ],
+          "texture": 1
+        },
+        "down": {
+          "uv": [
+            5,
+            6,
+            11,
+            10
+          ],
+          "texture": 1
+        }
+      },
+      "type": "cube",
+      "uuid": "00215100-2744-4c6a-a859-7c4e08499d6d"
+    },
+    {
+      "name": "dark bell mouth",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        5.2,
+        4.25,
+        6.2
+      ],
+      "to": [
+        10.8,
+        4.5,
+        9.8
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        4.375,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            5.2,
+            11.5,
+            10.8,
+            11.75
+          ],
+          "texture": 2
+        },
+        "south": {
+          "uv": [
+            5.2,
+            11.5,
+            10.8,
+            11.75
+          ],
+          "texture": 2
+        },
+        "east": {
+          "uv": [
+            6.2,
+            11.5,
+            9.8,
+            11.75
+          ],
+          "texture": 2
+        },
+        "west": {
+          "uv": [
+            6.2,
+            11.5,
+            9.8,
+            11.75
+          ],
+          "texture": 2
+        },
+        "up": {
+          "uv": [
+            5.2,
+            6.2,
+            10.8,
+            9.8
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            5.2,
+            6.2,
+            10.8,
+            9.8
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube",
+      "uuid": "3e2832c7-a519-4f86-ae7d-e65f393c8ac8"
+    },
+    {
+      "name": "clapper",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        7.25,
+        3,
+        7.25
+      ],
+      "to": [
+        8.75,
+        4.25,
+        8.75
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        3.625,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            7.25,
+            11.75,
+            8.75,
+            13
+          ],
+          "texture": 1
+        },
+        "south": {
+          "uv": [
+            7.25,
+            11.75,
+            8.75,
+            13
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            7.25,
+            11.75,
+            8.75,
+            13
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            7.25,
+            11.75,
+            8.75,
+            13
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            7.25,
+            7.25,
+            8.75,
+            8.75
+          ],
+          "texture": 1
+        },
+        "down": {
+          "uv": [
+            7.25,
+            7.25,
+            8.75,
+            8.75
+          ],
+          "texture": 1
+        }
+      },
+      "type": "cube",
+      "uuid": "b278d7c1-704b-4041-a89f-17363a4f7d20"
+    },
+    {
+      "name": "plum collar tie",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        10,
+        10,
+        5.6
+      ],
+      "to": [
+        11,
+        12,
+        5.9
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        10.5,
+        11,
+        5.75
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            10,
+            4,
+            11,
+            6
+          ],
+          "texture": 3
+        },
+        "south": {
+          "uv": [
+            10,
+            4,
+            11,
+            6
+          ],
+          "texture": 3
+        },
+        "east": {
+          "uv": [
+            5.6,
+            4,
+            5.9,
+            6
+          ],
+          "texture": 3
+        },
+        "west": {
+          "uv": [
+            5.6,
+            4,
+            5.9,
+            6
+          ],
+          "texture": 3
+        },
+        "up": {
+          "uv": [
+            10,
+            5.6,
+            11,
+            5.9
+          ],
+          "texture": 3
+        },
+        "down": {
+          "uv": [
+            10,
+            5.6,
+            11,
+            5.9
+          ],
+          "texture": 3
+        }
+      },
+      "type": "cube",
+      "uuid": "c45567e3-e918-405c-af34-8aaf98ca3413"
+    }
+  ],
+  "groups": [],
+  "outliner": [
+    "15591710-0fa6-4931-ad17-9262f8a18d46",
+    "33913adf-6e15-4888-aeb4-2e31323ce7a2",
+    "deabfe79-08c6-4c90-a794-be941f92f669",
+    "522b8ee1-5485-41de-ad19-46e76a450f13",
+    "cfe10312-8df8-4ad0-a4b4-a40d5a5134a5",
+    "00215100-2744-4c6a-a859-7c4e08499d6d",
+    "3e2832c7-a519-4f86-ae7d-e65f393c8ac8",
+    "b278d7c1-704b-4041-a89f-17363a4f7d20",
+    "c45567e3-e918-405c-af34-8aaf98ca3413"
+  ],
+  "textures": [
+    {
+      "path": "",
+      "name": "strap.png",
+      "folder": "block/pieces/familiars/equipment/cat_bell",
+      "namespace": "herbalwitch",
+      "id": "strap",
+      "group": "",
+      "width": 32,
+      "height": 32,
+      "uv_width": 16,
+      "uv_height": 16,
+      "particle": true,
+      "use_as_default": false,
+      "layers_enabled": false,
+      "sync_to_project": "",
+      "render_mode": "default",
+      "render_sides": "auto",
+      "pbr_channel": "color",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "frame_interpolate": false,
+      "visible": true,
+      "internal": true,
+      "saved": true,
+      "uuid": "81fa30f8-a3f6-4860-ad29-957629f476e1",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAS0lEQVR42u3TOQHAMAADMRNp83btz5+aA8PLDYIglXNzksbbnKR67U7S/LqT1O7iJB3/cJL6U50kGtKQhjSkIQ1pSEMa0pCGNEw3XMVDx4ymJ2mVAAAAAElFTkSuQmCC"
+    },
+    {
+      "path": "",
+      "name": "gold.png",
+      "folder": "block/pieces/familiars/equipment/cat_bell",
+      "namespace": "herbalwitch",
+      "id": "gold",
+      "group": "",
+      "width": 32,
+      "height": 32,
+      "uv_width": 16,
+      "uv_height": 16,
+      "particle": true,
+      "use_as_default": false,
+      "layers_enabled": false,
+      "sync_to_project": "",
+      "render_mode": "default",
+      "render_sides": "auto",
+      "pbr_channel": "color",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "frame_interpolate": false,
+      "visible": true,
+      "internal": true,
+      "saved": true,
+      "uuid": "775934b1-0b8a-4b63-ae95-3005b4c04a9d",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAgklEQVR42u3TORaCAAxF0SwIBW2ZZF0qSCsC7gNEaGWQnYWTPm0OzS9u9epHv6fPork6KutOSxWz+GaeyrrTWAQs2ttBZd3pX19Y9I+TyrrT9ApZfO5HlXWn9Z2wGPKzyrrTXEYsutRVWXfChtgQG2JDbIgNsSE2xIbYEBtiw7033ABX5pTIURg65gAAAABJRU5ErkJggg=="
+    },
+    {
+      "path": "",
+      "name": "leather.png",
+      "folder": "block/pieces/familiars/equipment/cat_bell",
+      "namespace": "herbalwitch",
+      "id": "leather",
+      "group": "",
+      "width": 32,
+      "height": 32,
+      "uv_width": 16,
+      "uv_height": 16,
+      "particle": true,
+      "use_as_default": false,
+      "layers_enabled": false,
+      "sync_to_project": "",
+      "render_mode": "default",
+      "render_sides": "auto",
+      "pbr_channel": "color",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "frame_interpolate": false,
+      "visible": true,
+      "internal": true,
+      "saved": true,
+      "uuid": "fc450b88-bfa1-4a48-ab29-cf6996b2b9ca",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAT0lEQVR42u3TRwGAQAADwZigvziaBNrhX1aQkc8+RsLonBsn6d0GJ+kqrZNU99FJupfOSfqOyUl61t5JoiENaUhDGtKQhjSkIQ1pSMN0wx8RAdOMnBJeSwAAAABJRU5ErkJggg=="
+    },
+    {
+      "path": "",
+      "name": "plum.png",
+      "folder": "block/pieces/familiars/equipment/cat_bell",
+      "namespace": "herbalwitch",
+      "id": "plum",
+      "group": "",
+      "width": 32,
+      "height": 32,
+      "uv_width": 16,
+      "uv_height": 16,
+      "particle": true,
+      "use_as_default": false,
+      "layers_enabled": false,
+      "sync_to_project": "",
+      "render_mode": "default",
+      "render_sides": "auto",
+      "pbr_channel": "color",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "frame_interpolate": false,
+      "visible": true,
+      "internal": true,
+      "saved": true,
+      "uuid": "194141ad-e910-4fe4-a597-c4225f851f8c",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAATklEQVR42u3TSQGAMAADwSjh9kELLZd/P0FGPvsYCaN9aE7SuTxOUhm7k9TW10mq0+Uk9e1zko75dpJoSEMa0pCGNKQhDWlIQxrSMN3wBz9Eo5vffjxyAAAAAElFTkSuQmCC"
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        2.5,
+        0
+      ],
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        2.5,
+        0
+      ],
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        225,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    },
+    "ground": {
+      "translation": [
+        0,
+        3,
+        0
+      ],
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    "gui": {
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "scale": [
+        0.625,
+        0.625,
+        0.625
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ]
+    },
+    "fixed": {
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    }
+  }
+}

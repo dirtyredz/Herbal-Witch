@@ -29,8 +29,8 @@ test('the pack carries the compiled models, owned textures, and the item models 
   assert.equal(JSON.parse(files.get('pack.mcmeta')).pack.pack_format, 15);
   for (const k of keys.filter((x) => x !== 'pack.mcmeta')) assert.match(k, /^assets\/herbalwitch\/(models|blockstates|textures)\//, k);
   assert.ok(!keys.some((k) => /\.bbmodel$|piece\.json$|^data\/|\/lang\//.test(k)));
-  assert.equal(keys.filter((k) => k.startsWith('assets/herbalwitch/models/block/')).length, 427); // M9 adds three authored homes
-  assert.equal(keys.filter((k) => k.startsWith('assets/herbalwitch/models/item/')).length, 121); // M9 adds three home wrappers
+  assert.equal(keys.filter((k) => k.startsWith('assets/herbalwitch/models/block/')).length, 435); // M9 homes and eight accessories
+  assert.equal(keys.filter((k) => k.startsWith('assets/herbalwitch/models/item/')).length, 129); // M9 home and accessory wrappers
   assert.equal(keys.filter((k) => k.startsWith('assets/herbalwitch/blockstates/')).length, 113); // and three home states
   const textures = keys.filter((k) => k.startsWith('assets/herbalwitch/textures/'));
   assert.equal(textures.length, compiled.textures.size);

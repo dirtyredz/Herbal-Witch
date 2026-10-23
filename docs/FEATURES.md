@@ -224,3 +224,12 @@ No new gameplay: the same blocks, items, states and textures, authored different
 | 12 | Complete-release qualification |
 
 Not planned: publishing, pack integration or a release before the owner decides.
+
+M9 equipment phase: two validated equipment slots, cursor escrow and saved-player receipt verification,
+shared M7 charm charging/effects, species gear and stable armor modifiers, private cargo collection,
+and tracker-only cosmetic snapshots. Eight gear projects and raven/crow, owl and snake rigs compile
+from Blockbench sources. Headless previews cover 19 equipped creature poses and eight gear items;
+native attachment pose review remains pending. Local gate passes 446 Java tests and 86 Node tests;
+1,091 generated resources match across repeated datagen. The home baseline ANU found a real return
+path failure above partial-height furniture; navigation now selects a checked adjacent floor.
+Equipment and corrected home behavior await the next committed ANU qualification. Milestone remains open.

@@ -50,6 +50,9 @@ public final class Messages {
         }
     }
 
+    public static void tracking(net.minecraft.world.entity.Entity entity, Object message) {
+        HerbalWitchNetwork.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> entity), message);
+    }
     public static void sendToServer(Object message) {
         HerbalWitchNetwork.CHANNEL.sendToServer(message);
     }

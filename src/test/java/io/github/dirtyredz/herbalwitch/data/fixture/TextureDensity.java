@@ -20,7 +20,7 @@ public final class TextureDensity {
 
     /** The size a texture at {@code relative} (to {@code textures/}, slash-separated) must have. */
     public static int expectedSize(String relative) {
-        return relative.startsWith("gui/") ? GUI_SIZE : TEXTURE_SIZE;
+        return relative.startsWith("gui/") ? GUI_SIZE : relative.matches("entity/familiars/(raven|owl|snake)/.*") ? 64 : TEXTURE_SIZE;
     }
 
     /** Fails unless the block or item texture PNG is exactly 32 x 32. */

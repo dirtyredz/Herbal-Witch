@@ -21,6 +21,8 @@ public final class FamiliarRegistration {
     private FamiliarRegistration() {}
     public static void register(IEventBus bus) {
         FamiliarHomes.register(bus);
+        FamiliarItems.register(bus);
+        io.github.dirtyredz.herbalwitch.companions.familiars.equipment.FamiliarCharmAdapter.install();
         io.github.dirtyredz.herbalwitch.companions.familiars.config.FamiliarServerConfig.register(bus);
         FamiliarEntities.TYPES.register(bus); bus.addListener(FamiliarEntities::attributes);
         FamiliarMenus.MENUS.register(bus);
@@ -49,6 +51,11 @@ public final class FamiliarRegistration {
         AltarSessionService.handle(FamiliarActionCatalog.BINDING, new BindingAction());
         bus.addListener(FamiliarLifecycleEvents::capabilities);
         var forge = MinecraftForge.EVENT_BUS;
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.equipment.FamiliarCharmAdapter::tick);
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.equipment.FamiliarEquipmentEffects::tick);
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.equipment.FamiliarEquipmentVisuals::tick);
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.equipment.FamiliarEquipmentVisuals::tracking);
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.equipment.FamiliarEquipmentVisuals::stopped);
         forge.addGenericListener(Entity.class, FamiliarLifecycleEvents::attach);
         forge.addListener(EventPriority.HIGHEST, true, FamiliarReconciliation::join);
         forge.addListener(FamiliarLifecycleEvents::tick); forge.addListener(FamiliarLifecycleEvents::stopped);

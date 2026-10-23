@@ -75,6 +75,7 @@ public final class HerbalWitchDataProviders {
         generator.addProvider(event.includeClient(), new CharmItemModelProvider(output, existingFiles));
         generator.addProvider(event.includeClient(), new io.github.dirtyredz.herbalwitch.data.client.animals.AnimalItemModelProvider(output, existingFiles));
         generator.addProvider(event.includeClient(), new io.github.dirtyredz.herbalwitch.data.client.familiars.FamiliarHomeModelProvider(output, existingFiles));
+        generator.addProvider(event.includeClient(), new io.github.dirtyredz.herbalwitch.data.client.familiars.FamiliarEquipmentModelProvider(output, existingFiles));
         generator.addProvider(event.includeClient(), new HerbalWitchLanguageProvider(output));
 
         generator.addProvider(event.includeServer(), new HerbalWitchRecipeProvider(output));

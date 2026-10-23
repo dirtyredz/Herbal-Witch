@@ -66,6 +66,7 @@ public final class StationManifest {
         CharmManifest.processingRecipes().forEach(r -> recipes.add("processing/" + r));
         for (String bait : List.of("grain", "root", "seed", "fish", "meat", "berry", "calming_powder")) recipes.add("processing/animals/grinding/" + bait);
         recipes.add("processing/animals/charm_work/capture_charm");
+        for (String gear : io.github.dirtyredz.herbalwitch.data.familiars.FamiliarManifest.EQUIPMENT) recipes.add("processing/charm_work/familiars/equipment/" + gear);
         return recipes;
     }
 

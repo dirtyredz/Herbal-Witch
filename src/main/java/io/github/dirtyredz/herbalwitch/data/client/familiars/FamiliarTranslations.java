@@ -7,6 +7,8 @@ import java.util.*;
 public final class FamiliarTranslations {
     private FamiliarTranslations() {}
     public static void addTo(LanguageProvider out) {
+        for (var gear : FamiliarEquipmentCatalog.ALL) out.add("item.herbalwitch." + gear.path().replace('/', '.'), gear.name());
+        Map.of("collect_cargo", "Collect cargo", "equipment_hint", "Equip one charm and one species accessory.", "charm_slot", "Charm", "gear_slot", "Gear", "cargo_empty", "No cargo to collect.", "inventory_full", "Make space in your inventory.", "cargo_collected", "Cargo collected.").forEach((key, value) -> out.add("familiar.herbalwitch." + key, value));
         for (var home : FamiliarHomeKind.values()) out.add("block.herbalwitch." + home.path().replace('/', '.'), "Familiar " + title(home.key()));
         out.add("showcase.herbalwitch.section.familiar_homes", "Familiar homes");
         out.add("showcase.herbalwitch.label.familiar_home", "Use with grimoire");

@@ -23,7 +23,8 @@
     "block/ritual/circle",
     "block/ward/ward_stone",
     "block/animals",
-    "block/familiars/home"
+    "block/familiars/home",
+    "block/familiars/equipment"
   ],
   "projects": [
     "stations/kettle",
@@ -147,6 +148,14 @@
     "animals/capture/filled_charm",
     "familiars/homes/bed",
     "familiars/homes/nest",
-    "familiars/homes/perch"
+    "familiars/homes/perch",
+    "familiars/equipment/bat_chime",
+    "familiars/equipment/cat_bell",
+    "familiars/equipment/fox_pouch",
+    "familiars/equipment/owl_lens",
+    "familiars/equipment/rabbit_sachet",
+    "familiars/equipment/raven_satchel",
+    "familiars/equipment/snake_ring",
+    "familiars/equipment/wolf_harness"
   ]
 }

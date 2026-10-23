@@ -1,0 +1,9 @@
+{
+  "schema": 1,
+  "species": "owl",
+  "project": "owl.bbmodel",
+  "equipmentBone": "head",
+  "appearances": {
+    "owl": "owl"
+  }
+}

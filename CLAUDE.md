@@ -10,7 +10,7 @@ docs/ARCHITECTURE.md and docs/catalogue/).
   Roundwood/DankRecipeTransfer are adapted locally, with attribution where source was copied.
 - **Headless only.** Never run `runClient`. Verification, in `mods/HerbalWitch/`:
   1. `node tools/generate-textures.mjs`, `node tools/generate-models.mjs`, `node tools/compile-blockbench.mjs`
-     (textures first) and `node tools/generate-test-structures.mjs`; Gradle also runs the three art
+     (textures first) and `node tools/generate-test-structures.mjs`; Gradle also runs the four art
      producers before resources and datagen (`generateArt`) and their checks in `check` (`checkArt`),
      so Node 22+ must be on PATH
   2. `.\gradlew.bat runData` (run it twice when generation changed: output must be byte-identical)
@@ -19,7 +19,8 @@ docs/ARCHITECTURE.md and docs/catalogue/).
   5. `git diff --check`, and from the workspace root `.\tools\sync-mod-files.ps1 -Check`
   6. Optional-mod runtime profiles: `.\gradlew.bat runGameTestServer -PcompatProfile=<base|emi|jei|viewers|farmersdelight|thirst|all> -PcompatModsDir=<mods folder>`
      (the folder supplies the Farmer's Delight and Thirst jars; see docs/COMPATIBILITY.md)
-  Art changes also: `node --test "tools/art/test/*.test.mjs" "tools/blockbench/test/*.test.mjs" "tools/blockbench/dev-art/test/*.test.mjs" "tools/preview/test/*.test.mjs"` and
+  Creature art also: `node tools/compile-entity-models.mjs` and its `--check`; Gradle includes both.
+  Art changes also: `node --test "tools/art/test/*.test.mjs" "tools/blockbench/test/*.test.mjs" "tools/blockbench/dev-art/test/*.test.mjs" "tools/preview/test/*.test.mjs" "tools/entities/test/*.test.mjs"` and
   `node tools/preview-models.mjs --output <job folder>/previews/<name> --references <job folder>`,
   then review the sheets before any jar goes to the mod's test instance (docs/ART.md "Review").
   The owner checks visuals, transforms, shaders and two-client behaviour in the mod's test instance.
@@ -40,7 +41,7 @@ docs/ARCHITECTURE.md and docs/catalogue/).
   mutate a player's energy or practice only through `WitchStatusService`; paid changes use its
   `WitchStatusService.spend` transaction (M7 production included, and M9 familiars will). Shared online lookup/enumeration
   belongs to `platform/player/OnlinePlayers`; features retain their own eligibility rules.
-  Bump `HerbalWitchNetwork.PROTOCOL` (now "8") on any wire change and register new messages
+  Bump `HerbalWitchNetwork.PROTOCOL` (now "9") on any wire change and register new messages
   after the grimoire's. The founding record is world-global: GameTests that convert anyone close it, so
   they reset it (`FoundingService.resetForTest`) and run their rituals synchronously. Grimoire prose
   never hard-codes a witch number (the rules are quoted from the synced rules; a test enforces it).
@@ -62,11 +63,12 @@ docs/ARCHITECTURE.md and docs/catalogue/).
 - **Generated resources are source.** Change a provider, run `runData`, commit the regenerated
   `src/generated/resources/` with the code. Never hand-edit generated JSON. `GeneratedResourcesTest`
   holds the exact manifest; when a file is renamed or removed, delete `src/generated` and regenerate.
-- **Art has three producers with disjoint paths** (`tools/art/output.mjs`; each also has `--check`):
+- **Art has four producers with disjoint paths** (`tools/art/output.mjs`; each also has `--check`):
   `tools/generate-textures.mjs` (every texture in `tools/art/catalogue.mjs`), `tools/generate-models.mjs`
   (herbs, herb beds, hung bundles; edit `tools/models/`) and `tools/compile-blockbench.mjs` (the
-  stations, furniture and oil lantern and every texture they own; edit the `.bbmodel` in
-  `src/art/blockbench/`, owner workflow docs/BLOCKBENCH.md). Never edit model JSON. One-off pieces
+  stations, furniture and oil lantern and every texture they own), plus
+  `tools/compile-entity-models.mjs` (living rigs and atlases in `src/art/entities/`). Edit the owning
+  `.bbmodel` in `src/art/blockbench/` or `src/art/entities/`; see docs/BLOCKBENCH.md. Never edit model JSON. One-off pieces
   belong in Blockbench, not generator code; item display transforms live in the projects, so item
   model providers only name a parent. Never launch Blockbench or a client; the owner edits and
   checks in game, agents compile, compare and preview headless. Materials are untinted: there is no

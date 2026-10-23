@@ -17,7 +17,7 @@ export const GUI_UNITS = 256;
 export const GUI_SIZE = GUI_UNITS * TEXELS_PER_UNIT;
 
 /** The square size a texture at `rel` (relative to assets/<ns>/textures/) must have. */
-export const expectedSize = (rel) => (rel.startsWith('gui/') ? GUI_SIZE : TEXTURE_SIZE);
+export const expectedSize = (rel) => (rel.startsWith('gui/') ? GUI_SIZE : /^entity\/familiars\/(raven|owl|snake)\//.test(rel) ? 64 : TEXTURE_SIZE);
 
 /** Throws unless the image (any {size} or {width, height}) has the size the density rule requires at `rel`. */
 export function checkDensity(rel, img) {

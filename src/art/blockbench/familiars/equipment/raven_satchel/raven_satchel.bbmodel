@@ -1,0 +1,1097 @@
+{
+  "meta": {
+    "format_version": "5.0",
+    "model_format": "java_block",
+    "box_uv": false
+  },
+  "name": "raven_satchel",
+  "parent": "",
+  "ambientocclusion": true,
+  "front_gui_light": false,
+  "visible_box": [
+    1,
+    1,
+    0
+  ],
+  "variable_placeholders": "",
+  "variable_placeholder_buttons": [],
+  "unhandled_root_fields": {},
+  "java_block_version": "1.9.0",
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "carrying strap left",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        4,
+        10,
+        6
+      ],
+      "to": [
+        5,
+        15,
+        9
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        4.5,
+        12.5,
+        7.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            1,
+            5,
+            6
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4,
+            1,
+            5,
+            6
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6,
+            1,
+            9,
+            6
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6,
+            1,
+            9,
+            6
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            4,
+            6,
+            5,
+            9
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            4,
+            6,
+            5,
+            9
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "fc190040-810f-4ec4-ae28-94e9142db1bd"
+    },
+    {
+      "name": "carrying strap right",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        11,
+        10,
+        6
+      ],
+      "to": [
+        12,
+        15,
+        9
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        11.5,
+        12.5,
+        7.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            11,
+            1,
+            12,
+            6
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11,
+            1,
+            12,
+            6
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6,
+            1,
+            9,
+            6
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6,
+            1,
+            9,
+            6
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            11,
+            6,
+            12,
+            9
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            11,
+            6,
+            12,
+            9
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "c013e504-38b3-4e33-a017-587ef44046c3"
+    },
+    {
+      "name": "carrying strap top",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        5,
+        14,
+        6
+      ],
+      "to": [
+        11,
+        15,
+        9
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        14.5,
+        7.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            5,
+            1,
+            11,
+            2
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            5,
+            1,
+            11,
+            2
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6,
+            1,
+            9,
+            2
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6,
+            1,
+            9,
+            2
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            5,
+            6,
+            11,
+            9
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            5,
+            6,
+            11,
+            9
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "a1e25e8c-db71-490a-a6f5-7858b2849542"
+    },
+    {
+      "name": "carrying strap bottom",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        5,
+        10,
+        6
+      ],
+      "to": [
+        11,
+        11,
+        9
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        10.5,
+        7.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            5,
+            5,
+            11,
+            6
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            5,
+            5,
+            11,
+            6
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6,
+            5,
+            9,
+            6
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6,
+            5,
+            9,
+            6
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            5,
+            6,
+            11,
+            9
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            5,
+            6,
+            11,
+            9
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "2b66a303-2049-4626-a4f5-950fe4c877f1"
+    },
+    {
+      "name": "leather pouch",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        3,
+        3,
+        5
+      ],
+      "to": [
+        13,
+        10,
+        11
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        6.5,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            6,
+            13,
+            13
+          ],
+          "texture": 1
+        },
+        "south": {
+          "uv": [
+            3,
+            6,
+            13,
+            13
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            5,
+            6,
+            11,
+            13
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            5,
+            6,
+            11,
+            13
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            3,
+            5,
+            13,
+            11
+          ],
+          "texture": 1
+        },
+        "down": {
+          "uv": [
+            3,
+            5,
+            13,
+            11
+          ],
+          "texture": 1
+        }
+      },
+      "type": "cube",
+      "uuid": "af2ce943-c752-4ddb-acba-fc496abf0ced"
+    },
+    {
+      "name": "folded flap",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        2.8,
+        8,
+        4.5
+      ],
+      "to": [
+        13.2,
+        11,
+        5
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        9.5,
+        4.75
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2.8,
+            5,
+            13.2,
+            8
+          ],
+          "texture": 2
+        },
+        "south": {
+          "uv": [
+            2.8,
+            5,
+            13.2,
+            8
+          ],
+          "texture": 2
+        },
+        "east": {
+          "uv": [
+            4.5,
+            5,
+            5,
+            8
+          ],
+          "texture": 2
+        },
+        "west": {
+          "uv": [
+            4.5,
+            5,
+            5,
+            8
+          ],
+          "texture": 2
+        },
+        "up": {
+          "uv": [
+            2.8,
+            4.5,
+            13.2,
+            5
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            2.8,
+            4.5,
+            13.2,
+            5
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube",
+      "uuid": "c53da73e-30d7-4a3b-a9f0-73cd754d492b"
+    },
+    {
+      "name": "brass clasp",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        7,
+        6.8,
+        4.1
+      ],
+      "to": [
+        9,
+        8.8,
+        4.45
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        7.800000000000001,
+        4.275
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            7,
+            7.199999999999999,
+            9,
+            9.2
+          ],
+          "texture": 3
+        },
+        "south": {
+          "uv": [
+            7,
+            7.199999999999999,
+            9,
+            9.2
+          ],
+          "texture": 3
+        },
+        "east": {
+          "uv": [
+            4.1,
+            7.199999999999999,
+            4.45,
+            9.2
+          ],
+          "texture": 3
+        },
+        "west": {
+          "uv": [
+            4.1,
+            7.199999999999999,
+            4.45,
+            9.2
+          ],
+          "texture": 3
+        },
+        "up": {
+          "uv": [
+            7,
+            4.1,
+            9,
+            4.45
+          ],
+          "texture": 3
+        },
+        "down": {
+          "uv": [
+            7,
+            4.1,
+            9,
+            4.45
+          ],
+          "texture": 3
+        }
+      },
+      "type": "cube",
+      "uuid": "ab39e514-a36f-4e93-a7ee-2561536d428c"
+    },
+    {
+      "name": "green bottom seam",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        3.3,
+        3.1,
+        4.7
+      ],
+      "to": [
+        12.7,
+        3.6,
+        4.95
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        3.35,
+        4.825
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            3.3,
+            12.4,
+            12.7,
+            12.9
+          ],
+          "texture": 4
+        },
+        "south": {
+          "uv": [
+            3.3,
+            12.4,
+            12.7,
+            12.9
+          ],
+          "texture": 4
+        },
+        "east": {
+          "uv": [
+            4.7,
+            12.4,
+            4.95,
+            12.9
+          ],
+          "texture": 4
+        },
+        "west": {
+          "uv": [
+            4.7,
+            12.4,
+            4.95,
+            12.9
+          ],
+          "texture": 4
+        },
+        "up": {
+          "uv": [
+            3.3,
+            4.7,
+            12.7,
+            4.95
+          ],
+          "texture": 4
+        },
+        "down": {
+          "uv": [
+            3.3,
+            4.7,
+            12.7,
+            4.95
+          ],
+          "texture": 4
+        }
+      },
+      "type": "cube",
+      "uuid": "d7e5e59f-a1f4-47d0-a765-fe3344d5c1d1"
+    },
+    {
+      "name": "stitch",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        3.5,
+        4,
+        4.7
+      ],
+      "to": [
+        3.75,
+        6.5,
+        4.95
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        3.625,
+        5.25,
+        4.825
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            3.5,
+            9.5,
+            3.75,
+            12
+          ],
+          "texture": 3
+        },
+        "south": {
+          "uv": [
+            3.5,
+            9.5,
+            3.75,
+            12
+          ],
+          "texture": 3
+        },
+        "east": {
+          "uv": [
+            4.7,
+            9.5,
+            4.95,
+            12
+          ],
+          "texture": 3
+        },
+        "west": {
+          "uv": [
+            4.7,
+            9.5,
+            4.95,
+            12
+          ],
+          "texture": 3
+        },
+        "up": {
+          "uv": [
+            3.5,
+            4.7,
+            3.75,
+            4.95
+          ],
+          "texture": 3
+        },
+        "down": {
+          "uv": [
+            3.5,
+            4.7,
+            3.75,
+            4.95
+          ],
+          "texture": 3
+        }
+      },
+      "type": "cube",
+      "uuid": "57429a6f-b298-417b-a3e5-930c77b015ac"
+    },
+    {
+      "name": "stitch",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        12,
+        4,
+        4.7
+      ],
+      "to": [
+        12.25,
+        6.5,
+        4.95
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        12.125,
+        5.25,
+        4.825
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            12,
+            9.5,
+            12.25,
+            12
+          ],
+          "texture": 3
+        },
+        "south": {
+          "uv": [
+            12,
+            9.5,
+            12.25,
+            12
+          ],
+          "texture": 3
+        },
+        "east": {
+          "uv": [
+            4.7,
+            9.5,
+            4.95,
+            12
+          ],
+          "texture": 3
+        },
+        "west": {
+          "uv": [
+            4.7,
+            9.5,
+            4.95,
+            12
+          ],
+          "texture": 3
+        },
+        "up": {
+          "uv": [
+            12,
+            4.7,
+            12.25,
+            4.95
+          ],
+          "texture": 3
+        },
+        "down": {
+          "uv": [
+            12,
+            4.7,
+            12.25,
+            4.95
+          ],
+          "texture": 3
+        }
+      },
+      "type": "cube",
+      "uuid": "0ea14921-5357-4d45-a010-0e822631342b"
+    }
+  ],
+  "groups": [],
+  "outliner": [
+    "fc190040-810f-4ec4-ae28-94e9142db1bd",
+    "c013e504-38b3-4e33-a017-587ef44046c3",
+    "a1e25e8c-db71-490a-a6f5-7858b2849542",
+    "2b66a303-2049-4626-a4f5-950fe4c877f1",
+    "af2ce943-c752-4ddb-acba-fc496abf0ced",
+    "c53da73e-30d7-4a3b-a9f0-73cd754d492b",
+    "ab39e514-a36f-4e93-a7ee-2561536d428c",
+    "d7e5e59f-a1f4-47d0-a765-fe3344d5c1d1",
+    "57429a6f-b298-417b-a3e5-930c77b015ac",
+    "0ea14921-5357-4d45-a010-0e822631342b"
+  ],
+  "textures": [
+    {
+      "path": "",
+      "name": "strap.png",
+      "folder": "block/pieces/familiars/equipment/raven_satchel",
+      "namespace": "herbalwitch",
+      "id": "strap",
+      "group": "",
+      "width": 32,
+      "height": 32,
+      "uv_width": 16,
+      "uv_height": 16,
+      "particle": true,
+      "use_as_default": false,
+      "layers_enabled": false,
+      "sync_to_project": "",
+      "render_mode": "default",
+      "render_sides": "auto",
+      "pbr_channel": "color",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "frame_interpolate": false,
+      "visible": true,
+      "internal": true,
+      "saved": true,
+      "uuid": "8c17bc02-3a6d-4661-a2ca-1184395ee384",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAS0lEQVR42u3TOQHAMAADMRNp83btz5+aA8PLDYIglXNzksbbnKR67U7S/LqT1O7iJB3/cJL6U50kGtKQhjSkIQ1pSEMa0pCGNEw3XMVDx4ymJ2mVAAAAAElFTkSuQmCC"
+    },
+    {
+      "path": "",
+      "name": "leather.png",
+      "folder": "block/pieces/familiars/equipment/raven_satchel",
+      "namespace": "herbalwitch",
+      "id": "leather",
+      "group": "",
+      "width": 32,
+      "height": 32,
+      "uv_width": 16,
+      "uv_height": 16,
+      "particle": true,
+      "use_as_default": false,
+      "layers_enabled": false,
+      "sync_to_project": "",
+      "render_mode": "default",
+      "render_sides": "auto",
+      "pbr_channel": "color",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "frame_interpolate": false,
+      "visible": true,
+      "internal": true,
+      "saved": true,
+      "uuid": "5595cf83-6d0b-42ba-a567-42e9cb61e3db",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAT0lEQVR42u3TRwGAQAADwZigvziaBNrhX1aQkc8+RsLonBsn6d0GJ+kqrZNU99FJupfOSfqOyUl61t5JoiENaUhDGtKQhjSkIQ1pSMN0wx8RAdOMnBJeSwAAAABJRU5ErkJggg=="
+    },
+    {
+      "path": "",
+      "name": "plum.png",
+      "folder": "block/pieces/familiars/equipment/raven_satchel",
+      "namespace": "herbalwitch",
+      "id": "plum",
+      "group": "",
+      "width": 32,
+      "height": 32,
+      "uv_width": 16,
+      "uv_height": 16,
+      "particle": true,
+      "use_as_default": false,
+      "layers_enabled": false,
+      "sync_to_project": "",
+      "render_mode": "default",
+      "render_sides": "auto",
+      "pbr_channel": "color",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "frame_interpolate": false,
+      "visible": true,
+      "internal": true,
+      "saved": true,
+      "uuid": "3b6309d7-2c14-40e8-aaef-6a058409ce22",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAATklEQVR42u3TSQGAMAADwSjh9kELLZd/P0FGPvsYCaN9aE7SuTxOUhm7k9TW10mq0+Uk9e1zko75dpJoSEMa0pCGNKQhDWlIQxrSMN3wBz9Eo5vffjxyAAAAAElFTkSuQmCC"
+    },
+    {
+      "path": "",
+      "name": "gold.png",
+      "folder": "block/pieces/familiars/equipment/raven_satchel",
+      "namespace": "herbalwitch",
+      "id": "gold",
+      "group": "",
+      "width": 32,
+      "height": 32,
+      "uv_width": 16,
+      "uv_height": 16,
+      "particle": true,
+      "use_as_default": false,
+      "layers_enabled": false,
+      "sync_to_project": "",
+      "render_mode": "default",
+      "render_sides": "auto",
+      "pbr_channel": "color",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "frame_interpolate": false,
+      "visible": true,
+      "internal": true,
+      "saved": true,
+      "uuid": "c2e70836-3dca-4557-a9ce-6e54eda513f0",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAgklEQVR42u3TORaCAAxF0SwIBW2ZZF0qSCsC7gNEaGWQnYWTPm0OzS9u9epHv6fPork6KutOSxWz+GaeyrrTWAQs2ttBZd3pX19Y9I+TyrrT9ApZfO5HlXWn9Z2wGPKzyrrTXEYsutRVWXfChtgQG2JDbIgNsSE2xIbYEBtiw7033ABX5pTIURg65gAAAABJRU5ErkJggg=="
+    },
+    {
+      "path": "",
+      "name": "green.png",
+      "folder": "block/pieces/familiars/equipment/raven_satchel",
+      "namespace": "herbalwitch",
+      "id": "green",
+      "group": "",
+      "width": 32,
+      "height": 32,
+      "uv_width": 16,
+      "uv_height": 16,
+      "particle": true,
+      "use_as_default": false,
+      "layers_enabled": false,
+      "sync_to_project": "",
+      "render_mode": "default",
+      "render_sides": "auto",
+      "pbr_channel": "color",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "frame_interpolate": false,
+      "visible": true,
+      "internal": true,
+      "saved": true,
+      "uuid": "19ddd97f-ef22-4c5c-a55b-b9454b0b620d",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAT0lEQVR42u3TRwGAQAADwbig/zmaAtrh31OQkc8+RsKoOWcnaXg3J6m9ipM01t1J6u7FSZq+w0nqn9VJoiENaUhDGtKQhjSkIQ1pSMN0wx/7XwubusV/fgAAAABJRU5ErkJggg=="
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        2.5,
+        0
+      ],
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        2.5,
+        0
+      ],
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        225,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    },
+    "ground": {
+      "translation": [
+        0,
+        3,
+        0
+      ],
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    "gui": {
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "scale": [
+        0.625,
+        0.625,
+        0.625
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ]
+    },
+    "fixed": {
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    }
+  }
+}

@@ -56,6 +56,8 @@ public final class HerbalWitchClient {
     public static void renderers(EntityRenderersEvent.RegisterRenderers event) {
         DecorClientRegistration.renderers(event);
         PreparationRenderers.renderers(event);
+        io.github.dirtyredz.herbalwitch.client.familiars.render.FamiliarNativeRenderers.register(event);
+        io.github.dirtyredz.herbalwitch.client.familiars.render.FamiliarRenderers.register(event);
     }
 
     @SubscribeEvent

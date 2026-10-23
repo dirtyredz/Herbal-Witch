@@ -1,0 +1,1152 @@
+{
+  "meta": {
+    "format_version": "5.0",
+    "model_format": "java_block",
+    "box_uv": false
+  },
+  "name": "wolf_harness",
+  "parent": "",
+  "ambientocclusion": true,
+  "front_gui_light": false,
+  "visible_box": [
+    1,
+    1,
+    0
+  ],
+  "variable_placeholders": "",
+  "variable_placeholder_buttons": [],
+  "unhandled_root_fields": {},
+  "java_block_version": "1.9.0",
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "chest harness left",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        2,
+        3,
+        6
+      ],
+      "to": [
+        3.5,
+        13,
+        10
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        2.75,
+        8,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            3,
+            3.5,
+            13
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            2,
+            3,
+            3.5,
+            13
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6,
+            3,
+            10,
+            13
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6,
+            3,
+            10,
+            13
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            2,
+            6,
+            3.5,
+            10
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2,
+            6,
+            3.5,
+            10
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "bfbfd6ae-b475-42f9-a68d-9dcf6dea6855"
+    },
+    {
+      "name": "chest harness right",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        12.5,
+        3,
+        6
+      ],
+      "to": [
+        14,
+        13,
+        10
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        13.25,
+        8,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            12.5,
+            3,
+            14,
+            13
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12.5,
+            3,
+            14,
+            13
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6,
+            3,
+            10,
+            13
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6,
+            3,
+            10,
+            13
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            12.5,
+            6,
+            14,
+            10
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            12.5,
+            6,
+            14,
+            10
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "5aa5c606-0edf-45f8-a082-a3ce60b2653f"
+    },
+    {
+      "name": "chest harness top",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        3.5,
+        11.5,
+        6
+      ],
+      "to": [
+        12.5,
+        13,
+        10
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        12.25,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            3.5,
+            3,
+            12.5,
+            4.5
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3.5,
+            3,
+            12.5,
+            4.5
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6,
+            3,
+            10,
+            4.5
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6,
+            3,
+            10,
+            4.5
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            3.5,
+            6,
+            12.5,
+            10
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            3.5,
+            6,
+            12.5,
+            10
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "c618376f-a2f7-45eb-a27c-e64effd58d49"
+    },
+    {
+      "name": "chest harness bottom",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        3.5,
+        3,
+        6
+      ],
+      "to": [
+        12.5,
+        4.5,
+        10
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        3.75,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            3.5,
+            11.5,
+            12.5,
+            13
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3.5,
+            11.5,
+            12.5,
+            13
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6,
+            11.5,
+            10,
+            13
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6,
+            11.5,
+            10,
+            13
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            3.5,
+            6,
+            12.5,
+            10
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            3.5,
+            6,
+            12.5,
+            10
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "a8e4b257-df6e-4367-a052-8ff177b34a65"
+    },
+    {
+      "name": "green breastplate",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        5.5,
+        5,
+        5
+      ],
+      "to": [
+        10.5,
+        11,
+        6
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        5.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            5.5,
+            5,
+            10.5,
+            11
+          ],
+          "texture": 1
+        },
+        "south": {
+          "uv": [
+            5.5,
+            5,
+            10.5,
+            11
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            5,
+            5,
+            6,
+            11
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            5,
+            5,
+            6,
+            11
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            5.5,
+            5,
+            10.5,
+            6
+          ],
+          "texture": 1
+        },
+        "down": {
+          "uv": [
+            5.5,
+            5,
+            10.5,
+            6
+          ],
+          "texture": 1
+        }
+      },
+      "type": "cube",
+      "uuid": "30d493e8-1b58-4e4d-ad2a-380fdea4ef74"
+    },
+    {
+      "name": "central buckle",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        6.5,
+        7,
+        4.5
+      ],
+      "to": [
+        9.5,
+        9,
+        4.9
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        4.7
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            6.5,
+            7,
+            9.5,
+            9
+          ],
+          "texture": 2
+        },
+        "south": {
+          "uv": [
+            6.5,
+            7,
+            9.5,
+            9
+          ],
+          "texture": 2
+        },
+        "east": {
+          "uv": [
+            4.5,
+            7,
+            4.9,
+            9
+          ],
+          "texture": 2
+        },
+        "west": {
+          "uv": [
+            4.5,
+            7,
+            4.9,
+            9
+          ],
+          "texture": 2
+        },
+        "up": {
+          "uv": [
+            6.5,
+            4.5,
+            9.5,
+            4.9
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            6.5,
+            4.5,
+            9.5,
+            4.9
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube",
+      "uuid": "e5e9cf25-3412-47e6-a4ef-84bf5c64522a"
+    },
+    {
+      "name": "plum upper tie",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        6.5,
+        11,
+        5.3
+      ],
+      "to": [
+        9.5,
+        12.5,
+        5.9
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        11.75,
+        5.6
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            6.5,
+            3.5,
+            9.5,
+            5
+          ],
+          "texture": 3
+        },
+        "south": {
+          "uv": [
+            6.5,
+            3.5,
+            9.5,
+            5
+          ],
+          "texture": 3
+        },
+        "east": {
+          "uv": [
+            5.3,
+            3.5,
+            5.9,
+            5
+          ],
+          "texture": 3
+        },
+        "west": {
+          "uv": [
+            5.3,
+            3.5,
+            5.9,
+            5
+          ],
+          "texture": 3
+        },
+        "up": {
+          "uv": [
+            6.5,
+            5.3,
+            9.5,
+            5.9
+          ],
+          "texture": 3
+        },
+        "down": {
+          "uv": [
+            6.5,
+            5.3,
+            9.5,
+            5.9
+          ],
+          "texture": 3
+        }
+      },
+      "type": "cube",
+      "uuid": "1576ff0a-45fb-479f-af71-0684a0bd1184"
+    },
+    {
+      "name": "rivet",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        2.5,
+        5,
+        5.6
+      ],
+      "to": [
+        3,
+        5.5,
+        5.95
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        2.75,
+        5.25,
+        5.775
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2.5,
+            10.5,
+            3,
+            11
+          ],
+          "texture": 2
+        },
+        "south": {
+          "uv": [
+            2.5,
+            10.5,
+            3,
+            11
+          ],
+          "texture": 2
+        },
+        "east": {
+          "uv": [
+            5.6,
+            10.5,
+            5.95,
+            11
+          ],
+          "texture": 2
+        },
+        "west": {
+          "uv": [
+            5.6,
+            10.5,
+            5.95,
+            11
+          ],
+          "texture": 2
+        },
+        "up": {
+          "uv": [
+            2.5,
+            5.6,
+            3,
+            5.95
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            2.5,
+            5.6,
+            3,
+            5.95
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube",
+      "uuid": "fc88cbab-8153-4823-a762-8191f23d9219"
+    },
+    {
+      "name": "rivet",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        2.5,
+        10,
+        5.6
+      ],
+      "to": [
+        3,
+        10.5,
+        5.95
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        2.75,
+        10.25,
+        5.775
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2.5,
+            5.5,
+            3,
+            6
+          ],
+          "texture": 2
+        },
+        "south": {
+          "uv": [
+            2.5,
+            5.5,
+            3,
+            6
+          ],
+          "texture": 2
+        },
+        "east": {
+          "uv": [
+            5.6,
+            5.5,
+            5.95,
+            6
+          ],
+          "texture": 2
+        },
+        "west": {
+          "uv": [
+            5.6,
+            5.5,
+            5.95,
+            6
+          ],
+          "texture": 2
+        },
+        "up": {
+          "uv": [
+            2.5,
+            5.6,
+            3,
+            5.95
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            2.5,
+            5.6,
+            3,
+            5.95
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube",
+      "uuid": "f55a924c-bb31-42d7-ade8-60a61c802004"
+    },
+    {
+      "name": "rivet",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        12.5,
+        5,
+        5.6
+      ],
+      "to": [
+        13,
+        5.5,
+        5.95
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        12.75,
+        5.25,
+        5.775
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            12.5,
+            10.5,
+            13,
+            11
+          ],
+          "texture": 2
+        },
+        "south": {
+          "uv": [
+            12.5,
+            10.5,
+            13,
+            11
+          ],
+          "texture": 2
+        },
+        "east": {
+          "uv": [
+            5.6,
+            10.5,
+            5.95,
+            11
+          ],
+          "texture": 2
+        },
+        "west": {
+          "uv": [
+            5.6,
+            10.5,
+            5.95,
+            11
+          ],
+          "texture": 2
+        },
+        "up": {
+          "uv": [
+            12.5,
+            5.6,
+            13,
+            5.95
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            12.5,
+            5.6,
+            13,
+            5.95
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube",
+      "uuid": "fe1c5f49-3ea3-4e34-abb3-5ab669d1f07d"
+    },
+    {
+      "name": "rivet",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        12.5,
+        10,
+        5.6
+      ],
+      "to": [
+        13,
+        10.5,
+        5.95
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        12.75,
+        10.25,
+        5.775
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            12.5,
+            5.5,
+            13,
+            6
+          ],
+          "texture": 2
+        },
+        "south": {
+          "uv": [
+            12.5,
+            5.5,
+            13,
+            6
+          ],
+          "texture": 2
+        },
+        "east": {
+          "uv": [
+            5.6,
+            5.5,
+            5.95,
+            6
+          ],
+          "texture": 2
+        },
+        "west": {
+          "uv": [
+            5.6,
+            5.5,
+            5.95,
+            6
+          ],
+          "texture": 2
+        },
+        "up": {
+          "uv": [
+            12.5,
+            5.6,
+            13,
+            5.95
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            12.5,
+            5.6,
+            13,
+            5.95
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube",
+      "uuid": "330514d6-1a62-4a52-a3a3-da2e4d20a783"
+    }
+  ],
+  "groups": [],
+  "outliner": [
+    "bfbfd6ae-b475-42f9-a68d-9dcf6dea6855",
+    "5aa5c606-0edf-45f8-a082-a3ce60b2653f",
+    "c618376f-a2f7-45eb-a27c-e64effd58d49",
+    "a8e4b257-df6e-4367-a052-8ff177b34a65",
+    "30d493e8-1b58-4e4d-ad2a-380fdea4ef74",
+    "e5e9cf25-3412-47e6-a4ef-84bf5c64522a",
+    "1576ff0a-45fb-479f-af71-0684a0bd1184",
+    "fc88cbab-8153-4823-a762-8191f23d9219",
+    "f55a924c-bb31-42d7-ade8-60a61c802004",
+    "fe1c5f49-3ea3-4e34-abb3-5ab669d1f07d",
+    "330514d6-1a62-4a52-a3a3-da2e4d20a783"
+  ],
+  "textures": [
+    {
+      "path": "",
+      "name": "leather.png",
+      "folder": "block/pieces/familiars/equipment/wolf_harness",
+      "namespace": "herbalwitch",
+      "id": "leather",
+      "group": "",
+      "width": 32,
+      "height": 32,
+      "uv_width": 16,
+      "uv_height": 16,
+      "particle": true,
+      "use_as_default": false,
+      "layers_enabled": false,
+      "sync_to_project": "",
+      "render_mode": "default",
+      "render_sides": "auto",
+      "pbr_channel": "color",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "frame_interpolate": false,
+      "visible": true,
+      "internal": true,
+      "saved": true,
+      "uuid": "b6c55c7e-a8be-41c8-ac2b-32a8061ede2b",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAT0lEQVR42u3TRwGAQAADwZigvziaBNrhX1aQkc8+RsLonBsn6d0GJ+kqrZNU99FJupfOSfqOyUl61t5JoiENaUhDGtKQhjSkIQ1pSMN0wx8RAdOMnBJeSwAAAABJRU5ErkJggg=="
+    },
+    {
+      "path": "",
+      "name": "green.png",
+      "folder": "block/pieces/familiars/equipment/wolf_harness",
+      "namespace": "herbalwitch",
+      "id": "green",
+      "group": "",
+      "width": 32,
+      "height": 32,
+      "uv_width": 16,
+      "uv_height": 16,
+      "particle": true,
+      "use_as_default": false,
+      "layers_enabled": false,
+      "sync_to_project": "",
+      "render_mode": "default",
+      "render_sides": "auto",
+      "pbr_channel": "color",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "frame_interpolate": false,
+      "visible": true,
+      "internal": true,
+      "saved": true,
+      "uuid": "47583431-2873-47c6-ad57-6ace948f9b34",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAT0lEQVR42u3TRwGAQAADwbig/zmaAtrh31OQkc8+RsKoOWcnaXg3J6m9ipM01t1J6u7FSZq+w0nqn9VJoiENaUhDGtKQhjSkIQ1pSMN0wx/7XwubusV/fgAAAABJRU5ErkJggg=="
+    },
+    {
+      "path": "",
+      "name": "iron.png",
+      "folder": "block/pieces/familiars/equipment/wolf_harness",
+      "namespace": "herbalwitch",
+      "id": "iron",
+      "group": "",
+      "width": 32,
+      "height": 32,
+      "uv_width": 16,
+      "uv_height": 16,
+      "particle": true,
+      "use_as_default": false,
+      "layers_enabled": false,
+      "sync_to_project": "",
+      "render_mode": "default",
+      "render_sides": "auto",
+      "pbr_channel": "color",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "frame_interpolate": false,
+      "visible": true,
+      "internal": true,
+      "saved": true,
+      "uuid": "75437edb-f7a5-449d-a1e4-e9a92216ff3d",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAdElEQVR42u3TJxLAQAwEQX3Y6Zxz9jn9WS5xUZXJgkaDh7r5YBG4UmXdadpvFknRqqw79YtnEaaVyrrTfDwsXNmprDsN68kiymqVdafFvyzSqldZdxq3i0WcNyrrTtgQG2JDbIgNsSE2xIbYEBtiQ2z494YfQ1ekyDjN7egAAAAASUVORK5CYII="
+    },
+    {
+      "path": "",
+      "name": "plum.png",
+      "folder": "block/pieces/familiars/equipment/wolf_harness",
+      "namespace": "herbalwitch",
+      "id": "plum",
+      "group": "",
+      "width": 32,
+      "height": 32,
+      "uv_width": 16,
+      "uv_height": 16,
+      "particle": true,
+      "use_as_default": false,
+      "layers_enabled": false,
+      "sync_to_project": "",
+      "render_mode": "default",
+      "render_sides": "auto",
+      "pbr_channel": "color",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "frame_interpolate": false,
+      "visible": true,
+      "internal": true,
+      "saved": true,
+      "uuid": "bfa39c88-a727-4e32-a662-278b9fe08fd8",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAATklEQVR42u3TSQGAMAADwSjh9kELLZd/P0FGPvsYCaN9aE7SuTxOUhm7k9TW10mq0+Uk9e1zko75dpJoSEMa0pCGNKQhDWlIQxrSMN3wBz9Eo5vffjxyAAAAAElFTkSuQmCC"
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        2.5,
+        0
+      ],
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        2.5,
+        0
+      ],
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        225,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    },
+    "ground": {
+      "translation": [
+        0,
+        3,
+        0
+      ],
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    "gui": {
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "scale": [
+        0.625,
+        0.625,
+        0.625
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ]
+    },
+    "fixed": {
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "project": "snake_ring.bbmodel",
+  "textures": {
+    "copper": "herbalwitch:block/pieces/familiars/equipment/snake_ring/copper",
+    "gold": "herbalwitch:block/pieces/familiars/equipment/snake_ring/gold",
+    "amethyst": "herbalwitch:block/pieces/familiars/equipment/snake_ring/amethyst",
+    "particle": "herbalwitch:block/pieces/familiars/equipment/snake_ring/copper"
+  },
+  "owned_textures": {
+    "copper": "herbalwitch:block/pieces/familiars/equipment/snake_ring/copper",
+    "gold": "herbalwitch:block/pieces/familiars/equipment/snake_ring/gold",
+    "amethyst": "herbalwitch:block/pieces/familiars/equipment/snake_ring/amethyst"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/familiars/equipment/snake_ring/base",
+      "item": true
+    }
+  ]
+}

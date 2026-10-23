@@ -415,3 +415,5 @@ client + datagen -> features and contracts
   Small typed recipe adapters retain registered type/serializer bounds; no configurable recipe framework.
   Broader TeachingNotifier/client-cache splits, catalogue dispatch, nullable policy/slot-layout cleanup
   and furniture placement, storage predicates and migration scripts remain separate P2 work.
+
+M9 additions: `companions/familiars/equipment/` owns canonical slots/cargo and transfer receipts. `client/familiars/{model,render}/` reads compiled rigs and attaches equipment; `state/FamiliarVisualCache` holds cosmetics. `src/art/blockbench/familiars/equipment/<gear>/` owns eight pieces. `src/art/entities/{raven,owl,snake}/` holds creature projects. `tools/entities/` owns the compiler/poses, with `test/`; `tools/compile-entity-models.mjs` produces `entity_models/familiars/<species>/` and `textures/entity/familiars/<species>/`. Equipment tests live in `src/{test,gameTest}/java/io/github/dirtyredz/herbalwitch/companions/familiars/equipment/`; geometry tests in `src/test/java/io/github/dirtyredz/herbalwitch/client/familiars/`.

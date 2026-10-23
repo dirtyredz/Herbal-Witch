@@ -217,3 +217,9 @@ shared-texture change, restart the watcher.
    folder) and press F3+T: the game shows the jar's art again.
 
 The pack is client-side only; a second client sees the edits only with its own copy of the pack.
+
+## Living creatures (M9 drafts)
+
+The separate `src/art/entities/catalog.json` lists raven (including crow), owl and snake. Each owns a Blockbench 5.2.2 modded-entity project in format 5.0 plus `rig.json`. Cuboids use named parent-before-child bones, pivots and box UVs. Meshes, per-cube rotations and authored animation clips are refused. Runtime reads compiled JSON and applies procedural idle, walk/slither, flight, rest and attack. The block compiler still rejects entity projects.
+
+Creature atlases use a logical 32-unit square exported at 64 x 64, preserving two texels per model unit. Block/item textures remain 32 x 32. Native species retain vanilla textures and variants. Compile with `node tools/compile-entity-models.mjs`; `--check` verifies without writing. Gradle includes both. Eight equipment projects live at `src/art/blockbench/familiars/equipment/<gear>/`.

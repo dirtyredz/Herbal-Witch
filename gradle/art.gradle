@@ -74,10 +74,18 @@ artTask('compileBlockbench', 'Compiles src/art/blockbench projects into models a
     outputs.file("${artAssets}/textures/block/material/lamp_shade.png")
 }
 
+artTask('compileEntities', 'Compiles owned creature rigs.', ['tools/compile-entity-models.mjs']) {
+    inputs.dir('src/art/entities')
+    inputs.dir('tools/entities')
+    inputs.dir('tools/image')
+    outputs.dir('src/main/resources/assets/herbalwitch/entity_models/familiars')
+    outputs.dir('src/main/resources/assets/herbalwitch/textures/entity/familiars')
+}
+
 tasks.register('generateArt') {
     group = 'art'
     description = 'Runs every art producer: textures, procedural models, Blockbench pieces.'
-    dependsOn 'generateTextures', 'generateModels', 'compileBlockbench'
+    dependsOn 'generateTextures', 'generateModels', 'compileBlockbench', 'compileEntities'
 }
 
 def artCheck = { String name, List<String> script ->
@@ -89,15 +97,16 @@ def artCheck = { String name, List<String> script ->
         requireNode(task)
     }
 }
+artCheck('checkEntities', ['tools/compile-entity-models.mjs', '--check'])
 artCheck('checkTextures', ['tools/generate-textures.mjs', '--check'])
 artCheck('checkModels', ['tools/generate-models.mjs', '--check'])
 artCheck('checkBlockbench', ['tools/compile-blockbench.mjs', '--check'])
-artCheck('testArtTools', ['--test', 'tools/art/test/*.test.mjs', 'tools/blockbench/test/*.test.mjs', 'tools/blockbench/dev-art/test/*.test.mjs', 'tools/preview/test/*.test.mjs'])
+artCheck('testArtTools', ['--test', 'tools/art/test/*.test.mjs', 'tools/blockbench/test/*.test.mjs', 'tools/blockbench/dev-art/test/*.test.mjs', 'tools/preview/test/*.test.mjs', 'tools/entities/test/*.test.mjs'])
 
 tasks.register('checkArt') {
     group = 'verification'
     description = 'Fails when committed art is stale, plus the Node pipeline, dev-pack and preview tests (z-fighting, coverage).'
-    dependsOn 'checkTextures', 'checkModels', 'checkBlockbench', 'testArtTools'
+    dependsOn 'checkTextures', 'checkModels', 'checkBlockbench', 'checkEntities', 'testArtTools'
 }
 
 tasks.named('processResources') { dependsOn 'generateArt' }

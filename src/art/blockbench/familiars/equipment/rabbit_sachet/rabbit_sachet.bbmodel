@@ -1,0 +1,820 @@
+{
+  "meta": {
+    "format_version": "5.0",
+    "model_format": "java_block",
+    "box_uv": false
+  },
+  "name": "rabbit_sachet",
+  "parent": "",
+  "ambientocclusion": true,
+  "front_gui_light": false,
+  "visible_box": [
+    1,
+    1,
+    0
+  ],
+  "variable_placeholders": "",
+  "variable_placeholder_buttons": [],
+  "unhandled_root_fields": {},
+  "java_block_version": "1.9.0",
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "soft sachet",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        4.5,
+        3,
+        5.5
+      ],
+      "to": [
+        11.5,
+        9,
+        10.5
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        6,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4.5,
+            7,
+            11.5,
+            13
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4.5,
+            7,
+            11.5,
+            13
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            5.5,
+            7,
+            10.5,
+            13
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            5.5,
+            7,
+            10.5,
+            13
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            4.5,
+            5.5,
+            11.5,
+            10.5
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            4.5,
+            5.5,
+            11.5,
+            10.5
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "c3c04e2c-d556-4a9d-ab85-0f5178e606b3"
+    },
+    {
+      "name": "gathered neck",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        5.5,
+        9,
+        6
+      ],
+      "to": [
+        10.5,
+        11,
+        10
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        10,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            5.5,
+            5,
+            10.5,
+            7
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            5.5,
+            5,
+            10.5,
+            7
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6,
+            5,
+            10,
+            7
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6,
+            5,
+            10,
+            7
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            5.5,
+            6,
+            10.5,
+            10
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            5.5,
+            6,
+            10.5,
+            10
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "c7300ee4-6a8a-4a1b-a802-038ac327fb50"
+    },
+    {
+      "name": "plum tie",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        5,
+        10.8,
+        5.7
+      ],
+      "to": [
+        11,
+        11.4,
+        10.3
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        11.100000000000001,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            5,
+            4.6,
+            11,
+            5.199999999999999
+          ],
+          "texture": 1
+        },
+        "south": {
+          "uv": [
+            5,
+            4.6,
+            11,
+            5.199999999999999
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            5.7,
+            4.6,
+            10.3,
+            5.199999999999999
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            5.7,
+            4.6,
+            10.3,
+            5.199999999999999
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            5,
+            5.7,
+            11,
+            10.3
+          ],
+          "texture": 1
+        },
+        "down": {
+          "uv": [
+            5,
+            5.7,
+            11,
+            10.3
+          ],
+          "texture": 1
+        }
+      },
+      "type": "cube",
+      "uuid": "67aecc79-0517-4a5b-a183-c192544ff81d"
+    },
+    {
+      "name": "folded top",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        5.5,
+        11.4,
+        6
+      ],
+      "to": [
+        10.5,
+        13,
+        10
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        12.2,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            5.5,
+            3,
+            10.5,
+            4.6
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            5.5,
+            3,
+            10.5,
+            4.6
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6,
+            3,
+            10,
+            4.6
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6,
+            3,
+            10,
+            4.6
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            5.5,
+            6,
+            10.5,
+            10
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            5.5,
+            6,
+            10.5,
+            10
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "8a99e48e-725a-4490-aff6-a1477043289f"
+    },
+    {
+      "name": "chamomile centre",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        7.5,
+        6.3,
+        5
+      ],
+      "to": [
+        8.5,
+        7.3,
+        5.45
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        6.8,
+        5.225
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            7.5,
+            8.7,
+            8.5,
+            9.7
+          ],
+          "texture": 2
+        },
+        "south": {
+          "uv": [
+            7.5,
+            8.7,
+            8.5,
+            9.7
+          ],
+          "texture": 2
+        },
+        "east": {
+          "uv": [
+            5,
+            8.7,
+            5.45,
+            9.7
+          ],
+          "texture": 2
+        },
+        "west": {
+          "uv": [
+            5,
+            8.7,
+            5.45,
+            9.7
+          ],
+          "texture": 2
+        },
+        "up": {
+          "uv": [
+            7.5,
+            5,
+            8.5,
+            5.45
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            7.5,
+            5,
+            8.5,
+            5.45
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube",
+      "uuid": "d4922c9a-b547-4541-aac5-4617c7bb601c"
+    },
+    {
+      "name": "chamomile petals",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        6.75,
+        6.65,
+        4.8
+      ],
+      "to": [
+        9.25,
+        6.95,
+        5
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        6.800000000000001,
+        4.9
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            6.75,
+            9.05,
+            9.25,
+            9.35
+          ],
+          "texture": 3
+        },
+        "south": {
+          "uv": [
+            6.75,
+            9.05,
+            9.25,
+            9.35
+          ],
+          "texture": 3
+        },
+        "east": {
+          "uv": [
+            4.8,
+            9.05,
+            5,
+            9.35
+          ],
+          "texture": 3
+        },
+        "west": {
+          "uv": [
+            4.8,
+            9.05,
+            5,
+            9.35
+          ],
+          "texture": 3
+        },
+        "up": {
+          "uv": [
+            6.75,
+            4.8,
+            9.25,
+            5
+          ],
+          "texture": 3
+        },
+        "down": {
+          "uv": [
+            6.75,
+            4.8,
+            9.25,
+            5
+          ],
+          "texture": 3
+        }
+      },
+      "type": "cube",
+      "uuid": "5aa3bd86-c705-4312-a7cc-6c2ec1f70278"
+    },
+    {
+      "name": "hanging cord",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        7.5,
+        13,
+        7.5
+      ],
+      "to": [
+        8.5,
+        15,
+        8.5
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        14,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            7.5,
+            1,
+            8.5,
+            3
+          ],
+          "texture": 2
+        },
+        "south": {
+          "uv": [
+            7.5,
+            1,
+            8.5,
+            3
+          ],
+          "texture": 2
+        },
+        "east": {
+          "uv": [
+            7.5,
+            1,
+            8.5,
+            3
+          ],
+          "texture": 2
+        },
+        "west": {
+          "uv": [
+            7.5,
+            1,
+            8.5,
+            3
+          ],
+          "texture": 2
+        },
+        "up": {
+          "uv": [
+            7.5,
+            7.5,
+            8.5,
+            8.5
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            7.5,
+            7.5,
+            8.5,
+            8.5
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube",
+      "uuid": "15b5cd41-3abe-4365-ac71-0c5a98f51588"
+    }
+  ],
+  "groups": [],
+  "outliner": [
+    "c3c04e2c-d556-4a9d-ab85-0f5178e606b3",
+    "c7300ee4-6a8a-4a1b-a802-038ac327fb50",
+    "67aecc79-0517-4a5b-a183-c192544ff81d",
+    "8a99e48e-725a-4490-aff6-a1477043289f",
+    "d4922c9a-b547-4541-aac5-4617c7bb601c",
+    "5aa3bd86-c705-4312-a7cc-6c2ec1f70278",
+    "15b5cd41-3abe-4365-ac71-0c5a98f51588"
+  ],
+  "textures": [
+    {
+      "path": "",
+      "name": "green.png",
+      "folder": "block/pieces/familiars/equipment/rabbit_sachet",
+      "namespace": "herbalwitch",
+      "id": "green",
+      "group": "",
+      "width": 32,
+      "height": 32,
+      "uv_width": 16,
+      "uv_height": 16,
+      "particle": true,
+      "use_as_default": false,
+      "layers_enabled": false,
+      "sync_to_project": "",
+      "render_mode": "default",
+      "render_sides": "auto",
+      "pbr_channel": "color",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "frame_interpolate": false,
+      "visible": true,
+      "internal": true,
+      "saved": true,
+      "uuid": "4a546d01-087b-4b18-ad86-fa7bbd225c5a",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAT0lEQVR42u3TRwGAQAADwbig/zmaAtrh31OQkc8+RsKoOWcnaXg3J6m9ipM01t1J6u7FSZq+w0nqn9VJoiENaUhDGtKQhjSkIQ1pSMN0wx/7XwubusV/fgAAAABJRU5ErkJggg=="
+    },
+    {
+      "path": "",
+      "name": "plum.png",
+      "folder": "block/pieces/familiars/equipment/rabbit_sachet",
+      "namespace": "herbalwitch",
+      "id": "plum",
+      "group": "",
+      "width": 32,
+      "height": 32,
+      "uv_width": 16,
+      "uv_height": 16,
+      "particle": true,
+      "use_as_default": false,
+      "layers_enabled": false,
+      "sync_to_project": "",
+      "render_mode": "default",
+      "render_sides": "auto",
+      "pbr_channel": "color",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "frame_interpolate": false,
+      "visible": true,
+      "internal": true,
+      "saved": true,
+      "uuid": "737b7d47-e7db-4f5d-a81d-f48b2dd101d6",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAATklEQVR42u3TSQGAMAADwSjh9kELLZd/P0FGPvsYCaN9aE7SuTxOUhm7k9TW10mq0+Uk9e1zko75dpJoSEMa0pCGNKQhDWlIQxrSMN3wBz9Eo5vffjxyAAAAAElFTkSuQmCC"
+    },
+    {
+      "path": "",
+      "name": "gold.png",
+      "folder": "block/pieces/familiars/equipment/rabbit_sachet",
+      "namespace": "herbalwitch",
+      "id": "gold",
+      "group": "",
+      "width": 32,
+      "height": 32,
+      "uv_width": 16,
+      "uv_height": 16,
+      "particle": true,
+      "use_as_default": false,
+      "layers_enabled": false,
+      "sync_to_project": "",
+      "render_mode": "default",
+      "render_sides": "auto",
+      "pbr_channel": "color",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "frame_interpolate": false,
+      "visible": true,
+      "internal": true,
+      "saved": true,
+      "uuid": "e2666661-f5b4-409d-a103-368e9d9f6f5a",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAgklEQVR42u3TORaCAAxF0SwIBW2ZZF0qSCsC7gNEaGWQnYWTPm0OzS9u9epHv6fPork6KutOSxWz+GaeyrrTWAQs2ttBZd3pX19Y9I+TyrrT9ApZfO5HlXWn9Z2wGPKzyrrTXEYsutRVWXfChtgQG2JDbIgNsSE2xIbYEBtiw7033ABX5pTIURg65gAAAABJRU5ErkJggg=="
+    },
+    {
+      "path": "",
+      "name": "iron.png",
+      "folder": "block/pieces/familiars/equipment/rabbit_sachet",
+      "namespace": "herbalwitch",
+      "id": "iron",
+      "group": "",
+      "width": 32,
+      "height": 32,
+      "uv_width": 16,
+      "uv_height": 16,
+      "particle": true,
+      "use_as_default": false,
+      "layers_enabled": false,
+      "sync_to_project": "",
+      "render_mode": "default",
+      "render_sides": "auto",
+      "pbr_channel": "color",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "frame_interpolate": false,
+      "visible": true,
+      "internal": true,
+      "saved": true,
+      "uuid": "fa1b5acf-b353-4927-a568-b81720891bc8",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAdElEQVR42u3TJxLAQAwEQX3Y6Zxz9jn9WS5xUZXJgkaDh7r5YBG4UmXdadpvFknRqqw79YtnEaaVyrrTfDwsXNmprDsN68kiymqVdafFvyzSqldZdxq3i0WcNyrrTtgQG2JDbIgNsSE2xIbYEBtiQ2z494YfQ1ekyDjN7egAAAAASUVORK5CYII="
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        2.5,
+        0
+      ],
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        2.5,
+        0
+      ],
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        225,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    },
+    "ground": {
+      "translation": [
+        0,
+        3,
+        0
+      ],
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    "gui": {
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "scale": [
+        0.625,
+        0.625,
+        0.625
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ]
+    },
+    "fixed": {
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    }
+  }
+}

@@ -1,0 +1,247 @@
+{
+  "schema": 1,
+  "species": "snake",
+  "atlas": [
+    32,
+    32
+  ],
+  "equipmentBone": "body",
+  "appearances": {
+    "snake": "herbalwitch:textures/entity/familiars/snake/snake.png"
+  },
+  "bones": [
+    {
+      "name": "body",
+      "parent": null,
+      "pivot": [
+        0,
+        1.5,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "cubes": [
+        {
+          "from": [
+            -1,
+            0.5,
+            -2
+          ],
+          "to": [
+            1,
+            2.5,
+            2
+          ],
+          "uv": [
+            0,
+            0
+          ],
+          "mirror": false
+        },
+        {
+          "from": [
+            -1,
+            0,
+            -2
+          ],
+          "to": [
+            1,
+            0.5,
+            2
+          ],
+          "uv": [
+            0,
+            12
+          ],
+          "mirror": false
+        }
+      ]
+    },
+    {
+      "name": "head",
+      "parent": "body",
+      "pivot": [
+        0,
+        1.5,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "cubes": [
+        {
+          "from": [
+            -1.5,
+            0.5,
+            -5
+          ],
+          "to": [
+            1.5,
+            2.5,
+            -2
+          ],
+          "uv": [
+            0,
+            0
+          ],
+          "mirror": false
+        },
+        {
+          "from": [
+            -2,
+            1.5,
+            -4
+          ],
+          "to": [
+            -1.5,
+            2,
+            -3.5
+          ],
+          "uv": [
+            24,
+            0
+          ],
+          "mirror": false
+        },
+        {
+          "from": [
+            1.5,
+            1.5,
+            -4
+          ],
+          "to": [
+            2,
+            2,
+            -3.5
+          ],
+          "uv": [
+            24,
+            0
+          ],
+          "mirror": false
+        }
+      ]
+    },
+    {
+      "name": "jaw",
+      "parent": "head",
+      "pivot": [
+        0,
+        1,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "cubes": [
+        {
+          "from": [
+            -1.5,
+            0,
+            -5
+          ],
+          "to": [
+            1.5,
+            0.5,
+            -2
+          ],
+          "uv": [
+            0,
+            12
+          ],
+          "mirror": false
+        }
+      ]
+    },
+    {
+      "name": "middle",
+      "parent": "body",
+      "pivot": [
+        0,
+        1.5,
+        2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "cubes": [
+        {
+          "from": [
+            -1,
+            0.5,
+            2
+          ],
+          "to": [
+            1,
+            2.5,
+            6
+          ],
+          "uv": [
+            0,
+            0
+          ],
+          "mirror": false
+        },
+        {
+          "from": [
+            -1,
+            0,
+            2
+          ],
+          "to": [
+            1,
+            0.5,
+            6
+          ],
+          "uv": [
+            0,
+            12
+          ],
+          "mirror": false
+        }
+      ]
+    },
+    {
+      "name": "tail",
+      "parent": "middle",
+      "pivot": [
+        0,
+        1.5,
+        6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "cubes": [
+        {
+          "from": [
+            -0.5,
+            0.5,
+            6
+          ],
+          "to": [
+            0.5,
+            1.5,
+            10
+          ],
+          "uv": [
+            0,
+            0
+          ],
+          "mirror": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "project": "cat_bell.bbmodel",
+  "textures": {
+    "strap": "herbalwitch:block/pieces/familiars/equipment/cat_bell/strap",
+    "gold": "herbalwitch:block/pieces/familiars/equipment/cat_bell/gold",
+    "leather": "herbalwitch:block/pieces/familiars/equipment/cat_bell/leather",
+    "plum": "herbalwitch:block/pieces/familiars/equipment/cat_bell/plum",
+    "particle": "herbalwitch:block/pieces/familiars/equipment/cat_bell/strap"
+  },
+  "owned_textures": {
+    "strap": "herbalwitch:block/pieces/familiars/equipment/cat_bell/strap",
+    "gold": "herbalwitch:block/pieces/familiars/equipment/cat_bell/gold",
+    "leather": "herbalwitch:block/pieces/familiars/equipment/cat_bell/leather",
+    "plum": "herbalwitch:block/pieces/familiars/equipment/cat_bell/plum"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/familiars/equipment/cat_bell/base",
+      "item": true
+    }
+  ]
+}

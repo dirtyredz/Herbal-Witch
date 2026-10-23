@@ -15,7 +15,7 @@ import java.util.*;
 public class FamiliarRosterScreen<T extends FamiliarRosterMenu> extends GrimoirePanelHost<T> {
     protected UUID selected;
     protected int offset;
-    private FamiliarRosterPage displayed;
+    protected FamiliarRosterPage displayed;
     private FamiliarCommand desired = FamiliarCommand.STAY;
     public FamiliarRosterScreen(T menu, Inventory inventory, Component title) {
         super(menu, inventory, title, Optional.empty(), Optional.empty(), false); imageWidth = 280; imageHeight = 220; selected = menu.selected();

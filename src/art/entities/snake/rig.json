@@ -1,0 +1,9 @@
+{
+  "schema": 1,
+  "species": "snake",
+  "project": "snake.bbmodel",
+  "equipmentBone": "body",
+  "appearances": {
+    "snake": "snake"
+  }
+}

@@ -1,0 +1,347 @@
+{
+  "schema": 1,
+  "species": "owl",
+  "atlas": [
+    32,
+    32
+  ],
+  "equipmentBone": "head",
+  "appearances": {
+    "owl": "herbalwitch:textures/entity/familiars/owl/owl.png"
+  },
+  "bones": [
+    {
+      "name": "body",
+      "parent": null,
+      "pivot": [
+        0,
+        5,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "cubes": [
+        {
+          "from": [
+            -3,
+            2.5,
+            -2.5
+          ],
+          "to": [
+            3,
+            8,
+            2.5
+          ],
+          "uv": [
+            0,
+            0
+          ],
+          "mirror": false
+        },
+        {
+          "from": [
+            -2,
+            3,
+            -3
+          ],
+          "to": [
+            2,
+            7.5,
+            -2.5
+          ],
+          "uv": [
+            0,
+            12
+          ],
+          "mirror": false
+        }
+      ]
+    },
+    {
+      "name": "head",
+      "parent": "body",
+      "pivot": [
+        0,
+        8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "cubes": [
+        {
+          "from": [
+            -3,
+            8,
+            -3
+          ],
+          "to": [
+            3,
+            12,
+            2
+          ],
+          "uv": [
+            0,
+            12
+          ],
+          "mirror": false
+        },
+        {
+          "from": [
+            -3,
+            12,
+            -1
+          ],
+          "to": [
+            -2,
+            14,
+            1
+          ],
+          "uv": [
+            0,
+            0
+          ],
+          "mirror": false
+        },
+        {
+          "from": [
+            2,
+            12,
+            -1
+          ],
+          "to": [
+            3,
+            14,
+            1
+          ],
+          "uv": [
+            0,
+            0
+          ],
+          "mirror": false
+        },
+        {
+          "from": [
+            -2.5,
+            9,
+            -3.5
+          ],
+          "to": [
+            -0.5,
+            11,
+            -3
+          ],
+          "uv": [
+            24,
+            0
+          ],
+          "mirror": false
+        },
+        {
+          "from": [
+            0.5,
+            9,
+            -3.5
+          ],
+          "to": [
+            2.5,
+            11,
+            -3
+          ],
+          "uv": [
+            24,
+            0
+          ],
+          "mirror": false
+        },
+        {
+          "from": [
+            -0.5,
+            8.5,
+            -4.5
+          ],
+          "to": [
+            0.5,
+            10,
+            -3.5
+          ],
+          "uv": [
+            24,
+            8
+          ],
+          "mirror": false
+        }
+      ]
+    },
+    {
+      "name": "wing_left",
+      "parent": "body",
+      "pivot": [
+        -3,
+        7,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "cubes": [
+        {
+          "from": [
+            -4,
+            2,
+            -2
+          ],
+          "to": [
+            -3,
+            8,
+            4
+          ],
+          "uv": [
+            0,
+            0
+          ],
+          "mirror": false
+        }
+      ]
+    },
+    {
+      "name": "leg_left",
+      "parent": "body",
+      "pivot": [
+        -1.5,
+        2.5,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "cubes": [
+        {
+          "from": [
+            -2,
+            0,
+            -1.5
+          ],
+          "to": [
+            -1,
+            2.5,
+            1
+          ],
+          "uv": [
+            24,
+            16
+          ],
+          "mirror": false
+        }
+      ]
+    },
+    {
+      "name": "wing_right",
+      "parent": "body",
+      "pivot": [
+        3,
+        7,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "cubes": [
+        {
+          "from": [
+            3,
+            2,
+            -2
+          ],
+          "to": [
+            4,
+            8,
+            4
+          ],
+          "uv": [
+            0,
+            0
+          ],
+          "mirror": false
+        }
+      ]
+    },
+    {
+      "name": "leg_right",
+      "parent": "body",
+      "pivot": [
+        1.5,
+        2.5,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "cubes": [
+        {
+          "from": [
+            1,
+            0,
+            -1.5
+          ],
+          "to": [
+            2,
+            2.5,
+            1
+          ],
+          "uv": [
+            24,
+            16
+          ],
+          "mirror": false
+        }
+      ]
+    },
+    {
+      "name": "tail",
+      "parent": "body",
+      "pivot": [
+        0,
+        3,
+        2.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "cubes": [
+        {
+          "from": [
+            -2,
+            2,
+            2.5
+          ],
+          "to": [
+            2,
+            3,
+            5
+          ],
+          "uv": [
+            0,
+            0
+          ],
+          "mirror": false
+        }
+      ]
+    }
+  ]
+}

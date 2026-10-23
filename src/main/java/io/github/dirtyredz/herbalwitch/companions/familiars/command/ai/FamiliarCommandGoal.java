@@ -92,7 +92,13 @@ public final class FamiliarCommandGoal extends Goal {
                 var home = FamiliarHomeTarget.resolve(mob, record);
                 if (home.position() == null) { motion.stop(); motion.status(home.reason()); break; }
                 if (mob.position().distanceToSqr(home.position()) <= 4) { motion.stop(); FamiliarCommands.stay(mob, ""); }
-                else motion.move(home.position(), speed);
+                else {
+                    // Ground paths cannot terminate in the air above a partial bed or nest.
+                    // Arrive on checked floor beside the home, inside the same rest radius.
+                    var arrival = FamiliarDestinations.near((ServerLevel) mob.level(), mob, home.position().add(0, -1, 0), owner, 1);
+                    if (arrival.isPresent()) motion.move(arrival.get(), speed);
+                    else { motion.stop(); motion.status("blocked"); }
+                }
             }
         }
     }

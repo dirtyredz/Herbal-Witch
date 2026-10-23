@@ -40,18 +40,10 @@ public final class CharmEvents {
     /** Counts {@code ticks} of wearing the active charm (the GameTest seam); returns whether it broke. */
     public static boolean wear(ServerPlayer player, ItemStack charm, int ticks) {
         CompoundTag data = player.getPersistentData();
-        int counter = data.getInt(COUNTER) + ticks;
-        boolean broke = false;
-        while (counter >= TICKS_PER_CHARGE && !broke) {
-            counter -= TICKS_PER_CHARGE;
-            if (ProtectiveCharmItem.spendSecond(charm)) {
-                charm.shrink(1);
-                player.level().playSound(null, player.blockPosition(), SoundEvents.ITEM_BREAK, SoundSource.PLAYERS, 0.8F, 1.2F);
-                broke = true;
-            }
-        }
-        data.putInt(COUNTER, broke ? 0 : counter);
-        return broke;
+        var result = CharmCharge.wear(charm, data.getInt(COUNTER), ticks);
+        if (result.broke()) player.level().playSound(null, player.blockPosition(), SoundEvents.ITEM_BREAK, SoundSource.PLAYERS, 0.8F, 1.2F);
+        data.putInt(COUNTER, result.partialTicks());
+        return result.broke();
     }
 
     /** The partial second counted so far (tests). */

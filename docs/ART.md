@@ -356,3 +356,5 @@ plot, then walk it.
 
 Feedback wanted: per piece keep / change (what); whether "more blocks" means new furniture pieces
 (such as the 2-wide dresser) as well as richer models.
+
+M9 equipment and creature drafts: eight equipment projects use owned dark leather, green cloth, plum and metal textures. Raven/crow, owl and segmented snake use the separate entity compiler and owned 64px atlases (32 logical units). The full preview run rendered 82 images, 3,853 blockstates, 252 items and 841/841 models with no diagnostics. All eight equipment scenes and nineteen equipped creature poses were inspected at `2026-10-22-herbal-witch-m9/previews/equipment-creatures-qualified/`. Native-species attachment pose review and owner in-game review remain pending.

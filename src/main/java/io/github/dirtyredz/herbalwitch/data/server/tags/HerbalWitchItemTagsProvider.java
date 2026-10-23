@@ -49,6 +49,7 @@ public class HerbalWitchItemTagsProvider extends ItemTagsProvider {
             }
         };
         DecorItemTags.addTo(sink);
+        io.github.dirtyredz.herbalwitch.data.server.familiars.FamiliarEquipmentTags.addTo(sink);
         CharmTagContributions.items(sink);
         BotanyTagContributions.items(sink);
         PreparationTagContributions.items(sink);

@@ -1,0 +1,36 @@
+{
+  "project": "fox_pouch.bbmodel",
+  "textures": {
+    "strap": "herbalwitch:block/pieces/familiars/equipment/fox_pouch/strap",
+    "leather": "herbalwitch:block/pieces/familiars/equipment/fox_pouch/leather",
+    "plum": "herbalwitch:block/pieces/familiars/equipment/fox_pouch/plum",
+    "gold": "herbalwitch:block/pieces/familiars/equipment/fox_pouch/gold",
+    "green": "herbalwitch:block/pieces/familiars/equipment/fox_pouch/green",
+    "particle": "herbalwitch:block/pieces/familiars/equipment/fox_pouch/strap"
+  },
+  "owned_textures": {
+    "strap": "herbalwitch:block/pieces/familiars/equipment/fox_pouch/strap",
+    "leather": "herbalwitch:block/pieces/familiars/equipment/fox_pouch/leather",
+    "plum": "herbalwitch:block/pieces/familiars/equipment/fox_pouch/plum",
+    "gold": "herbalwitch:block/pieces/familiars/equipment/fox_pouch/gold",
+    "green": "herbalwitch:block/pieces/familiars/equipment/fox_pouch/green"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/familiars/equipment/fox_pouch/base",
+      "item": true
+    }
+  ]
+}

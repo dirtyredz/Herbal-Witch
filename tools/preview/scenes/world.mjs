@@ -2,6 +2,7 @@
 // directly), plus labelled vanilla proxies (flat-coloured cubes standing in for grass, dirt,
 // farmland and stone: their heights are real, their textures are not). Faces with a cullface
 // against a full proxy cube are culled as the game would.
+import {creatureQuads} from './familiars/creatures.mjs';
 import { select, enumerate } from './blockstates.mjs';
 import { variantRotation, translate } from '../geometry/transforms.mjs';
 import { bakeElement } from '../geometry/elements.mjs';
@@ -55,7 +56,8 @@ export function sceneQuads(entries, baker, res) {
   const used = [];
   for (const e of entries) {
     let local;
-    if (e.proxy) local = proxyQuads(e.proxy);
+    if (e.creature) local = creatureQuads(e, res, baker);
+    else if (e.proxy) local = proxyQuads(e.proxy);
     else if (e.model) local = variantRotation(baker.bake(e.model).quads, { y: e.y ?? 0 });
     else {
       const bs = res.json('blockstates', e.block);

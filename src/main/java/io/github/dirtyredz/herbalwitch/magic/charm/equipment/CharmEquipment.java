@@ -19,6 +19,8 @@ public final class CharmEquipment {
     /** Most extra equipment slots inspected per lookup. */
     public static final int MAX_SLOTS = 8;
     private static volatile BiFunction<LivingEntity, Predicate<ItemStack>, List<ItemStack>> extraSlots = (wearer, test) -> List.of();
+    private record OwnedSlot(Predicate<LivingEntity> owns, java.util.function.Function<LivingEntity, Optional<ItemStack>> item) {}
+    private static final List<OwnedSlot> OWNED = new java.util.ArrayList<>();
 
     private CharmEquipment() {
     }
@@ -32,8 +34,15 @@ public final class CharmEquipment {
         return !stack.isEmpty() && stack.getItem() instanceof ProtectiveCharmItem;
     }
 
+    /** A feature may own a creature's entire charm lookup, including an empty slot. Bootstrap only. */
+    public static void ownedSlot(Predicate<LivingEntity> owns, java.util.function.Function<LivingEntity, Optional<ItemStack>> item) {
+        if (OWNED.size() >= 4) throw new IllegalStateException("Too many charm slot owners");
+        OWNED.add(new OwnedSlot(java.util.Objects.requireNonNull(owns), java.util.Objects.requireNonNull(item)));
+    }
+
     /** The one active charm stack (live, mutable), if any. */
     public static Optional<ItemStack> active(LivingEntity wearer) {
+        for (var slot : OWNED) if (slot.owns().test(wearer)) return slot.item().apply(wearer).filter(CharmEquipment::charm);
         ItemStack offhand = wearer.getOffhandItem();
         if (charm(offhand)) {
             return Optional.of(offhand);

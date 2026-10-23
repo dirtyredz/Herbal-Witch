@@ -552,3 +552,5 @@ reserves inputs in their slots, advances progress in its block entity, revalidat
 capacity at completion, then commits once. Magical jobs (Milestone 7, see "Advanced stations and witch
 recipes" above) also need an authorised witch nearby while progressing and at completion. Unloaded
 stations simply stop; there is no catch-up simulation.
+
+Equipment remains in the canonical bond shard. Detail menus expose two detached slot views and serialize transfers with verified player/bond receipts, retaining the cursor that vanilla player saves omit. Pending cursors suspend the familiar. Closing into a full inventory retains disabled escrow and recovery payload instead of scattering items. Cargo has a whole-stack collect action, never an editable slot or automation capability. Shared M7 charge arithmetic and its existing damage handler apply protection once; creature lookup never falls through to offhand or Curios. Protocol 9 adds tracker-only gear/command/rest projections.

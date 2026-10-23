@@ -52,6 +52,8 @@ public final class FamiliarStore implements AutoCloseable {
                     String file = path.getFileName().toString();
                     UUID id = UUID.fromString(file.substring(FamiliarSavedData.PREFIX.length(), file.length() - 4));
                     var data = new FamiliarSavedData(directory, id, new VerifiedSnapshotWriter(FamiliarSavedData.FORMAT)); data.load();
+                    if (!io.github.dirtyredz.herbalwitch.companions.familiars.bond.transaction.FamiliarReceiptVerification.verify(data.record(), directory))
+                        data.put(data.record().quarantine(), false, FamiliarCodec.MAX_BYTES);
                     if (!creatures.add(data.record()) || !homes.changed(data.record()) || shards.putIfAbsent(id, data) != null) throw new IOException("Duplicate familiar or home identity");
                     owners.changed(data.record()); mobile.changed(data.record()); register.accept(FamiliarSavedData.name(id), data);
                     if (data.isDirty() && !data.checkpoint(FamiliarCodec.MAX_BYTES)) corrupt = true;
@@ -85,7 +87,7 @@ public final class FamiliarStore implements AutoCloseable {
         if (shard.record().revision() != previous) {
             var after = shard.record();
             // Internal rest ticks persist without making every in-flight owner intent stale.
-            var oldView = before.state(); var newView = after.state(); oldView.remove("homeRest"); newView.remove("homeRest");
+            var oldView = before.state(); var newView = after.state(); oldView.remove("homeRest"); newView.remove("homeRest"); oldView.remove("charmTicks"); newView.remove("charmTicks");
             if (checkpoint || before.phase() != after.phase() || before.generation() != after.generation() || !oldView.equals(newView)) owners.changed(after);
             mobile.changed(after); homes.changed(after);
         }

@@ -1,0 +1,34 @@
+{
+  "project": "bat_chime.bbmodel",
+  "textures": {
+    "iron": "herbalwitch:block/pieces/familiars/equipment/bat_chime/iron",
+    "gold": "herbalwitch:block/pieces/familiars/equipment/bat_chime/gold",
+    "amethyst": "herbalwitch:block/pieces/familiars/equipment/bat_chime/amethyst",
+    "pink": "herbalwitch:block/pieces/familiars/equipment/bat_chime/pink",
+    "particle": "herbalwitch:block/pieces/familiars/equipment/bat_chime/iron"
+  },
+  "owned_textures": {
+    "iron": "herbalwitch:block/pieces/familiars/equipment/bat_chime/iron",
+    "gold": "herbalwitch:block/pieces/familiars/equipment/bat_chime/gold",
+    "amethyst": "herbalwitch:block/pieces/familiars/equipment/bat_chime/amethyst",
+    "pink": "herbalwitch:block/pieces/familiars/equipment/bat_chime/pink"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/familiars/equipment/bat_chime/base",
+      "item": true
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "species": "raven",
+  "project": "raven.bbmodel",
+  "equipmentBone": "body",
+  "appearances": {
+    "raven": "raven",
+    "crow": "crow"
+  }
+}

@@ -1,0 +1,709 @@
+{
+  "meta": {
+    "format_version": "5.0",
+    "model_format": "java_block",
+    "box_uv": false
+  },
+  "name": "snake_ring",
+  "parent": "",
+  "ambientocclusion": true,
+  "front_gui_light": false,
+  "visible_box": [
+    1,
+    1,
+    0
+  ],
+  "variable_placeholders": "",
+  "variable_placeholder_buttons": [],
+  "unhandled_root_fields": {},
+  "java_block_version": "1.9.0",
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "copper band left",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        3.5,
+        3.5,
+        6
+      ],
+      "to": [
+        4.75,
+        12.5,
+        10
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        4.125,
+        8,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            3.5,
+            3.5,
+            4.75,
+            12.5
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3.5,
+            3.5,
+            4.75,
+            12.5
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6,
+            3.5,
+            10,
+            12.5
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6,
+            3.5,
+            10,
+            12.5
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            3.5,
+            6,
+            4.75,
+            10
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            3.5,
+            6,
+            4.75,
+            10
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "171a6aa1-bc02-4fa0-a14e-20c2033cd634"
+    },
+    {
+      "name": "copper band right",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        11.25,
+        3.5,
+        6
+      ],
+      "to": [
+        12.5,
+        12.5,
+        10
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        11.875,
+        8,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            11.25,
+            3.5,
+            12.5,
+            12.5
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.25,
+            3.5,
+            12.5,
+            12.5
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6,
+            3.5,
+            10,
+            12.5
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6,
+            3.5,
+            10,
+            12.5
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            11.25,
+            6,
+            12.5,
+            10
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            11.25,
+            6,
+            12.5,
+            10
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "adf8c503-395e-443e-ae31-d85b432deaaa"
+    },
+    {
+      "name": "copper band top",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        4.75,
+        11.25,
+        6
+      ],
+      "to": [
+        11.25,
+        12.5,
+        10
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        11.875,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4.75,
+            3.5,
+            11.25,
+            4.75
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4.75,
+            3.5,
+            11.25,
+            4.75
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6,
+            3.5,
+            10,
+            4.75
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6,
+            3.5,
+            10,
+            4.75
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            4.75,
+            6,
+            11.25,
+            10
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            4.75,
+            6,
+            11.25,
+            10
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "611eae36-42eb-4bf2-a4ce-10a18298d8a6"
+    },
+    {
+      "name": "copper band bottom",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        4.75,
+        3.5,
+        6
+      ],
+      "to": [
+        11.25,
+        4.75,
+        10
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        4.125,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4.75,
+            11.25,
+            11.25,
+            12.5
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4.75,
+            11.25,
+            11.25,
+            12.5
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6,
+            11.25,
+            10,
+            12.5
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6,
+            11.25,
+            10,
+            12.5
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            4.75,
+            6,
+            11.25,
+            10
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            4.75,
+            6,
+            11.25,
+            10
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "68574f8e-79f4-4ed2-a92a-b799a60261f3"
+    },
+    {
+      "name": "amethyst setting",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        6,
+        12.5,
+        6.5
+      ],
+      "to": [
+        10,
+        13.25,
+        9.5
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        12.875,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            6,
+            2.75,
+            10,
+            3.5
+          ],
+          "texture": 1
+        },
+        "south": {
+          "uv": [
+            6,
+            2.75,
+            10,
+            3.5
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            6.5,
+            2.75,
+            9.5,
+            3.5
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            6.5,
+            2.75,
+            9.5,
+            3.5
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            6,
+            6.5,
+            10,
+            9.5
+          ],
+          "texture": 1
+        },
+        "down": {
+          "uv": [
+            6,
+            6.5,
+            10,
+            9.5
+          ],
+          "texture": 1
+        }
+      },
+      "type": "cube",
+      "uuid": "7a43c71d-326c-425e-aa16-1a036b282ed5"
+    },
+    {
+      "name": "amethyst cabochon",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "render_order": "default",
+      "from": [
+        6.75,
+        13.25,
+        7
+      ],
+      "to": [
+        9.25,
+        14.5,
+        9
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        13.875,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            6.75,
+            1.5,
+            9.25,
+            2.75
+          ],
+          "texture": 2
+        },
+        "south": {
+          "uv": [
+            6.75,
+            1.5,
+            9.25,
+            2.75
+          ],
+          "texture": 2
+        },
+        "east": {
+          "uv": [
+            7,
+            1.5,
+            9,
+            2.75
+          ],
+          "texture": 2
+        },
+        "west": {
+          "uv": [
+            7,
+            1.5,
+            9,
+            2.75
+          ],
+          "texture": 2
+        },
+        "up": {
+          "uv": [
+            6.75,
+            7,
+            9.25,
+            9
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            6.75,
+            7,
+            9.25,
+            9
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube",
+      "uuid": "e57a1167-9cb5-4584-a364-3acd28b23d29"
+    }
+  ],
+  "groups": [],
+  "outliner": [
+    "171a6aa1-bc02-4fa0-a14e-20c2033cd634",
+    "adf8c503-395e-443e-ae31-d85b432deaaa",
+    "611eae36-42eb-4bf2-a4ce-10a18298d8a6",
+    "68574f8e-79f4-4ed2-a92a-b799a60261f3",
+    "7a43c71d-326c-425e-aa16-1a036b282ed5",
+    "e57a1167-9cb5-4584-a364-3acd28b23d29"
+  ],
+  "textures": [
+    {
+      "path": "",
+      "name": "copper.png",
+      "folder": "block/pieces/familiars/equipment/snake_ring",
+      "namespace": "herbalwitch",
+      "id": "copper",
+      "group": "",
+      "width": 32,
+      "height": 32,
+      "uv_width": 16,
+      "uv_height": 16,
+      "particle": true,
+      "use_as_default": false,
+      "layers_enabled": false,
+      "sync_to_project": "",
+      "render_mode": "default",
+      "render_sides": "auto",
+      "pbr_channel": "color",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "frame_interpolate": false,
+      "visible": true,
+      "internal": true,
+      "saved": true,
+      "uuid": "f131fea3-8d26-423d-a94f-85d9759d745e",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAgUlEQVR42u3TKxaCABBG4dkQClp5SVVBqgi4IxChykP2OZzpU+dQ/vClmy/9nj6L5uqorDstVczim3kq605jEbBobweVdad/fWHRP04q607TK2TxuR9V1p3Wd8JiyM8q605zGbHoUldl3QkbYkNsiA2xITbEhtgQG2JDbIgN995wAwAaaLl0Aa79AAAAAElFTkSuQmCC"
+    },
+    {
+      "path": "",
+      "name": "gold.png",
+      "folder": "block/pieces/familiars/equipment/snake_ring",
+      "namespace": "herbalwitch",
+      "id": "gold",
+      "group": "",
+      "width": 32,
+      "height": 32,
+      "uv_width": 16,
+      "uv_height": 16,
+      "particle": true,
+      "use_as_default": false,
+      "layers_enabled": false,
+      "sync_to_project": "",
+      "render_mode": "default",
+      "render_sides": "auto",
+      "pbr_channel": "color",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "frame_interpolate": false,
+      "visible": true,
+      "internal": true,
+      "saved": true,
+      "uuid": "e4127c3d-79dd-4633-a818-2dcca02cc1a4",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAgklEQVR42u3TORaCAAxF0SwIBW2ZZF0qSCsC7gNEaGWQnYWTPm0OzS9u9epHv6fPork6KutOSxWz+GaeyrrTWAQs2ttBZd3pX19Y9I+TyrrT9ApZfO5HlXWn9Z2wGPKzyrrTXEYsutRVWXfChtgQG2JDbIgNsSE2xIbYEBtiw7033ABX5pTIURg65gAAAABJRU5ErkJggg=="
+    },
+    {
+      "path": "",
+      "name": "amethyst.png",
+      "folder": "block/pieces/familiars/equipment/snake_ring",
+      "namespace": "herbalwitch",
+      "id": "amethyst",
+      "group": "",
+      "width": 32,
+      "height": 32,
+      "uv_width": 16,
+      "uv_height": 16,
+      "particle": true,
+      "use_as_default": false,
+      "layers_enabled": false,
+      "sync_to_project": "",
+      "render_mode": "default",
+      "render_sides": "auto",
+      "pbr_channel": "color",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "frame_interpolate": false,
+      "visible": true,
+      "internal": true,
+      "saved": true,
+      "uuid": "4770256d-9269-450a-a101-c0120fbf6aa4",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAATklEQVR42u3TRwGAQAADwRiju+FoNmiH5CAjn32MhNHcnE7SNrxOUmkvJ2kfq5O0dLeTdEyfk7T2j5NEQxrSkIY0pCENaUhDGtKQhumGP8OP37l6FhmDAAAAAElFTkSuQmCC"
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        2.5,
+        0
+      ],
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        2.5,
+        0
+      ],
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        225,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    },
+    "ground": {
+      "translation": [
+        0,
+        3,
+        0
+      ],
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    "gui": {
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "scale": [
+        0.625,
+        0.625,
+        0.625
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ]
+    },
+    "fixed": {
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    }
+  }
+}

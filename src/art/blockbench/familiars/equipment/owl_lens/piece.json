@@ -1,0 +1,34 @@
+{
+  "project": "owl_lens.bbmodel",
+  "textures": {
+    "gold": "herbalwitch:block/pieces/familiars/equipment/owl_lens/gold",
+    "glass": "herbalwitch:block/pieces/familiars/equipment/owl_lens/glass",
+    "strap": "herbalwitch:block/pieces/familiars/equipment/owl_lens/strap",
+    "amethyst": "herbalwitch:block/pieces/familiars/equipment/owl_lens/amethyst",
+    "particle": "herbalwitch:block/pieces/familiars/equipment/owl_lens/gold"
+  },
+  "owned_textures": {
+    "gold": "herbalwitch:block/pieces/familiars/equipment/owl_lens/gold",
+    "glass": "herbalwitch:block/pieces/familiars/equipment/owl_lens/glass",
+    "strap": "herbalwitch:block/pieces/familiars/equipment/owl_lens/strap",
+    "amethyst": "herbalwitch:block/pieces/familiars/equipment/owl_lens/amethyst"
+  },
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      16,
+      16,
+      16
+    ]
+  },
+  "outputs": [
+    {
+      "model": "block/familiars/equipment/owl_lens/base",
+      "item": true
+    }
+  ]
+}

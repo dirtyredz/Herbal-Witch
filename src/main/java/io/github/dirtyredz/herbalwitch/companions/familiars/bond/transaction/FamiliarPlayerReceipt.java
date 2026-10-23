@@ -16,25 +16,44 @@ public final class FamiliarPlayerReceipt {
     private FamiliarPlayerReceipt() {}
     public static boolean pending(ServerPlayer player) { return player.getPersistentData().getCompound(KEY).getBoolean("pending"); }
     public static boolean begin(ServerPlayer player, FamiliarStore store, UUID bond) {
+        return begin(player, store, bond, net.minecraft.world.item.ItemStack.EMPTY);
+    }
+    /** The menu cursor is absent from vanilla player saves, so pending equipment transfers retain it explicitly. */
+    public static boolean begin(ServerPlayer player, FamiliarStore store, UUID bond, net.minecraft.world.item.ItemStack cursor) {
         if (pending(player)) return false;
         var r = store.record(bond).orElseThrow();
         long previous = player.getPersistentData().getCompound(KEY).getLong("sequence");
         if (previous < 0 || previous == Long.MAX_VALUE) return false;
         CompoundTag marker = new CompoundTag(); marker.putInt("schema", 1); marker.putLong("sequence", previous + 1);
         marker.putUUID("bond", bond); marker.putUUID("transaction", r.transaction()); marker.putBoolean("pending", true);
+        var before = new CompoundTag(); before.put("equipment", r.state().getCompound("equipment")); before.put("cargo", r.state().getCompound("cargo"));
+        marker.put("inventoryBefore", before);
+        if (!cursor.isEmpty()) marker.put("cursor", cursor.save(new CompoundTag()));
         if (!store.update(r.change(s -> s.put("receipt", marker.copy())), true)) return false;
         player.getPersistentData().put(KEY, marker);
         return save(player, marker);
+    }
+    public static boolean cursor(ServerPlayer player, FamiliarStore store, UUID bond, net.minecraft.world.item.ItemStack cursor) {
+        var record = store.record(bond).orElseThrow(); var old = player.getPersistentData().getCompound(KEY);
+        if (!old.getBoolean("pending") || !old.hasUUID("bond") || !old.getUUID("bond").equals(bond)
+                || !old.equals(record.state().getCompound("receipt"))) return false;
+        var next = old.copy(); next.remove("cursor");
+        if (!cursor.isEmpty()) next.put("cursor", cursor.save(new CompoundTag()));
+        next.putLong("step", Math.addExact(old.getLong("step"), 1));
+        if (!store.update(record.change(s -> s.put("receipt", next.copy())), true)) return false;
+        player.getPersistentData().put(KEY, next);
+        return save(player, next);
     }
     /** Called after the paid change and practice. Both sides remain disabled until verified. */
     public static boolean complete(ServerPlayer player, FamiliarStore store, UUID bond, boolean compactPayload) {
         var r = store.record(bond).orElseThrow();
         CompoundTag marker = player.getPersistentData().getCompound(KEY);
-        if (!marker.getBoolean("pending") || !marker.hasUUID("bond") || !marker.getUUID("bond").equals(bond)
+        if (marker.contains("cursor") || !marker.getBoolean("pending") || !marker.hasUUID("bond") || !marker.getUUID("bond").equals(bond)
                 || !marker.equals(r.state().getCompound("receipt"))) return false;
-        marker = marker.copy(); marker.putBoolean("pending", false); player.getPersistentData().put(KEY, marker);
+        marker = marker.copy(); marker.putBoolean("pending", false); marker.remove("inventoryBefore"); player.getPersistentData().put(KEY, marker);
         if (!save(player, marker)) return false;
-        var next = r.change(s -> s.remove("receipt"));
+        final CompoundTag settled = marker.copy();
+        var next = r.change(s -> { s.remove("receipt"); s.put("settledReceipt", settled); });
         if (compactPayload) next = next.transition(next.phase(), next.generation(), next.transaction(), new CompoundTag());
         return store.update(next, true);
     }

@@ -5,19 +5,28 @@ import java.util.*;
 /** Independent M9 inventory; never computed from production catalogues. */
 public final class FamiliarManifest {
     public static final List<String> SPECIES = List.of("cat", "raven", "owl", "fox", "wolf", "snake", "rabbit", "bat");
+    public static final List<String> EQUIPMENT = List.of("cat_bell", "raven_satchel", "owl_lens", "fox_pouch", "wolf_harness", "snake_ring", "rabbit_sachet", "bat_chime");
     private FamiliarManifest() {}
     public static Set<String> files() {
         Set<String> out = new TreeSet<>();
+        for (String species : SPECIES) out.add("data/herbalwitch/tags/items/familiars/equipment/" + species + ".json");
+        out.add("data/herbalwitch/tags/items/familiars/charms.json");
         for (String key : List.of("bed", "nest", "perch")) {
             String path = "familiars/home/" + key + ".json";
             out.add("assets/herbalwitch/blockstates/" + path); out.add("assets/herbalwitch/models/item/" + path);
             out.add("data/herbalwitch/loot_tables/blocks/" + path); out.add("data/herbalwitch/recipes/" + path);
             out.add("data/herbalwitch/advancements/recipes/decorations/" + path);
         }
+        for (String gear : EQUIPMENT) {
+            out.add("assets/herbalwitch/models/item/familiars/equipment/" + gear + ".json");
+            out.add("data/herbalwitch/recipes/processing/charm_work/familiars/equipment/" + gear + ".json");
+        }
         return out;
     }
     public static Map<String, String> lang() {
         Map<String, String> out = new LinkedHashMap<>();
+        for (String gear : EQUIPMENT) out.put("item.herbalwitch.familiars.equipment." + gear, null);
+        for (String key : List.of("collect_cargo", "equipment_hint", "charm_slot", "gear_slot", "cargo_empty", "inventory_full", "cargo_collected")) out.put("familiar.herbalwitch." + key, null);
         for (String key : List.of("bed", "nest", "perch")) out.put("block.herbalwitch.familiars.home." + key, null);
         out.put("showcase.herbalwitch.section.familiar_homes", null); out.put("showcase.herbalwitch.label.familiar_home", null);
         for (String key : List.of("choose_home", "assign_home", "home_assigned", "home_incompatible", "home_occupied")) out.put("familiar.herbalwitch." + key, null);

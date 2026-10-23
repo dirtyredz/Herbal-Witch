@@ -1,0 +1,31 @@
+{
+  "type": "herbalwitch:processing/charm_work",
+  "duration": 200,
+  "ingredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:leather"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "minecraft:string"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:iron_ingot"
+      }
+    }
+  ],
+  "requirements": {
+    "energy": 5,
+    "witch": true
+  },
+  "result": {
+    "item": "herbalwitch:familiars/equipment/wolf_harness"
+  }
+}

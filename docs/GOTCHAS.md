@@ -362,3 +362,6 @@ Discovery forms resolve lazily after registration, in seeds/fresh/bundle/powder 
   equals a group name (`furniture`, `witchcraft`).
 - **A copied ward record id is inert.** Breaking a stone retires its record in `WardSavedData`, so a
   copy of the stone's data (or an item carrying a stale id) never revives a ward.
+
+- Ground paths cannot finish in the air above a partial home. Return Home chooses checked adjacent floor within the rest radius; home identity and rest centre stay unchanged.
+- A menu cursor is absent from ordinary player NBT. Familiar equipment receipts retain it until settlement; unresolved transfers never automatically replay or refund.
