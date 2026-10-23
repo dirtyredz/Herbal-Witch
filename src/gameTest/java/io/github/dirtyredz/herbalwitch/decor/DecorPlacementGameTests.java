@@ -188,7 +188,11 @@ public final class DecorPlacementGameTests {
         for (int i = 0; i < row.size(); i++) {
             check(helper.getBlockState(row.get(i)).is(Block.byItem(items.get(i))), "piece " + i + " disturbed");
         }
-        check(droppedAny(helper) == 0, "something dropped");
+        // Count only this test's pieces: concurrent batches may leave unrelated loose items near the area.
+        for (Item item : List.of(DecorItems.item(SeatingCatalog.ARMCHAIR), DecorItems.item(SurfacesCatalog.APOTHECARY_COUNTER),
+                DecorItems.item(TextilesCatalog.SMALL_RUG), DecorItems.item(StorageCatalog.SMALL_WALL_SHELF), DecorItems.item(LightingCatalog.TABLE_LAMP))) {
+            check(dropped(helper, item) == 0, "something dropped: " + item);
+        }
         helper.succeed();
     }
 
