@@ -656,3 +656,20 @@ the mounted HUD.
 ### Wand transactions
 
 Wand use derives targets from the server eye ray and the actual held stack. Actor-wide attempt and successful-cast gates cover both hands and every wand copy. Local utilities participate in `WitchStatusService.spend`; mutable targets and supplies are revalidated before applying. Harvest drops and collection notifications follow successful commit. Native offhand seed placement retains Forge placement cancellation. Hand and wand herb harvesting share one yield/reset plan; hearth ticking and wand ignition share actual fuel and returned-container accounting. Focus delegates to M7 block/menu access, and familiar mode enters M9 roster/detail menus through its existing command authority. Selecting a mode is a separate bounded request checked against the observed hand, slot and stack.
+
+## Release qualification (M12)
+
+Qualification adds no runtime authority. It lives in test sources (`src/gameTest/.../qualification/`,
+`companions/animals/persistence/`), `gradle/qualification.gradle` and `tools/qualification/`, and none of
+it reaches the release jar. Two runtime rules changed with it:
+
+- **Capture admission** (`CaptureReconciliation.join`): the ledger distinguishes *write-locked* (a failed
+  write: records still known and authoritative for joins) from *unreadable* (load failed: only
+  transported incarnations, generation above zero, are refused). A refused join is permanent removal,
+  so ordinary animals are never refused for a ledger problem.
+- **Bounded familiar scans** (`FamiliarQueries.entities`) take a relevance predicate applied before the
+  32-entity bound, so guards, scouts and senses see the entities they can act on.
+
+Reload and persistence semantics are unchanged: server configs install whole on the server thread;
+recipe reloads re-match jobs (changed recipes cancel, items stay); unknown persisted schemas are
+preserved and unavailable. See docs/qualification/README.md for the harnesses that prove them.

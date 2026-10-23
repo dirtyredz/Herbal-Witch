@@ -233,7 +233,8 @@ Discovery forms resolve lazily after registration, in seeds/fresh/bundle/powder 
 - **Water purity rides only through an installed carrier.** Without Thirst Was Taken the tea has no
   purity tag; with it, the water's `Purity` int is copied unchanged (never upgraded by heating).
 - **Compat runtime profiles need SRG refmap remapping** for the local FD/Thirst jars; build.gradle
-  sets it only when `-PcompatProfile` uses them. Their mixin warnings about absent mods are harmless.
+  sets it for every profile that puts optional jars on the runtime (Curios alone included since M12;
+  without it Curios's accessor mixin fails at launch). Their mixin warnings about absent mods are harmless.
 - **Never name a source directory `build/`, `run/`, `out/` or `bin/`.** The shared `.gitignore` ignores
   them anywhere in the tree, so the files are silently left out of commits (a standalone clone build
   caught `showcase/build/`, now `showcase/construction/`).

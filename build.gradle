@@ -24,6 +24,8 @@ if (!(compatProfile in ['base', 'emi', 'jei', 'viewers', 'farmersdelight', 'thir
     throw new GradleException("Unknown compatProfile '${compatProfile}'")
 }
 def needsLocalMods = compatProfile in ['farmersdelight', 'thirst', 'doggy', 'all']
+// Every optional mod jar on the dev runtime ships SRG mixin refmaps (Curios too, alone or in 'all').
+def remapRefmaps = needsLocalMods || compatProfile == 'curios'
 def compatModsDir = project.findProperty('compatModsDir')?.toString()
 if (needsLocalMods && !compatModsDir) {
     throw new GradleException("compatProfile '${compatProfile}' needs -PcompatModsDir=<folder holding its optional runtime jars>")
@@ -59,8 +61,8 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'info'
-            if (needsLocalMods) {
-                // The local mod jars ship SRG refmaps; remap them for the dev environment.
+            if (remapRefmaps) {
+                // The optional mod jars ship SRG refmaps; remap them for the dev environment.
                 property 'mixin.env.remapRefMap', 'true'
                 property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             }

@@ -202,11 +202,9 @@ No new gameplay: the same blocks, items, states and textures, authored different
 
 ## Planned
 
-| Milestone | Scope |
-|---|---|
-| 8 | Ordinary-animal candidate implemented; ANU lifecycle/restart qualification and owner review pending |
-
-| 12 | Complete-release qualification |
+Nothing is planned beyond the release candidate (M12, below): owner acceptance, publishing and pack
+integration are the owner's decisions (docs/qualification/release-readiness.md). M8 capture restart
+qualification, open since 0.7.0, passed in M12 (captureRestartTest).
 
 Not planned: publishing, pack integration or a release before the owner decides.
 
