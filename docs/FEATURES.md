@@ -16,7 +16,7 @@ Local fast-gate evidence: 335 existing + 31 added JUnit tests; 75 existing + 4 a
 are delegated to the orchestrator after the committed handoff; no client was launched. Owner checks
 remain for all four panel hosts, changed-rule recipe text, drinks/oils, wards and two-client private
 updates. Headless preview review and all 2,693 baseline resource/art hashes are recorded locally.
-M9 gameplay is implemented; the final acceptance table below supersedes the historical phase status. Version promotion waits for the remaining server qualification. M8 ordinary-animal history follows.
+M9 gameplay is implemented; the final acceptance table below supersedes the historical phase status. Private 0.8.0 passed headless acceptance. M8 ordinary-animal history follows.
 M8 adds six baits, personal loaded-time care state, existing-salve targeting, temporary goal-based
 calming, reused M7 sleep, earned native taming/keepers, a private grimoire card, verified capture
 checkpoints/reconciliation/recovery and sixteen showcase habitats. Exact boundaries and defaults:
@@ -205,7 +205,7 @@ No new gameplay: the same blocks, items, states and textures, authored different
 | Milestone | Scope |
 |---|---|
 | 8 | Ordinary-animal candidate implemented; ANU lifecycle/restart qualification and owner review pending |
-| 9 | Multiple familiars: binding, roster, seven commands, homes, equipment, abilities, familiar brews, revival; familiar powers charge the owner's energy through `WitchStatusService` |
+
 | 10 | Broom and wand |
 | 11 | Apothecary commerce: register, counters, stock, offers, proceeds, history, order board |
 | 12 | Complete-release qualification |
@@ -214,7 +214,7 @@ Not planned: publishing, pack integration or a release before the owner decides.
 
 ### M9: multiple familiars — final qualification
 
-All gameplay phases are implemented. The private version remains 0.6.1 until final acceptance;
+All gameplay phases and headless acceptance are complete in private 0.8.0;
 owner visual, shader, reload and two-client checks remain pending independently.
 
 | Area | Automated coverage |
@@ -230,7 +230,21 @@ owner visual, shader, reload and two-client checks remain pending independently.
 | Acquisition, grimoire and showcase | Daytime spawn rules, creative eggs, feature-owned root plus eight guide pages, nine inert appearances and complete labelled supply barrels |
 | Art | 1,100 generated files unchanged by repeat datagen; 86 Node tests; owned Blockbench gear/eggs/homes and raven/crow/owl/snake rigs; 19 new-species and 20 native equipped poses visually reviewed |
 
-Final base and optional-profile results are being qualified. The restart runner is isolated from
+Base and optional-profile results passed (evidence below). The restart runner is isolated from
 normal build/check and uses checkpoint replay rather than random process termination. See
 [restart procedure](../tools/familiars/restart/README.md) and [familiar reference](catalogue/familiars.md).
 Phase commits, failed runs and corrections are recorded in Docket `dk-5b3234c4`.
+M9 acceptance runs (ANU logs live under G:/mods-ci/logs/<job>.log):
+
+| Check | Commit / job | Result |
+|---|---|---|
+| Base, test runGameTestServer | ef20d02 / HerbalWitch-ef20d0279dc31c6fabdcfa34-20261023-060516-ea8 | 460 JUnit and 285 required GameTests passed |
+| EMI | 2237de0 / HerbalWitch-2237de0e20833d758241c5fd-20261023-055428-ccd | 285 passed |
+| JEI | 2237de0 / HerbalWitch-2237de0e20833d758241c5fd-20261023-060113-41c | 285 passed |
+| Combined viewers, Curios, Farmer's Delight, Thirst | 2237de0 / HerbalWitch-2237de0e20833d758241c5fd-20261023-060136-92c | 285 passed |
+| Doggy Talents Next | 2237de0 / HerbalWitch-2237de0e20833d758241c5fd-20261023-060146-4e1 | 286 passed |
+| Separate-process restart | 9f3627b / HerbalWitch-9f3627badbc6a2751684cbde-20261023-055219-9f9 | 76 checkpoints; JVMs 14588 and 6480; passed |
+
+Local offline runData/test/build/compileGameTestJava passed; 460 Java tests and 86 Node tests, datagen wrote zero of 1,100 existing generated files. Workspace sync passed four mods; release-jar exclusions and Docket checks passed. The last fixture correction removes neighboring dropped items before showcase setup: the diagnostic had reported 'operator fixture preflight: Oak Sign is in the way at 500 -59 5'. Runtime showcase occupancy checks were correct and remain unchanged. Earlier failures and fixes remain in the Docket phase history.
+
+Owner checks still pending: species silhouettes and animation, equipped/rest poses, UI and private synchronization with two clients, shaders and F3+T. No client, Blockbench, pack installation or public release was performed. There is no available protection-mod adapter; unsupported-claim refusal and UUID-aware permission seams are tested instead.

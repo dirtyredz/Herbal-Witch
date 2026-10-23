@@ -133,5 +133,7 @@ EMI 1.1.24+1.20.1, JEI 15.62.0.219, Curios 5.14.1+1.20.1, Farmer's Delight 1.3.4
 With a local folder, Curios resolves that supplied jar, allowing fully offline CI qualification.
 No protection adapter is installed; automated UUID-aware checks and recognized unsupported-claim
 refusal remain conservative. Viewer UI, Curios UI, shaders and two-client interaction are owner checks.
-Final profile job IDs will be recorded with the M9 acceptance table.
+Green ANU runs at `2237de0`: EMI-only `HerbalWitch-2237de0e20833d758241c5fd-20261023-055428-ccd`, JEI-only `HerbalWitch-2237de0e20833d758241c5fd-20261023-060113-41c`, combined all profile `HerbalWitch-2237de0e20833d758241c5fd-20261023-060136-92c`: 285 required server tests each. The combined profile also qualifies both viewers together, Curios, Farmer's Delight and Thirst. Inputs came from existing local caches/instances; no internet download was used.
 The separate doggy profile loads the supplied Doggy Talents Next 1.19.1 jar and runs a real registered dog through binding/capture refusal, asserting unchanged health, item, energy and both authorities. It is intentionally separate from the ordinary all profile.
+
+Doggy Talents Next passed all 286 required tests at 2237de0: ANU HerbalWitch-2237de0e20833d758241c5fd-20261023-060146-4e1 (107 seconds).
