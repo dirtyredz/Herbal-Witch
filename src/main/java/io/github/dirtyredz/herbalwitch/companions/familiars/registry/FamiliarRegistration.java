@@ -22,6 +22,8 @@ public final class FamiliarRegistration {
     public static void register(IEventBus bus) {
         FamiliarHomes.register(bus);
         FamiliarItems.register(bus);
+        io.github.dirtyredz.herbalwitch.apothecary.brewing.application.FamiliarPreparationApplications.install(io.github.dirtyredz.herbalwitch.companions.familiars.preparation.FamiliarPreparationConsumer::apply);
+        io.github.dirtyredz.herbalwitch.platform.permission.entity.EntityActionPermission.register(io.github.dirtyredz.herbalwitch.companions.familiars.preparation.FamiliarPoison::permission);
         io.github.dirtyredz.herbalwitch.companions.animals.care.interaction.AnimalCareContributions.register(new io.github.dirtyredz.herbalwitch.companions.familiars.interaction.FamiliarCareContribution());
         io.github.dirtyredz.herbalwitch.companions.familiars.equipment.FamiliarCharmAdapter.install();
         io.github.dirtyredz.herbalwitch.companions.familiars.config.FamiliarServerConfig.register(bus);
@@ -55,6 +57,9 @@ public final class FamiliarRegistration {
         AltarSessionService.handle(FamiliarActionCatalog.REVIVAL, new io.github.dirtyredz.herbalwitch.companions.familiars.ritual.RevivalAction());
         bus.addListener(FamiliarLifecycleEvents::capabilities);
         var forge = MinecraftForge.EVENT_BUS;
+        forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.preparation.FamiliarBuffEvents::tick);
+        forge.addListener(EventPriority.LOW, io.github.dirtyredz.herbalwitch.companions.familiars.preparation.FamiliarBuffEvents::damage);
+        forge.addListener(EventPriority.LOWEST, io.github.dirtyredz.herbalwitch.companions.familiars.preparation.FamiliarPoison::damage);
         forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.bond.FamiliarBondProgress::tick);
         forge.addListener(EventPriority.LOWEST, io.github.dirtyredz.herbalwitch.companions.familiars.recovery.FamiliarIncapacitation::damage);
         forge.addListener(io.github.dirtyredz.herbalwitch.companions.familiars.admin.FamiliarRecoveryCommand::register);

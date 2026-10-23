@@ -35,7 +35,8 @@ public final class FamiliarRevival {
         if (destination.isEmpty() || !store.begin(owner.server.getTickCount())) return false;
         Mob[] candidate = {null}; boolean[] success = {false}; var backup = offering.backup(owner);
         try {
-            var prepared = original.transition(FamiliarRecord.Phase.REVIVAL_PREPARED, Math.addExact(original.generation(), 1), UUID.randomUUID(), original.payload());
+            var prepared = original.transition(FamiliarRecord.Phase.REVIVAL_PREPARED, Math.addExact(original.generation(), 1), UUID.randomUUID(), original.payload())
+                    .change(s -> { s.remove("buffs"); s.remove("poisonCoating"); });
             if (!store.update(prepared, true) || !FamiliarPlayerReceipt.begin(owner, store, bond)) return false;
             boolean paid = WitchStatusService.spend(owner, 5000, new WitchStatusService.Change() {
                 @Override public boolean prepare() { if (!offering.intact(owner)) return false; offering.consume(owner); return true; }

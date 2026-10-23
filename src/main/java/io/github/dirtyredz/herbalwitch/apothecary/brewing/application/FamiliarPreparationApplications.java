@@ -9,8 +9,7 @@ import net.minecraft.world.item.ItemStack;
 /**
  * The seam where familiar bonding (Milestone 9) will give the familiar preparations their effect,
  * keyed by the permanent product, without changing a recipe and without a second bond store here.
- * Until a consumer is installed every use is refused as {@link Result#UNAVAILABLE} and nothing is
- * consumed; the item says "Familiar application becomes available with familiar bonding".
+ * Without a consumer every use is refused as {@link Result#UNAVAILABLE} and nothing is consumed.
  */
 public final class FamiliarPreparationApplications {
     /** What a familiar application did. */

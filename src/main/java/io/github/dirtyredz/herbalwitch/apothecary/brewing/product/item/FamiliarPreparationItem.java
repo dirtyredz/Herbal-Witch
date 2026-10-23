@@ -22,9 +22,8 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 
 /**
- * A familiar preparation. It is made now; it is given to a bonded familiar once familiar bonding
- * exists (Milestone 9 installs {@link FamiliarPreparationApplications}). Until then every use is
- * refused with "Familiar application becomes available with familiar bonding" and nothing is consumed.
+ * A familiar preparation. The installed consumer validates and applies the target effect;
+ * this item alone consumes the dose and returns its bottle after a successful application.
  */
 public class FamiliarPreparationItem extends Item {
     public static final String UNAVAILABLE = "item." + HerbalWitch.MOD_ID + ".preparations.familiar.unavailable";

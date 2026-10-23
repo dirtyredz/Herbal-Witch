@@ -421,3 +421,5 @@ M9 additions: `companions/familiars/equipment/` owns canonical slots/cargo and t
 Recovery lives in `companions/familiars/recovery/`: lethal damage checkpointing, paid revival and retained-payload administrative resolution. `companions/familiars/admin/` owns its level-two command adapter; `ritual/RevivalAction` owns the circle session. Real lifecycle tests live in `src/gameTest/.../companions/familiars/recovery/`.
 
 Bond progression and durable named upgrades live in `companions/familiars/bond/`; `interaction/FamiliarCareContribution` observes the animal module's neutral `AnimalCareContributions` seam. The shared `ritual/FamiliarUpgradeAction` serves Heartwood, Spirit Well and Harmony. No familiar implementation is imported by animal care.
+
+`companions/familiars/preparation/` owns canonical buff rules, application validation, runtime projections, damage/Shadowstep events and familiar poison policy. M7 keeps the shared item/container, concealment, poison application and delayed harm-attribution implementations.

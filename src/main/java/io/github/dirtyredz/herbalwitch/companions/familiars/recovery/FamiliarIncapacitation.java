@@ -25,7 +25,7 @@ public final class FamiliarIncapacitation {
             store.update(record.quarantine(), true); FamiliarReconciliation.hold(mob); return;
         }
         var prepared = record.transition(FamiliarRecord.Phase.INCAPACITATION_PREPARED, record.generation(), UUID.randomUUID(), payload.get())
-                .change(s -> { s.remove("buffs"); s.remove("mobileOrder"); s.putString("command", "stay"); s.putFloat("health", 0); });
+                .change(s -> { s.remove("buffs"); s.remove("poisonCoating"); s.remove("mobileOrder"); s.putString("command", "stay"); s.putFloat("health", 0); });
         if (!store.update(prepared, true)) { FamiliarReconciliation.hold(mob); return; }
         mob.getNavigation().stop(); mob.setTarget(null); mob.discard();
         var incapacitated = prepared.transition(FamiliarRecord.Phase.INCAPACITATED, Math.addExact(prepared.generation(), 1), prepared.transaction(), prepared.payload());

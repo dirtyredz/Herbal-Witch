@@ -37,7 +37,7 @@ public final class AdvancedTranslations {
         lang.add(PreparationMetadata.LABEL_KEY, "Labelled: %s");
         lang.add(HerbalOilItem.NO_WEAPON, "Hold a sword or axe in your off hand to coat it.");
         lang.add(ThrowablePreparationItem.LIMIT, "Too many of your preparations are in flight.");
-        lang.add(FamiliarPreparationItem.UNAVAILABLE, "Familiar application becomes available with familiar bonding");
+        lang.add(FamiliarPreparationItem.UNAVAILABLE, "Use on your nearby bonded familiar; wait before refreshing the same preparation");
         lang.add(AdvancedPreparationShowcaseSection.TITLE, "Witch's Preparations");
         Map<String, String[]> barrels = Map.of(
                 "player", new String[] {"Preparations", "Draughts, vials, oils"},

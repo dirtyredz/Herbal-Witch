@@ -44,6 +44,16 @@ public class HerbalOilItem extends Item {
     public OilApplication.Oil oil() {
         return oil;
     }
+    @Override public net.minecraft.world.InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
+        if (oil != OilApplication.Oil.VENOM) return super.interactLivingEntity(stack, player, target, hand);
+        if (!(player instanceof net.minecraft.server.level.ServerPlayer owner)) return net.minecraft.world.InteractionResult.sidedSuccess(true);
+        var result = io.github.dirtyredz.herbalwitch.apothecary.brewing.application.FamiliarPreparationApplications.apply(owner,
+                io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.AdvancedProductCatalog.VENOM_OIL, stack, target, hand);
+        if (result != io.github.dirtyredz.herbalwitch.apothecary.brewing.application.FamiliarPreparationApplications.Result.APPLIED)
+            return net.minecraft.world.InteractionResult.FAIL;
+        owner.setItemInHand(hand, ContainerReturns.finish(stack, owner, new ItemStack(Items.GLASS_BOTTLE)));
+        return net.minecraft.world.InteractionResult.CONSUME;
+    }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {

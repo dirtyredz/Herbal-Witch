@@ -50,11 +50,18 @@ public final class CombatEvents {
         if (WeaponCoating.read(weapon, now).isEmpty() || !EntityActionPermission.mayHarm(attacker, victim)) {
             return;
         }
-        victim.addEffect(new MobEffectInstance(MobEffects.POISON, VENOM_TICKS, 0), attacker);
-        if (victim instanceof Player) {
-            HarmAttribution.record(victim, attacker.getUUID(), VENOM_TICKS);
-        }
+        applyVenom(attacker, victim, attacker.getUUID(), io.github.dirtyredz.herbalwitch.platform.permission.entity.EntityActionContext.Action.HARM);
         WeaponCoating.spend(weapon);
+    }
+    /** Common poison delivery; action-specific callers preserve owner attribution for every delayed tick. */
+    public static boolean applyVenom(LivingEntity attacker, LivingEntity victim, java.util.UUID principal,
+            io.github.dirtyredz.herbalwitch.platform.permission.entity.EntityActionContext.Action action) {
+        if (!(victim.level() instanceof net.minecraft.server.level.ServerLevel level)
+                || !EntityActionPermission.checkByPrincipal(action, level, principal, victim).allowed()) return false;
+        boolean applied = victim.addEffect(new MobEffectInstance(MobEffects.POISON, VENOM_TICKS, 0), attacker);
+        if (applied && (victim instanceof Player || action != io.github.dirtyredz.herbalwitch.platform.permission.entity.EntityActionContext.Action.HARM))
+            HarmAttribution.record(victim, principal, VENOM_TICKS, action);
+        return applied;
     }
 
     private static void thorns(LivingEntity defender, LivingEntity attacker) {

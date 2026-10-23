@@ -160,7 +160,7 @@ public final class AdvancedPreparationGameTests {
         ItemStack tonic = new ItemStack(AdvancedPreparations.item(FamiliarPreparationCatalog.GUARDIAN));
         keeper.setItemInHand(InteractionHand.MAIN_HAND, tonic);
         Cow cow = helper.spawn(EntityType.COW, new BlockPos(4, 1, 4));
-        check(!FamiliarPreparationApplications.available(), "a familiar consumer is installed before familiars exist");
+        check(FamiliarPreparationApplications.available(), "the familiar consumer is not installed");
         InteractionResult result = tonic.getItem().interactLivingEntity(tonic, keeper, cow, InteractionHand.MAIN_HAND);
         check(result == InteractionResult.FAIL && keeper.getMainHandItem().getCount() == 1, "the tonic was used up: " + result);
         helper.succeed();

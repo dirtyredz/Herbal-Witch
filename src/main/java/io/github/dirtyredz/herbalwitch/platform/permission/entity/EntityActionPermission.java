@@ -70,6 +70,11 @@ public final class EntityActionPermission {
         if (!baseline.allowed()) return baseline;
         return policies(action, actor == null ? null : actor.getUUID(), target);
     }
+    /** Delayed/automated effects keep their original action purpose when their actor is offline. */
+    public static Denial checkByPrincipal(EntityActionContext.Action action, ServerLevel level, UUID actor, LivingEntity target) {
+        var baseline = checkHarmByPrincipal(level, actor, target);
+        return baseline.allowed() ? policies(action, actor, target) : baseline;
+    }
 
     private static Denial policies(EntityActionContext.Action action, UUID actor, LivingEntity target) {
         for (Policy policy : POLICIES) {

@@ -828,7 +828,7 @@
   "item.herbalwitch.preparations.familiar.tonics.spiritbond.tooltip": "For a bonded familiar: a deeper bond",
   "item.herbalwitch.preparations.familiar.tonics.swiftpaw": "Swiftpaw Tonic",
   "item.herbalwitch.preparations.familiar.tonics.swiftpaw.tooltip": "For a bonded familiar: quick on its feet",
-  "item.herbalwitch.preparations.familiar.unavailable": "Familiar application becomes available with familiar bonding",
+  "item.herbalwitch.preparations.familiar.unavailable": "Use on your nearby bonded familiar; wait before refreshing the same preparation",
   "item.herbalwitch.preparations.garden.fertilizer": "Garden Fertilizer",
   "item.herbalwitch.preparations.garden.fertilizer.tooltip": "Bone meal for one crop",
   "item.herbalwitch.preparations.garden.flower_dust": "Flower Growth Dust",

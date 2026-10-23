@@ -16,6 +16,7 @@ public final class FamiliarSpeciesAdapters {
         var species = FamiliarCatalog.type(EntityType.getKey(mob.getType()).toString()).orElse(null);
         if (species == null) return Optional.empty();
         var tag = new CompoundTag(); mob.saveWithoutId(tag); tag.putString("id", EntityType.getKey(mob.getType()).toString());
+        io.github.dirtyredz.herbalwitch.companions.familiars.preparation.FamiliarBuffEffects.stripProjected(mob, tag);
         var validation = tag.copy();
         var caps = validation.getCompound("ForgeCaps");
         if (caps.contains(FamiliarBinding.ID.toString())) {
@@ -41,6 +42,7 @@ public final class FamiliarSpeciesAdapters {
         candidate.goalSelector.removeAllGoals(goal -> true); candidate.targetSelector.removeAllGoals(goal -> true);
         if (candidate instanceof TamableAnimal pet) { pet.setOrderedToSit(false); pet.setInSittingPose(false); }
         io.github.dirtyredz.herbalwitch.companions.familiars.bond.FamiliarBondProgress.project(candidate, r);
+        io.github.dirtyredz.herbalwitch.companions.familiars.preparation.FamiliarBuffEffects.project(candidate, r);
         // Transient bond modifiers are absent from vanilla attribute NBT; restore health after projection.
         candidate.setHealth(payload.getFloat("Health"));
         return candidate;

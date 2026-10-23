@@ -25,12 +25,16 @@ public final class HarmAttribution {
 
     /** Records that {@code actor} applied a delayed harmful effect lasting {@code ticks}. */
     public static void record(LivingEntity target, UUID actor, int ticks) {
+        record(target, actor, ticks, EntityActionContext.Action.HARM);
+    }
+    public static void record(LivingEntity target, UUID actor, int ticks, EntityActionContext.Action action) {
         if (actor == null) {
             return;
         }
         CompoundTag tag = new CompoundTag();
         tag.putUUID("Actor", actor);
         tag.putLong("Until", target.level().getGameTime() + ticks);
+        if (action != EntityActionContext.Action.HARM) tag.putString("Action", action.name());
         target.getPersistentData().put(KEY, tag);
     }
 
@@ -56,7 +60,11 @@ public final class HarmAttribution {
             return;
         }
         Optional<UUID> actor = actor(target);
-        if (actor.isPresent() && !EntityActionPermission.checkHarmByPrincipal(level, actor.get(), target).allowed()) {
+        EntityActionContext.Action action = EntityActionContext.Action.HARM;
+        var stored = target.getPersistentData().getCompound(KEY);
+        try { if (stored.contains("Action")) action = EntityActionContext.Action.valueOf(stored.getString("Action")); }
+        catch (IllegalArgumentException unknown) { event.setCanceled(true); return; }
+        if (actor.isPresent() && !EntityActionPermission.checkByPrincipal(action, level, actor.get(), target).allowed()) {
             event.setCanceled(true);
             target.removeEffect(MobEffects.POISON);
             target.getPersistentData().remove(KEY);
