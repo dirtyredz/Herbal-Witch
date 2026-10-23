@@ -475,3 +475,5 @@ Optional native-payload compatibility lives in platform/compat/curios/CuriosNati
 - `src/gameTest/.../magic/wand/fixture/`: actual held-item utility fixtures; sibling GameTests cover gardening, collection, lighting and selection.
 
 - `magic/{broom,wand}/{grimoire,showcase}/`: tool-owned live-rule guides and narrow station/practice plots, registered at bootstrap after the established witchcraft sections.
+
+- `src/gameTest/.../magic/tools/restart/`: actual world save/reopen qualification for vehicles, packed preferences and interrupted repair. `gradle/magic-tools-test.gradle` isolates the two dedicated runs; `tools/test/` queues them and validates distinct-process evidence.

@@ -101,7 +101,7 @@ public final class GrimoireContentGameTests {
         // the editorial guides, the three witchcraft pages, the six altar action pages (Milestones 6 and 7), the three
         // advanced preparation pages, wards and charms (Milestone 7), and ordinary animal care (Milestone 8)
         long guides = content.entries().stream().filter(e -> e.key().kind() == EntryKey.Kind.GUIDE).count();
-        check(guides == GuideEntries.ORDER.size() + 3 + 6 + 3 + 2 + 1 + 8, "guides: " + guides);
+        check(guides == GuideEntries.ORDER.size() + 3 + 6 + 3 + 2 + 1 + 8 + 2, "guides: " + guides);
         check(content.entries().stream().anyMatch(e -> e.key().serialized().equals("guide|herbalwitch:animals/care")), "animal care guide missing");
         check(content.entries().stream().filter(e -> e.key().kind() == EntryKey.Kind.HERB).count() == HerbCatalog.ALL.size(), "herbs");
         long stations = content.entries().stream().filter(e -> e.key().kind() == EntryKey.Kind.STATION).count();

@@ -3,7 +3,7 @@ package io.github.dirtyredz.herbalwitch.magic.wand.catalog;
 import java.util.Arrays;
 import java.util.Optional;
 
-/** Permanent serialized selector IDs; enum ordinal is never a wire or save identity. */
+/** Permanent saved selector IDs; bounded enum ordinals are used only by the versioned network protocol. */
 public enum WandMode {
     HARVEST("harvest"), PLANT("plant"), WATER("water"), COLLECT("collect"), LIGHT("light"), FOCUS("focus"), FAMILIAR("familiar");
 

@@ -406,3 +406,5 @@ CI world's bounded shard index; its 600-tick timeout includes that startup work.
 fixture timeout does not change production indexing budgets or power cooldowns.
 
 M10 tool selection is a preference request, never a cast. Compare the observed hand, selected slot and full held stack before writing it. Both hands and wand copies share actor cooldowns. Collection must preserve partial remainders even in creative inventories. Broom maintenance uses `Change.awardsPractice() == false`; paid station and wand operations retain successful practice.
+
+Tool fixtures must aim at the actual outline height of candles and farmland rather than a unit cube center. Drop-producing wand tests use dedicated batches. The restart harness loads actual saved chunks in two JVMs; separate player NBT is replayed only for payer identity. Ordinary Minecraft player/chunk files do not provide power-loss-atomic deployment or packing.

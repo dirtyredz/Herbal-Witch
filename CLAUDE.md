@@ -108,3 +108,5 @@ Before your first item write in a session, run `docket guide` and follow it.
   It is excluded from build/check and must not be run locally. Version promotion requires its green result.
 
 - Native familiar attachment changes also require test (exports the vanilla geometry) followed by node tools/preview-native-familiars.mjs --output <job>/previews/native-poses and sheet inspection.
+
+- M10 restart qualification: ANU-only `magicToolsRestartTest` starts two sequential dedicated JVMs against one disposable world. See `tools/test/README.md`; never run it locally.

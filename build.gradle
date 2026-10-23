@@ -183,3 +183,5 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 apply from: 'gradle/familiars.gradle'
+
+apply from: 'gradle/magic-tools-test.gradle'

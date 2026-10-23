@@ -483,7 +483,7 @@ hundredth between ticks, including when the configured price is zero. Movement m
 horizontal diagonals and bounds acceleration as a vector. The per-mount input lease authenticates
 rider and nonce, rejects replay, accepts at most one update per tick and limits packet attempts.
 It is deliberately absent from persistence. Wand preferences serialize seven stable string IDs.
-Movement collision and interaction adapters remain M10 work.
+Server movement checks loaded swept volumes, world bounds, rider headroom and travel permissions before collision queries. Utility adapters and their shared transactions are described below.
 
 ## Whole-mod module map (plan section 2)
 

@@ -24,7 +24,7 @@ public final class BroomLifecycleGameTests {
   floor(h);var actor=witch(h,"broom_protocol",AT.offset(0,0,-2));var b=broom(h,actor);up(actor,b);
   var server=h.getLevel().getServer();boolean flight=server.isFlightAllowed();var previous=actor.connection;
   try{server.setFlightAllowed(false);var connection=new net.minecraft.network.Connection(net.minecraft.network.protocol.PacketFlow.SERVERBOUND);var listener=new net.minecraft.server.network.ServerGamePacketListenerImpl(server,connection,actor);actor.connection=listener;
-   listener.tick();var before=b.position();var forged=BroomEntities.BROOM.get().create(h.getLevel());forged.moveTo(before.add(100,50,100));listener.handleMoveVehicle(new net.minecraft.network.protocol.game.ServerboundMoveVehiclePacket(forged));check(b.position().equals(before),"vanilla packet moved authoritative entity");
+   listener.tick();var before=b.position();var forged=BroomEntities.BROOM.get().create(h.getLevel());forged.moveTo(before.add(100,50,100));var wire=new net.minecraft.network.FriendlyByteBuf(io.netty.buffer.Unpooled.buffer());try{new net.minecraft.network.protocol.game.ServerboundMoveVehiclePacket(forged).write(wire);listener.handleMoveVehicle(new net.minecraft.network.protocol.game.ServerboundMoveVehiclePacket(wire));}finally{wire.release();}check(b.position().equals(before),"vanilla packet moved authoritative entity");
    for(int i=0;i<90;i++){b.tick();listener.tick();}check(actor.isPassenger()&&!b.isRemoved(),"default flight rules ended valid riding");
   }finally{actor.connection=previous;server.setFlightAllowed(flight);actor.stopRiding();}h.succeed();
  }
