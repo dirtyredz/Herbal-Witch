@@ -287,6 +287,7 @@ inert showcase section (witchcraft showcase stays 125 x 8 x 60, 62,713 writes). 
 | ANU test runGameTestServer (first) | dbdb00b / HerbalWitch-m11-commerce-0.10.0-20261023-124323-d72 | 7 of 346 failed: 2 production refusal-order defects, 5 test defects/pins; fixed |
 | ANU test runGameTestServer (second) | 14c55b4 / ...-20261023-125643-8ab | 2 of 346 failed: neighbour item interference in two existing tests; isolated |
 | ANU test runGameTestServer | 85e886c / HerbalWitch-m11-commerce-0.10.0-20261023-130225-baa | 519 unit, all 346 GameTests passed |
+| ANU test build runGameTestServer (promotion) | 9d36ce6 / HerbalWitch-m11-commerce-0.10.0-20261023-130906-58b | 519 unit, build, all 346 GameTests passed |
 | ANU commerceRestartTest | 85e886c / HerbalWitch-m11-commerce-0.10.0-20261023-130503-90b | two JVMs, 25 checks passed |
 
 Pending: owner in-game review (placement preview, facings and item views, two clients buying the last lot,
