@@ -45,6 +45,16 @@ class DependencyDirectionTest {
     }
 
     @Test
+    void sharedCompanionPrerequisitesDoNotImportTheirFeatureConsumers() throws IOException {
+        var lifecycle = Pattern.compile("io\\.github\\.dirtyredz\\.herbalwitch\\.companions\\.(?:animals|familiars)\\.");
+        for (Path file : javaFiles(ROOT.resolve("companions/lifecycle"))) reject(file, lifecycle);
+        var feature = Pattern.compile("io\\.github\\.dirtyredz\\.herbalwitch\\.(?:companions|magic|apothecary)\\.");
+        for (Path file : javaFiles(ROOT.resolve("platform/persistence"))) reject(file, feature);
+        var companion = Pattern.compile("io\\.github\\.dirtyredz\\.herbalwitch\\.companions\\.");
+        for (Path file : javaFiles(ROOT.resolve("apothecary/brewing"))) reject(file, companion);
+    }
+
+    @Test
     void wardServicePackageDependsDownwardsOnly() throws IOException {
         // WardService (ticking, server lifecycle) sits on top; its siblings use WardIndex/WardContext/WardLifecycle.
         var sibling = Pattern.compile("\\bWardService\\b");

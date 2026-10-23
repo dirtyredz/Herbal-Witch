@@ -5,6 +5,7 @@ import io.github.dirtyredz.herbalwitch.companions.animals.capture.data.CaptureRe
 import io.github.dirtyredz.herbalwitch.companions.animals.capture.payload.VanillaCaptureAdapters;
 import io.github.dirtyredz.herbalwitch.companions.animals.registry.AnimalItems;
 import io.github.dirtyredz.herbalwitch.companions.animals.trust.AnimalTrustService;
+import io.github.dirtyredz.herbalwitch.companions.lifecycle.CompanionLifecycleAuthority;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -55,7 +56,7 @@ public final class CaptureService {
         var record = data.token(token).orElse(null);
         if (record == null || record.phase() != Phase.STORED) return "token";
         if (!record.captor().equals(player.getUUID())) return "owner";
-        if (CaptureReconciliation.live(player.server, record.animal())) return "generation";
+        if (CompanionLifecycleAuthority.live(player.server, record.animal())) return "generation";
         Mob candidate = VanillaCaptureAdapters.restore(player.serverLevel(), record); if (candidate == null) return "payload";
         try {
             long prior = CaptureReconciliation.generation(candidate);
@@ -100,7 +101,7 @@ public final class CaptureService {
         try {
             CaptureRecord next = recovery ? record.recover(UUID.randomUUID()) : record.reissue(UUID.randomUUID());
             if (!data.commit(next)) return "persistence";
-            if (recovery) CaptureReconciliation.retire(destination.server, animal);
+            if (recovery) CompanionLifecycleAuthority.retire(destination.server, animal);
             destination.getInventory().setItem(slot, CaptureToken.item(next)); destination.inventoryMenu.broadcastChanges();
             return null;
         } catch (RuntimeException failure) { return "generation"; }

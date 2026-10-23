@@ -28,7 +28,6 @@ public final class AnimalRegistration {
         var forge = MinecraftForge.EVENT_BUS;
         forge.addListener(io.github.dirtyredz.herbalwitch.companions.animals.capture.command.CaptureCommands::register);
         forge.addListener(EventPriority.HIGHEST, io.github.dirtyredz.herbalwitch.companions.animals.capture.data.CaptureReconciliation::join);
-        forge.addListener(io.github.dirtyredz.herbalwitch.companions.animals.capture.data.CaptureReconciliation::leave);
         forge.addListener((ServerStoppedEvent event) -> {
             io.github.dirtyredz.herbalwitch.companions.animals.capture.data.CaptureReconciliation.reset();
             io.github.dirtyredz.herbalwitch.companions.animals.capture.data.CaptureSavedData.reset();
