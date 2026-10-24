@@ -80,9 +80,12 @@ public final class WorldFixtures {
         }
     }
 
-    /** Whether entities anywhere in the test area are visible and ticking. */
+    /**
+     * Whether entities anywhere on the test's own 9 x 9 plot are visible and ticking. Only the structure's
+     * chunks are force-loaded, so never widen this box: a neighbouring chunk may stay unticked for good.
+     */
     public static boolean entitiesLive(GameTestHelper helper) {
-        AABB box = area(helper);
+        AABB box = new AABB(helper.absolutePos(BlockPos.ZERO), helper.absolutePos(new BlockPos(8, 0, 8)));
         for (int x = (int) Math.floor(box.minX) >> 4; x <= (int) Math.floor(box.maxX) >> 4; x++)
             for (int z = (int) Math.floor(box.minZ) >> 4; z <= (int) Math.floor(box.maxZ) >> 4; z++)
                 if (!helper.getLevel().isPositionEntityTicking(new BlockPos(x << 4, (int) box.minY, z << 4))) return false;
