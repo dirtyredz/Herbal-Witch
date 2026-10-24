@@ -27,6 +27,12 @@
   and a distracting fox gives it up first so distraction still works.
 - **Performance gates were frozen before measuring** and the protocol was shortened for the shared ANU
   machine (docs/qualification/performance.md); thresholds are not relaxed after a result.
+- **GameTests run in a superflat world** (`gradle/gametest-world.gradle`). Forge's GameTest server is a
+  dedicated server, and with no server.properties it generated normal terrain, placing every
+  plot in deepslate caves; the random failures M12 chased (falling gravel, cave mobs, terrain in a
+  villager's path) came from there. Rejected: hardening each test against terrain (endless, and the
+  world would still differ from the performance protocol). A guard GameTest fails the suite on any other
+  world type.
 - **Design interpretations kept for the owner to confirm** (not approvals): the hearth's "home anchor"
   is its ward-focus role; "optional experimentation" is advisory discovery; modded-mob adapters stay
   optional and absent.
