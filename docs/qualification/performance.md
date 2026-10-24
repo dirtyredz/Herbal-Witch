@@ -42,35 +42,39 @@ unit tests, not by wall-clock thresholds.
 
 ## Results
 
-Candidate run: ANU `HerbalWitch-m12-release-qualificatio-20261023-164003-755` at f5f1107 (1.0.0-rc.1),
-Temurin 17.0.20.1, 8 GB heap, i7-4820K (4 cores / 8 threads). Worst of three 800-tick windows:
+Candidate run: ANU `HerbalWitch-1b7414627fc396af96ea98f0-20261023-204157-aef` at 1b74146 (1.0.0-rc.1, production
+code unchanged since f5f1107), Temurin 17.0.20.1, 8 GB heap, i7-4820K (4 cores / 8 threads), superflat world.
+Worst of three 800-tick windows (by p95), milliseconds:
 
 | Phase | p50 | p95 | p99 | max | ticks > 50 ms | entities | Herbal Witch BEs |
 |---|---|---|---|---|---|---|---|
-| control | 3.65 | 5.99 | 8.24 | 20.5 | 0 | 117 | 0 |
-| idle cottage | 3.36 | 4.62 | 6.29 | 60.6 | 1 | 132 | 256 |
-| busy, matched vanilla control | 18.45 | 22.31 | 26.35 | 35.3 | 0 | 442 | 0 |
-| busy: stations only | 3.85 | 5.14 | 7.17 | 56.7 | 1 | 161 | 256 |
-| busy: familiars only | 8.15 | 9.68 | 11.97 | 17.0 | 0 | 175 | 32 |
-| busy: creatures only (216 mobs with care state, 8 brooms) | 15.73 | 19.41 | 23.35 | 211.6 | 1 | 352 | 0 |
-| busy settlement | 24.07 | 28.22 | 30.58 | 35.4 | 0 | 419 | 288 |
-| saturation (twice busy) | 41.58 | 47.85 | 52.84 | 509.3 | 19 | 657 | 560 |
-| 4,096 bonds, none loaded | 3.67 | 5.35 | 6.78 | 15.3 | 0 | 141 | 0 |
+| control | 0.31 | 0.52 | 0.75 | 2.0 | 0 | 0 | 0 |
+| idle cottage | 0.37 | 0.58 | 0.96 | 1.5 | 0 | 0 | 256 |
+| busy, matched vanilla control | 13.27 | 15.47 | 19.13 | 37.9 | 0 | 280 | 0 |
+| busy: stations only | 0.42 | 0.64 | 0.88 | 3.4 | 0 | 0 | 256 |
+| busy: familiars only | 6.20 | 7.22 | 8.87 | 11.5 | 0 | 56 | 32 |
+| busy: creatures only (216 mobs with care state, 8 brooms) | 10.93 | 13.17 | 15.05 | 24.1 | 0 | 224 | 0 |
+| busy settlement | 18.58 | 21.10 | 23.42 | 30.0 | 0 | 280 | 288 |
+| saturation (twice busy) | 36.66 | 40.29 | 42.95 | 48.5 | 0 | 560 | 576 |
+| 4,096 bonds, none loaded | 0.24 | 0.34 | 0.45 | 1.0 | 0 | 0 | 0 |
 
-Gates: idle cottage -1.37 ms over control (gate 2); busy settlement p95 28.22 / p99 30.58 (gates 40 / 50);
-busy settlement 5.91 ms over its matched vanilla control (gate 10); saturation entities 657 to 639 with
-familiar work at its shared budget (8 scans, 0 paths per tick); churn left no seat (100 seatings, 100
-menus); 4,096 bonds -0.64 ms over control; durable bond create p95 6.85 ms; roster page p95 0.08 ms;
-restart indexed 4,096 bonds in 132 ticks (3.8 s) and served a first page of 32; durable commerce sale
-p95 16.62 ms (gate 100). **Every frozen gate passed.** The single 200-500 ms spikes in the creature and
-saturation phases occur once per phase (probably the periodic world save; not investigated further).
+Gates: idle cottage +0.06 ms over control (gate 2); busy settlement p95 21.10 / p99 23.42 (gates 40 / 50);
+busy settlement 5.63 ms over its matched vanilla control (gate 10); saturation entities 560 to 560 with familiar
+work within its shared budget; churn left no seat (100 seatings, 100 menus); 4,096 bonds -0.18 ms over control;
+durable bond create p95 6.86 ms; roster page p95 0.07 ms; restart indexed 4,096 bonds in 132 ticks (1.7 s) and
+served a first page of 32; durable commerce sale p95 17.18 ms (gate 100). **Every frozen gate passed.** Single
+spikes of 80-500 ms appear once in a few phases (probably the periodic world save; not investigated further).
+Saturation runs near the 50 ms tick budget on this CPU; twice the busy settlement is a stress figure, not a
+supported population.
 
-History (kept, not overwritten): the first run compared the busy settlement with an empty world
-(25.28 ms, a harness defect, job ...150743-eed); the matched control then measured 10.87 ms, a gate
-failure (...154923-fca). A flight recording (...161631-ab3) traced 40% of Herbal Witch samples to
-`FamiliarRecord.state()` copying the whole bond state on every lookup and tick; after the fix
-(f3cbab1) the delta was 7.28 ms (...162624-6b4), and 5.91 ms on the candidate. Run-to-run noise on
-this shared machine is a few milliseconds (control p95 ranged 1.4 to 6.0 ms across runs).
+Deviation found after the first candidate run: the protocol says a flat world, but every GameTest JVM had been
+generating normal terrain (GOTCHAS, "The Forge GameTest server..."), so the plots sat in caves and natural
+mobs added to every phase. From 1b74146 the world is superflat with spawning off and the workload plots are
+penned, so each phase holds exactly its fixed population (the entity column matches `Workloads.java`).
 
-Saturation runs near the 50 ms tick budget on this CPU; twice the busy settlement is a stress figure,
-not a supported population.
+History (kept, not overwritten): the first run compared the busy settlement with an empty world (25.28 ms, a
+harness defect, job ...150743-eed); the matched control then measured 10.87 ms, a gate failure (...154923-fca).
+A flight recording (...161631-ab3) traced 40% of Herbal Witch samples to `FamiliarRecord.state()` copying the
+whole bond state on every lookup and tick; after the fix (f3cbab1) the delta was 7.28 ms (...162624-6b4), then
+5.91 ms at f5f1107 in cave terrain (...164003-755) and 5.63 ms on the superflat candidate. Run-to-run noise on
+this shared machine is a few milliseconds.
