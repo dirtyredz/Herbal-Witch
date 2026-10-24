@@ -88,7 +88,7 @@ public final class FamiliarHomeGameTests {
             owner.containerMenu = owner.inventoryMenu; h.succeed();
         });
     }
-    @GameTest(template = TEMPLATE, batch = "herbalwitch_familiar_home_return", timeoutTicks = 260)
+    @GameTest(template = TEMPLATE, batch = "herbalwitch_familiar_home_return", timeoutTicks = 320)
     public static void returnHomeNavigatesThenSafeOfflineRestHealsWithoutEnergy(GameTestHelper h) {
         FamiliarFixtures.bound(h, "wolf", "home_return_" + UUID.randomUUID(), b -> {
             var owner = b.owner(); var mob = b.mob();
@@ -100,7 +100,8 @@ public final class FamiliarHomeGameTests {
                 check(b.record().command() == FamiliarCommand.STAY && mob.position().distanceToSqr(Vec3.atBottomCenterOf(bed.getBlockPos().above())) <= 4, "return failed: " + b.record().state());
                 returning.close(); returning = null; mob.setHealth(mob.getMaxHealth() - 2); float health = mob.getHealth();
                 FamiliarStore.get(owner.server).update(b.record().change(s -> s.putInt("homeRest", 0)), false);
-                h.runAfterDelay(100, () -> {
+                // Mid-interval (heals at 100 and 200 ticks of rest), never on the boundary tick.
+                h.runAfterDelay(150, () -> {
                     check(mob.getHealth() == health + 1, "offline rest did not heal exactly one health");
                     check(WitchStatusService.energyUnits(owner) == 7500 && b.record().state().getInt("reserve") == 0, "rest changed energy or reserve"); h.succeed();
                 });
