@@ -213,7 +213,7 @@ only then the builder, the sole world writer. `command/` registers `/herbalwitch
 Each feature registers its own section; coverage tests require every block to appear. The altar's
 section (`magic/ritual/showcase`) builds an idle altar and a supply barrel and starts nothing. Sections
 pack into rows no wider than `ShowcasePlan.ROW_WIDTH` (126), so adding a section grows the depth first;
-the GameTest template is 128 x 10 x 100 and `ShowcasePlanTest` fails if a plan outgrows it. Sections belong to a `ShowcaseGroup` (`furniture`: decor; `witchcraft`: the rest, the default); each group is its own plan and plot, and the bare command builds both, `ShowcaseCommand.SEPARATION` apart. Signs stand beside their block (rule on `ShowcaseSection.placements()`).
+the GameTest template is 128 x 10 x 100 and `ShowcasePlanTest` fails if a plan outgrows it. Sections belong to a `ShowcaseGroup` (`furniture`: decor; `witchcraft`: the rest, the default); each group is its own plan and plot, and the bare command builds both, `ShowcaseCommand.SEPARATION` apart. Sample signs use `ShowcasePlacement.sampleLabel`: two cells east of the sample footprint, in its front row, facing north (viewer-left, one clear cell), matching Roundwood. Plain `label` is for headings and standalone notes.
 
 **Stations (`apothecary/stations/`).**
 - *Composition:* `StationBlock`, `StationEntity` and `StationMenu` carry block and menu boilerplate.

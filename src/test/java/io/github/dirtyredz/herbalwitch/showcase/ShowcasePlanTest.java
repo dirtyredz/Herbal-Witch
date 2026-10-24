@@ -116,7 +116,7 @@ class ShowcasePlanTest {
             assertEquals(rowZ, area.z(), area.id() + " row");
             assertTrue(area.x() + area.width() <= ShowcasePlan.ROW_WIDTH, area.id() + " passes the row width");
         }
-        assertEquals(List.of("herbs", "advanced_preparations"), rowStarts);
+        assertEquals(List.of("herbs", "altar"), rowStarts);
     }
 
     @Test
@@ -141,9 +141,9 @@ class ShowcasePlanTest {
                     group + " " + plan.width() + " x " + plan.depth() + " outgrows the 128 x 100 showcase template");
         }
         // the bare command stacks the furniture showcase and the witchcraft showcase one separation apart
-        assertTrue(28 + ShowcaseCommand.SEPARATION + 60 + 1 <= 100, "both showcases outgrow the template depth");
-        assertEquals(List.of(41, 28), bounds(ShowcaseGroup.FURNITURE), "the README documents the furniture showcase as 41 x 8 x 28");
-        assertEquals(List.of(125, 60), bounds(ShowcaseGroup.WITCHCRAFT), "the README documents the witchcraft showcase as 125 x 8 x 60");
+        assertTrue(bounds(ShowcaseGroup.FURNITURE).get(1) + ShowcaseCommand.SEPARATION + bounds(ShowcaseGroup.WITCHCRAFT).get(1) + 1 <= 100, "both showcases outgrow the template depth");
+        assertEquals(List.of(43, 28), bounds(ShowcaseGroup.FURNITURE), "the README documents the furniture showcase as 43 x 8 x 28");
+        assertEquals(List.of(126, 60), bounds(ShowcaseGroup.WITCHCRAFT), "the README documents the witchcraft showcase as 126 x 8 x 60");
     }
 
     private static List<Integer> bounds(ShowcaseGroup group) throws Exception {
@@ -178,14 +178,35 @@ class ShowcasePlanTest {
         }
     }
 
-    /** Every sign for a block stands beside it: the cell to its east (the sign's viewer-right neighbour) is the block's, never open air with a block two away. */
+    /** Every sign for a block stands beside it: two cells east of its piece (viewer-left), leaving one clear cell like Roundwood. */
     @Test
     void decorSignsStandBesideTheirPiece() {
         List<ShowcasePlacement> placements = new DecorShowcaseSection().placements();
         for (ShowcasePlacement label : placements.stream().filter(p -> p.kind() == ShowcasePlacement.Kind.LABEL).toList()) {
-            boolean beside = placements.stream().anyMatch(p -> p.kind() == ShowcasePlacement.Kind.CONTENT
-                    && p.z() == label.z() && p.x() == label.x() + 1);
+            boolean beside = placements.stream().anyMatch(p -> (p.kind() == ShowcasePlacement.Kind.CONTENT || p.kind() == ShowcasePlacement.Kind.SUPPORT)
+                    && p.z() == label.z() && p.x() == label.x() - 2);
             assertTrue(beside, "no piece beside the sign at " + label.x() + "," + label.z());
+        }
+    }
+
+    @Test
+    void sampleLabelsUseTheViewerLeftEdgeAndLeaveOneClearCell() {
+        var label = ShowcasePlacement.sampleLabel(12, 7, ShowcasePlacement.Line.literal("sample"));
+        assertEquals(List.of(14, 1, 7), List.of(label.x(), label.y(), label.z()));
+        assertEquals(ShowcasePlacement.Kind.LABEL, label.kind());
+    }
+
+    @Test
+    void sampleLabelGapIsClearInEverySection() throws Exception {
+        for (var section : sections()) {
+            var placements = section.placements();
+            ShowcasePlan.of(List.of(section)); // standalone sections must also have disjoint cells
+            for (var label : placements.stream().filter(p -> p.kind() == ShowcasePlacement.Kind.LABEL).toList()) {
+                assertFalse(placements.stream().anyMatch(p ->
+                        (p.kind() == ShowcasePlacement.Kind.CONTENT || p.kind() == ShowcasePlacement.Kind.SUPPORT)
+                        && p.x() == label.x() - 1 && p.z() == label.z()),
+                        section.id() + " has no gap west of " + label.lines());
+            }
         }
     }
 

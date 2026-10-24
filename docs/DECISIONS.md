@@ -782,3 +782,12 @@ The broom opts out of vanilla `hasExactlyOnePlayerPassenger` save ownership. Min
 The final showcase has all four specified command sections: broom_stand, wand_bench, broom and wand. To retain the existing two-row packing algorithm and write cap, empty familiar homes occupy a narrow vertical column and inert familiar display columns are closer together. Their blocks, contents and entity count are unchanged; tool samples remain separate from the unstarted crafting stations.
 
 M10 rider alignment uses the same authored item geometry at 0.55 blocks above the entity origin. The player riding offset remains 0.2; vanilla player offset and scale put seated hips at approximately 0.553. A headless native-player geometry test and three reviewed previews guard this relationship.
+
+## 2026-10-24 - Match Roundwood showcase labels (1.0.0-rc.2)
+
+Roundwood 2da57e6 places standing sample signs two columns to the viewer's left, in the sample's front row, facing the viewer. Herbal Witch uses a fixed north-facing layout, so this is east
+of the sample with one clear cell. `ShowcasePlacement.sampleLabel` owns that arithmetic; sections
+provide their eastern footprint edge, including supports. Headings and instruction-only notes
+keep explicit positions. This supersedes the October 22 west-side rule. Habitat spacing and
+nearby instruction positions reserve room for the moved signs. Preparation and grimoire displays use
+narrower rows/columns, and altar/charm notes use separate rows, to retain the combined write cap; no RedzCore dependency is added.

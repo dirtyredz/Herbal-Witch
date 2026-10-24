@@ -145,7 +145,7 @@ public final class ShowcaseContentGameTests {
             check(barrel.countItem(tool.equals("broom") ? io.github.dirtyredz.herbalwitch.magic.broom.registry.BroomItems.BROOM.get() : io.github.dirtyredz.herbalwitch.magic.wand.registry.WandItems.WAND.get()) == (tool.equals("broom") ? 2 : 1), "tool supplies incomplete");
         }
         var animalArea = plan.areas().stream().filter(a -> a.id().equals("animals")).findFirst().orElseThrow();
-        var supplies = (Container) helper.getLevel().getBlockEntity(helper.absolutePos(ORIGIN.offset(animalArea.x() + 24, 1, animalArea.z() + ShowcasePlan.HEADING_ROWS)));
+        var supplies = (Container) helper.getLevel().getBlockEntity(helper.absolutePos(ORIGIN.offset(animalArea.x() + 32, 1, animalArea.z() + ShowcasePlan.HEADING_ROWS)));
         check(supplies != null && supplies.countItem(io.github.dirtyredz.herbalwitch.apothecary.brewing.product.registry.AdvancedPreparations.item(
                 io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.AdvancedProductCatalog.SLEEP)) == 16, "animal-care sleep supplies missing");
         var animalBox = new AABB(helper.absolutePos(ORIGIN), helper.absolutePos(ORIGIN.offset(plan.width(), ShowcasePlan.HEIGHT, plan.depth())));

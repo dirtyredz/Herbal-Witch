@@ -24,7 +24,7 @@ class ShowcaseAnimalsTest {
         var plan = ShowcasePlan.of(ShowcasePlanTest.group(ShowcaseGroup.WITCHCRAFT));
         Set<String> solid = new HashSet<>();
         for (ShowcasePlacement p : plan.placements()) {
-            if (p.kind() == ShowcasePlacement.Kind.SUPPORT) solid.add(p.x() + "," + p.y() + "," + p.z());
+            if (p.kind() == ShowcasePlacement.Kind.SUPPORT || p.kind() == ShowcasePlacement.Kind.LABEL) solid.add(p.x() + "," + p.y() + "," + p.z());
         }
         for (var sample : plan.entities()) {
             for (int x = (int) Math.floor(sample.x() - 0.7); x <= (int) Math.floor(sample.x() + 0.7); x++) {

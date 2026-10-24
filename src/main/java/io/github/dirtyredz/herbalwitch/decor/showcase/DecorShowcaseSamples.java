@@ -77,7 +77,7 @@ public final class DecorShowcaseSamples {
         int originX = slot.x() + f.width() - 1;
         int originZ = slot.z();
         List<ShowcasePlacement> out = new ArrayList<>();
-        out.add(ShowcasePlacement.label(slot.x() - DecorShowcaseLayout.SIGN_COLUMN, slot.z(), label(sample)));
+        out.add(ShowcasePlacement.sampleLabel(slot.x() + f.columns() - 1, slot.z(), label(sample)));
         MultiblockLayout layout = FurnitureLayouts.of(spec);
         int cells = layout == null ? 1 : layout.size();
         for (int i = 0; i < cells; i++) {

@@ -47,7 +47,7 @@ public final class HerbShowcaseSection implements ShowcaseSection {
         for (int row = 0; row < HerbCatalog.ALL.size(); row++) {
             HerbSpec herb = HerbCatalog.ALL.get(row);
             int z = row * 2;
-            out.add(ShowcasePlacement.label(0, z, Line.literal(herb.displayName()), Line.translated(AGES),
+            out.add(ShowcasePlacement.sampleLabel(5, z, Line.literal(herb.displayName()), Line.translated(AGES),
                     Line.translated(SAMPLES)));
             for (int age = 0; age <= HerbSpec.MAX_AGE; age++) {
                 int x = 1 + age;

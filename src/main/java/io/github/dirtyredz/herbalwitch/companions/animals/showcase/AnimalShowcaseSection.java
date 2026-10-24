@@ -24,7 +24,7 @@ public final class AnimalShowcaseSection implements ShowcaseSection {
         List<ShowcaseEntitySample> out = new ArrayList<>();
         for (int i = 0; i < AnimalProfiles.ALL.size(); i++) {
             var p = AnimalProfiles.ALL.get(i);
-            out.add(new ShowcaseEntitySample(p.id(), (i % 4) * 6 + 3.5, p.id().endsWith("bat") || p.id().endsWith("parrot") ? 2 : 1,
+            out.add(new ShowcaseEntitySample(p.id(), (i % 4) * 8 + 3.5, p.id().endsWith("bat") || p.id().endsWith("parrot") ? 2 : 1,
                     (i / 4) * 7 + 3.5));
         }
         return List.copyOf(out);
@@ -32,8 +32,8 @@ public final class AnimalShowcaseSection implements ShowcaseSection {
     @Override public List<ShowcasePlacement> placements() {
         List<ShowcasePlacement> out = new ArrayList<>();
         for (int i = 0; i < AnimalProfiles.ALL.size(); i++) {
-            var profile = AnimalProfiles.ALL.get(i); int x = (i % 4) * 6 + 1, z = (i / 4) * 7; // the sign stands west of the habitat wall, never in front of it
-            out.add(ShowcasePlacement.label(x - 1, z, ShowcasePlacement.Line.translated("entity." + profile.id().replace(':', '.')),
+            var profile = AnimalProfiles.ALL.get(i); int x = (i % 4) * 8 + 1, z = (i / 4) * 7; // three clear columns between habitats leave room for the east-side label
+            out.add(ShowcasePlacement.sampleLabel(x + 4, z + 1, ShowcasePlacement.Line.translated("entity." + profile.id().replace(':', '.')),
                     ShowcasePlacement.Line.translated("item.herbalwitch.animals.bait." + profile.bait().id())));
             boolean water = profile.id().equals("minecraft:axolotl");
             for (int dx = 0; dx < 5; dx++) for (int dz = 1; dz <= 5; dz++) {
@@ -51,7 +51,7 @@ public final class AnimalShowcaseSection implements ShowcaseSection {
                 }
             }
         }
-        out.add(ShowcasePlacement.content(24, 1, 0, () -> Blocks.BARREL.defaultBlockState(), entity -> {
+        out.add(ShowcasePlacement.content(32, 1, 0, () -> Blocks.BARREL.defaultBlockState(), entity -> {
             if (entity instanceof BarrelBlockEntity barrel) {
                 int slot = 0;
                 for (var item : AnimalItems.all()) barrel.setItem(slot++, new ItemStack(item, item == AnimalItems.CHARM.get() ? 1 : 16));
@@ -60,7 +60,7 @@ public final class AnimalShowcaseSection implements ShowcaseSection {
                 barrel.setItem(slot, new ItemStack(GrimoireItems.BOOK.get()));
             }
         }));
-        out.add(ShowcasePlacement.label(24, 1, ShowcasePlacement.Line.translated("animal.herbalwitch.showcase.supplies")));
+        out.add(ShowcasePlacement.sampleLabel(32, 0, ShowcasePlacement.Line.translated("animal.herbalwitch.showcase.supplies")));
         return out;
     }
 }

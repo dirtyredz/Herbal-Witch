@@ -39,23 +39,23 @@ public final class GardenShowcaseSection implements ShowcaseSection {
     public List<ShowcasePlacement> placements() {
         List<ShowcasePlacement> out = new ArrayList<>(
                 ShowcasePlacement.floorArea(0, 0, 10, 9, () -> Blocks.GRASS_BLOCK.defaultBlockState()));
-        // each bed has its sign one block west of it; the moist bed's water sits on its far side
+        // Labels use each sample's eastern edge, including the moist bed's water enclosure.
         out.addAll(List.of(
-                ShowcasePlacement.label(0, 1, Line.translated(BED_DRY)),
+                ShowcasePlacement.sampleLabel(1, 1, Line.translated(BED_DRY)),
                 ShowcasePlacement.content(1, 1, 1, () -> BotanyBlocks.herbBed().defaultBlockState()),
-                ShowcasePlacement.label(3, 1, Line.translated(BED_MOIST)),
+                ShowcasePlacement.sampleLabel(6, 1, Line.translated(BED_MOIST)),
                 ShowcasePlacement.content(4, 1, 1, HerbShowcaseSection::moistBed),
                 // A water source walled in on three sides, the bed being the fourth.
                 ShowcasePlacement.support(5, 1, 0, () -> Blocks.MOSSY_COBBLESTONE.defaultBlockState()),
                 ShowcasePlacement.support(6, 1, 1, () -> Blocks.MOSSY_COBBLESTONE.defaultBlockState()),
                 ShowcasePlacement.support(5, 1, 2, () -> Blocks.MOSSY_COBBLESTONE.defaultBlockState()),
                 ShowcasePlacement.content(5, 1, 1, () -> Blocks.WATER.defaultBlockState()),
-                ShowcasePlacement.label(8, 1, Line.translated(FARMLAND)),
+                ShowcasePlacement.sampleLabel(9, 1, Line.translated(FARMLAND)),
                 ShowcasePlacement.content(9, 1, 1, () -> Blocks.FARMLAND.defaultBlockState().setValue(FarmBlock.MOISTURE, 7)),
                 ShowcasePlacement.content(9, 2, 1,
                         () -> BotanyBlocks.plant(HerbCatalog.CHAMOMILE).getStateForAge(HerbSpec.MAX_AGE))));
         // joined beds (they connect as they are placed): a planted square, a line, an L, a ring
-        out.add(ShowcasePlacement.label(6, 3, Line.translated(JOINED)));
+        out.add(ShowcasePlacement.sampleLabel(8, 3, Line.translated(JOINED)));
         HerbSpec[] square = {HerbCatalog.CHAMOMILE, HerbCatalog.LAVENDER, HerbCatalog.MANDRAKE, HerbCatalog.THYME};
         for (int i = 0; i < 4; i++) {
             int x = i % 2;

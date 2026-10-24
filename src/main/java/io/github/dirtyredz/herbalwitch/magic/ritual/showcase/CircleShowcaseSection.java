@@ -74,7 +74,7 @@ public final class CircleShowcaseSection implements ShowcaseSection {
         for (int i = 0; i < BEDS; i++) {
             out.add(ShowcasePlacement.content(6, 1, 2 + i, () -> BotanyBlocks.HERB_BED.get().defaultBlockState()));
         }
-        out.add(ShowcasePlacement.label(5, 6, Line.translated(label("supplies"))));
+        out.add(ShowcasePlacement.sampleLabel(6, 6, Line.translated(label("supplies"))));
         out.add(ShowcasePlacement.content(6, 1, 6, () -> Blocks.BARREL.defaultBlockState(), entity -> {
             if (entity instanceof Container barrel) {
                 List<Supplier<ItemStack>> supplies = supplies();

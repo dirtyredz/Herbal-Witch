@@ -54,14 +54,15 @@ public final class GrimoireShowcaseSection implements ShowcaseSection {
     public List<ShowcasePlacement> placements() {
         List<ShowcasePlacement> out = new ArrayList<>();
         int x = 0;
+        int z = 1;
         for (ResearchPiece piece : GrimoireCatalog.RESEARCH_PIECES) {
-            out.add(ShowcasePlacement.label(x, 1, Line.literal(piece.displayName())));
-            out.add(ShowcasePlacement.content(x + 1, 1, 1, () -> GrimoireBlocks.block(piece).defaultBlockState()
+            out.add(ShowcasePlacement.sampleLabel(x + 1, z, Line.literal(piece.displayName())));
+            out.add(ShowcasePlacement.content(x + 1, 1, z, () -> GrimoireBlocks.block(piece).defaultBlockState()
                     .setValue(HorizontalDirectionalBlock.FACING, Direction.NORTH)));
-            x += 3;
+            z += 3;
         }
-        out.add(ShowcasePlacement.label(x, 1, Line.translated(SUPPLIES)));
-        out.add(ShowcasePlacement.content(x + 1, 1, 1, () -> Blocks.BARREL.defaultBlockState(), entity -> {
+        out.add(ShowcasePlacement.sampleLabel(x + 1, z, Line.translated(SUPPLIES)));
+        out.add(ShowcasePlacement.content(x + 1, 1, z, () -> Blocks.BARREL.defaultBlockState(), entity -> {
             if (entity instanceof Container barrel) {
                 List<Supplier<ItemStack>> supplies = supplies();
                 for (int i = 0; i < supplies.size(); i++) {

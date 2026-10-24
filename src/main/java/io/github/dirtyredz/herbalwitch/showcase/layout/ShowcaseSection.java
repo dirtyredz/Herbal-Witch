@@ -23,9 +23,10 @@ public interface ShowcaseSection {
     }
 
     /**
-     * The section's placements; deterministic, catalogue order. Sign rule: a sign for a block stands on
-     * the floor in the block's own front row, one cell west of it (the viewer's right), and the cell
-     * north of every sign and block stays open; notes that annotate no block stand in the front row
+     * The section's placements; deterministic, catalogue order. Use {@link ShowcasePlacement#sampleLabel}
+     * with the sample's eastern edge and
+     * front row. It stands two cells east (the viewer's left), with one clear cell. The cell
+     * north of every sign and block stays open; notes that annotate no block stand in a separate clear row
      * with nothing behind them.
      */
     List<ShowcasePlacement> placements();

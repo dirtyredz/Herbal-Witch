@@ -34,9 +34,9 @@ public final class ShopShowcaseSection implements ShowcaseSection {
     public static final List<String> EXHIBITS = List.of("register_closed", "register_open", "shelf_stocked", "shelf_sold_out", "jar_stocked", "jar_sold_out", "board");
     public static final List<String> NOTES = List.of("offers", "history", "orders", "villagers");
     public static final int SPACING = 3;
-    /** Every exhibit block stands in this column, its sign one cell west; notes and the villager yard sit east. */
+    /** Every exhibit block stands in this column, its sign two cells east; notes and the villager yard sit farther east. */
     public static final int COLUMN = 1;
-    public static final int NOTES_X = 2;
+    public static final int NOTES_X = 4;
 
     public static String label(String topic) {
         return "showcase." + HerbalWitch.MOD_ID + ".label.shop." + topic;
@@ -65,7 +65,7 @@ public final class ShopShowcaseSection implements ShowcaseSection {
         for (int i = 0; i < EXHIBITS.size(); i++) {
             String exhibit = EXHIBITS.get(i);
             int x = COLUMN, row = row(i);
-            out.add(ShowcasePlacement.label(x - 1, row, Line.translated(label(exhibit)), Line.translated(label(exhibit) + ".detail")));
+            out.add(ShowcasePlacement.sampleLabel(x, row, Line.translated(label(exhibit)), Line.translated(label(exhibit) + ".detail")));
             switch (exhibit) {
                 case "register_closed", "register_open" -> {
                     boolean open = exhibit.equals("register_open");

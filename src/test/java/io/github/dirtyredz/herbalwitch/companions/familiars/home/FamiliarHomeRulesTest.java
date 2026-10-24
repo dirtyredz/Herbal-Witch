@@ -25,6 +25,6 @@ class FamiliarHomeRulesTest {
         var section = new FamiliarHomeShowcaseSection(); assertEquals(ShowcaseGroup.WITCHCRAFT, section.group());
         var placements = section.placements(); assertEquals(6, placements.size());
         var blocks = placements.stream().filter(p -> p.kind() == ShowcasePlacement.Kind.CONTENT).toList(); assertEquals(3, blocks.size());
-        for (var block : blocks) assertTrue(placements.stream().anyMatch(p -> p.kind() == ShowcasePlacement.Kind.LABEL && p.x() == block.x() - 1 && p.y() == block.y() && p.z() == block.z()));
+        for (var block : blocks) assertTrue(placements.stream().anyMatch(p -> p.kind() == ShowcasePlacement.Kind.LABEL && p.x() == block.x() + 2 && p.y() == block.y() && p.z() == block.z()));
     }
 }

@@ -78,6 +78,14 @@ public record ShowcasePlacement(Kind kind, int x, int y, int z, Supplier<BlockSt
         return new ShowcasePlacement(Kind.CONTENT, x, y, z, state, init, List.of());
     }
 
+    /** A sample label two cells east of its eastern edge: viewer-left, with one clear cell.
+     * Matches Roundwood's labelR(pieceR) = pieceR - 2 in its viewer-relative frame.
+     * The caller supplies the sample footprint; all side/spacing arithmetic lives here.
+     */
+    public static ShowcasePlacement sampleLabel(int eastX, int frontZ, Line... lines) {
+        return label(eastX + 2, frontZ, lines);
+    }
+
     /** A standing sign at floor level, readable from the north (the showcase entrance side). */
     public static ShowcasePlacement label(int x, int z, Line... lines) {
         if (lines.length == 0 || lines.length > 4) {

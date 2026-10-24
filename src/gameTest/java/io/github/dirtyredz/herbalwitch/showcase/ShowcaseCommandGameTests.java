@@ -27,7 +27,7 @@ import static io.github.dirtyredz.herbalwitch.fixture.WorldFixtures.check;
 @GameTestHolder(HerbalWitch.MOD_ID)
 @PrefixGameTestTemplate(false)
 public final class ShowcaseCommandGameTests {
-    /** The garden section's dry bed: section (1, 1, 1): a sign (x 0) beside it, the heading and an open row (2) before it. */
+    /** The garden section's dry bed: section (1, 1, 1): a sign (x 3) beside it, the heading and an open row (2) before it. */
     private static final BlockPos DRY_BED = ORIGIN.offset(1, 1, 3);
 
     private ShowcaseCommandGameTests() {
@@ -46,6 +46,11 @@ public final class ShowcaseCommandGameTests {
         check(placed > 0, "operator command placed nothing");
         check(helper.getBlockState(DRY_BED).is(BotanyBlocks.herbBed()), "garden bed missing: " + helper.getBlockState(DRY_BED));
         check(helper.getBlockState(ORIGIN.offset(0, 1, 0)).is(Blocks.OAK_SIGN), "section heading sign missing");
+        BlockState label = helper.getBlockState(DRY_BED.east(2));
+        check(label.is(Blocks.OAK_SIGN), "dry-bed label must stand two cells east");
+        check(helper.getBlockState(DRY_BED.east()).isAir(), "dry-bed label gap must stay clear");
+        check(label.getValue(net.minecraft.world.level.block.StandingSignBlock.ROTATION) == 8,
+                "sample sign must face north toward the viewer");
         // the planted square's north-west bed (section 0, 1, 3 = box z 5) joined its neighbours as it was built
         BlockState square = helper.getBlockState(ORIGIN.offset(0, 1, 5));
         check(square.getValue(GardenBedConnections.EAST) && square.getValue(GardenBedConnections.SOUTH)

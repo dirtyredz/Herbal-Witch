@@ -386,8 +386,10 @@ Discovery forms resolve lazily after registration, in seeds/fresh/bundle/powder 
   adding a section changes the depth, not the width; the GameTest template (`showcase`) is 128 x 10 x 100
   (both showcases plus the separation) and `ShowcasePlanTest` fails when a plan outgrows it (regenerate
   with `tools/generate-test-structures.mjs`).
-- **Showcase signs stand beside their block.** A new section places each block sign one cell west of the
-  block in the block's front row and leaves a cell between samples; `ShowcasePlanTest.noSignStandsInFrontOfABlock`
+- **Showcase signs stand beside their block.** Use `ShowcasePlacement.sampleLabel(eastX, frontZ, lines)`
+  with the sample's eastern footprint edge (including supports). It leaves one clear cell east of
+  the sample, on the viewer's left, facing north like Roundwood's builder-facing labels. Reserve
+  that sign cell when packing samples; `ShowcasePlanTest.noSignStandsInFrontOfABlock`
   fails for any sign with a block or support directly north-to-south behind it. A new section belongs to the
   witchcraft showcase unless it overrides `ShowcaseSection.group()`; `ShowcaseRegistry` refuses an id that
   equals a group name (`furniture`, `witchcraft`).

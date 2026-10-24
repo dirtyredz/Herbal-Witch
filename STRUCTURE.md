@@ -248,7 +248,7 @@ herbalwitch/
 
 - `src/main/java/io/github/dirtyredz/herbalwitch/showcase/command/` — `/herbalwitch showcase` registration and execution
 - `src/main/java/io/github/dirtyredz/herbalwitch/showcase/construction/` — preflight checks, the builder and sign labels (the only world writes)
-- `src/main/java/io/github/dirtyredz/herbalwitch/showcase/layout/` — section contract, registry, placements and the bounded plan (no world writes)
+- `src/main/java/io/github/dirtyredz/herbalwitch/showcase/layout/` — section contract, registry, placements (including the shared sample-label side/offset) and the bounded plan (no world writes)
 
 **src/main/resources**
 

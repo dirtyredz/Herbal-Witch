@@ -46,9 +46,10 @@ public final class AdvancedPreparationShowcaseSection implements ShowcaseSection
         List<ShowcasePlacement> out = new ArrayList<>();
         for (int i = 0; i < BARRELS.size(); i++) {
             String topic = BARRELS.get(i);
-            int x = i * 3;
-            out.add(ShowcasePlacement.label(x, 1, Line.translated(label(topic)), Line.translated(label(topic) + ".detail")));
-            out.add(ShowcasePlacement.content(x + 1, 1, 1, () -> Blocks.BARREL.defaultBlockState(), entity -> {
+            int x = 0;
+            int z = 1 + i * 3;
+            out.add(ShowcasePlacement.sampleLabel(x + 1, z, Line.translated(label(topic)), Line.translated(label(topic) + ".detail")));
+            out.add(ShowcasePlacement.content(x + 1, 1, z, () -> Blocks.BARREL.defaultBlockState(), entity -> {
                 if (entity instanceof Container barrel) {
                     List<ProductSpec> specs = contents(topic);
                     for (int s = 0; s < specs.size(); s++) {

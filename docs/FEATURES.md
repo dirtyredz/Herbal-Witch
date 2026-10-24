@@ -311,3 +311,10 @@ whole bond state (busy-settlement cost 10.87 to 5.91 ms p95 over vanilla). Each 
 
 Pending: owner in-game acceptance of M1-M12 ([owner-acceptance](qualification/owner-acceptance.md)) and the
 [release-readiness](qualification/release-readiness.md) items. Publishing and pack integration are the owner's.
+
+## 1.0.0-rc.2 showcase label alignment
+
+Sample labels match Roundwood: north-facing, two cells east of the sample edge (viewer-left),
+with one clear cell. Shared placement arithmetic and unit guards cover side, offset, clear gaps,
+block/sign overlap and entity clearance. Narrower display rows keep witchcraft at 126 x 8 x 60
+(63,193 writes); furniture is 43 x 8 x 28. In-game acceptance remains with the owner.

@@ -65,13 +65,13 @@ public final class StationShowcaseSection implements ShowcaseSection {
     @Override
     public List<ShowcasePlacement> placements() {
         List<ShowcasePlacement> out = new ArrayList<>();
-        out.add(ShowcasePlacement.label(0, 1, Line.translated(recipeKey)));
         int y = 1;
         if (onStove) {
             station(out, () -> StationBlocks.STOVE.get(), StationCatalog.STOVE.layout(), 1, 1, StationShowcaseSection::fuel);
             y = 2;
         }
         station(out, () -> StationBlocks.block(spec), spec.layout(), onStove ? 2 : 1, y, this::stock);
+        out.add(ShowcasePlacement.sampleLabel(out.stream().mapToInt(ShowcasePlacement::x).max().orElseThrow(), 1, Line.translated(recipeKey)));
         return out;
     }
 
