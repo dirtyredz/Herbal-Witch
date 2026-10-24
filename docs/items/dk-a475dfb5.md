@@ -2,7 +2,7 @@
 id: dk-a475dfb5
 type: bug
 created: 2026-10-24
-status: wip
+status: done
 since: 2026-10-24
 area: showcase
 priority: P2

@@ -318,3 +318,6 @@ Sample labels match Roundwood: north-facing, two cells east of the sample edge (
 with one clear cell. Shared placement arithmetic and unit guards cover side, offset, clear gaps,
 block/sign overlap and entity clearance. Narrower display rows keep witchcraft at 126 x 8 x 60
 (63,193 writes); furniture is 43 x 8 x 28. In-game acceptance remains with the owner.
+
+Local offline `test build compileGameTestJava` passed: 527 Java tests, 90 Node tooling tests,
+art consistency checks and the release build. Runtime GameTests remain ANU-only; no client ran.
