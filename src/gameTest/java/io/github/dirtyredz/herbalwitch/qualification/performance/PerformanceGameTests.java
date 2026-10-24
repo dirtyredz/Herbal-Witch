@@ -49,6 +49,8 @@ public final class PerformanceGameTests {
     /** No natural spawning: every entity in a workload is one the workload placed. */
     private static void quiet(GameTestHelper helper) {
         var server = helper.getLevel().getServer();
+        if (!(helper.getLevel().getChunkSource().getGenerator() instanceof net.minecraft.world.level.levelgen.FlatLevelSource))
+            throw new IllegalStateException("The frozen protocol measures a superflat world (gradle/gametest-world.gradle)");
         helper.getLevel().getGameRules().getRule(GameRules.RULE_DOMOBSPAWNING).set(false, server);
     }
 

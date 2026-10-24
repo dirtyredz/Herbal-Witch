@@ -16,8 +16,12 @@ Severity: **blocker** (release cannot happen with it open), **owner** (needs the
 | R-PERF | known limit | Every frozen gate passes on ANU (busy settlement 5.91 ms p95 over its matched vanilla control on the candidate, after the M12 familiar-state fix; it was 10.87). The figures come from a 4-core 2013 CPU with a shortened protocol; saturation (twice the busy settlement) runs at 47.85 ms p95, near the 50 ms tick budget | docs/qualification/performance.md | Owner may ask for a longer protocol on other hardware | - |
 | R-CRASH | known limit | Crash safety is deterministic boundary replay across processes (capture, familiar, tools, commerce), not random power loss; Minecraft saves are not transactions across player, chunk and data files | restart READMEs; save-compatibility.md | none | - |
 | R-STRUCT | known limit | Structural P2 debt, no behaviour impact: grimoire/client single-file jobs, brewing registry catch-alls, process station seams, small cleanups, witch-status residue | Docket | Schedule after release | dk-1aa5c349, dk-9aa8a47a, dk-1967a7e5, dk-21d69e74, dk-41d0eae3 |
+| R-FLAKE | known limit | One GameTest (capture release with a full inventory) refused its release cell once in about fifteen M12 runs; not reproduced in 24 repeats, not root-caused. No production symptom is known | ANU ...175808-c88; qualification README | On recurrence, read the reach/position the assertion now reports | dk-a58050f7 |
 | R-UNVERIFIED | owner | Behaviours with code but no automated proof: familiar names (vanilla name tag, no rename UI), "broom is not a weapon", two simultaneous real players | design-audit.md (D-8-3, D-11-4, D-14-42) | Owner cases M9-1, M10-1, M11-2 | - |
 
 Fixed during M12 (no longer open): a write-locked capture ledger deleted ordinary animals on chunk load;
 herds or dropped items hid hostiles from familiar guards, scouts and senses; foxes lacked their promised
-stealth; the seat and thrown-preparation entities had no English name. Each has a regression test.
+stealth; the seat and thrown-preparation entities had no English name; familiar tick handlers deep-copied the
+whole bond state (the performance gate failure). Each has a regression test. Intermittent GameTests were test
+defects, root-caused and fixed (qualification README), except one capture-release refusal seen once and
+not reproduced in 24 repeats (dk-a58050f7, P3; its assertion now reports the cause).

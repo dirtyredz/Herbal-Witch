@@ -292,3 +292,22 @@ Pending: owner in-game review (placement preview, facings and item views, two cl
 owner logout during a sale, privacy of proceeds/ledger/requests, villager arrival and exhausted demand,
 the board request-to-purchase flow, the commerce screen layout, Blockbench edit/recompile). The
 integrated-host (level.dat) player checkpoint path is implemented but not automation-qualified.
+
+## M12: complete-release qualification - private 1.0.0-rc.1
+
+No new gameplay beyond what the design audit found missing: fox familiars are stealthy (concealed from hostiles
+until they distract one). Everything else is evidence: every design promise traced
+([design-audit](qualification/design-audit.md), 355 rows, none missing), the owner's 0.2.0-dev.9 and 0.6.1
+worlds upgraded ([save-compatibility](qualification/save-compatibility.md)), capture restarts at eleven ledger
+boundaries, the installed Forge dedicated server with optional mods, Doggy Talents and KubeJS, measured
+performance budgets ([performance](qualification/performance.md)), extensibility seams
+([extensibility](qualification/extensibility.md)), English names for every registry entry, and the art sweep
+(docs/ART.md). Results and job ids: [qualification README](qualification/README.md#results-for-the-candidate).
+
+Fixed (production): a write-locked capture ledger deleted ordinary animals on chunk load; herds and dropped
+items hid hostiles from guards, scouts and senses (scans now count only relevant entities); foxes lacked their
+stealth; the seat and thrown-preparation entities had no English name; familiar tick handlers deep-copied the
+whole bond state (busy-settlement cost 10.87 to 5.91 ms p95 over vanilla). Each has a regression test.
+
+Pending: owner in-game acceptance of M1-M12 ([owner-acceptance](qualification/owner-acceptance.md)) and the
+[release-readiness](qualification/release-readiness.md) items. Publishing and pack integration are the owner's.

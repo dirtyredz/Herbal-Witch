@@ -44,6 +44,7 @@ def dedicatedPhase = { String taskName, File workingDir, String namespace, Map<S
         minecraftArtifacts.from(providers.provider { tasks.named('runGameTestServer').get().minecraftArtifacts })
         runtimeClasspathArtifacts.from(providers.provider { tasks.named('runGameTestServer').get().runtimeClasspathArtifacts })
         additionalClientArgs.set([])
+        doFirst { gameTestWorld(workingDir) }
     }
 }
 

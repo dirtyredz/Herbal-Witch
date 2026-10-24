@@ -377,7 +377,7 @@ herbalwitch/
 **other (gradle, docs)**
 
 - `docs/` — architecture, decisions, gotchas, features, art, compatibility; `docs/catalogue/` traces the design to implementation
-- `gradle/` — `art.gradle` (the art pipeline tasks) and `qualification.gradle` (every ANU-only dedicated-JVM harness, one shared phase factory); the wrapper comes from the workspace template
+- `gradle/` — `art.gradle` (the art pipeline tasks), `gametest-world.gradle` (the superflat server.properties every GameTest JVM starts from) and `qualification.gradle` (every ANU-only dedicated-JVM harness, one shared phase factory); the wrapper comes from the workspace template
 
 ## Components
 

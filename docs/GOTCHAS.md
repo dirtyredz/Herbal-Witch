@@ -481,3 +481,10 @@ Full M10 profile runs exposed M9 fixture assumptions: the retreat owner was outs
   `getEntitiesOfClass` never see (M12: harvest drops joined and were then not found; a spawned cow was absent
   from the animal card). Tests that add or look up entities on their first tick start through
   `WorldFixtures.whenEntitiesLive`; familiar tests get it from `FamiliarFixtures.whenReady`.
+- **The Forge GameTest server is a dedicated server: its world comes from server.properties.** Without one it
+  generated normal terrain, and the plots at y = -60 sat in deepslate caves: gravel fell into a release cell,
+  cave mobs and terrain broke villager, familiar and capture tests at random (M12, ANU curios run
+  ...195136-111). `gradle/gametest-world.gradle` writes a superflat, structure-free, no-natural-spawning
+  server.properties before every GameTest JVM; `TestWorldGameTests` fails the suite if the world is not flat.
+  An existing world keeps its generator, so delete or rename a reused `run/gametest*` world (use a new
+  `-PgameTestRunId`).
