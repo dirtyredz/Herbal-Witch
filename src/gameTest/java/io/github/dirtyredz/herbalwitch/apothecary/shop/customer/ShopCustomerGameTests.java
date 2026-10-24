@@ -43,8 +43,16 @@ public final class ShopCustomerGameTests {
         if (previous != null) ShopServerConfig.install(previous);
     }
 
+    /**
+     * A villager shop on a penned plot: a two-high barrier ring on the plot's edge keeps the customer
+     * inside its own plot (the superflat test world has no walls of its own), so it is never out of range.
+     */
     static Shop villagerShop(GameTestHelper h, int teas) {
         floor(h);
+        for (int i = 0; i <= 8; i++) for (int y = 1; y <= 2; y++) {
+            h.setBlock(new BlockPos(i, y, 0), Blocks.BARRIER); h.setBlock(new BlockPos(i, y, 8), Blocks.BARRIER);
+            h.setBlock(new BlockPos(0, y, i), Blocks.BARRIER); h.setBlock(new BlockPos(8, y, i), Blocks.BARRIER);
+        }
         Shop shop = shop(h, witch(h, "npc_owner"), COUNTER);
         selling(h, shop, teas, 1);
         check(ShopManagement.villagers(shop.owner(), store(h), shop.id(), true).success(), "enable villagers");
@@ -58,11 +66,13 @@ public final class ShopCustomerGameTests {
     @GameTest(template = TEMPLATE, batch = "herbalwitch_shop_customers", timeoutTicks = 1600)
     public static void aRealVillagerWalksToTheRegisterAndBuysOneLot(GameTestHelper h) {
         Shop shop = villagerShop(h, 3);
-        Villager villager = h.spawn(EntityType.VILLAGER, new BlockPos(4, 1, 0));
+        Villager villager = h.spawn(EntityType.VILLAGER, new BlockPos(4, 1, 1));
         villager.setAge(0);
         h.succeedWhen(() -> {
             var r = record(h, shop);
-            check(r.proceeds == 1, "no villager sale yet");
+            if (r.proceeds != 1) throw new net.minecraft.gametest.framework.GameTestAssertException("no villager sale yet: villager at "
+                    + h.relativePos(villager.blockPosition()) + ", activity " + villager.getBrain().getActiveNonCoreActivity().orElse(null)
+                    + ", day time " + h.getLevel().getDayTime() % 24000 + ", visiting " + visiting(h, shop));
             check(r.stock.count(ShopStackKey.of(tea(1))) == 2, "villager sale moved the wrong stock");
             check(r.history.stream().anyMatch(e -> e.type() == ShopHistoryEntry.Type.NPC_SALE && e.actor().equals(villager.getUUID())), "history");
             check(villager.getInventory().isEmpty(), "the preparation entered the villager's inventory");
@@ -97,7 +107,7 @@ public final class ShopCustomerGameTests {
     @GameTest(template = TEMPLATE, batch = "herbalwitch_shop_customers", timeoutTicks = 1600)
     public static void closingTheShopOrChangingTheOfferCancelsAVisitWithoutSelling(GameTestHelper h) {
         Shop shop = villagerShop(h, 3);
-        Villager villager = h.spawn(EntityType.VILLAGER, new BlockPos(1, 1, 0));
+        Villager villager = h.spawn(EntityType.VILLAGER, new BlockPos(1, 1, 1));
         villager.setAge(0);
         UUID offer = record(h, shop).offers.get(0).id();
         boolean[] closed = {false};

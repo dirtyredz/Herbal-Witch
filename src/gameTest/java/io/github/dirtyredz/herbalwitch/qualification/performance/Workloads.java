@@ -89,6 +89,13 @@ final class Workloads {
             level.setBlock(base.offset(x, -1, z), Blocks.STONE.defaultBlockState(), Block.UPDATE_CLIENTS);
             for (int y = 0; y < 6; y++) level.setBlock(base.offset(x, y, z), Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS);
         }
+        // A barrier ring just outside the plot keeps the fixed population on it in the open superflat world.
+        for (int i = -1; i <= SIZE; i++) for (int y = 0; y < 2; y++) {
+            level.setBlock(base.offset(i, y, -1), Blocks.BARRIER.defaultBlockState(), Block.UPDATE_CLIENTS);
+            level.setBlock(base.offset(i, y, SIZE), Blocks.BARRIER.defaultBlockState(), Block.UPDATE_CLIENTS);
+            level.setBlock(base.offset(-1, y, i), Blocks.BARRIER.defaultBlockState(), Block.UPDATE_CLIENTS);
+            level.setBlock(base.offset(SIZE, y, i), Blocks.BARRIER.defaultBlockState(), Block.UPDATE_CLIENTS);
+        }
     }
 
     void release() {
