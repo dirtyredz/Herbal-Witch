@@ -87,6 +87,22 @@ class DependencyDirectionTest {
     }
 
     @Test
+    void animalsAndLifecycleNeverDependOnFamiliars() throws IOException {
+        var familiar = Pattern.compile("io\\.github\\.dirtyredz\\.herbalwitch\\.companions\\.familiars\\.");
+        for (String area : List.of("animals", "lifecycle")) {
+            for (Path file : javaFiles(ROOT.resolve("companions/" + area))) reject(file, familiar);
+        }
+    }
+
+    @Test
+    void onlyWandMayImportCompanionsFromMagic() throws IOException {
+        var companion = Pattern.compile("io\\.github\\.dirtyredz\\.herbalwitch\\.companions\\.");
+        for (Path file : javaFiles(ROOT.resolve("magic"))) {
+            if (!file.startsWith(ROOT.resolve("magic/wand"))) reject(file, companion);
+        }
+    }
+
+    @Test
     void wardServicePackageDependsDownwardsOnly() throws IOException {
         // WardService (ticking, server lifecycle) sits on top; its siblings use WardIndex/WardContext/WardLifecycle.
         var sibling = Pattern.compile("\\bWardService\\b");

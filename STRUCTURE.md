@@ -1,6 +1,6 @@
 # STRUCTURE - The Herbal Witch
 
-<!-- Last full review: 2026-10-22 (0.6.1 structural refactor; round 2 fixes applied) -->
+<!-- Last full review: 2026-10-25 (baseline review; debt filed as Docket items) -->
 
 Code map. Behaviour: [README.md](README.md). How it works: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.md.
@@ -9,51 +9,89 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 
 - `.github/workflows/`, `.github/actions/setup-mod-build/` - synced hosted checks and deliberate release dispatch.
 - `.ci/mod.json` - this mod's identity, datagen/GameTest flags and pack side; `.ci/scripts/` is synced release tooling.
-- `gradle/{verify-release-jar,test-world,gametest-world}.gradle` and `tools/test-world/datapack/` - synced jar verification and test-world staging.
+- `gradle/verify-release-jar.gradle` and `tools/test-world/datapack/` - synced jar verification and test-world staging.
+- `gradle/test-world.gradle` and `tools/test-world/datapack/` - synced jar verification and test-world staging.
+- `gradle/gametest-world.gradle` and `tools/test-world/datapack/` - synced jar verification and test-world staging.
 - `gradle/wrapper/`, `gradlew*`, `.gitattributes`, `.gitignore` - synced workspace files; edit the root template and sync.
 - `docs/releases/` - versioned release notes; add notes only for a version being prepared for release.
 
-Phase 1 guide (1.0.0-rc.3): `client/grimoire/guide/` owns GuideME registration and reload wiring;
-`client/grimoire/guide/content/` owns live processing tags and recipe presentation.
-`data/client/grimoire/guide/` assembles native pages and validates scene states/item associations
-against Forge registries during datagen. No GuideME imports occur in datagen or gameplay.
-Authored prose lives in `src/main/resources/assets/herbalwitch/guide_sources/en_us/{path,apothecary}/`;
-generated pages (native frontmatter and catalogue-derived scenes included) live in
-`src/generated/resources/assets/herbalwitch/guide/{path,apothecary}/`.
-Separate source/output roots prevent duplicate packaged paths. Tests mirror presentation under
-`src/test/java/io/github/dirtyredz/herbalwitch/client/grimoire/guide/` and its `content/` child.
-The existing reader remains in place during this additive phase.
+- `src/main/java/io/github/dirtyredz/herbalwitch/client/grimoire/guide/` — GuideME registration and reload wiring; content/ owns live recipe presentation.
+- `src/main/java/io/github/dirtyredz/herbalwitch/data/client/grimoire/guide/` — Native guide pages and registry-validated scenes; no GuideME gameplay dependencies.
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/advanced/broom_stand/` — Broom station adapter, recipes and repair transforms.
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/advanced/wand_bench/` — Wand station adapter, recipes and repair transforms.
+- `src/main/java/io/github/dirtyredz/herbalwitch/data/server/stations/recipes/tools/` — Tool acquisition contributions to the sole recipe writer.
+- `src/main/java/io/github/dirtyredz/herbalwitch/data/client/magic/tools/` — Tool item parents and language contributions.
+- `src/main/java/io/github/dirtyredz/herbalwitch/client/stations/tools/` — Tool repair presentation.
+- `src/main/java/io/github/dirtyredz/herbalwitch/magic/broom/catalog/` — Physical broom constants.
+- `src/main/java/io/github/dirtyredz/herbalwitch/magic/broom/persistence/` — Strict item condition data.
+- `src/main/java/io/github/dirtyredz/herbalwitch/magic/broom/flight/` — Movement and fixed-point costs.
+- `src/main/java/io/github/dirtyredz/herbalwitch/magic/broom/network/` — Ephemeral rider input leases.
+- `src/main/java/io/github/dirtyredz/herbalwitch/magic/wand/catalog/` — Stable selector identities.
+- `src/main/java/io/github/dirtyredz/herbalwitch/magic/wand/persistence/` — Mode preferences.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/familiars/equipment/` — Canonical slots, cargo and receipt-controlled transfers.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/familiars/recovery/` — Lethal damage checkpoints, paid revival and retained-payload recovery.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/familiars/admin/` — Level-two administrative command adapter.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/familiars/interaction/` — Animal care contributions and familiar interaction.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/familiars/preparation/` — Canonical buffs, runtime projections and damage policy.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/familiars/ability/retrieval/` — Loose-item eligibility, pickup transaction and source-retirement receipts.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/familiars/acquisition/` — Safe passive spawn placement.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/familiars/grimoire/` — Installed familiar guide source.
+- `src/main/java/io/github/dirtyredz/herbalwitch/client/familiars/model/` — Native and compiled familiar rigs and attachment poses.
+- `src/main/java/io/github/dirtyredz/herbalwitch/client/familiars/render/` — Familiar rendering and equipment attachments.
+- `src/main/java/io/github/dirtyredz/herbalwitch/client/broom/` — Intent controls, HUD, deployment preview and item-model renderer.
+- `src/main/java/io/github/dirtyredz/herbalwitch/client/wand/` — Selector controls and mode HUD.
+- `src/main/java/io/github/dirtyredz/herbalwitch/magic/wand/config/` — Utility limits and prices in the existing witch rules.
+- `src/main/java/io/github/dirtyredz/herbalwitch/magic/wand/action/` — Seven utility adapters.
+- `src/main/java/io/github/dirtyredz/herbalwitch/magic/wand/use/` — Actor limits and server targeting.
+- `src/main/java/io/github/dirtyredz/herbalwitch/magic/wand/network/` — Held-stack selector validation.
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/botany/harvest/` — Shared reversible hand/wand harvest plan and commit.
+- `src/main/java/io/github/dirtyredz/herbalwitch/magic/broom/item/` — broom item ownership and feature contributions.
+- `src/main/java/io/github/dirtyredz/herbalwitch/magic/broom/registry/` — broom registry ownership and feature contributions.
+- `src/main/java/io/github/dirtyredz/herbalwitch/magic/broom/grimoire/` — broom grimoire ownership and feature contributions.
+- `src/main/java/io/github/dirtyredz/herbalwitch/magic/broom/showcase/` — broom showcase ownership and feature contributions.
+- `src/main/java/io/github/dirtyredz/herbalwitch/magic/wand/item/` — wand item ownership and feature contributions.
+- `src/main/java/io/github/dirtyredz/herbalwitch/magic/wand/registry/` — wand registry ownership and feature contributions.
+- `src/main/java/io/github/dirtyredz/herbalwitch/magic/wand/grimoire/` — wand grimoire ownership and feature contributions.
+- `src/main/java/io/github/dirtyredz/herbalwitch/magic/wand/showcase/` — wand showcase ownership and feature contributions.
+- `src/main/java/io/github/dirtyredz/herbalwitch/magic/broom/config/` — Validated flight rules and physical entity lifecycle.
+- `src/main/java/io/github/dirtyredz/herbalwitch/magic/broom/entity/` — Validated flight rules and physical entity lifecycle.
+- `src/main/java/io/github/dirtyredz/herbalwitch/magic/broom/interaction/` — Validated flight rules and physical entity lifecycle.
+- `src/main/java/io/github/dirtyredz/herbalwitch/magic/broom/lifecycle/` — Validated flight rules and physical entity lifecycle.
 
-M10 tools: `apothecary/stations/advanced/{broom_stand,wand_bench}/` owns station adapters, recipes and
-repair transforms; `data/server/stations/recipes/tools/` contributes acquisition to the sole recipe
-writer. `data/client/magic/tools/` owns item parents; `client/stations/tools/` owns repair presentation.
-`magic/{broom,wand}/{item,registry}/` owns physical tool registration.
-`src/art/blockbench/magic/{broom,wand}/` and `src/art/blockbench/stations/tools/{broom_stand,wand_bench}/`
-own editable geometry and textures. Compiled handheld parents live in `models/item/magic/<tool>/`,
-station models in `models/block/stations/tools/<station>/`, and textures below `textures/block/pieces/`
-mirroring project directories. `tools/art/interface/tool-stations.mjs` supplies their GUI atlases.
-GameTests live in `src/gameTest/java/io/github/dirtyredz/herbalwitch/apothecary/stations/tools/`.
-
-M10 foundation: `magic/broom/catalog/` owns physical constants;
-`magic/broom/persistence/` owns strict item condition data; `magic/broom/flight/` owns pure movement
-and fixed-point cost arithmetic; `magic/broom/network/` owns ephemeral rider input leases.
-`magic/wand/catalog/` owns stable selector IDs and `magic/wand/persistence/` owns mode preferences.
-Tests mirror these responsibilities under `src/test/java/io/github/dirtyredz/herbalwitch/magic/`,
-with the wand's selector tests directly in `magic/wand/`.
+- `src/main/resources/assets/herbalwitch/guide_sources/en_us/` — authored path and apothecary prose.
+- `src/generated/resources/assets/herbalwitch/guide/` — generated native guide pages; separate from authored sources.
+- `src/art/blockbench/magic/` — editable broom and wand geometry.
+- `src/art/blockbench/stations/tools/` — editable broom stand and wand bench geometry.
+- `src/art/entities/` — raven, owl and snake rig projects.
+- `tools/entities/` — entity compilation and pose tests.
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/magic/tools/restart/` — two-JVM tool persistence qualification.
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/companions/familiars/persistence/` — familiar restart support.
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/platform/persistence/` — test-only snapshot probes.
 
 ```text
-herbalwitch/
+src/main/java/io/github/dirtyredz/herbalwitch/
   HerbalWitch.java
-  apothecary/                 botany/ -> cultivation; brewing/ -> preparations; stations/ -> processing
-  client/                    screens, rendering, recipe text and optional viewers; magic/ -> ritual, ward, witch
-  companions/                animals/ care and transport; lifecycle/ loaded identities; familiars/ consume trust views
-  data/                      generated resources, one writer per shared output
-  decor/                     catalogue, structures and furniture behaviour
-  grimoire/                  contracts, content, knowledge, reading and transport
-  magic/                     witch/, ritual/, charm/, ward/, broom/, wand/
-  platform/                  compat/, geometry/, inventory/, multiblock/, network/, permission/,
-                             persistence/, placement/, player/, recipe/, time/
-  showcase/                  planning, construction and commands
+  apothecary/
+    botany/  brewing/  shop/  stations/
+  client/
+    animals/  brewing/  broom/  compat/  decor/  familiars/
+    grimoire/  magic/  placement/  recipe/  stations/  wand/
+  companions/
+    animals/  familiars/  lifecycle/
+  data/
+    client/  server/
+  decor/
+    behavior/  catalog/  grimoire/  registry/  showcase/  structure/
+  grimoire/
+    access/  catalog/  content/  knowledge/  network/  reading/
+    registry/  showcase/
+  magic/
+    broom/  charm/  ritual/  wand/  ward/  witch/
+  platform/
+    compat/  geometry/  inventory/  multiblock/  network/  permission/
+    persistence/  placement/  player/  recipe/  time/
+  showcase/
+    command/  construction/  layout/
 ```
 
 **src/main/java: root**
@@ -62,7 +100,7 @@ herbalwitch/
 
 **src/main/java: apothecary**
 
-- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/` — grouping parent only: botany, brewing and stations; no implementation in the parent
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/` — grouping parent only: botany, brewing, shop and stations; no implementation in the parent
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/botany/` — grouping parent; `HerbWorldgen` (herb patch feature keys and bootstraps, biome modifiers) is the only loose file
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/botany/catalog/` — plain herb descriptors: the 14 herbs, habitats (groups), traits
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/botany/conditions/` — reloadable discovery/yield conditions: model, reload listener, live evaluator
@@ -77,7 +115,7 @@ herbalwitch/
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/brewing/grimoire/` — preparation guidance contributions
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/brewing/product/` — preparations: `catalog/`, `registry/`, `item/`, `lighting/` (oil lantern), `metadata/` (water-to-drink data), `showcase/`, with `DriedBundleBlock` (hung bundles) and `ResinDropModifier` (resin) loose; Milestone 7 adds the advanced, familiar and mixture catalogues with their items and registries
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/brewing/projectile/` — thrown preparations: the projectile entity, its impact and the in-flight limits
-- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/advanced/` — shared `AdvancedStationBlock` and `AdvancedStationEntity`, then one flat package per station (`cauldron`, `still`, `bottling_bench`, `charm_workbench`)
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/advanced/` — shared `AdvancedStationBlock` and `AdvancedStationEntity`, then one flat package per station (`cauldron`, `still`, `bottling_bench`, `charm_workbench`, `broom_stand`, `wand_bench`)
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/block/` — `StationBlock`, `StationEntity`, `ProcessStationEntity` and `StationMenu`: block behaviour shared by stations (facing, support, menu, ticker, drops; the process-station base)
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/catalog/` — the twelve station identities (six everyday, six advanced) and processing categories
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/everyday/` — one flat package per everyday station (`drying_rack`, `mortar`, `kettle`, `hearth`, `stove`, `infusion_pot`), containing its block, menu and recipe adapters
@@ -93,55 +131,66 @@ herbalwitch/
 **src/main/java: companions**
 
 - `src/main/java/io/github/dirtyredz/herbalwitch/companions/` and `companions/animals/` — grouping parents only.
-- `companions/lifecycle/` — loaded object-identity index and cross-dimension lookup/admission/retirement; no capture or bond records.
-- `companions/familiars/` — grouping parent; `catalog/` holds permanent species/action facts, `registry/` wires contributions, `command/` owns serialized command identities.
-- `companions/familiars/bond/` — binding eligibility and paid conversion; `data/` owns bounded per-bond shards and derived owner/entity indexes, `entity/` owns lightweight references and admission, `transaction/` owns durable player receipts.
-- `companions/familiars/species/` — exact animal participation and payload adapters; `ground/` and `flying/` contain thin native representations and shared flight mechanics.
-- `companions/familiars/ritual/` — feature-owned altar session handlers through the neutral action registry.
-- `companions/familiars/menu/` and `network/` — owner-derived roster pages, nearby detail sessions and bounded request/projection messages.
-- `companions/familiars/config/` — atomic bounded server rule snapshots; acquisition switches never delete bonds.
-- `companions/familiars/command/` — command transitions, derived mobile reservations and loaded-only recall; `ai/` owns mutually exclusive behavior and observations, `navigation/` owns safe destinations and queued paths.
-- `companions/familiars/work/` — shared fair per-dimension scan/path queues and bounded engine queries; `observation/` owns private owner/target alert throttling.
-- `companions/familiars/ability/` — payment, reserve and scheduling; `sensing/` owns incremental plant/entity observations and `action/` owns concrete garden/guard effects. `observation/` also owns short-lived private action tokens; `client/familiars/state/` caches their bounded projections and `render/` draws observed positions. Tests live in `src/{test,gameTest}/.../companions/familiars/ability/`.
-- `companions/familiars/home/` — shared bed/nest/perch block, identity-only block entity, canonical occupancy index, assignment, safe rest and loaded-only destinations.
-- `companions/familiars/showcase/` — functional home and familiar feature sections in the witchcraft group.
-- `src/{test,gameTest}/java/io/github/dirtyredz/herbalwitch/companions/familiars/home/` — compatibility, occupancy, real placement/support loss, replacement identity, pending homes and loaded rest.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/lifecycle/` — loaded object-identity index and cross-dimension lookup/admission/retirement; no capture or bond records.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/familiars/` — grouping parent; `catalog/` holds permanent species/action facts, `registry/` wires contributions, `command/` owns serialized command identities.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/familiars/bond/` — binding eligibility and paid conversion; `data/` owns bounded per-bond shards and derived owner/entity indexes, `entity/` owns lightweight references and admission, `transaction/` owns durable player receipts.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/familiars/species/` — exact animal participation and payload adapters; `ground/` and `flying/` contain thin native representations and shared flight mechanics.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/familiars/ritual/` — feature-owned altar session handlers through the neutral action registry.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/familiars/menu/` and `network/` — owner-derived roster pages, nearby detail sessions and bounded request/projection messages.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/familiars/config/` — atomic bounded server rule snapshots; acquisition switches never delete bonds.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/familiars/command/` — command transitions, derived mobile reservations and loaded-only recall; `ai/` owns mutually exclusive behavior and observations, `navigation/` owns safe destinations and queued paths.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/familiars/work/` — shared fair per-dimension scan/path queues and bounded engine queries; `observation/` owns private owner/target alert throttling.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/familiars/ability/` — payment, reserve and scheduling; `sensing/` owns incremental plant/entity observations and `action/` owns concrete garden/guard effects. `observation/` also owns short-lived private action tokens; `client/familiars/state/` caches their bounded projections and `render/` draws observed positions. Tests live in `src/{test,gameTest}/.../companions/familiars/ability/`.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/familiars/home/` — shared bed/nest/perch block, identity-only block entity, canonical occupancy index, assignment, safe rest and loaded-only destinations.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/familiars/showcase/` — functional home and familiar feature sections in the witchcraft group.
+- `src/test/java/io/github/dirtyredz/herbalwitch/companions/familiars/home/` — compatibility, occupancy, real placement/support loss, replacement identity, pending homes and loaded rest.
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/companions/familiars/home/` — compatibility, occupancy, real placement/support loss, replacement identity, pending homes and loaded rest.
 - `src/art/blockbench/familiars/homes/<bed|nest|perch>/` — one-off owned-texture projects and sidecars; compiled models at `src/main/resources/assets/herbalwitch/models/block/familiars/home/<piece>/`, textures at `textures/block/pieces/familiars/homes/<piece>/`.
 - `tools/preview/scenes/familiars/` — actual home blockstates in each facing and floor-support context.
-- `platform/permission/PrincipalPermission` — UUID-aware automation location checks, vanilla spawn protection and additive protection policies; unsupported claims refuse automation.
-- `client/familiars/` — client bootstrap; `state/` retains only the current private page and `screen/` renders roster/detail cards.
+- `src/main/java/io/github/dirtyredz/herbalwitch/platform/permission/PrincipalPermission.java` — UUID-aware automation location checks, vanilla spawn protection and additive protection policies; unsupported claims refuse automation.
+- `src/main/java/io/github/dirtyredz/herbalwitch/client/familiars/` — client bootstrap; `state/` retains only the current private page and `screen/` renders roster/detail cards.
 - `src/test/java/io/github/dirtyredz/herbalwitch/companions/familiars/network/` — wire limits and private projection contracts.
-- `src/gameTest/java/io/github/dirtyredz/herbalwitch/companions/familiars/{fixture,menu}/` — real bound entities and private session/nearby access checks.
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/companions/familiars/fixture/` — real bound entities and private session/nearby access checks.
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/companions/familiars/menu/` — real bound entities and private session/nearby access checks.
 - `src/test/java/io/github/dirtyredz/herbalwitch/companions/familiars/command/` — persisted reservation order, shared mobile classification, queue fairness and hard configuration bounds.
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/companions/familiars/command/` — real navigation, sleep, guard authorization, unloaded reservations and paid incarnation recall.
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/companions/familiars/config/` — live cap reduction and acquisition-only switches against real bonds.
-- `data/{client,server}/familiars/` — language/entity tags, home states/item parents, empty loot and exact crafting recipes through the shared writers.
+- `src/main/java/io/github/dirtyredz/herbalwitch/data/client/familiars/` — language/entity tags, home states/item parents, empty loot and exact crafting recipes through the shared writers.
+- `src/main/java/io/github/dirtyredz/herbalwitch/data/server/familiars/` — language/entity tags, home states/item parents, empty loot and exact crafting recipes through the shared writers.
 - `src/test/java/io/github/dirtyredz/herbalwitch/companions/familiars/bond/` — shard bounds, indexing, corruption, receipt and write uncertainty tests.
 - `src/test/java/io/github/dirtyredz/herbalwitch/data/familiars/` — independent resource inventory.
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/companions/familiars/bond/` — real altar binding, cancellation and stale source admission tests in separate batches.
 - `src/test/java/io/github/dirtyredz/herbalwitch/companions/lifecycle/` — duplicate, removed and late-leave object identity tests.
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/companions/lifecycle/` — real-entity admission, retirement and replacement tests.
-- `companions/animals/catalog/`, `species/`, `config/`, `registry/` — bait identities, exact species profiles and live eligibility, validated server limits, bootstrap and tags.
-- `companions/animals/trust/` — lazy Mob capability, immutable personal views, schema codec and loaded-clock lifecycle.
-- `companions/animals/care/taming/` — authoritative native-owner/keeper resolution; care responsibilities group beneath `care/` to keep the animal root narrow.
-- `companions/animals/care/interaction/` — one server interaction path, targeted existing salve, bait and powder; shared entity-policy contribution.
-- `companions/animals/care/ai/` — removable goal instances, bounded dimension budgets, fair query queue and spatial bait-holder index.
-- `companions/animals/inspection/{menu,network}/` — continuously validated zero-slot card, private bounded snapshot and adoption request.
-- `companions/animals/capture/` — item token, capture/release policy and transactions; `data/` owns the sole ledger, checkpoint writer and load reconciliation; `payload/` owns exact vanilla adapters and NBT validation; `command/` owns operator recovery.
-- `companions/animals/{grimoire,showcase}/` — feature-owned guidance at priority 1100 and sixteen live animal habitats.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/animals/catalog/`, `species/`, `config/`, `registry/` — bait identities, exact species profiles and live eligibility, validated server limits, bootstrap and tags.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/animals/trust/` — lazy Mob capability, immutable personal views, schema codec and loaded-clock lifecycle.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/animals/care/taming/` — authoritative native-owner/keeper resolution; care responsibilities group beneath `care/` to keep the animal root narrow.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/animals/care/interaction/` — one server interaction path, targeted existing salve, bait and powder; shared entity-policy contribution.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/animals/care/ai/` — removable goal instances, bounded dimension budgets, fair query queue and spatial bait-holder index.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/animals/inspection/menu/` — continuously validated zero-slot card, private bounded snapshot and adoption request.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/animals/inspection/network/` — continuously validated zero-slot card, private bounded snapshot and adoption request.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/animals/capture/` — item token, capture/release policy and transactions; `data/` owns the sole ledger, checkpoint writer and load reconciliation; `payload/` owns exact vanilla adapters and NBT validation; `command/` owns operator recovery.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/animals/grimoire/` — feature-owned guidance at priority 1100 and sixteen live animal habitats.
+- `src/main/java/io/github/dirtyredz/herbalwitch/companions/animals/showcase/` — feature-owned guidance at priority 1100 and sixteen live animal habitats.
 - `src/main/java/io/github/dirtyredz/herbalwitch/client/animals/` — card presentation through the shared grimoire panel host; no server authority.
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/client/animals/` — language contribution and parent-only item model provider.
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/server/animals/` — contributions to the sole tag and processing-recipe writers.
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/server/tags/HerbalWitchEntityTagsProvider.java` — sole entity-tag writer; preparations and animals contribute independently.
-- `src/test/java/io/github/dirtyredz/herbalwitch/companions/animals/{trust,species}/` — pure relationship, codec, eligibility and bounds tests.
-- `src/test/java/io/github/dirtyredz/herbalwitch/companions/animals/{care,inspection,capture}/` — AI counters, wire bounds, ledger transitions, payload validation and persistence fault tests.
+- `src/test/java/io/github/dirtyredz/herbalwitch/companions/animals/trust/` — pure relationship, codec, eligibility and bounds tests.
+- `src/test/java/io/github/dirtyredz/herbalwitch/companions/animals/species/` — pure relationship, codec, eligibility and bounds tests.
+- `src/test/java/io/github/dirtyredz/herbalwitch/companions/animals/care/` — AI counters, wire bounds, ledger transitions, payload validation and persistence fault tests.
+- `src/test/java/io/github/dirtyredz/herbalwitch/companions/animals/inspection/` — AI counters, wire bounds, ledger transitions, payload validation and persistence fault tests.
+- `src/test/java/io/github/dirtyredz/herbalwitch/companions/animals/capture/` — AI counters, wire bounds, ledger transitions, payload validation and persistence fault tests.
 - `src/test/java/io/github/dirtyredz/herbalwitch/data/animals/` — independent animal resource manifest and exact tag matrix.
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/companions/animals/` — real-entity capability and ownership tests, compiled locally and run by the orchestrator.
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/companions/animals/fixture/` — test-only unique players and real animal setup.
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/companions/animals/care/ai/` — real bait movement and fair spatial-index tests.
-- `src/art/blockbench/animals/{bait,care,capture}/<piece>/` — nine independent projects with embedded 32px textures and sidecars.
-- `src/main/resources/assets/herbalwitch/{models/block/animals,textures/block/pieces/animals}/` — compiler-owned art; generated item wrappers live under `models/item/animals/`.
-- `showcase/layout/ShowcaseEntitySample.java` — pure bounded entity descriptors; `showcase/construction/ShowcaseEntitySpawner.java` runs after habitats and cleans up only its own failed invocation.
+- `src/art/blockbench/animals/bait/<piece>/` — nine independent projects with embedded 32px textures and sidecars.
+- `src/art/blockbench/animals/care/<piece>/` — nine independent projects with embedded 32px textures and sidecars.
+- `src/art/blockbench/animals/capture/<piece>/` — nine independent projects with embedded 32px textures and sidecars.
+- `src/main/resources/assets/herbalwitch/models/block/animals/` — compiler-owned art; generated item wrappers live under `models/item/animals/`.
+- `src/main/resources/assets/herbalwitch/textures/block/pieces/animals/` — compiler-owned art; generated item wrappers live under `models/item/animals/`.
+- `src/main/java/io/github/dirtyredz/herbalwitch/showcase/layout/ShowcaseEntitySample.java` — pure bounded entity descriptors; `showcase/construction/ShowcaseEntitySpawner.java` runs after habitats and cleans up only its own failed invocation.
 
 **src/main/java: apothecary/shop (Milestone 11 commerce)**
 
@@ -255,7 +304,7 @@ herbalwitch/
 - `src/main/java/io/github/dirtyredz/herbalwitch/platform/multiblock/` — multiblock cell layout and lifecycle (placement, removal, shared state) used by the rack, hearth and stove
 - `src/main/java/io/github/dirtyredz/herbalwitch/platform/network/` — the mod's channel, payload bounds and chunked snapshot assembly (no gameplay policy)
 - `src/main/java/io/github/dirtyredz/herbalwitch/platform/permission/` — the shared authorization boundary for custom world changes; `entity/` (harmful entity actions, claim-mod adapters, harm attribution, the ward protection check)
-- `src/main/java/io/github/dirtyredz/herbalwitch/platform/persistence/` — checksummed snapshot envelope and serialized temp/force/atomic-replace/read-back writer; feature adapters retain failure policy and schemas.
+- `src/main/java/io/github/dirtyredz/herbalwitch/platform/persistence/` — checksummed snapshots plus host-aware `PlayerFileCheckpoint` save/force/read-back and clone copying; feature adapters retain failure policy and marker schemas.
 - `src/main/java/io/github/dirtyredz/herbalwitch/platform/placement/` — pure placement resolution, world checks and the transactional commit for multi-cell pieces
 - `src/main/java/io/github/dirtyredz/herbalwitch/platform/player/` — server-lifecycle online roster and independently scoped fake registrations
 - `src/main/java/io/github/dirtyredz/herbalwitch/platform/recipe/` — immutable processing facts, live `RecipeView` and ordered ingredient queries
@@ -322,7 +371,7 @@ herbalwitch/
 - `src/test/java/io/github/dirtyredz/herbalwitch/platform/inventory/` — allocation characterization
 - `src/test/java/io/github/dirtyredz/herbalwitch/platform/multiblock/` — 3D and sparse layout tests
 - `src/test/java/io/github/dirtyredz/herbalwitch/platform/network/` — payload bounds and chunk assembly tests
-- `src/test/java/io/github/dirtyredz/herbalwitch/platform/persistence/` — exact capture-envelope compatibility, filesystem fault stages and malformed/oversized snapshots.
+- `src/test/java/io/github/dirtyredz/herbalwitch/platform/persistence/` — capture-envelope compatibility, snapshot faults, host/dedicated player-file precedence, marker/UUID verification, clone isolation and malformed/oversized files.
 - `src/test/java/io/github/dirtyredz/herbalwitch/platform/placement/` — placement resolution tests
 - `src/test/java/io/github/dirtyredz/herbalwitch/platform/recipe/` — processing requirement codec and bounds
 - `src/test/java/io/github/dirtyredz/herbalwitch/platform/time/` — duration boundaries and fractional text
@@ -415,7 +464,7 @@ herbalwitch/
 | Station base | `apothecary/stations/block/{StationBlock,StationEntity,ProcessStationEntity}`, `apothecary/stations/block/StationMenu` | Shared block and menu boilerplate (facing, support, ticker, drops, slot rules) |
 | Processing | `apothecary/stations/process/**` | Composed `ProcessStation`: inventory with reservations, job, completion; `recipe/` format and index, `ProcessMatcher`, `execution/` policy and commit, `authorization/` operator and magical policy |
 | Stations | `apothecary/stations/everyday/<station>/`, `apothecary/stations/registry/*`, `apothecary/stations/heat/*` | The six everyday stations, their registration and heat rules |
-| Advanced stations | `apothecary/stations/advanced/**` | Witch's Cauldron, Copper Still, Bottling Bench, Charm Workbench on one `AdvancedStationBlock`/`AdvancedStationEntity`; witch recipes start by menu button |
+| Advanced stations | `apothecary/stations/advanced/**` | Witch's Cauldron, Copper Still, Bottling Bench, Charm Workbench, Broom Stand and Wand Bench on one `AdvancedStationBlock`/`AdvancedStationEntity`; witch recipes start by menu button |
 | Products | `apothecary/brewing/product/**`, `apothecary/brewing/application/**`, `apothecary/brewing/effect/**`, `apothecary/brewing/projectile/*` | Bundles, powders, drinks, salve, oils, garden products, oil lantern, the 16 advanced preparations, mixtures, effects, thrown preparations |
 | Charms | `magic/charm/**`, `platform/compat/curios/*` | Sachet and amulets, worn rules and charge, the Curios slot adapter |
 | Ritual circle | `magic/ritual/circle/*`, `magic/ritual/action/{Circle,GardenBlessing,HomeProtection}*` | The 5x5 ring, its validation, Garden Blessing and Home Protection |
@@ -456,10 +505,18 @@ grimoire content/knowledge/reading/network -> neutral facts + platform recipe/in
 apothecary/stations -> apothecary/brewing -> apothecary/botany
 processing + brewing -> magic/witch services
 magic/ward focus -> stations registry; magic/charm equipment -> brewing effects
-apothecary/shop -> brewing/botany/charm catalogues, decor counter (by id), platform persistence/permission/network/placement; nothing imports shop
+apothecary/shop -> brewing/botany/charm catalogues, decor counter (by id), platform persistence/permission/network/placement; stations, brewing, botany and decor never import shop
+companions/animals -> brewing application/effects + grimoire contracts + lifecycle + platform
+companions/familiars -> animals trust/care + lifecycle + magic/{ritual,witch,charm} + platform
+companions/animals + companions/lifecycle -X-> companions/familiars
+magic/broom -> witch services + platform; magic/wand -> broom + familiars + botany/stations + witch/ritual
+magic outside wand -X-> companions
 client + datagen -> features and contracts
 ```
 
+- Commerce presentation may import session `ShopMenu`, `ShopPackets`, `ShopRequest`, `ShopSession`,
+  `ShopUpdate`, registry `ShopMenus`/`ShopBlockEntities`, and its catalogue/fixture render contracts;
+  it never owns ledger mutation.
 - Features never import client/datagen. Core grimoire consumers never import feature implementations
   or client/viewer code; `DependencyDirectionTest` guards these boundaries.
 - Magic presentation adapters contribute sources; durable witch mutation does not depend on page
@@ -514,50 +571,23 @@ client + datagen -> features and contracts
   Broader TeachingNotifier/client-cache splits, catalogue dispatch, nullable policy/slot-layout cleanup
   and furniture placement, storage predicates and migration scripts remain separate P2 work.
 
-M9 additions: `companions/familiars/equipment/` owns canonical slots/cargo and transfer receipts. `client/familiars/{model,render}/` reads compiled rigs and attaches equipment; `state/FamiliarVisualCache` holds cosmetics. `src/art/blockbench/familiars/equipment/<gear>/` owns eight pieces. `src/art/entities/{raven,owl,snake}/` holds creature projects. `tools/entities/` owns the compiler/poses, with `test/`; `tools/compile-entity-models.mjs` produces `entity_models/familiars/<species>/` and `textures/entity/familiars/<species>/`. Equipment tests live in `src/{test,gameTest}/java/io/github/dirtyredz/herbalwitch/companions/familiars/equipment/`; geometry tests in `src/test/java/io/github/dirtyredz/herbalwitch/client/familiars/`.
+## Structural debt
 
-Recovery lives in `companions/familiars/recovery/`: lethal damage checkpointing, paid revival and retained-payload administrative resolution. `companions/familiars/admin/` owns its level-two command adapter; `ritual/RevivalAction` owns the circle session. Real lifecycle tests live in `src/gameTest/.../companions/familiars/recovery/`.
+Baseline review on 2026-10-25 filed the following deferred work; this map describes the current tree,
+not the proposed refactors.
 
-Bond progression and durable named upgrades live in `companions/familiars/bond/`; `interaction/FamiliarCareContribution` observes the animal module's neutral `AnimalCareContributions` seam. The shared `ritual/FamiliarUpgradeAction` serves Heartwood, Spirit Well and Harmony. No familiar implementation is imported by animal care.
-
-`companions/familiars/preparation/` owns canonical buff rules, application validation, runtime projections, damage/Shadowstep events and familiar poison policy. M7 keeps the shared item/container, concealment, poison application and delayed harm-attribution implementations.
-
-Retrieval lives in `companions/familiars/ability/retrieval/`: exact loose-item eligibility, the durable
-pickup transaction, and immutable source-retirement receipts. `platform/permission/entity/ItemPickupPermission`
-owns the neutral entity-pickup veto (including Forge pickup cancellation); it is not block placement.
-`data/server/familiars/FamiliarRetrievalTags` contributes the small-object allowlist to the one item-tag writer.
-
-M9 acquisition/presentation layout: `companions/familiars/acquisition/` owns safe passive spawn
-placement rules; `data/server/familiars/` owns its biome tags/modifiers. Creative egg projects live
-in `src/art/blockbench/familiars/spawn_egg/<raven|owl|snake>/`, compiled to matching block-model
-and owned texture directories. `companions/familiars/grimoire/` owns the installed guide source;
-`data/client/familiars/FamiliarGuideTranslations` supplies its prose. `showcase/` owns nine inert
-appearance samples and supply barrels. Acquisition tests live in `src/gameTest/.../familiars/acquisition/`.
-
-Restart qualification belongs in gradle/qualification.gradle and tools/qualification/restart/familiars/. Test-world
-support lives in src/gameTest/.../companions/familiars/persistence/; the test-only SnapshotProbe
-adapter lives in src/gameTest/.../platform/persistence/. Neither ships in the release jar.
-
-Native pose exports live in src/test/.../client/familiars/FamiliarNativePoseTest.java; tools/preview-native-familiars.mjs renders them with the owned equipment models. Runtime pose and attachment ownership remains client/familiars/{model,render}/.
-
-Optional native-payload compatibility lives in platform/compat/curios/CuriosNativePayload; it depends only on NBT. Doggy Talents exclusion qualification lives beside binding tests and has no foreign class imports. Optional runtime profile versions remain in gradle.properties.
-
-- `magic/broom/{config,entity,flight,interaction,lifecycle,network,persistence,registry}/`: validated flight rules, physical entity/item ownership, authenticated rider intent and server movement.
-- `magic/wand/config/`: local utility limits and five prices, installed alongside broom settings in the existing witch rules/config/sync.
-- `src/gameTest/java/io/github/dirtyredz/herbalwitch/magic/broom/fixture/`: bounded flight arena setup and authenticated actor fixtures.
-
-- `client/broom/`: remappable intent controls, authoritative condition/state HUD, advisory deployment outline and the reload-aware item-model entity renderer.
-- `data/client/magic/tools/`, `src/test/.../data/magic/tools/`: tool-owned language and independent generated-resource manifest.
-
-- `magic/wand/{action,use,network}/`: seven utility adapters, actor-wide limits, server targeting and held-stack selector validation.
-- `client/wand/`: remappable selector and mode HUD; no casting authority.
-- `apothecary/botany/harvest/`: shared reversible hand/wand herb harvest plan and commit.
-- `src/gameTest/.../magic/wand/fixture/`: actual held-item utility fixtures; sibling GameTests cover gardening, collection, lighting and selection.
-
-- `magic/{broom,wand}/{grimoire,showcase}/`: tool-owned live-rule guides and separate compact station/practice plots, registered at bootstrap after the established witchcraft sections.
-
-- `src/gameTest/.../magic/tools/restart/`: actual world save/reopen qualification for vehicles, packed preferences and interrupted repair. `gradle/qualification.gradle` isolates the two dedicated runs; `tools/qualification/restart/magic-tools/` queues them and validates distinct-process evidence.
-
-- `src/test/.../client/fixture/NativeVertices` shares actual vanilla model export between familiar and broom pose tests. `client/broom/BroomRiderPoseTest` exports the seated player; `tools/preview-broom-rider.mjs` combines it with the owned broom model and runtime offsets.
-
-The M10 item/recipe/control reference lives in `docs/catalogue/tools.md`; witchcraft and familiar catalogues link their unchanged service authority.
+- [dk-651e0762](docs/items/dk-651e0762.md) — Split TeachingEvents: request handler, notifier, nearby-player sync
+- [dk-ed397e9e](docs/items/dk-ed397e9e.md) — Split AltarSessionService: action-handler registry and session validator
+- [dk-5d5ca8a1](docs/items/dk-5d5ca8a1.md) — ShopSessionService: extract ShopRequestRouter; move unbound-register flow to ShopBindingService
+- [dk-f5658eb8](docs/items/dk-f5658eb8.md) — Typed ShopView record + codec instead of string-keyed CompoundTag snapshot
+- [dk-62580b94](docs/items/dk-62580b94.md) — Split GrimoireClientState into ContentCache, DiscoveryCache, TeachingClientState
+- [dk-67b35594](docs/items/dk-67b35594.md) — FamiliarRecord.state: named per-feature sections instead of a string-keyed bag
+- [dk-8a733759](docs/items/dk-8a733759.md) — Extract PlayerRequestGate and animal care contribution registries from AnimalInteractionEvents
+- [dk-e47af1b4](docs/items/dk-e47af1b4.md) — Regroup companions/familiars (21 subfolders) under responsibility parents
+- [dk-2e9da6b4](docs/items/dk-2e9da6b4.md) — Mirror the server tree in client/: client/magic/{broom,wand}, client/companions/{animals,familiars}
+- [dk-062b5018](docs/items/dk-062b5018.md) — magic/broom and magic/wand: collapse single-file folders
+- [dk-b14f0d24](docs/items/dk-b14f0d24.md) — Station wiring from StationSpec: one generic menu/block-entity factory for trivial stations
+- [dk-48107997](docs/items/dk-48107997.md) — Shared native-goal clearing for familiar species; merge tiny datagen contributors
+- [dk-09dcae9d](docs/items/dk-09dcae9d.md) — MagicalProcessPolicy: extract operator lease (StationOperator) and MagicalPayment; ShopStore batch indexer
+- [dk-68afcef1](docs/items/dk-68afcef1.md) — One RecipeRoles traversal for guide, grimoire, EMI and JEI presenters
+- [dk-8874ab3a](docs/items/dk-8874ab3a.md) — Root tools/ and platform/ over breadth cap
