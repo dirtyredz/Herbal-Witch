@@ -382,7 +382,7 @@ src/main/java/io/github/dirtyredz/herbalwitch/
 
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/apothecary/botany/` — herb, garden, foraging and worldgen GameTests
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/apothecary/brewing/` — product use, block and advanced-preparation GameTests
-- `src/gameTest/java/io/github/dirtyredz/herbalwitch/apothecary/stations/` — station GameTests; `process/` the shared process behaviour tests; `advanced/` the four advanced stations and the witch-recipe flow
+- `src/gameTest/java/io/github/dirtyredz/herbalwitch/apothecary/stations/` — station GameTests; `process/` the shared process behaviour tests; `advanced/` the advanced stations (cauldron, still, bottling bench, charm workbench and the broom stand and wand bench tool stations) and the witch-recipe flow
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/client/recipe/` — counted-stack NBT/copy and duration characterization
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/compat/` — optional-integration GameTests (profile dependent)
 - `src/gameTest/java/io/github/dirtyredz/herbalwitch/decor/` — furniture GameTests; `placement/`, `seating/`, `storage/`, `sleeping/`, `openings/`, `lighting/` per behaviour (test names, not main packages)
@@ -552,7 +552,7 @@ client + datagen -> features and contracts
 - Milestone 7 added no top-level Java package: charms, wards and the circle sit under `magic/`, the
   advanced stations under `apothecary/stations/advanced/`, entity permission under `platform/permission/entity/`.
   `apothecary/stations/` was at its breadth cap, so the station authorization lives inside `apothecary/stations/process/`
-  (`authorization/`), beside `recipe/` and `execution/`; the four advanced stations share one
+  (`authorization/`), beside `recipe/` and `execution/`; the six advanced stations (including the broom stand and wand bench) share one
   `AdvancedStationBlock`/`AdvancedStationEntity` rather than one block class each (docs/DECISIONS.md).
 - `models/block/ritual/circle/` holds 32 files, an enumerated exception to the 12-file directory cap: the
   ring has 16 cells with an idle and an active model each, and the compiler names them by cell.
