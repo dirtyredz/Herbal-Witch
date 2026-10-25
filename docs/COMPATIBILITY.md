@@ -10,7 +10,9 @@ GuideME **20.1.15** is required on both sides: install `guideme-20.1.15.jar` alo
 The source is the Evil Eye pack pin: CurseForge project 1173950, file 8204776,
 SHA-1 `3d432fc99cefcfd17a12635d2d220f09a069f1c7`. Local builds read that owner-supplied jar from
 `build/guide-inputs/`, or a directory passed with `-PguideMeDir=<directory>`; ForgeGradle remaps
-the external dependency. No library classes are shaded into HerbalWitch. Use `--offline` when
+the external dependency. Clean hosted clones instead resolve the same pinned file through
+CurseMaven (`guideme_curse_id`); an explicit local directory never falls back silently.
+No library classes are shaded into HerbalWitch. Use `--offline` when
 downloads are prohibited; all other Gradle/Forge prerequisites must already be cached.
 
 HerbalWitch Dev needs this jar added; AE2, Create and Ponder are unnecessary for the complete

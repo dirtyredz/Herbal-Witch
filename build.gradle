@@ -13,6 +13,10 @@ base {
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
+// Preserve owner-supplied offline inputs; clean hosted clones use the exact approved pack pin.
+def guideMeDir = project.findProperty('guideMeDir') ?: 'build/guide-inputs'
+def localGuideMe = project.hasProperty('guideMeDir') || file("${guideMeDir}/guideme-${guideme_version}.jar").isFile()
+
 // Optional-mod runtime profile for headless adapter checks (docs/COMPATIBILITY.md):
 //   -PcompatProfile=base|emi|jei|viewers|farmersdelight|thirst|curios|doggy|all   (default base: no optional mods)
 // Farmer's Delight and Thirst Was Taken come from a local mods folder: -PcompatModsDir=<folder>.
@@ -102,7 +106,11 @@ minecraft {
 
 repositories {
     // Owner-supplied pinned CurseForge artifact; supports completely offline builds.
-    flatDir { dirs project.findProperty('guideMeDir') ?: 'build/guide-inputs' }
+    flatDir { dirs guideMeDir }
+    maven {
+        url = 'https://cursemaven.com'
+        content { includeModule 'curse.maven', 'guideme-1173950' }
+    }
     // Recipe viewer APIs (compile-only; the jar ships no viewer classes).
     maven { url = 'https://maven.blamejared.com/' }
     maven { url = 'https://maven.terraformersmc.com/releases/' }
@@ -116,7 +124,7 @@ repositories {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    implementation fg.deobf("local:guideme:${guideme_version}")
+    implementation fg.deobf(localGuideMe ? "local:guideme:${guideme_version}" : "curse.maven:${guideme_curse_id}")
 
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
@@ -193,3 +201,5 @@ tasks.withType(JavaCompile).configureEach {
 
 apply from: 'gradle/gametest-world.gradle'
 apply from: 'gradle/qualification.gradle'
+
+apply from: 'gradle/verify-release-jar.gradle'

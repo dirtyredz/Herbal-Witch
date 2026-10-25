@@ -1,5 +1,18 @@
 # Decisions - The Herbal Witch
 
+## 2026-10-25 - Shared hosted CI and deliberate releases
+
+Adopt the workspace template as byte-identical standalone files. Pushes verify without publishing;
+owner-authorized release dispatch after green main CI verifies, builds, drafts, hashes readback
+and publishes immutable assets. Gradle resolves the exact release manifest beside the staged jar.
+
+Datagen and Forge GameTests are enabled; art producers/checks keep their existing Gradle wiring.
+The shared gameTestWorld(File) stages the canonical datapack for both GameTests and existing
+qualification phases; restart/profile qualification stays on ANU. Clean hosted clones resolve GuideME
+from the exact CurseForge project/file already approved in COMPATIBILITY.md (1173950/8204776).
+An explicit guideMeDir or existing build/guide-inputs jar retains the local flatDir route for offline
+builds. This adds no version upgrade, shading or dependency download to the local gate.
+
 ## 2026-10-25 - Additive GuideME first-herb lesson
 
 Require the pack's exact GuideME 20.1.15, with no AE2/Create dependency and no bundled library classes.
@@ -112,7 +125,6 @@ amount in JSON, recipe sync and fingerprints. A live result note supplies repair
 both recipe viewers and the grimoire. The normal processing transaction retains reservations,
 payer validation and the only energy debit. Tool stations reuse AdvancedStationBlock and
 StructurePlacementItem; their menus reuse the standard Start/Resume/Cancel panel.
-
 
 ## 2026-10-23 - Home assignment belongs to the bond
 
@@ -255,7 +267,6 @@ All other section 7 defaults are retained. Version remains 0.6.1 while M8 accept
 - Singleton feature `grimoire/`, targeting and integration packages express ownership and remain.
   Catalogue dispatch, TeachingNotifier/client-cache splits, nullable policy/slot layout and broader
   furniture placement/storage predicates and migration scripts remain P2 follow-ups; this refactor adds no M8-M12 gameplay.
-
 
 ## 2026-10-22 - 0.6.0: advanced brewing, charms, ritual circle and ward stones (Milestone 7)
 

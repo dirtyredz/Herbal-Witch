@@ -7,6 +7,12 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 
 ## Layout
 
+- `.github/workflows/`, `.github/actions/setup-mod-build/` - synced hosted checks and deliberate release dispatch.
+- `.ci/mod.json` - this mod's identity, datagen/GameTest flags and pack side; `.ci/scripts/` is synced release tooling.
+- `gradle/{verify-release-jar,test-world,gametest-world}.gradle` and `tools/test-world/datapack/` - synced jar verification and test-world staging.
+- `gradle/wrapper/`, `gradlew*`, `.gitattributes`, `.gitignore` - synced workspace files; edit the root template and sync.
+- `docs/releases/` - versioned release notes; add notes only for a version being prepared for release.
+
 Phase 1 guide (1.0.0-rc.3): `client/grimoire/guide/` owns GuideME registration and reload wiring;
 `client/grimoire/guide/content/` owns live processing tags and recipe presentation.
 `data/client/grimoire/guide/` assembles native pages and validates scene states/item associations

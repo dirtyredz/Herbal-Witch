@@ -406,3 +406,31 @@ command, crafting and recovery reference is [familiars.md](docs/catalogue/famili
 The witchcraft showcase contains 26 appearances, including nine inert familiar displays and the inert
 commerce villager, three functional homes and familiar supplies. Its measured bounds are 126 x 8 x 60; furniture
 is 43 x 8 x 28. All labels retain the sign-beside-block rule.
+
+## Release
+
+The version lives only in `gradle.properties`. Prepare non-empty `docs/releases/<version>.md`
+for a release, then obtain the owner's go-ahead to push and land on main. Push CI runs
+`./gradlew test build verifyReleaseJar` plus `runData` and generated-resource drift detection; it publishes nothing.
+After green main CI and owner authorization, the agent dispatches
+`gh workflow run release.yml --ref main`. The workflow verifies again, requires successful Forge GameTests, builds
+the final jar, creates its version tag, uploads a draft, reads every asset back and compares
+SHA-256 before publishing the jar, its `.sha256` and `herbalwitch.pw.toml`.
+The pack session consumes the published `.pw.toml`; the owner never publishes by hand.
+Versions starting with `0.` or containing `-` are prereleases. Existing releases/tags are
+refused, published bytes are never replaced, and stable latest never moves backward.
+A failed draft requires deliberate recovery before retrying.
+
+Local fast gate: `./gradlew --offline test build verifyReleaseJar` with cached dependencies.
+Shared files are checked from the workspace with `tools/sync-mod-files.ps1 -Check -Mod <this-worktree>`.
+
+CI enables datagen and Forge GameTests. Existing `generateArt`/`checkArt` wiring remains active
+through resource processing, `runData` and `check`. Run `./gradlew --offline runData checkArt`
+and confirm `git status --short -- src/generated src/main/resources` stays empty.
+Qualification phases retain the shared `gameTestWorld(File)` call; long restart/profile
+qualification stays on ANU and owner in-game acceptance remains required.
+
+Clean hosted clones resolve the exact approved GuideME 20.1.15 CurseForge file (1173950/8204776).
+For offline local builds, supply the existing jar in `build/guide-inputs` or use
+`-PguideMeDir=<existing-jar-directory>`; no dependency is bundled. This rollout downloads nothing
+locally. The release candidate is still private and unapproved for publication.

@@ -1,0 +1,7 @@
+{
+  "modId": "herbalwitch",
+  "mainPackage": "io.github.dirtyredz.herbalwitch",
+  "datagen": true,
+  "gametests": true,
+  "packSide": "both"
+}
