@@ -101,6 +101,8 @@ minecraft {
 }
 
 repositories {
+    // Owner-supplied pinned CurseForge artifact; supports completely offline builds.
+    flatDir { dirs project.findProperty('guideMeDir') ?: 'build/guide-inputs' }
     // Recipe viewer APIs (compile-only; the jar ships no viewer classes).
     maven { url = 'https://maven.blamejared.com/' }
     maven { url = 'https://maven.terraformersmc.com/releases/' }
@@ -114,6 +116,7 @@ repositories {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    implementation fg.deobf("local:guideme:${guideme_version}")
 
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
@@ -157,6 +160,7 @@ tasks.named('processResources', ProcessResources).configure {
             minecraft_version      : minecraft_version, minecraft_version_range: minecraft_version_range,
             forge_version          : forge_version, forge_version_range: forge_version_range,
             loader_version_range   : loader_version_range,
+            guideme_version        : guideme_version,
             mod_id                 : mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
             mod_authors            : mod_authors, mod_description: mod_description,
     ]

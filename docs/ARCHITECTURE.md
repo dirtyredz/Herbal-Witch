@@ -1,5 +1,27 @@
 # Architecture - The Herbal Witch
 
+## Phase 1 public guide (1.0.0-rc.3)
+
+GuideME 20.1.15 is required; its imports stay in client presentation. `GuideClient` registers
+The Witch's Path with native item-tooltip hold-G access, navigation, search and English fallback.
+Registration runs during RegisterClientReloadListenersEvent, before the initial page reload.
+The existing grimoire and its authenticated research/teaching workflows remain unchanged; protocol
+14 and all saved identities remain unchanged. Public reading grants no discovery or access.
+
+`GuidePageProvider` combines authored Markdown with catalogue-derived item associations.
+`GuideSceneProvider` emits complete rack/stove layouts and checks each blockstate against the live
+Forge registry during datagen. Native GameScene uses actual baked models in an inert guide world;
+it never invokes station processing, inventory, payment or other gameplay services.
+
+`HerbalRecipe` resolves `RecipeView` from the connected client's synchronized RecipeManager on
+each page compilation. The renderer preserves counted alternatives, base, packaging, returns,
+duration, heat and result notes. Missing or replaced non-processing recipes show unavailable.
+Recipe/tag events reload an open guide through the public `GuideUiHost`; resource reloads belong
+to GuideME. There is no connection-specific recipe cache to carry across disconnects.
+Magical recipes, if substituted by a datapack, show the witch requirement and explicitly label
+energy as server configured rather than substituting local defaults. This slice does not migrate
+editorial overlays or authenticated actions; those remain in the existing reader. Ponder is deferred.
+
 Familiar homes share one floor-supported structure block and identity-only block entity. Placement
 uses `platform/placement`; the canonical bond's home reference owns assignment, and a derived
 instance-to-bond index enforces one occupant including unloaded/incapacitated bonds. The block's

@@ -7,6 +7,17 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 
 ## Layout
 
+Phase 1 guide (1.0.0-rc.3): `client/grimoire/guide/` owns GuideME registration and reload wiring;
+`client/grimoire/guide/content/` owns live processing tags and recipe presentation.
+`data/client/grimoire/guide/` assembles native pages and validates scene states/item associations
+against Forge registries during datagen. No GuideME imports occur in datagen or gameplay.
+Authored prose lives in `src/main/resources/assets/herbalwitch/guide_sources/en_us/{path,apothecary}/`;
+generated pages (native frontmatter and catalogue-derived scenes included) live in
+`src/generated/resources/assets/herbalwitch/guide/{path,apothecary}/`.
+Separate source/output roots prevent duplicate packaged paths. Tests mirror presentation under
+`src/test/java/io/github/dirtyredz/herbalwitch/client/grimoire/guide/` and its `content/` child.
+The existing reader remains in place during this additive phase.
+
 M10 tools: `apothecary/stations/advanced/{broom_stand,wand_bench}/` owns station adapters, recipes and
 repair transforms; `data/server/stations/recipes/tools/` contributes acquisition to the sole recipe
 writer. `data/client/magic/tools/` owns item parents; `client/stations/tools/` owns repair presentation.
@@ -62,7 +73,7 @@ herbalwitch/
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/brewing/projectile/` — thrown preparations: the projectile entity, its impact and the in-flight limits
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/advanced/` — shared `AdvancedStationBlock` and `AdvancedStationEntity`, then one flat package per station (`cauldron`, `still`, `bottling_bench`, `charm_workbench`)
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/block/` — `StationBlock`, `StationEntity`, `ProcessStationEntity` and `StationMenu`: block behaviour shared by stations (facing, support, menu, ticker, drops; the process-station base)
-- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/catalog/` — the ten station identities (six everyday, four advanced) and processing categories
+- `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/catalog/` — the twelve station identities (six everyday, six advanced) and processing categories
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/everyday/` — one flat package per everyday station (`drying_rack`, `mortar`, `kettle`, `hearth`, `stove`, `infusion_pot`), containing its block, menu and recipe adapters
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/grimoire/` — brewing guidance, station pages and live recipe projections
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/heat/` — heat sources and conductors
@@ -164,7 +175,7 @@ herbalwitch/
 - `src/main/java/io/github/dirtyredz/herbalwitch/client/brewing/` — thrown-preparation renderers
 - `src/main/java/io/github/dirtyredz/herbalwitch/client/compat/` — EMI (`emi/`) and JEI (`jei/`) plugins over one shared card layout; `ritual/` (the ritual card layout both viewers use)
 - `src/main/java/io/github/dirtyredz/herbalwitch/client/decor/` — decor client wiring; `storage/` (the storage screen, the display renderer)
-- `src/main/java/io/github/dirtyredz/herbalwitch/client/grimoire/` — the reader/view, `GrimoirePanelHost` shared by four screens, book panel and connection-local state; `widgets/` (`EntryPage` shell, `RecipeBody`, index, consent and buttons)
+- `src/main/java/io/github/dirtyredz/herbalwitch/client/grimoire/` — the reader/view, `GrimoirePanelHost` shared by six direct screen hosts (process station, hearth, altar, ward, animal, familiar roster), book panel and connection-local state; `widgets/` (`EntryPage` shell, `RecipeBody`, index, consent and buttons)
 - `src/main/java/io/github/dirtyredz/herbalwitch/client/magic/` — grouping parent for the witchcraft client: `witch/`, `ritual/`, `ward/`
 - `src/main/java/io/github/dirtyredz/herbalwitch/client/magic/ritual/` — the altar screen and its client state, the aimed-target reader and the circle placement preview; `widgets/` (action, consent and circle panels)
 - `src/main/java/io/github/dirtyredz/herbalwitch/client/magic/ward/` — the ward screen and the boundary preview

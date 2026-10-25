@@ -2,6 +2,13 @@
 
 Traces each of the 16 station groups in the design ("Distinct functional workstations") to blocks, owning module, recipe type, witch requirement and milestone. Every station has its own purpose, a small recipe interface, limited slots, clear output and grimoire recipe lookup.
 
+The current processing registry contains **twelve stations**: six everyday and six advanced
+(including the broom stand and wand bench), covering ten processing categories plus heat support.
+These registry counts differ from the design's broader workstation groups below.
+Guide Phase 1 teaches rack, mortar and kettle with a stove heat diagram; holding G over those
+items or the hearth opens the lavender lesson. Native scenes use complete catalogue layouts.
+Other station guidance remains in the existing grimoire pending later guide phases.
+
 Module paths are relative to `io.github.dirtyredz.herbalwitch`. Milestones are from plan section 3.
 
 | Station | Purpose (design) | Blocks it covers | Owning module | Recipe type | Witch-only? | Milestone | Evidence |
@@ -19,7 +26,7 @@ Module paths are relative to `io.github.dirtyredz.herbalwitch`. Milestones are f
 | Grimoire stand / witch bookshelf | Research herbs, recipes, rituals | grimoire stand, witch bookshelf | `grimoire/access/block/` (with `grimoire/content/`, `grimoire/knowledge/`) | none (reads all recipes) | no | 4 | done (0.3.0): automated acceptance passed (unit tests, GameTests); owner checks pending |
 | Familiar beds, nests and perches | Assign rest locations and recovery | bed, nest, perch | `companions/familiars/home/` | none | familiar owner | 9 | functional placement, assignment and safe rest qualified |
 | Home ward stone | Define guarded home area and targeting settings | ward stone | `magic/ward/` | none (ward activation, 20 energy default) | yes | 7 | done (0.6.0): WardGameTests, WardCodecTest, WardIndexTest; see "Ward stone" below |
-| Apothecary counter, register, shelves and jars | Stock, sell, display, track goods | counter, register, stock shelves, jars; decor Apothecary Counter links here | `shop/block/` (with `shop/catalog/`, `shop/trade/`, `shop/order/`, `shop/persistence/`) | none | witch runs shop; non-witch inspects and buys | 11 | not started |
+| Apothecary counter, register, shelves and jars | Stock, sell, display, track goods | counter, register, stock shelves, jars; decor Apothecary Counter links here | `apothecary/shop/fixture/`, `apothecary/shop/catalog/`, `apothecary/shop/trade/`, `apothecary/shop/order/`, `apothecary/shop/ledger/` | none | witch runs shop; non-witch inspects and buys | 11 | implemented; see [commerce](commerce.md); integrated-host checkpoint owner acceptance remains pending |
 | Broom crafting stand | Craft and repair rideable flying brooms | broom stand | `magic/broom/` + `apothecary/stations/advanced/broom_stand/` | broom work | yes; attending witch starts each batch | 10 | implemented and headless-qualified in 0.9.0 |
 | Wand carving bench | Create utility wands for everyday tasks | wand bench | `magic/wand/` + `apothecary/stations/advanced/wand_bench/` | wand carving | yes; attending witch starts each batch | 10 | implemented and headless-qualified in 0.9.0 |
 

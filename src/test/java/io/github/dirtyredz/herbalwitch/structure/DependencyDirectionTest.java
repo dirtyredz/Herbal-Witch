@@ -20,6 +20,16 @@ class DependencyDirectionTest {
     private static final Path ROOT = Path.of("src/main/java/io/github/dirtyredz/herbalwitch");
 
     @Test
+    void documentationLibrariesStayInClientPresentationAndCreateIsForbidden() throws IOException {
+        var guide = Pattern.compile("\\b(?:guideme|net\\.createmod\\.ponder)\\.");
+        var create = Pattern.compile("\\bcom\\.simibubi\\.create\\.");
+        for (Path file : javaFiles(ROOT)) {
+            reject(file, create);
+            if (!file.startsWith(ROOT.resolve("client"))) reject(file, guide);
+        }
+    }
+
+    @Test
     void familiarWorkCannotAcquireChunksOrTickets() throws IOException {
         var forbidden = Pattern.compile("\\b(?:getChunk|getChunkAt|getChunkFuture|addRegionTicket|registerTickingTicket|forceChunk|setChunkForced)\\s*\\(");
         for (Path file : javaFiles(ROOT.resolve("companions/familiars"))) reject(file, forbidden);

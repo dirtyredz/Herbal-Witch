@@ -4,6 +4,21 @@ Records the supported platform, what is actually tested, and each planned option
 
 Supported platform: Minecraft 1.20.1, Forge 47.x (built and tested on 47.4.10), Java 17. Install on both server and clients.
 
+## Guide Phase 1 (1.0.0-rc.3)
+
+GuideME **20.1.15** is required on both sides: install `guideme-20.1.15.jar` alongside HerbalWitch.
+The source is the Evil Eye pack pin: CurseForge project 1173950, file 8204776,
+SHA-1 `3d432fc99cefcfd17a12635d2d220f09a069f1c7`. Local builds read that owner-supplied jar from
+`build/guide-inputs/`, or a directory passed with `-PguideMeDir=<directory>`; ForgeGradle remaps
+the external dependency. No library classes are shaded into HerbalWitch. Use `--offline` when
+downloads are prohibited; all other Gradle/Forge prerequisites must already be cached.
+
+HerbalWitch Dev needs this jar added; AE2, Create and Ponder are unnecessary for the complete
+first-herb lesson. The approved future animation profile is standalone Ponder 1.0.91 with
+Flywheel 1.0.5, optional; Phase 1 neither loads nor declares them. Installed dedicated-server
+and in-game rendering/input qualification are pending owner/pipeline checks, not claimed by
+the local datagen/build gate. Earlier "no required dependencies" evidence below predates this change.
+
 ## Earlier evidence (0.1.0-dev.4; superseded by "Release candidate (M12)" below)
 
 Exact versions: Farmer's Delight 1.3.4, Thirst Was Taken 1.4.0, EMI 1.1.24+1.20.1, JEI 15.62.0.219.

@@ -16,6 +16,7 @@ import io.github.dirtyredz.herbalwitch.magic.ward.registry.WardRegistration;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
+import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -53,6 +54,12 @@ public final class HerbalWitchClient {
         event.enqueueWork(() -> CirclePlacementPreview.register(MinecraftForge.EVENT_BUS));
         event.enqueueWork(() -> RitualTargets.register(MinecraftForge.EVENT_BUS));
         event.enqueueWork(() -> WardBoundaryPreview.register(MinecraftForge.EVENT_BUS, WardRegistration.MENU.get()));
+    }
+
+    @SubscribeEvent
+    public static void guide(RegisterClientReloadListenersEvent event) {
+        // All guide definitions must exist before the first resource reload starts preparing pages.
+        io.github.dirtyredz.herbalwitch.client.grimoire.guide.GuideClient.setup();
     }
 
     @SubscribeEvent

@@ -1,5 +1,26 @@
 # Decisions - The Herbal Witch
 
+## 2026-10-25 - Additive GuideME first-herb lesson
+
+Require the pack's exact GuideME 20.1.15, with no AE2/Create dependency and no bundled library classes.
+This qualifies earlier standalone/no-shared-runtime wording: HerbalWitch remains independent of
+workspace libraries and other gameplay mods, but uses an external documentation engine.
+Standalone Ponder 1.0.91 (Flywheel 1.0.5) is the approved optional direction for later animation work;
+Phase 1 adds no Ponder dependency or integration.
+
+Keep the book, saved IDs, discoveries and research/teaching unchanged. The new public lesson is
+always readable and grants no progression. Use native GuideME item associations and rotatable
+scenes; do not subclass its internal screens. Actual 1.20.1 API inspection confirmed per-guide
+TagCompiler extensions, item_ids frontmatter and GameScene's p: blockstate attributes.
+Recipes resolve live through RecipeView, never copied amounts in prose.
+
+For this two-page slice, datagen reads authored guide_sources Markdown and produces complete
+native guide pages with validated catalogue associations and scene layouts. Separate roots avoid
+two writers for one packaged resource. Broader topic contribution, search-fact and Ponder layers
+remain later phases; introducing them now would add unused scaffolding.
+The pinned loader expects base-language pages directly under guide/ and localized overrides under
+guide/_<locale>/, unlike the plan's guide/en_us/ suggestion. Authored English stays in the source root.
+
 ## 2026-10-23 - M12 release qualification: evidence from real worlds and real servers
 
 - **Qualification is not publication.** `1.0.0-rc.1` names a private candidate that passed automated

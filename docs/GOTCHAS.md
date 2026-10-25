@@ -1,5 +1,23 @@
 # Gotchas - The Herbal Witch
 
+- **GuideME is pinned to 20.1.15 / Forge 1.20.1.** Inspect that jar before using extensions.
+  Guide.builder uses ResourceLocation; TagCompiler receives MdxJsxFlowElement and a LytBlockContainer.
+  Native routing uses item_ids frontmatter; GameScene rotation requires interactive="true" and
+  Block states use p:facing, p:part, etc. Newer website snippets are not this API.
+  Default-language pages live directly under guide/, not guide/en_us/. Translations use
+  guide/_<locale>/; the pinned loader only substitutes a translation when its base page exists.
+  RecipeManager.byKey returns Recipe<?> rather than newer RecipeHolder types; custom tags
+  render RecipeView directly. No public runtime page-provider extension is assumed.
+- **Guide sources are not the packaged pages.** Edit guide_sources Markdown, then runData twice.
+  Datagen supplies associations and full catalogue layouts, validating real registry IDs/states.
+  Tests check links before any dangling-link filtering. Do not hand-edit generated guide pages.
+- **Recipe cards read the connected server.** Missing recipes show unavailable, never bundled defaults.
+  No recipe cache survives connection changes. GuideME handles resource reload; recipe/tag updates
+  explicitly reload an open page. Magical costs remain labelled server configured in this slice.
+- **A document screen is not a container screen.** Phase 1 uses native hover access only and leaves
+  book/menu behavior alone. Future guide buttons must close containers normally; a return screen
+  must not revive an old authenticated session. Optional Ponder must remain client-isolated.
+
 - **A commerce save that returns is not a checkpoint.** `ShopSavedData` writes only through the verified
   writer and `ShopPlayerCheckpoint` forces and reads back the player file (or, for the integrated host,
   `level.dat`'s `Player` tag) before a transfer may commit. A failed write leaves the shard read-only for

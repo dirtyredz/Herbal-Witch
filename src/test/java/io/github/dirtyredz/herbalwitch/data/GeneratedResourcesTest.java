@@ -72,6 +72,8 @@ class GeneratedResourcesTest {
     @Test
     void generatedTreeIsExactlyTheUnionOfTheFeatureManifests() {
         Set<String> expected = new TreeSet<>();
+        expected.add("assets/herbalwitch/guide/path/start.md");
+        expected.add("assets/herbalwitch/guide/apothecary/lavender.md");
         expected.addAll(DecorManifest.files());
         expected.addAll(BotanyManifest.files());
         expected.addAll(StationManifest.files());
