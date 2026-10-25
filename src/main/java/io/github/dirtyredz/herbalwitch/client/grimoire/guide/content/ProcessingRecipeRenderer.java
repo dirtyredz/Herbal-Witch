@@ -12,6 +12,7 @@ import io.github.dirtyredz.herbalwitch.client.recipe.RecipeText;
 import io.github.dirtyredz.herbalwitch.platform.recipe.ProcessRecipeDescription;
 import io.github.dirtyredz.herbalwitch.platform.recipe.RecipeView;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
 /** Counted alternatives, base, packaging, returns and result semantics retain their feature-owned facts. */
@@ -23,17 +24,21 @@ public final class ProcessingRecipeRenderer {
         card.setGap(3);
         var facts = recipe.description();
         card.append(LytParagraph.of(facts.result().getHoverName().getString()));
-        for (var ingredient : facts.ingredients()) counted(card, compiler, "Ingredient", ingredient);
-        facts.base().ifPresent(value -> counted(card, compiler, "Base liquid", value));
-        facts.packaging().ifPresent(value -> counted(card, compiler, "Packaging", value));
+        for (var ingredient : facts.ingredients()) counted(card, compiler, role("ingredient").getString(), ingredient);
+        facts.base().ifPresent(value -> counted(card, compiler, role("base").getString(), value));
+        facts.packaging().ifPresent(value -> counted(card, compiler, role("packaging").getString(), value));
         stack(card, compiler, "Result", facts.result());
-        for (var returned : facts.returns()) stack(card, compiler, "Returned container", returned);
+        for (var returned : facts.returns()) stack(card, compiler, role("packaging").getString(), returned);
         card.append(LytParagraph.of(RecipeText.footer(facts.duration(), facts.heated()).getString()));
         if (facts.requirements().magical()) {
             card.append(LytParagraph.of("Requires witchcraft; energy cost is server configured. See the station before starting."));
         }
         recipe.resultNote().ifPresent(note -> card.append(LytParagraph.of(note.getString())));
         return card;
+    }
+
+    static Component role(String role) {
+        return Component.translatable("grimoire.herbalwitch.ui.role." + role);
     }
 
     private static void counted(LytVBox card, PageCompiler compiler, String role, ProcessRecipeDescription.Counted ingredient) {
