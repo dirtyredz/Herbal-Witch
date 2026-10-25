@@ -4,7 +4,7 @@ import io.github.dirtyredz.herbalwitch.companions.familiars.bond.data.FamiliarRe
 import net.minecraft.nbt.*;
 import java.io.*;
 import java.nio.file.*;
-import java.util.zip.GZIPInputStream;
+import io.github.dirtyredz.herbalwitch.platform.persistence.PlayerFileCheckpoint;
 
 /** Startup check against an older/missing player save. Never grants, refunds or repairs inventory. */
 public final class FamiliarReceiptVerification {
@@ -22,13 +22,9 @@ public final class FamiliarReceiptVerification {
     public static boolean verify(FamiliarRecord record, Path worldData) {
         var expected = record.state().getCompound("settledReceipt");
         if (expected.isEmpty()) return true;
-        var path = worldData.getParent().resolve("playerdata").resolve(record.owner() + ".dat");
         try {
-            if (!Files.isRegularFile(path) || Files.size(path) > 4 * 1024 * 1024) return false;
-            try (var input = new DataInputStream(new GZIPInputStream(Files.newInputStream(path)))) {
-                var saved = NbtIo.read(input, new NbtAccounter(16 * 1024 * 1024L));
-                return matches(expected, saved.getCompound("ForgeData").getCompound(FamiliarPlayerReceipt.KEY));
-            }
+            var saved = PlayerFileCheckpoint.saved(worldData.getParent(), record.owner());
+            return matches(expected, saved.getCompound("ForgeData").getCompound(FamiliarPlayerReceipt.KEY));
         } catch (IOException | RuntimeException unreadable) { return false; }
     }
 }

@@ -24,7 +24,9 @@
   the rest of the run; never "retry" by rewriting it.
 - **The integrated host's player data lives in level.dat.** Vanilla prefers that tag over
   `playerdata/<uuid>.dat` at the next load, so the host checkpoint writes and verifies level data. This
-  path cannot run on the dedicated GameTest server and is not automation-qualified.
+  path is shared by commerce and familiars through `platform/persistence/PlayerFileCheckpoint`.
+  Filesystem tests pin stale-host precedence, identity checks and read-back; the actual integrated
+  server save still needs owner in-game acceptance (dedicated GameTests cannot run that branch).
 - **Exact metadata or nothing.** Offers and stock compare item plus every tag. A custom name, unknown tag
   or capability data makes a stack untradeable; never strip a tag to make it fit.
 - **Register claims are not bindings.** A copied, cloned or creative-picked register carries an old claim;
@@ -70,8 +72,11 @@
   creatures without saving a permanent NoAI flag. Never bind or reconstruct from a partial lookup.
 - **Player receipts are not automatic refunds.** A pending bond/player receipt blocks another
   economic operation. Keep both files for inspection; the owner must resolve an interrupted bond.
-  The pinned Forge remapping helper invokes the protected single-player save, then forces and reads
-  its marker. A successful method return alone is not a durable checkpoint.
+  `PlayerFileCheckpoint` invokes the pinned protected `PlayerList.save`, forces the authoritative file
+  and checks the feature's marker predicate. Integrated hosts also save and verify `level.dat`'s
+  `Data.Player`; familiar startup verification honours that precedence too. Both features share deep
+  clone copying but retain their own marker schemas and failure policy. A successful method return
+  alone is not a durable checkpoint.
 - **Familiar and transport generations are separate.** Binding preserves M8's released generation
   and tombstone; its new entity capability identifies the bond incarnation. Both authorities check
   exact lineage, and an old unmarked source is rejected by the bond's creature index.

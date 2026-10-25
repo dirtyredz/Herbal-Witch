@@ -1,5 +1,6 @@
 package io.github.dirtyredz.herbalwitch.apothecary.shop.ledger.transaction;
 
+import io.github.dirtyredz.herbalwitch.platform.persistence.PlayerFileCheckpoint;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -64,7 +65,6 @@ public final class ShopPlayerReceipt {
 
     /** Death and End return copy the marker so a pending receipt keeps blocking. */
     public static void clonePlayer(PlayerEvent.Clone event) {
-        CompoundTag old = event.getOriginal().getPersistentData();
-        if (old.contains(KEY)) event.getEntity().getPersistentData().put(KEY, old.getCompound(KEY).copy());
+        PlayerFileCheckpoint.copy(event.getOriginal(), event.getEntity(), KEY);
     }
 }

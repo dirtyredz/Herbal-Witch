@@ -94,6 +94,14 @@ The loaded cross-dimension index rejects stale/duplicate incarnations without in
 unload. Exact vanilla serialization adapters reject unknown capability/persistent data before capture.
 
 The filesystem mechanics now live in `platform/persistence/{SnapshotEnvelope,VerifiedSnapshotWriter}`.
+Player receipts share `platform/persistence/PlayerFileCheckpoint`: pinned vanilla player save,
+file force, bounded NBT read-back, feature-supplied marker predicate and deep clone copying. Commerce
+and familiars keep their sequence/pending schemas and failure policies. The integrated host also
+saves world data and verifies its UUID and receipt in `level.dat`'s `Data.Player`, which takes precedence
+over `playerdata/<uuid>.dat`. Offline commerce and familiar recovery use that same precedence, so a
+newer player file cannot prove a stale host receipt. Filesystem tests cover both layouts; actual
+integrated-server save acceptance remains an owner check.
+
 `CaptureCheckpoint` retains its exact HWC8/version-1 envelope, failure return and logging policy;
 `CaptureSavedData` still owns dirty state and transport lockout. `companions/lifecycle` owns the shared
 loaded-object index, lookup and retirement. Capture still decides generations, phases and exact-object
