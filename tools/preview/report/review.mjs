@@ -110,4 +110,3 @@ function sideBySide(ref, img, name) {
   blit(out, img, rw + pad * 2, pad + 24 + Math.floor((h - img.height) / 2));
   return out;
 }
-
