@@ -54,7 +54,7 @@ public final class FirstPreparationScene {
         scene.title(FirstPreparationText.SCENE, FirstPreparationText.TITLE);
         scene.configureBasePlate(0, (FirstPreparationLayout.SIZE.getZ() - FirstPreparationLayout.SIZE.getX()) / 2,
                 FirstPreparationLayout.SIZE.getX());
-        scene.scaleSceneView(0.7f);
+        scene.scaleSceneView(0.85f);
         introduce(scene, cast);
         harvest(scene, cast);
         dry(scene, cast);
