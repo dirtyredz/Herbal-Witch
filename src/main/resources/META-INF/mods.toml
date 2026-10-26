@@ -31,3 +31,11 @@ displayTest="MATCH_VERSION"
     versionRange="${minecraft_version_range}"
     ordering="NONE"
     side="BOTH"
+
+# Optional animated lessons (client only); without Ponder the guide simply hides its Watch links.
+[[dependencies.${mod_id}]]
+    modId="ponder"
+    mandatory=false
+    versionRange="[${ponder_version}]"
+    ordering="AFTER"
+    side="CLIENT"

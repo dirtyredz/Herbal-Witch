@@ -1,0 +1,26 @@
+// Optional Ponder animation (docs/COMPATIBILITY.md). Ponder and Flywheel are compile-only: the release jar ships
+// none of their classes (no shading, no jar-in-jar, no Create artifact), and only client/grimoire/ponder/ may
+// reference them (DependencyDirectionTest). -PcompatProfile=ponder adds the pinned pair to the dev runtime;
+// the default base runtime stays free of both. Transitives are disabled: Ponder's POM names an older Flywheel
+// build, and the nested mod metadata of the qualified pack confirms the pair pinned here.
+def ponderProfile = (project.findProperty('compatProfile') ?: 'base').toString() == 'ponder'
+
+repositories {
+    maven {
+        url = 'https://maven.createmod.net'
+        content {
+            includeModule 'net.createmod.ponder', "Ponder-Forge-${minecraft_version}"
+            includeModule 'dev.engine-room.flywheel', "flywheel-forge-api-${minecraft_version}"
+            includeModule 'dev.engine-room.flywheel', "flywheel-forge-${minecraft_version}"
+        }
+    }
+}
+
+dependencies {
+    compileOnly(fg.deobf("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}")) { transitive = false }
+    compileOnly(fg.deobf("dev.engine-room.flywheel:flywheel-forge-api-${minecraft_version}:${flywheel_version}")) { transitive = false }
+    if (ponderProfile) {
+        runtimeOnly(fg.deobf("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}")) { transitive = false }
+        runtimeOnly(fg.deobf("dev.engine-room.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}")) { transitive = false }
+    }
+}

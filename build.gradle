@@ -18,18 +18,19 @@ def guideMeDir = project.findProperty('guideMeDir') ?: 'build/guide-inputs'
 def localGuideMe = project.hasProperty('guideMeDir') || file("${guideMeDir}/guideme-${guideme_version}.jar").isFile()
 
 // Optional-mod runtime profile for headless adapter checks (docs/COMPATIBILITY.md):
-//   -PcompatProfile=base|emi|jei|viewers|farmersdelight|thirst|curios|doggy|all   (default base: no optional mods)
+//   -PcompatProfile=base|emi|jei|viewers|farmersdelight|thirst|curios|doggy|all|ponder   (default base: no optional mods)
+// 'ponder' (client animation; gradle/ponder.gradle) is opt-in only and never part of 'all'.
 // Farmer's Delight and Thirst Was Taken come from a local mods folder: -PcompatModsDir=<folder>.
 // Optional isolated qualification world; preserve the ordinary retained test world by default.
 def gameTestRunId = project.findProperty('gameTestRunId')?.toString()
 if (gameTestRunId && !(gameTestRunId ==~ /[a-z0-9_-]{1,64}/)) throw new GradleException('Invalid gameTestRunId')
 def compatProfile = (project.findProperty('compatProfile') ?: 'base').toString()
-if (!(compatProfile in ['base', 'emi', 'jei', 'viewers', 'farmersdelight', 'thirst', 'curios', 'doggy', 'all'])) {
+if (!(compatProfile in ['base', 'emi', 'jei', 'viewers', 'farmersdelight', 'thirst', 'curios', 'doggy', 'all', 'ponder'])) {
     throw new GradleException("Unknown compatProfile '${compatProfile}'")
 }
 def needsLocalMods = compatProfile in ['farmersdelight', 'thirst', 'doggy', 'all']
-// Every optional mod jar on the dev runtime ships SRG mixin refmaps (Curios too, alone or in 'all').
-def remapRefmaps = needsLocalMods || compatProfile == 'curios'
+// Every optional mod jar on the dev runtime ships SRG mixin refmaps (Curios and Ponder/Flywheel too).
+def remapRefmaps = needsLocalMods || compatProfile in ['curios', 'ponder']
 def compatModsDir = project.findProperty('compatModsDir')?.toString()
 if (needsLocalMods && !compatModsDir) {
     throw new GradleException("compatProfile '${compatProfile}' needs -PcompatModsDir=<folder holding its optional runtime jars>")
@@ -168,7 +169,7 @@ tasks.named('processResources', ProcessResources).configure {
             minecraft_version      : minecraft_version, minecraft_version_range: minecraft_version_range,
             forge_version          : forge_version, forge_version_range: forge_version_range,
             loader_version_range   : loader_version_range,
-            guideme_version        : guideme_version,
+            guideme_version        : guideme_version, ponder_version: ponder_version,
             mod_id                 : mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
             mod_authors            : mod_authors, mod_description: mod_description,
     ]
@@ -194,6 +195,7 @@ tasks.named('jar', Jar).configure {
 }
 
 apply from: 'gradle/art.gradle'
+apply from: 'gradle/ponder.gradle'
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'

@@ -21,12 +21,39 @@ class DependencyDirectionTest {
 
     @Test
     void documentationLibrariesStayInClientPresentationAndCreateIsForbidden() throws IOException {
-        var guide = Pattern.compile("\\b(?:guideme|net\\.createmod\\.ponder)\\.");
+        var guide = Pattern.compile("\\bguideme\\.");
         var create = Pattern.compile("\\bcom\\.simibubi\\.create\\.");
         for (Path file : javaFiles(ROOT)) {
             reject(file, create);
             if (!file.startsWith(ROOT.resolve("client"))) reject(file, guide);
         }
+    }
+
+    /** Ponder, its bundled Catnip, and Flywheel (current and legacy packages). */
+    private static final Pattern OPTIONAL_ANIMATION = Pattern.compile(
+            "\\b(?:net\\.createmod\\.(?:ponder|catnip)|dev\\.engine_room\\.flywheel|com\\.jozufozu\\.flywheel)\\.");
+
+    /**
+     * Ponder and Flywheel are optional, compile-only libraries and the mod must load without them, so their types
+     * appear only in the isolated integration package: never in bootstrap signatures, fields or annotations
+     * elsewhere, and never in GameTests (which run without them).
+     */
+    @Test
+    void optionalAnimationLibrariesStayInTheIsolatedPonderPackage() throws IOException {
+        Path allowed = ROOT.resolve("client/grimoire/ponder");
+        for (Path file : javaFiles(ROOT)) {
+            if (!file.startsWith(allowed)) reject(file, OPTIONAL_ANIMATION);
+        }
+        for (Path file : javaFiles(Path.of("src/gameTest/java"))) reject(file, OPTIONAL_ANIMATION);
+    }
+
+    @Test
+    void optionalAnimationGuardRecognisesEveryOptionalPackage() {
+        for (String sample : List.of("import net.createmod.ponder.api.registration.PonderPlugin;",
+                "import net.createmod.catnip.math.Pointing;", "dev.engine_room.flywheel.api.Flywheel.ID")) {
+            assertTrue(OPTIONAL_ANIMATION.matcher(sample).find(), sample);
+        }
+        assertFalse(OPTIONAL_ANIMATION.matcher("import io.github.dirtyredz.herbalwitch.grimoire.guide.lessons.GuideLessons;").find());
     }
 
     @Test
