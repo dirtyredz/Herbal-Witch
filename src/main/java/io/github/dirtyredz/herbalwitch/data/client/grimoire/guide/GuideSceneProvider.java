@@ -9,6 +9,15 @@ import java.util.Map;
 
 /** Produces inert native scene markup from the same layouts used to place the actual stations. */
 public final class GuideSceneProvider {
+    /**
+     * The one place scene size and centring are decided (pinned GuideME 20.1.15 SceneTagCompiler attributes).
+     * GuideME already frames the camera on the block bounding box (rotation centre = world centre,
+     * centerScene()), so zoom only scales the content-fitted box; fullWidth gives the viewport the whole page
+     * width so the content sits centred horizontally instead of left-aligned. padding is left at its default:
+     * the pinned getInt reader rejects the expression form the guide tests require.
+     */
+    public static final String SCENE_ATTRIBUTES = "interactive={true} zoom={3} fullWidth={true}";
+
     private GuideSceneProvider() { }
 
     public static String dryingRack() {
@@ -21,7 +30,7 @@ public final class GuideSceneProvider {
     }
 
     private static String scene(String content) {
-        return "<GameScene interactive={true} zoom={1.5}>\n" + content + "</GameScene>";
+        return "<GameScene " + SCENE_ATTRIBUTES + ">\n" + content + "</GameScene>";
     }
 
     private static String station(StationSpec spec, String property, String value) {

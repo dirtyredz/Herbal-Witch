@@ -10,7 +10,7 @@ item_ids:
 
 Place the rack on a solid floor with room for its whole frame, then use it to open its inventory. Insert a fresh herb; drying starts automatically. No fuel or heat is needed. Keep the area loaded and leave room in the output.
 
-<GameScene interactive={true} zoom={1.5}>
+<GameScene interactive={true} zoom={3} fullWidth={true}>
   <Block id="minecraft:stone" x="0" y="0" z="0" />
   <Block id="herbalwitch:stations/drying_rack/station" x="0" y="1" z="0" p:active="true" p:facing="north" p:part="0" />
   <Block id="minecraft:stone" x="-1" y="0" z="0" />

@@ -197,6 +197,7 @@ class GuidePageCompilerTest {
                 case "GameScene" -> {
                     MdxAttrs.getBoolean(compiler, parent, tag, "interactive", false);
                     MdxAttrs.getFloat(compiler, parent, tag, "zoom", 1);
+                    MdxAttrs.getBoolean(compiler, parent, tag, "fullWidth", false);
                     for (var child : tag.children()) {
                         if (child instanceof MdxJsxElementFields nested) validate(compiler, parent, nested);
                     }

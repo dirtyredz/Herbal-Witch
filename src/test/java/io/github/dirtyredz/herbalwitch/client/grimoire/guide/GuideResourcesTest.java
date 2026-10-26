@@ -62,6 +62,28 @@ class GuideResourcesTest {
                 .filter(tag -> tag.name().equals("Block")).count());
     }
 
+    /** Scenes must stay large and page-centred: GuideME frames the camera on the content, these set size and alignment. */
+    @Test
+    void everySceneDeclaresTheSharedSizeAndCentringSettings() throws IOException {
+        int scenes = 0;
+        for (Path root : java.util.List.of(ROOT, Path.of("src/main/resources/assets/herbalwitch/guide_sources/en_us"))) {
+            try (var files = Files.walk(root)) {
+                for (Path file : files.filter(p -> p.toString().endsWith(".md")).toList()) {
+                    var open = Pattern.compile("<GameScene\\b([^>]*)>").matcher(Files.readString(file));
+                    while (open.find()) {
+                        scenes++;
+                        String attrs = open.group(1);
+                        var zoom = Pattern.compile("zoom=\\{(\\d+(?:\\.\\d+)?)}").matcher(attrs);
+                        assertTrue(zoom.find() && Double.parseDouble(zoom.group(1)) >= 3, file + ": scene zoom below 3 " + attrs);
+                        assertTrue(attrs.contains("fullWidth={true}"), file + ": scene not page-centred " + attrs);
+                        assertTrue(attrs.contains("interactive={true}"), file + ": scene not interactive " + attrs);
+                    }
+                }
+            }
+        }
+        assertTrue(scenes >= 4, "Expected the generated station scenes, found " + scenes);
+    }
+
     @Test
     void allLinksResolveAndEveryPageIsReachableFromStart() throws IOException {
         Map<Path, Set<Path>> edges = new HashMap<>();

@@ -45,7 +45,7 @@ No fuel or heat is needed. Take the dried bundle when it finishes.
 
 Drag this scene to rotate the real rack model. The hanging bundles indicate occupancy; their colours do not identify the herb being dried.
 
-<GameScene interactive={true} zoom={1.5}>
+<GameScene interactive={true} zoom={3} fullWidth={true}>
   <Block id="minecraft:stone" x="0" y="0" z="0" />
   <Block id="herbalwitch:stations/drying_rack/station" x="0" y="1" z="0" p:active="true" p:facing="north" p:part="0" />
   <Block id="minecraft:stone" x="-1" y="0" z="0" />
@@ -79,7 +79,7 @@ Decorative cottage stoves do not supply this heat.
 
 <HerbalCrafting id="herbalwitch:stations/stove/station" />
 
-<GameScene interactive={true} zoom={1.5}>
+<GameScene interactive={true} zoom={3} fullWidth={true}>
   <Block id="minecraft:stone" x="0" y="0" z="0" />
   <Block id="herbalwitch:stations/stove/station" x="0" y="1" z="0" p:facing="north" p:lit="true" p:part="0" />
   <Block id="minecraft:stone" x="-1" y="0" z="0" />

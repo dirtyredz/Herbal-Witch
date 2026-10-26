@@ -18,6 +18,10 @@
   Tests check links before any dangling-link filtering. Do not hand-edit generated guide pages.
   Scene placeholders use MDX comments (`{/* scene:heat */}`), not HTML comments: the pinned
   parser rejects `<!-- ... -->` even in authored sources before scene expansion.
+- **Scene size and centring come from one string.** `GuideSceneProvider.SCENE_ATTRIBUTES` (`zoom={3}
+  fullWidth={true}`); GuideME 20.1.15 already centres the camera on the block bounding box, `zoom` scales the
+  content-fitted box and `fullWidth` centres it on the page. `padding` cannot be used: its getInt reader only
+  accepts a string value, which the typed-JSX guard forbids. GuideResourcesTest enforces both on every scene.
   Plain JUnit cannot initialize LytFlowLink/GuideMEClient: vanilla bootstrap fails on Forge's
   untransformed NetworkEvent. The guard validates links with native LinkParser and compiles their
   labels as text; scene/recipe tags use native attribute readers instead of a live client renderer.

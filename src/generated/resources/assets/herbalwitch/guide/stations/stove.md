@@ -10,7 +10,7 @@ item_ids:
 
 Place this functional stove on a solid floor. Open it and insert furnace fuel; it burns automatically. Put the [Tea Kettle](herbalwitch:stations/kettle.md) directly on its burner. The stove must remain lit to supply heat. Decorative cottage stoves do not supply heat.
 
-<GameScene interactive={true} zoom={1.5}>
+<GameScene interactive={true} zoom={3} fullWidth={true}>
   <Block id="minecraft:stone" x="0" y="0" z="0" />
   <Block id="herbalwitch:stations/stove/station" x="0" y="1" z="0" p:facing="north" p:lit="true" p:part="0" />
   <Block id="minecraft:stone" x="-1" y="0" z="0" />
