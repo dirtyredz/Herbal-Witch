@@ -16,10 +16,83 @@ No library classes are shaded into HerbalWitch. Use `--offline` when
 downloads are prohibited; all other Gradle/Forge prerequisites must already be cached.
 
 HerbalWitch Dev needs this jar added; AE2, Create and Ponder are unnecessary for the complete
-first-herb lesson. The approved future animation profile is standalone Ponder 1.0.91 with
-Flywheel 1.0.5, optional; Phase 1 neither loads nor declares them. Installed dedicated-server
-and in-game rendering/input qualification are pending owner/pipeline checks, not claimed by
-the local datagen/build gate. Earlier "no required dependencies" evidence below predates this change.
+written first-herb lesson. Earlier "no required dependencies" evidence below predates this change.
+
+## Optional first-preparation animation (1.0.0-rc.3)
+
+Ponder is an optional client integration, with `mandatory=false`, `ordering="AFTER"`,
+`side="CLIENT"` and exact supported range `[1.0.91]`. Its Flywheel requirement comes from Ponder's
+own metadata. The isolated client entry point runs only when Ponder is loaded. Watch disappears
+when unavailable; the complete readable lesson, live recipes and G-hover remain usable.
+
+`build.gradle` applies `gradle/ponder.gradle`, declaring `https://maven.createmod.net` with module
+content filters and disabled transitives. These are the same build scripts called by
+`.github/workflows/ci.yml` through `.ci/scripts/verify.mjs`; no MultiMC path is needed by CI.
+
+| Scope | Coordinate |
+|---|---|
+| Compile only | `net.createmod.ponder:Ponder-Forge-1.20.1:1.0.91` |
+| Compile only | `dev.engine-room.flywheel:flywheel-forge-api-1.20.1:1.0.5` |
+| `-PcompatProfile=ponder` runtime | `net.createmod.ponder:Ponder-Forge-1.20.1:1.0.91` |
+| `-PcompatProfile=ponder` runtime | `dev.engine-room.flywheel:flywheel-forge-1.20.1:1.0.5` |
+
+Default `base` and the ordinary `all` profile omit both libraries. No Create dependency, foreign
+classes or nested libraries ship in the release jar. `verifyPonderRuntime` resolves and checks the
+main, GameTest and JUnit runtime graphs; it is part of `check`. Run it separately with the Ponder
+profile to verify the pinned runtime pair. Ordinary JUnit tests use `base` to prove absence.
+
+For standalone **Herbal Witch Dev**, retain GuideME 20.1.15 and add the pinned Ponder and Flywheel
+runtime jars on the client. For **Herbal Witch Test**, use its bundled Create/Ponder/Flywheel;
+do not add duplicate standalone jars or change an Evil Eye instance. The owner has approved the
+first lesson in game at scale 0.85. This approval does not by itself establish every profile below.
+
+Focused owner checks, when not already recorded for the specific installation:
+
+- Libraries absent: readable lesson and G-hover work; Watch is hidden.
+- Standalone animation: Watch and W-hover reach the lesson; captions, pause/replay, return
+  navigation and normal GUI scales work. Water bottle and valerian are clear, all rack/stove cells
+  render, and replay accumulates no items or particles.
+- W-hover from inventory: normal menu behavior resumes; no authenticated screen is reconstructed.
+- One full-pack acceptance launch using bundled libraries and the pack's rendering configuration.
+
+Headless guards cover dependency isolation, absent Watch compilation, inert scene contracts and
+recipe/caption/structure coverage; they do not render the client. Dedicated-server behavior requires
+a green ANU result.
+Hosted clean-clone Maven resolution remains unverified until an owner-authorized push. See the
+qualification record below for this branch's measured results.
+
+### Qualification record: 2026-10-26
+
+Guard implementation commit: `0d5d607`. Local `gradlew --offline test build verifyReleaseJar` passed:
+576 JUnit tests, 92 Node tests, art parity, resolved base main/GameTest/test graphs with neither
+optional library, and release-jar verification (1,259 main classes; no foreign classes or nested jars).
+The real Watch tag compiles to no content with Ponder/Catnip/Flywheel unavailable; written prose
+still compiles. Source guards enforce the loaded-mod entry, isolated imports and null client ticker.
+
+Two successful offline `runData` runs left all 1,154 generated files byte-identical to each other
+and the committed baseline, including the compressed lesson NBT. The base
+`dependencies --configuration runtimeClasspath` report also excludes Ponder/Flywheel.
+`gradlew --offline verifyPonderRuntime dependencies --configuration runtimeClasspath -PcompatProfile=ponder`
+passed with exactly Ponder 1.0.91 and Flywheel 1.0.5 in all three runtime graphs. `git diff --check`,
+the workspace shared-file check scoped to this worktree, and `dk check` passed.
+
+Verified artifact: `build/ci/release/herbalwitch-1.20.1-1.0.0-rc.3.jar` (also in `build/libs/`).
+SHA-256: `bfa0b1098726dd97f8205a4f51fe86fc22bd81ff6bb8d0498bbbc6f98d7248ec`.
+
+The single ANU attempt **FAILED before tests** (19 seconds, zero tests). Job
+`HerbalWitch-ponder-lesson1-20261026-104617-71f` tested `0d5d607` using
+`test runGameTestServer -PcompatProfile=base -PgameTestRunId=ponder-first-preparation-20261026-1046 --offline`.
+Log on ANU: `G:\mods-ci\logs\HerbalWitch-ponder-lesson1-20261026-104617-71f.log`.
+The cache lacks mapped JEI/EMI/Curios/Ponder/Flywheel API/GuideME dependencies; for example:
+
+```text
+Could not find net.createmod.ponder:Ponder-Forge-1.20.1:1.0.91_mapped_official_1.20.1.
+```
+
+No GameTest server started, and no server pass is claimed. Downloads were prohibited, so the run
+used offline mode and was not retried. ANU qualification remains open in `dk-99902446`; populate
+the required cache through an authorized provisioning step before a separately authorized rerun.
+No local client, local GameTest server or full-pack boot was launched. The approved scene is unchanged.
 
 ## Earlier evidence (0.1.0-dev.4; superseded by "Release candidate (M12)" below)
 

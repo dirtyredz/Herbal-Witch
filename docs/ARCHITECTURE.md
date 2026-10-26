@@ -33,7 +33,28 @@ cannot run in plain JUnit (vanilla bootstrap also needs Forge's transformed Netw
 World-dependent tags use native attribute readers in the guard; datagen validates scene states.
 Magical recipes, if substituted by a datapack, show the witch requirement and explicitly label
 energy as server configured rather than substituting local defaults. This slice does not migrate
-editorial overlays or authenticated actions; those remain in the existing reader. Ponder is deferred.
+editorial overlays or authenticated actions; those remain in the existing reader.
+
+### Optional first-preparation animation
+
+Ponder 1.0.91 and Flywheel 1.0.5 are compile-only, separately installed client libraries. Only
+`client/grimoire/ponder/` references their types (including Catnip); client bootstrap reaches that
+package only inside the loaded-mod guard. Neutral lesson identities, layout and named captions live
+in `grimoire/guide/lessons/`. Datagen imports no Ponder and validates the complete station structures
+against Forge registries. The base runtime and release jar contain neither optional library.
+
+`HerbalWatch` validates its lesson even without Ponder, then emits nothing when `GuideAnimations`
+has no available player. The readable lesson, live recipe cards and native G-hover remain complete.
+The installed player rechecks the world and selects exactly one storyboard by schematic and canonical
+component. `PonderLessonScreen` exposes the pinned protected list constructor; native controls,
+replay and `ScreenOpener.transitionTo` own navigation. No authenticated container is retained.
+Ponder supplies W-hover for the fourteen associated items; HerbalWitch adds no key handler.
+
+The scene illustrates the bundled Restful Infusion recipe with shortened waits and points back to
+live recipe cards for datapack changes. It changes visual states and transient items/effects only.
+Ponder can tick block entities, so `StationBlock.getTicker` must keep returning null for client
+worlds. Structures contain no entities or block-entity payloads; scenes invoke no processing,
+inventory, harvest, fuel or payment services. Native restore handles replay.
 
 Familiar homes share one floor-supported structure block and identity-only block entity. Placement
 uses `platform/placement`; the canonical bond's home reference owns assignment, and a derived

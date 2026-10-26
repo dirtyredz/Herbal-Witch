@@ -12,7 +12,7 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `gradle/verify-release-jar.gradle` and `tools/test-world/datapack/` - synced jar verification and test-world staging.
 - `gradle/test-world.gradle` and `tools/test-world/datapack/` - synced jar verification and test-world staging.
 - `gradle/gametest-world.gradle` and `tools/test-world/datapack/` - synced jar verification and test-world staging.
-- `gradle/ponder.gradle` - optional Ponder/Flywheel compile-only pins and the opt-in `-PcompatProfile=ponder` runtime; nothing is bundled.
+- `gradle/ponder.gradle` - optional Ponder/Flywheel compile-only pins, the opt-in `-PcompatProfile=ponder` runtime and `verifyPonderRuntime` (resolved main/GameTest/test graph checks wired into `check`); nothing is bundled.
 - `gradle/wrapper/`, `gradlew*`, `.gitattributes`, `.gitignore` - synced workspace files; edit the root template and sync.
 - `docs/releases/` - versioned release notes; add notes only for a version being prepared for release.
 
@@ -69,7 +69,7 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `src/generated/resources/assets/herbalwitch/ponder/` — generated, gzip-compressed lesson structures that Ponder loads; datagen-owned.
 - `src/test/java/io/github/dirtyredz/herbalwitch/data/grimoire/ponder/` — independent lesson manifest and decoded structure checks.
 - `src/test/java/io/github/dirtyredz/herbalwitch/grimoire/guide/lessons/` — lesson facts and captions on the Ponder-free test classpath.
-- `src/test/java/io/github/dirtyredz/herbalwitch/client/grimoire/guide/` — pinned page compiler, typed MDX, link/anchor and item-route guards; `content/` covers live recipe lookup and tooltip bounds.
+- `src/test/java/io/github/dirtyredz/herbalwitch/client/grimoire/guide/` — pinned page compiler, real absent-Ponder Watch compilation, typed MDX, link/anchor and item-route guards; `content/` covers live recipe lookup and tooltip bounds.
 - `src/test/java/io/github/dirtyredz/herbalwitch/client/grimoire/guide/animation/` — Watch availability, validation and exact dispatch, without Ponder.
 - `src/test/java/io/github/dirtyredz/herbalwitch/client/grimoire/ponder/` — source-level storyboard guards (captions, title, registration); Ponder is not on the test classpath.
 - `src/art/blockbench/magic/` — editable broom and wand geometry.
@@ -548,7 +548,8 @@ client + datagen -> features and contracts
   registry-derived decor directories (blockstates, item models and loot of the seating, storage, surfaces and fixtures
   families), whose file names are permanent block ids; each must hold exactly the decor manifest's files.
 - GameTests stay in `src/gameTest/`, outside the release source set.
-- No RedzCore dependency and no shared runtime library (docs/DECISIONS.md).
+- No RedzCore or shared workspace runtime library. GuideME is required presentation infrastructure;
+  Ponder/Flywheel are optional client presentation libraries (docs/DECISIONS.md).
 
 ## Structural notes
 

@@ -1,5 +1,25 @@
 # Decisions - The Herbal Witch
 
+## 2026-10-26 - Optional animated first preparation before release
+
+Deliver one Ponder lesson alongside the complete written GuideME equivalent. Watch is hidden when
+Ponder is absent; native G-hover stays available. Native W-hover and Watch share the same inert
+storyboard. Lessons 2–11 remain future work, with no placeholder scenes. The owner approved the
+lesson in game, including its final 0.85 scene scale; qualification work preserves that appearance.
+
+Pin standalone Ponder 1.0.91 exactly and Flywheel 1.0.5 explicitly, without transitives, shading,
+jar-in-jar or a Create dependency. The build declares Create's Maven repository in
+`gradle/ponder.gradle`, also applied by hosted CI. Only the opt-in `ponder` runtime profile adds
+these libraries; `base` and `all` do not. The protected PonderUI scene-list constructor needs a
+small adapter because its public factory selects a component, not an exact lesson. Broaden the
+supported Ponder range only after checking that API and qualifying it.
+
+Use named shared captions and deterministic compressed structures from the sole Java datagen
+writer. Illustrate the bundled recipe, label the shortened waiting and direct readers to live cards
+for current recipes. Keep client station tickers null and all gameplay services out of scenes.
+No saved identities, protocol or version changes accompany this addition. This supersedes the
+earlier Phase 1 deferral of Ponder below; release authorization remains separate.
+
 ## 2026-10-25 - Shared hosted CI and deliberate releases
 
 Adopt the workspace template as byte-identical standalone files. Pushes verify without publishing;

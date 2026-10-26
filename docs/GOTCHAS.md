@@ -43,6 +43,18 @@
   never read them as text. Ponder loads them from `assets/<ns>/ponder/<path>.nbt`.
 - **Ponder's Maven POM names an older Flywheel.** `gradle/ponder.gradle` disables transitives and pins the
   pair explicitly; the default runtime has neither library, only `-PcompatProfile=ponder` adds them.
+- **PonderUI.of takes a component, not a lesson.** Watch filters by schematic and canonical component,
+  rejects missing/ambiguous matches and uses the pinned protected constructor through PonderLessonScreen.
+  Preserve native transition/back behavior; never reconstruct an authenticated container screen.
+- **Captions need stable shared keys.** Use `sharedText` and plugin shared-text registration with
+  `herbalwitch.ponder.shared.first_preparation.<name>`; `.text(English)` creates position-dependent keys.
+- **Ponder ticks block entities.** StationBlock must return a null ticker on client levels. Keep scene
+  operations visual and generated structures free of inventories/jobs/owners/entities. Native restore
+  resets transient items and effects; do not add static replay state.
+- **Absent Watch is testable without a client.** The real WatchLessonTag returns before LytFlowLink
+  construction when unavailable. GuidePageCompilerTest executes that branch with optional classes
+  absent, while available links still use headless contracts. DependencyDirectionTest guards the
+  sole loaded-mod entry and inert ticker; verifyPonderRuntime checks all three resolved runtime graphs.
 
 - **A commerce save that returns is not a checkpoint.** `ShopSavedData` writes only through the verified
   writer and `ShopPlayerCheckpoint` forces and reads back the player file (or, for the integrated host,

@@ -13,8 +13,13 @@ cards keep recipe data current; missing recipes show unavailable. Linked ingredi
 recipe slots lead to their own item pages. Tooltips wrap and stay within the screen edges.
 The rotatable rack and heat diagram use the real block models and complete layouts.
 The original grimoire, discoveries, research and teaching remain available unchanged.
-Owner validation is pending for rotation, input/navigation, GUI scales and following the complete
-lesson in HerbalWitch Dev. Ponder and the replacement reader are not implemented in Phase 1.
+Optional Ponder 1.0.91 with Flywheel 1.0.5 adds **Watch** in the lesson and native hold-W access
+over its fourteen associated items. First preparation shows harvesting lavender, drying and grinding,
+valerian powder, stove heat, water, automatic brewing, drinking and replay. It illustrates the
+bundled recipe; live cards remain authoritative. Without Ponder, Watch is hidden and the complete
+written guide and G-hover remain available. The owner approved this animation in game at scale 0.85.
+The replacement reader and animated lessons 2–11 remain unimplemented. Broader candidate acceptance
+and any unrecorded absent-library/full-pack checks remain separate; see COMPATIBILITY.md.
 
 Version 0.6.1 is the structural prerequisite for M8/M9: grouped packages, feature-owned grimoire
 content, shared recipe/roster contracts, guarded witch spending, split ward services, unified

@@ -4,8 +4,8 @@ Standalone mod repo inside the `minecraft-mods` workspace (see `../../CLAUDE.md`
 [README.md](README.md), [STRUCTURE.md](STRUCTURE.md), [docs/](docs/) (start with
 docs/ARCHITECTURE.md and docs/catalogue/).
 
-- **Commit identity:** `dirtyredz <dirtyredz@live.com>`. Private development: no GitHub repo, no
-  release, no pushes, and never update the Evil Eye pack's pinned jar or config from here.
+- **Commit identity:** `dirtyredz <dirtyredz@live.com>`. Private development with shared hosted CI:
+  pushes and release dispatch require owner authorization. Never update the Evil Eye pack's pinned jar or config from here.
 - **Standalone.** No RedzCore dependency and no code shared with other mods at runtime. Patterns from
   Roundwood/DankRecipeTransfer are adapted locally, with attribution where source was copied.
 - **Headless only.** Never run `runClient`. Verification, in `mods/HerbalWitch/`:

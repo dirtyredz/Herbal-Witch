@@ -12,6 +12,10 @@ inventory and **hold G** to open that item's page. Follow its links into "My fir
 use live recipe cards, inspect the rotatable rack and arrange the kettle over the stove to make
 your first infusion. Every topic links to the start page and lesson. No AE2, Create or Ponder is required.
 
+Optionally install **Ponder 1.0.91 and Flywheel 1.0.5** on the client for the animated first
+preparation: choose **Watch** in the lesson or hold **W** over an associated item. Without them,
+Watch is hidden and all written instructions remain available. See [compatibility](docs/COMPATIBILITY.md).
+
 The existing grimoire still opens normally for discoveries, research, teaching and the complete
 reference. Phase 1 adds public instructions without changing book access or saved knowledge.
 
