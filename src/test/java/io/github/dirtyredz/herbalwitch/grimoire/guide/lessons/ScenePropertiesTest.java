@@ -42,7 +42,7 @@ class ScenePropertiesTest {
     }
 
     private static void assertDeclared(String file, String field, String expression) throws IOException {
-        var declaration = Pattern.compile("public static final \w+ " + field + " = ([^;]+);").matcher(Files.readString(Path.of(file)));
+        var declaration = Pattern.compile("public static final \\w+ " + field + " = ([^;]+);").matcher(Files.readString(Path.of(file)));
         assertTrue(declaration.find(), file + " no longer declares " + field);
         assertEquals(expression, declaration.group(1).trim(), file + " " + field + " changed; update SceneProperties");
     }
