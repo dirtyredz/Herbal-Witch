@@ -92,6 +92,14 @@ class DependencyDirectionTest {
     }
 
     @Test
+    void stationTickersRemainInertInPondersClientWorld() throws IOException {
+        String station = Files.readString(ROOT.resolve("apothecary/stations/block/StationBlock.java"));
+        assertTrue(Pattern.compile("getTicker\\(Level level,[^{]+\\{\\s*"
+                + "if \\(level\\.isClientSide \\|\\|[^)]*type\\.get\\(\\)[^}]+return null;")
+                .matcher(station).find(), "Client station tickers must return null before any gameplay tick");
+    }
+
+    @Test
     void lessonGameplayGuardRecognisesServiceCallsAndContents() {
         for (String sample : List.of("import io.github.dirtyredz.herbalwitch.apothecary.stations.process.StationProcessor;",
                 "import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchStatusService;",

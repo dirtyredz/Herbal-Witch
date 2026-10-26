@@ -24,3 +24,32 @@ dependencies {
         runtimeOnly(fg.deobf("dev.engine-room.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}")) { transitive = false }
     }
 }
+
+// Resolve the actual runtime graphs, not just dependency declarations. This runs in hosted build/check too.
+tasks.register('verifyPonderRuntime') {
+    group = 'verification'
+    description = 'Verify optional animation isolation and the exact opt-in runtime pair.'
+    doLast {
+        ['runtimeClasspath', 'gameTestRuntimeClasspath', 'testRuntimeClasspath'].each { name ->
+            def modules = configurations.getByName(name).resolvedConfiguration.resolvedArtifacts.collect {
+                it.moduleVersion.id
+            }
+            def animation = modules.findAll {
+                it.group in ['net.createmod.ponder', 'dev.engine-room.flywheel']
+            }
+            if (!ponderProfile && !animation.isEmpty()) {
+                throw new GradleException("${name}: base runtime contains optional animation libraries: ${animation}")
+            }
+            if (ponderProfile) {
+                def expected = [("Ponder-Forge-${minecraft_version}".toString()): ponder_version,
+                                ("flywheel-forge-${minecraft_version}".toString()): flywheel_version]
+                if (animation.size() != 2 || animation.any { id ->
+                    !expected.containsKey(id.name) || !(id.version == expected[id.name]
+                            || id.version.startsWith(expected[id.name] + '_mapped_'))
+                }) throw new GradleException("${name}: expected pinned Ponder/Flywheel runtime pair, got ${animation}")
+            }
+            logger.lifecycle("${name}: optional animation ${animation ?: 'absent'}")
+        }
+    }
+}
+tasks.named('check').configure { dependsOn 'verifyPonderRuntime' }

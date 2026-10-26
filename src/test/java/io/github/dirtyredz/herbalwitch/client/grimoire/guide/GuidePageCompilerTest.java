@@ -47,6 +47,32 @@ class GuidePageCompilerTest {
     private static final ExtensionCollection EXTENSIONS = ExtensionCollection.builder()
             .add(TagCompiler.EXTENSION_POINT, new HeadlessTags()).build();
 
+    /** Execute the real tag's absent branch, which must return before constructing client-only links. */
+    @Test void absentPonderCompilesTheRealWatchTagWithoutEmittingContent() {
+        for (String resource : List.of("net/createmod/ponder/api/registration/PonderPlugin.class",
+                "net/createmod/catnip/gui/ScreenOpener.class", "dev/engine_room/flywheel/api/Flywheel.class")) {
+            assertNull(getClass().getClassLoader().getResource(resource), "Optional library on test runtime: " + resource);
+        }
+        assertFalse(GuideAnimations.available(
+                io.github.dirtyredz.herbalwitch.grimoire.guide.lessons.GuideLessons.FIRST_PREPARATION));
+        var id = new ResourceLocation("herbalwitch:test.md");
+        var extensions = ExtensionCollection.builder()
+                .add(TagCompiler.EXTENSION_POINT, new WatchLessonTag()).build();
+        var parsed = PageCompiler.parse("test", id, "<HerbalWatch lesson=\"herbalwitch:first_preparation\" />");
+        var document = PageCompiler.compile(new Pages(Map.of(id, parsed)), extensions, parsed).document();
+        assertTrue(document.getTextContent().isBlank(), "Unavailable Watch must emit no label or error");
+        document.visit(new LytVisitor() {
+            @Override public Result beforeFlowContent(LytFlowContent content) {
+                fail("Unavailable Watch emitted flow content: " + content);
+                return Result.CONTINUE;
+            }
+        });
+        var prose = PageCompiler.parse("test", id, "Written lesson remains readable.\n\n"
+                + "<HerbalWatch lesson=\"herbalwitch:first_preparation\" />");
+        assertEquals("Written lesson remains readable.", PageCompiler.compile(
+                new Pages(Map.of(id, prose)), extensions, prose).document().getTextContent().trim());
+    }
+
     @Test void everyAuthoredAndGeneratedPageHasValidMarkupLinksAndCompiledProse() throws Exception {
         var bundled = read(GENERATED);
         assertEquals(16, bundled.size(), "Every Phase 1 page must be generated");
