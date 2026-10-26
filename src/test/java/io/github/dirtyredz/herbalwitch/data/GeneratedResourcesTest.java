@@ -3,6 +3,8 @@ package io.github.dirtyredz.herbalwitch.data;
 import com.google.gson.JsonObject;
 import io.github.dirtyredz.herbalwitch.data.botany.BotanyManifest;
 import io.github.dirtyredz.herbalwitch.data.decor.DecorManifest;
+import io.github.dirtyredz.herbalwitch.data.fixture.ResourceFiles;
+import io.github.dirtyredz.herbalwitch.data.grimoire.ponder.PonderManifest;
 import io.github.dirtyredz.herbalwitch.data.grimoire.GrimoireManifest;
 import io.github.dirtyredz.herbalwitch.data.magic.charm.CharmManifest;
 import io.github.dirtyredz.herbalwitch.data.magic.ritual.AltarManifest;
@@ -62,10 +64,12 @@ class GeneratedResourcesTest {
             });
         }
         lang.putAll(io.github.dirtyredz.herbalwitch.data.magic.tools.ToolManifest.lang());
-        io.github.dirtyredz.herbalwitch.data.stations.shop.ShopManifest.lang().forEach((key, value) -> {
-            assertFalse(lang.containsKey(key), "two features claim " + key);
-            lang.put(key, value);
-        });
+        for (Map<String, String> part : List.of(io.github.dirtyredz.herbalwitch.data.stations.shop.ShopManifest.lang(), PonderManifest.lang())) {
+            part.forEach((key, value) -> {
+                assertFalse(lang.containsKey(key), "two features claim " + key);
+                lang.put(key, value);
+            });
+        }
         return lang;
     }
 
@@ -98,6 +102,7 @@ class GeneratedResourcesTest {
         expected.addAll(io.github.dirtyredz.herbalwitch.data.familiars.FamiliarManifest.files());
         expected.addAll(io.github.dirtyredz.herbalwitch.data.magic.tools.ToolManifest.files());
         expected.addAll(io.github.dirtyredz.herbalwitch.data.stations.shop.ShopManifest.files());
+        expected.addAll(PonderManifest.files());
         assertEquals(expected, generatedFiles());
     }
 
@@ -146,7 +151,8 @@ class GeneratedResourcesTest {
     @Test
     void optionalModReferencesOnlyWhereDeclared() throws IOException {
         for (String rel : generatedFiles()) {
-            String text = Files.readString(GENERATED.resolve(rel));
+            // Structures are binary: check the block ids of their palette, never decode them as text.
+            String text = rel.endsWith(".nbt") ? paletteIds(GENERATED.resolve(rel)) : Files.readString(GENERATED.resolve(rel));
             Matcher m = NAMESPACED.matcher(text);
             while (m.find()) {
                 String namespace = m.group(1);
@@ -158,5 +164,13 @@ class GeneratedResourcesTest {
             }
             assertFalse(rel.endsWith(".png"), "textures come from the art pipeline (tools/generate-textures.mjs, tools/compile-blockbench.mjs), never datagen: " + rel);
         }
+    }
+
+    /** A structure's palette block ids, quoted like JSON so the namespace scan applies unchanged. */
+    private static String paletteIds(Path file) {
+        var palette = ResourceFiles.structure(file).getList("palette", net.minecraft.nbt.Tag.TAG_COMPOUND);
+        StringBuilder ids = new StringBuilder();
+        for (int i = 0; i < palette.size(); i++) ids.append('"').append(palette.getCompound(i).getString("Name")).append("\"\n");
+        return ids.toString();
     }
 }

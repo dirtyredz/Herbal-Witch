@@ -12,11 +12,14 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `gradle/verify-release-jar.gradle` and `tools/test-world/datapack/` - synced jar verification and test-world staging.
 - `gradle/test-world.gradle` and `tools/test-world/datapack/` - synced jar verification and test-world staging.
 - `gradle/gametest-world.gradle` and `tools/test-world/datapack/` - synced jar verification and test-world staging.
+- `gradle/ponder.gradle` - optional Ponder/Flywheel compile-only pins and the opt-in `-PcompatProfile=ponder` runtime; nothing is bundled.
 - `gradle/wrapper/`, `gradlew*`, `.gitattributes`, `.gitignore` - synced workspace files; edit the root template and sync.
 - `docs/releases/` - versioned release notes; add notes only for a version being prepared for release.
 
 - `src/main/java/io/github/dirtyredz/herbalwitch/client/grimoire/guide/` — GuideME registration and reload wiring; content/ owns live recipe presentation.
-- `src/main/java/io/github/dirtyredz/herbalwitch/data/client/grimoire/guide/` — Native guide pages and registry-validated scenes; no GuideME gameplay dependencies.
+- `src/main/java/io/github/dirtyredz/herbalwitch/data/client/grimoire/guide/` — Native guide pages and registry-validated scenes; `GuideSceneBlocks` owns station-cell expansion and block validation shared with the Ponder structures; no GuideME gameplay dependencies.
+- `src/main/java/io/github/dirtyredz/herbalwitch/grimoire/guide/lessons/` — Animated-lesson facts (identity, structure, page, associated items), scene layout and named captions; no optional-library or registry types.
+- `src/main/java/io/github/dirtyredz/herbalwitch/data/client/grimoire/ponder/` — Deterministic lesson structure NBT, lesson composition and caption language contributions; imports no Ponder.
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/advanced/broom_stand/` — Broom station adapter, recipes and repair transforms.
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/advanced/wand_bench/` — Wand station adapter, recipes and repair transforms.
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/server/stations/recipes/tools/` — Tool acquisition contributions to the sole recipe writer.
@@ -60,6 +63,9 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 
 - `src/main/resources/assets/herbalwitch/guide_sources/en_us/` — authored path and apothecary prose; `apothecary/{lavender,valerian}/` owns each herb form and `stations/` owns the five lesson stations.
 - `src/generated/resources/assets/herbalwitch/guide/` — generated native guide pages; separate from authored sources.
+- `src/generated/resources/assets/herbalwitch/ponder/` — generated, gzip-compressed lesson structures that Ponder loads; datagen-owned.
+- `src/test/java/io/github/dirtyredz/herbalwitch/data/grimoire/ponder/` — independent lesson manifest and decoded structure checks.
+- `src/test/java/io/github/dirtyredz/herbalwitch/grimoire/guide/lessons/` — lesson facts and captions on the Ponder-free test classpath.
 - `src/test/java/io/github/dirtyredz/herbalwitch/client/grimoire/guide/` — pinned page compiler, typed MDX, link/anchor and item-route guards; `content/` covers live recipe lookup and tooltip bounds.
 - `src/art/blockbench/magic/` — editable broom and wand geometry.
 - `src/art/blockbench/stations/tools/` — editable broom stand and wand bench geometry.

@@ -54,6 +54,15 @@ public final class ResourceFiles {
         return kind + ".herbalwitch." + path.replace('/', '.');
     }
 
+    /** A gzip-compressed vanilla structure (NBT), decoded with the game's own reader. */
+    public static net.minecraft.nbt.CompoundTag structure(Path file) {
+        try (InputStream in = Files.newInputStream(file)) {
+            return net.minecraft.nbt.NbtIo.readCompressed(in);
+        } catch (IOException e) {
+            throw new AssertionError("cannot read " + file, e);
+        }
+    }
+
     public static int[] pngSize(Path file) {
         try (InputStream in = Files.newInputStream(file); DataInputStream data = new DataInputStream(in)) {
             data.skipBytes(16); // signature, IHDR length and type

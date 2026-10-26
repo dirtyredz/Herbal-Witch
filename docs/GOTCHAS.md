@@ -36,6 +36,13 @@
 - **A document screen is not a container screen.** Phase 1 uses native hover access only and leaves
   book/menu behavior alone. Future guide buttons must close containers normally; a return screen
   must not revive an old authenticated session. Optional Ponder must remain client-isolated.
+- **Lesson structures are binary and must be byte-stable on every OS.** Hosted CI reruns `runData` on
+  Linux and fails on any diff, and a platform zlib (or zlib-ng) may deflate differently, so
+  `PonderStructureProvider` writes gzip with stored deflate blocks itself; never switch it to
+  `NbtIo.writeCompressed`. `GeneratedResourcesTest` decodes `.nbt` files and scans only their palette ids;
+  never read them as text. Ponder loads them from `assets/<ns>/ponder/<path>.nbt`.
+- **Ponder's Maven POM names an older Flywheel.** `gradle/ponder.gradle` disables transitives and pins the
+  pair explicitly; the default runtime has neither library, only `-PcompatProfile=ponder` adds them.
 
 - **A commerce save that returns is not a checkpoint.** `ShopSavedData` writes only through the verified
   writer and `ShopPlayerCheckpoint` forces and reads back the player file (or, for the integrated host,

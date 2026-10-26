@@ -2,12 +2,16 @@ package io.github.dirtyredz.herbalwitch.data.client.grimoire.guide;
 
 import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationCatalog;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationSpec;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 
 import java.util.Map;
 
-/** Produces inert native scene markup from the same layouts used to place the actual stations. */
+/**
+ * Produces inert native scene markup from the same layouts used to place the actual stations. Geometry and
+ * registry validation come from {@link GuideSceneBlocks}, shared with the Ponder structures; this class owns
+ * only the GuideME markup.
+ */
 public final class GuideSceneProvider {
     /**
      * The one place scene size and centring are decided (pinned GuideME 20.1.15 SceneTagCompiler attributes).
@@ -17,6 +21,8 @@ public final class GuideSceneProvider {
      * the pinned getInt reader rejects the expression form the guide tests require.
      */
     public static final String SCENE_ATTRIBUTES = "interactive={true} zoom={3} fullWidth={true}";
+    /** Stations stand one block up, on supports in layer 0, facing the viewer's default side. */
+    private static final BlockPos ORIGIN = new BlockPos(0, 1, 0);
 
     private GuideSceneProvider() { }
 
@@ -26,7 +32,7 @@ public final class GuideSceneProvider {
 
     public static String heat() {
         return scene(station(StationCatalog.STOVE, "lit", "true")
-                + block("herbalwitch:" + StationCatalog.KETTLE.path(), 0, 2, 0, Map.of("facing", "north")));
+                + block(GuideSceneBlocks.block("herbalwitch:" + StationCatalog.KETTLE.path(), ORIGIN.above(), Map.of("facing", "north"))));
     }
 
     private static String scene(String content) {
@@ -35,30 +41,19 @@ public final class GuideSceneProvider {
 
     private static String station(StationSpec spec, String property, String value) {
         StringBuilder result = new StringBuilder();
-        var cells = spec.layout().cells();
-        for (int i = 0; i < cells.size(); i++) {
-            var cell = cells.get(i);
-            if (cell.up() == 0) result.append(block("minecraft:stone", -cell.right(), 0, cell.depth(), Map.of()));
-            result.append(block("herbalwitch:" + spec.path(), -cell.right(), cell.up() + 1, cell.depth(),
-                    Map.of("facing", "north", spec.layout().part().getName(), Integer.toString(i), property, value)));
+        for (var cell : GuideSceneBlocks.station(spec, ORIGIN, Direction.NORTH, Map.of(property, value))) {
+            if (cell.grounded()) result.append(block(GuideSceneBlocks.block("minecraft:stone", cell.pos().below(), Map.of())));
+            result.append(block(cell));
         }
         return result.toString();
     }
 
-    private static String block(String id, int x, int y, int z, Map<String, String> properties) {
-        var key = new ResourceLocation(id);
-        if (!ForgeRegistries.BLOCKS.containsKey(key)) throw new IllegalStateException("Unknown guide block: " + id);
-        var block = ForgeRegistries.BLOCKS.getValue(key);
+    private static String block(GuideSceneBlocks.Placement placement) {
         // Unlike getFloat/getBoolean, the pinned getInt reader requires a string value.
-        StringBuilder out = new StringBuilder("  <Block id=\"").append(id).append("\" x=\"").append(x)
-                .append("\" y=\"").append(y).append("\" z=\"").append(z).append('"');
-        properties.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry -> {
-            var property = block.getStateDefinition().getProperty(entry.getKey());
-            if (property == null || property.getValue(entry.getValue()).isEmpty()) {
-                throw new IllegalStateException("Invalid guide state: " + id + " " + entry);
-            }
-            out.append(" p:").append(entry.getKey()).append("=\"").append(entry.getValue()).append('"');
-        });
+        var pos = placement.pos();
+        StringBuilder out = new StringBuilder("  <Block id=\"").append(placement.id()).append("\" x=\"").append(pos.getX())
+                .append("\" y=\"").append(pos.getY()).append("\" z=\"").append(pos.getZ()).append('"');
+        placement.properties().forEach((key, value) -> out.append(" p:").append(key).append("=\"").append(value).append('"'));
         return out.append(" />\n").toString();
     }
 }

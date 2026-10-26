@@ -57,6 +57,7 @@ public final class HerbalWitchDataProviders {
         DataGenerator generator = event.getGenerator();
         PackOutput output = generator.getPackOutput();
         generator.addProvider(event.includeClient(), new io.github.dirtyredz.herbalwitch.data.client.grimoire.guide.GuidePageProvider(output));
+        generator.addProvider(event.includeClient(), new io.github.dirtyredz.herbalwitch.data.client.grimoire.ponder.PonderStructureProvider(output));
         ExistingFileHelper existingFiles = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookup = event.getLookupProvider();
 
