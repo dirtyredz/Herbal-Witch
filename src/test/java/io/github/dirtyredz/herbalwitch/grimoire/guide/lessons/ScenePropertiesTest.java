@@ -6,6 +6,9 @@ import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationCatalo
 import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.drying_rack.DryingRackBlock;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.hearth.HearthBlock;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.everyday.stove.StoveBlock;
+import net.minecraft.SharedConstants;
+import net.minecraft.server.Bootstrap;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,6 +18,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * one to the real block's property so a rename fails here instead of silently breaking a scene.
  */
 class ScenePropertiesTest {
+    /** Block classes need the vanilla registries bootstrapped before their static properties exist. */
+    @BeforeAll
+    static void bootstrap() {
+        SharedConstants.tryDetectVersion();
+        Bootstrap.bootStrap();
+    }
+
     @Test
     void namesMatchTheRealBlockProperties() {
         assertEquals(HerbCropBlock.AGE.getName(), SceneProperties.AGE);
