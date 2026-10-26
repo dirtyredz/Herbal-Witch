@@ -3,21 +3,6 @@ navigation:
   title: "My first useful herb"
   parent: herbalwitch:path/start.md
   position: 1
-item_ids:
-  - herbalwitch:botany/temperate/lavender/seeds
-  - herbalwitch:botany/temperate/lavender/fresh
-  - herbalwitch:preparations/herbs/temperate/lavender/bundle
-  - herbalwitch:preparations/herbs/temperate/lavender/powder
-  - herbalwitch:botany/shade/valerian/seeds
-  - herbalwitch:botany/shade/valerian/fresh
-  - herbalwitch:preparations/herbs/shade/valerian/bundle
-  - herbalwitch:preparations/herbs/shade/valerian/powder
-  - herbalwitch:preparations/drinks/restful_infusion
-  - herbalwitch:stations/drying_rack/station
-  - herbalwitch:stations/mortar/station
-  - herbalwitch:stations/kettle/station
-  - herbalwitch:stations/stove/station
-  - herbalwitch:stations/hearth/station
 ---
 
 # My first useful herb
@@ -27,13 +12,24 @@ You can make and drink it before becoming a witch. A witch can also use it to pr
 
 [Back to The Witch's Path](../path/start.md)
 
+## Find an item
+
+- Lavender: [seeds](herbalwitch:apothecary/lavender/seeds.md) · [fresh](herbalwitch:apothecary/lavender/fresh.md) · [bundle](herbalwitch:apothecary/lavender/bundle.md) · [powder](herbalwitch:apothecary/lavender/powder.md)
+- Valerian: [seeds](herbalwitch:apothecary/valerian/seeds.md) · [fresh](herbalwitch:apothecary/valerian/fresh.md) · [bundle](herbalwitch:apothecary/valerian/bundle.md) · [powder](herbalwitch:apothecary/valerian/powder.md)
+- [Herb Drying Rack](herbalwitch:stations/drying_rack.md)
+- [Mortar and Pestle](herbalwitch:stations/mortar.md)
+- [Tea Kettle](herbalwitch:stations/kettle.md)
+- [Witch's Stove](herbalwitch:stations/stove.md)
+- [Hearth](herbalwitch:stations/hearth.md)
+- [Restful Infusion](herbalwitch:apothecary/restful_infusion.md)
+
 ## Gather and grow
 
 Begin with lavender. Harvest a mature wild plant by using it, or plant lavender seeds on farmland or an herb bed,
 let the plant mature, then harvest it by hand. Save seeds to grow more.
 Lavender starter seeds can also be crafted; the current recipe is below.
 
-<RecipeFor id="herbalwitch:botany/temperate/lavender/seeds" />
+<HerbalCrafting id="herbalwitch:botany/temperate/lavender/seeds" />
 
 The default drink also needs **valerian**. Look for it in shaded habitats, harvest mature plants and keep their seeds.
 You can discover herbs and seeds by breaking grass in their habitats. Grow valerian on farmland or an herb bed.
@@ -45,11 +41,11 @@ Craft a Herb Drying Rack, place it on a solid floor with room for its whole fram
 Put the fresh herb in the input slot. Drying starts automatically; keep the area loaded and leave room in the output.
 No fuel or heat is needed. Take the dried bundle when it finishes.
 
-<RecipeFor id="herbalwitch:stations/drying_rack/station" />
+<HerbalCrafting id="herbalwitch:stations/drying_rack/station" />
 
 Drag this scene to rotate the real rack model. The hanging bundles indicate occupancy; their colours do not identify the herb being dried.
 
-<GameScene interactive="true" zoom="1.5">
+<GameScene interactive={true} zoom={1.5}>
   <Block id="minecraft:stone" x="0" y="0" z="0" />
   <Block id="herbalwitch:stations/drying_rack/station" x="0" y="1" z="0" p:active="true" p:facing="north" p:part="0" />
   <Block id="minecraft:stone" x="-1" y="0" z="0" />
@@ -67,7 +63,7 @@ Drag this scene to rotate the real rack model. The hanging bundles indicate occu
 Craft and place a Mortar and Pestle. Open it and put a dried bundle in the input slot.
 Grinding starts automatically; take the powder from the output. Prepare both herbs this way.
 
-<RecipeFor id="herbalwitch:stations/mortar/station" />
+<HerbalCrafting id="herbalwitch:stations/mortar/station" />
 
 <HerbalRecipe id="herbalwitch:processing/grinding/herbs/temperate/lavender" />
 
@@ -79,11 +75,11 @@ Craft a Tea Kettle and a functional Witch's Stove. Place the stove on a solid fl
 as shown below. Open the stove and add furnace fuel; it burns automatically. The kettle needs the stove lit beneath it.
 Decorative cottage stoves do not supply this heat.
 
-<RecipeFor id="herbalwitch:stations/kettle/station" />
+<HerbalCrafting id="herbalwitch:stations/kettle/station" />
 
-<RecipeFor id="herbalwitch:stations/stove/station" />
+<HerbalCrafting id="herbalwitch:stations/stove/station" />
 
-<GameScene interactive="true" zoom="1.5">
+<GameScene interactive={true} zoom={1.5}>
   <Block id="minecraft:stone" x="0" y="0" z="0" />
   <Block id="herbalwitch:stations/stove/station" x="0" y="1" z="0" p:facing="north" p:lit="true" p:part="0" />
   <Block id="minecraft:stone" x="-1" y="0" z="0" />

@@ -8,9 +8,9 @@ every client.
 
 Install **GuideME 20.1.15** (`guideme-20.1.15.jar`) on both sides. Hover lavender or valerian,
 their prepared forms, a Restful Infusion or the drying rack/mortar/kettle/stove/hearth in an
-inventory and **hold G** to read "My first useful herb". Follow live recipe cards, inspect the
-rotatable rack and arrange the kettle over the stove to make your first infusion. The start
-page is linked from the lesson. No AE2, Create or Ponder is required.
+inventory and **hold G** to open that item's page. Follow its links into "My first useful herb",
+use live recipe cards, inspect the rotatable rack and arrange the kettle over the stove to make
+your first infusion. Every topic links to the start page and lesson. No AE2, Create or Ponder is required.
 
 The existing grimoire still opens normally for discoveries, research, teaching and the complete
 reference. Phase 1 adds public instructions without changing book access or saved knowledge.

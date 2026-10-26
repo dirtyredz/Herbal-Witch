@@ -15,6 +15,12 @@ builds. This adds no version upgrade, shading or dependency download to the loca
 
 ## 2026-10-25 - Additive GuideME first-herb lesson
 
+Owner-feedback correction: keep the walkthrough and add one focused page for each of its fourteen
+item associations. The 20.1.15 ItemIndex hard-codes a null anchor, so per-item pages are required
+for precise hold-G and ingredient routes. Replace native crafting cards with live HerbalCrafting
+cards sharing bounded tooltip slots with processing cards: pinned DocumentScreen's leftward
+overflow adjustment can produce a negative x. No library fork, mixin or screen subclass is needed.
+
 Require the pack's exact GuideME 20.1.15, with no AE2/Create dependency and no bundled library classes.
 This qualifies earlier standalone/no-shared-runtime wording: HerbalWitch remains independent of
 workspace libraries and other gameplay mods, but uses an external documentation engine.
@@ -27,7 +33,7 @@ scenes; do not subclass its internal screens. Actual 1.20.1 API inspection confi
 TagCompiler extensions, item_ids frontmatter and GameScene's p: blockstate attributes.
 Recipes resolve live through RecipeView, never copied amounts in prose.
 
-For this two-page slice, datagen reads authored guide_sources Markdown and produces complete
+For this slice, datagen reads authored guide_sources Markdown and produces complete
 native guide pages with validated catalogue associations and scene layouts. Separate roots avoid
 two writers for one packaged resource. Broader topic contribution, search-fact and Ponder layers
 remain later phases; introducing them now would add unused scaffolding.

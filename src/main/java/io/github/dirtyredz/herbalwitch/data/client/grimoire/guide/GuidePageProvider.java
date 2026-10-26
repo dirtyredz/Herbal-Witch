@@ -30,38 +30,46 @@ public final class GuidePageProvider implements DataProvider {
     public CompletableFuture<?> run(CachedOutput cache) {
         try {
             write(cache, "path/start.md", source("path/start.md"));
-            String lesson = source("apothecary/lavender.md");
-            int frontmatterEnd = lesson.indexOf("\n---", 3);
-            if (frontmatterEnd < 0) throw new IOException("Guide lesson has no frontmatter terminator");
-            StringBuilder associations = new StringBuilder("\nitem_ids:\n");
-            for (String item : items()) {
+            write(cache, "apothecary/lavender.md", scenes(source("apothecary/lavender.md")));
+            for (var topic : topics()) {
+                String item = "herbalwitch:" + topic.item();
                 if (!ForgeRegistries.ITEMS.containsKey(new ResourceLocation(item))) {
                     throw new IllegalStateException("Unknown guide item association: " + item);
                 }
-                associations.append("  - ").append(item).append('\n');
+                String page = source(topic.page());
+                int end = page.indexOf("\n---", 3);
+                if (end < 0) throw new IOException("Guide topic has no frontmatter terminator: " + topic.page());
+                page = page.substring(0, end) + "\nitem_ids:\n  - " + item + page.substring(end);
+                write(cache, topic.page(), scenes(page));
             }
-            lesson = lesson.substring(0, frontmatterEnd) + associations.toString().stripTrailing() + lesson.substring(frontmatterEnd);
-            lesson = lesson.replace("<!-- scene:drying_rack -->", GuideSceneProvider.dryingRack())
-                    .replace("<!-- scene:heat -->", GuideSceneProvider.heat());
-            write(cache, "apothecary/lavender.md", lesson);
             return CompletableFuture.completedFuture(null);
         } catch (IOException error) {
             return CompletableFuture.failedFuture(error);
         }
     }
 
-    private static List<String> items() {
-        List<String> ids = new ArrayList<>();
+    private record Topic(String item, String page) { }
+
+    private static List<Topic> topics() {
+        List<Topic> ids = new ArrayList<>();
         for (var herb : List.of(HerbCatalog.LAVENDER, HerbCatalog.VALERIAN)) {
-            ids.add(herb.seedsPath());
-            ids.add(herb.freshPath());
-            ids.add(HerbalMaterialCatalog.bundlePath(herb));
-            ids.add(HerbalMaterialCatalog.powderPath(herb));
+            String folder = "apothecary/" + (herb == HerbCatalog.LAVENDER ? "lavender" : "valerian") + "/";
+            ids.add(new Topic(herb.seedsPath(), folder + "seeds.md"));
+            ids.add(new Topic(herb.freshPath(), folder + "fresh.md"));
+            ids.add(new Topic(HerbalMaterialCatalog.bundlePath(herb), folder + "bundle.md"));
+            ids.add(new Topic(HerbalMaterialCatalog.powderPath(herb), folder + "powder.md"));
         }
-        ids.add(EverydayProductCatalog.RESTFUL_INFUSION.path());
+        ids.add(new Topic(EverydayProductCatalog.RESTFUL_INFUSION.path(), "apothecary/restful_infusion.md"));
         for (var station : List.of(StationCatalog.DRYING_RACK, StationCatalog.MORTAR, StationCatalog.KETTLE,
-                StationCatalog.STOVE, StationCatalog.HEARTH)) ids.add(station.path());
-        return ids.stream().map(id -> "herbalwitch:" + id).toList();
+                StationCatalog.STOVE, StationCatalog.HEARTH)) {
+            ids.add(new Topic(station.path(), station.path().replace("/station", ".md")));
+        }
+        return ids;
+    }
+
+    private static String scenes(String page) {
+        return page.replace("{/* scene:drying_rack */}", GuideSceneProvider.dryingRack())
+                .replace("{/* scene:heat */}", GuideSceneProvider.heat());
     }
 
     private static String source(String page) throws IOException {

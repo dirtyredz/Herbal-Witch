@@ -58,8 +58,9 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `src/main/java/io/github/dirtyredz/herbalwitch/magic/broom/interaction/` — Validated flight rules and physical entity lifecycle.
 - `src/main/java/io/github/dirtyredz/herbalwitch/magic/broom/lifecycle/` — Validated flight rules and physical entity lifecycle.
 
-- `src/main/resources/assets/herbalwitch/guide_sources/en_us/` — authored path and apothecary prose.
+- `src/main/resources/assets/herbalwitch/guide_sources/en_us/` — authored path and apothecary prose; `apothecary/{lavender,valerian}/` owns each herb form and `stations/` owns the five lesson stations.
 - `src/generated/resources/assets/herbalwitch/guide/` — generated native guide pages; separate from authored sources.
+- `src/test/java/io/github/dirtyredz/herbalwitch/client/grimoire/guide/` — pinned page compiler, typed MDX, link/anchor and item-route guards; `content/` covers live recipe lookup and tooltip bounds.
 - `src/art/blockbench/magic/` — editable broom and wand geometry.
 - `src/art/blockbench/stations/tools/` — editable broom stand and wand bench geometry.
 - `src/art/entities/` — raven, owl and snake rig projects.

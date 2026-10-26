@@ -2,8 +2,13 @@
 
 - **GuideME is pinned to 20.1.15 / Forge 1.20.1.** Inspect that jar before using extensions.
   Guide.builder uses ResourceLocation; TagCompiler receives MdxJsxFlowElement and a LytBlockContainer.
-  Native routing uses item_ids frontmatter; GameScene rotation requires interactive="true" and
-  Block states use p:facing, p:part, etc. Newer website snippets are not this API.
+  Native item_ids always targets the page top (ItemIndex constructs a null anchor), so each item
+  form/station needs its own page. GameScene uses interactive={true} and zoom={1.5}. In contrast,
+  Block x/y/z MUST be strings: pinned getInt delegates to getString, unlike getFloat/getBoolean.
+  Block-state p:facing, p:part and p:lit also remain strings, including "true". The guard permits
+  precisely these native string-valued Block attributes and validates coordinates with getPos.
+  Heading anchors lowercase and replace whitespace with hyphens; punctuation is retained.
+  Newer website snippets are not this API.
   Default-language pages live directly under guide/, not guide/en_us/. Translations use
   guide/_<locale>/; the pinned loader only substitutes a translation when its base page exists.
   RecipeManager.byKey returns Recipe<?> rather than newer RecipeHolder types; custom tags
@@ -11,9 +16,19 @@
 - **Guide sources are not the packaged pages.** Edit guide_sources Markdown, then runData twice.
   Datagen supplies associations and full catalogue layouts, validating real registry IDs/states.
   Tests check links before any dangling-link filtering. Do not hand-edit generated guide pages.
+  Scene placeholders use MDX comments (`{/* scene:heat */}`), not HTML comments: the pinned
+  parser rejects `<!-- ... -->` even in authored sources before scene expansion.
+  Plain JUnit cannot initialize LytFlowLink/GuideMEClient: vanilla bootstrap fails on Forge's
+  untransformed NetworkEvent. The guard validates links with native LinkParser and compiles their
+  labels as text; scene/recipe tags use native attribute readers instead of a live client renderer.
 - **Recipe cards read the connected server.** Missing recipes show unavailable, never bundled defaults.
   No recipe cache survives connection changes. GuideME handles resource reload; recipe/tag updates
   explicitly reload an open page. Magical costs remain labelled server configured in this slice.
+- **Pinned GuideME tooltips can escape the left edge.** DocumentScreen moves a tooltip left on
+  right overflow without a final clamp. HerbalCrafting and HerbalRecipe use GuideRecipeSlot;
+  its hover is drawn after the screen via vanilla GuiGraphics with wrapping and a bounded
+  positioner. Do not reintroduce native RecipeFor slots in these pages. The pending hover is
+  cleared before and after each screen render; recipe data is never cached across connections.
 - **A document screen is not a container screen.** Phase 1 uses native hover access only and leaves
   book/menu behavior alone. Future guide buttons must close containers normally; a return screen
   must not revive an old authenticated session. Optional Ponder must remain client-isolated.

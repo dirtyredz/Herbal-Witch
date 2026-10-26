@@ -9,7 +9,8 @@ navigation:
 Start with something you can grow and use: [make a restful infusion from lavender](../apothecary/lavender.md).
 Follow fresh herbs through drying, grinding and brewing, then drink your preparation.
 
-Hover lavender, valerian, their prepared forms or a lesson station in your inventory and hold **G** to return to the lesson.
+Hover lavender, valerian, their prepared forms or a lesson station in your inventory and hold **G** to open that item's own page.
+[Find a herb form or station](../apothecary/lavender.md#find-an-item).
 Click linked ingredient names to follow their preparation. Drag the drying-rack scene to inspect it.
 
 The recipe cards read the connected server's current recipes. If a pack changes a recipe, follow the card;

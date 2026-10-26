@@ -4,6 +4,8 @@ import guideme.Guide;
 import guideme.compiler.TagCompiler;
 import guideme.ui.GuideUiHost;
 import io.github.dirtyredz.herbalwitch.client.grimoire.guide.content.LiveRecipesTag;
+import io.github.dirtyredz.herbalwitch.client.grimoire.guide.content.CraftingRecipesTag;
+import io.github.dirtyredz.herbalwitch.client.grimoire.guide.content.GuideRecipeSlot;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.event.RecipesUpdatedEvent;
@@ -20,7 +22,10 @@ public final class GuideClient {
         guide = Guide.builder(new ResourceLocation("herbalwitch", "witch_path"))
                 .folder("guide").defaultNamespace("herbalwitch").defaultLanguage("en_us")
                 .startPage(new ResourceLocation("herbalwitch", "path/start.md"))
-                .extension(TagCompiler.EXTENSION_POINT, new LiveRecipesTag()).build();
+                .extension(TagCompiler.EXTENSION_POINT, new LiveRecipesTag())
+                .extension(TagCompiler.EXTENSION_POINT, new CraftingRecipesTag()).build();
+        MinecraftForge.EVENT_BUS.addListener(GuideRecipeSlot::beforeScreen);
+        MinecraftForge.EVENT_BUS.addListener(GuideRecipeSlot::afterScreen);
         MinecraftForge.EVENT_BUS.addListener(GuideClient::recipesUpdated);
         MinecraftForge.EVENT_BUS.addListener(GuideClient::tagsUpdated);
     }

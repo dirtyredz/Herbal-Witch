@@ -74,6 +74,15 @@ class GeneratedResourcesTest {
         Set<String> expected = new TreeSet<>();
         expected.add("assets/herbalwitch/guide/path/start.md");
         expected.add("assets/herbalwitch/guide/apothecary/lavender.md");
+        for (String herb : java.util.List.of("lavender", "valerian")) {
+            for (String form : java.util.List.of("seeds", "fresh", "bundle", "powder")) {
+                expected.add("assets/herbalwitch/guide/apothecary/" + herb + "/" + form + ".md");
+            }
+        }
+        expected.add("assets/herbalwitch/guide/apothecary/restful_infusion.md");
+        for (String station : java.util.List.of("drying_rack", "mortar", "kettle", "stove", "hearth")) {
+            expected.add("assets/herbalwitch/guide/stations/" + station + ".md");
+        }
         expected.addAll(DecorManifest.files());
         expected.addAll(BotanyManifest.files());
         expected.addAll(StationManifest.files());

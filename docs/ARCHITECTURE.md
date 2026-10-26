@@ -9,6 +9,10 @@ The existing grimoire and its authenticated research/teaching workflows remain u
 14 and all saved identities remain unchanged. Public reading grants no discovery or access.
 
 `GuidePageProvider` combines authored Markdown with catalogue-derived item associations.
+The lesson remains a continuous walkthrough; fourteen focused pages give each associated herb
+form, drink and station a distinct destination. The pinned item index cannot associate an anchor.
+Recipe item slots and ingredient-name links use that same native index. Lesson/topic links use
+page IDs, with heading anchors only for navigation within the walkthrough.
 `GuideSceneProvider` emits complete rack/stove layouts and checks each blockstate against the live
 Forge registry during datagen. Native GameScene uses actual baked models in an inert guide world;
 it never invokes station processing, inventory, payment or other gameplay services.
@@ -18,6 +22,15 @@ each page compilation. The renderer preserves counted alternatives, base, packag
 duration, heat and result notes. Missing or replaced non-processing recipes show unavailable.
 Recipe/tag events reload an open guide through the public `GuideUiHost`; resource reloads belong
 to GuideME. There is no connection-specific recipe cache to carry across disconnects.
+`HerbalCrafting` reads the live crafting recipe and preserves its shaped grid or shapeless inputs.
+Both recipe presenters use `GuideRecipeSlot`: native hover selection and item-index routing,
+then vanilla tooltip rendering after the screen with wrapped text and bounded coordinates.
+This avoids the pinned document screen's missing left-edge clamp without patching its internals.
+The headless page guard parses both source and generated trees, compiles prose with the pinned
+compiler, checks its error nodes, validates links through LinkParser and resolves anchors through
+AnchorIndexer. Link labels compile as text: native LytFlowLink initializes Forge registries and
+cannot run in plain JUnit (vanilla bootstrap also needs Forge's transformed NetworkEvent).
+World-dependent tags use native attribute readers in the guard; datagen validates scene states.
 Magical recipes, if substituted by a datapack, show the witch requirement and explicitly label
 energy as server configured rather than substituting local defaults. This slice does not migrate
 editorial overlays or authenticated actions; those remain in the existing reader. Ponder is deferred.

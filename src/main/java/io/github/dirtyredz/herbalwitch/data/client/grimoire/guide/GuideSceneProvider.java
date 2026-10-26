@@ -21,7 +21,7 @@ public final class GuideSceneProvider {
     }
 
     private static String scene(String content) {
-        return "<GameScene interactive=\"true\" zoom=\"1.5\">\n" + content + "</GameScene>";
+        return "<GameScene interactive={true} zoom={1.5}>\n" + content + "</GameScene>";
     }
 
     private static String station(StationSpec spec, String property, String value) {
@@ -40,6 +40,7 @@ public final class GuideSceneProvider {
         var key = new ResourceLocation(id);
         if (!ForgeRegistries.BLOCKS.containsKey(key)) throw new IllegalStateException("Unknown guide block: " + id);
         var block = ForgeRegistries.BLOCKS.getValue(key);
+        // Unlike getFloat/getBoolean, the pinned getInt reader requires a string value.
         StringBuilder out = new StringBuilder("  <Block id=\"").append(id).append("\" x=\"").append(x)
                 .append("\" y=\"").append(y).append("\" z=\"").append(z).append('"');
         properties.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry -> {

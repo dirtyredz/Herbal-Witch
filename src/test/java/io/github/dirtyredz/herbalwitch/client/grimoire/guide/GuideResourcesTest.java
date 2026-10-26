@@ -25,18 +25,36 @@ import static org.junit.jupiter.api.Assertions.*;
 class GuideResourcesTest {
     private static final Path ROOT = Path.of("src/generated/resources/assets/herbalwitch/guide");
     private static final Path GENERATED = Path.of("src/generated/resources");
-    private static final Pattern ATTR = Pattern.compile("([\\w:]+)=\"([^\"]*)\"");
+    private static final Pattern ATTR = Pattern.compile("([\\w:]+)=(?:\"([^\"]*)\"|\\{([^}]+)})");
+
+    @Test
+    void jsxValuesAreTypedAndItemDestinationsAreDistinct() throws IOException {
+        for (Path root : java.util.List.of(ROOT, Path.of("src/main/resources/assets/herbalwitch/guide_sources/en_us"))) {
+            try (var files = Files.walk(root)) {
+                for (Path file : files.filter(p -> p.toString().endsWith(".md")).toList()) {
+                    String text = Files.readString(file);
+                    var attrs = Pattern.compile("(?<![\\w:])([\\w:]+)=\"(true|false|-?\\d+(?:\\.\\d+)?)\"").matcher(text);
+                    while (attrs.find()) assertTrue(attrs.group(1).startsWith("p:")
+                            || Set.of("x", "y", "z").contains(attrs.group(1)), file + ": string-valued " + attrs.group());
+                    var page = PageCompiler.parse("herbalwitch", new ResourceLocation("herbalwitch",
+                            root.relativize(file).toString().replace('\\', '/')), text);
+                    var items = (java.util.List<?>) page.getFrontmatter().additionalProperties().get("item_ids");
+                    assertTrue(items == null || items.size() == 1, file + ": multiple items share a page-top destination");
+                }
+            }
+        }
+    }
 
     @Test
     void pinnedGuideMeParserRecognizesNativeFrontmatterScenesAndRecipeTags() throws IOException {
         var id = new ResourceLocation("herbalwitch", "apothecary/lavender.md");
         var page = PageCompiler.parse("herbalwitch", id, Files.readString(ROOT.resolve(id.getPath())));
         assertEquals("My first useful herb", page.getFrontmatter().navigationEntry().title());
-        assertEquals(14, ((java.util.List<?>) page.getFrontmatter().additionalProperties().get("item_ids")).size());
+        assertNull(page.getFrontmatter().additionalProperties().get("item_ids"));
         var tags = page.getAstRoot().children().stream().filter(MdxJsxElementFields.class::isInstance)
                 .map(MdxJsxElementFields.class::cast).toList();
         assertEquals(5, tags.stream().filter(tag -> tag.name().equals("HerbalRecipe")).count());
-        assertEquals(5, tags.stream().filter(tag -> tag.name().equals("RecipeFor")).count());
+        assertEquals(5, tags.stream().filter(tag -> tag.name().equals("HerbalCrafting")).count());
         var scenes = tags.stream().filter(tag -> tag.name().equals("GameScene")).toList();
         assertEquals(2, scenes.size());
         assertEquals(11, scenes.stream().flatMap(scene -> scene.children().stream())
@@ -52,7 +70,9 @@ class GuideResourcesTest {
                 var links = new HashSet<Path>();
                 var match = Pattern.compile("\\[[^\\]]+\\]\\(([^)#]+)(?:#[^)]*)?\\)").matcher(Files.readString(page));
                 while (match.find()) {
-                    Path target = page.getParent().resolve(match.group(1)).normalize();
+                    Path target = match.group(1).startsWith("herbalwitch:")
+                            ? ROOT.resolve(match.group(1).substring(12))
+                            : page.getParent().resolve(match.group(1)).normalize();
                     assertTrue(target.startsWith(ROOT) && Files.isRegularFile(target), page + " -> " + target);
                     links.add(target);
                 }
@@ -68,7 +88,7 @@ class GuideResourcesTest {
             if (before == reached.size()) break;
         }
         assertEquals(edges.keySet(), reached);
-        assertEquals(2, reached.size());
+        assertEquals(16, reached.size());
     }
 
     @Test
@@ -90,6 +110,16 @@ class GuideResourcesTest {
                     String id = match.group(1);
                     assertTrue(registered.contains(id), "Unregistered association: " + id);
                     assertTrue(associations.add(id), "Duplicate association: " + id);
+                    String path = id.substring(12);
+                    String expected;
+                    if (path.startsWith("stations/")) expected = path.replace("/station", ".md");
+                    else if (id.equals("herbalwitch:" + EverydayProductCatalog.RESTFUL_INFUSION.path()))
+                        expected = "apothecary/restful_infusion.md";
+                    else {
+                        String[] parts = path.split("/");
+                        expected = "apothecary/" + parts[parts.length - 2] + "/" + parts[parts.length - 1] + ".md";
+                    }
+                    assertEquals(ROOT.resolve(expected), page, "Wrong item-specific target for " + id);
                     assertTrue(Files.isRegularFile(GENERATED.resolve("assets/herbalwitch/models/item/" + id.substring(12) + ".json")), id);
                 }
             }
@@ -108,7 +138,7 @@ class GuideResourcesTest {
         var scenes = Pattern.compile("<GameScene([^>]*)>(.*?)</GameScene>", Pattern.DOTALL).matcher(page);
         int sceneCount = 0;
         while (scenes.find()) {
-            assertTrue(scenes.group(1).contains("interactive=\"true\""));
+            assertTrue(scenes.group(1).contains("interactive={true}"));
             Map<String, Map<Integer, String>> parts = new HashMap<>();
             Set<String> positions = new HashSet<>();
             var blocks = Pattern.compile("<Block ([^>]+)/>").matcher(scenes.group(2));
@@ -168,7 +198,7 @@ class GuideResourcesTest {
             count++;
         }
         assertEquals(5, count);
-        var crafting = Pattern.compile("<RecipeFor id=\"herbalwitch:([^\"]+)\" />").matcher(page);
+        var crafting = Pattern.compile("<HerbalCrafting id=\"herbalwitch:([^\"]+)\" />").matcher(page);
         int craftingCount = 0;
         while (crafting.find()) {
             assertTrue(Files.isRegularFile(GENERATED.resolve("data/herbalwitch/recipes/" + crafting.group(1) + ".json")), crafting.group(1));
@@ -182,7 +212,7 @@ class GuideResourcesTest {
     private static Map<String, String> attributes(String text) {
         Map<String, String> result = new HashMap<>();
         var matcher = ATTR.matcher(text);
-        while (matcher.find()) result.put(matcher.group(1), matcher.group(2));
+        while (matcher.find()) result.put(matcher.group(1), matcher.group(2) != null ? matcher.group(2) : matcher.group(3));
         return result;
     }
 

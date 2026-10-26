@@ -8,9 +8,10 @@ Detail per entry: docs/catalogue/{decor,stations,products,witchcraft}.md.
 **1.0.0-rc.3, guide Phase 1:** required GuideME 20.1.15 adds The Witch's Path start page and
 "My first useful herb": lavender and valerian through drying, grinding and the kettle to a
 Restful Infusion. Hold G over their seeds/fresh/bundle/powder forms, the drink or the lesson's
-rack/mortar/kettle/stove/hearth to open it. Native crafting cards and live processing cards keep
-recipe data current; missing processing recipes show unavailable. Ingredient links lead back
-to the lesson. The rotatable rack and heat diagram use the real block models and complete layouts.
+rack/mortar/kettle/stove/hearth to open that item's focused page. Live crafting and processing
+cards keep recipe data current; missing recipes show unavailable. Linked ingredient names and
+recipe slots lead to their own item pages. Tooltips wrap and stay within the screen edges.
+The rotatable rack and heat diagram use the real block models and complete layouts.
 The original grimoire, discoveries, research and teaching remain available unchanged.
 Owner validation is pending for rotation, input/navigation, GUI scales and following the complete
 lesson in HerbalWitch Dev. Ponder and the replacement reader are not implemented in Phase 1.

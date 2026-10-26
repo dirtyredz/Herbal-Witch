@@ -3,7 +3,6 @@ package io.github.dirtyredz.herbalwitch.client.grimoire.guide.content;
 import guideme.compiler.PageCompiler;
 import guideme.document.block.LytParagraph;
 import guideme.document.block.LytHBox;
-import guideme.document.block.LytSlot;
 import guideme.document.block.LytVBox;
 import guideme.document.flow.LytFlowLink;
 import guideme.document.flow.LytFlowText;
@@ -52,7 +51,7 @@ public final class ProcessingRecipeRenderer {
     private static void stack(LytVBox card, PageCompiler compiler, String role, ItemStack stack) {
         var row = new LytHBox();
         row.setGap(4);
-        row.append(new LytSlot(stack));
+        row.append(new GuideRecipeSlot(compiler, stack));
         var line = new LytParagraph();
         line.append(LytFlowText.of(role + ": " + stack.getCount() + " × "));
         var route = compiler.getIndex(ItemIndex.class).get(BuiltInRegistries.ITEM.getKey(stack.getItem()));
