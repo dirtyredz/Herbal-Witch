@@ -56,6 +56,52 @@ class DependencyDirectionTest {
         assertFalse(OPTIONAL_ANIMATION.matcher("import io.github.dirtyredz.herbalwitch.grimoire.guide.lessons.GuideLessons;").find());
     }
 
+    /**
+     * Bootstrap reaches the integration package only behind the loaded-mod guard, and nothing else outside the
+     * package reaches it at all: with Ponder absent, no class that links to it is ever resolved.
+     */
+    @Test
+    void bootstrapReachesThePonderPackageOnlyBehindTheLoadedGuard() throws IOException {
+        Path allowed = ROOT.resolve("client/grimoire/ponder");
+        Path bootstrap = ROOT.resolve("client/HerbalWitchClient.java");
+        var reference = Pattern.compile("\\bherbalwitch\\.client\\.grimoire\\.ponder\\.");
+        for (Path file : javaFiles(ROOT)) {
+            if (!file.startsWith(allowed) && !file.equals(bootstrap)) reject(file, reference);
+        }
+        String client = Files.readString(bootstrap);
+        var matches = reference.matcher(client);
+        int count = 0;
+        while (matches.find()) count++;
+        assertEquals(1, count, "HerbalWitchClient must reference the Ponder package exactly once, inside the guard");
+        assertTrue(Pattern.compile("if \\(ModList\\.get\\(\\)\\.isLoaded\\(PONDER_MOD_ID\\)\\) \\{\\s*"
+                        + "event\\.enqueueWork\\(io\\.github\\.dirtyredz\\.herbalwitch\\.client\\.grimoire\\.ponder\\.PonderIntegration::setup\\);")
+                .matcher(client).find(), "The Ponder setup call must sit inside the isLoaded guard");
+        assertTrue(client.contains("PONDER_MOD_ID = \"ponder\""), "The guard must check Ponder's mod id");
+    }
+
+    /** Gameplay a lesson must never execute: station, inventory, processing, fuel, payment or player services. */
+    private static final Pattern LESSON_GAMEPLAY = Pattern.compile(
+            "(?m)^import (?:static )?io\\.github\\.dirtyredz\\.herbalwitch\\.(?:apothecary\\.(?:shop|stations\\.(?:process|block|everyday|advanced|heat|registry|grimoire))"
+                    + "|magic|companions|platform\\.(?:permission|persistence|player))\\.[^;]+;"
+                    + "|\\b(?:getCapability|insertItem|extractItem|setStackInSlot|setItem|modifyBlockEntity(?:NBT)?|ServerLevel|ServerPlayer|ShopTransfer|\\w+Service)\\b");
+
+    /** Lessons are inert illustrations: block states, item entities, overlays and particles only. */
+    @Test
+    void ponderLessonsNeverReachGameplayServicesOrStationContents() throws IOException {
+        for (Path file : javaFiles(ROOT.resolve("client/grimoire/ponder"))) reject(file, LESSON_GAMEPLAY);
+    }
+
+    @Test
+    void lessonGameplayGuardRecognisesServiceCallsAndContents() {
+        for (String sample : List.of("import io.github.dirtyredz.herbalwitch.apothecary.stations.process.StationProcessor;",
+                "import io.github.dirtyredz.herbalwitch.magic.witch.status.WitchStatusService;",
+                "scene.world().modifyBlockEntityNBT(sel, Entity.class, tag -> {})", "WitchStatusService.spend(x)",
+                "handler.insertItem(0, stack, false)")) {
+            assertTrue(LESSON_GAMEPLAY.matcher(sample).find(), sample);
+        }
+        assertFalse(LESSON_GAMEPLAY.matcher("import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationCatalog;").find());
+    }
+
     @Test
     void familiarWorkCannotAcquireChunksOrTickets() throws IOException {
         var forbidden = Pattern.compile("\\b(?:getChunk|getChunkAt|getChunkFuture|addRegionTicket|registerTickingTicket|forceChunk|setChunkForced)\\s*\\(");

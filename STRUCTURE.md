@@ -17,6 +17,9 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `docs/releases/` - versioned release notes; add notes only for a version being prepared for release.
 
 - `src/main/java/io/github/dirtyredz/herbalwitch/client/grimoire/guide/` — GuideME registration and reload wiring; content/ owns live recipe presentation.
+- `src/main/java/io/github/dirtyredz/herbalwitch/client/grimoire/guide/animation/` — Ponder-free Watch contract: `GuideAnimations` (player callback, unavailable by default, lesson-id validation) and the `HerbalWatch` tag.
+- `src/main/java/io/github/dirtyredz/herbalwitch/client/grimoire/ponder/` — the only home of Ponder/Catnip/Flywheel types: guarded entry point, plugin, lesson storyboard registry and exact-lesson screen adapter; `scenes/` holds one storyboard per lesson.
+- `src/main/java/io/github/dirtyredz/herbalwitch/client/grimoire/ponder/scenes/` — one inert storyboard per lesson (block states, transient items, overlays, particles).
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/client/grimoire/guide/` — Native guide pages and registry-validated scenes; `GuideSceneBlocks` owns station-cell expansion and block validation shared with the Ponder structures; no GuideME gameplay dependencies.
 - `src/main/java/io/github/dirtyredz/herbalwitch/grimoire/guide/lessons/` — Animated-lesson facts (identity, structure, page, associated items), scene layout and named captions; no optional-library or registry types.
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/client/grimoire/ponder/` — Deterministic lesson structure NBT, lesson composition and caption language contributions; imports no Ponder.
@@ -67,6 +70,8 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `src/test/java/io/github/dirtyredz/herbalwitch/data/grimoire/ponder/` — independent lesson manifest and decoded structure checks.
 - `src/test/java/io/github/dirtyredz/herbalwitch/grimoire/guide/lessons/` — lesson facts and captions on the Ponder-free test classpath.
 - `src/test/java/io/github/dirtyredz/herbalwitch/client/grimoire/guide/` — pinned page compiler, typed MDX, link/anchor and item-route guards; `content/` covers live recipe lookup and tooltip bounds.
+- `src/test/java/io/github/dirtyredz/herbalwitch/client/grimoire/guide/animation/` — Watch availability, validation and exact dispatch, without Ponder.
+- `src/test/java/io/github/dirtyredz/herbalwitch/client/grimoire/ponder/` — source-level storyboard guards (captions, title, registration); Ponder is not on the test classpath.
 - `src/art/blockbench/magic/` — editable broom and wand geometry.
 - `src/art/blockbench/stations/tools/` — editable broom stand and wand bench geometry.
 - `src/art/entities/` — raven, owl and snake rig projects.

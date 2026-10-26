@@ -19,6 +19,7 @@ import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
@@ -30,6 +31,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
  */
 @Mod.EventBusSubscriber(modid = HerbalWitch.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public final class HerbalWitchClient {
+    private static final String PONDER_MOD_ID = "ponder";
+
     private HerbalWitchClient() {
     }
 
@@ -54,6 +57,11 @@ public final class HerbalWitchClient {
         event.enqueueWork(() -> CirclePlacementPreview.register(MinecraftForge.EVENT_BUS));
         event.enqueueWork(() -> RitualTargets.register(MinecraftForge.EVENT_BUS));
         event.enqueueWork(() -> WardBoundaryPreview.register(MinecraftForge.EVENT_BUS, WardRegistration.MENU.get()));
+        // Optional Ponder lesson: the integration package is touched only when Ponder is loaded, so no Ponder,
+        // Catnip or Flywheel class is resolved without it (the guide then simply shows no Watch link).
+        if (ModList.get().isLoaded(PONDER_MOD_ID)) {
+            event.enqueueWork(io.github.dirtyredz.herbalwitch.client.grimoire.ponder.PonderIntegration::setup);
+        }
     }
 
     @SubscribeEvent
