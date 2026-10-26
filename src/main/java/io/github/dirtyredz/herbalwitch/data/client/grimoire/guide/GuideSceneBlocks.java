@@ -1,6 +1,7 @@
 package io.github.dirtyredz.herbalwitch.data.client.grimoire.guide;
 
 import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationSpec;
+import io.github.dirtyredz.herbalwitch.grimoire.guide.lessons.SceneProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -51,7 +52,7 @@ public final class GuideSceneBlocks {
         List<Placement> cells = new ArrayList<>();
         for (int i = 0; i < layout.size(); i++) {
             Map<String, String> properties = new TreeMap<>(extra);
-            properties.put("facing", facing.getSerializedName());
+            properties.put(SceneProperties.FACING, facing.getSerializedName());
             properties.put(layout.part().getName(), Integer.toString(i));
             cells.add(placement(layout.cellPos(origin, facing, i), "herbalwitch:" + spec.path(), properties, layout.grounded(i)));
         }

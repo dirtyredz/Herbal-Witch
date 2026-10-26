@@ -1,10 +1,7 @@
 package io.github.dirtyredz.herbalwitch.data.client.grimoire.guide;
 
 import com.google.common.hash.Hashing;
-import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.EverydayProductCatalog;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.HerbalMaterialCatalog;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationCatalog;
+import io.github.dirtyredz.herbalwitch.grimoire.guide.lessons.GuideTopics;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
@@ -13,8 +10,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 /** Authored prose plus catalogue-owned associations/scenes; recipe amounts never enter generated prose. */
@@ -31,8 +26,8 @@ public final class GuidePageProvider implements DataProvider {
         try {
             write(cache, "path/start.md", source("path/start.md"));
             write(cache, "apothecary/lavender.md", scenes(source("apothecary/lavender.md")));
-            for (var topic : topics()) {
-                String item = "herbalwitch:" + topic.item();
+            for (var topic : GuideTopics.FIRST_PREPARATION) {
+                String item = topic.item();
                 if (!ForgeRegistries.ITEMS.containsKey(new ResourceLocation(item))) {
                     throw new IllegalStateException("Unknown guide item association: " + item);
                 }
@@ -46,25 +41,6 @@ public final class GuidePageProvider implements DataProvider {
         } catch (IOException error) {
             return CompletableFuture.failedFuture(error);
         }
-    }
-
-    private record Topic(String item, String page) { }
-
-    private static List<Topic> topics() {
-        List<Topic> ids = new ArrayList<>();
-        for (var herb : List.of(HerbCatalog.LAVENDER, HerbCatalog.VALERIAN)) {
-            String folder = "apothecary/" + (herb == HerbCatalog.LAVENDER ? "lavender" : "valerian") + "/";
-            ids.add(new Topic(herb.seedsPath(), folder + "seeds.md"));
-            ids.add(new Topic(herb.freshPath(), folder + "fresh.md"));
-            ids.add(new Topic(HerbalMaterialCatalog.bundlePath(herb), folder + "bundle.md"));
-            ids.add(new Topic(HerbalMaterialCatalog.powderPath(herb), folder + "powder.md"));
-        }
-        ids.add(new Topic(EverydayProductCatalog.RESTFUL_INFUSION.path(), "apothecary/restful_infusion.md"));
-        for (var station : List.of(StationCatalog.DRYING_RACK, StationCatalog.MORTAR, StationCatalog.KETTLE,
-                StationCatalog.STOVE, StationCatalog.HEARTH)) {
-            ids.add(new Topic(station.path(), station.path().replace("/station", ".md")));
-        }
-        return ids;
     }
 
     private static String scenes(String page) {

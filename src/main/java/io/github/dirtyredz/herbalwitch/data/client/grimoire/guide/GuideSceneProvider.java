@@ -2,6 +2,7 @@ package io.github.dirtyredz.herbalwitch.data.client.grimoire.guide;
 
 import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationCatalog;
 import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationSpec;
+import io.github.dirtyredz.herbalwitch.grimoire.guide.lessons.SceneProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 
@@ -27,12 +28,12 @@ public final class GuideSceneProvider {
     private GuideSceneProvider() { }
 
     public static String dryingRack() {
-        return scene(station(StationCatalog.DRYING_RACK, "active", "true"));
+        return scene(station(StationCatalog.DRYING_RACK, SceneProperties.ACTIVE, "true"));
     }
 
     public static String heat() {
-        return scene(station(StationCatalog.STOVE, "lit", "true")
-                + block(GuideSceneBlocks.block("herbalwitch:" + StationCatalog.KETTLE.path(), ORIGIN.above(), Map.of("facing", "north"))));
+        return scene(station(StationCatalog.STOVE, SceneProperties.LIT, "true")
+                + block(GuideSceneBlocks.block("herbalwitch:" + StationCatalog.KETTLE.path(), ORIGIN.above(), Map.of(SceneProperties.FACING, "north"))));
     }
 
     private static String scene(String content) {

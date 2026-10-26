@@ -9,6 +9,7 @@ import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationSpec;
 import io.github.dirtyredz.herbalwitch.grimoire.guide.lessons.FirstPreparationLayout;
 import io.github.dirtyredz.herbalwitch.grimoire.guide.lessons.FirstPreparationText;
 import io.github.dirtyredz.herbalwitch.grimoire.guide.lessons.FirstPreparationText.Caption;
+import io.github.dirtyredz.herbalwitch.grimoire.guide.lessons.SceneProperties;
 import net.createmod.catnip.math.Pointing;
 import net.createmod.ponder.api.scene.SceneBuilder;
 import net.createmod.ponder.api.scene.SceneBuildingUtil;
@@ -90,7 +91,7 @@ public final class FirstPreparationScene {
         scene.idle(30);
         scene.overlay().showControls(cast.top(plant), Pointing.DOWN, 40).rightClick();
         scene.idle(20);
-        scene.world().modifyBlock(plant, state -> withInt(state, "age", 1), false);
+        scene.world().modifyBlock(plant, state -> withInt(state, SceneProperties.AGE, 1), false);
         scene.world().createItemEntity(cast.top(plant), new Vec3(0.05, 0.25, -0.05), cast.fresh(HerbCatalog.LAVENDER));
         scene.world().createItemEntity(cast.top(plant), new Vec3(-0.05, 0.25, -0.05), cast.seeds(HerbCatalog.LAVENDER));
         scene.idle(READ - 10);
@@ -104,12 +105,12 @@ public final class FirstPreparationScene {
         scene.idle(30);
         scene.overlay().showControls(front, Pointing.DOWN, 50).rightClick().withItem(cast.fresh(HerbCatalog.LAVENDER));
         scene.idle(60);
-        scene.world().modifyBlocks(cast.rack, state -> withBoolean(state, "active", true), false);
+        scene.world().modifyBlocks(cast.rack, state -> withBoolean(state, SceneProperties.ACTIVE, true), false);
         caption(scene, FirstPreparationText.DRY_WAIT, READ).pointAt(front).placeNearTarget();
         scene.idle(READ);
         scene.overlay().showControls(front, Pointing.UP, 50).withItem(cast.bundle(HerbCatalog.LAVENDER));
         scene.idle(40);
-        scene.world().modifyBlocks(cast.rack, state -> withBoolean(state, "active", false), false);
+        scene.world().modifyBlocks(cast.rack, state -> withBoolean(state, SceneProperties.ACTIVE, false), false);
         scene.idle(20);
     }
 
@@ -138,7 +139,7 @@ public final class FirstPreparationScene {
         scene.idle(30);
         scene.overlay().showControls(stove, Pointing.DOWN, 50).rightClick().withItem(new ItemStack(Items.COAL));
         scene.idle(55);
-        scene.world().modifyBlocks(cast.stove, state -> withBoolean(state, "lit", true), false);
+        scene.world().modifyBlocks(cast.stove, state -> withBoolean(state, SceneProperties.LIT, true), false);
         var smoke = scene.effects().simpleParticleEmitter(ParticleTypes.SMOKE, new Vec3(0, 0.02, 0));
         scene.effects().emitParticles(stove, smoke, 1, 8);
         scene.idle(READ - 50);
@@ -181,14 +182,21 @@ public final class FirstPreparationScene {
         return scene.overlay().showText(ticks).sharedText(caption.id());
     }
 
+    /** Sets a boolean property; an unknown or non-boolean name fails the scene instead of silently doing nothing. */
     private static BlockState withBoolean(BlockState state, String name, boolean value) {
-        return state.getBlock().getStateDefinition().getProperty(name) instanceof BooleanProperty property
-                ? state.setValue(property, value) : state;
+        if (state.getBlock().getStateDefinition().getProperty(name) instanceof BooleanProperty property) {
+            return state.setValue(property, value);
+        }
+        throw new IllegalStateException(state.getBlock() + " has no boolean property " + name);
     }
 
+    /** Sets an integer property; an unknown name or out-of-range value fails the scene. */
     private static BlockState withInt(BlockState state, String name, int value) {
-        return state.getBlock().getStateDefinition().getProperty(name) instanceof IntegerProperty property
-                && property.getPossibleValues().contains(value) ? state.setValue(property, value) : state;
+        if (state.getBlock().getStateDefinition().getProperty(name) instanceof IntegerProperty property
+                && property.getPossibleValues().contains(value)) {
+            return state.setValue(property, value);
+        }
+        throw new IllegalStateException(state.getBlock() + " has no integer property " + name + " accepting " + value);
     }
 
     /** The scene's selections and props, resolved once per compile (no static scene state). */

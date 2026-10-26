@@ -1,12 +1,7 @@
 package io.github.dirtyredz.herbalwitch.grimoire.guide.lessons;
 
 import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbCatalog;
-import io.github.dirtyredz.herbalwitch.apothecary.botany.catalog.HerbSpec;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.EverydayProductCatalog;
-import io.github.dirtyredz.herbalwitch.apothecary.brewing.product.catalog.HerbalMaterialCatalog;
-import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationCatalog;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,19 +57,7 @@ public final class GuideLessons {
 
     /** The fourteen items the first-herb guide pages are about, lavender's fresh herb first. */
     private static List<String> firstPreparationItems() {
-        List<String> items = new ArrayList<>();
-        for (HerbSpec herb : List.of(HerbCatalog.LAVENDER, HerbCatalog.VALERIAN)) {
-            items.add(item(herb.freshPath()));
-            items.add(item(herb.seedsPath()));
-            items.add(item(HerbalMaterialCatalog.bundlePath(herb)));
-            items.add(item(HerbalMaterialCatalog.powderPath(herb)));
-        }
-        items.add(item(EverydayProductCatalog.RESTFUL_INFUSION.path()));
-        for (var station : List.of(StationCatalog.DRYING_RACK, StationCatalog.MORTAR, StationCatalog.KETTLE,
-                StationCatalog.STOVE, StationCatalog.HEARTH)) {
-            items.add(item(station.path()));
-        }
-        return items;
+        return GuideTopics.FIRST_PREPARATION.stream().map(GuideTopics.Topic::item).toList();
     }
 
     private static String item(String path) {

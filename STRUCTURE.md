@@ -9,19 +9,21 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 
 - `.github/workflows/`, `.github/actions/setup-mod-build/` - synced hosted checks and deliberate release dispatch.
 - `.ci/mod.json` - this mod's identity, datagen/GameTest flags and pack side; `.ci/scripts/` is synced release tooling.
-- `gradle/verify-release-jar.gradle` and `tools/test-world/datapack/` - synced jar verification and test-world staging.
-- `gradle/test-world.gradle` and `tools/test-world/datapack/` - synced jar verification and test-world staging.
-- `gradle/gametest-world.gradle` and `tools/test-world/datapack/` - synced jar verification and test-world staging.
+- `gradle/verify-release-jar.gradle` - synced release-jar verification: reproducible archives, forbidden-entry and manifest checks.
+- `gradle/test-world.gradle` - the one test-world spec (pack name, staging path, forbidden tokens) shared by jar verification and GameTest world staging.
+- `gradle/gametest-world.gradle` - synced GameTest world staging: a fresh superflat world with no natural spawning for every GameTest JVM.
+- `tools/test-world/datapack/` - the standalone test-world datapack that `gradle/test-world.gradle` stages; never packaged.
 - `gradle/ponder.gradle` - optional Ponder/Flywheel compile-only pins, the opt-in `-PcompatProfile=ponder` runtime and `verifyPonderRuntime` (resolved main/GameTest/test graph checks wired into `check`); nothing is bundled.
 - `gradle/wrapper/`, `gradlew*`, `.gitattributes`, `.gitignore` - synced workspace files; edit the root template and sync.
 - `docs/releases/` - versioned release notes; add notes only for a version being prepared for release.
 
 - `src/main/java/io/github/dirtyredz/herbalwitch/client/grimoire/guide/` — GuideME registration and reload wiring; content/ owns live recipe presentation.
+- `src/main/java/io/github/dirtyredz/herbalwitch/client/grimoire/guide/content/` — live recipe presentation in guide pages: crafting and processing recipe tags, slot and recipe rendering.
 - `src/main/java/io/github/dirtyredz/herbalwitch/client/grimoire/guide/animation/` — Ponder-free Watch contract: `GuideAnimations` (player callback, unavailable by default, lesson-id validation) and the `HerbalWatch` tag.
-- `src/main/java/io/github/dirtyredz/herbalwitch/client/grimoire/ponder/` — the only home of Ponder/Catnip/Flywheel types: guarded entry point, plugin, lesson storyboard registry and exact-lesson screen adapter; `scenes/` holds one storyboard per lesson.
+- `src/main/java/io/github/dirtyredz/herbalwitch/client/grimoire/ponder/` — the only home of Ponder/Catnip/Flywheel types: guarded entry point, plugin, lesson storyboard registry and exact-lesson screen adapter.
 - `src/main/java/io/github/dirtyredz/herbalwitch/client/grimoire/ponder/scenes/` — one inert storyboard per lesson (block states, transient items, overlays, particles).
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/client/grimoire/guide/` — Native guide pages and registry-validated scenes; `GuideSceneBlocks` owns station-cell expansion and block validation shared with the Ponder structures; no GuideME gameplay dependencies.
-- `src/main/java/io/github/dirtyredz/herbalwitch/grimoire/guide/lessons/` — Animated-lesson facts (identity, structure, page, associated items), scene layout and named captions; no optional-library or registry types.
+- `src/main/java/io/github/dirtyredz/herbalwitch/grimoire/guide/lessons/` — Animated-lesson facts (identity, structure, page, associated items), the `GuideTopics` item-to-page catalogue, scene layout, `SceneProperties` block-property names and named captions; no optional-library or registry types.
 - `src/main/java/io/github/dirtyredz/herbalwitch/data/client/grimoire/ponder/` — Deterministic lesson structure NBT, lesson composition and caption language contributions; imports no Ponder.
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/advanced/broom_stand/` — Broom station adapter, recipes and repair transforms.
 - `src/main/java/io/github/dirtyredz/herbalwitch/apothecary/stations/advanced/wand_bench/` — Wand station adapter, recipes and repair transforms.
@@ -69,7 +71,8 @@ The whole-mod module map (where later milestones land) is in docs/ARCHITECTURE.m
 - `src/generated/resources/assets/herbalwitch/ponder/` — generated, gzip-compressed lesson structures that Ponder loads; datagen-owned.
 - `src/test/java/io/github/dirtyredz/herbalwitch/data/grimoire/ponder/` — independent lesson manifest and decoded structure checks.
 - `src/test/java/io/github/dirtyredz/herbalwitch/grimoire/guide/lessons/` — lesson facts and captions on the Ponder-free test classpath.
-- `src/test/java/io/github/dirtyredz/herbalwitch/client/grimoire/guide/` — pinned page compiler, real absent-Ponder Watch compilation, typed MDX, link/anchor and item-route guards; `content/` covers live recipe lookup and tooltip bounds.
+- `src/test/java/io/github/dirtyredz/herbalwitch/client/grimoire/guide/` — pinned page compiler, real absent-Ponder Watch compilation, typed MDX, link/anchor and item-route guards.
+- `src/test/java/io/github/dirtyredz/herbalwitch/client/grimoire/guide/content/` — live recipe lookup, slot rendering and tooltip bounds.
 - `src/test/java/io/github/dirtyredz/herbalwitch/client/grimoire/guide/animation/` — Watch availability, validation and exact dispatch, without Ponder.
 - `src/test/java/io/github/dirtyredz/herbalwitch/client/grimoire/ponder/` — source-level storyboard guards (captions, title, registration); Ponder is not on the test classpath.
 - `src/art/blockbench/magic/` — editable broom and wand geometry.
@@ -95,7 +98,7 @@ src/main/java/io/github/dirtyredz/herbalwitch/
   decor/
     behavior/  catalog/  grimoire/  registry/  showcase/  structure/
   grimoire/
-    access/  catalog/  content/  knowledge/  network/  reading/
+    access/  catalog/  content/  guide/  knowledge/  network/  reading/
     registry/  showcase/
   magic/
     broom/  charm/  ritual/  wand/  ward/  witch/
@@ -514,6 +517,8 @@ src/main/java/io/github/dirtyredz/herbalwitch/
 ```text
 feature grimoire/ + registration adapters -> grimoire contracts
 grimoire content/knowledge/reading/network -> neutral facts + platform recipe/inventory/network
+client/grimoire/ponder + client/grimoire/guide/animation -> grimoire/guide/lessons (neutral lesson facts; catalogues only)
+data/client/grimoire/ponder -> data/client/grimoire/guide GuideSceneBlocks (shared block validation) + grimoire/guide/lessons
 apothecary/stations -> apothecary/brewing -> apothecary/botany
 processing + brewing -> magic/witch services
 magic/ward focus -> stations registry; magic/charm equipment -> brewing effects

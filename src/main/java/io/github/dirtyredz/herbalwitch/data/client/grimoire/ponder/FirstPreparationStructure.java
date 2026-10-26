@@ -7,6 +7,7 @@ import io.github.dirtyredz.herbalwitch.apothecary.stations.catalog.StationCatalo
 import io.github.dirtyredz.herbalwitch.data.client.grimoire.guide.GuideSceneBlocks;
 import io.github.dirtyredz.herbalwitch.data.client.grimoire.guide.GuideSceneBlocks.Placement;
 import io.github.dirtyredz.herbalwitch.grimoire.guide.lessons.FirstPreparationLayout;
+import io.github.dirtyredz.herbalwitch.grimoire.guide.lessons.SceneProperties;
 import net.minecraft.core.BlockPos;
 
 import java.util.ArrayList;
@@ -32,15 +33,15 @@ public final class FirstPreparationStructure {
     public static List<Placement> placements() {
         List<Placement> work = new ArrayList<>();
         work.add(GuideSceneBlocks.block("herbalwitch:" + HerbCatalog.LAVENDER.plantPath(), FirstPreparationLayout.LAVENDER,
-                Map.of("age", Integer.toString(HerbSpec.MAX_AGE))));
+                Map.of(SceneProperties.AGE, Integer.toString(HerbSpec.MAX_AGE))));
         work.addAll(GuideSceneBlocks.station(StationCatalog.DRYING_RACK, FirstPreparationLayout.RACK_ORIGIN, FACING,
-                Map.of("active", "false")));
+                Map.of(SceneProperties.ACTIVE, "false")));
         work.add(GuideSceneBlocks.block("herbalwitch:" + StationCatalog.MORTAR.path(), FirstPreparationLayout.MORTAR,
-                Map.of("facing", FACING.getSerializedName())));
+                Map.of(SceneProperties.FACING, FACING.getSerializedName())));
         work.addAll(GuideSceneBlocks.station(StationCatalog.STOVE, FirstPreparationLayout.STOVE_ORIGIN, FACING,
-                Map.of("lit", "false")));
+                Map.of(SceneProperties.LIT, "false")));
         work.add(GuideSceneBlocks.block("herbalwitch:" + StationCatalog.KETTLE.path(), FirstPreparationLayout.KETTLE,
-                Map.of("facing", FACING.getSerializedName())));
+                Map.of(SceneProperties.FACING, FACING.getSerializedName())));
 
         List<Placement> all = new ArrayList<>();
         var size = FirstPreparationLayout.SIZE;
@@ -73,7 +74,7 @@ public final class FirstPreparationStructure {
             throw new IllegalStateException("Lavender cannot stand on " + byPos.get(FirstPreparationLayout.SOIL));
         }
         Placement burner = byPos.get(FirstPreparationLayout.KETTLE.below());
-        if (burner == null || !burner.properties().get("part").equals("0")
+        if (burner == null || !burner.properties().get(SceneProperties.PART).equals("0")
                 || !burner.id().equals("herbalwitch:" + StationCatalog.STOVE.path())) {
             throw new IllegalStateException("The kettle must stand on the stove's origin burner");
         }

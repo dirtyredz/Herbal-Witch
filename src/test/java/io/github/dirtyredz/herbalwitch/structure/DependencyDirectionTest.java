@@ -151,6 +151,17 @@ class DependencyDirectionTest {
         }
     }
 
+    /** Lesson facts stay usable without a game bootstrap: catalogue reads only, no registry, gameplay or optional-library types. */
+    @Test
+    void guideLessonsUseCatalogsButNoRegistryTypes() throws IOException {
+        var forbidden = Pattern.compile("(?m)^import (?:static )?(?:io\\.github\\.dirtyredz\\.herbalwitch\\.(?:magic|decor|client|compat|data)\\."
+                + "|io\\.github\\.dirtyredz\\.herbalwitch\\.apothecary\\.(?!(?:botany|brewing\\.product|stations)\\.catalog\\.)"
+                + "|net\\.minecraftforge\\.registries\\.|net\\.minecraft\\.(?:core\\.registries|resources\\.ResourceLocation)"
+                + "|net\\.createmod\\.)[^;]+;"
+                + "|\\b(?:ForgeRegistries|DeferredRegister|RegistryObject|BuiltInRegistries)\\b");
+        for (Path file : javaFiles(ROOT.resolve("grimoire/guide/lessons"))) reject(file, forbidden);
+    }
+
     @Test
     void recipeContractsDoNotImportStationExecutionOrRegistries() throws IOException {
         var forbidden = Pattern.compile("(?m)^import (?:static )?io\\.github\\.dirtyredz\\.herbalwitch\\.apothecary\\.stations\\.[^;]+;");
