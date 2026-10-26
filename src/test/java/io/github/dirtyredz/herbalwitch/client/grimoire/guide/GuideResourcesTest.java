@@ -62,6 +62,28 @@ class GuideResourcesTest {
                 .filter(tag -> tag.name().equals("Block")).count());
     }
 
+    /** Every Watch link sits on its lesson's written page, in both the authored source and the packaged page. */
+    @Test
+    void watchLinksTargetKnownLessonsOnTheirWrittenPages() throws IOException {
+        var watch = Pattern.compile("<HerbalWatch lesson=\"([^\"]*)\" />");
+        for (Path root : java.util.List.of(ROOT, Path.of("src/main/resources/assets/herbalwitch/guide_sources/en_us"))) {
+            Map<String, String> lessonPages = new HashMap<>();
+            try (var files = Files.walk(root)) {
+                for (Path file : files.filter(p -> p.toString().endsWith(".md")).toList()) {
+                    String page = "herbalwitch:" + root.relativize(file).toString().replace('\\', '/');
+                    var links = watch.matcher(Files.readString(file));
+                    while (links.find()) {
+                        var lesson = io.github.dirtyredz.herbalwitch.grimoire.guide.lessons.GuideLessons.find(links.group(1));
+                        assertTrue(lesson.isPresent(), file + ": unknown lesson " + links.group(1));
+                        assertEquals(lesson.get().page(), page, file + ": Watch belongs on the lesson's written page");
+                        assertNull(lessonPages.put(links.group(1), page), "Duplicate Watch link for " + links.group(1));
+                    }
+                }
+            }
+            assertEquals(Map.of("herbalwitch:first_preparation", "herbalwitch:apothecary/lavender.md"), lessonPages, root.toString());
+        }
+    }
+
     /** Scenes must stay large and page-centred: GuideME frames the camera on the content, these set size and alignment. */
     @Test
     void everySceneDeclaresTheSharedSizeAndCentringSettings() throws IOException {

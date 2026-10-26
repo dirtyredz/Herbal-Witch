@@ -10,6 +10,12 @@ navigation:
 Make a **Restful Infusion**: a drink that resets your time since rest, helping with phantoms without forcing you to sleep.
 You can make and drink it before becoming a witch. A witch can also use it to prepare for their next rewarded sleep.
 
+<HerbalWatch lesson="herbalwitch:first_preparation" />
+
+With the optional Ponder mod installed, the link above plays the whole preparation as an animated lesson, and you can
+hover any item named here and hold W to open it. The animation illustrates the bundled recipe with the waiting shortened;
+the live recipe cards on this page show what your world accepts. Every step is written out below either way.
+
 [Back to The Witch's Path](../path/start.md)
 
 ## Find an item

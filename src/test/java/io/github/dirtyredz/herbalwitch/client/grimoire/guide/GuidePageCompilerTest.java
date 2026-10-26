@@ -22,6 +22,8 @@ import guideme.libs.mdast.model.MdAstNode;
 import guideme.libs.mdast.model.MdAstParent;
 import guideme.libs.mdast.model.MdAstText;
 import guideme.navigation.NavigationTree;
+import io.github.dirtyredz.herbalwitch.client.grimoire.guide.animation.GuideAnimations;
+import io.github.dirtyredz.herbalwitch.client.grimoire.guide.animation.WatchLessonTag;
 import net.minecraft.resources.ResourceLocation;
 import org.junit.jupiter.api.Test;
 
@@ -77,6 +79,11 @@ class GuidePageCompilerTest {
                 PageCompiler.parse("test", id, "[bad](missing.md)"))));
         assertThrows(AssertionError.class, () -> check(Map.of(id,
                 PageCompiler.parse("test", id, "<UnknownTag />"))));
+        check(Map.of(id, PageCompiler.parse("test", id, "<HerbalWatch lesson=\"herbalwitch:first_preparation\" />")));
+        for (String watch : List.of("<HerbalWatch />", "<HerbalWatch lesson=\"\" />", "<HerbalWatch lesson=\"Not An Id\" />",
+                "<HerbalWatch lesson=\"first_preparation\" />", "<HerbalWatch lesson=\"herbalwitch:unknown\" />")) {
+            assertThrows(AssertionError.class, () -> check(Map.of(id, PageCompiler.parse("test", id, watch))), watch);
+        }
         assertThrows(AssertionError.class, () -> check(Map.of(id,
                 PageCompiler.parse("test", id, "---\nitem_ids:\n  - herbalwitch:first\n  - herbalwitch:second\n---\n\n# Shared"))));
     }
@@ -188,7 +195,7 @@ class GuidePageCompilerTest {
 
     /** Native scene compilation needs Minecraft.level/model rendering, unavailable in a headless JUnit JVM. */
     private static final class HeadlessTags implements TagCompiler {
-        public Set<String> getTagNames() { return Set.of("GameScene", "HerbalRecipe", "HerbalCrafting", "Block"); }
+        public Set<String> getTagNames() { return Set.of("GameScene", "HerbalRecipe", "HerbalCrafting", "Block", WatchLessonTag.TAG); }
         public void compileBlockContext(PageCompiler compiler, LytBlockContainer parent, MdxJsxFlowElement tag) {
             validate(compiler, parent, tag);
         }
@@ -211,6 +218,8 @@ class GuidePageCompilerTest {
                     if (id != null) assertTrue(Files.isRegularFile(Path.of("src/generated/resources/data",
                             id.getNamespace(), "recipes", id.getPath() + ".json")), "Missing recipe " + id);
                 }
+                case WatchLessonTag.TAG -> GuideAnimations.problem(MdxAttrs.getString(compiler, parent, tag,
+                        WatchLessonTag.LESSON_ATTRIBUTE, null)).ifPresent(problem -> parent.appendError(compiler, problem, tag));
                 default -> fail("Unsupported nested tag " + tag.name());
             }
         }
