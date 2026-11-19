@@ -68,3 +68,31 @@ production code; repros in the commit messages):
 - A fresh plot is not entity-ticking on its first tick, which hid harvest drops and a spawned cow (c50cd5c,
   0670804; confirmed by an ItemEntity join spy, c8b59f8 ...183255-e1b).
 - The offline-rest check landed on the heal boundary tick (b90d9e3).
+
+## Agent run rules for restart and qualification harnesses (moved from CLAUDE.md, 2026-11-19)
+
+- **M9 restart qualification:** the ANU-only named heavier task is familiarRestartTest. It starts two
+  sequential dedicated-server JVMs; tools/qualification/restart/familiars/README.md explains checkpoint evidence.
+  It is excluded from build/check and must not be run locally. Version promotion requires its green result.
+
+- M10 restart qualification: ANU-only `magicToolsRestartTest` starts two sequential dedicated JVMs against one disposable world. See `tools/qualification/restart/magic-tools/README.md`; never run it locally.
+
+- For reproducible milestone/profile qualification, add `-PgameTestRunId=<unique-lowercase-id>` to the ANU task string. It selects a new `run/gametest-<id>/` world without deleting the default retained test world. The restart task always supplies its own isolated shared world.
+
+- **Commerce (M11, `apothecary/shop/`; docs/catalogue/commerce.md):** every value move goes through
+  `ShopTransfer` (prepare, apply, verified player checkpoint, commit); never mutate stock, proceeds or a
+  player inventory for commerce anywhere else, and never treat a vanilla save as a checkpoint. Shop
+  fixtures hold claims, not authority. GameTests use `ShopFixtures` (fresh identities; the ANU world keeps
+  old shops). Restart qualification: ANU-only `commerceRestartTest` (two dedicated JVMs; see
+  `tools/qualification/restart/commerce/README.md`); never run it locally. Version promotion requires its green result.
+
+- **Release qualification (M12; docs/qualification/README.md):** every harness is ANU-only and outside
+  `build`/`check`, registered in `gradle/qualification.gradle`: `captureRestartTest`,
+  `familiarRestartTest`, `magicToolsRestartTest`, `commerceRestartTest`,
+  `saveUpgradeTest -PsaveUpgradeFixtures=G:/mods-ci/work/HerbalWitch/build/save-fixtures`,
+  `qualifyPerformance`, `qualifyDedicatedServer` (installed Forge server + release jar; inputs in
+  `build/qualification-inputs/`). Profiles: `runGameTestServer -PcompatProfile=<p> -PgameTestRunId=<id>
+  -PcompatModsDir=G:/mods-ci/work/HerbalWitch/build/compat-inputs`. Add `--continue` to see every
+  failure. Qualification tooling tests: `node --test "tools/qualification/test/*.test.mjs"`.
+  New persisted state needs a save-upgrade expectation or a restart harness; a new registered thing
+  needs an English name (TranslationRegistryGameTests).

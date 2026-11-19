@@ -412,3 +412,21 @@ For the owner (docs/qualification/release-readiness.md, R-ART):
 - The raven, owl and snake rigs are simple block forms beside the vanilla-derived familiars.
 - Headless previews have no ambient occlusion, light, shaders or animation; owner cases M5-1, M9-1 and
   M12-4 decide.
+
+## Art producers and preview review rules (moved from CLAUDE.md, 2026-11-19)
+
+- **Art has four producers with disjoint paths** (`tools/art/output.mjs`; each also has `--check`):
+  `tools/generate-textures.mjs` (every texture in `tools/art/catalogue.mjs`), `tools/generate-models.mjs`
+  (herbs, herb beds, hung bundles; edit `tools/models/`) and `tools/compile-blockbench.mjs` (the
+  stations, furniture and oil lantern and every texture they own), plus
+  `tools/compile-entity-models.mjs` (living rigs and atlases in `src/art/entities/`). Edit the owning
+  `.bbmodel` in `src/art/blockbench/` or `src/art/entities/`; see docs/BLOCKBENCH.md. Never edit model JSON. One-off pieces
+  belong in Blockbench, not generator code; item display transforms live in the projects, so item
+  model providers only name a parent. Never launch Blockbench or a client; the owner edits and
+  checks in game, agents compile, compare and preview headless. Materials are untinted: there is no
+  tint index, no colour handler and no runtime recolouring; a new look is a new texture. The house
+  style and the owner's reference pieces are in docs/ART.md.
+
+- Native familiar attachment changes also require test (exports the vanilla geometry) followed by node tools/preview-native-familiars.mjs --output <job>/previews/native-poses and sheet inspection.
+
+- Broom ridden-pose review: after `test`, run `node tools/preview-broom-rider.mjs --output <job>/previews/ridden` and inspect all three images. The test exports actual cached vanilla player geometry and the runtime seat offsets; it launches no client.

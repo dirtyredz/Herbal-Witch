@@ -29,91 +29,14 @@ docs/ARCHITECTURE.md and docs/catalogue/).
   commit, then from the workspace root `tools/anu-test.ps1 -Mod HerbalWitch -Ref <branch> -Path <worktree>
   -Tasks "test runGameTestServer" -Wait` (space-separated tasks; tools/anu/README.md). A milestone wave
   closes only on the full gate plus a green ANU run and reviewed preview sheets.
-- **Furniture** (docs/ARCHITECTURE.md "Decor"): every piece is one `FurnitureSpec` in its family catalogue
-  (`decor/catalog/pieces/`) with its behaviour and mount; never add a block class per piece. Every piece
-  places through `FurniturePlacementItem` (which extends the shared `platform/placement/StructurePlacementItem`,
-  the checked, previewed structure placement the altar also uses); new pieces need a
-  Blockbench project whose sidecar cells match the catalogue, collision boxes in their family's Shapes
-  class, a recipe in their family's recipe contributor, a grimoire line (`DecorReferenceTranslations`),
-  display anchors (`DisplaySpec`) for displays, and the independent manifests (`data/decor/manifest/`).
-- **Witch state, energy and the altar** (`magic/witch`, `magic/ritual`; docs/ARCHITECTURE.md "Witchcraft"):
-  mutate a player's energy or practice only through `WitchStatusService`; paid changes use its
-  `WitchStatusService.spend` transaction (M7 production included, and M9 familiars will). Shared online lookup/enumeration
-  belongs to `platform/player/OnlinePlayers`; features retain their own eligibility rules.
-  Bump `HerbalWitchNetwork.PROTOCOL` (now "14") on any wire change and register new messages
-  after the grimoire's. The founding record is world-global: GameTests that convert anyone close it, so
-  they reset it (`FoundingService.resetForTest`) and run their rituals synchronously. Grimoire prose
-  never hard-codes a witch number (the rules are quoted from the synced rules; a test enforces it).
-  Mod builds are tried only in the dedicated mod test instance, never an `Evil Eye Trial *` instance.
-- **Advanced brewing, charms, circle and wards** (Milestone 7; docs/ARCHITECTURE.md "Advanced witchcraft"):
-  witch recipes carry `requirements` and reserve nothing until a witch presses Start; Start, Resume,
-  Cancel and the ward settings are vanilla menu buttons, never new packets. New M7-style numbers go in
-  `WorkingRules` inside `WitchRules` (one config, one sync, one fingerprint). Every harmful action on an
-  entity goes through `platform/permission/entity/EntityActionPermission`. The four advanced stations share
-  `AdvancedStationBlock`/`AdvancedStationEntity`; never add a block class per station. Curios stays
-  compile-only behind `platform/compat/curios/`. A GameTest that charges a ward joins a
-  `herbalwitch_ward_*` batch (docs/GOTCHAS.md).
-- **Animals and transport (M8 candidate):** care state lives under `companions/animals`; future
-  familiars consume its immutable trust views and must provide their own lifecycle authority.
-  Capture records have one verified writer; ordinary dirty marking is never a durability checkpoint.
-  Before promoting a release, ANU must qualify real-entity GameTests and restart/fault cases at each
-  capture/release checkpoint, stale source chunks/items, token rotation, corrupt files and failed
-  insertion. Never run those servers or a client locally in an implementation handoff.
 - **Generated resources are source.** Change a provider, run `runData`, commit the regenerated
   `src/generated/resources/` with the code. Never hand-edit generated JSON. `GeneratedResourcesTest`
   holds the exact manifest; when a file is renamed or removed, delete `src/generated` and regenerate.
-- **Art has four producers with disjoint paths** (`tools/art/output.mjs`; each also has `--check`):
-  `tools/generate-textures.mjs` (every texture in `tools/art/catalogue.mjs`), `tools/generate-models.mjs`
-  (herbs, herb beds, hung bundles; edit `tools/models/`) and `tools/compile-blockbench.mjs` (the
-  stations, furniture and oil lantern and every texture they own), plus
-  `tools/compile-entity-models.mjs` (living rigs and atlases in `src/art/entities/`). Edit the owning
-  `.bbmodel` in `src/art/blockbench/` or `src/art/entities/`; see docs/BLOCKBENCH.md. Never edit model JSON. One-off pieces
-  belong in Blockbench, not generator code; item display transforms live in the projects, so item
-  model providers only name a parent. Never launch Blockbench or a client; the owner edits and
-  checks in game, agents compile, compare and preview headless. Materials are untinted: there is no
-  tint index, no colour handler and no runtime recolouring; a new look is a new texture. The house
-  style and the owner's reference pieces are in docs/ART.md.
-- **One catalogue.** There is a single cottage design: `decor/catalog/FinishCatalog` has one entry
-  (`COTTAGE`; the `Finish` type stays so a design can return later) and pieces live only in their
-  catalogue. IDs are `decor/<family>/<piece>` and permanent once a world uses them. Update the
-  independent lists in the tests to match.
-- **Showcase:** every new block or feature must contribute to the showcase registry and its coverage
-  tests; update labels, supports, sample states/inventories, and documented bounds in the same change.
-  Sections register from their feature's registration (`showcase/layout/ShowcaseRegistry`).
-- **Shared datagen outputs** (en_us.json, block/item tags, recipes, global loot modifiers) each have
-  one provider; features contribute to it (docs/GOTCHAS.md).
+- **Art has four producers with disjoint paths** (`tools/generate-textures.mjs`, `tools/generate-models.mjs`, `tools/compile-blockbench.mjs`, `tools/compile-entity-models.mjs`); never edit model JSON or launch Blockbench or a client. Edit the owning `.bbmodel` in `src/art/blockbench/` or `src/art/entities/`. Details, preview-review commands and house style: docs/ART.md and docs/BLOCKBENCH.md.
+- **Design contracts** (read the section before touching the area, all in docs/ARCHITECTURE.md "Subsystem contracts"): furniture is one `FurnitureSpec` per piece, never a block class per piece; mutate witch energy only through `WitchStatusService`; bump `HerbalWitchNetwork.PROTOCOL` on any wire change; harmful entity actions go through `EntityActionPermission`; advanced stations share one block/entity class; commerce value moves only through `ShopTransfer`; every new block/feature registers with the showcase; shared datagen outputs have one provider each (docs/GOTCHAS.md). IDs `decor/<family>/<piece>` are permanent once a world uses them.
+- **Restart and release qualification harnesses are ANU-only**, outside `build`/`check`, never run locally (register: `gradle/qualification.gradle`; commands and rules: docs/qualification/README.md). Version promotion requires their green results.
 - **Layout:** every source and resource directory is declared in STRUCTURE.md `## Layout`; follow its
   structural rules (bootstrap-only roots, 12-file directories, 800-line files).
 - **Version** lives only in `gradle.properties` (`mod_version`).
 - Shared files (wrapper, `.gitattributes`, `.gitignore`) come from `../../tools/mod-template/`;
   never edit them here.
-
-- **M9 restart qualification:** the ANU-only named heavier task is familiarRestartTest. It starts two
-  sequential dedicated-server JVMs; tools/qualification/restart/familiars/README.md explains checkpoint evidence.
-  It is excluded from build/check and must not be run locally. Version promotion requires its green result.
-
-- Native familiar attachment changes also require test (exports the vanilla geometry) followed by node tools/preview-native-familiars.mjs --output <job>/previews/native-poses and sheet inspection.
-
-- M10 restart qualification: ANU-only `magicToolsRestartTest` starts two sequential dedicated JVMs against one disposable world. See `tools/qualification/restart/magic-tools/README.md`; never run it locally.
-
-- For reproducible milestone/profile qualification, add `-PgameTestRunId=<unique-lowercase-id>` to the ANU task string. It selects a new `run/gametest-<id>/` world without deleting the default retained test world. The restart task always supplies its own isolated shared world.
-
-- Broom ridden-pose review: after `test`, run `node tools/preview-broom-rider.mjs --output <job>/previews/ridden` and inspect all three images. The test exports actual cached vanilla player geometry and the runtime seat offsets; it launches no client.
-
-- **Commerce (M11, `apothecary/shop/`; docs/catalogue/commerce.md):** every value move goes through
-  `ShopTransfer` (prepare, apply, verified player checkpoint, commit); never mutate stock, proceeds or a
-  player inventory for commerce anywhere else, and never treat a vanilla save as a checkpoint. Shop
-  fixtures hold claims, not authority. GameTests use `ShopFixtures` (fresh identities; the ANU world keeps
-  old shops). Restart qualification: ANU-only `commerceRestartTest` (two dedicated JVMs; see
-  `tools/qualification/restart/commerce/README.md`); never run it locally. Version promotion requires its green result.
-
-- **Release qualification (M12; docs/qualification/README.md):** every harness is ANU-only and outside
-  `build`/`check`, registered in `gradle/qualification.gradle`: `captureRestartTest`,
-  `familiarRestartTest`, `magicToolsRestartTest`, `commerceRestartTest`,
-  `saveUpgradeTest -PsaveUpgradeFixtures=G:/mods-ci/work/HerbalWitch/build/save-fixtures`,
-  `qualifyPerformance`, `qualifyDedicatedServer` (installed Forge server + release jar; inputs in
-  `build/qualification-inputs/`). Profiles: `runGameTestServer -PcompatProfile=<p> -PgameTestRunId=<id>
-  -PcompatModsDir=G:/mods-ci/work/HerbalWitch/build/compat-inputs`. Add `--continue` to see every
-  failure. Qualification tooling tests: `node --test "tools/qualification/test/*.test.mjs"`.
-  New persisted state needs a save-upgrade expectation or a restart harness; a new registered thing
-  needs an English name (TranslationRegistryGameTests).

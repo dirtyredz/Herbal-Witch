@@ -737,3 +737,46 @@ it reaches the release jar. Two runtime rules changed with it:
 Reload and persistence semantics are unchanged: server configs install whole on the server thread;
 recipe reloads re-match jobs (changed recipes cancel, items stay); unknown persisted schemas are
 preserved and unavailable. See docs/qualification/README.md for the harnesses that prove them.
+
+## Subsystem contracts (moved from CLAUDE.md, 2026-11-19)
+
+- **Furniture** (docs/ARCHITECTURE.md "Decor"): every piece is one `FurnitureSpec` in its family catalogue
+  (`decor/catalog/pieces/`) with its behaviour and mount; never add a block class per piece. Every piece
+  places through `FurniturePlacementItem` (which extends the shared `platform/placement/StructurePlacementItem`,
+  the checked, previewed structure placement the altar also uses); new pieces need a
+  Blockbench project whose sidecar cells match the catalogue, collision boxes in their family's Shapes
+  class, a recipe in their family's recipe contributor, a grimoire line (`DecorReferenceTranslations`),
+  display anchors (`DisplaySpec`) for displays, and the independent manifests (`data/decor/manifest/`).
+- **Witch state, energy and the altar** (`magic/witch`, `magic/ritual`; docs/ARCHITECTURE.md "Witchcraft"):
+  mutate a player's energy or practice only through `WitchStatusService`; paid changes use its
+  `WitchStatusService.spend` transaction (M7 production included, and M9 familiars will). Shared online lookup/enumeration
+  belongs to `platform/player/OnlinePlayers`; features retain their own eligibility rules.
+  Bump `HerbalWitchNetwork.PROTOCOL` (check the current value in source) on any wire change and register new messages
+  after the grimoire's. The founding record is world-global: GameTests that convert anyone close it, so
+  they reset it (`FoundingService.resetForTest`) and run their rituals synchronously. Grimoire prose
+  never hard-codes a witch number (the rules are quoted from the synced rules; a test enforces it).
+  Mod builds are tried only in the dedicated mod test instance, never an `Evil Eye Trial *` instance.
+- **Advanced brewing, charms, circle and wards** (Milestone 7; docs/ARCHITECTURE.md "Advanced witchcraft"):
+  witch recipes carry `requirements` and reserve nothing until a witch presses Start; Start, Resume,
+  Cancel and the ward settings are vanilla menu buttons, never new packets. New M7-style numbers go in
+  `WorkingRules` inside `WitchRules` (one config, one sync, one fingerprint). Every harmful action on an
+  entity goes through `platform/permission/entity/EntityActionPermission`. The four advanced stations share
+  `AdvancedStationBlock`/`AdvancedStationEntity`; never add a block class per station. Curios stays
+  compile-only behind `platform/compat/curios/`. A GameTest that charges a ward joins a
+  `herbalwitch_ward_*` batch (docs/GOTCHAS.md).
+- **Animals and transport (M8 candidate):** care state lives under `companions/animals`; future
+  familiars consume its immutable trust views and must provide their own lifecycle authority.
+  Capture records have one verified writer; ordinary dirty marking is never a durability checkpoint.
+  Before promoting a release, ANU must qualify real-entity GameTests and restart/fault cases at each
+  capture/release checkpoint, stale source chunks/items, token rotation, corrupt files and failed
+  insertion. Never run those servers or a client locally in an implementation handoff.
+
+- **One catalogue.** There is a single cottage design: `decor/catalog/FinishCatalog` has one entry
+  (`COTTAGE`; the `Finish` type stays so a design can return later) and pieces live only in their
+  catalogue. IDs are `decor/<family>/<piece>` and permanent once a world uses them. Update the
+  independent lists in the tests to match.
+- **Showcase:** every new block or feature must contribute to the showcase registry and its coverage
+  tests; update labels, supports, sample states/inventories, and documented bounds in the same change.
+  Sections register from their feature's registration (`showcase/layout/ShowcaseRegistry`).
+- **Shared datagen outputs** (en_us.json, block/item tags, recipes, global loot modifiers) each have
+  one provider; features contribute to it (docs/GOTCHAS.md).
